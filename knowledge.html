@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>漏水百科｜台灣漏水醫生 - 台灣房屋漏水完整知識庫</title>
+<meta name="description" content="台灣最完整的漏水知識庫，免費查詢房屋結構、漏水症狀對照、工法說明，看懂問題才能找對工班。">
+<meta name="keywords" content="漏水,抓漏,台灣漏水,浴室漏水,頂樓漏水,外牆滲水,壁癌,防水工程,高壓灌注,打針止漏">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans TC',sans-serif;color:#1a202c;background:#fff;line-height:1.7;font-size:16px}
+a{text-decoration:none;color:inherit}
+
+:root{
+  --blue:#1d4ed8;--blue-dark:#1e3a8a;--blue-light:#eff6ff;--blue-mid:#3b82f6;
+  --green:#16a34a;--green-light:#22c55e;--green-100:#dcfce7;
+  --orange:#ea580c;--orange-100:#ffedd5;
+  --teal:#0d9488;--teal-100:#ccfbf1;
+  --red:#dc2626;--red-100:#fee2e2;
+  --gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;
+  --gray-500:#6b7280;--gray-700:#374151;--gray-900:#111827;
+}
+
+/* ── Shared ─── */
+.container{max-width:900px;margin:0 auto;padding:0 1.25rem}
+.sec-tag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.25rem .75rem;border-radius:99px;margin-bottom:.6rem}
+.sec-tag.blue{background:var(--blue-light);color:var(--blue)}
+.sec-tag.teal{background:var(--teal-100);color:var(--teal)}
+.sec-title{font-size:1.6rem;font-weight:900;color:var(--gray-900);line-height:1.25;margin-bottom:.4rem}
+.sec-sub{font-size:.875rem;color:var(--gray-500);line-height:1.7;margin-bottom:1.75rem}
+.badge{display:inline-block;font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:99px}
+.b-red{background:var(--red-100);color:var(--red)}
+.b-orange{background:var(--orange-100);color:var(--orange)}
+.b-blue{background:var(--blue-light);color:var(--blue)}
+.b-teal{background:var(--teal-100);color:var(--teal)}
+.b-green{background:var(--green-100);color:var(--green)}
+
+/* ── Float Line ─── */
+#float-line{
+  position:fixed;right:1rem;top:50%;transform:translateY(-50%);z-index:999;
+  width:58px;height:58px;border-radius:50%;background:var(--green-light);color:#fff;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-size:.6rem;font-weight:700;line-height:1.3;
+  box-shadow:0 4px 18px rgba(34,197,94,.5);
+  animation:gpulse 2.5s ease-in-out infinite;
+}
+@keyframes gpulse{0%,100%{box-shadow:0 4px 18px rgba(34,197,94,.5)}50%{box-shadow:0 4px 28px rgba(34,197,94,.75),0 0 0 8px rgba(34,197,94,.12)}}
+
+/* ── Header ─── */
+header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--gray-200);
+  padding:.75rem 1.25rem;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.brand-name{font-size:1.1rem;font-weight:900;color:var(--blue-dark)}
+.brand-sub{font-size:.62rem;color:var(--blue-mid);font-weight:500;display:block}
+.header-nav{display:flex;gap:.5rem;align-items:center}
+.nav-back{font-size:.8rem;color:var(--gray-500);padding:.35rem .65rem;border-radius:6px;display:flex;align-items:center;gap:.3rem}
+.nav-back:hover{background:var(--gray-100)}
+.header-cta{background:var(--green-light);color:#fff;font-weight:700;font-size:.78rem;padding:.4rem .9rem;border-radius:8px;white-space:nowrap}
+.header-cta:hover{background:var(--green)}
+
+/* ── Page Hero ─── */
+#page-hero{
+  background:linear-gradient(135deg,var(--teal) 0%,#0369a1 100%);
+  color:#fff;padding:2.5rem 1.25rem 2rem;
+}
+.page-hero-inner{max-width:900px;margin:0 auto}
+.page-eyebrow{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.9);font-size:.72rem;font-weight:600;padding:.3rem .85rem;border-radius:99px;margin-bottom:1rem}
+.page-title{font-size:1.75rem;font-weight:900;line-height:1.2;margin-bottom:.65rem}
+@media(min-width:480px){.page-title{font-size:2.1rem}}
+.page-desc{font-size:.9rem;color:rgba(255,255,255,.8);line-height:1.75;margin-bottom:1.5rem;max-width:50ch}
+.page-breadcrumb{font-size:.75rem;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:.4rem}
+
+/* ── Tab Nav ─── */
+#tab-nav{
+  position:sticky;top:57px;z-index:90;
+  background:#fff;border-bottom:2px solid var(--gray-200);
+  padding:0 1.25rem;overflow-x:auto;
+  display:flex;gap:0;white-space:nowrap;
+  scrollbar-width:none;
+}
+#tab-nav::-webkit-scrollbar{display:none}
+.tab-btn{
+  padding:.85rem 1.1rem;font-size:.85rem;font-weight:600;
+  color:var(--gray-500);border:none;background:none;cursor:pointer;
+  border-bottom:2px solid transparent;margin-bottom:-2px;
+  font-family:inherit;white-space:nowrap;transition:.15s;
+}
+.tab-btn:hover{color:var(--blue)}
+.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue)}
+
+/* ── Tab Panels ─── */
+.tab-panel{display:none;padding:2rem 0}
+.tab-panel.active{display:block}
+
+/* ── 房屋結構 ─── */
+.structure-grid{display:grid;gap:1rem;margin-bottom:1.5rem}
+@media(min-width:600px){.structure-grid{grid-template-columns:repeat(2,1fr)}}
+.structure-card{
+  border:1.5px solid var(--gray-200);border-radius:12px;padding:1.4rem;
+  transition:.18s;
+}
+.structure-card:hover{border-color:var(--blue-mid);box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.sc-head{display:flex;align-items:flex-start;justify-content:space-between;gap:.5rem;margin-bottom:.75rem}
+.sc-icon{font-size:1.75rem}
+.sc-year{font-size:.7rem;font-weight:700;background:var(--blue-light);color:var(--blue);padding:.2rem .6rem;border-radius:99px;white-space:nowrap}
+.sc-name{font-weight:700;color:var(--gray-900);margin-bottom:.5rem}
+.sc-leak{list-style:none;display:flex;flex-direction:column;gap:.3rem}
+.sc-leak li{font-size:.82rem;color:var(--gray-600);display:flex;align-items:flex-start;gap:.4rem;line-height:1.5}
+.sc-leak li::before{content:'▸';color:var(--blue-mid);flex-shrink:0;margin-top:.05rem}
+.tip-box{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:0 8px 8px 0;padding:1rem 1.1rem;font-size:.85rem;color:var(--blue-dark);line-height:1.7}
+
+/* ── 症狀對照 ─── */
+.symptom-cards{display:flex;flex-direction:column;gap:.75rem}
+.sy-card{
+  border:1.5px solid var(--gray-200);border-radius:10px;overflow:hidden;
+}
+.sy-head{
+  padding:.85rem 1rem;display:flex;align-items:flex-start;gap:.75rem;
+  cursor:pointer;transition:background .15s;
+}
+.sy-head:hover{background:var(--gray-50)}
+.sy-emoji{font-size:1.35rem;flex-shrink:0;margin-top:.05rem}
+.sy-symptom{font-weight:700;font-size:.9rem;color:var(--gray-900);margin-bottom:.25rem}
+.sy-tags{display:flex;gap:.35rem;flex-wrap:wrap}
+.sy-body{
+  display:none;padding:.85rem 1rem 1rem 3.1rem;
+  border-top:1px solid var(--gray-100);
+  background:var(--gray-50);
+}
+.sy-body.open{display:block}
+.sy-row{display:flex;gap:.5rem;margin-bottom:.45rem;font-size:.83rem}
+.sy-label{color:var(--gray-500);flex-shrink:0;width:48px}
+.sy-val{color:var(--gray-700);line-height:1.55}
+.sy-arrow{margin-left:auto;font-size:.65rem;color:var(--gray-400);transition:.25s;flex-shrink:0;margin-top:.35rem}
+.sy-head.open .sy-arrow{transform:rotate(180deg)}
+.warn-box{background:#fef9c3;border-left:4px solid #ca8a04;border-radius:0 8px 8px 0;padding:1rem 1.1rem;font-size:.83rem;color:#713f12;line-height:1.7;margin-top:1.25rem}
+
+/* ── 工法卡 ─── */
+.method-grid{display:grid;gap:1rem}
+@media(min-width:600px){.method-grid{grid-template-columns:repeat(2,1fr)}}
+.method-card{border:1.5px solid var(--gray-200);border-radius:12px;padding:1.4rem;transition:.18s}
+.method-card:hover{border-color:var(--blue-mid);box-shadow:0 4px 12px rgba(0,0,0,.07)}
+.mc-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem;gap:.5rem}
+.mc-name{font-weight:700;color:var(--gray-900);font-size:.9rem}
+.mc-price{font-size:.8rem;font-weight:700;color:var(--blue);white-space:nowrap}
+.mc-tags{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.65rem}
+.mc-desc{font-size:.83rem;color:var(--gray-600);line-height:1.7;margin-bottom:.75rem}
+.mc-pros-cons{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.mc-pros,.mc-cons{padding:.55rem .65rem;border-radius:6px;font-size:.76rem;line-height:1.5}
+.mc-pros{background:var(--green-100);color:#15803d}
+.mc-cons{background:var(--red-100);color:#b91c1c}
+.mc-sub{font-weight:700;margin-bottom:.2rem;font-size:.72rem}
+
+/* ── 自我診斷 ─── */
+.diag-card{background:var(--gray-50);border-radius:12px;padding:1.5rem;border:1.5px solid var(--gray-200)}
+.diag-q{font-weight:700;color:var(--gray-900);margin-bottom:1rem;font-size:.95rem}
+.diag-options{display:flex;flex-direction:column;gap:.5rem}
+.diag-opt{
+  padding:.8rem 1rem;border-radius:8px;border:1.5px solid var(--gray-200);
+  background:#fff;cursor:pointer;font-size:.875rem;color:var(--gray-700);
+  text-align:left;font-family:inherit;transition:.15s;
+  display:flex;align-items:center;gap:.6rem;
+}
+.diag-opt:hover{border-color:var(--blue-mid);background:var(--blue-light);color:var(--blue)}
+.diag-opt-icon{font-size:1.1rem;flex-shrink:0}
+.diag-result{
+  display:none;margin-top:1.25rem;padding:1.1rem;
+  border-radius:10px;border:1.5px solid var(--blue-mid);background:var(--blue-light);
+}
+.diag-result.show{display:block}
+.dr-title{font-weight:700;color:var(--blue-dark);margin-bottom:.5rem;font-size:.9rem}
+.dr-body{font-size:.835rem;color:var(--blue-dark);line-height:1.75}
+.diag-reset{margin-top:.75rem;font-size:.78rem;color:var(--blue);cursor:pointer;display:inline-flex;align-items:center;gap:.25rem}
+.diag-step{display:none}
+.diag-step.active{display:block}
+
+/* ── CTA Strip ─── */
+.cta-strip{
+  background:linear-gradient(135deg,var(--blue-dark),var(--blue));
+  border-radius:12px;padding:1.5rem;color:#fff;text-align:center;margin:2rem 0;
+}
+.cs-title{font-size:1.1rem;font-weight:700;margin-bottom:.4rem}
+.cs-sub{font-size:.82rem;color:rgba(255,255,255,.75);margin-bottom:1rem}
+.cs-btn{
+  display:inline-flex;align-items:center;gap:.4rem;
+  background:var(--green-light);color:#fff;font-weight:700;font-size:.875rem;
+  padding:.7rem 1.5rem;border-radius:8px;transition:.15s;
+}
+.cs-btn:hover{background:var(--green)}
+</style>
+</head>
+<body>
+
+<!-- Float Line -->
+<a id="float-line" href="https://lin.ee/rjmmYyC" target="_blank" rel="noopener">
+  <span>免費</span><span>諮詢</span>
+</a>
+
+<!-- Header -->
+<header>
+  <div>
+    <div class="brand-name">台灣漏水醫生</div>
+    <span class="brand-sub">漏水知識庫 × 專業工班媒合</span>
+  </div>
+  <div class="header-nav">
+    <a href="index.html" class="nav-back">← 首頁</a>
+    <a href="https://lin.ee/rjmmYyC" class="header-cta" target="_blank">📲 免費諮詢</a>
+  </div>
+</header>
+
+<!-- Page Hero -->
+<section id="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-eyebrow">📖 免費知識庫</div>
+    <h1 class="page-title">台灣漏水百科</h1>
+    <p class="page-desc">從房屋結構到施工工法，全部免費查詢。看懂問題才能找對師傅，不被亂報價。</p>
+    <div class="page-breadcrumb">
+      <a href="index.html" style="color:rgba(255,255,255,.6)">首頁</a>
+      <span>›</span>
+      <span style="color:#fff">漏水百科</span>
+    </div>
+  </div>
+</section>
+
+<!-- Tab Nav -->
+<div id="tab-nav">
+  <button class="tab-btn active" onclick="showTab('structure',this)">🏠 房屋結構</button>
+  <button class="tab-btn" onclick="showTab('symptom',this)">🔍 症狀對照</button>
+  <button class="tab-btn" onclick="showTab('detect',this)">📡 檢測工法</button>
+  <button class="tab-btn" onclick="showTab('repair',this)">🔨 施工工法</button>
+  <button class="tab-btn" onclick="showTab('diag',this)">💡 自我診斷</button>
+</div>
+
+<!-- ── 房屋結構 ── -->
+<div id="tab-structure" class="tab-panel active">
+  <div class="container">
+    <div class="sec-tag teal">台灣四大房屋類型</div>
+    <h2 class="sec-title">你家是哪種結構？</h2>
+    <p class="sec-sub">不同結構的漏水原因不同，修法也不同。先確認你家類型，再對照常見漏水問題。</p>
+
+    <div class="structure-grid">
+      <div class="structure-card">
+        <div class="sc-head">
+          <div class="sc-icon">🏢</div>
+          <span class="sc-year">屋齡 10–30 年多見</span>
+        </div>
+        <div class="sc-name">RC 鋼筋混凝土大樓</div>
+        <ul class="sc-leak">
+          <li>外牆裂縫滲水（熱脹冷縮）</li>
+          <li>頂樓防水層老化積水滲漏</li>
+          <li>管道間水管老化破裂</li>
+          <li>冷氣排水管堵塞逆流</li>
+          <li>浴室地磚下防水層破損</li>
+          <li>窗框嵌縫老化開裂</li>
+        </ul>
+      </div>
+      <div class="structure-card">
+        <div class="sc-head">
+          <div class="sc-icon">🏠</div>
+          <span class="sc-year">屋齡 30–50 年 高風險</span>
+        </div>
+        <div class="sc-name">磚牆砌造老公寓</div>
+        <ul class="sc-leak">
+          <li>外牆磚縫滲水嚴重</li>
+          <li>鑄鐵給排水管腐蝕爆管</li>
+          <li>地磚下防水層完全失效</li>
+          <li>壁癌反覆發生難以根治</li>
+          <li>頂樓加蓋漏水情況複雜</li>
+          <li>公共管道間責任難界定</li>
+        </ul>
+      </div>
+      <div class="structure-card">
+        <div class="sc-head">
+          <div class="sc-icon">🏡</div>
+          <span class="sc-year">各屋齡皆有</span>
+        </div>
+        <div class="sc-name">透天厝</div>
+        <ul class="sc-leak">
+          <li>屋頂鐵皮接縫與螺絲孔漏水</li>
+          <li>外牆遮雨棚積水滲入</li>
+          <li>地下室結構防水層老化</li>
+          <li>水塔平台周邊滲水</li>
+          <li>窗框與牆體嵌縫開裂</li>
+          <li>車庫地板滲水</li>
+        </ul>
+      </div>
+      <div class="structure-card">
+        <div class="sc-head">
+          <div class="sc-icon">🏗️</div>
+          <span class="sc-year">需分段測試</span>
+        </div>
+        <div class="sc-name">頂樓加蓋 / 鐵皮屋</div>
+        <ul class="sc-leak">
+          <li>鐵皮屋頂螺絲孔生鏽漏水</li>
+          <li>RC 頂樓與加蓋接縫處積水</li>
+          <li>隔熱磚下積水滲漏</li>
+          <li>加蓋與原建築結構縫隙</li>
+          <li>公共排水管路阻塞溢水</li>
+          <li>責任歸屬複雜（需釐清）</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      💡 <strong>固漏提醒：</strong>台灣全台住宅平均屋齡已超過 32 年，超過一半住宅屋齡逾 30 年。老屋漏水往往不只一個點，建議先做整體判斷，避免修了這裡漏那裡，浪費費用。
+    </div>
+
+    <div class="cta-strip" style="margin-top:1.75rem">
+      <div class="cs-title">不確定你家是哪種問題？</div>
+      <div class="cs-sub">傳照片給我們，免費初步判斷，不收評估費</div>
+      <a href="https://lin.ee/rjmmYyC" class="cs-btn" target="_blank">📲 Line 免費諮詢</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── 症狀對照 ── -->
+<div id="tab-symptom" class="tab-panel">
+  <div class="container">
+    <div class="sec-tag teal">看症狀找原因</div>
+    <h2 class="sec-title">你看到什麼？</h2>
+    <p class="sec-sub">點選你家的漏水症狀，查看可能原因、建議工法與參考費用</p>
+
+    <div class="symptom-cards">
+
+      <div class="sy-card">
+        <div class="sy-head" onclick="toggleSy(this)">
+          <span class="sy-emoji">💧</span>
+          <div style="flex:1">
+            <div class="sy-symptom">天花板持續滴水或大面積水漬</div>
+            <div class="sy-tags"><span class="badge b-red">緊急處理</span><span class="badge b-blue">管路問題</span></div>
+          </div>
+          <span class="sy-arrow">▼</span>
+        </div>
+        <div class="sy-body">
+          <div class="sy-row"><span class="sy-label">可能原因</span><span class="sy-val">樓上給水管破裂，或浴室地板防水層失效。若持續滲水（不分晴雨）幾乎確定是給水管問題。</span></div>
+          <div class="sy-row"><span class="sy-label">建議工法</span><span class="sy-val">壓力測試定位破裂點 → 換管或重做防水層</span></div>
+          <div class="sy-row"><span class="sy-label">參考費用</span><span class="sy-val">$3,000–8,000（依換管難度）</span></div>
+          <div class="sy-row"><span class="sy-label">注意事項</span><span class="sy-val">先關掉總水閥觀察是否停止滴水，可初步判斷是給水管還是排水管問題。</span></div>
+        </div>
+      </div>
+
+      <div class="sy-card">
+        <div class="sy-head" onclick="toggleSy(this)">
+          <span class="sy-emoji">🌧️</span>
+          <div style="flex:1">
+            <div class="sy-symptom">下雨後天花板或牆面才出現水漬</div>
+            <div class="sy-tags"><span class="badge b-orange">盡快處理</span><span class="badge b-blue">防水層問題</span></div>
+          </div>
+          <span class="sy-arrow">▼</span>
+        </div>
+        <div class="sy-body">
+          <div class="sy-row"><span class="sy-label">可能原因</span><span class="sy-val">頂樓防水層老化、外牆裂縫或窗框嵌縫開裂，讓雨水滲入。</span></div>
+          <div class="sy-row"><span class="sy-label">建議工法</span><span class="sy-val">熱像儀定位滲水路徑 → 防水塗料或重做防水層</span></div>
+          <div class="sy-row"><span class="sy-label">參考費用</span><span class="sy-val">$6,000–20,000（依面積與工法）</span></div>
+          <div class="sy-row"><span class="sy-label">注意事項</span><span class="sy-val">乾燥期間熱像儀效果有限，建議雨後 24 小時內進行檢測效果最佳。</span></div>
+        </div>
+      </div>
+
+      <div class="sy-card">
+        <div class="sy-head" onclick="toggleSy(this)">
+          <span class="sy-emoji">🪟</span>
+          <div style="flex:1">
+            <div class="sy-symptom">窗框四周雨天滲水</div>
+            <div class="sy-tags"><span class="badge b-blue">注意觀察</span><span class="badge b-teal">打針可解</span></div>
+          </div>
+          <span class="sy-arrow">▼</span>
+        </div>
+        <div class="sy-body">
+          <div class="sy-row"><span class="sy-label">可能原因</span><span class="sy-val">窗框與牆體之間的嵌縫材料老化開裂，或窗框本身變形，雨水從縫隙滲入。</span></div>
+          <div class="sy-row"><span class="sy-label">建議工法</span><span class="sy-val">高壓灌注打針 2–5 針，外側重新嵌縫</span></div>
+          <div class="sy-row"><span class="sy-label">參考費用</span><span class="sy-val">$1,500–4,000（視裂縫數量）</span></div>
+          <div class="sy-row"><span class="sy-label">注意事項</span><span class="sy-val">窗框漏水是相對容易處理的案例，成功率高，適合作為平台初期承接的標準案件。</span></div>
+        </div>
+      </div>
+
+      <div class="sy-card">
+        <div class="sy-head" onclick="toggleSy(this)">
+          <span class="sy-emoji">🟤</span>
+          <div style="flex:1">
+            <div class="sy-symptom">牆面白色粉狀結晶（壁癌）</div>
+            <div class="sy-tags"><span class="badge b-blue">長期問題</span><span class="badge b-orange">需找水源</span></div>
+          </div>
+          <span class="sy-arrow">▼</span>
+        </div>
+        <div class="sy-body">
+          <div class="sy-row"><span class="sy-label">可能原因</span><span class="sy-val">水泥牆長期受水侵蝕，鈣離子析出形成碳酸鈣結晶。是漏水的結果，不是原因。需先找到滲水源。</span></div>
+          <div class="sy-row"><span class="sy-label">建議工法</span><span class="sy-val">找到外部水源 → 矽酸質防水材處理</span></div>
+          <div class="sy-row"><span class="sy-label">參考費用</span><span class="sy-val">$2,500–5,000/坪（不含外部防水）</span></div>
+          <div class="sy-row"><span class="sy-label">注意事項</span><span class="sy-val">⚠️ 只做表面壁癌處理而不找水源，100% 會復發。必須從滲水側阻水才能根治。</span></div>
+        </div>
+      </div>
+
+      <div class="sy-card">
+        <div class="sy-head" onclick="toggleSy(this)">
+          <span class="sy-emoji">🚿</span>
+          <div style="flex:1">
+            <div class="sy-symptom">浴室地板使用後持續潮濕、樓下滲漏</div>
+            <div class="sy-tags"><span class="badge b-orange">盡快處理</span><span class="badge b-red">需敲磚</span></div>
+          </div>
+          <span class="sy-arrow">▼</span>
+        </div>
+        <div class="sy-body">
+          <div class="sy-row"><span class="sy-label">可能原因</span><span class="sy-val">浴室地磚下防水層破損，淋浴水滲入樓板，導致樓下天花板滲漏。</span></div>
+          <div class="sy-row"><span class="sy-label">建議工法</span><span class="sy-val">色素積水測試定位 → 局部或全面敲磚重做防水層</span></div>
+          <div class="sy-row"><span class="sy-label">參考費用</span><span class="sy-val">$15,000–40,000（依浴室大小）</span></div>
+          <div class="sy-row"><span class="sy-label">注意事項</span><span class="sy-val">需要與樓下住戶協調，建議先確認漏水位置再決定敲磚範圍，避免過度施工。</span></div>
+        </div>
+      </div>
+
+      <div class="sy-card">
+        <div class="sy-head" onclick="toggleSy(this)">
+          <span class="sy-emoji">💸</span>
+          <div style="flex:1">
+            <div class="sy-symptom">水費異常增加 / 水錶不停轉</div>
+            <div class="sy-tags"><span class="badge b-red">緊急</span><span class="badge b-blue">暗管破裂</span></div>
+          </div>
+          <span class="sy-arrow">▼</span>
+        </div>
+        <div class="sy-body">
+          <div class="sy-row"><span class="sy-label">可能原因</span><span class="sy-val">給水暗管破裂，水持續流失。關閉所有水龍頭後水錶仍轉動，幾乎確定是暗管問題。</span></div>
+          <div class="sy-row"><span class="sy-label">建議工法</span><span class="sy-val">管路定壓測試 + 聲音探測定位 → 打牆換管</span></div>
+          <div class="sy-row"><span class="sy-label">參考費用</span><span class="sy-val">$5,000–15,000（依定位難度）</span></div>
+          <div class="sy-row"><span class="sy-label">注意事項</span><span class="sy-val">立即關閉家中總水閥，避免持續漏水浸濕結構，再聯繫師傅處理。</span></div>
+        </div>
+      </div>
+
+      <div class="sy-card">
+        <div class="sy-head" onclick="toggleSy(this)">
+          <span class="sy-emoji">❄️</span>
+          <div style="flex:1">
+            <div class="sy-symptom">冷氣附近天花板潮濕或滴水</div>
+            <div class="sy-tags"><span class="badge b-teal">一般處理</span><span class="badge b-blue">排水管問題</span></div>
+          </div>
+          <span class="sy-arrow">▼</span>
+        </div>
+        <div class="sy-body">
+          <div class="sy-row"><span class="sy-label">可能原因</span><span class="sy-val">冷氣排水管堵塞或破裂，導致排水逆流溢出。夏天使用冷氣期間最常發生。</span></div>
+          <div class="sy-row"><span class="sy-label">建議工法</span><span class="sy-val">內視鏡探查排水管 → 疏通或更換部分管路</span></div>
+          <div class="sy-row"><span class="sy-label">參考費用</span><span class="sy-val">$2,000–6,000</span></div>
+          <div class="sy-row"><span class="sy-label">注意事項</span><span class="sy-val">先確認是冷氣排水問題還是結構漏水，兩者處理方式完全不同。先關冷氣觀察是否停止。</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="warn-box">
+      ⚠️ <strong>重要提醒：</strong>壁癌、純潮濕、結露反潮等情況，因含水量不足，部分色素測試無法施作。需先判斷是否為「活性滲水」，再決定工法。請傳照片讓我們先評估，不收費用。
+    </div>
+  </div>
+</div>
+
+<!-- ── 檢測工法 ── -->
+<div id="tab-detect" class="tab-panel">
+  <div class="container">
+    <div class="sec-tag teal">找到漏水點</div>
+    <h2 class="sec-title">檢測工法說明</h2>
+    <p class="sec-sub">找不到漏水點就貿然施工，是浪費錢的最常見原因。先用對工具定位，再施工才有效。</p>
+
+    <div class="method-grid">
+
+      <div class="method-card">
+        <div class="mc-head">
+          <div class="mc-name">🌡️ 紅外線熱像儀</div>
+          <div class="mc-price">$8,000–20,000</div>
+        </div>
+        <div class="mc-tags"><span class="badge b-blue">非破壞性</span><span class="badge b-teal">大面積掃描</span></div>
+        <div class="mc-desc">透過溫度差異辨識牆體內隱藏的含水區域。可快速掃描大面積，找出肉眼看不到的滲水路徑。是複雜案件的首選工具。</div>
+        <div class="mc-pros-cons">
+          <div class="mc-pros"><div class="mc-sub">✓ 優點</div>非破壞・快速・範圍大</div>
+          <div class="mc-cons"><div class="mc-sub">✗ 限制</div>乾燥期溫差小效果有限</div>
+        </div>
+      </div>
+
+      <div class="method-card">
+        <div class="mc-head">
+          <div class="mc-name">🔬 高解析內視鏡</div>
+          <div class="mc-price">$6,000–12,000</div>
+        </div>
+        <div class="mc-tags"><span class="badge b-blue">管路專用</span><span class="badge b-orange">視覺確認</span></div>
+        <div class="mc-desc">將鏡頭深入排水管、冷氣排水管或管道間，直接拍攝管內狀況。精確定位破裂點，避免盲目打牆找位置。</div>
+        <div class="mc-pros-cons">
+          <div class="mc-pros"><div class="mc-sub">✓ 優點</div>直視管內・定位精確</div>
+          <div class="mc-cons"><div class="mc-sub">✗ 限制</div>受管徑與彎曲度限制</div>
+        </div>
+      </div>
+
+      <div class="method-card">
+        <div class="mc-head">
+          <div class="mc-name">🎨 色素積水測試</div>
+          <div class="mc-price">含於測試費</div>
+        </div>
+        <div class="mc-tags"><span class="badge b-teal">追蹤路徑</span><span class="badge b-blue">三色辨識</span></div>
+        <div class="mc-desc">使用紅、藍、綠三色色素注入疑似漏水位置，追蹤滲水路徑。頂樓九宮格分割測試可系統性找出漏水點。</div>
+        <div class="mc-pros-cons">
+          <div class="mc-pros"><div class="mc-sub">✓ 優點</div>路徑清晰・多點同測</div>
+          <div class="mc-cons"><div class="mc-sub">✗ 限制</div>需要有水才能流動</div>
+        </div>
+      </div>
+
+      <div class="method-card">
+        <div class="mc-head">
+          <div class="mc-name">💧 管路加壓測試</div>
+          <div class="mc-price">$3,000–6,000</div>
+        </div>
+        <div class="mc-tags"><span class="badge b-red">給水管專用</span></div>
+        <div class="mc-desc">對給水管路加壓，觀察壓力是否下降，確認管路有無破損。定壓測試可判斷漏水速率，是暗管破裂的基本確認方法。</div>
+        <div class="mc-pros-cons">
+          <div class="mc-pros"><div class="mc-sub">✓ 優點</div>客觀數據・費用低</div>
+          <div class="mc-cons"><div class="mc-sub">✗ 限制</div>無法定位破裂點位置</div>
+        </div>
+      </div>
+
+      <div class="method-card">
+        <div class="mc-head">
+          <div class="mc-name">🔊 漏水聲音探測</div>
+          <div class="mc-price">含於測試費</div>
+        </div>
+        <div class="mc-tags"><span class="badge b-blue">隱蔽管路</span></div>
+        <div class="mc-desc">聲波探測儀聆聽水流異音，搭配管路路徑探測器找出埋藏在水泥牆內的給水管破裂位置。</div>
+        <div class="mc-pros-cons">
+          <div class="mc-pros"><div class="mc-sub">✓ 優點</div>不打牆即可初步定位</div>
+          <div class="mc-cons"><div class="mc-sub">✗ 限制</div>環境噪音影響準確度</div>
+        </div>
+      </div>
+
+      <div class="method-card">
+        <div class="mc-head">
+          <div class="mc-name">💦 日本水分計</div>
+          <div class="mc-price">含於勘查費</div>
+        </div>
+        <div class="mc-tags"><span class="badge b-teal">輔助判斷</span></div>
+        <div class="mc-desc">高精度水分計測量牆面含水量，區分活性漏水與乾燥舊漬。避免對已無水的舊漬做無謂測試，節省費用。</div>
+        <div class="mc-pros-cons">
+          <div class="mc-pros"><div class="mc-sub">✓ 優點</div>快速篩查・低成本</div>
+          <div class="mc-cons"><div class="mc-sub">✗ 限制</div>僅輔助判斷非定位</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="tip-box" style="margin-top:1.25rem">
+      💡 <strong>多種儀器組合使用效果最好。</strong>專業師傅通常會依現場狀況選用 2–3 種工具交叉驗證，避免誤判。若您的漏水超過 3 個月找不到原因，建議直接採用儀器檢測，勘查費最低 $3,000，施工超過 $30,000 可折抵。
+    </div>
+  </div>
+</div>
+
+<!-- ── 施工工法 ── -->
+<div id="tab-repair" class="tab-panel">
+  <div class="container">
+    <div class="sec-tag teal">修好漏水</div>
+    <h2 class="sec-title">施工工法說明</h2>
+    <p class="sec-sub">不同漏水原因對應不同工法。選錯了花錢也沒用，先看懂再跟師傅討論。</p>
+
+    <div class="method-grid">
+
+      <div class="method-card">
+        <div class="mc-head">
+          <div class="mc-name">💉 高壓灌注（打針）</div>
+          <div class="mc-price">$500–1,000 / 針</div>
+        </div>
+        <div class="mc-tags"><span class="badge b-orange">治標</span><span class="badge b-blue">快速</span><span class="badge b-teal">小範圍</span></div>
+        <div class="mc-desc">以環氧樹脂或親水性發泡樹脂，高壓注入裂縫填補止漏。適合窗框、牆角等小範圍裂縫。效果約 1–3 年，裂縫日後可能再開。</div>
+        <div class="mc-pros-cons">
+          <div class="mc-pros"><div class="mc-sub">✓ 優點</div>當日施工・費用低廉</div>
+          <div class="mc-cons"><div class="mc-sub">✗ 缺點</div>治標・效果期限短</div>
+        </div>
+      </div>
+
+      <div class="method-card">
+        <div class="mc-head">
+          <div class="mc-name">🎨 防水塗料施作</div>
+          <div class="mc-price">$600–1,200 / 坪</div>
+        </div>
+        <div class="mc-tags"><span class="badge b-teal">防水層修復</span><span class="badge b-blue">大面積</span></div>
+        <div class="mc-desc">塗佈 PU 防水膜、彈泥或矽酸質防水材，用於頂樓、外牆、浴室等大面積防水層修復。矽酸質材可滲入牆體形成晶體持久阻水。</div>
+        <div class="mc-pros-cons">
+          <div class="mc-pros"><div class="mc-sub">✓ 優點</div>大面積有效・保固較長</div>
+          <div class="mc-cons"><div class="mc-sub">✗ 缺點</div>需等完全乾燥才能驗收</div>
+        </div>
+      </div>
+
+      <div class="method-card">
+        <div class="mc-head">
+          <div class="mc-name">🚰 管路更換</div>
+          <div class="mc-price">$3,000–8,000 / 次</div>
+        </div>
+        <div class="mc-tags"><span class="badge b-green">治本</span><span class="badge b-red">可能需打牆</span></div>
+        <div class="mc-desc">切開水泥牆或地板，更換老化破裂的給排水管。新式大樓排水管懸吊於下層天花板，可直接替換不需打牆，老屋則多需開鑿。</div>
+        <div class="mc-pros-cons">
+          <div class="mc-pros"><div class="mc-sub">✓ 優點</div>根治・一勞永逸</div>
+          <div class="mc-cons"><div class="mc-sub">✗ 缺點</div>工期長・費用相對高</div>
+        </div>
+      </div>
+
+      <div class="method-card">
+        <div class="mc-head">
+          <div class="mc-name">🔨 浴室防水層重做</div>
+          <div class="mc-price">$3,000–8,000 / 坪</div>
+        </div>
+        <div class="mc-tags"><span class="badge b-green">治本</span><span class="badge b-orange">屋齡 15 年以上建議</span></div>
+        <div class="mc-desc">敲除地磚或牆磚，重做防水層後復原。徹底解決浴室漏水的方式。工期約 5–10 天，期間無法使用浴室。</div>
+        <div class="mc-pros-cons">
+          <div class="mc-pros"><div class="mc-sub">✓ 優點</div>最根本的解決方式</div>
+          <div class="mc-cons"><div class="mc-sub">✗ 缺點</div>費時・需臨時替代浴室</div>
+        </div>
+      </div>
+
+      <div class="method-card">
+        <div class="mc-head">
+          <div class="mc-name">🧱 矽酸質壁癌處理</div>
+          <div class="mc-price">$2,500–5,000 / 坪</div>
+        </div>
+        <div class="mc-tags"><span class="badge b-blue">阻水結晶</span><span class="badge b-orange">需找水源</span></div>
+        <div class="mc-desc">磨除壁癌面，嚴重時打除至紅磚面。以矽酸質防水材分兩次塗刷，滲入牆體形成樹枝狀結晶填補孔隙，從內部阻水。</div>
+        <div class="mc-pros-cons">
+          <div class="mc-pros"><div class="mc-sub">✓ 優點</div>從牆體內部阻水</div>
+          <div class="mc-cons"><div class="mc-sub">✗ 缺點</div>未找水源仍會復發</div>
+        </div>
+      </div>
+
+      <div class="method-card">
+        <div class="mc-head">
+          <div class="mc-name">🏠 頂樓防水層重做</div>
+          <div class="mc-price">依面積估算</div>
+        </div>
+        <div class="mc-tags"><span class="badge b-teal">整合工法</span><span class="badge b-blue">頂樓專用</span></div>
+        <div class="mc-desc">移除舊隔熱磚，重做防水層後鋪設新隔熱磚。九宮格積水測試確認排水均勻後施工，同時解決積水與隔熱問題。</div>
+        <div class="mc-pros-cons">
+          <div class="mc-pros"><div class="mc-sub">✓ 優點</div>防水 + 隔熱一次解決</div>
+          <div class="mc-cons"><div class="mc-sub">✗ 缺點</div>費用較高・工期較長</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cta-strip">
+      <div class="cs-title">不確定你家適合哪種工法？</div>
+      <div class="cs-sub">傳照片給我們，免費判斷並建議最合適的方式</div>
+      <a href="https://lin.ee/rjmmYyC" class="cs-btn" target="_blank">📲 Line 免費諮詢</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── 自我診斷 ── -->
+<div id="tab-diag" class="tab-panel">
+  <div class="container">
+    <div class="sec-tag teal">快速判斷</div>
+    <h2 class="sec-title">自我診斷工具</h2>
+    <p class="sec-sub">回答幾個問題，我們給你初步的漏水類型判斷和建議做法</p>
+
+    <div class="diag-card">
+      <!-- Step 1 -->
+      <div class="diag-step active" id="diag-s1">
+        <div class="diag-q">Q1：漏水是什麼時候發生的？</div>
+        <div class="diag-options">
+          <button class="diag-opt" onclick="diagNext('s2-rain')"><span class="diag-opt-icon">🌧️</span>下雨天才會出現</button>
+          <button class="diag-opt" onclick="diagNext('s2-always')"><span class="diag-opt-icon">💧</span>不分晴雨，持續滴水或潮濕</button>
+          <button class="diag-opt" onclick="diagNext('s2-use')"><span class="diag-opt-icon">🚿</span>使用浴室／廚房後才出現</button>
+          <button class="diag-opt" onclick="diagNext('s2-ac')"><span class="diag-opt-icon">❄️</span>開冷氣時才出現</button>
+        </div>
+      </div>
+
+      <!-- Step 2a: 下雨才有 -->
+      <div class="diag-step" id="diag-s2-rain">
+        <div class="diag-q">Q2：水漬出現在哪裡？</div>
+        <div class="diag-options">
+          <button class="diag-opt" onclick="showResult('r-roof')"><span class="diag-opt-icon">⬆️</span>天花板（頂層住戶）</button>
+          <button class="diag-opt" onclick="showResult('r-wall')"><span class="diag-opt-icon">🪟</span>窗框旁邊或外牆附近</button>
+          <button class="diag-opt" onclick="showResult('r-ceiling')"><span class="diag-opt-icon">🏢</span>天花板（非頂層住戶）</button>
+        </div>
+        <div class="diag-reset" onclick="diagReset()">← 重新開始</div>
+      </div>
+
+      <!-- Step 2b: 持續有 -->
+      <div class="diag-step" id="diag-s2-always">
+        <div class="diag-q">Q2：關掉總水閥後，滴水或潮濕有停止嗎？</div>
+        <div class="diag-options">
+          <button class="diag-opt" onclick="showResult('r-pipe')"><span class="diag-opt-icon">✅</span>停止了</button>
+          <button class="diag-opt" onclick="showResult('r-structure')"><span class="diag-opt-icon">❌</span>沒有停止</button>
+        </div>
+        <div class="diag-reset" onclick="diagReset()">← 重新開始</div>
+      </div>
+
+      <!-- Step 2c: 使用後才有 -->
+      <div class="diag-step" id="diag-s2-use">
+        <div class="diag-q">Q2：問題出現在哪個位置？</div>
+        <div class="diag-options">
+          <button class="diag-opt" onclick="showResult('r-bathroom')"><span class="diag-opt-icon">🚿</span>浴室地板下方 / 樓下天花板</button>
+          <button class="diag-opt" onclick="showResult('r-pipe-drain')"><span class="diag-opt-icon">🚰</span>廚房或洗衣機附近地板</button>
+        </div>
+        <div class="diag-reset" onclick="diagReset()">← 重新開始</div>
+      </div>
+
+      <!-- Step 2d: 開冷氣才有 -->
+      <div class="diag-step" id="diag-s2-ac">
+        <div class="diag-result show" id="r-ac-direct">
+          <div class="dr-title">🔍 初步判斷：冷氣排水管問題</div>
+          <div class="dr-body">
+            冷氣附近天花板或牆面潮濕，多數是排水管堵塞或破裂導致逆流。<br><br>
+            <strong>建議做法：</strong>先關閉冷氣，確認潮濕是否停止。若停止，確認是排水管問題，可用內視鏡探查後疏通或換管。<br><br>
+            <strong>參考費用：</strong>$2,000–6,000<br>
+            <strong>緊急程度：</strong>一般，但長期不處理會損壞天花板材料。
+          </div>
+        </div>
+        <div class="diag-reset" onclick="diagReset()">← 重新開始</div>
+      </div>
+
+      <!-- Results -->
+      <div class="diag-result" id="r-roof">
+        <div class="dr-title">🔍 初步判斷：頂樓防水層老化</div>
+        <div class="dr-body">頂層住戶下雨天花板滲水，幾乎是頂樓防水層老化失效。屋齡超過 15 年的頂樓防水層需要重新施作。<br><br><strong>建議做法：</strong>熱像儀掃描確認積水範圍 → 移除隔熱磚 → 重做防水層。<br><strong>參考費用：</strong>$30,000–80,000（依頂樓面積）<br><strong>緊急程度：</strong>盡快處理，避免滲入鋼筋造成結構損壞。</div>
+        <div class="diag-reset" onclick="diagReset()">← 重新開始</div>
+      </div>
+
+      <div class="diag-result" id="r-wall">
+        <div class="dr-title">🔍 初步判斷：窗框或外牆嵌縫老化</div>
+        <div class="dr-body">窗框旁下雨滲水是很常見的問題，通常是嵌縫材料老化或窗框輕微變形所致。這類案件成功率高，費用相對低。<br><br><strong>建議做法：</strong>高壓灌注打針 2–5 針 + 外側重新嵌縫。<br><strong>參考費用：</strong>$1,500–4,000<br><strong>緊急程度：</strong>注意觀察，雨季前盡快處理。</div>
+        <div class="diag-reset" onclick="diagReset()">← 重新開始</div>
+      </div>
+
+      <div class="diag-result" id="r-ceiling">
+        <div class="dr-title">🔍 初步判斷：樓上浴室或管道間問題</div>
+        <div class="dr-body">非頂層住戶下雨天花板滲水，可能是樓上浴室防水層滲漏，或外牆滲水沿結構流下。需要釐清漏水路徑。<br><br><strong>建議做法：</strong>熱像儀或色素測試找到漏水路徑，再決定是否需要與樓上協調。<br><strong>參考費用：</strong>診斷 $6,000–12,000，施工依結果而定<br><strong>緊急程度：</strong>盡快處理，避免糾紛擴大。</div>
+        <div class="diag-reset" onclick="diagReset()">← 重新開始</div>
+      </div>
+
+      <div class="diag-result" id="r-pipe">
+        <div class="dr-title">🔍 初步判斷：給水暗管破裂</div>
+        <div class="dr-body">關閉總水閥後停止滴水，確認是給水管問題。老化的鍍鋅鋼管或 PVC 管可能在接頭處鬆脫或本體破裂。<br><br><strong>建議做法：</strong>管路定壓測試 + 聲音探測定位破裂點 → 打牆換管。<br><strong>參考費用：</strong>$5,000–15,000<br><strong>緊急程度：</strong>緊急，持續漏水會浸濕結構，建議先關總水閥。</div>
+        <div class="diag-reset" onclick="diagReset()">← 重新開始</div>
+      </div>
+
+      <div class="diag-result" id="r-structure">
+        <div class="dr-title">🔍 初步判斷：結構滲水或排水管問題</div>
+        <div class="dr-body">關閉總水閥後仍持續，排除給水管問題，可能是外部滲水或排水管破裂。需要進一步檢測確認。<br><br><strong>建議做法：</strong>熱像儀 + 內視鏡組合檢測，找出真正來源。<br><strong>參考費用：</strong>診斷 $8,000–15,000，施工依結果<br><strong>緊急程度：</strong>盡快安排診斷，原因不明時不要貿然施工。</div>
+        <div class="diag-reset" onclick="diagReset()">← 重新開始</div>
+      </div>
+
+      <div class="diag-result" id="r-bathroom">
+        <div class="dr-title">🔍 初步判斷：浴室地板防水層破損</div>
+        <div class="dr-body">使用浴室後才出現的樓下滲漏，最常見是浴室地磚下防水層破損。老屋尤其常見。<br><br><strong>建議做法：</strong>色素測試確認範圍 → 局部或全面敲磚重做防水層。<br><strong>參考費用：</strong>$15,000–40,000（依浴室大小）<br><strong>緊急程度：</strong>盡快處理，長期滲漏可能造成樓下鄰居求償。</div>
+        <div class="diag-reset" onclick="diagReset()">← 重新開始</div>
+      </div>
+
+      <div class="diag-result" id="r-pipe-drain">
+        <div class="dr-title">🔍 初步判斷：排水管破裂或接頭鬆脫</div>
+        <div class="dr-body">廚房或洗衣機使用後才出現漏水，通常是排水管老化破裂。老屋的鑄鐵排水管尤其容易在接頭處腐蝕。<br><br><strong>建議做法：</strong>內視鏡探查定位 → 更換破損管路。<br><strong>參考費用：</strong>$3,000–8,000<br><strong>緊急程度：</strong>一般，但長期不處理會加劇損壞。</div>
+        <div class="diag-reset" onclick="diagReset()">← 重新開始</div>
+      </div>
+    </div>
+
+    <div style="background:var(--gray-50);border-radius:10px;padding:1.1rem;margin-top:1.25rem;text-align:center">
+      <p style="font-size:.875rem;color:var(--gray-700);margin-bottom:.75rem">自我診斷只是初步參考，實際狀況需要師傅現場評估才能確認</p>
+      <a href="https://lin.ee/rjmmYyC" class="cs-btn" style="display:inline-flex;background:var(--blue)" target="_blank">📲 傳照片給我們免費評估</a>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer style="background:var(--gray-900);color:#fff;padding:2rem 1.25rem 1.25rem;margin-top:2rem">
+  <div style="max-width:900px;margin:0 auto">
+    <div style="font-size:1rem;font-weight:900;margin-bottom:.35rem">台灣漏水醫生</div>
+    <div style="font-size:.78rem;color:#9ca3af;margin-bottom:1rem">漏水知識庫 × 專業工班媒合平台</div>
+    <div style="display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;margin-bottom:1rem">
+      <a href="index.html" style="font-size:.78rem;color:#9ca3af">首頁</a>
+      <a href="cases.html" style="font-size:.78rem;color:#9ca3af">施工案例</a>
+      <a href="team.html" style="font-size:.78rem;color:#9ca3af">師傅團隊</a>
+      <a href="https://lin.ee/rjmmYyC" style="font-size:.78rem;color:#9ca3af" target="_blank">Line 諮詢</a>
+    </div>
+    <div style="font-size:.72rem;color:#6b7280;border-top:1px solid #374151;padding-top:1rem">© 2025 台灣漏水醫生　|　Line 官方帳號：@guleak（待填寫）</div>
+  </div>
+</footer>
+
+<script>
+// Tab 切換
+function showTab(id, btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:document.getElementById('tab-nav').offsetTop-60,behavior:'smooth'});
+}
+
+// 症狀手風琴
+function toggleSy(head){
+  const body = head.nextElementSibling;
+  const open = head.classList.contains('open');
+  document.querySelectorAll('.sy-head').forEach(h=>h.classList.remove('open'));
+  document.querySelectorAll('.sy-body').forEach(b=>b.classList.remove('open'));
+  if(!open){ head.classList.add('open'); body.classList.add('open'); }
+}
+
+// 自我診斷
+function diagNext(stepId){
+  document.querySelectorAll('.diag-step').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.diag-result').forEach(r=>r.classList.remove('show'));
+  const el = document.getElementById('diag-'+stepId);
+  if(el) el.classList.add('active');
+}
+function showResult(resultId){
+  document.querySelectorAll('.diag-step').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.diag-result').forEach(r=>r.classList.remove('show'));
+  const el = document.getElementById(resultId);
+  if(el) el.classList.add('show');
+}
+function diagReset(){
+  document.querySelectorAll('.diag-step').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.diag-result').forEach(r=>r.classList.remove('show'));
+  document.getElementById('diag-s1').classList.add('active');
+}
+
+// Header 陰影
+window.addEventListener('scroll',()=>{
+  document.querySelector('header').style.boxShadow=
+    window.scrollY>8?'0 2px 16px rgba(0,0,0,.09)':'none';
+});
+</script>
+</body>
+</html>

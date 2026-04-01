@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>施工案例｜台灣漏水醫生 - 台灣漏水修繕真實案例記錄</title>
+<meta name="description" content="台灣漏水醫生案例記錄，包含浴室漏水、頂樓防水、外牆滲水等各類型案例，完整記錄診斷過程、使用工法與驗收結果。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans TC',sans-serif;color:#1a202c;background:#fff;line-height:1.7;font-size:16px}
+a{text-decoration:none;color:inherit}
+
+:root{
+  --blue:#1d4ed8;--blue-dark:#1e3a8a;--blue-light:#eff6ff;--blue-mid:#3b82f6;
+  --green:#16a34a;--green-light:#22c55e;--green-100:#dcfce7;
+  --orange:#ea580c;--orange-100:#ffedd5;
+  --teal:#0d9488;--teal-100:#ccfbf1;
+  --red:#dc2626;--red-100:#fee2e2;
+  --gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;
+  --gray-400:#9ca3af;--gray-500:#6b7280;--gray-700:#374151;--gray-900:#111827;
+}
+
+.container{max-width:900px;margin:0 auto;padding:0 1.25rem}
+.badge{display:inline-block;font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:99px}
+.b-blue{background:var(--blue-light);color:var(--blue)}
+.b-teal{background:var(--teal-100);color:var(--teal)}
+.b-orange{background:var(--orange-100);color:var(--orange)}
+.b-green{background:var(--green-100);color:var(--green)}
+.b-red{background:var(--red-100);color:var(--red)}
+
+/* Float Line */
+#float-line{position:fixed;right:1rem;top:50%;transform:translateY(-50%);z-index:999;width:58px;height:58px;border-radius:50%;background:var(--green-light);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;line-height:1.3;box-shadow:0 4px 18px rgba(34,197,94,.5);animation:gpulse 2.5s ease-in-out infinite}
+@keyframes gpulse{0%,100%{box-shadow:0 4px 18px rgba(34,197,94,.5)}50%{box-shadow:0 4px 28px rgba(34,197,94,.75),0 0 0 8px rgba(34,197,94,.12)}}
+
+/* Header */
+header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--gray-200);padding:.75rem 1.25rem;display:flex;align-items:center;justify-content:space-between}
+.brand-name{font-size:1.1rem;font-weight:900;color:var(--blue-dark)}
+.brand-sub{font-size:.62rem;color:var(--blue-mid);font-weight:500;display:block}
+.header-nav{display:flex;gap:.5rem;align-items:center}
+.nav-back{font-size:.8rem;color:var(--gray-500);padding:.35rem .65rem;border-radius:6px;display:flex;align-items:center;gap:.3rem}
+.nav-back:hover{background:var(--gray-100)}
+.header-cta{background:var(--green-light);color:#fff;font-weight:700;font-size:.78rem;padding:.4rem .9rem;border-radius:8px}
+.header-cta:hover{background:var(--green)}
+
+/* Page Hero */
+#page-hero{background:linear-gradient(135deg,#7c3aed 0%,#1d4ed8 100%);color:#fff;padding:2.5rem 1.25rem 2rem}
+.page-hero-inner{max-width:900px;margin:0 auto}
+.page-eyebrow{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.9);font-size:.72rem;font-weight:600;padding:.3rem .85rem;border-radius:99px;margin-bottom:1rem}
+.page-title{font-size:1.75rem;font-weight:900;line-height:1.2;margin-bottom:.65rem}
+@media(min-width:480px){.page-title{font-size:2.1rem}}
+.page-desc{font-size:.9rem;color:rgba(255,255,255,.8);line-height:1.75;margin-bottom:1.25rem}
+.page-breadcrumb{font-size:.75rem;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:.4rem}
+
+/* Filter Bar */
+#filter-bar{background:var(--gray-50);border-bottom:1px solid var(--gray-200);padding:.85rem 1.25rem;overflow-x:auto;display:flex;gap:.5rem;white-space:nowrap;scrollbar-width:none;position:sticky;top:57px;z-index:90}
+#filter-bar::-webkit-scrollbar{display:none}
+.filter-btn{padding:.4rem .9rem;border-radius:99px;font-size:.8rem;font-weight:600;border:1.5px solid var(--gray-200);background:#fff;color:var(--gray-500);cursor:pointer;font-family:inherit;transition:.15s;white-space:nowrap}
+.filter-btn:hover{border-color:var(--blue-mid);color:var(--blue)}
+.filter-btn.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+/* Stats Row */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;padding:1.5rem 0;border-bottom:1px solid var(--gray-200);margin-bottom:1.75rem}
+.stat-item{text-align:center}
+.stat-num{font-size:1.5rem;font-weight:900;color:var(--blue)}
+.stat-label{font-size:.75rem;color:var(--gray-500);margin-top:.1rem}
+
+/* Case Grid */
+.cases-grid{display:grid;gap:1.1rem}
+@media(min-width:600px){.cases-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* Case Card */
+.case-card{border:1.5px solid var(--gray-200);border-radius:12px;overflow:hidden;transition:.18s;cursor:pointer}
+.case-card:hover{border-color:var(--blue-mid);box-shadow:0 4px 16px rgba(0,0,0,.09);transform:translateY(-2px)}
+.case-card[data-hidden="true"]{display:none}
+.case-top{padding:1rem 1.1rem;border-bottom:1px solid var(--gray-100)}
+.case-type{display:inline-block;font-size:.7rem;font-weight:700;padding:.2rem .65rem;border-radius:99px;margin-bottom:.5rem}
+.ct-bath{background:var(--blue-light);color:var(--blue)}
+.ct-roof{background:var(--teal-100);color:var(--teal)}
+.ct-wall{background:var(--orange-100);color:var(--orange)}
+.ct-pipe{background:#f3e8ff;color:#7c3aed}
+.ct-mold{background:var(--red-100);color:var(--red)}
+.ct-ac{background:#ecfdf5;color:#059669}
+.case-title{font-weight:700;color:var(--gray-900);font-size:.9rem;line-height:1.4;margin-bottom:.25rem}
+.case-loc{font-size:.75rem;color:var(--gray-400);display:flex;align-items:center;gap:.25rem}
+.case-body{padding:1rem 1.1rem}
+.case-row{display:flex;gap:.5rem;margin-bottom:.4rem;font-size:.82rem}
+.case-lbl{color:var(--gray-400);flex-shrink:0;width:44px;padding-top:.05rem}
+.case-val{color:var(--gray-700);line-height:1.55;flex:1}
+.case-result{margin-top:.75rem;padding:.55rem .85rem;border-radius:8px;font-size:.8rem;font-weight:600;display:flex;align-items:center;gap:.45rem}
+.r-pass{background:var(--green-100);color:var(--green)}
+.r-retry{background:var(--orange-100);color:var(--orange)}
+.case-expand{display:none;padding:.85rem 1.1rem 1.1rem;border-top:1px solid var(--gray-100);background:var(--gray-50)}
+.case-expand.open{display:block}
+.expand-title{font-size:.78rem;font-weight:700;color:var(--gray-700);margin-bottom:.4rem}
+.expand-text{font-size:.8rem;color:var(--gray-600);line-height:1.75}
+
+/* CTA Strip */
+.cta-strip{background:linear-gradient(135deg,var(--blue-dark),var(--blue));border-radius:12px;padding:1.5rem;color:#fff;text-align:center;margin:2rem 0}
+.cs-title{font-size:1.1rem;font-weight:700;margin-bottom:.4rem}
+.cs-sub{font-size:.82rem;color:rgba(255,255,255,.75);margin-bottom:1rem}
+.cs-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--green-light);color:#fff;font-weight:700;font-size:.875rem;padding:.7rem 1.5rem;border-radius:8px;transition:.15s}
+.cs-btn:hover{background:var(--green)}
+
+/* Notice */
+.notice{background:var(--gray-50);border-radius:8px;padding:.9rem 1rem;font-size:.8rem;color:var(--gray-500);text-align:center;margin-top:1rem;line-height:1.7}
+</style>
+</head>
+<body>
+
+<a id="float-line" href="https://lin.ee/rjmmYyC" target="_blank" rel="noopener">
+  <span>免費</span><span>諮詢</span>
+</a>
+
+<header>
+  <div>
+    <div class="brand-name">台灣漏水醫生</div>
+    <span class="brand-sub">漏水知識庫 × 專業工班媒合</span>
+  </div>
+  <div class="header-nav">
+    <a href="index.html" class="nav-back">← 首頁</a>
+    <a href="https://lin.ee/rjmmYyC" class="header-cta" target="_blank">📲 免費諮詢</a>
+  </div>
+</header>
+
+<section id="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-eyebrow">📋 施工記錄</div>
+    <h1 class="page-title">施工案例分享</h1>
+    <p class="page-desc">每筆案例完整記錄診斷過程、使用工法、費用與驗收結果。透明呈現，讓你知道真實的修繕狀況。</p>
+    <div class="page-breadcrumb">
+      <a href="index.html" style="color:rgba(255,255,255,.6)">首頁</a>
+      <span>›</span>
+      <span style="color:#fff">施工案例</span>
+    </div>
+  </div>
+</section>
+
+<!-- Filter -->
+<div id="filter-bar">
+  <button class="filter-btn active" onclick="filterCases('all',this)">全部案例</button>
+  <button class="filter-btn" onclick="filterCases('bath',this)">🚿 浴室漏水</button>
+  <button class="filter-btn" onclick="filterCases('roof',this)">🏠 頂樓防水</button>
+  <button class="filter-btn" onclick="filterCases('wall',this)">🪟 外牆滲水</button>
+  <button class="filter-btn" onclick="filterCases('pipe',this)">🔧 管路問題</button>
+  <button class="filter-btn" onclick="filterCases('mold',this)">🟤 壁癌根治</button>
+</div>
+
+<div style="padding:1.5rem 0 3rem">
+  <div class="container">
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">已記錄案例</div></div>
+      <div class="stat-item"><div class="stat-num">83%</div><div class="stat-label">首次驗收通過</div></div>
+      <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">最終完成率</div></div>
+    </div>
+
+    <div class="cases-grid" id="cases-grid">
+
+      <!-- Case 1 -->
+      <div class="case-card" data-type="bath">
+        <div class="case-top">
+          <div class="case-type ct-bath">🚿 浴室漏水</div>
+          <div class="case-title">30 年老公寓浴室天花板持續滴水</div>
+          <div class="case-loc">📍 台北市大安區｜RC 公寓 4F</div>
+        </div>
+        <div class="case-body">
+          <div class="case-row"><span class="case-lbl">問題</span><span class="case-val">樓下住戶天花板積水，3 年換了 2 次師傅仍未解決</span></div>
+          <div class="case-row"><span class="case-lbl">診斷</span><span class="case-val">熱像儀掃描 + 內視鏡確認排水管接頭鬆脫</span></div>
+          <div class="case-row"><span class="case-lbl">工法</span><span class="case-val">更換老化排水管，重做管路接頭</span></div>
+          <div class="case-row"><span class="case-lbl">費用</span><span class="case-val">診斷 $6,000 + 施工 $8,500</span></div>
+          <div class="case-result r-pass">✅ 驗收通過｜後續梅雨季無再滲漏</div>
+        </div>
+        <div class="case-expand">
+          <div class="expand-title">師傅施工記錄</div>
+          <div class="expand-text">前兩次師傅均採打針工法，但漏水原因是排水管接頭鬆脫，打針無法解決。本次先以熱像儀確認含水範圍，再用內視鏡找到接頭位置，開孔 2 處換管後復原，施工半天完成。<br><br>驗收：施工後梅雨季連續降雨 48 小時觀察，樓下天花板完全無滲漏，業主確認通過。</div>
+        </div>
+      </div>
+
+      <!-- Case 2 -->
+      <div class="case-card" data-type="wall">
+        <div class="case-top">
+          <div class="case-type ct-wall">🪟 外牆滲水</div>
+          <div class="case-title">新大樓窗框雨天持續滲水壁癌</div>
+          <div class="case-loc">📍 新北市板橋區｜15 年華廈 8F</div>
+        </div>
+        <div class="case-body">
+          <div class="case-row"><span class="case-lbl">問題</span><span class="case-val">窗框左下角每次下雨就出現水痕，牆面白色結晶持續惡化</span></div>
+          <div class="case-row"><span class="case-lbl">診斷</span><span class="case-val">目視 + 水分計確認窗框嵌縫老化開裂，無需儀器測試</span></div>
+          <div class="case-row"><span class="case-lbl">工法</span><span class="case-val">高壓灌注 3 針 + 外側重新嵌縫</span></div>
+          <div class="case-row"><span class="case-lbl">費用</span><span class="case-val">$3,500（含材料）</span></div>
+          <div class="case-result r-pass">✅ 驗收通過｜颱風期間測試無滲漏</div>
+        </div>
+        <div class="case-expand">
+          <div class="expand-title">師傅施工記錄</div>
+          <div class="expand-text">窗框案件屬於高成功率標準案例。師傅先目視確認裂縫位置，水分計量測含水量仍高，確認為活性漏水。外側搭鷹架重新嵌縫，室內高壓灌注 3 針填補縫隙，施工約 4 小時。<br><br>驗收：施工後遇颱風外圍環流，持續降雨，窗框周圍 48 小時無滲水，業主確認通過。</div>
+        </div>
+      </div>
+
+      <!-- Case 3 -->
+      <div class="case-card" data-type="roof">
+        <div class="case-top">
+          <div class="case-type ct-roof">🏠 頂樓防水</div>
+          <div class="case-title">20 年透天厝頂樓積水滲入 4 樓</div>
+          <div class="case-loc">📍 桃園市中壢區｜4 層透天厝</div>
+        </div>
+        <div class="case-body">
+          <div class="case-row"><span class="case-lbl">問題</span><span class="case-val">4 樓天花板雨後大面積滲水，防水層施工超過 20 年</span></div>
+          <div class="case-row"><span class="case-lbl">診斷</span><span class="case-val">九宮格積水測試確認排水坡度失效，防水層全面老化</span></div>
+          <div class="case-row"><span class="case-lbl">工法</span><span class="case-val">移除隔熱磚，重做 PU 防水層，重鋪隔熱磚</span></div>
+          <div class="case-row"><span class="case-lbl">費用</span><span class="case-val">$45,000（約 15 坪頂樓）</span></div>
+          <div class="case-result r-pass">✅ 驗收通過｜隔年梅雨季回訪確認</div>
+        </div>
+        <div class="case-expand">
+          <div class="expand-title">師傅施工記錄</div>
+          <div class="expand-text">頂樓防水層全面失效，九宮格測試顯示積水路徑混亂，原有排水坡度不足。施工分 3 天：Day1 移除所有隔熱磚並清潔底面；Day2 重做 PU 防水層兩道，養護 24 小時；Day3 重鋪隔熱磚，確認排水坡度正確。<br><br>驗收：施工後隔年梅雨季主動回訪，4 樓天花板確認無任何滲漏，業主給予五星評價。</div>
+        </div>
+      </div>
+
+      <!-- Case 4 -->
+      <div class="case-card" data-type="bath">
+        <div class="case-top">
+          <div class="case-type ct-bath">🚿 浴室漏水</div>
+          <div class="case-title">10 年新大樓浴室地板使用後滲漏</div>
+          <div class="case-loc">📍 台中市西屯區｜RC 大樓 12F</div>
+        </div>
+        <div class="case-body">
+          <div class="case-row"><span class="case-lbl">問題</span><span class="case-val">樓下 11F 住戶天花板溼斑，僅淋浴後才出現</span></div>
+          <div class="case-row"><span class="case-lbl">診斷</span><span class="case-val">藍色色素測試確認 12F 浴室地磚下防水層破損</span></div>
+          <div class="case-row"><span class="case-lbl">工法</span><span class="case-val">局部敲磚（約 4 坪），重做防水層，復原磁磚</span></div>
+          <div class="case-row"><span class="case-lbl">費用</span><span class="case-val">$22,000（局部施工）</span></div>
+          <div class="case-result r-pass">✅ 驗收通過｜淋浴後 48H 確認無滲漏</div>
+        </div>
+        <div class="case-expand">
+          <div class="expand-title">師傅施工記錄</div>
+          <div class="expand-text">色素測試注入藍色色素，浸泡 2 小時後確認滲漏位置在淋浴區角落約 2 坪範圍。實際敲磚後發現防水層有明顯裂縫，牆角施工不確實，可能是建商施工疏失。重做防水層並延伸到牆面 30cm，復原磁磚。<br><br>驗收：淋浴 3 次，每次 48 小時觀察，11F 天花板完全無溼斑，業主確認通過。</div>
+        </div>
+      </div>
+
+      <!-- Case 5 -->
+      <div class="case-card" data-type="mold">
+        <div class="case-top">
+          <div class="case-type ct-mold">🟤 壁癌根治</div>
+          <div class="case-title">40 年老屋外牆壁癌反覆無法根治</div>
+          <div class="case-loc">📍 台北市信義區｜磚牆老公寓 2F</div>
+        </div>
+        <div class="case-body">
+          <div class="case-row"><span class="case-lbl">問題</span><span class="case-val">牆面壁癌每年處理都復發，前後花超過 $30,000</span></div>
+          <div class="case-row"><span class="case-lbl">診斷</span><span class="case-val">熱像儀確認外牆磚縫大量滲水，從室外側進入</span></div>
+          <div class="case-row"><span class="case-lbl">工法</span><span class="case-val">第一次室內矽酸質處理 → 第二次加做外牆防水塗料</span></div>
+          <div class="case-row"><span class="case-lbl">費用</span><span class="case-val">兩次合計 $18,000</span></div>
+          <div class="case-result r-retry">🔄 第二次施工後驗收通過（首次部分有效）</div>
+        </div>
+        <div class="case-expand">
+          <div class="expand-title">師傅施工記錄 + 誠實說明</div>
+          <div class="expand-text">第一次：室內矽酸質防水材處理，預計從內部阻水。驗收後下雨仍有少量滲水，判斷外部水源進入量超過內部阻水能力。<br><br>第二次：搭鷹架，外牆磚縫全面重新填縫並塗佈防水塗料，再次施工後驗收通過。<br><br>⚠️ 誠實記錄：這個案例首次施工效果不完整，需要第二次才根治。費用分兩次收，第一次驗收未通過退還差額，第二次才完整收費。</div>
+        </div>
+      </div>
+
+      <!-- Case 6 -->
+      <div class="case-card" data-type="pipe">
+        <div class="case-top">
+          <div class="case-type ct-pipe">🔧 管路問題</div>
+          <div class="case-title">辦公室冷氣排水管漏水天花板損壞</div>
+          <div class="case-loc">📍 新北市新店區｜商辦大樓 5F</div>
+        </div>
+        <div class="case-body">
+          <div class="case-row"><span class="case-lbl">問題</span><span class="case-val">輕鋼架天花板長期受潮，矽酸鈣板變色脫落</span></div>
+          <div class="case-row"><span class="case-lbl">診斷</span><span class="case-val">內視鏡探測確認冷氣排水管管內堵塞導致逆流</span></div>
+          <div class="case-row"><span class="case-lbl">工法</span><span class="case-val">疏通 + 更換部分排水管路，更換受損天花板</span></div>
+          <div class="case-row"><span class="case-lbl">費用</span><span class="case-val">$9,500（含天花板修復）</span></div>
+          <div class="case-result r-pass">✅ 驗收通過｜使用冷氣 2 週觀察正常</div>
+        </div>
+        <div class="case-expand">
+          <div class="expand-title">師傅施工記錄</div>
+          <div class="expand-text">冷氣排水管使用超過 8 年，管內積累水垢和污垢造成嚴重堵塞。疏通後測試排水仍不順，判斷管路部分老化變形，更換 2 公尺管路後排水正常。天花板矽酸鈣板更換 3 片。<br><br>驗收：連續使用冷氣 2 週，每日觀察天花板，無任何潮濕或滴水，業主確認通過。</div>
+        </div>
+      </div>
+
+    </div><!-- end cases-grid -->
+
+    <div class="notice">
+      以上案例為施工記錄，費用因地區、屋況、工法不同而有差異。<br>
+      初期案例為虛擬示範，後續將持續新增真實施工紀錄。
+    </div>
+
+    <div class="cta-strip">
+      <div class="cs-title">你家的狀況和哪個案例相似？</div>
+      <div class="cs-sub">傳照片給我們，免費初步判斷，快速媒合工班</div>
+      <a href="https://lin.ee/rjmmYyC" class="cs-btn" target="_blank">📲 Line 免費諮詢</a>
+    </div>
+
+  </div>
+</div>
+
+<footer style="background:#111827;color:#fff;padding:2rem 1.25rem 1.25rem">
+  <div style="max-width:900px;margin:0 auto">
+    <div style="font-size:1rem;font-weight:900;margin-bottom:.35rem">台灣漏水醫生</div>
+    <div style="font-size:.78rem;color:#9ca3af;margin-bottom:1rem">漏水知識庫 × 專業工班媒合平台</div>
+    <div style="display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;margin-bottom:1rem">
+      <a href="index.html" style="font-size:.78rem;color:#9ca3af">首頁</a>
+      <a href="knowledge.html" style="font-size:.78rem;color:#9ca3af">漏水百科</a>
+      <a href="team.html" style="font-size:.78rem;color:#9ca3af">師傅團隊</a>
+      <a href="https://lin.ee/rjmmYyC" style="font-size:.78rem;color:#9ca3af" target="_blank">Line 諮詢</a>
+    </div>
+    <div style="font-size:.72rem;color:#6b7280;border-top:1px solid #374151;padding-top:1rem">© 2025 台灣漏水醫生　|　Line 官方帳號：@guleak（待填寫）</div>
+  </div>
+</footer>
+
+<script>
+function filterCases(type, btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.case-card').forEach(card=>{
+    card.dataset.hidden = (type!=='all' && card.dataset.type!==type) ? 'true' : 'false';
+  });
+}
+// 展開案例詳情
+document.querySelectorAll('.case-card').forEach(card=>{
+  card.addEventListener('click',function(){
+    const expand = this.querySelector('.case-expand');
+    expand.classList.toggle('open');
+  });
+});
+window.addEventListener('scroll',()=>{
+  document.querySelector('header').style.boxShadow=
+    window.scrollY>8?'0 2px 16px rgba(0,0,0,.09)':'none';
+});
+</script>
+</body>
+</html>

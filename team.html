@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>合作工班｜台灣漏水醫生 - 嚴選認證漏水修繕師傅</title>
+<meta name="description" content="台灣漏水醫生媒合工班師傅，依漏水類型與地區媒合最適合的師傅。所有師傅均通過資歷審核，施工記錄透明，低評分自動下架。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans TC',sans-serif;color:#1a202c;background:#fff;line-height:1.7;font-size:16px}
+a{text-decoration:none;color:inherit}
+
+:root{
+  --blue:#1d4ed8;--blue-dark:#1e3a8a;--blue-light:#eff6ff;--blue-mid:#3b82f6;
+  --green:#16a34a;--green-light:#22c55e;--green-100:#dcfce7;
+  --orange:#ea580c;--orange-100:#ffedd5;
+  --gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;
+  --gray-400:#9ca3af;--gray-500:#6b7280;--gray-700:#374151;--gray-900:#111827;
+}
+
+.container{max-width:900px;margin:0 auto;padding:0 1.25rem}
+
+/* Float */
+#float-line{position:fixed;right:1rem;top:50%;transform:translateY(-50%);z-index:999;width:58px;height:58px;border-radius:50%;background:var(--green-light);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;line-height:1.3;box-shadow:0 4px 18px rgba(34,197,94,.5);animation:gpulse 2.5s ease-in-out infinite}
+@keyframes gpulse{0%,100%{box-shadow:0 4px 18px rgba(34,197,94,.5)}50%{box-shadow:0 4px 28px rgba(34,197,94,.75),0 0 0 8px rgba(34,197,94,.12)}}
+
+/* Header */
+header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--gray-200);padding:.75rem 1.25rem;display:flex;align-items:center;justify-content:space-between}
+.brand-name{font-size:1.1rem;font-weight:900;color:var(--blue-dark)}
+.brand-sub{font-size:.62rem;color:var(--blue-mid);font-weight:500;display:block}
+.header-nav{display:flex;gap:.5rem;align-items:center}
+.nav-back{font-size:.8rem;color:var(--gray-500);padding:.35rem .65rem;border-radius:6px}
+.nav-back:hover{background:var(--gray-100)}
+.header-cta{background:var(--green-light);color:#fff;font-weight:700;font-size:.78rem;padding:.4rem .9rem;border-radius:8px}
+.header-cta:hover{background:var(--green)}
+
+/* Page Hero */
+#page-hero{background:linear-gradient(135deg,#065f46 0%,#0d9488 100%);color:#fff;padding:2.5rem 1.25rem 2rem}
+.page-hero-inner{max-width:900px;margin:0 auto}
+.page-eyebrow{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.9);font-size:.72rem;font-weight:600;padding:.3rem .85rem;border-radius:99px;margin-bottom:1rem}
+.page-title{font-size:1.75rem;font-weight:900;line-height:1.2;margin-bottom:.65rem}
+@media(min-width:480px){.page-title{font-size:2.1rem}}
+.page-desc{font-size:.9rem;color:rgba(255,255,255,.8);line-height:1.75;margin-bottom:1.25rem}
+.page-breadcrumb{font-size:.75rem;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:.4rem}
+
+/* 審核流程橫幅 */
+.audit-bar{background:var(--blue-light);border-bottom:1px solid #bfdbfe;padding:1rem 1.25rem}
+.audit-steps{max-width:900px;margin:0 auto;display:flex;gap:.5rem;overflow-x:auto;scrollbar-width:none}
+.audit-steps::-webkit-scrollbar{display:none}
+.audit-step{display:flex;align-items:center;gap:.5rem;flex-shrink:0}
+.as-num{width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.as-text{font-size:.78rem;color:var(--blue-dark);font-weight:500;white-space:nowrap}
+.as-arrow{font-size:.65rem;color:var(--blue-mid);flex-shrink:0}
+
+/* Team Grid */
+.team-grid{display:grid;gap:1.1rem;padding:2rem 0 3rem}
+@media(min-width:600px){.team-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* Team Card */
+.team-card{border:1.5px solid var(--gray-200);border-radius:14px;overflow:hidden;transition:.18s}
+.team-card:hover{border-color:var(--blue-mid);box-shadow:0 4px 16px rgba(0,0,0,.09)}
+.tc-top{padding:1.25rem 1.1rem;display:flex;align-items:flex-start;gap:1rem}
+.tc-avatar{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:700;color:#fff;flex-shrink:0}
+.av1{background:linear-gradient(135deg,#1e4d7b,#3b82d4)}
+.av2{background:linear-gradient(135deg,#0d9488,#2dd4bf)}
+.av3{background:linear-gradient(135deg,#7c3aed,#a78bfa)}
+.av4{background:linear-gradient(135deg,#dc2626,#f87171)}
+.av5{background:linear-gradient(135deg,#d97706,#fbbf24)}
+.av6{background:linear-gradient(135deg,#065f46,#34d399)}
+.tc-info{flex:1;min-width:0}
+.tc-name{font-size:1rem;font-weight:700;color:var(--gray-900);margin-bottom:.1rem}
+.tc-title{font-size:.75rem;color:var(--blue);font-weight:600;margin-bottom:.5rem}
+.tc-stars{display:flex;gap:2px;margin-bottom:.5rem}
+.star{color:#fbbf24;font-size:.85rem}
+.tc-body{padding:.85rem 1.1rem 1.1rem;border-top:1px solid var(--gray-100);background:var(--gray-50)}
+.tc-spec-title{font-size:.72rem;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.5rem}
+.tc-specs{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.85rem}
+.spec-tag{font-size:.72rem;padding:.2rem .6rem;border-radius:99px;background:#fff;border:1px solid var(--gray-200);color:var(--gray-700);font-weight:500}
+.tc-rows{display:flex;flex-direction:column;gap:.35rem}
+.tc-row{display:flex;gap:.5rem;font-size:.8rem}
+.tc-lbl{color:var(--gray-400);flex-shrink:0;width:44px}
+.tc-val{color:var(--gray-700);line-height:1.5}
+.tc-cta{display:block;text-align:center;margin-top:1rem;padding:.65rem;background:var(--blue);color:#fff;border-radius:8px;font-size:.825rem;font-weight:700;transition:.15s}
+.tc-cta:hover{background:var(--blue-dark)}
+
+/* Join Section */
+.join-section{background:var(--gray-50);border-radius:12px;padding:1.75rem;margin:0 0 2rem;border:1.5px dashed var(--gray-300)}
+.join-title{font-size:1.1rem;font-weight:700;color:var(--gray-900);margin-bottom:.5rem}
+.join-desc{font-size:.875rem;color:var(--gray-600);line-height:1.75;margin-bottom:1.25rem}
+.join-requirements{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.25rem}
+.join-req{display:flex;align-items:flex-start;gap:.55rem;font-size:.83rem;color:var(--gray-700)}
+.req-check{color:var(--green);font-weight:700;flex-shrink:0;margin-top:.08rem}
+.join-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--blue);color:#fff;font-weight:700;font-size:.875rem;padding:.7rem 1.4rem;border-radius:8px;transition:.15s}
+.join-btn:hover{background:var(--blue-dark)}
+
+/* CTA Strip */
+.cta-strip{background:linear-gradient(135deg,var(--blue-dark),var(--blue));border-radius:12px;padding:1.5rem;color:#fff;text-align:center;margin:0 0 2rem}
+.cs-title{font-size:1.1rem;font-weight:700;margin-bottom:.4rem}
+.cs-sub{font-size:.82rem;color:rgba(255,255,255,.75);margin-bottom:1rem}
+.cs-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--green-light);color:#fff;font-weight:700;font-size:.875rem;padding:.7rem 1.5rem;border-radius:8px;transition:.15s}
+.cs-btn:hover{background:var(--green)}
+</style>
+</head>
+<body>
+
+<a id="float-line" href="https://lin.ee/rjmmYyC" target="_blank" rel="noopener">
+  <span>免費</span><span>諮詢</span>
+</a>
+
+<header>
+  <div>
+    <div class="brand-name">台灣漏水醫生</div>
+    <span class="brand-sub">漏水知識庫 × 專業工班媒合</span>
+  </div>
+  <div class="header-nav">
+    <a href="index.html" class="nav-back">← 首頁</a>
+    <a href="https://lin.ee/rjmmYyC" class="header-cta" target="_blank">📲 免費諮詢</a>
+  </div>
+</header>
+
+<section id="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-eyebrow">👷 合作工班</div>
+    <h1 class="page-title">合作工班</h1>
+    <p class="page-desc">依您的漏水狀況與所在地區，快速媒合合適工班師傅，酌收車馬費，到場後報價透明。</p>
+    <div class="page-breadcrumb">
+      <a href="index.html" style="color:rgba(255,255,255,.6)">首頁</a>
+      <span>›</span>
+      <span style="color:#fff">合作工班</span>
+    </div>
+  </div>
+</section>
+
+<!-- 審核流程 -->
+<div class="audit-bar">
+  <div class="audit-steps">
+    <div class="audit-step"><div class="as-num">1</div><div class="as-text">提出申請</div></div>
+    <div class="as-arrow">›</div>
+    <div class="audit-step"><div class="as-num">2</div><div class="as-text">資歷審核</div></div>
+    <div class="as-arrow">›</div>
+    <div class="audit-step"><div class="as-num">3</div><div class="as-text">工法認證</div></div>
+    <div class="as-arrow">›</div>
+    <div class="audit-step"><div class="as-num">4</div><div class="as-text">上線接案</div></div>
+    <div class="as-arrow">›</div>
+    <div class="audit-step"><div class="as-num">5</div><div class="as-text">評分追蹤</div></div>
+    <div class="as-arrow">›</div>
+    <div class="audit-step"><div class="as-num">⚠</div><div class="as-text">低評分下架</div></div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="team-grid">
+
+    <!-- 師傅 1 -->
+    <div class="team-card">
+      <div class="tc-top">
+        <div class="tc-avatar av1">王</div>
+        <div class="tc-info">
+          <div class="tc-name">王師傅</div>
+          <div class="tc-title">資深結構漏水診斷專家</div>
+          <div class="tc-stars">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+            <span style="font-size:.75rem;color:var(--gray-500);margin-left:.35rem">5.0（待填寫）</span>
+          </div>
+        </div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-spec-title">專長工法</div>
+        <div class="tc-specs">
+          <span class="spec-tag">熱像儀診斷</span>
+          <span class="spec-tag">複雜漏水</span>
+          <span class="spec-tag">老屋評估</span>
+          <span class="spec-tag">色素測試</span>
+        </div>
+        <div class="tc-rows">
+          <div class="tc-row"><span class="tc-lbl">年資</span><span class="tc-val">（待填寫）年</span></div>
+          <div class="tc-row"><span class="tc-lbl">服務區</span><span class="tc-val">大台北地區</span></div>
+          <div class="tc-row"><span class="tc-lbl">完成案件</span><span class="tc-val">（待填寫）件</span></div>
+          <div class="tc-row"><span class="tc-lbl">回應時間</span><span class="tc-val">（待填寫）小時內</span></div>
+        </div>
+        <a href="https://lin.ee/rjmmYyC" class="tc-cta" target="_blank">📲 指定諮詢</a>
+      </div>
+    </div>
+
+    <!-- 師傅 2 -->
+    <div class="team-card">
+      <div class="tc-top">
+        <div class="tc-avatar av2">陳</div>
+        <div class="tc-info">
+          <div class="tc-name">陳師傅</div>
+          <div class="tc-title">科技抓漏・內視鏡專家</div>
+          <div class="tc-stars">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+            <span style="font-size:.75rem;color:var(--gray-500);margin-left:.35rem">5.0（待填寫）</span>
+          </div>
+        </div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-spec-title">專長工法</div>
+        <div class="tc-specs">
+          <span class="spec-tag">內視鏡定位</span>
+          <span class="spec-tag">管路路徑探測</span>
+          <span class="spec-tag">聲音探測</span>
+          <span class="spec-tag">排水管</span>
+        </div>
+        <div class="tc-rows">
+          <div class="tc-row"><span class="tc-lbl">年資</span><span class="tc-val">（待填寫）年</span></div>
+          <div class="tc-row"><span class="tc-lbl">服務區</span><span class="tc-val">台北・新北・基隆</span></div>
+          <div class="tc-row"><span class="tc-lbl">完成案件</span><span class="tc-val">（待填寫）件</span></div>
+          <div class="tc-row"><span class="tc-lbl">回應時間</span><span class="tc-val">（待填寫）小時內</span></div>
+        </div>
+        <a href="https://lin.ee/rjmmYyC" class="tc-cta" target="_blank">📲 指定諮詢</a>
+      </div>
+    </div>
+
+    <!-- 師傅 3 -->
+    <div class="team-card">
+      <div class="tc-top">
+        <div class="tc-avatar av3">林</div>
+        <div class="tc-info">
+          <div class="tc-name">林師傅</div>
+          <div class="tc-title">打針止漏・防水塗料</div>
+          <div class="tc-stars">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+            <span style="font-size:.75rem;color:var(--gray-500);margin-left:.35rem">5.0（待填寫）</span>
+          </div>
+        </div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-spec-title">專長工法</div>
+        <div class="tc-specs">
+          <span class="spec-tag">高壓灌注</span>
+          <span class="spec-tag">防水塗料</span>
+          <span class="spec-tag">窗框嵌縫</span>
+          <span class="spec-tag">快速施工</span>
+        </div>
+        <div class="tc-rows">
+          <div class="tc-row"><span class="tc-lbl">年資</span><span class="tc-val">（待填寫）年</span></div>
+          <div class="tc-row"><span class="tc-lbl">服務區</span><span class="tc-val">台北・新北・桃園</span></div>
+          <div class="tc-row"><span class="tc-lbl">完成案件</span><span class="tc-val">（待填寫）件</span></div>
+          <div class="tc-row"><span class="tc-lbl">回應時間</span><span class="tc-val">（待填寫）小時內</span></div>
+        </div>
+        <a href="https://lin.ee/rjmmYyC" class="tc-cta" target="_blank">📲 指定諮詢</a>
+      </div>
+    </div>
+
+    <!-- 師傅 4 -->
+    <div class="team-card">
+      <div class="tc-top">
+        <div class="tc-avatar av4">張</div>
+        <div class="tc-info">
+          <div class="tc-name">張師傅</div>
+          <div class="tc-title">頂樓防水・外牆修復</div>
+          <div class="tc-stars">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+            <span style="font-size:.75rem;color:var(--gray-500);margin-left:.35rem">5.0（待填寫）</span>
+          </div>
+        </div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-spec-title">專長工法</div>
+        <div class="tc-specs">
+          <span class="spec-tag">頂樓防水</span>
+          <span class="spec-tag">外牆修復</span>
+          <span class="spec-tag">PU 防水膜</span>
+          <span class="spec-tag">透天厝</span>
+        </div>
+        <div class="tc-rows">
+          <div class="tc-row"><span class="tc-lbl">年資</span><span class="tc-val">（待填寫）年</span></div>
+          <div class="tc-row"><span class="tc-lbl">服務區</span><span class="tc-val">桃園・新竹・台中</span></div>
+          <div class="tc-row"><span class="tc-lbl">完成案件</span><span class="tc-val">（待填寫）件</span></div>
+          <div class="tc-row"><span class="tc-lbl">回應時間</span><span class="tc-val">（待填寫）小時內</span></div>
+        </div>
+        <a href="https://lin.ee/rjmmYyC" class="tc-cta" target="_blank">📲 指定諮詢</a>
+      </div>
+    </div>
+
+    <!-- 師傅 5 -->
+    <div class="team-card">
+      <div class="tc-top">
+        <div class="tc-avatar av5">黃</div>
+        <div class="tc-info">
+          <div class="tc-name">黃師傅</div>
+          <div class="tc-title">浴室重做・壁癌根治</div>
+          <div class="tc-stars">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+            <span style="font-size:.75rem;color:var(--gray-500);margin-left:.35rem">5.0（待填寫）</span>
+          </div>
+        </div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-spec-title">專長工法</div>
+        <div class="tc-specs">
+          <span class="spec-tag">浴室重做</span>
+          <span class="spec-tag">壁癌根治</span>
+          <span class="spec-tag">矽酸質防水</span>
+          <span class="spec-tag">磁磚修復</span>
+        </div>
+        <div class="tc-rows">
+          <div class="tc-row"><span class="tc-lbl">年資</span><span class="tc-val">（待填寫）年</span></div>
+          <div class="tc-row"><span class="tc-lbl">服務區</span><span class="tc-val">台中・彰化・台南</span></div>
+          <div class="tc-row"><span class="tc-lbl">完成案件</span><span class="tc-val">（待填寫）件</span></div>
+          <div class="tc-row"><span class="tc-lbl">回應時間</span><span class="tc-val">（待填寫）小時內</span></div>
+        </div>
+        <a href="https://lin.ee/rjmmYyC" class="tc-cta" target="_blank">📲 指定諮詢</a>
+      </div>
+    </div>
+
+    <!-- 師傅 6 -->
+    <div class="team-card">
+      <div class="tc-top">
+        <div class="tc-avatar av6">吳</div>
+        <div class="tc-info">
+          <div class="tc-name">吳師傅</div>
+          <div class="tc-title">緊急應修・全台服務</div>
+          <div class="tc-stars">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+            <span style="font-size:.75rem;color:var(--gray-500);margin-left:.35rem">5.0（待填寫）</span>
+          </div>
+        </div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-spec-title">專長工法</div>
+        <div class="tc-specs">
+          <span class="spec-tag">緊急到場</span>
+          <span class="spec-tag">全工法</span>
+          <span class="spec-tag">大樓管委會</span>
+          <span class="spec-tag">商辦空間</span>
+        </div>
+        <div class="tc-rows">
+          <div class="tc-row"><span class="tc-lbl">年資</span><span class="tc-val">（待填寫）年</span></div>
+          <div class="tc-row"><span class="tc-lbl">服務區</span><span class="tc-val">全台灣（48H 安排）</span></div>
+          <div class="tc-row"><span class="tc-lbl">完成案件</span><span class="tc-val">（待填寫）件</span></div>
+          <div class="tc-row"><span class="tc-lbl">回應時間</span><span class="tc-val">（待填寫）小時內</span></div>
+        </div>
+        <a href="https://lin.ee/rjmmYyC" class="tc-cta" target="_blank">📲 指定諮詢</a>
+      </div>
+    </div>
+
+  </div><!-- end team-grid -->
+
+  <!-- 師傅加入 -->
+  <div class="join-section">
+    <div class="join-title">👷 您是防水師傅嗎？加入固漏團隊</div>
+    <div class="join-desc">固漏平台持續招募各地區優質師傅。我們提供穩定的案源，您只需要專注在施工品質。品質優先機制讓好師傅脫穎而出。</div>
+    <div class="join-requirements">
+      <div class="join-req"><span class="req-check">✓</span>具備防水相關施工經驗 3 年以上</div>
+      <div class="join-req"><span class="req-check">✓</span>願意配合透明媒合機制</div>
+      <div class="join-req"><span class="req-check">✓</span>施工全程拍照記錄</div>
+      <div class="join-req"><span class="req-check">✓</span>接受客戶評分監督</div>
+    </div>
+    <a href="https://lin.ee/rjmmYyC" class="join-btn" target="_blank">📲 Line 洽談加入</a>
+  </div>
+
+  <div class="cta-strip">
+    <div class="cs-title">不確定要找哪位師傅？</div>
+    <div class="cs-sub">告訴我們你家的漏水狀況，我們幫你媒合最適合的師傅</div>
+    <a href="https://lin.ee/rjmmYyC" class="cs-btn" target="_blank">📲 Line 免費諮詢媒合</a>
+  </div>
+
+</div>
+
+<footer style="background:#111827;color:#fff;padding:2rem 1.25rem 1.25rem">
+  <div style="max-width:900px;margin:0 auto">
+    <div style="font-size:1rem;font-weight:900;margin-bottom:.35rem">台灣漏水醫生</div>
+    <div style="font-size:.78rem;color:#9ca3af;margin-bottom:1rem">漏水知識庫 × 專業工班媒合平台</div>
+    <div style="display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;margin-bottom:1rem">
+      <a href="index.html" style="font-size:.78rem;color:#9ca3af">首頁</a>
+      <a href="knowledge.html" style="font-size:.78rem;color:#9ca3af">漏水百科</a>
+      <a href="cases.html" style="font-size:.78rem;color:#9ca3af">施工案例</a>
+      <a href="https://lin.ee/rjmmYyC" style="font-size:.78rem;color:#9ca3af" target="_blank">Line 諮詢</a>
+    </div>
+    <div style="font-size:.72rem;color:#6b7280;border-top:1px solid #374151;padding-top:1rem">© 2025 台灣漏水醫生　|　Line 官方帳號：@guleak（待填寫）</div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  document.querySelector('header').style.boxShadow=
+    window.scrollY>8?'0 2px 16px rgba(0,0,0,.09)':'none';
+});
+</script>
+</body>
+</html>
