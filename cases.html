@@ -10,7 +10,7 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Noto Sans TC',sans-serif;color:#1a202c;background:#fff;line-height:1.7;font-size:16px}
+body{font-family:'Noto Sans TC',sans-serif;color:#1a202c;background:#fff;line-height:1.8;font-size:18px}
 a{text-decoration:none;color:inherit}
 
 :root{
@@ -106,6 +106,16 @@ header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdr
 
 /* Notice */
 .notice{background:var(--gray-50);border-radius:8px;padding:.9rem 1rem;font-size:.8rem;color:var(--gray-500);text-align:center;margin-top:1rem;line-height:1.7}
+
+.page-nav{display:flex;overflow-x:auto;scrollbar-width:none;border-top:1px solid var(--gray-200)}
+.page-nav::-webkit-scrollbar{display:none}
+.pn-link{display:flex;align-items:center;gap:.4rem;padding:.75rem 1.1rem;font-size:.9rem;font-weight:700;white-space:nowrap;border-bottom:3px solid transparent;transition:.15s;text-decoration:none}
+.pn-link.c-blue{color:#1d4ed8;border-bottom-color:#1d4ed8;background:#eff6ff}
+.pn-link.c-teal{color:#0d9488;border-bottom-color:#0d9488;background:#f0fdfa}
+.pn-link.c-purple{color:#7c3aed;border-bottom-color:#7c3aed;background:#f5f3ff}
+.pn-link.c-orange{color:#ea580c;border-bottom-color:#ea580c;background:#fff7ed}
+.pn-link.c-green{color:#16a34a;border-bottom-color:#16a34a;background:#f0fdf4}
+.pn-icon{font-size:1rem}
 </style>
 </head>
 <body>
@@ -115,14 +125,22 @@ header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdr
 </a>
 
 <header>
+<div class="header-top">
   <div>
     <div class="brand-name">台灣漏水醫生</div>
     <span class="brand-sub">漏水知識庫 × 專業工班媒合</span>
   </div>
   <div class="header-nav">
-    <a href="index.html" class="nav-back">← 首頁</a>
     <a href="https://lin.ee/rjmmYyC" class="header-cta" target="_blank">📲 免費諮詢</a>
   </div>
+</div>
+  <nav class="page-nav">
+    <a href="index.html" class="pn-link c-blue">🏠 首頁</a>
+    <a href="knowledge.html" class="pn-link c-teal">📖 漏水百科</a>
+    <a href="cases.html" class="pn-link c-purple" style="border-bottom-width:4px">📋 施工案例</a>
+    <a href="team.html" class="pn-link c-orange">👷 合作廠商</a>
+    <a href="index.html#pricing" class="pn-link c-green">💰 收費方式</a>
+  </nav>
 </header>
 
 <section id="page-hero">
@@ -303,7 +321,7 @@ header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdr
     <div style="display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;margin-bottom:1rem">
       <a href="index.html" style="font-size:.78rem;color:#9ca3af">首頁</a>
       <a href="knowledge.html" style="font-size:.78rem;color:#9ca3af">漏水百科</a>
-      <a href="team.html" style="font-size:.78rem;color:#9ca3af">師傅團隊</a>
+      <a href="team.html" style="font-size:.78rem;color:#9ca3af">合作廠商</a>
       <a href="https://lin.ee/rjmmYyC" style="font-size:.78rem;color:#9ca3af" target="_blank">Line 諮詢</a>
     </div>
     <div style="font-size:.72rem;color:#6b7280;border-top:1px solid #374151;padding-top:1rem">© 2025 台灣漏水醫生　|　Line 官方帳號：@guleak（待填寫）</div>

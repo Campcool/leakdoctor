@@ -5,246 +5,264 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>台灣漏水醫生｜漏水狀況快速媒合工班・免費諮詢</title>
 <meta name="description" content="台灣漏水工班媒合平台，依漏水狀況快速配對合適師傅，酌收車馬費，免費 Line 諮詢，全台服務。">
-<meta property="og:title" content="固漏｜漏水修好才付錢">
+<meta property="og:title" content="台灣漏水醫生｜漏水快速媒合工班">
 <meta property="og:description" content="台灣漏水工班媒合平台，依你的漏水狀況快速配對合適師傅，免費諮詢，全台服務。">
 <meta property="og:image" content="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="台灣漏水醫生">
+<meta property="og:locale" content="zh_TW">
+<meta name="google-site-verification" content="待填寫">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"台灣漏水醫生","description":"台灣漏水工班媒合平台","url":"https://campcool.github.io/leakdoctor","areaServed":"台灣","serviceType":"漏水修繕媒合"}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Noto Sans TC',sans-serif;color:#1a202c;background:#fff;line-height:1.7;font-size:16px}
+/* 老人家友善：基礎字體放大為 18px */
+body{font-family:'Noto Sans TC',sans-serif;color:#1a202c;background:#fff;line-height:1.8;font-size:18px}
 a{text-decoration:none;color:inherit}
-img{max-width:100%;display:block}
 
 :root{
-  --blue:#1d4ed8;
-  --blue-dark:#1e3a8a;
-  --blue-light:#eff6ff;
-  --blue-mid:#3b82f6;
-  --green:#16a34a;
-  --green-light:#22c55e;
-  --orange:#ea580c;
-  --gray-50:#f9fafb;
-  --gray-100:#f3f4f6;
-  --gray-200:#e5e7eb;
-  --gray-500:#6b7280;
-  --gray-700:#374151;
-  --gray-900:#111827;
+  --blue:#1d4ed8;--blue-dark:#1e3a8a;--blue-light:#eff6ff;--blue-mid:#3b82f6;
+  --green:#16a34a;--green-light:#22c55e;
+  --orange:#ea580c;--orange-light:#fff7ed;
+  --teal:#0d9488;--teal-light:#f0fdfa;
+  --purple:#7c3aed;--purple-light:#f5f3ff;
   --red:#dc2626;
+  --gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;
+  --gray-500:#6b7280;--gray-700:#374151;--gray-900:#111827;
 }
 
-/* ── Float Line ─── */
+/* ── 浮動 Line ─── */
 #float-line{
   position:fixed;right:1rem;top:50%;transform:translateY(-50%);z-index:999;
-  width:58px;height:58px;border-radius:50%;
+  width:68px;height:68px;border-radius:50%;
   background:var(--green-light);color:#fff;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  font-size:.6rem;font-weight:700;line-height:1.3;
-  box-shadow:0 4px 18px rgba(34,197,94,.5);
+  font-size:.72rem;font-weight:700;line-height:1.4;
+  box-shadow:0 4px 20px rgba(34,197,94,.55);
   animation:gpulse 2.5s ease-in-out infinite;
 }
-#float-line:hover{transform:translateY(-50%) scale(1.08)}
+#float-line:hover{transform:translateY(-50%) scale(1.1)}
 @keyframes gpulse{
-  0%,100%{box-shadow:0 4px 18px rgba(34,197,94,.5)}
-  50%{box-shadow:0 4px 28px rgba(34,197,94,.75),0 0 0 8px rgba(34,197,94,.12)}
+  0%,100%{box-shadow:0 4px 20px rgba(34,197,94,.55)}
+  50%{box-shadow:0 4px 32px rgba(34,197,94,.8),0 0 0 10px rgba(34,197,94,.12)}
 }
 
 /* ── Header ─── */
 header{
   position:sticky;top:0;z-index:100;
-  background:rgba(255,255,255,.92);backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--gray-200);
-  padding:.75rem 1.25rem;
+  background:rgba(255,255,255,.95);backdrop-filter:blur(10px);
+  border-bottom:2px solid var(--gray-200);
+}
+.header-top{
+  padding:.85rem 1.25rem;
   display:flex;align-items:center;justify-content:space-between;
 }
-.brand{display:flex;flex-direction:column;line-height:1.2}
-.brand-name{font-size:1.2rem;font-weight:900;color:var(--blue-dark);letter-spacing:-.02em}
-.brand-sub{font-size:.65rem;color:var(--blue-mid);font-weight:500}
-.header-nav{display:flex;gap:.5rem;align-items:center}
-.header-nav a{font-size:.78rem;color:var(--gray-500);padding:.35rem .65rem;border-radius:6px}
-.header-nav a:hover{background:var(--blue-light);color:var(--blue)}
+.brand-name{font-size:1.4rem;font-weight:900;color:var(--blue-dark);letter-spacing:-.02em}
+.brand-sub{font-size:.75rem;color:var(--blue-mid);font-weight:500;display:block;margin-top:1px}
 .header-cta{
   background:var(--green-light);color:#fff;font-weight:700;
-  font-size:.78rem;padding:.4rem .9rem;border-radius:8px;
-  white-space:nowrap;
+  font-size:.9rem;padding:.55rem 1.1rem;border-radius:10px;
+  white-space:nowrap;display:flex;align-items:center;gap:.35rem;
 }
 .header-cta:hover{background:var(--green)}
-/* hide nav links on mobile */
-.nav-links{display:none}
-@media(min-width:640px){.nav-links{display:flex;gap:.25rem}}
+
+/* 彩色分頁導覽列 */
+.page-nav{
+  display:flex;overflow-x:auto;scrollbar-width:none;
+  border-top:1px solid var(--gray-200);
+}
+.page-nav::-webkit-scrollbar{display:none}
+.pn-link{
+  display:flex;align-items:center;gap:.4rem;
+  padding:.75rem 1.1rem;font-size:.9rem;font-weight:700;
+  white-space:nowrap;border-bottom:3px solid transparent;
+  transition:.15s;text-decoration:none;
+}
+.pn-link:hover{opacity:.8}
+.pn-link.c-blue{color:var(--blue);border-bottom-color:var(--blue);background:var(--blue-light)}
+.pn-link.c-teal{color:var(--teal);border-bottom-color:var(--teal);background:var(--teal-light)}
+.pn-link.c-purple{color:var(--purple);border-bottom-color:var(--purple);background:var(--purple-light)}
+.pn-link.c-orange{color:var(--orange);border-bottom-color:var(--orange);background:var(--orange-light)}
+.pn-link.c-green{color:var(--green);border-bottom-color:var(--green);background:#f0fdf4}
+.pn-icon{font-size:1rem}
 
 /* ── Hero ─── */
 #hero{
   background:linear-gradient(160deg,var(--blue-dark) 0%,#1d4ed8 60%,#2563eb 100%);
-  color:#fff;padding:2.5rem 1.25rem 2rem;position:relative;overflow:hidden;
+  color:#fff;padding:3rem 1.25rem 2.5rem;position:relative;overflow:hidden;
 }
 #hero::after{
-  content:'';position:absolute;bottom:-2px;left:0;right:0;height:40px;
+  content:'';position:absolute;bottom:-2px;left:0;right:0;height:48px;
   background:#fff;clip-path:ellipse(55% 100% at 50% 100%);
 }
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:.4rem;
   background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);
-  color:rgba(255,255,255,.9);font-size:.72rem;font-weight:600;
-  padding:.3rem .85rem;border-radius:99px;margin-bottom:1.25rem;
+  color:rgba(255,255,255,.95);font-size:.85rem;font-weight:600;
+  padding:.4rem 1rem;border-radius:99px;margin-bottom:1.5rem;
 }
-.hero-h1{font-size:2rem;font-weight:900;line-height:1.2;margin-bottom:1rem}
-@media(min-width:480px){.hero-h1{font-size:2.4rem}}
-.hero-h1 em{color:#93c5fd;font-style:normal;display:block;margin-top:.15rem}
-.hero-desc{font-size:.9rem;color:rgba(255,255,255,.8);line-height:1.8;margin-bottom:1.75rem;max-width:42ch}
+/* 主標題大字：老人家也能輕鬆閱讀 */
+.hero-h1{font-size:2.4rem;font-weight:900;line-height:1.2;margin-bottom:1rem}
+@media(min-width:480px){.hero-h1{font-size:3rem}}
+.hero-h1 em{color:#93c5fd;font-style:normal;display:block;margin-top:.2rem}
+.hero-desc{font-size:1.05rem;color:rgba(255,255,255,.85);line-height:1.85;margin-bottom:2rem;max-width:44ch}
 
-/* 保證卡片 */
 .guarantee-card{
-  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
-  border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.75rem;
-  display:flex;flex-direction:column;gap:.55rem;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);
+  border-radius:14px;padding:1.1rem 1.25rem;margin-bottom:2rem;
+  display:flex;flex-direction:column;gap:.7rem;
 }
-.g-item{display:flex;align-items:flex-start;gap:.6rem;font-size:.85rem;color:rgba(255,255,255,.92);line-height:1.5}
-.g-icon{font-size:1rem;flex-shrink:0;margin-top:.1rem}
+.g-item{display:flex;align-items:flex-start;gap:.7rem;font-size:1rem;color:rgba(255,255,255,.95);line-height:1.6}
+.g-icon{font-size:1.1rem;flex-shrink:0;margin-top:.15rem}
 
 .hero-btn{
-  display:flex;align-items:center;justify-content:center;gap:.5rem;
-  background:var(--green-light);color:#fff;font-weight:700;font-size:1rem;
-  padding:1rem;border-radius:12px;width:100%;max-width:360px;
-  box-shadow:0 4px 16px rgba(34,197,94,.4);transition:.18s;
+  display:flex;align-items:center;justify-content:center;gap:.55rem;
+  background:var(--green-light);color:#fff;font-weight:700;font-size:1.1rem;
+  padding:1.1rem;border-radius:14px;width:100%;max-width:380px;
+  box-shadow:0 4px 20px rgba(34,197,94,.45);transition:.18s;
 }
 .hero-btn:hover{background:var(--green);transform:translateY(-1px)}
-.hero-btn-sub{font-size:.72rem;opacity:.85;font-weight:400}
+.hero-btn-sub{font-size:.8rem;opacity:.85;font-weight:400}
 
 .hero-stats{
   display:grid;grid-template-columns:repeat(3,1fr);
-  gap:.5rem;margin-top:2.5rem;padding-top:1.5rem;
-  border-top:1px solid rgba(255,255,255,.15);
+  gap:.6rem;margin-top:2.75rem;padding-top:1.75rem;
+  border-top:1px solid rgba(255,255,255,.18);
 }
-.stat-num{font-size:1.6rem;font-weight:900}
-.stat-label{font-size:.68rem;color:rgba(255,255,255,.6);margin-top:.1rem}
+.stat-num{font-size:1.85rem;font-weight:900}
+.stat-label{font-size:.78rem;color:rgba(255,255,255,.65);margin-top:.15rem}
 
 /* ── 痛點 ─── */
-#pain{background:var(--gray-50);padding:2rem 1.25rem;border-bottom:1px solid var(--gray-200)}
-.pain-title{font-size:.8rem;font-weight:700;color:var(--orange);text-align:center;margin-bottom:1rem;letter-spacing:.02em}
-.pain-list{display:flex;flex-direction:column;gap:.6rem}
+#pain{background:#fff7ed;padding:2.25rem 1.25rem;border-bottom:2px solid #fed7aa}
+.pain-title{font-size:.95rem;font-weight:700;color:var(--orange);text-align:center;margin-bottom:1.25rem;letter-spacing:.02em}
+.pain-list{display:flex;flex-direction:column;gap:.75rem}
 .pain-item{
-  background:#fff;border-radius:8px;padding:.8rem 1rem;
-  display:flex;align-items:flex-start;gap:.65rem;
-  border-left:3px solid var(--orange);font-size:.875rem;color:var(--gray-700);
-  box-shadow:0 1px 4px rgba(0,0,0,.06);
+  background:#fff;border-radius:10px;padding:.95rem 1.1rem;
+  display:flex;align-items:flex-start;gap:.75rem;
+  border-left:4px solid var(--orange);font-size:1rem;color:var(--gray-700);
+  box-shadow:0 1px 6px rgba(0,0,0,.07);line-height:1.7;
 }
-.px{color:var(--orange);font-weight:900;flex-shrink:0}
+.px{color:var(--orange);font-weight:900;flex-shrink:0;font-size:1.1rem}
 
-/* ── 三大保證 ─── */
-#promises{padding:2.25rem 1.25rem}
-.sec-tag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.25rem .75rem;border-radius:99px;margin-bottom:.6rem}
+/* ── 三大服務 ─── */
+#promises{padding:2.5rem 1.25rem}
+.sec-tag{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .85rem;border-radius:99px;margin-bottom:.75rem}
 .sec-tag.blue{background:var(--blue-light);color:var(--blue)}
-.sec-title{font-size:1.5rem;font-weight:900;color:var(--gray-900);line-height:1.25;margin-bottom:.4rem}
-.sec-sub{font-size:.875rem;color:var(--gray-500);margin-bottom:1.75rem;line-height:1.7}
-.promise-list{display:flex;flex-direction:column;gap:1rem}
+.sec-tag.teal{background:var(--teal-light);color:var(--teal)}
+.sec-tag.orange{background:var(--orange-light);color:var(--orange)}
+/* 重要標題放大 */
+.sec-title{font-size:1.75rem;font-weight:900;color:var(--gray-900);line-height:1.25;margin-bottom:.5rem}
+.sec-sub{font-size:1rem;color:var(--gray-500);margin-bottom:2rem;line-height:1.75}
+.promise-list{display:flex;flex-direction:column;gap:1.1rem}
 .promise-item{
-  display:flex;gap:1rem;padding:1.1rem;
-  background:#fff;border-radius:12px;
-  border:1.5px solid var(--gray-200);
-  box-shadow:0 2px 8px rgba(0,0,0,.05);
+  display:flex;gap:1.1rem;padding:1.25rem;
+  background:#fff;border-radius:14px;
+  border:2px solid var(--gray-200);
+  box-shadow:0 2px 10px rgba(0,0,0,.05);
   transition:.2s;
 }
-.promise-item:hover{border-color:var(--blue-mid);box-shadow:0 4px 16px rgba(0,0,0,.09)}
+.promise-item:hover{border-color:var(--blue-mid);box-shadow:0 6px 20px rgba(0,0,0,.10)}
 .promise-icon{
-  width:44px;height:44px;border-radius:10px;
+  width:52px;height:52px;border-radius:12px;
   display:flex;align-items:center;justify-content:center;
-  font-size:1.25rem;flex-shrink:0;
+  font-size:1.5rem;flex-shrink:0;
 }
 .pi1{background:var(--blue-light)}
 .pi2{background:#dcfce7}
 .pi3{background:#fef9c3}
-.promise-title{font-weight:700;color:var(--gray-900);font-size:.92rem;margin-bottom:.3rem}
-.promise-desc{font-size:.82rem;color:var(--gray-500);line-height:1.65}
+.promise-title{font-weight:700;color:var(--gray-900);font-size:1.05rem;margin-bottom:.35rem}
+.promise-desc{font-size:.92rem;color:var(--gray-500);line-height:1.7}
 
 /* ── 快速入口 ─── */
-#explore{padding:1.5rem 1.25rem 2.25rem;background:var(--blue-light)}
-.explore-title{font-size:1rem;font-weight:700;color:var(--blue-dark);margin-bottom:1rem}
-.explore-grid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}
+#explore{padding:1.75rem 1.25rem 2.5rem;background:var(--blue-light)}
+.explore-title{font-size:1.1rem;font-weight:700;color:var(--blue-dark);margin-bottom:1.1rem}
+.explore-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
 .explore-card{
-  background:#fff;border-radius:10px;padding:1rem;
-  border:1.5px solid var(--gray-200);display:flex;flex-direction:column;gap:.3rem;
+  background:#fff;border-radius:12px;padding:1.1rem;
+  border:2px solid var(--gray-200);display:flex;flex-direction:column;gap:.4rem;
   transition:.18s;
 }
 .explore-card:hover{border-color:var(--blue-mid);transform:translateY(-2px)}
-.explore-card-icon{font-size:1.4rem}
-.explore-card-title{font-size:.85rem;font-weight:700;color:var(--gray-900)}
-.explore-card-desc{font-size:.75rem;color:var(--gray-500);line-height:1.5}
-.explore-card-link{font-size:.72rem;color:var(--blue);font-weight:600;margin-top:.25rem}
+.explore-card-icon{font-size:1.6rem}
+.explore-card-title{font-size:.95rem;font-weight:700;color:var(--gray-900)}
+.explore-card-desc{font-size:.82rem;color:var(--gray-500);line-height:1.55}
+.explore-card-link{font-size:.8rem;color:var(--blue);font-weight:600;margin-top:.3rem}
 
 /* ── 收費 ─── */
-#pricing{padding:2.25rem 1.25rem;background:#fff}
-.price-simple{display:flex;flex-direction:column;gap:.75rem}
+#pricing{padding:2.5rem 1.25rem;background:#fff}
+.price-simple{display:flex;flex-direction:column;gap:.85rem}
 .price-row{
   display:flex;align-items:center;justify-content:space-between;
-  padding:.9rem 1rem;background:var(--gray-50);border-radius:10px;
-  border:1.5px solid var(--gray-200);gap:.75rem;
+  padding:1rem 1.15rem;background:var(--gray-50);border-radius:12px;
+  border:2px solid var(--gray-200);gap:.85rem;
 }
 .price-row.pop{border-color:var(--blue-mid);background:var(--blue-light)}
-.pr-left{display:flex;flex-direction:column;gap:.15rem}
-.pr-name{font-size:.9rem;font-weight:700;color:var(--gray-900)}
-.pr-sub{font-size:.75rem;color:var(--gray-500)}
-.pr-price{font-size:1rem;font-weight:900;color:var(--blue);white-space:nowrap;text-align:right}
-.pr-unit{font-size:.7rem;color:var(--gray-500);display:block;text-align:right}
-.pop-badge{font-size:.65rem;font-weight:700;background:var(--blue);color:#fff;padding:.15rem .55rem;border-radius:99px;display:inline-block;margin-top:.2rem}
-.price-note{font-size:.75rem;color:var(--gray-500);text-align:center;margin-top:.75rem}
+.price-row.top{border-color:var(--teal);background:var(--teal-light)}
+.pr-left{display:flex;flex-direction:column;gap:.2rem}
+.pr-name{font-size:1rem;font-weight:700;color:var(--gray-900)}
+.pr-sub{font-size:.82rem;color:var(--gray-500)}
+.pr-price{font-size:1.1rem;font-weight:900;color:var(--blue);white-space:nowrap;text-align:right}
+.pr-unit{font-size:.75rem;color:var(--gray-500);display:block;text-align:right}
+.top-badge{font-size:.7rem;font-weight:700;background:var(--teal);color:#fff;padding:.18rem .6rem;border-radius:99px;display:inline-block;margin-top:.25rem}
+.pop-badge{font-size:.7rem;font-weight:700;background:var(--blue);color:#fff;padding:.18rem .6rem;border-radius:99px;display:inline-block;margin-top:.25rem}
+.price-note{font-size:.82rem;color:var(--gray-500);text-align:center;margin-top:.85rem}
 .price-cta{
-  display:flex;align-items:center;justify-content:center;gap:.4rem;
-  background:var(--blue);color:#fff;font-weight:700;font-size:.9rem;
-  padding:.85rem;border-radius:10px;margin-top:1.25rem;transition:.18s;
+  display:flex;align-items:center;justify-content:center;gap:.45rem;
+  background:var(--blue);color:#fff;font-weight:700;font-size:1rem;
+  padding:.95rem;border-radius:12px;margin-top:1.5rem;transition:.18s;
 }
 .price-cta:hover{background:var(--blue-dark)}
 
-/* ── 流程 手風琴 ─── */
-#process{padding:2.25rem 1.25rem;background:var(--gray-50)}
-.process-accordion{display:flex;flex-direction:column;gap:.5rem;margin-top:1.5rem}
-.pa-item{background:#fff;border-radius:10px;border:1.5px solid var(--gray-200);overflow:hidden}
+/* ── 流程 ─── */
+#process{padding:2.5rem 1.25rem;background:var(--gray-50)}
+.process-accordion{display:flex;flex-direction:column;gap:.6rem;margin-top:1.75rem}
+.pa-item{background:#fff;border-radius:12px;border:2px solid var(--gray-200);overflow:hidden}
 .pa-btn{
-  width:100%;text-align:left;padding:.9rem 1rem;
+  width:100%;text-align:left;padding:1rem 1.15rem;
   background:none;border:none;cursor:pointer;
-  display:flex;align-items:center;gap:.75rem;
-  font-family:inherit;font-size:.875rem;
+  display:flex;align-items:center;gap:.85rem;
+  font-family:inherit;font-size:1rem;
 }
 .pa-btn:hover{background:var(--gray-50)}
 .pa-num{
-  width:30px;height:30px;border-radius:50%;
+  width:36px;height:36px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  font-size:.78rem;font-weight:700;color:#fff;flex-shrink:0;
+  font-size:.85rem;font-weight:700;color:#fff;flex-shrink:0;
 }
 .n1,.n2{background:var(--blue)}
-.n3,.n4{background:#0d9488}
+.n3,.n4{background:var(--teal)}
 .n5{background:var(--orange)}
-.pa-label{font-weight:600;color:var(--gray-900);flex:1}
-.pa-arrow{font-size:.65rem;color:var(--gray-500);transition:.25s;flex-shrink:0}
+.pa-label{font-weight:700;color:var(--gray-900);flex:1;font-size:1rem}
+.pa-arrow{font-size:.7rem;color:var(--gray-500);transition:.25s;flex-shrink:0}
 .pa-btn.open .pa-arrow{transform:rotate(180deg)}
 .pa-body{
-  display:none;padding:.75rem 1rem 1rem 3.4rem;
-  font-size:.835rem;color:var(--gray-600);line-height:1.75;
+  display:none;padding:.85rem 1.15rem 1.15rem 4rem;
+  font-size:.95rem;color:var(--gray-600);line-height:1.8;
   border-top:1px solid var(--gray-100);
 }
 .pa-body.open{display:block}
-.pa-result{display:flex;gap:1rem;margin-top:.6rem;flex-wrap:wrap}
-.pr-pass{font-size:.78rem;font-weight:600;color:var(--green);display:flex;align-items:center;gap:.3rem}
-.pr-fail{font-size:.78rem;font-weight:600;color:var(--red);display:flex;align-items:center;gap:.3rem}
 
 /* ── FAQ ─── */
-#faq{padding:2.25rem 1.25rem;background:#fff}
-.faq-list{display:flex;flex-direction:column;gap:.5rem;margin-top:1.5rem}
-.faq-item{border:1.5px solid var(--gray-200);border-radius:10px;overflow:hidden}
+#faq{padding:2.5rem 1.25rem;background:#fff}
+.faq-list{display:flex;flex-direction:column;gap:.6rem;margin-top:1.75rem}
+.faq-item{border:2px solid var(--gray-200);border-radius:12px;overflow:hidden}
 .faq-q{
-  width:100%;text-align:left;padding:.9rem 1rem;
+  width:100%;text-align:left;padding:1rem 1.15rem;
   background:none;border:none;cursor:pointer;font-family:inherit;
-  font-size:.875rem;font-weight:600;color:var(--gray-900);
-  display:flex;justify-content:space-between;align-items:center;gap:.75rem;
+  font-size:1rem;font-weight:700;color:var(--gray-900);
+  display:flex;justify-content:space-between;align-items:center;gap:.85rem;line-height:1.6;
 }
 .faq-q:hover{background:var(--gray-50)}
 .faq-q.open{background:var(--blue-light);color:var(--blue)}
-.faq-chevron{font-size:.65rem;color:var(--gray-500);transition:.25s;flex-shrink:0}
+.faq-chevron{font-size:.7rem;color:var(--gray-500);transition:.25s;flex-shrink:0}
 .faq-q.open .faq-chevron{transform:rotate(180deg)}
 .faq-a{
-  display:none;padding:.75rem 1rem 1rem;
-  font-size:.835rem;color:var(--gray-600);line-height:1.8;
+  display:none;padding:.85rem 1.15rem 1.15rem;
+  font-size:.95rem;color:var(--gray-600);line-height:1.85;
   border-top:1px solid var(--blue-light);
 }
 .faq-a.open{display:block}
@@ -252,57 +270,27 @@ header{
 /* ── CTA Bottom ─── */
 #cta-bottom{
   background:linear-gradient(135deg,var(--blue-dark),var(--blue));
-  padding:2.5rem 1.25rem;text-align:center;color:#fff;
+  padding:3rem 1.25rem;text-align:center;color:#fff;
 }
-.cta-title{font-size:1.5rem;font-weight:900;margin-bottom:.5rem}
-.cta-sub{font-size:.875rem;color:rgba(255,255,255,.75);margin-bottom:1.75rem;line-height:1.7}
+.cta-title{font-size:1.85rem;font-weight:900;margin-bottom:.6rem;line-height:1.3}
+.cta-sub{font-size:1rem;color:rgba(255,255,255,.8);margin-bottom:2rem;line-height:1.8}
 .cta-btn{
-  display:inline-flex;align-items:center;gap:.5rem;
-  background:var(--green-light);color:#fff;font-weight:700;font-size:1rem;
-  padding:.9rem 2rem;border-radius:12px;
-  box-shadow:0 4px 16px rgba(34,197,94,.35);transition:.18s;
+  display:inline-flex;align-items:center;gap:.55rem;
+  background:var(--green-light);color:#fff;font-weight:700;font-size:1.1rem;
+  padding:1rem 2.25rem;border-radius:14px;
+  box-shadow:0 4px 18px rgba(34,197,94,.4);transition:.18s;
 }
 .cta-btn:hover{background:var(--green);transform:translateY(-1px)}
 
 /* ── Footer ─── */
-footer{background:var(--gray-900);color:#fff;padding:2rem 1.25rem 1.25rem}
-.footer-brand{font-size:1rem;font-weight:900;margin-bottom:.35rem}
-.footer-tagline{font-size:.78rem;color:#9ca3af;line-height:1.6;margin-bottom:1.25rem}
-.footer-links{display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;margin-bottom:1.25rem}
-.footer-links a{font-size:.78rem;color:#9ca3af;transition:.15s}
+footer{background:var(--gray-900);color:#fff;padding:2.25rem 1.25rem 1.5rem}
+.footer-brand{font-size:1.1rem;font-weight:900;margin-bottom:.4rem}
+.footer-tagline{font-size:.85rem;color:#9ca3af;line-height:1.7;margin-bottom:1.5rem}
+.footer-links{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;margin-bottom:1.5rem}
+.footer-links a{font-size:.85rem;color:#9ca3af;transition:.15s}
 .footer-links a:hover{color:#fff}
-.footer-copy{font-size:.72rem;color:#6b7280;border-top:1px solid #374151;padding-top:1rem}
+.footer-copy{font-size:.78rem;color:#6b7280;border-top:1px solid #374151;padding-top:1rem}
 </style>
-
-<!-- Google Search Console 驗證（上線後填入） -->
-<meta name="google-site-verification" content="待填寫">
-<!-- OG Tags for FB/IG -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://待填寫網域">
-<meta property="og:site_name" content="台灣漏水醫生">
-<meta property="og:locale" content="zh_TW">
-<!-- 結構化資料 -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "台灣漏水醫生",
-  "description": "台灣漏水工班媒合平台，依漏水狀況快速媒合工班，免費Line諮詢，全台服務",
-  "url": "https://待填寫網域",
-  "telephone": "待填寫",
-  "address": {
-    "@type": "PostalAddress",
-    "addressCountry": "TW"
-  },
-  "areaServed": "台灣",
-  "serviceType": "漏水修繕媒合",
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "contactType": "customer service",
-    "availableLanguage": "Chinese"
-  }
-}
-</script>
 </head>
 <body>
 
@@ -313,39 +301,42 @@ footer{background:var(--gray-900);color:#fff;padding:2rem 1.25rem 1.25rem}
 
 <!-- Header -->
 <header>
-  <div class="brand">
-    <span class="brand-name">台灣漏水醫生</span>
-    <span class="brand-sub">漏水知識庫 × 專業工班媒合</span>
-  </div>
-  <div class="header-nav">
-    <div class="nav-links">
-      <a href="knowledge.html">漏水百科</a>
-      <a href="cases.html">案例</a>
-      <a href="team.html">師傅</a>
+  <div class="header-top">
+    <div>
+      <div class="brand-name">台灣漏水醫生</div>
+      <span class="brand-sub">漏水工班快速媒合平台</span>
     </div>
     <a href="https://lin.ee/rjmmYyC" class="header-cta" target="_blank">📲 免費諮詢</a>
   </div>
+  <!-- 彩色分頁導覽列 -->
+  <nav class="page-nav">
+    <a href="knowledge.html" class="pn-link c-teal"><span class="pn-icon">📖</span>漏水百科</a>
+    <a href="cases.html" class="pn-link c-purple"><span class="pn-icon">📋</span>施工案例</a>
+    <a href="team.html" class="pn-link c-orange"><span class="pn-icon">👷</span>合作廠商</a>
+    <a href="#pricing" class="pn-link c-blue"><span class="pn-icon">💰</span>收費方式</a>
+    <a href="#process" class="pn-link c-green"><span class="pn-icon">📝</span>服務流程</a>
+  </nav>
 </header>
 
 <!-- Hero -->
 <section id="hero">
-  <div class="hero-eyebrow">💧 台灣漏水工班媒合平台</div>
+  <div class="hero-eyebrow">💧 台灣漏水工班媒合平台・免費諮詢</div>
   <h1 class="hero-h1">
     快速媒合<br>
     <em>專業工班</em>
   </h1>
-  <p class="hero-desc">描述漏水狀況，我們依你的問題類型與地區，快速媒合合適的工班師傅。</p>
+  <p class="hero-desc">描述漏水狀況，我們依問題類型與地區，快速媒合合適的工班師傅。</p>
 
   <div class="guarantee-card">
     <div class="g-item"><span class="g-icon">📍</span>描述漏水狀況，免費初步判斷漏水類型</div>
-    <div class="g-item"><span class="g-icon">🔧</span>依狀況媒合最合適的工班師傅到場</div>
+    <div class="g-item"><span class="g-icon">🔧</span>依狀況媒合合適工班師傅到場</div>
     <div class="g-item"><span class="g-icon">🚗</span>酌收車馬費，透明收費無隱藏費用</div>
   </div>
 
   <a href="https://lin.ee/rjmmYyC" class="hero-btn" target="_blank">
     <span>📲</span>
     <span>
-      免費 Line 諮詢，取得報價
+      免費 Line 諮詢，快速媒合師傅
       <span class="hero-btn-sub">（不收諮詢費）</span>
     </span>
   </a>
@@ -353,25 +344,25 @@ footer{background:var(--gray-900);color:#fff;padding:2rem 1.25rem 1.25rem}
   <div class="hero-stats">
     <div><div class="stat-num">免費</div><div class="stat-label">漏水知識查詢</div></div>
     <div><div class="stat-num">全台</div><div class="stat-label">師傅媒合</div></div>
-    <div><div class="stat-num">快速</div><div class="stat-label">媒合師傅</div></div>
+    <div><div class="stat-num">快速</div><div class="stat-label">48H 安排出勤</div></div>
   </div>
 </section>
 
 <!-- 痛點 -->
 <section id="pain">
-  <div class="pain-title">您是否有過這些經歷？</div>
+  <div class="pain-title">🔴 您是否有過這些經歷？</div>
   <div class="pain-list">
-    <div class="pain-item"><span class="px">✗</span>師傅說修好了，下雨天還是在漏</div>
-    <div class="pain-item"><span class="px">✗</span>找了三家，每家說法不一樣、報價差很多</div>
-    <div class="pain-item"><span class="px">✗</span>費用一直追加，問題還是沒根治</div>
+    <div class="pain-item"><span class="px">✗</span>師傅說修好了，下次又在漏，錢白花了</div>
+    <div class="pain-item"><span class="px">✗</span>找了好幾家，每家說法不一樣、報價差很多</div>
+    <div class="pain-item"><span class="px">✗</span>不知道要找哪種師傅，問了也聽不懂</div>
   </div>
 </section>
 
-<!-- 三大保證 -->
+<!-- 三大服務 -->
 <section id="promises">
-  <div class="sec-tag blue">為什麼選固漏</div>
+  <div class="sec-tag blue">我們提供什麼</div>
   <h2 class="sec-title">知識 · 媒合 · 透明</h2>
-  <p class="sec-sub">先讓你看懂問題，再快速媒合合適工班</p>
+  <p class="sec-sub">先讓您看懂問題，再快速媒合合適工班</p>
   <div class="promise-list">
     <div class="promise-item">
       <div class="promise-icon pi1">📖</div>
@@ -383,15 +374,15 @@ footer{background:var(--gray-900);color:#fff;padding:2rem 1.25rem 1.25rem}
     <div class="promise-item">
       <div class="promise-icon pi2">🔧</div>
       <div>
-        <div class="promise-title">依狀況媒合師傅</div>
-        <div class="promise-desc">依您的漏水類型與地區，媒合最適合的師傅。純諮詢完全免費，預約才收費。</div>
+        <div class="promise-title">依狀況媒合工班</div>
+        <div class="promise-desc">依您的漏水類型與地區，媒合最合適的師傅。純諮詢完全免費，預約才收費。</div>
       </div>
     </div>
     <div class="promise-item">
       <div class="promise-icon pi3">🛡️</div>
       <div>
-        <div class="promise-title">透明收費媒合</div>
-        <div class="promise-desc">依漏水類型與地區快速媒合，酌收車馬費，師傅到場報價，透明收費。</div>
+        <div class="promise-title">透明收費</div>
+        <div class="promise-desc">車馬費事先告知，師傅到場報價由您決定是否施工。沒有隱藏費用。</div>
       </div>
     </div>
   </div>
@@ -410,13 +401,13 @@ footer{background:var(--gray-900);color:#fff;padding:2rem 1.25rem 1.25rem}
     <a href="cases.html" class="explore-card">
       <div class="explore-card-icon">📋</div>
       <div class="explore-card-title">施工案例</div>
-      <div class="explore-card-desc">真實案例記錄，含費用與驗收結果</div>
+      <div class="explore-card-desc">真實案例記錄，含費用與結果</div>
       <div class="explore-card-link">看案例 →</div>
     </a>
     <a href="team.html" class="explore-card">
       <div class="explore-card-icon">👷</div>
-      <div class="explore-card-title">師傅團隊</div>
-      <div class="explore-card-desc">嚴選認證，各地區專業師傅</div>
+      <div class="explore-card-title">合作廠商</div>
+      <div class="explore-card-desc">各地區專業工班師傅介紹</div>
       <div class="explore-card-link">認識師傅 →</div>
     </a>
     <a href="https://lin.ee/rjmmYyC" class="explore-card" target="_blank" style="border-color:#16a34a">
@@ -428,53 +419,75 @@ footer{background:var(--gray-900);color:#fff;padding:2rem 1.25rem 1.25rem}
   </div>
 </section>
 
-<!-- 收費 -->
+<!-- 收費方式：科技抓漏放第一 -->
 <section id="pricing">
   <div class="sec-tag blue">收費方式</div>
   <h2 class="sec-title">透明報價</h2>
   <p class="sec-sub">查詢免費，媒合免費，預約施工才收費</p>
   <div class="price-simple">
-    <div class="price-row">
+
+    <!-- 1. 科技抓漏（優先評估） -->
+    <div class="price-row top">
       <div class="pr-left">
-        <div class="pr-name">高壓灌注（打針）</div>
-        <div class="pr-sub">窗框、牆角裂縫</div>
-      </div>
-      <div>
-        <div class="pr-price">$500–1,000</div>
-        <div class="pr-unit">/ 針</div>
-      </div>
-    </div>
-    <div class="price-row pop">
-      <div class="pr-left">
-        <div class="pr-name">防水塗料施作</div>
-        <div class="pr-sub">頂樓・外牆・浴室</div>
-        <div><span class="pop-badge">最多人選擇</span></div>
-      </div>
-      <div>
-        <div class="pr-price">$600–1,200</div>
-        <div class="pr-unit">/ 坪</div>
-      </div>
-    </div>
-    <div class="price-row">
-      <div class="pr-left">
-        <div class="pr-name">浴室防水層重做</div>
-        <div class="pr-sub">治本，敲磚重做</div>
-      </div>
-      <div>
-        <div class="pr-price">$3,000–8,000</div>
-        <div class="pr-unit">/ 坪</div>
-      </div>
-    </div>
-    <div class="price-row">
-      <div class="pr-left">
-        <div class="pr-name">儀器精準檢測</div>
-        <div class="pr-sub">找不到漏水點時</div>
+        <div class="pr-name">🔬 科技儀器抓漏</div>
+        <div class="pr-sub">熱像儀・內視鏡・聲波探測</div>
+        <div><span class="top-badge">優先評估・找出根本原因</span></div>
       </div>
       <div>
         <div class="pr-price">$3,000起</div>
         <div class="pr-unit">/ 次</div>
       </div>
     </div>
+
+    <!-- 2. 藥劑管內補漏 -->
+    <div class="price-row">
+      <div class="pr-left">
+        <div class="pr-name">💉 藥劑管內補漏</div>
+        <div class="pr-sub">管內注入修補・不需打牆</div>
+      </div>
+      <div>
+        <div class="pr-price">$500–1,500</div>
+        <div class="pr-unit">/ 次</div>
+      </div>
+    </div>
+
+    <!-- 3. 高壓灌注打針 -->
+    <div class="price-row pop">
+      <div class="pr-left">
+        <div class="pr-name">🪡 高壓灌注（打針）</div>
+        <div class="pr-sub">窗框、牆角、裂縫止漏</div>
+        <div><span class="pop-badge">最多人選擇</span></div>
+      </div>
+      <div>
+        <div class="pr-price">$500–1,000</div>
+        <div class="pr-unit">/ 針</div>
+      </div>
+    </div>
+
+    <!-- 4. 防水層施作 -->
+    <div class="price-row">
+      <div class="pr-left">
+        <div class="pr-name">🎨 防水塗料施作</div>
+        <div class="pr-sub">頂樓・外牆・浴室防水層</div>
+      </div>
+      <div>
+        <div class="pr-price">$600–1,200</div>
+        <div class="pr-unit">/ 坪</div>
+      </div>
+    </div>
+
+    <!-- 5. 敲除重做 -->
+    <div class="price-row">
+      <div class="pr-left">
+        <div class="pr-name">🔨 敲除重做防水層</div>
+        <div class="pr-sub">浴室磁磚敲除・根治漏水</div>
+      </div>
+      <div>
+        <div class="pr-price">$3,000–8,000</div>
+        <div class="pr-unit">/ 坪</div>
+      </div>
+    </div>
+
   </div>
   <div class="price-note">※ 以上為參考價格，實際報價依現場狀況。確認前不收費。</div>
   <a href="https://lin.ee/rjmmYyC" class="price-cta" target="_blank">
@@ -485,7 +498,7 @@ footer{background:var(--gray-900);color:#fff;padding:2rem 1.25rem 1.25rem}
 <!-- 流程 -->
 <section id="process">
   <div class="sec-tag blue">服務流程</div>
-  <h2 class="sec-title">5 步驟，全程透明</h2>
+  <h2 class="sec-title">5 個步驟，全程透明</h2>
   <div class="process-accordion">
 
     <div class="pa-item">
@@ -506,7 +519,7 @@ footer{background:var(--gray-900);color:#fff;padding:2rem 1.25rem 1.25rem}
         <span class="pa-arrow">▼</span>
       </button>
       <div class="pa-body">
-        確認漏水狀況後，我們媒合適合師傅，業主與師傅直接確認報價。酌收車馬費，費用事先告知。
+        確認漏水狀況後媒合適合師傅，業主與師傅直接確認報價。車馬費依地區酌收，費用事先告知。
       </div>
     </div>
 
@@ -517,29 +530,29 @@ footer{background:var(--gray-900);color:#fff;padding:2rem 1.25rem 1.25rem}
         <span class="pa-arrow">▼</span>
       </button>
       <div class="pa-body">
-        48 小時內安排師傅，施工全程拍照記錄。師傅不得向您收取現金，所有費用透過平台處理。
+        48 小時內安排師傅，施工全程拍照記錄。師傅會說明使用材料與施工方式，歡迎當場詢問。
       </div>
     </div>
 
     <div class="pa-item">
       <button class="pa-btn" onclick="togglePa(this)">
         <span class="pa-num n4">04</span>
-        <span class="pa-label">下雨後 48H 驗收</span>
+        <span class="pa-label">藥劑固化後・客戶自行驗收</span>
         <span class="pa-arrow">▼</span>
       </button>
       <div class="pa-body">
-        等下次降雨，觀察同一位置 48 小時。這才是真正的驗收，不是師傅自己說好了算。
+        依施工工法不同，等待藥劑或防水層完全乾燥固化後（通常 24–72 小時），由您自行觀察同一位置是否仍有滲漏。
       </div>
     </div>
 
     <div class="pa-item">
       <button class="pa-btn" onclick="togglePa(this)">
         <span class="pa-num n5">05</span>
-        <span class="pa-label">施工完成・業主確認</span>
+        <span class="pa-label">施工完成・如有問題 Line 反映</span>
         <span class="pa-arrow">▼</span>
       </button>
       <div class="pa-body">
-        師傅施工完成，由業主驗收確認。如有疑慮可透過 Line 與我們反映，我們協助居中溝通。
+        驗收無問題即完成。若固化後仍有滲漏疑慮，可透過 Line 回傳照片，我們協助判斷並安排師傅回訪。
       </div>
     </div>
 
@@ -558,7 +571,7 @@ footer{background:var(--gray-900);color:#fff;padding:2rem 1.25rem 1.25rem}
         <span class="faq-chevron">▼</span>
       </button>
       <div class="faq-a">
-        我們酌收車馬費（依地區與師傅出勤成本而定，事先告知），師傅到場後報價由業主自行決定是否施工，平台不強制收費，報價後不施工只收車馬費。
+        我們酌收車馬費（依地區與師傅出勤成本而定，事先告知），師傅到場後報價由您自行決定是否施工。平台不強制收費，報價後不施工只收車馬費。
       </div>
     </div>
 
@@ -592,6 +605,16 @@ footer{background:var(--gray-900);color:#fff;padding:2rem 1.25rem 1.25rem}
       </div>
     </div>
 
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        老房子、住的是老人家，師傅會耐心說明嗎？
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-a">
+        我們合作的師傅都有豐富的老屋修繕經驗，習慣用簡單的話解釋問題，不趕時間。如果家裡是長輩居住，請在 Line 諮詢時告知，我們會特別注意溝通方式。
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -607,34 +630,34 @@ footer{background:var(--gray-900);color:#fff;padding:2rem 1.25rem 1.25rem}
 <!-- Footer -->
 <footer>
   <div class="footer-brand">台灣漏水醫生</div>
-  <div class="footer-tagline">漏水知識庫 × 專業工班媒合平台<br>修好了才是真的修好。</div>
+  <div class="footer-tagline">漏水工班媒合平台 · 免費諮詢 · 全台服務<br>看懂問題，才能真正修好。</div>
   <div class="footer-links">
     <a href="knowledge.html">漏水百科</a>
     <a href="cases.html">施工案例</a>
-    <a href="team.html">師傅團隊</a>
+    <a href="team.html">合作廠商</a>
     <a href="https://lin.ee/rjmmYyC" target="_blank">Line 諮詢</a>
   </div>
-  <div class="footer-copy">© 2025 台灣漏水醫生　|　Line 官方帳號：@guleak（待填寫）　|　服務地區：全台灣</div>
+  <div class="footer-copy">© 2025 台灣漏水醫生　|　Line：台灣漏水醫生:防水抓漏免費諮詢　|　服務地區：全台灣</div>
 </footer>
 
 <script>
 function togglePa(btn){
-  const body = btn.nextElementSibling;
-  const open = btn.classList.contains('open');
+  const body=btn.nextElementSibling;
+  const open=btn.classList.contains('open');
   document.querySelectorAll('.pa-btn').forEach(b=>b.classList.remove('open'));
   document.querySelectorAll('.pa-body').forEach(b=>b.classList.remove('open'));
-  if(!open){ btn.classList.add('open'); body.classList.add('open'); }
+  if(!open){btn.classList.add('open');body.classList.add('open');}
 }
 function toggleFaq(btn){
-  const ans = btn.nextElementSibling;
-  const open = btn.classList.contains('open');
+  const ans=btn.nextElementSibling;
+  const open=btn.classList.contains('open');
   document.querySelectorAll('.faq-q').forEach(q=>q.classList.remove('open'));
   document.querySelectorAll('.faq-a').forEach(a=>a.classList.remove('open'));
-  if(!open){ btn.classList.add('open'); ans.classList.add('open'); }
+  if(!open){btn.classList.add('open');ans.classList.add('open');}
 }
 window.addEventListener('scroll',()=>{
-  document.querySelector('header').style.boxShadow =
-    window.scrollY>8 ? '0 2px 16px rgba(0,0,0,.09)' : 'none';
+  document.querySelector('header').style.boxShadow=
+    window.scrollY>8?'0 2px 16px rgba(0,0,0,.09)':'none';
 });
 </script>
 </body>
