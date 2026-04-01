@@ -21,7 +21,7 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 /* 老人家友善：基礎字體放大為 18px */
-body{font-family:'Noto Sans TC',sans-serif;color:#1a202c;background:#fff;line-height:1.8;font-size:18px}
+body{font-family:'Noto Sans TC',sans-serif;color:#1a202c;background:#f8fafc;line-height:1.8;font-size:18px}
 a{text-decoration:none;color:inherit}
 
 :root{
@@ -92,7 +92,7 @@ header{
 
 /* ── Hero ─── */
 #hero{
-  background:linear-gradient(160deg,var(--blue-dark) 0%,#1d4ed8 60%,#2563eb 100%);
+  background:linear-gradient(150deg,#0f2456 0%,#1d4ed8 55%,#2563eb 100%);
   color:#fff;padding:3rem 1.25rem 2.5rem;position:relative;overflow:hidden;
 }
 #hero::after{
@@ -149,7 +149,7 @@ header{
 .px{color:var(--orange);font-weight:900;flex-shrink:0;font-size:1.1rem}
 
 /* ── 三大服務 ─── */
-#promises{padding:2.5rem 1.25rem}
+#promises{padding:2.5rem 1.25rem;background:#fff}
 .sec-tag{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .85rem;border-radius:99px;margin-bottom:.75rem}
 .sec-tag.blue{background:var(--blue-light);color:var(--blue)}
 .sec-tag.teal{background:var(--teal-light);color:var(--teal)}
@@ -160,7 +160,7 @@ header{
 .promise-list{display:flex;flex-direction:column;gap:1.1rem}
 .promise-item{
   display:flex;gap:1.1rem;padding:1.25rem;
-  background:#fff;border-radius:14px;
+  background:#fff;border-radius:16px;
   border:2px solid var(--gray-200);
   box-shadow:0 2px 10px rgba(0,0,0,.05);
   transition:.2s;
@@ -197,7 +197,7 @@ header{
 .price-simple{display:flex;flex-direction:column;gap:.85rem}
 .price-row{
   display:flex;align-items:center;justify-content:space-between;
-  padding:1rem 1.15rem;background:var(--gray-50);border-radius:12px;
+  padding:1rem 1.15rem;background:#fff;border-radius:14px;
   border:2px solid var(--gray-200);gap:.85rem;
 }
 .price-row.pop{border-color:var(--blue-mid);background:var(--blue-light)}
@@ -290,6 +290,105 @@ footer{background:var(--gray-900);color:#fff;padding:2.25rem 1.25rem 1.5rem}
 .footer-links a{font-size:.85rem;color:#9ca3af;transition:.15s}
 .footer-links a:hover{color:#fff}
 .footer-copy{font-size:.78rem;color:#6b7280;border-top:1px solid #374151;padding-top:1rem}
+
+/* ════════════════════════════════════════
+   PC 版響應式（≥ 1024px）
+   ════════════════════════════════════════ */
+@media(min-width:1024px){
+  body{font-size:15px}
+
+  /* Header */
+  .header-top{max-width:1200px;margin:0 auto;padding:.9rem 2.5rem}
+  .brand-name{font-size:1.5rem}
+  .brand-sub{font-size:.78rem}
+  .header-cta{font-size:.92rem;padding:.6rem 1.3rem}
+  .page-nav{justify-content:center}
+  .pn-link{font-size:.88rem;padding:.7rem 1.4rem}
+
+  /* Hero：左右分欄 */
+  #hero{padding:5rem 2.5rem 4.5rem}
+  #hero .hero-content{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 380px;gap:4rem;align-items:center}
+  .hero-h1{font-size:3rem}
+  .hero-desc{font-size:.96rem}
+  .hero-btn{font-size:.98rem;max-width:320px;padding:.9rem 1.4rem}
+  .hero-stats{margin-top:2rem;padding-top:1.5rem}
+  .stat-num{font-size:1.7rem}
+  .guarantee-card{margin-bottom:0;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);border-radius:18px;padding:1.5rem}
+  .g-item{font-size:.9rem}
+
+  /* 痛點：三欄 */
+  #pain{padding:2.5rem 2.5rem}
+  #pain .pain-inner{max-width:1200px;margin:0 auto}
+  .pain-list{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+  .pain-item{font-size:.9rem}
+
+  /* 三大服務：三欄橫排 */
+  #promises{padding:4rem 2.5rem}
+  #promises .promises-inner{max-width:1200px;margin:0 auto}
+  .sec-title{font-size:1.85rem}
+  .sec-sub{font-size:.9rem}
+  .promise-list{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+  .promise-item{flex-direction:column;align-items:flex-start;gap:.75rem}
+  .promise-title{font-size:.96rem}
+  .promise-desc{font-size:.84rem}
+
+  /* 快速入口：四欄 */
+  #explore{padding:2.5rem 2.5rem 3rem}
+  #explore .explore-inner{max-width:1200px;margin:0 auto}
+  .explore-grid{grid-template-columns:repeat(4,1fr);gap:1rem}
+  .explore-card-title{font-size:.9rem}
+  .explore-card-desc{font-size:.76rem}
+
+  /* 收費：科技抓漏全寬 + 下方兩欄 */
+  #pricing{padding:4rem 2.5rem}
+  #pricing .pricing-inner{max-width:900px;margin:0 auto}
+  .price-simple{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+  .price-row.top{grid-column:1/-1}
+  .pr-name{font-size:.93rem}
+  .pr-price{font-size:1rem}
+  .price-cta{max-width:380px;margin:1.25rem auto 0;font-size:.92rem}
+
+  /* 流程：內容置中縮窄 */
+  #process{padding:4rem 2.5rem}
+  #process .process-inner{max-width:740px;margin:0 auto}
+  .pa-btn{font-size:.93rem}
+  .pa-label{font-size:.93rem}
+  .pa-body{font-size:.88rem}
+
+  /* FAQ：兩欄 */
+  #faq{padding:4rem 2.5rem}
+  #faq .faq-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:0 1.5rem;align-items:start}
+  #faq .sec-tag,#faq .sec-title,#faq .sec-sub{grid-column:1/-1}
+  .faq-list{display:contents}
+  .faq-q{font-size:.93rem;padding:.9rem 1.1rem}
+  .faq-a{font-size:.88rem}
+
+  /* CTA Bottom */
+  #cta-bottom{padding:5rem 2.5rem}
+  .cta-title{font-size:2.1rem}
+  .cta-sub{font-size:.93rem}
+  .cta-btn{font-size:.98rem;padding:.9rem 2.5rem}
+
+  /* Footer：三欄 */
+  footer{padding:3rem 2.5rem 1.75rem}
+  .footer-inner-grid{max-width:1200px;margin:0 auto 2rem;display:grid;grid-template-columns:2fr 1fr 1fr;gap:2.5rem}
+  .footer-bottom{max-width:1200px;margin:0 auto}
+  .footer-brand{font-size:1.15rem}
+  .footer-links{flex-direction:column;gap:.4rem;margin-bottom:0}
+}
+
+@media(min-width:1400px){
+  .header-top,
+  #hero .hero-content,
+  #pain .pain-inner,
+  #promises .promises-inner,
+  #explore .explore-inner,
+  #pricing .pricing-inner,
+  #process .process-inner,
+  #faq .faq-inner,
+  .footer-inner-grid,
+  .footer-bottom{max-width:1360px}
+}
 </style>
 </head>
 <body>
@@ -320,46 +419,52 @@ footer{background:var(--gray-900);color:#fff;padding:2.25rem 1.25rem 1.5rem}
 
 <!-- Hero -->
 <section id="hero">
-  <div class="hero-eyebrow">💧 台灣漏水工班媒合平台・免費諮詢</div>
-  <h1 class="hero-h1">
-    快速媒合<br>
-    <em>專業工班</em>
-  </h1>
-  <p class="hero-desc">描述漏水狀況，我們依問題類型與地區，快速媒合合適的工班師傅。</p>
-
-  <div class="guarantee-card">
-    <div class="g-item"><span class="g-icon">📍</span>描述漏水狀況，免費初步判斷漏水類型</div>
-    <div class="g-item"><span class="g-icon">🔧</span>依狀況媒合合適工班師傅到場</div>
-    <div class="g-item"><span class="g-icon">🚗</span>酌收車馬費，透明收費無隱藏費用</div>
+<div class="hero-content">
+  <div>
+    <div class="hero-eyebrow">💧 台灣漏水工班媒合平台・免費諮詢</div>
+    <h1 class="hero-h1">
+      快速媒合<br>
+      <em>專業工班</em>
+    </h1>
+    <p class="hero-desc">描述漏水狀況，我們依問題類型與地區，快速媒合合適的工班師傅。</p>
+    <a href="https://lin.ee/rjmmYyC" class="hero-btn" target="_blank">
+      <span>📲</span>
+      <span>
+        免費 Line 諮詢，快速媒合師傅
+        <span class="hero-btn-sub">（不收諮詢費）</span>
+      </span>
+    </a>
+    <div class="hero-stats">
+      <div><div class="stat-num">免費</div><div class="stat-label">漏水知識查詢</div></div>
+      <div><div class="stat-num">全台</div><div class="stat-label">師傅媒合</div></div>
+      <div><div class="stat-num">快速</div><div class="stat-label">48H 安排出勤</div></div>
+    </div>
   </div>
-
-  <a href="https://lin.ee/rjmmYyC" class="hero-btn" target="_blank">
-    <span>📲</span>
-    <span>
-      免費 Line 諮詢，快速媒合師傅
-      <span class="hero-btn-sub">（不收諮詢費）</span>
-    </span>
-  </a>
-
-  <div class="hero-stats">
-    <div><div class="stat-num">免費</div><div class="stat-label">漏水知識查詢</div></div>
-    <div><div class="stat-num">全台</div><div class="stat-label">師傅媒合</div></div>
-    <div><div class="stat-num">快速</div><div class="stat-label">48H 安排出勤</div></div>
+  <div class="hero-right">
+    <div class="guarantee-card">
+      <div class="g-item"><span class="g-icon">📍</span>描述漏水狀況，免費初步判斷漏水類型</div>
+      <div class="g-item"><span class="g-icon">🔧</span>依狀況媒合合適工班師傅到場</div>
+      <div class="g-item"><span class="g-icon">🚗</span>酌收車馬費，透明收費無隱藏費用</div>
+    </div>
   </div>
+</div>
 </section>
 
 <!-- 痛點 -->
 <section id="pain">
+<div class="pain-inner">
   <div class="pain-title">🔴 您是否有過這些經歷？</div>
   <div class="pain-list">
     <div class="pain-item"><span class="px">✗</span>師傅說修好了，下次又在漏，錢白花了</div>
     <div class="pain-item"><span class="px">✗</span>找了好幾家，每家說法不一樣、報價差很多</div>
     <div class="pain-item"><span class="px">✗</span>不知道要找哪種師傅，問了也聽不懂</div>
   </div>
+</div>
 </section>
 
 <!-- 三大服務 -->
 <section id="promises">
+<div class="promises-inner">
   <div class="sec-tag blue">我們提供什麼</div>
   <h2 class="sec-title">知識 · 媒合 · 透明</h2>
   <p class="sec-sub">先讓您看懂問題，再快速媒合合適工班</p>
@@ -386,10 +491,12 @@ footer{background:var(--gray-900);color:#fff;padding:2.25rem 1.25rem 1.5rem}
       </div>
     </div>
   </div>
+</div>
 </section>
 
 <!-- 深度內容入口 -->
 <section id="explore">
+<div class="explore-inner">
   <div class="explore-title">想先了解更多？</div>
   <div class="explore-grid">
     <a href="knowledge.html" class="explore-card">
@@ -417,10 +524,12 @@ footer{background:var(--gray-900);color:#fff;padding:2.25rem 1.25rem 1.5rem}
       <div class="explore-card-link" style="color:#16a34a">Line 諮詢 →</div>
     </a>
   </div>
+</div>
 </section>
 
 <!-- 收費方式：科技抓漏放第一 -->
 <section id="pricing">
+<div class="pricing-inner">
   <div class="sec-tag blue">收費方式</div>
   <h2 class="sec-title">透明報價</h2>
   <p class="sec-sub">查詢免費，媒合免費，預約施工才收費</p>
@@ -493,10 +602,12 @@ footer{background:var(--gray-900);color:#fff;padding:2.25rem 1.25rem 1.5rem}
   <a href="https://lin.ee/rjmmYyC" class="price-cta" target="_blank">
     📲 Line 詢問我家的報價
   </a>
+</div>
 </section>
 
 <!-- 流程 -->
 <section id="process">
+<div class="process-inner">
   <div class="sec-tag blue">服務流程</div>
   <h2 class="sec-title">5 個步驟，全程透明</h2>
   <div class="process-accordion">
@@ -557,10 +668,12 @@ footer{background:var(--gray-900);color:#fff;padding:2.25rem 1.25rem 1.5rem}
     </div>
 
   </div>
+</div>
 </section>
 
 <!-- FAQ -->
 <section id="faq">
+<div class="faq-inner">
   <div class="sec-tag blue">常見問題</div>
   <h2 class="sec-title">您最想知道的事</h2>
   <div class="faq-list">
@@ -616,6 +729,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.25rem 1.25rem 1.5rem}
     </div>
 
   </div>
+</div>
 </section>
 
 <!-- CTA Bottom -->
@@ -629,15 +743,31 @@ footer{background:var(--gray-900);color:#fff;padding:2.25rem 1.25rem 1.5rem}
 
 <!-- Footer -->
 <footer>
-  <div class="footer-brand">台灣漏水醫生</div>
-  <div class="footer-tagline">漏水工班媒合平台 · 免費諮詢 · 全台服務<br>看懂問題，才能真正修好。</div>
-  <div class="footer-links">
-    <a href="knowledge.html">漏水百科</a>
-    <a href="cases.html">施工案例</a>
-    <a href="team.html">合作廠商</a>
-    <a href="https://lin.ee/rjmmYyC" target="_blank">Line 諮詢</a>
+<div class="footer-inner-grid">
+  <div>
+    <div class="footer-brand">台灣漏水醫生</div>
+    <div class="footer-tagline">漏水工班媒合平台 · 免費諮詢 · 全台服務<br>看懂問題，才能真正修好。</div>
   </div>
+  <div>
+    <div style="font-size:.85rem;font-weight:700;color:#fff;margin-bottom:.75rem">快速連結</div>
+    <div class="footer-links">
+      <a href="knowledge.html">漏水百科</a>
+      <a href="cases.html">施工案例</a>
+      <a href="team.html">合作廠商</a>
+    </div>
+  </div>
+  <div>
+    <div style="font-size:.85rem;font-weight:700;color:#fff;margin-bottom:.75rem">聯絡我們</div>
+    <div class="footer-links">
+      <a href="https://lin.ee/rjmmYyC" target="_blank">📲 Line 免費諮詢</a>
+      <span style="font-size:.82rem;color:#9ca3af">服務時間：週一至週六</span>
+      <span style="font-size:.82rem;color:#9ca3af">09:00 – 18:00</span>
+    </div>
+  </div>
+</div>
+<div class="footer-bottom">
   <div class="footer-copy">© 2025 台灣漏水醫生　|　Line：台灣漏水醫生:防水抓漏免費諮詢　|　服務地區：全台灣</div>
+</div>
 </footer>
 
 <script>

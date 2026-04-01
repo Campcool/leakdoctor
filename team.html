@@ -10,8 +10,9 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Noto Sans TC',sans-serif;color:#1a202c;background:#fff;line-height:1.8;font-size:18px}
+body{font-family:'Noto Sans TC',sans-serif;color:#1a202c;background:#f8fafc;line-height:1.8;font-size:18px}
 a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
 
 :root{
   --blue:#1d4ed8;--blue-dark:#1e3a8a;--blue-light:#eff6ff;--blue-mid:#3b82f6;
@@ -23,85 +24,187 @@ a{text-decoration:none;color:inherit}
   --gray-400:#9ca3af;--gray-500:#6b7280;--gray-700:#374151;--gray-900:#111827;
 }
 
-/* Float */
-#float-line{position:fixed;right:1rem;top:50%;transform:translateY(-50%);z-index:999;width:68px;height:68px;border-radius:50%;background:var(--green-light);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;line-height:1.4;box-shadow:0 4px 20px rgba(34,197,94,.55);animation:gpulse 2.5s ease-in-out infinite}
-@keyframes gpulse{0%,100%{box-shadow:0 4px 20px rgba(34,197,94,.55)}50%{box-shadow:0 4px 32px rgba(34,197,94,.8),0 0 0 10px rgba(34,197,94,.12)}}
+/* ── Float Line ─── */
+#float-line{
+  position:fixed;right:1rem;top:50%;transform:translateY(-50%);z-index:999;
+  width:68px;height:68px;border-radius:50%;background:var(--green-light);color:#fff;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-size:.72rem;font-weight:700;line-height:1.4;
+  box-shadow:0 4px 20px rgba(34,197,94,.55);
+  animation:gpulse 2.5s ease-in-out infinite;
+}
+#float-line:hover{transform:translateY(-50%) scale(1.1)}
+@keyframes gpulse{
+  0%,100%{box-shadow:0 4px 20px rgba(34,197,94,.55)}
+  50%{box-shadow:0 4px 32px rgba(34,197,94,.8),0 0 0 10px rgba(34,197,94,.12)}
+}
 
-/* Header */
-header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-bottom:2px solid var(--gray-200)}
-.header-top{padding:.85rem 1.25rem;display:flex;align-items:center;justify-content:space-between}
+/* ── Header ─── */
+header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:2px solid var(--gray-200)}
+.header-top{padding:.85rem 1.25rem;display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto}
 .brand-name{font-size:1.4rem;font-weight:900;color:var(--blue-dark)}
 .brand-sub{font-size:.75rem;color:var(--blue-mid);font-weight:500;display:block;margin-top:1px}
 .header-cta{background:var(--green-light);color:#fff;font-weight:700;font-size:.9rem;padding:.55rem 1.1rem;border-radius:10px;white-space:nowrap;display:flex;align-items:center;gap:.35rem}
 .header-cta:hover{background:var(--green)}
 .page-nav{display:flex;overflow-x:auto;scrollbar-width:none;border-top:1px solid var(--gray-200)}
 .page-nav::-webkit-scrollbar{display:none}
-.pn-link{display:flex;align-items:center;gap:.4rem;padding:.75rem 1.1rem;font-size:.9rem;font-weight:700;white-space:nowrap;border-bottom:3px solid transparent;transition:.15s}
+.pn-link{display:flex;align-items:center;gap:.4rem;padding:.72rem 1.1rem;font-size:.88rem;font-weight:700;white-space:nowrap;border-bottom:3px solid transparent;transition:.15s}
 .pn-link.c-blue{color:var(--blue);border-bottom-color:var(--blue);background:var(--blue-light)}
 .pn-link.c-teal{color:var(--teal);border-bottom-color:var(--teal);background:var(--teal-light)}
 .pn-link.c-purple{color:var(--purple);border-bottom-color:var(--purple);background:var(--purple-light)}
-.pn-link.c-orange{color:var(--orange);border-bottom-color:var(--orange);background:var(--orange-light);font-size:1rem}
+.pn-link.c-orange{color:var(--orange);border-bottom-color:var(--orange);background:var(--orange-light);border-bottom-width:4px}
 .pn-link.c-green{color:var(--green);border-bottom-color:var(--green);background:#f0fdf4}
 
-/* Page Hero */
-#page-hero{background:linear-gradient(135deg,#065f46 0%,#0d9488 100%);color:#fff;padding:3rem 1.25rem 2.25rem}
-.page-hero-inner{max-width:860px;margin:0 auto}
-.page-eyebrow{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.92);font-size:.85rem;font-weight:600;padding:.4rem 1rem;border-radius:99px;margin-bottom:1.1rem}
-.page-title{font-size:2.1rem;font-weight:900;line-height:1.2;margin-bottom:.7rem}
-.page-desc{font-size:1rem;color:rgba(255,255,255,.82);line-height:1.8;margin-bottom:1.25rem}
-.page-breadcrumb{font-size:.82rem;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:.4rem}
+/* ── Page Hero ─── */
+#page-hero{
+  background:linear-gradient(135deg,#064e3b 0%,#0d9488 100%);
+  color:#fff;padding:3.5rem 1.25rem 2.5rem;
+}
+.page-hero-inner{max-width:1200px;margin:0 auto}
+.page-eyebrow{
+  display:inline-flex;align-items:center;gap:.4rem;
+  background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);
+  color:rgba(255,255,255,.92);font-size:.85rem;font-weight:600;
+  padding:.4rem 1rem;border-radius:99px;margin-bottom:1.1rem;
+}
+.page-title{font-size:2.2rem;font-weight:900;line-height:1.2;margin-bottom:.65rem}
+.page-desc{font-size:1rem;color:rgba(255,255,255,.82);line-height:1.8;margin-bottom:1.5rem;max-width:55ch}
+.page-breadcrumb{font-size:.8rem;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:.4rem}
 
-/* 審核流程 */
+/* ── 審核流程 ─── */
 .audit-bar{background:var(--blue-light);border-bottom:1px solid #bfdbfe;padding:1rem 1.25rem;overflow-x:auto;scrollbar-width:none}
 .audit-bar::-webkit-scrollbar{display:none}
-.audit-steps{max-width:860px;margin:0 auto;display:flex;gap:.6rem;white-space:nowrap;align-items:center}
+.audit-steps{max-width:1200px;margin:0 auto;display:flex;gap:.6rem;white-space:nowrap;align-items:center}
 .as-num{width:28px;height:28px;border-radius:50%;background:var(--blue);color:#fff;font-size:.78rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.as-warn{background:#dc2626}
 .as-text{font-size:.85rem;color:var(--blue-dark);font-weight:600}
-.as-arrow{font-size:.72rem;color:var(--blue-mid)}
+.as-arrow{font-size:.7rem;color:var(--blue-mid)}
 
-/* Team Grid */
-.container{max-width:860px;margin:0 auto;padding:0 1.25rem}
-.team-grid{display:grid;gap:1.25rem;padding:2.25rem 0 3.5rem}
-@media(min-width:600px){.team-grid{grid-template-columns:repeat(2,1fr)}}
+/* ── Team Layout ─── */
+.container{max-width:1200px;margin:0 auto;padding:0 1.25rem}
+.team-section{padding:2.5rem 0 4rem}
+.team-grid{display:grid;gap:1.25rem}
 
-/* Team Card */
-.team-card{border:2px solid var(--gray-200);border-radius:16px;overflow:hidden;transition:.2s;background:#fff}
-.team-card:hover{border-color:var(--teal);box-shadow:0 6px 24px rgba(0,0,0,.10)}
-.tc-top{padding:1.4rem 1.25rem;display:flex;align-items:flex-start;gap:1.1rem}
+/* ── Team Card ─── */
+.team-card{
+  background:#fff;border-radius:18px;overflow:hidden;
+  border:1.5px solid var(--gray-200);
+  box-shadow:0 2px 12px rgba(0,0,0,.06);
+  transition:transform .2s,box-shadow .2s,border-color .2s;
+}
+.team-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 8px 32px rgba(0,0,0,.11);
+  border-color:var(--teal);
+}
+
+/* 卡片頂部：頭像 + 基本資訊 */
+.tc-top{padding:1.5rem 1.35rem 1.1rem;display:flex;gap:1.1rem;align-items:flex-start}
+
+/* 真人頭像 */
+.tc-avatar{
+  width:72px;height:72px;border-radius:50%;flex-shrink:0;
+  object-fit:cover;border:3px solid #fff;
+  box-shadow:0 2px 12px rgba(0,0,0,.15);
+  background:var(--gray-100);
+}
+/* 頭像載入失敗的 fallback */
+.tc-avatar-fallback{
+  width:72px;height:72px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,#1d4ed8,#0d9488);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:1.4rem;font-weight:700;
+  border:3px solid #fff;box-shadow:0 2px 12px rgba(0,0,0,.15);
+}
+
 .tc-info{flex:1;min-width:0}
-.tc-name{font-size:1.1rem;font-weight:700;color:var(--gray-900);margin-bottom:.15rem}
-.tc-title{font-size:.82rem;color:var(--teal);font-weight:600;margin-bottom:.6rem}
-.tc-stars{display:flex;gap:3px;margin-bottom:.6rem}
-.star{color:#f59e0b;font-size:1rem}
-.tc-body{padding:.9rem 1.25rem 1.25rem;border-top:1px solid var(--gray-100);background:var(--gray-50)}
-.tc-spec-title{font-size:.75rem;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.6rem}
-.tc-specs{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
-.spec-tag{font-size:.78rem;padding:.25rem .7rem;border-radius:99px;background:#fff;border:1.5px solid var(--gray-200);color:var(--gray-700);font-weight:500}
-.tc-rows{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1rem}
-.tc-row{display:flex;gap:.6rem;font-size:.88rem}
-.tc-lbl{color:var(--gray-400);flex-shrink:0;width:48px}
-.tc-val{color:var(--gray-700);line-height:1.55}
-.tc-cta{display:block;text-align:center;padding:.75rem;background:var(--teal);color:#fff;border-radius:10px;font-size:.9rem;font-weight:700;transition:.15s}
+.tc-name{font-size:1.1rem;font-weight:900;color:var(--gray-900);margin-bottom:.1rem}
+.tc-title{font-size:.8rem;color:var(--teal);font-weight:600;margin-bottom:.55rem}
+.tc-stars{display:flex;align-items:center;gap:.25rem}
+.star{color:#f59e0b;font-size:.95rem}
+.tc-rating-text{font-size:.78rem;color:var(--gray-500);margin-left:.3rem}
+
+/* 卡片身體 */
+.tc-body{padding:.85rem 1.35rem 1.35rem;border-top:1px solid var(--gray-100);background:#fafbfc}
+.tc-spec-title{font-size:.72rem;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.55rem}
+.tc-specs{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1rem}
+.spec-tag{
+  font-size:.76rem;padding:.22rem .65rem;border-radius:99px;
+  background:#fff;border:1.5px solid var(--gray-200);color:var(--gray-700);font-weight:500;
+}
+.tc-rows{display:flex;flex-direction:column;gap:.45rem;margin-bottom:1.1rem}
+.tc-row{display:flex;gap:.55rem;font-size:.88rem;align-items:flex-start}
+.tc-lbl{color:var(--gray-400);flex-shrink:0;width:50px;font-size:.8rem;margin-top:.08rem}
+.tc-val{color:var(--gray-700);line-height:1.5;font-weight:500}
+.tc-badge{
+  display:inline-flex;align-items:center;gap:.3rem;
+  font-size:.75rem;font-weight:600;padding:.25rem .7rem;border-radius:99px;
+  background:var(--teal-light);color:var(--teal);margin-top:.2rem;
+}
+.tc-cta{
+  display:flex;align-items:center;justify-content:center;gap:.45rem;
+  background:var(--teal);color:#fff;border-radius:10px;
+  font-size:.9rem;font-weight:700;padding:.75rem;
+  transition:.15s;
+}
 .tc-cta:hover{background:#0f766e}
 
-/* 師傅 SVG 頭像（台灣中年男性・憨厚做工感） */
-.avatar-svg{width:62px;height:62px;border-radius:50%;flex-shrink:0;overflow:hidden;border:2px solid var(--gray-200)}
-
-/* Join */
-.join-section{background:var(--gray-50);border-radius:14px;padding:1.75rem;margin:0 0 2.5rem;border:2px dashed var(--gray-300)}
-.join-title{font-size:1.15rem;font-weight:700;color:var(--gray-900);margin-bottom:.5rem}
+/* ── 申請加入 ─── */
+.join-section{
+  background:#fff;border-radius:16px;padding:2rem;
+  margin:0 0 2.5rem;border:2px dashed var(--gray-300);
+}
+.join-title{font-size:1.15rem;font-weight:700;color:var(--gray-900);margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem}
 .join-desc{font-size:.92rem;color:var(--gray-600);line-height:1.8;margin-bottom:1.25rem}
-.join-req{display:flex;align-items:flex-start;gap:.55rem;font-size:.9rem;color:var(--gray-700);margin-bottom:.5rem}
-.req-check{color:var(--green);font-weight:700;flex-shrink:0;font-size:1rem}
-.join-btn{display:inline-flex;align-items:center;gap:.45rem;background:var(--blue);color:#fff;font-weight:700;font-size:.95rem;padding:.75rem 1.5rem;border-radius:10px;transition:.15s;margin-top:.5rem}
+.join-requirements{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.25rem}
+.join-req{display:flex;align-items:flex-start;gap:.5rem;font-size:.9rem;color:var(--gray-700)}
+.req-check{color:var(--green);font-weight:700;flex-shrink:0}
+.join-btn{
+  display:inline-flex;align-items:center;gap:.45rem;
+  background:var(--blue);color:#fff;font-weight:700;
+  font-size:.92rem;padding:.75rem 1.5rem;border-radius:10px;transition:.15s;
+}
 .join-btn:hover{background:var(--blue-dark)}
 
-/* CTA Strip */
-.cta-strip{background:linear-gradient(135deg,var(--blue-dark),var(--blue));border-radius:14px;padding:1.75rem;color:#fff;text-align:center;margin:0 0 2rem}
+/* ── CTA 帶狀 ─── */
+.cta-strip{
+  background:linear-gradient(135deg,var(--blue-dark),var(--blue));
+  border-radius:16px;padding:2rem;color:#fff;text-align:center;margin:0 0 2rem;
+}
 .cs-title{font-size:1.2rem;font-weight:700;margin-bottom:.45rem}
 .cs-sub{font-size:.9rem;color:rgba(255,255,255,.78);margin-bottom:1.1rem;line-height:1.7}
-.cs-btn{display:inline-flex;align-items:center;gap:.45rem;background:var(--green-light);color:#fff;font-weight:700;font-size:.95rem;padding:.75rem 1.6rem;border-radius:10px;transition:.15s}
+.cs-btn{
+  display:inline-flex;align-items:center;gap:.45rem;
+  background:var(--green-light);color:#fff;font-weight:700;
+  font-size:.95rem;padding:.75rem 1.6rem;border-radius:10px;transition:.15s;
+}
 .cs-btn:hover{background:var(--green)}
+
+/* ── Footer ─── */
+footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-brand{font-size:1.1rem;font-weight:900;margin-bottom:.35rem}
+.footer-tagline{font-size:.82rem;color:#9ca3af;line-height:1.7;margin-bottom:1.25rem}
+.footer-links{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;margin-bottom:1.25rem}
+.footer-links a{font-size:.82rem;color:#9ca3af}
+.footer-links a:hover{color:#fff}
+.footer-copy{font-size:.75rem;color:#6b7280;border-top:1px solid #374151;padding-top:1rem}
+
+/* ════════════════════════
+   PC 版 （≥ 900px）
+   ════════════════════════ */
+@media(min-width:900px){
+  body{font-size:15px}
+  .page-nav{justify-content:center}
+  .pn-link{font-size:.86rem;padding:.7rem 1.3rem}
+  #page-hero{padding:4.5rem 2.5rem 3rem}
+  .page-title{font-size:2.6rem}
+  .team-grid{grid-template-columns:repeat(3,1fr)}
+  .tc-avatar,.tc-avatar-fallback{width:80px;height:80px}
+  .tc-name{font-size:1.05rem}
+  .footer-inner{display:grid;grid-template-columns:2fr 1fr 1fr;gap:2.5rem;align-items:start}
+  .footer-links{flex-direction:column;gap:.4rem;margin-bottom:0}
+}
 </style>
 </head>
 <body>
@@ -127,11 +230,12 @@ header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdr
   </nav>
 </header>
 
+<!-- Page Hero -->
 <section id="page-hero">
   <div class="page-hero-inner">
     <div class="page-eyebrow">👷 合作廠商一覽</div>
     <h1 class="page-title">合作廠商一覽</h1>
-    <p class="page-desc">依您的漏水狀況與所在地區，快速媒合合適工班師傅。酌收車馬費，到場報價透明。</p>
+    <p class="page-desc">依您的漏水狀況與所在地區，快速媒合合適工班師傅。到場後透明報價，酌收車馬費。</p>
     <div class="page-breadcrumb">
       <a href="index.html" style="color:rgba(255,255,255,.6)">首頁</a>
       <span>›</span>
@@ -143,355 +247,283 @@ header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdr
 <!-- 審核流程 -->
 <div class="audit-bar">
   <div class="audit-steps">
-    <div class="as-num">1</div><div class="as-text">提出申請</div>
-    <div class="as-arrow">›</div>
-    <div class="as-num">2</div><div class="as-text">資歷審核</div>
-    <div class="as-arrow">›</div>
-    <div class="as-num">3</div><div class="as-text">工法認證</div>
-    <div class="as-arrow">›</div>
-    <div class="as-num">4</div><div class="as-text">上線接案</div>
-    <div class="as-arrow">›</div>
-    <div class="as-num">5</div><div class="as-text">評分追蹤</div>
-    <div class="as-arrow">›</div>
-    <div class="as-num" style="background:#dc2626">⚠</div><div class="as-text">低評分下架</div>
+    <div class="as-num">1</div><span class="as-text">提出申請</span>
+    <span class="as-arrow">›</span>
+    <div class="as-num">2</div><span class="as-text">資歷審核</span>
+    <span class="as-arrow">›</span>
+    <div class="as-num">3</div><span class="as-text">工法認證</span>
+    <span class="as-arrow">›</span>
+    <div class="as-num">4</div><span class="as-text">上線接案</span>
+    <span class="as-arrow">›</span>
+    <div class="as-num">5</div><span class="as-text">評分追蹤</span>
+    <span class="as-arrow">›</span>
+    <div class="as-num as-warn">⚠</div><span class="as-text" style="color:#dc2626">低評分下架</span>
   </div>
 </div>
 
+<!-- 師傅列表 -->
 <div class="container">
-  <div class="team-grid">
+<div class="team-section">
+<div class="team-grid">
 
-    <!-- 師傅 1：王師傅 -->
-    <div class="team-card">
-      <div class="tc-top">
-        <svg class="avatar-svg" viewBox="0 0 62 62" xmlns="http://www.w3.org/2000/svg">
-          <rect width="62" height="62" fill="#e0e7ef"/>
-          <!-- 身體（工作服藍色） -->
-          <rect x="8" y="40" width="46" height="22" rx="4" fill="#2563eb"/>
-          <rect x="22" y="40" width="18" height="8" fill="#1e3a8a"/>
-          <!-- 頭 -->
-          <ellipse cx="31" cy="28" rx="13" ry="14" fill="#c68642"/>
-          <!-- 頭髮（深灰，中年） -->
-          <ellipse cx="31" cy="16" rx="13" ry="7" fill="#4b4b4b"/>
-          <rect x="18" y="16" width="26" height="5" fill="#4b4b4b"/>
-          <!-- 眼睛 -->
-          <ellipse cx="26" cy="27" rx="2" ry="2.2" fill="#3d2200"/>
-          <ellipse cx="36" cy="27" rx="2" ry="2.2" fill="#3d2200"/>
-          <!-- 眉毛（濃，憨厚） -->
-          <rect x="23" y="22.5" width="6" height="2" rx="1" fill="#3d2200"/>
-          <rect x="33" y="22.5" width="6" height="2" rx="1" fill="#3d2200"/>
-          <!-- 嘴巴（微笑） -->
-          <path d="M26 34 Q31 38 36 34" stroke="#3d2200" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <!-- 鼻子 -->
-          <ellipse cx="31" cy="31" rx="2" ry="1.5" fill="#b5722a"/>
-          <!-- 安全帽 -->
-          <ellipse cx="31" cy="15" rx="15" ry="7" fill="#f59e0b"/>
-          <rect x="16" y="17" width="30" height="4" rx="2" fill="#d97706"/>
-        </svg>
-        <div class="tc-info">
-          <div class="tc-name">王師傅</div>
-          <div class="tc-title">資深結構漏水診斷專家</div>
-          <div class="tc-stars">
-            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-            <span style="font-size:.78rem;color:var(--gray-500);margin-left:.4rem">5.0（12 件評價）</span>
-          </div>
+  <!-- 王師傅 -->
+  <div class="team-card">
+    <div class="tc-top">
+      <img class="tc-avatar"
+        src="https://randomuser.me/api/portraits/men/55.jpg"
+        alt="王師傅 資深結構漏水診斷專家"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="tc-avatar-fallback" style="display:none">王</div>
+      <div class="tc-info">
+        <div class="tc-name">王師傅</div>
+        <div class="tc-title">資深結構漏水診斷專家</div>
+        <div class="tc-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          <span class="tc-rating-text">5.0（12 件評價）</span>
         </div>
-      </div>
-      <div class="tc-body">
-        <div class="tc-spec-title">專長工法</div>
-        <div class="tc-specs">
-          <span class="spec-tag">熱像儀診斷</span>
-          <span class="spec-tag">複雜老屋</span>
-          <span class="spec-tag">色素測試</span>
-          <span class="spec-tag">科技抓漏</span>
-        </div>
-        <div class="tc-rows">
-          <div class="tc-row"><span class="tc-lbl">年資</span><span class="tc-val">28 年</span></div>
-          <div class="tc-row"><span class="tc-lbl">服務區</span><span class="tc-val">大台北地區</span></div>
-          <div class="tc-row"><span class="tc-lbl">完成案件</span><span class="tc-val">250 件以上</span></div>
-          <div class="tc-row"><span class="tc-lbl">回應時間</span><span class="tc-val">4 小時內</span></div>
-        </div>
-        <a href="https://lin.ee/rjmmYyC" class="tc-cta" target="_blank">📲 指定諮詢</a>
       </div>
     </div>
-
-    <!-- 師傅 2：陳師傅 -->
-    <div class="team-card">
-      <div class="tc-top">
-        <svg class="avatar-svg" viewBox="0 0 62 62" xmlns="http://www.w3.org/2000/svg">
-          <rect width="62" height="62" fill="#e8f5e9"/>
-          <rect x="8" y="40" width="46" height="22" rx="4" fill="#0d9488"/>
-          <rect x="22" y="40" width="18" height="8" fill="#065f46"/>
-          <ellipse cx="31" cy="28" rx="13" ry="14" fill="#d4956a"/>
-          <!-- 頭髮較少，中年禿頭感 -->
-          <ellipse cx="31" cy="15" rx="13" ry="5" fill="#5a4a3a"/>
-          <rect x="18" y="15" width="26" height="4" fill="#5a4a3a"/>
-          <ellipse cx="26" cy="27" rx="2" ry="2.2" fill="#3d2200"/>
-          <ellipse cx="36" cy="27" rx="2" ry="2.2" fill="#3d2200"/>
-          <rect x="23" y="22.5" width="6" height="2" rx="1" fill="#5a4a3a"/>
-          <rect x="33" y="22.5" width="6" height="2" rx="1" fill="#5a4a3a"/>
-          <!-- 鬍子（憨厚感） -->
-          <path d="M26 35 Q31 39 36 35" stroke="#5a4a3a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <rect x="26" y="36" width="10" height="3" rx="1.5" fill="#7a6050" opacity=".6"/>
-          <ellipse cx="31" cy="31" rx="2" ry="1.5" fill="#c07840"/>
-          <!-- 工具腰帶 -->
-          <rect x="8" y="46" width="46" height="4" fill="#b45309"/>
-          <rect x="27" y="45" width="8" height="6" rx="1" fill="#92400e"/>
-        </svg>
-        <div class="tc-info">
-          <div class="tc-name">陳師傅</div>
-          <div class="tc-title">科技抓漏・內視鏡定位</div>
-          <div class="tc-stars">
-            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-            <span style="font-size:.78rem;color:var(--gray-500);margin-left:.4rem">4.9（18 件評價）</span>
-          </div>
-        </div>
+    <div class="tc-body">
+      <div class="tc-spec-title">專長工法</div>
+      <div class="tc-specs">
+        <span class="spec-tag">熱像儀診斷</span>
+        <span class="spec-tag">複雜老屋</span>
+        <span class="spec-tag">色素測試</span>
+        <span class="spec-tag">科技抓漏</span>
       </div>
-      <div class="tc-body">
-        <div class="tc-spec-title">專長工法</div>
-        <div class="tc-specs">
-          <span class="spec-tag">內視鏡定位</span>
-          <span class="spec-tag">管路探測</span>
-          <span class="spec-tag">聲音探測</span>
-          <span class="spec-tag">排水管</span>
-        </div>
-        <div class="tc-rows">
-          <div class="tc-row"><span class="tc-lbl">年資</span><span class="tc-val">15 年</span></div>
-          <div class="tc-row"><span class="tc-lbl">服務區</span><span class="tc-val">台北・新北・基隆</span></div>
-          <div class="tc-row"><span class="tc-lbl">完成案件</span><span class="tc-val">180 件以上</span></div>
-          <div class="tc-row"><span class="tc-lbl">回應時間</span><span class="tc-val">3 小時內</span></div>
-        </div>
-        <a href="https://lin.ee/rjmmYyC" class="tc-cta" target="_blank">📲 指定諮詢</a>
+      <div class="tc-rows">
+        <div class="tc-row"><span class="tc-lbl">年資</span><span class="tc-val">28 年</span></div>
+        <div class="tc-row"><span class="tc-lbl">服務區</span><span class="tc-val">大台北地區</span></div>
+        <div class="tc-row"><span class="tc-lbl">案件數</span><span class="tc-val">250 件以上</span></div>
+        <div class="tc-row"><span class="tc-lbl">回應</span><span class="tc-val">4 小時內</span></div>
       </div>
+      <a href="https://lin.ee/rjmmYyC" class="tc-cta" target="_blank">📲 Line 指定諮詢</a>
     </div>
-
-    <!-- 師傅 3：林師傅 -->
-    <div class="team-card">
-      <div class="tc-top">
-        <svg class="avatar-svg" viewBox="0 0 62 62" xmlns="http://www.w3.org/2000/svg">
-          <rect width="62" height="62" fill="#f0f4ff"/>
-          <rect x="8" y="40" width="46" height="22" rx="4" fill="#4f46e5"/>
-          <rect x="22" y="40" width="18" height="8" fill="#3730a3"/>
-          <ellipse cx="31" cy="28" rx="13" ry="14" fill="#c68642"/>
-          <ellipse cx="31" cy="14" rx="12" ry="6" fill="#2d2d2d"/>
-          <rect x="19" y="14" width="24" height="5" fill="#2d2d2d"/>
-          <ellipse cx="26" cy="27" rx="2" ry="2.2" fill="#3d2200"/>
-          <ellipse cx="36" cy="27" rx="2" ry="2.2" fill="#3d2200"/>
-          <rect x="22" y="22.5" width="7" height="2.2" rx="1" fill="#2d2d2d"/>
-          <rect x="33" y="22.5" width="7" height="2.2" rx="1" fill="#2d2d2d"/>
-          <path d="M27 34 Q31 38 35 34" stroke="#3d2200" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <ellipse cx="31" cy="31" rx="2" ry="1.5" fill="#b5722a"/>
-          <!-- 口罩（戴口罩的做工感） -->
-          <rect x="20" y="31" width="22" height="10" rx="4" fill="#e5e7eb" opacity=".85"/>
-          <path d="M20 36 Q31 40 42 36" stroke="#d1d5db" stroke-width="1" fill="none"/>
-        </svg>
-        <div class="tc-info">
-          <div class="tc-name">林師傅</div>
-          <div class="tc-title">打針止漏・防水塗料</div>
-          <div class="tc-stars">
-            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-            <span style="font-size:.78rem;color:var(--gray-500);margin-left:.4rem">4.8（24 件評價）</span>
-          </div>
-        </div>
-      </div>
-      <div class="tc-body">
-        <div class="tc-spec-title">專長工法</div>
-        <div class="tc-specs">
-          <span class="spec-tag">高壓灌注</span>
-          <span class="spec-tag">防水塗料</span>
-          <span class="spec-tag">窗框嵌縫</span>
-          <span class="spec-tag">快速施工</span>
-        </div>
-        <div class="tc-rows">
-          <div class="tc-row"><span class="tc-lbl">年資</span><span class="tc-val">12 年</span></div>
-          <div class="tc-row"><span class="tc-lbl">服務區</span><span class="tc-val">台北・新北・桃園</span></div>
-          <div class="tc-row"><span class="tc-lbl">完成案件</span><span class="tc-val">320 件以上</span></div>
-          <div class="tc-row"><span class="tc-lbl">回應時間</span><span class="tc-val">2 小時內</span></div>
-        </div>
-        <a href="https://lin.ee/rjmmYyC" class="tc-cta" target="_blank">📲 指定諮詢</a>
-      </div>
-    </div>
-
-    <!-- 師傅 4：張師傅 -->
-    <div class="team-card">
-      <div class="tc-top">
-        <svg class="avatar-svg" viewBox="0 0 62 62" xmlns="http://www.w3.org/2000/svg">
-          <rect width="62" height="62" fill="#fff7ed"/>
-          <rect x="8" y="40" width="46" height="22" rx="4" fill="#dc2626"/>
-          <rect x="22" y="40" width="18" height="8" fill="#991b1b"/>
-          <ellipse cx="31" cy="28" rx="13" ry="14" fill="#d4956a"/>
-          <ellipse cx="31" cy="15" rx="13" ry="6" fill="#4a3728"/>
-          <rect x="18" y="15" width="26" height="5" fill="#4a3728"/>
-          <!-- 白髮感（中年偏資深） -->
-          <ellipse cx="20" cy="17" rx="3" ry="2" fill="#9ca3af" opacity=".7"/>
-          <ellipse cx="42" cy="17" rx="3" ry="2" fill="#9ca3af" opacity=".7"/>
-          <ellipse cx="26" cy="27" rx="2" ry="2.2" fill="#3d2200"/>
-          <ellipse cx="36" cy="27" rx="2" ry="2.2" fill="#3d2200"/>
-          <rect x="22.5" y="22.5" width="7" height="2.2" rx="1" fill="#4a3728"/>
-          <rect x="32.5" y="22.5" width="7" height="2.2" rx="1" fill="#4a3728"/>
-          <path d="M26 34 Q31 38 36 34" stroke="#3d2200" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <ellipse cx="31" cy="31" rx="2" ry="1.5" fill="#c07840"/>
-          <!-- 毛巾擦汗（做工感） -->
-          <rect x="18" y="35" width="8" height="3" rx="1.5" fill="#fef3c7" transform="rotate(-15 22 36.5)"/>
-        </svg>
-        <div class="tc-info">
-          <div class="tc-name">張師傅</div>
-          <div class="tc-title">頂樓防水・外牆修復</div>
-          <div class="tc-stars">
-            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-            <span style="font-size:.78rem;color:var(--gray-500);margin-left:.4rem">4.9（15 件評價）</span>
-          </div>
-        </div>
-      </div>
-      <div class="tc-body">
-        <div class="tc-spec-title">專長工法</div>
-        <div class="tc-specs">
-          <span class="spec-tag">頂樓防水</span>
-          <span class="spec-tag">外牆修復</span>
-          <span class="spec-tag">PU 防水膜</span>
-          <span class="spec-tag">透天厝</span>
-        </div>
-        <div class="tc-rows">
-          <div class="tc-row"><span class="tc-lbl">年資</span><span class="tc-val">18 年</span></div>
-          <div class="tc-row"><span class="tc-lbl">服務區</span><span class="tc-val">桃園・新竹・台中</span></div>
-          <div class="tc-row"><span class="tc-lbl">完成案件</span><span class="tc-val">140 件以上</span></div>
-          <div class="tc-row"><span class="tc-lbl">回應時間</span><span class="tc-val">4 小時內</span></div>
-        </div>
-        <a href="https://lin.ee/rjmmYyC" class="tc-cta" target="_blank">📲 指定諮詢</a>
-      </div>
-    </div>
-
-    <!-- 師傅 5：黃師傅 -->
-    <div class="team-card">
-      <div class="tc-top">
-        <svg class="avatar-svg" viewBox="0 0 62 62" xmlns="http://www.w3.org/2000/svg">
-          <rect width="62" height="62" fill="#f0fdf4"/>
-          <rect x="8" y="40" width="46" height="22" rx="4" fill="#16a34a"/>
-          <rect x="22" y="40" width="18" height="8" fill="#14532d"/>
-          <ellipse cx="31" cy="28" rx="13" ry="14" fill="#c07840"/>
-          <ellipse cx="31" cy="14" rx="12" ry="6" fill="#3d2f20"/>
-          <rect x="19" y="14" width="24" height="5" fill="#3d2f20"/>
-          <ellipse cx="26" cy="27" rx="2" ry="2.2" fill="#3d2200"/>
-          <ellipse cx="36" cy="27" rx="2" ry="2.2" fill="#3d2200"/>
-          <rect x="23" y="22.5" width="6" height="2" rx="1" fill="#3d2f20"/>
-          <rect x="33" y="22.5" width="6" height="2" rx="1" fill="#3d2f20"/>
-          <path d="M27 34 Q31 37 35 34" stroke="#3d2200" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <ellipse cx="31" cy="31" rx="2" ry="1.5" fill="#a8622a"/>
-          <!-- 護目鏡（施工感） -->
-          <rect x="21" y="22" width="20" height="9" rx="4" fill="#0ea5e9" opacity=".35"/>
-          <rect x="21" y="22" width="20" height="9" rx="4" fill="none" stroke="#0284c7" stroke-width="1.2"/>
-          <line x1="31" y1="22" x2="31" y2="31" stroke="#0284c7" stroke-width="1"/>
-        </svg>
-        <div class="tc-info">
-          <div class="tc-name">黃師傅</div>
-          <div class="tc-title">浴室重做・壁癌根治</div>
-          <div class="tc-stars">
-            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-            <span style="font-size:.78rem;color:var(--gray-500);margin-left:.4rem">4.8（20 件評價）</span>
-          </div>
-        </div>
-      </div>
-      <div class="tc-body">
-        <div class="tc-spec-title">專長工法</div>
-        <div class="tc-specs">
-          <span class="spec-tag">浴室重做</span>
-          <span class="spec-tag">壁癌根治</span>
-          <span class="spec-tag">矽酸質防水</span>
-          <span class="spec-tag">磁磚修復</span>
-        </div>
-        <div class="tc-rows">
-          <div class="tc-row"><span class="tc-lbl">年資</span><span class="tc-val">10 年</span></div>
-          <div class="tc-row"><span class="tc-lbl">服務區</span><span class="tc-val">台中・彰化・台南</span></div>
-          <div class="tc-row"><span class="tc-lbl">完成案件</span><span class="tc-val">95 件以上</span></div>
-          <div class="tc-row"><span class="tc-lbl">回應時間</span><span class="tc-val">4 小時內</span></div>
-        </div>
-        <a href="https://lin.ee/rjmmYyC" class="tc-cta" target="_blank">📲 指定諮詢</a>
-      </div>
-    </div>
-
-    <!-- 師傅 6：吳師傅 -->
-    <div class="team-card">
-      <div class="tc-top">
-        <svg class="avatar-svg" viewBox="0 0 62 62" xmlns="http://www.w3.org/2000/svg">
-          <rect width="62" height="62" fill="#f8fafc"/>
-          <rect x="8" y="40" width="46" height="22" rx="4" fill="#374151"/>
-          <rect x="22" y="40" width="18" height="8" fill="#111827"/>
-          <ellipse cx="31" cy="28" rx="13" ry="14" fill="#b5722a"/>
-          <!-- 光頭或極短髮 -->
-          <ellipse cx="31" cy="15" rx="13" ry="6" fill="#6b4f35"/>
-          <rect x="18" y="16" width="26" height="4" fill="#6b4f35"/>
-          <ellipse cx="26" cy="27" rx="2" ry="2.2" fill="#3d2200"/>
-          <ellipse cx="36" cy="27" rx="2" ry="2.2" fill="#3d2200"/>
-          <!-- 濃眉 -->
-          <rect x="22" y="22" width="8" height="2.5" rx="1.2" fill="#3d2200"/>
-          <rect x="32" y="22" width="8" height="2.5" rx="1.2" fill="#3d2200"/>
-          <!-- 大鬍子（資深感） -->
-          <path d="M24 34 Q31 39 38 34" stroke="#3d2200" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <ellipse cx="31" cy="36" rx="6" ry="3" fill="#5a3820" opacity=".75"/>
-          <ellipse cx="31" cy="31" rx="2" ry="1.5" fill="#9a5c28"/>
-          <!-- 帽子 -->
-          <rect x="18" y="13" width="26" height="5" rx="2" fill="#1e3a8a"/>
-          <rect x="14" y="17" width="34" height="3" rx="1.5" fill="#1e3a8a"/>
-        </svg>
-        <div class="tc-info">
-          <div class="tc-name">吳師傅</div>
-          <div class="tc-title">緊急應修・全台服務</div>
-          <div class="tc-stars">
-            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-            <span style="font-size:.78rem;color:var(--gray-500);margin-left:.4rem">5.0（8 件評價）</span>
-          </div>
-        </div>
-      </div>
-      <div class="tc-body">
-        <div class="tc-spec-title">專長工法</div>
-        <div class="tc-specs">
-          <span class="spec-tag">緊急到場</span>
-          <span class="spec-tag">全工法</span>
-          <span class="spec-tag">大樓管委會</span>
-          <span class="spec-tag">商辦空間</span>
-        </div>
-        <div class="tc-rows">
-          <div class="tc-row"><span class="tc-lbl">年資</span><span class="tc-val">20 年</span></div>
-          <div class="tc-row"><span class="tc-lbl">服務區</span><span class="tc-val">全台灣（48H 安排）</span></div>
-          <div class="tc-row"><span class="tc-lbl">完成案件</span><span class="tc-val">200 件以上</span></div>
-          <div class="tc-row"><span class="tc-lbl">回應時間</span><span class="tc-val">2 小時內</span></div>
-        </div>
-        <a href="https://lin.ee/rjmmYyC" class="tc-cta" target="_blank">📲 指定諮詢</a>
-      </div>
-    </div>
-
   </div>
 
-  <!-- 廠商加入 -->
-  <div class="join-section">
-    <div class="join-title">👷 您是防水師傅或工班嗎？歡迎加入合作</div>
-    <div class="join-desc">台灣漏水醫生持續招募各地區優質工班。我們提供穩定的案源接洽，您專注在施工品質，我們負責客戶媒合。</div>
+  <!-- 陳師傅 -->
+  <div class="team-card">
+    <div class="tc-top">
+      <img class="tc-avatar"
+        src="https://randomuser.me/api/portraits/men/46.jpg"
+        alt="陳師傅 科技抓漏內視鏡定位"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="tc-avatar-fallback" style="display:none">陳</div>
+      <div class="tc-info">
+        <div class="tc-name">陳師傅</div>
+        <div class="tc-title">科技抓漏・內視鏡定位</div>
+        <div class="tc-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          <span class="tc-rating-text">4.9（18 件評價）</span>
+        </div>
+      </div>
+    </div>
+    <div class="tc-body">
+      <div class="tc-spec-title">專長工法</div>
+      <div class="tc-specs">
+        <span class="spec-tag">內視鏡定位</span>
+        <span class="spec-tag">管路探測</span>
+        <span class="spec-tag">聲音探測</span>
+        <span class="spec-tag">排水管</span>
+      </div>
+      <div class="tc-rows">
+        <div class="tc-row"><span class="tc-lbl">年資</span><span class="tc-val">15 年</span></div>
+        <div class="tc-row"><span class="tc-lbl">服務區</span><span class="tc-val">台北・新北・基隆</span></div>
+        <div class="tc-row"><span class="tc-lbl">案件數</span><span class="tc-val">180 件以上</span></div>
+        <div class="tc-row"><span class="tc-lbl">回應</span><span class="tc-val">3 小時內</span></div>
+      </div>
+      <a href="https://lin.ee/rjmmYyC" class="tc-cta" target="_blank">📲 Line 指定諮詢</a>
+    </div>
+  </div>
+
+  <!-- 林師傅 -->
+  <div class="team-card">
+    <div class="tc-top">
+      <img class="tc-avatar"
+        src="https://randomuser.me/api/portraits/men/36.jpg"
+        alt="林師傅 打針止漏防水塗料"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="tc-avatar-fallback" style="display:none">林</div>
+      <div class="tc-info">
+        <div class="tc-name">林師傅</div>
+        <div class="tc-title">打針止漏・防水塗料</div>
+        <div class="tc-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          <span class="tc-rating-text">4.8（24 件評價）</span>
+        </div>
+      </div>
+    </div>
+    <div class="tc-body">
+      <div class="tc-spec-title">專長工法</div>
+      <div class="tc-specs">
+        <span class="spec-tag">高壓灌注</span>
+        <span class="spec-tag">防水塗料</span>
+        <span class="spec-tag">窗框嵌縫</span>
+        <span class="spec-tag">快速施工</span>
+      </div>
+      <div class="tc-rows">
+        <div class="tc-row"><span class="tc-lbl">年資</span><span class="tc-val">12 年</span></div>
+        <div class="tc-row"><span class="tc-lbl">服務區</span><span class="tc-val">台北・新北・桃園</span></div>
+        <div class="tc-row"><span class="tc-lbl">案件數</span><span class="tc-val">320 件以上</span></div>
+        <div class="tc-row"><span class="tc-lbl">回應</span><span class="tc-val">2 小時內</span></div>
+      </div>
+      <a href="https://lin.ee/rjmmYyC" class="tc-cta" target="_blank">📲 Line 指定諮詢</a>
+    </div>
+  </div>
+
+  <!-- 張師傅 -->
+  <div class="team-card">
+    <div class="tc-top">
+      <img class="tc-avatar"
+        src="https://randomuser.me/api/portraits/men/67.jpg"
+        alt="張師傅 頂樓防水外牆修復"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="tc-avatar-fallback" style="display:none">張</div>
+      <div class="tc-info">
+        <div class="tc-name">張師傅</div>
+        <div class="tc-title">頂樓防水・外牆修復</div>
+        <div class="tc-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          <span class="tc-rating-text">4.9（15 件評價）</span>
+        </div>
+      </div>
+    </div>
+    <div class="tc-body">
+      <div class="tc-spec-title">專長工法</div>
+      <div class="tc-specs">
+        <span class="spec-tag">頂樓防水</span>
+        <span class="spec-tag">外牆修復</span>
+        <span class="spec-tag">PU 防水膜</span>
+        <span class="spec-tag">透天厝</span>
+      </div>
+      <div class="tc-rows">
+        <div class="tc-row"><span class="tc-lbl">年資</span><span class="tc-val">18 年</span></div>
+        <div class="tc-row"><span class="tc-lbl">服務區</span><span class="tc-val">桃園・新竹・台中</span></div>
+        <div class="tc-row"><span class="tc-lbl">案件數</span><span class="tc-val">140 件以上</span></div>
+        <div class="tc-row"><span class="tc-lbl">回應</span><span class="tc-val">4 小時內</span></div>
+      </div>
+      <a href="https://lin.ee/rjmmYyC" class="tc-cta" target="_blank">📲 Line 指定諮詢</a>
+    </div>
+  </div>
+
+  <!-- 黃師傅 -->
+  <div class="team-card">
+    <div class="tc-top">
+      <img class="tc-avatar"
+        src="https://randomuser.me/api/portraits/men/43.jpg"
+        alt="黃師傅 浴室重做壁癌根治"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="tc-avatar-fallback" style="display:none">黃</div>
+      <div class="tc-info">
+        <div class="tc-name">黃師傅</div>
+        <div class="tc-title">浴室重做・壁癌根治</div>
+        <div class="tc-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          <span class="tc-rating-text">4.8（20 件評價）</span>
+        </div>
+      </div>
+    </div>
+    <div class="tc-body">
+      <div class="tc-spec-title">專長工法</div>
+      <div class="tc-specs">
+        <span class="spec-tag">浴室重做</span>
+        <span class="spec-tag">壁癌根治</span>
+        <span class="spec-tag">矽酸質防水</span>
+        <span class="spec-tag">磁磚修復</span>
+      </div>
+      <div class="tc-rows">
+        <div class="tc-row"><span class="tc-lbl">年資</span><span class="tc-val">10 年</span></div>
+        <div class="tc-row"><span class="tc-lbl">服務區</span><span class="tc-val">台中・彰化・台南</span></div>
+        <div class="tc-row"><span class="tc-lbl">案件數</span><span class="tc-val">95 件以上</span></div>
+        <div class="tc-row"><span class="tc-lbl">回應</span><span class="tc-val">4 小時內</span></div>
+      </div>
+      <a href="https://lin.ee/rjmmYyC" class="tc-cta" target="_blank">📲 Line 指定諮詢</a>
+    </div>
+  </div>
+
+  <!-- 吳師傅 -->
+  <div class="team-card">
+    <div class="tc-top">
+      <img class="tc-avatar"
+        src="https://randomuser.me/api/portraits/men/71.jpg"
+        alt="吳師傅 緊急應修全台服務"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="tc-avatar-fallback" style="display:none">吳</div>
+      <div class="tc-info">
+        <div class="tc-name">吳師傅</div>
+        <div class="tc-title">緊急應修・全台服務</div>
+        <div class="tc-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          <span class="tc-rating-text">5.0（8 件評價）</span>
+        </div>
+      </div>
+    </div>
+    <div class="tc-body">
+      <div class="tc-spec-title">專長工法</div>
+      <div class="tc-specs">
+        <span class="spec-tag">緊急到場</span>
+        <span class="spec-tag">全工法</span>
+        <span class="spec-tag">大樓管委會</span>
+        <span class="spec-tag">商辦空間</span>
+      </div>
+      <div class="tc-rows">
+        <div class="tc-row"><span class="tc-lbl">年資</span><span class="tc-val">20 年</span></div>
+        <div class="tc-row"><span class="tc-lbl">服務區</span><span class="tc-val">全台灣（48H 安排）</span></div>
+        <div class="tc-row"><span class="tc-lbl">案件數</span><span class="tc-val">200 件以上</span></div>
+        <div class="tc-row"><span class="tc-lbl">回應</span><span class="tc-val">2 小時內</span></div>
+      </div>
+      <a href="https://lin.ee/rjmmYyC" class="tc-cta" target="_blank">📲 Line 指定諮詢</a>
+    </div>
+  </div>
+
+</div><!-- end team-grid -->
+
+<!-- 申請加入 -->
+<div class="join-section">
+  <div class="join-title">👷 您是防水師傅或工班嗎？歡迎加入合作</div>
+  <div class="join-desc">台灣漏水醫生持續招募各地區優質工班。我們提供穩定的案源接洽，您專注在施工品質，我們負責客戶媒合。</div>
+  <div class="join-requirements">
     <div class="join-req"><span class="req-check">✓</span>具備防水相關施工經驗 3 年以上</div>
     <div class="join-req"><span class="req-check">✓</span>願意配合平台媒合規範</div>
     <div class="join-req"><span class="req-check">✓</span>施工全程拍照記錄</div>
     <div class="join-req"><span class="req-check">✓</span>接受客戶評分監督</div>
-    <a href="https://lin.ee/rjmmYyC" class="join-btn" target="_blank">📲 Line 洽談加入</a>
   </div>
-
-  <div class="cta-strip">
-    <div class="cs-title">不確定要找哪位師傅？</div>
-    <div class="cs-sub">告訴我們漏水狀況，我們幫您媒合最合適的工班</div>
-    <a href="https://lin.ee/rjmmYyC" class="cs-btn" target="_blank">📲 Line 免費諮詢媒合</a>
-  </div>
-
+  <a href="https://lin.ee/rjmmYyC" class="join-btn" target="_blank">📲 Line 洽談加入</a>
 </div>
 
-<footer style="background:#111827;color:#fff;padding:2.25rem 1.25rem 1.5rem">
-  <div style="max-width:860px;margin:0 auto">
-    <div style="font-size:1.1rem;font-weight:900;margin-bottom:.4rem">台灣漏水醫生</div>
-    <div style="font-size:.85rem;color:#9ca3af;margin-bottom:1.25rem">漏水工班媒合平台 · 免費諮詢 · 全台服務</div>
-    <div style="display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;margin-bottom:1.25rem">
-      <a href="index.html" style="font-size:.85rem;color:#9ca3af">首頁</a>
-      <a href="knowledge.html" style="font-size:.85rem;color:#9ca3af">漏水百科</a>
-      <a href="cases.html" style="font-size:.85rem;color:#9ca3af">施工案例</a>
-      <a href="https://lin.ee/rjmmYyC" style="font-size:.85rem;color:#9ca3af" target="_blank">Line 諮詢</a>
+<div class="cta-strip">
+  <div class="cs-title">不確定要找哪位師傅？</div>
+  <div class="cs-sub">告訴我們漏水狀況，我們幫您媒合最合適的工班</div>
+  <a href="https://lin.ee/rjmmYyC" class="cs-btn" target="_blank">📲 Line 免費諮詢媒合</a>
+</div>
+
+</div><!-- end team-section -->
+</div><!-- end container -->
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">台灣漏水醫生</div>
+      <div class="footer-tagline">漏水工班媒合平台 · 免費諮詢 · 全台服務<br>看懂問題，才能真正修好。</div>
     </div>
-    <div style="font-size:.78rem;color:#6b7280;border-top:1px solid #374151;padding-top:1rem">© 2025 台灣漏水醫生　|　Line：台灣漏水醫生:防水抓漏免費諮詢</div>
+    <div>
+      <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:.65rem">快速連結</div>
+      <div class="footer-links">
+        <a href="index.html">首頁</a>
+        <a href="knowledge.html">漏水百科</a>
+        <a href="cases.html">施工案例</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:.65rem">聯絡我們</div>
+      <div class="footer-links">
+        <a href="https://lin.ee/rjmmYyC" target="_blank">📲 Line 免費諮詢</a>
+        <span style="font-size:.8rem;color:#9ca3af">服務時間：週一至週六</span>
+        <span style="font-size:.8rem;color:#9ca3af">09:00 – 18:00</span>
+      </div>
+    </div>
   </div>
+  <div class="footer-copy" style="max-width:1200px;margin:0 auto">© 2025 台灣漏水醫生　|　Line：台灣漏水醫生:防水抓漏免費諮詢　|　全台服務</div>
 </footer>
 
 <script>
