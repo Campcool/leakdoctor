@@ -116,6 +116,14 @@ header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdr
 .pn-link.c-orange{color:#ea580c;border-bottom-color:#ea580c;background:#fff7ed}
 .pn-link.c-green{color:#16a34a;border-bottom-color:#16a34a;background:#f0fdf4}
 .pn-icon{font-size:1rem}
+.fb-type,.fb-loc{
+  padding:.35rem .85rem;border-radius:99px;font-size:.78rem;font-weight:600;
+  border:1.5px solid #e5e7eb;background:#fff;color:#6b7280;cursor:pointer;
+  font-family:inherit;transition:.15s;white-space:nowrap;
+}
+.fb-type:hover,.fb-loc:hover{border-color:#1d4ed8;color:#1d4ed8}
+.fb-type.active{background:#1d4ed8;color:#fff;border-color:#1d4ed8}
+.fb-loc.active{background:#0d9488;color:#fff;border-color:#0d9488}
 </style>
 </head>
 <body>
@@ -157,13 +165,26 @@ header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdr
 </section>
 
 <!-- Filter -->
-<div id="filter-bar">
-  <button class="filter-btn active" onclick="filterCases('all',this)">全部案例</button>
-  <button class="filter-btn" onclick="filterCases('bath',this)">🚿 浴室漏水</button>
-  <button class="filter-btn" onclick="filterCases('roof',this)">🏠 頂樓防水</button>
-  <button class="filter-btn" onclick="filterCases('wall',this)">🪟 外牆滲水</button>
-  <button class="filter-btn" onclick="filterCases('pipe',this)">🔧 管路問題</button>
-  <button class="filter-btn" onclick="filterCases('mold',this)">🟤 壁癌根治</button>
+<div id="filter-area" style="background:#fff;border-bottom:1px solid #e5e7eb;padding:.85rem 1.25rem">
+  <div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:.6rem">
+    <div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap">
+      <span style="font-size:.78rem;font-weight:700;color:#6b7280;flex-shrink:0">住宅類型：</span>
+      <button class="fb-type active" data-type="all" onclick="applyFilter()">全部</button>
+      <button class="fb-type" data-type="rc" onclick="applyFilter()">🏢 RC大樓</button>
+      <button class="fb-type" data-type="apt" onclick="applyFilter()">🏠 老公寓</button>
+      <button class="fb-type" data-type="house" onclick="applyFilter()">🏡 透天厝</button>
+      <button class="fb-type" data-type="roof" onclick="applyFilter()">🏗️ 頂樓加蓋</button>
+    </div>
+    <div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap">
+      <span style="font-size:.78rem;font-weight:700;color:#6b7280;flex-shrink:0">漏水位置：</span>
+      <button class="fb-loc active" data-loc="all" onclick="applyFilter()">全部</button>
+      <button class="fb-loc" data-loc="bath" onclick="applyFilter()">🚿 浴室</button>
+      <button class="fb-loc" data-loc="roof" onclick="applyFilter()">🏠 頂樓</button>
+      <button class="fb-loc" data-loc="wall" onclick="applyFilter()">🪟 外牆</button>
+      <button class="fb-loc" data-loc="pipe" onclick="applyFilter()">🔧 管路</button>
+      <button class="fb-loc" data-loc="mold" onclick="applyFilter()">🟤 壁癌</button>
+    </div>
+  </div>
 </div>
 
 <div style="padding:1.5rem 0 3rem">
@@ -179,9 +200,9 @@ header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdr
     <div class="cases-grid" id="cases-grid">
 
       <!-- Case 1 -->
-      <div class="case-card" data-type="bath">
+      <div class="case-card" data-type="rc" data-loc="bath">
         <div class="case-top">
-          <div class="case-type ct-bath">🚿 浴室漏水</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.4rem"><div class="case-type ct-bath">🚿 浴室漏水</div><div class="case-type" style="background:#fef9c3;color:#92400e">🏠 老公寓</div></div>
           <div class="case-title">30 年老公寓浴室天花板持續滴水</div>
           <div class="case-loc">📍 台北市大安區｜RC 公寓 4F</div>
         </div>
@@ -199,9 +220,9 @@ header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdr
       </div>
 
       <!-- Case 2 -->
-      <div class="case-card" data-type="wall">
+      <div class="case-card" data-type="apt" data-loc="wall">
         <div class="case-top">
-          <div class="case-type ct-wall">🪟 外牆滲水</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.4rem"><div class="case-type ct-wall">🪟 外牆滲水</div><div class="case-type" style="background:#eff6ff;color:#1d4ed8">🏢 RC大樓</div></div>
           <div class="case-title">新大樓窗框雨天持續滲水壁癌</div>
           <div class="case-loc">📍 新北市板橋區｜15 年華廈 8F</div>
         </div>
@@ -219,9 +240,9 @@ header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdr
       </div>
 
       <!-- Case 3 -->
-      <div class="case-card" data-type="roof">
+      <div class="case-card" data-type="house" data-loc="roof">
         <div class="case-top">
-          <div class="case-type ct-roof">🏠 頂樓防水</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.4rem"><div class="case-type ct-roof">🏠 頂樓防水</div><div class="case-type" style="background:#f0fdf4;color:#16a34a">🏡 透天厝</div></div>
           <div class="case-title">20 年透天厝頂樓積水滲入 4 樓</div>
           <div class="case-loc">📍 桃園市中壢區｜4 層透天厝</div>
         </div>
@@ -239,9 +260,9 @@ header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdr
       </div>
 
       <!-- Case 4 -->
-      <div class="case-card" data-type="bath">
+      <div class="case-card" data-type="rc" data-loc="bath" id="case-rc-bath2">
         <div class="case-top">
-          <div class="case-type ct-bath">🚿 浴室漏水</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.4rem"><div class="case-type ct-bath">🚿 浴室漏水</div><div class="case-type" style="background:#eff6ff;color:#1d4ed8">🏢 RC大樓</div></div>
           <div class="case-title">10 年新大樓浴室地板使用後滲漏</div>
           <div class="case-loc">📍 台中市西屯區｜RC 大樓 12F</div>
         </div>
@@ -259,9 +280,9 @@ header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdr
       </div>
 
       <!-- Case 5 -->
-      <div class="case-card" data-type="mold">
+      <div class="case-card" data-type="apt" data-loc="mold">
         <div class="case-top">
-          <div class="case-type ct-mold">🟤 壁癌根治</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.4rem"><div class="case-type ct-mold">🟤 壁癌根治</div><div class="case-type" style="background:#fef9c3;color:#92400e">🏠 老公寓</div></div>
           <div class="case-title">40 年老屋外牆壁癌反覆無法根治</div>
           <div class="case-loc">📍 台北市信義區｜磚牆老公寓 2F</div>
         </div>
@@ -279,9 +300,9 @@ header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdr
       </div>
 
       <!-- Case 6 -->
-      <div class="case-card" data-type="pipe">
+      <div class="case-card" data-type="rc" data-loc="pipe">
         <div class="case-top">
-          <div class="case-type ct-pipe">🔧 管路問題</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.4rem"><div class="case-type ct-pipe">🔧 管路問題</div><div class="case-type" style="background:#eff6ff;color:#1d4ed8">🏢 RC大樓</div></div>
           <div class="case-title">辦公室冷氣排水管漏水天花板損壞</div>
           <div class="case-loc">📍 新北市新店區｜商辦大樓 5F</div>
         </div>
@@ -329,11 +350,41 @@ header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdr
 </footer>
 
 <script>
-function filterCases(type, btn){
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
+// 從 URL 參數自動篩選
+(function(){
+  const p=new URLSearchParams(location.search);
+  const t=p.get('type'), l=p.get('loc');
+  if(t){
+    const btn=document.querySelector('.fb-type[data-type="'+t+'"]');
+    if(btn){document.querySelectorAll('.fb-type').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+  }
+  if(l){
+    const btn=document.querySelector('.fb-loc[data-loc="'+l+'"]');
+    if(btn){document.querySelectorAll('.fb-loc').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+  }
+  if(t||l) setTimeout(applyFilter, 50);
+})();
+
+function applyFilter(){
+  const activeType=document.querySelector('.fb-type.active')?.dataset.type||'all';
+  const activeLoc=document.querySelector('.fb-loc.active')?.dataset.loc||'all';
+  // 更新點擊的按鈕 active 狀態
+  if(event && event.target){
+    const btn=event.target;
+    if(btn.classList.contains('fb-type')){
+      document.querySelectorAll('.fb-type').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+    } else if(btn.classList.contains('fb-loc')){
+      document.querySelectorAll('.fb-loc').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+  }
+  const curType=document.querySelector('.fb-type.active')?.dataset.type||'all';
+  const curLoc=document.querySelector('.fb-loc.active')?.dataset.loc||'all';
   document.querySelectorAll('.case-card').forEach(card=>{
-    card.dataset.hidden = (type!=='all' && card.dataset.type!==type) ? 'true' : 'false';
+    const matchType = curType==='all' || card.dataset.type===curType;
+    const matchLoc  = curLoc==='all'  || card.dataset.loc===curLoc;
+    card.style.display = (matchType && matchLoc) ? '' : 'none';
   });
 }
 // 展開案例詳情
