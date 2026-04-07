@@ -83,7 +83,19 @@ header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.96);backdr
 /* ── Team Layout ─── */
 .container{max-width:1200px;margin:0 auto;padding:0 1.25rem}
 .team-section{padding:2.5rem 0 4rem}
-.team-grid{display:grid;gap:1.25rem}
+/* ── 師傅輪播 ── */
+.team-carousel-outer{padding:0 1.25rem 2.5rem}
+.team-carousel-wrap{overflow:hidden;border-radius:14px}
+.team-carousel-track{display:flex;gap:1rem;transition:transform .5s cubic-bezier(.4,0,.2,1);will-change:transform}
+.team-card{min-width:300px;flex-shrink:0;background:#fff;border-radius:14px;border:1.5px solid #e5e7eb;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.07);transition:.2s}
+.team-card:hover{border-color:#0d9488;box-shadow:0 6px 20px rgba(0,0,0,.1);transform:translateY(-3px)}
+/* 輪播控制 */
+.tc-carousel-controls{display:flex;align-items:center;justify-content:center;gap:.8rem;margin-top:1rem}
+.tc-carousel-btn{width:38px;height:38px;border-radius:50%;border:1.5px solid #e5e7eb;background:#fff;font-size:1.2rem;cursor:pointer;color:#6b7280;display:flex;align-items:center;justify-content:center;transition:.15s}
+.tc-carousel-btn:hover{border-color:#0d9488;color:#0d9488;background:#f0fdfa}
+.tc-dots-wrap{display:flex;gap:.4rem;align-items:center}
+.tc-dot{width:8px;height:8px;border-radius:50%;background:#e5e7eb;cursor:pointer;transition:.25s;border:none;padding:0;outline:none}
+.tc-dot.active{background:#0d9488;transform:scale(1.25)}
 
 /* ── Team Card ─── */
 .team-card{
@@ -199,7 +211,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   .pn-link{font-size:.86rem;padding:.7rem 1.3rem}
   #page-hero{padding:4.5rem 2.5rem 3rem}
   .page-title{font-size:2.6rem}
-  .team-grid{grid-template-columns:repeat(3,1fr)}
+  
   .tc-avatar,.tc-avatar-fallback{width:80px;height:80px}
   .tc-name{font-size:1.05rem}
   .footer-inner{display:grid;grid-template-columns:2fr 1fr 1fr;gap:2.5rem;align-items:start}
@@ -263,900 +275,600 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 
 <!-- 師傅列表 -->
 <div class="container">
-<div class="team-section">
-<div class="team-grid">
-
-  <!-- 王師傅 -->
-  <div class="team-card">
-    <div class="tc-top">
-      <img class="tc-avatar"
-        src="master_01.jpg"
-        alt="王師傅 資深結構漏水診斷"
-        style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #e5e7eb;flex-shrink:0">
-      <div class="tc-info">
-        <div class="tc-name">王師傅</div>
-        <div class="tc-title">資深結構漏水診斷</div>
-        <div class="tc-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-          <span class="tc-rating-text">5.0（12 件評價）</span>
-        </div>
-      </div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-spec-title">專長工法</div>
-      <div class="tc-specs"><span class="spec-tag">熱像儀診斷</span><span class="spec-tag">複雜老屋</span><span class="spec-tag">色素測試</span><span class="spec-tag">老公寓</span></div>
-      <div class="tc-desc">從事防水抓漏近 30 年，擅長以熱像儀診斷複雜滲水路徑，尤其對 30 年以上老公寓有豐富處理經驗。溝通有耐心，習慣用簡單的話向屋主說明問題所在。</div>
-      <div class="tc-meta-row">
-        <span class="tc-meta-item">🗓 28 年資歷</span>
-        <span class="tc-meta-item">📍 台北市・新北市・基隆市</span>
-      </div>
-    </div>
-    <div class="tc-footer">
-      <a href="https://lin.ee/rjmmYyC" class="tc-contact" target="_blank">
-        📲 透過 LINE 預約 王師傅
-      </a>
-    </div>
-  </div>
-
-  <!-- 陳師傅 -->
-  <div class="team-card">
-    <div class="tc-top">
-      <img class="tc-avatar"
-        src="master_02.jpg"
-        alt="陳師傅 科技抓漏・內視鏡定位"
-        style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #e5e7eb;flex-shrink:0">
-      <div class="tc-info">
-        <div class="tc-name">陳師傅</div>
-        <div class="tc-title">科技抓漏・內視鏡定位</div>
-        <div class="tc-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star-empty">★</span>
-          <span class="tc-rating-text">4.9（18 件評價）</span>
-        </div>
-      </div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-spec-title">專長工法</div>
-      <div class="tc-specs"><span class="spec-tag">內視鏡定位</span><span class="spec-tag">管路探測</span><span class="spec-tag">排水管</span><span class="spec-tag">給水管</span></div>
-      <div class="tc-desc">專精以高解析內視鏡深入排水管、冷氣管道探查，精確定位破裂點，避免打牆盲目施工。特別擅長辦公室與商辦空間的管路問題。</div>
-      <div class="tc-meta-row">
-        <span class="tc-meta-item">🗓 15 年資歷</span>
-        <span class="tc-meta-item">📍 台北市・新北市・基隆市</span>
-      </div>
-    </div>
-    <div class="tc-footer">
-      <a href="https://lin.ee/rjmmYyC" class="tc-contact" target="_blank">
-        📲 透過 LINE 預約 陳師傅
-      </a>
-    </div>
-  </div>
-
-  <!-- 林師傅 -->
-  <div class="team-card">
-    <div class="tc-top">
-      <img class="tc-avatar"
-        src="master_03.jpg"
-        alt="林師傅 高壓灌注止漏・防水塗料"
-        style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #e5e7eb;flex-shrink:0">
-      <div class="tc-info">
-        <div class="tc-name">林師傅</div>
-        <div class="tc-title">高壓灌注止漏・防水塗料</div>
-        <div class="tc-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star-empty">★</span>
-          <span class="tc-rating-text">4.8（24 件評價）</span>
-        </div>
-      </div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-spec-title">專長工法</div>
-      <div class="tc-specs"><span class="spec-tag">高壓灌注</span><span class="spec-tag">防水塗料</span><span class="spec-tag">窗框嵌縫</span><span class="spec-tag">外牆</span></div>
-      <div class="tc-desc">擅長高壓灌注打針止漏，對窗框嵌縫老化、外牆裂縫等輕中度漏水案件有豐富處理經驗，施工速度快，報價清楚。</div>
-      <div class="tc-meta-row">
-        <span class="tc-meta-item">🗓 12 年資歷</span>
-        <span class="tc-meta-item">📍 台北市・新北市・桃園市</span>
-      </div>
-    </div>
-    <div class="tc-footer">
-      <a href="https://lin.ee/rjmmYyC" class="tc-contact" target="_blank">
-        📲 透過 LINE 預約 林師傅
-      </a>
-    </div>
-  </div>
-
-  <!-- 張師傅 -->
-  <div class="team-card">
-    <div class="tc-top">
-      <img class="tc-avatar"
-        src="master_04.jpg"
-        alt="張師傅 頂樓防水・外牆修復"
-        style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #e5e7eb;flex-shrink:0">
-      <div class="tc-info">
-        <div class="tc-name">張師傅</div>
-        <div class="tc-title">頂樓防水・外牆修復</div>
-        <div class="tc-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star-empty">★</span>
-          <span class="tc-rating-text">4.9（15 件評價）</span>
-        </div>
-      </div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-spec-title">專長工法</div>
-      <div class="tc-specs"><span class="spec-tag">頂樓防水</span><span class="spec-tag">PU防水膜</span><span class="spec-tag">透天厝</span><span class="spec-tag">外牆拉皮</span></div>
-      <div class="tc-desc">主攻頂樓防水層重做及外牆防水翻新，對透天厝的頂樓積水、鐵皮接縫等問題特別有心得，施工細心，提供完整前後對比記錄。</div>
-      <div class="tc-meta-row">
-        <span class="tc-meta-item">🗓 18 年資歷</span>
-        <span class="tc-meta-item">📍 桃園市・新竹市・台中市</span>
-      </div>
-    </div>
-    <div class="tc-footer">
-      <a href="https://lin.ee/rjmmYyC" class="tc-contact" target="_blank">
-        📲 透過 LINE 預約 張師傅
-      </a>
-    </div>
-  </div>
-
-  <!-- 黃師傅 -->
-  <div class="team-card">
-    <div class="tc-top">
-      <img class="tc-avatar"
-        src="master_05.jpg"
-        alt="黃師傅 浴室重做・壁癌處理"
-        style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #e5e7eb;flex-shrink:0">
-      <div class="tc-info">
-        <div class="tc-name">黃師傅</div>
-        <div class="tc-title">浴室重做・壁癌處理</div>
-        <div class="tc-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star-empty">★</span>
-          <span class="tc-rating-text">4.8（20 件評價）</span>
-        </div>
-      </div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-spec-title">專長工法</div>
-      <div class="tc-specs"><span class="spec-tag">浴室重做</span><span class="spec-tag">矽酸質防水</span><span class="spec-tag">磁磚復原</span><span class="spec-tag">壁癌</span></div>
-      <div class="tc-desc">專精浴室地板敲磚重做防水層，同時熟悉矽酸質滲透阻水工法用於壁癌根本處理，施工後均提供淋浴驗收確認。</div>
-      <div class="tc-meta-row">
-        <span class="tc-meta-item">🗓 10 年資歷</span>
-        <span class="tc-meta-item">📍 台中市・彰化縣・台南市</span>
-      </div>
-    </div>
-    <div class="tc-footer">
-      <a href="https://lin.ee/rjmmYyC" class="tc-contact" target="_blank">
-        📲 透過 LINE 預約 黃師傅
-      </a>
-    </div>
-  </div>
-
-  <!-- 吳師傅 -->
-  <div class="team-card">
-    <div class="tc-top">
-      <img class="tc-avatar"
-        src="master_06.jpg"
-        alt="吳師傅 全工法・緊急到場"
-        style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #e5e7eb;flex-shrink:0">
-      <div class="tc-info">
-        <div class="tc-name">吳師傅</div>
-        <div class="tc-title">全工法・緊急到場</div>
-        <div class="tc-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-          <span class="tc-rating-text">5.0（8 件評價）</span>
-        </div>
-      </div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-spec-title">專長工法</div>
-      <div class="tc-specs"><span class="spec-tag">緊急到場</span><span class="spec-tag">全工法</span><span class="spec-tag">商業空間</span><span class="spec-tag">住宅</span></div>
-      <div class="tc-desc">具備全方位防水施工能力，可處理從輕度窗框滲漏到頂樓大面積防水重做的各類案件。擅長緊急出勤，48 小時內到場，溝通直接，效率高。</div>
-      <div class="tc-meta-row">
-        <span class="tc-meta-item">🗓 20 年資歷</span>
-        <span class="tc-meta-item">📍 全台本島</span>
-      </div>
-    </div>
-    <div class="tc-footer">
-      <a href="https://lin.ee/rjmmYyC" class="tc-contact" target="_blank">
-        📲 透過 LINE 預約 吳師傅
-      </a>
-    </div>
-  </div>
-
-  <!-- 劉師傅 -->
-  <div class="team-card">
-    <div class="tc-top">
-      <img class="tc-avatar"
-        src="master_07.jpg"
-        alt="劉師傅 地下室・車庫防水"
-        style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #e5e7eb;flex-shrink:0">
-      <div class="tc-info">
-        <div class="tc-name">劉師傅</div>
-        <div class="tc-title">地下室・車庫防水</div>
-        <div class="tc-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star-empty">★</span>
-          <span class="tc-rating-text">4.7（11 件評價）</span>
-        </div>
-      </div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-spec-title">專長工法</div>
-      <div class="tc-specs"><span class="spec-tag">地下室防水</span><span class="spec-tag">車庫積水</span><span class="spec-tag">RC補強</span><span class="spec-tag">排水系統</span></div>
-      <div class="tc-desc">專攻地下室及車庫的防水問題，熟悉地下滲水的特性與處理方式，包含地板防水層重做及排水系統規劃，有多個大型停車場施工經驗。</div>
-      <div class="tc-meta-row">
-        <span class="tc-meta-item">🗓 14 年資歷</span>
-        <span class="tc-meta-item">📍 桃園市・台中市・彰化縣</span>
-      </div>
-    </div>
-    <div class="tc-footer">
-      <a href="https://lin.ee/rjmmYyC" class="tc-contact" target="_blank">
-        📲 透過 LINE 預約 劉師傅
-      </a>
-    </div>
-  </div>
-
-  <!-- 蔡師傅 -->
-  <div class="team-card">
-    <div class="tc-top">
-      <img class="tc-avatar"
-        src="master_08.jpg"
-        alt="蔡師傅 高空作業・外牆防水"
-        style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #e5e7eb;flex-shrink:0">
-      <div class="tc-info">
-        <div class="tc-name">蔡師傅</div>
-        <div class="tc-title">高空作業・外牆防水</div>
-        <div class="tc-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star-empty">★</span>
-          <span class="tc-rating-text">4.9（9 件評價）</span>
-        </div>
-      </div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-spec-title">專長工法</div>
-      <div class="tc-specs"><span class="spec-tag">高空防水</span><span class="spec-tag">外牆拉皮</span><span class="spec-tag">吊籠作業</span><span class="spec-tag">大樓外牆</span></div>
-      <div class="tc-desc">持有高空作業資格，擅長大樓外牆高空防水施工，使用吊籠或繩索作業，可處理電梯大樓外牆裂縫滲水及外牆拉皮防水，安全施工紀錄良好。</div>
-      <div class="tc-meta-row">
-        <span class="tc-meta-item">🗓 16 年資歷</span>
-        <span class="tc-meta-item">📍 台北市・新北市</span>
-      </div>
-    </div>
-    <div class="tc-footer">
-      <a href="https://lin.ee/rjmmYyC" class="tc-contact" target="_blank">
-        📲 透過 LINE 預約 蔡師傅
-      </a>
-    </div>
-  </div>
-
-  <!-- 許師傅 -->
-  <div class="team-card">
-    <div class="tc-top">
-      <img class="tc-avatar"
-        src="master_09.jpg"
-        alt="許師傅 鐵皮屋・頂樓加蓋"
-        style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #e5e7eb;flex-shrink:0">
-      <div class="tc-info">
-        <div class="tc-name">許師傅</div>
-        <div class="tc-title">鐵皮屋・頂樓加蓋</div>
-        <div class="tc-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star-empty">★</span>
-          <span class="tc-rating-text">4.6（7 件評價）</span>
-        </div>
-      </div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-spec-title">專長工法</div>
-      <div class="tc-specs"><span class="spec-tag">鐵皮止漏</span><span class="spec-tag">接縫防水</span><span class="spec-tag">頂樓加蓋</span><span class="spec-tag">螺絲孔修補</span></div>
-      <div class="tc-desc">專精頂樓鐵皮加蓋的各類漏水問題，包含鐵皮接縫、螺絲孔生鏽及與 RC 結構接縫滲水，熟悉加蓋結構的特性，分段測試精準定位。</div>
-      <div class="tc-meta-row">
-        <span class="tc-meta-item">🗓 11 年資歷</span>
-        <span class="tc-meta-item">📍 台北市・新北市</span>
-      </div>
-    </div>
-    <div class="tc-footer">
-      <a href="https://lin.ee/rjmmYyC" class="tc-contact" target="_blank">
-        📲 透過 LINE 預約 許師傅
-      </a>
-    </div>
-  </div>
-
-  <!-- 鄭師傅 -->
-  <div class="team-card">
-    <div class="tc-top">
-      <img class="tc-avatar"
-        src="master_10.jpg"
-        alt="鄭師傅 管路換新・老屋翻修"
-        style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #e5e7eb;flex-shrink:0">
-      <div class="tc-info">
-        <div class="tc-name">鄭師傅</div>
-        <div class="tc-title">管路換新・老屋翻修</div>
-        <div class="tc-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star-empty">★</span>
-          <span class="tc-rating-text">4.8（14 件評價）</span>
-        </div>
-      </div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-spec-title">專長工法</div>
-      <div class="tc-specs"><span class="spec-tag">換管</span><span class="spec-tag">老屋管路</span><span class="spec-tag">鑄鐵管更換</span><span class="spec-tag">給排水</span></div>
-      <div class="tc-desc">30 年以上老屋的鑄鐵或鍍鋅管換新專家，熟悉老屋管路配置，定壓測試後精準定位，以最小破牆範圍完成換管工程。</div>
-      <div class="tc-meta-row">
-        <span class="tc-meta-item">🗓 22 年資歷</span>
-        <span class="tc-meta-item">📍 台北市・新北市・基隆市</span>
-      </div>
-    </div>
-    <div class="tc-footer">
-      <a href="https://lin.ee/rjmmYyC" class="tc-contact" target="_blank">
-        📲 透過 LINE 預約 鄭師傅
-      </a>
-    </div>
-  </div>
-
-  <!-- 洪師傅 -->
-  <div class="team-card">
-    <div class="tc-top">
-      <img class="tc-avatar"
-        src="master_11.jpg"
-        alt="洪師傅 浴室防水・陽台止漏"
-        style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #e5e7eb;flex-shrink:0">
-      <div class="tc-info">
-        <div class="tc-name">洪師傅</div>
-        <div class="tc-title">浴室防水・陽台止漏</div>
-        <div class="tc-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star-empty">★</span>
-          <span class="tc-rating-text">4.7（10 件評價）</span>
-        </div>
-      </div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-spec-title">專長工法</div>
-      <div class="tc-specs"><span class="spec-tag">浴室防水</span><span class="spec-tag">陽台防水</span><span class="spec-tag">色素測試</span><span class="spec-tag">敲磚重做</span></div>
-      <div class="tc-desc">以色素測試精準判斷浴室及陽台地板防水層破損位置，擅長局部精準敲磚，縮短工期與費用。作業整潔，施工完後自行清理現場。</div>
-      <div class="tc-meta-row">
-        <span class="tc-meta-item">🗓 9 年資歷</span>
-        <span class="tc-meta-item">📍 台中市・台南市・高雄市</span>
-      </div>
-    </div>
-    <div class="tc-footer">
-      <a href="https://lin.ee/rjmmYyC" class="tc-contact" target="_blank">
-        📲 透過 LINE 預約 洪師傅
-      </a>
-    </div>
-  </div>
-
-  <!-- 游師傅 -->
-  <div class="team-card">
-    <div class="tc-top">
-      <img class="tc-avatar"
-        src="master_12.jpg"
-        alt="游師傅 外牆壁癌・結構補強"
-        style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #e5e7eb;flex-shrink:0">
-      <div class="tc-info">
-        <div class="tc-name">游師傅</div>
-        <div class="tc-title">外牆壁癌・結構補強</div>
-        <div class="tc-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star-empty">★</span>
-          <span class="tc-rating-text">4.9（13 件評價）</span>
-        </div>
-      </div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-spec-title">專長工法</div>
-      <div class="tc-specs"><span class="spec-tag">外牆防水</span><span class="spec-tag">壁癌處理</span><span class="spec-tag">矽酸質</span><span class="spec-tag">結構補強</span></div>
-      <div class="tc-desc">擅長追蹤外牆滲水源頭，結合外牆防水塗料與室內矽酸質工法雙管齊下，確保壁癌不復發。對 RC 結構裂縫也有補強施工能力。</div>
-      <div class="tc-meta-row">
-        <span class="tc-meta-item">🗓 17 年資歷</span>
-        <span class="tc-meta-item">📍 台北市・新北市</span>
-      </div>
-    </div>
-    <div class="tc-footer">
-      <a href="https://lin.ee/rjmmYyC" class="tc-contact" target="_blank">
-        📲 透過 LINE 預約 游師傅
-      </a>
-    </div>
-  </div>
-
-  <!-- 廖師傅 -->
-  <div class="team-card">
-    <div class="tc-top">
-      <img class="tc-avatar"
-        src="master_13.jpg"
-        alt="廖師傅 頂樓九宮格測試"
-        style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #e5e7eb;flex-shrink:0">
-      <div class="tc-info">
-        <div class="tc-name">廖師傅</div>
-        <div class="tc-title">頂樓九宮格測試</div>
-        <div class="tc-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star-empty">★</span>
-          <span class="tc-rating-text">4.8（16 件評價）</span>
-        </div>
-      </div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-spec-title">專長工法</div>
-      <div class="tc-specs"><span class="spec-tag">九宮格測試</span><span class="spec-tag">頂樓防水</span><span class="spec-tag">色素定位</span><span class="spec-tag">隔熱磚</span></div>
-      <div class="tc-desc">擅長頂樓防水層老化案件，以九宮格色素分割測試系統性找出所有漏水點，再一次施工解決，避免多次施工浪費費用。</div>
-      <div class="tc-meta-row">
-        <span class="tc-meta-item">🗓 13 年資歷</span>
-        <span class="tc-meta-item">📍 桃園市・新竹縣・台中市</span>
-      </div>
-    </div>
-    <div class="tc-footer">
-      <a href="https://lin.ee/rjmmYyC" class="tc-contact" target="_blank">
-        📲 透過 LINE 預約 廖師傅
-      </a>
-    </div>
-  </div>
-
-  <!-- 邱師傅 -->
-  <div class="team-card">
-    <div class="tc-top">
-      <img class="tc-avatar"
-        src="master_14.jpg"
-        alt="邱師傅 冷氣排水・管道間"
-        style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #e5e7eb;flex-shrink:0">
-      <div class="tc-info">
-        <div class="tc-name">邱師傅</div>
-        <div class="tc-title">冷氣排水・管道間</div>
-        <div class="tc-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star-empty">★</span>
-          <span class="tc-rating-text">4.6（6 件評價）</span>
-        </div>
-      </div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-spec-title">專長工法</div>
-      <div class="tc-specs"><span class="spec-tag">冷氣排水管</span><span class="spec-tag">管道間</span><span class="spec-tag">內視鏡</span><span class="spec-tag">商辦</span></div>
-      <div class="tc-desc">專攻冷氣排水管堵塞逆流及管道間漏水問題，擅長以內視鏡確認管內狀況，不開天花板即可定位，大幅縮短施工時間。</div>
-      <div class="tc-meta-row">
-        <span class="tc-meta-item">🗓 8 年資歷</span>
-        <span class="tc-meta-item">📍 台北市・新北市</span>
-      </div>
-    </div>
-    <div class="tc-footer">
-      <a href="https://lin.ee/rjmmYyC" class="tc-contact" target="_blank">
-        📲 透過 LINE 預約 邱師傅
-      </a>
-    </div>
-  </div>
-
-  <!-- 施師傅 -->
-  <div class="team-card">
-    <div class="tc-top">
-      <img class="tc-avatar"
-        src="master_15.jpg"
-        alt="施師傅 窗框嵌縫・高壓打針"
-        style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #e5e7eb;flex-shrink:0">
-      <div class="tc-info">
-        <div class="tc-name">施師傅</div>
-        <div class="tc-title">窗框嵌縫・高壓打針</div>
-        <div class="tc-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star-empty">★</span>
-          <span class="tc-rating-text">4.7（8 件評價）</span>
-        </div>
-      </div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-spec-title">專長工法</div>
-      <div class="tc-specs"><span class="spec-tag">窗框嵌縫</span><span class="spec-tag">高壓灌注</span><span class="spec-tag">颱風防水</span><span class="spec-tag">外牆</span></div>
-      <div class="tc-desc">擅長颱風季前的窗框嵌縫全面檢查與施工，熟悉各種嵌縫材料特性，對透天厝多扇窗框同時處理有豐富經驗，效率高。</div>
-      <div class="tc-meta-row">
-        <span class="tc-meta-item">🗓 11 年資歷</span>
-        <span class="tc-meta-item">📍 新竹市・新竹縣・苗栗縣</span>
-      </div>
-    </div>
-    <div class="tc-footer">
-      <a href="https://lin.ee/rjmmYyC" class="tc-contact" target="_blank">
-        📲 透過 LINE 預約 施師傅
-      </a>
-    </div>
-  </div>
-
-  <!-- 柯師傅 -->
-  <div class="team-card">
-    <div class="tc-top">
-      <img class="tc-avatar"
-        src="master_16.jpg"
-        alt="柯師傅 老屋整體評估"
-        style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #e5e7eb;flex-shrink:0">
-      <div class="tc-info">
-        <div class="tc-name">柯師傅</div>
-        <div class="tc-title">老屋整體評估</div>
-        <div class="tc-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-          <span class="tc-rating-text">5.0（5 件評價）</span>
-        </div>
-      </div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-spec-title">專長工法</div>
-      <div class="tc-specs"><span class="spec-tag">整體評估</span><span class="spec-tag">老屋診斷</span><span class="spec-tag">熱像儀</span><span class="spec-tag">修繕建議</span></div>
-      <div class="tc-desc">資歷最深的師傅之一，擅長對老屋進行全面漏水風險評估，提供修繕優先順序建議，幫助屋主以最合理的預算規劃修繕步驟。</div>
-      <div class="tc-meta-row">
-        <span class="tc-meta-item">🗓 25 年資歷</span>
-        <span class="tc-meta-item">📍 台北市・新北市</span>
-      </div>
-    </div>
-    <div class="tc-footer">
-      <a href="https://lin.ee/rjmmYyC" class="tc-contact" target="_blank">
-        📲 透過 LINE 預約 柯師傅
-      </a>
-    </div>
-  </div>
-
-  <!-- 韓師傅 -->
-  <div class="team-card">
-    <div class="tc-top">
-      <img class="tc-avatar"
-        src="master_17.jpg"
-        alt="韓師傅 南部防水・透天厝"
-        style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #e5e7eb;flex-shrink:0">
-      <div class="tc-info">
-        <div class="tc-name">韓師傅</div>
-        <div class="tc-title">南部防水・透天厝</div>
-        <div class="tc-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star-empty">★</span>
-          <span class="tc-rating-text">4.8（11 件評價）</span>
-        </div>
-      </div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-spec-title">專長工法</div>
-      <div class="tc-specs"><span class="spec-tag">透天厝</span><span class="spec-tag">頂樓防水</span><span class="spec-tag">南部氣候</span><span class="spec-tag">外牆</span></div>
-      <div class="tc-desc">深耕南部市場多年，熟悉南部氣候對建築防水層的影響，對透天厝的頂樓鐵皮及 RC 防水均有豐富施工經驗，在地服務反應速度快。</div>
-      <div class="tc-meta-row">
-        <span class="tc-meta-item">🗓 14 年資歷</span>
-        <span class="tc-meta-item">📍 台南市・高雄市・屏東縣</span>
-      </div>
-    </div>
-    <div class="tc-footer">
-      <a href="https://lin.ee/rjmmYyC" class="tc-contact" target="_blank">
-        📲 透過 LINE 預約 韓師傅
-      </a>
-    </div>
-  </div>
-
-  <!-- 唐師傅 -->
-  <div class="team-card">
-    <div class="tc-top">
-      <img class="tc-avatar"
-        src="master_18.jpg"
-        alt="唐師傅 水費異常・暗管定位"
-        style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #e5e7eb;flex-shrink:0">
-      <div class="tc-info">
-        <div class="tc-name">唐師傅</div>
-        <div class="tc-title">水費異常・暗管定位</div>
-        <div class="tc-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star-empty">★</span>
-          <span class="tc-rating-text">4.7（9 件評價）</span>
-        </div>
-      </div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-spec-title">專長工法</div>
-      <div class="tc-specs"><span class="spec-tag">定壓測試</span><span class="spec-tag">聲音探測</span><span class="spec-tag">給水暗管</span><span class="spec-tag">水費暴增</span></div>
-      <div class="tc-desc">水費突然暴增的首選師傅。以定壓測試確認是否有暗管漏水，再用聲音探測儀精準定位，以最小範圍打牆換管，台中地區快速到場。</div>
-      <div class="tc-meta-row">
-        <span class="tc-meta-item">🗓 16 年資歷</span>
-        <span class="tc-meta-item">📍 台中市・彰化縣・南投縣</span>
-      </div>
-    </div>
-    <div class="tc-footer">
-      <a href="https://lin.ee/rjmmYyC" class="tc-contact" target="_blank">
-        📲 透過 LINE 預約 唐師傅
-      </a>
-    </div>
-  </div>
-
-  <!-- 方師傅 -->
-  <div class="team-card">
-    <div class="tc-top">
-      <img class="tc-avatar"
-        src="master_19.jpg"
-        alt="方師傅 東部・花蓮台東"
-        style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #e5e7eb;flex-shrink:0">
-      <div class="tc-info">
-        <div class="tc-name">方師傅</div>
-        <div class="tc-title">東部・花蓮台東</div>
-        <div class="tc-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star-empty">★</span>
-          <span class="tc-rating-text">4.8（7 件評價）</span>
-        </div>
-      </div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-spec-title">專長工法</div>
-      <div class="tc-specs"><span class="spec-tag">東部服務</span><span class="spec-tag">全工法</span><span class="spec-tag">山區建築</span><span class="spec-tag">老屋</span></div>
-      <div class="tc-desc">東部地區少數具備完整科技儀器的防水師傅，熟悉花蓮台東的建築特性（包含地震帶來的結構裂縫），提供在地快速服務。</div>
-      <div class="tc-meta-row">
-        <span class="tc-meta-item">🗓 12 年資歷</span>
-        <span class="tc-meta-item">📍 花蓮縣・台東縣</span>
-      </div>
-    </div>
-    <div class="tc-footer">
-      <a href="https://lin.ee/rjmmYyC" class="tc-contact" target="_blank">
-        📲 透過 LINE 預約 方師傅
-      </a>
-    </div>
-  </div>
-
-  <!-- 潘師傅 -->
-  <div class="team-card">
-    <div class="tc-top">
-      <img class="tc-avatar"
-        src="master_20.jpg"
-        alt="潘師傅 中部老屋・壁癌"
-        style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #e5e7eb;flex-shrink:0">
-      <div class="tc-info">
-        <div class="tc-name">潘師傅</div>
-        <div class="tc-title">中部老屋・壁癌</div>
-        <div class="tc-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star-empty">★</span>
-          <span class="tc-rating-text">4.9（15 件評價）</span>
-        </div>
-      </div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-spec-title">專長工法</div>
-      <div class="tc-specs"><span class="spec-tag">老屋修繕</span><span class="spec-tag">壁癌</span><span class="spec-tag">矽酸質</span><span class="spec-tag">外牆滲水</span></div>
-      <div class="tc-desc">中部地區資深師傅，對台中老舊公寓的外牆磚縫滲水及室內壁癌處理有豐富經驗，溝通耐心，習慣詳細說明每個施工步驟。</div>
-      <div class="tc-meta-row">
-        <span class="tc-meta-item">🗓 19 年資歷</span>
-        <span class="tc-meta-item">📍 台中市・南投縣・雲林縣</span>
-      </div>
-    </div>
-    <div class="tc-footer">
-      <a href="https://lin.ee/rjmmYyC" class="tc-contact" target="_blank">
-        📲 透過 LINE 預約 潘師傅
-      </a>
-    </div>
-  </div>
-
+<!-- 師傅輪播區塊 -->
+<section style="padding:2.5rem 0;background:#f9fafb">
+<div style="max-width:1200px;margin:0 auto;padding:0 1.25rem;margin-bottom:1.25rem">
+  <div style="font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#fff7ed;color:#ea580c;display:inline-block;padding:.26rem .8rem;border-radius:99px;margin-bottom:.65rem">合作工班</div>
+  <h2 style="font-size:1.65rem;font-weight:900;color:#111827;margin-bottom:.3rem">認識我們的師傅</h2>
+  <p style="font-size:.88rem;color:#6b7280;margin-bottom:0">以下為示意資料，實際合作師傅以 LINE 媒合時確認為準</p>
 </div>
+<div class="team-carousel-outer">
+  <div class="team-carousel-wrap" id="tc-wrap">
+    <div class="team-carousel-track" id="tc-track">
+    <div class="team-card">
+      <div style="display:flex;gap:.85rem;padding:1.1rem;align-items:flex-start">
+        <img src="master_01.jpg" alt="王師傅"
+          style="width:80px;height:80px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid #e5e7eb"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div style="width:80px;height:80px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,#1d4ed8,#0d9488);color:#fff;font-size:1.2rem;font-weight:700;display:none;align-items:center;justify-content:center">王</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:1rem;font-weight:700;color:#111827">王師傅</div>
+          <div style="font-size:.78rem;color:#0d9488;font-weight:600;margin-bottom:.3rem">資深結構漏水診斷</div>
+          <div style="font-size:.88rem;color:#f59e0b">★★★★★ <span style="color:#9ca3af;font-size:.75rem">5.0（12件）</span></div>
+        </div>
+      </div>
+      <div style="padding:0 1.1rem 1.1rem">
+        <div style="font-size:.72rem;font-weight:700;color:#6b7280;margin-bottom:.4rem">專長工法</div>
+        <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.65rem"><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">熱像儀診斷</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">複雜老屋</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">色素測試</span></div>
+        <div style="font-size:.82rem;color:#4b5563;line-height:1.72;margin-bottom:.75rem">從事防水抓漏近 30 年，擅長以熱像儀診斷複雜滲水路徑，對 30 年以上老公寓有豐富處理經驗。溝通有耐心，習慣用簡單的話說明問題。</div>
+        <div style="display:flex;gap:1rem;font-size:.76rem;color:#9ca3af;margin-bottom:.85rem">
+          <span>🗓 28年資歷</span><span>📍 大台北地區</span>
+        </div>
+        <a href="https://lin.ee/rjmmYyC" target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:.4rem;background:#06C755;color:#fff;font-weight:700;font-size:.88rem;padding:.7rem;border-radius:10px;text-decoration:none">
+          📲 透過 LINE 預約 王師傅
+        </a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div style="display:flex;gap:.85rem;padding:1.1rem;align-items:flex-start">
+        <img src="master_02.jpg" alt="陳師傅"
+          style="width:80px;height:80px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid #e5e7eb"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div style="width:80px;height:80px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,#1d4ed8,#0d9488);color:#fff;font-size:1.2rem;font-weight:700;display:none;align-items:center;justify-content:center">陳</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:1rem;font-weight:700;color:#111827">陳師傅</div>
+          <div style="font-size:.78rem;color:#0d9488;font-weight:600;margin-bottom:.3rem">科技抓漏・內視鏡定位</div>
+          <div style="font-size:.88rem;color:#f59e0b">★★★★☆ <span style="color:#9ca3af;font-size:.75rem">4.9（18件）</span></div>
+        </div>
+      </div>
+      <div style="padding:0 1.1rem 1.1rem">
+        <div style="font-size:.72rem;font-weight:700;color:#6b7280;margin-bottom:.4rem">專長工法</div>
+        <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.65rem"><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">內視鏡定位</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">管路探測</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">排水管</span></div>
+        <div style="font-size:.82rem;color:#4b5563;line-height:1.72;margin-bottom:.75rem">專精以高解析內視鏡深入排水管探查，精確定位破裂點，避免打牆盲目施工。特別擅長辦公室與商辦空間的管路問題。</div>
+        <div style="display:flex;gap:1rem;font-size:.76rem;color:#9ca3af;margin-bottom:.85rem">
+          <span>🗓 15年資歷</span><span>📍 台北新北基隆</span>
+        </div>
+        <a href="https://lin.ee/rjmmYyC" target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:.4rem;background:#06C755;color:#fff;font-weight:700;font-size:.88rem;padding:.7rem;border-radius:10px;text-decoration:none">
+          📲 透過 LINE 預約 陳師傅
+        </a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div style="display:flex;gap:.85rem;padding:1.1rem;align-items:flex-start">
+        <img src="master_03.jpg" alt="林師傅"
+          style="width:80px;height:80px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid #e5e7eb"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div style="width:80px;height:80px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,#1d4ed8,#0d9488);color:#fff;font-size:1.2rem;font-weight:700;display:none;align-items:center;justify-content:center">林</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:1rem;font-weight:700;color:#111827">林師傅</div>
+          <div style="font-size:.78rem;color:#0d9488;font-weight:600;margin-bottom:.3rem">高壓灌注止漏・防水塗料</div>
+          <div style="font-size:.88rem;color:#f59e0b">★★★★☆ <span style="color:#9ca3af;font-size:.75rem">4.8（24件）</span></div>
+        </div>
+      </div>
+      <div style="padding:0 1.1rem 1.1rem">
+        <div style="font-size:.72rem;font-weight:700;color:#6b7280;margin-bottom:.4rem">專長工法</div>
+        <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.65rem"><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">高壓灌注</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">防水塗料</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">窗框嵌縫</span></div>
+        <div style="font-size:.82rem;color:#4b5563;line-height:1.72;margin-bottom:.75rem">擅長高壓灌注打針止漏，對窗框嵌縫老化、外牆裂縫等輕中度漏水案件有豐富處理經驗，施工速度快，報價清楚。</div>
+        <div style="display:flex;gap:1rem;font-size:.76rem;color:#9ca3af;margin-bottom:.85rem">
+          <span>🗓 12年資歷</span><span>📍 台北新北桃園</span>
+        </div>
+        <a href="https://lin.ee/rjmmYyC" target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:.4rem;background:#06C755;color:#fff;font-weight:700;font-size:.88rem;padding:.7rem;border-radius:10px;text-decoration:none">
+          📲 透過 LINE 預約 林師傅
+        </a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div style="display:flex;gap:.85rem;padding:1.1rem;align-items:flex-start">
+        <img src="master_04.jpg" alt="張師傅"
+          style="width:80px;height:80px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid #e5e7eb"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div style="width:80px;height:80px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,#1d4ed8,#0d9488);color:#fff;font-size:1.2rem;font-weight:700;display:none;align-items:center;justify-content:center">張</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:1rem;font-weight:700;color:#111827">張師傅</div>
+          <div style="font-size:.78rem;color:#0d9488;font-weight:600;margin-bottom:.3rem">頂樓防水・外牆修復</div>
+          <div style="font-size:.88rem;color:#f59e0b">★★★★☆ <span style="color:#9ca3af;font-size:.75rem">4.9（15件）</span></div>
+        </div>
+      </div>
+      <div style="padding:0 1.1rem 1.1rem">
+        <div style="font-size:.72rem;font-weight:700;color:#6b7280;margin-bottom:.4rem">專長工法</div>
+        <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.65rem"><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">頂樓防水</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">PU防水膜</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">透天厝</span></div>
+        <div style="font-size:.82rem;color:#4b5563;line-height:1.72;margin-bottom:.75rem">主攻頂樓防水層重做及外牆防水翻新，對透天厝的頂樓積水、鐵皮接縫等問題特別有心得，施工細心，提供完整前後記錄。</div>
+        <div style="display:flex;gap:1rem;font-size:.76rem;color:#9ca3af;margin-bottom:.85rem">
+          <span>🗓 18年資歷</span><span>📍 桃園新竹台中</span>
+        </div>
+        <a href="https://lin.ee/rjmmYyC" target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:.4rem;background:#06C755;color:#fff;font-weight:700;font-size:.88rem;padding:.7rem;border-radius:10px;text-decoration:none">
+          📲 透過 LINE 預約 張師傅
+        </a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div style="display:flex;gap:.85rem;padding:1.1rem;align-items:flex-start">
+        <img src="master_05.jpg" alt="黃師傅"
+          style="width:80px;height:80px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid #e5e7eb"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div style="width:80px;height:80px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,#1d4ed8,#0d9488);color:#fff;font-size:1.2rem;font-weight:700;display:none;align-items:center;justify-content:center">黃</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:1rem;font-weight:700;color:#111827">黃師傅</div>
+          <div style="font-size:.78rem;color:#0d9488;font-weight:600;margin-bottom:.3rem">浴室重做・壁癌處理</div>
+          <div style="font-size:.88rem;color:#f59e0b">★★★★☆ <span style="color:#9ca3af;font-size:.75rem">4.8（20件）</span></div>
+        </div>
+      </div>
+      <div style="padding:0 1.1rem 1.1rem">
+        <div style="font-size:.72rem;font-weight:700;color:#6b7280;margin-bottom:.4rem">專長工法</div>
+        <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.65rem"><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">浴室重做</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">矽酸質防水</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">磁磚復原</span></div>
+        <div style="font-size:.82rem;color:#4b5563;line-height:1.72;margin-bottom:.75rem">專精浴室地板敲磚重做防水層，同時熟悉矽酸質滲透阻水工法，施工後均提供淋浴驗收確認。</div>
+        <div style="display:flex;gap:1rem;font-size:.76rem;color:#9ca3af;margin-bottom:.85rem">
+          <span>🗓 10年資歷</span><span>📍 台中彰化台南</span>
+        </div>
+        <a href="https://lin.ee/rjmmYyC" target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:.4rem;background:#06C755;color:#fff;font-weight:700;font-size:.88rem;padding:.7rem;border-radius:10px;text-decoration:none">
+          📲 透過 LINE 預約 黃師傅
+        </a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div style="display:flex;gap:.85rem;padding:1.1rem;align-items:flex-start">
+        <img src="master_06.jpg" alt="吳師傅"
+          style="width:80px;height:80px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid #e5e7eb"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div style="width:80px;height:80px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,#1d4ed8,#0d9488);color:#fff;font-size:1.2rem;font-weight:700;display:none;align-items:center;justify-content:center">吳</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:1rem;font-weight:700;color:#111827">吳師傅</div>
+          <div style="font-size:.78rem;color:#0d9488;font-weight:600;margin-bottom:.3rem">全工法・緊急到場</div>
+          <div style="font-size:.88rem;color:#f59e0b">★★★★★ <span style="color:#9ca3af;font-size:.75rem">5.0（8件）</span></div>
+        </div>
+      </div>
+      <div style="padding:0 1.1rem 1.1rem">
+        <div style="font-size:.72rem;font-weight:700;color:#6b7280;margin-bottom:.4rem">專長工法</div>
+        <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.65rem"><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">緊急到場</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">全工法</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">商業空間</span></div>
+        <div style="font-size:.82rem;color:#4b5563;line-height:1.72;margin-bottom:.75rem">具備全方位防水施工能力，擅長緊急出勤，48 小時內到場，溝通直接，效率高。</div>
+        <div style="display:flex;gap:1rem;font-size:.76rem;color:#9ca3af;margin-bottom:.85rem">
+          <span>🗓 20年資歷</span><span>📍 全台48H安排</span>
+        </div>
+        <a href="https://lin.ee/rjmmYyC" target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:.4rem;background:#06C755;color:#fff;font-weight:700;font-size:.88rem;padding:.7rem;border-radius:10px;text-decoration:none">
+          📲 透過 LINE 預約 吳師傅
+        </a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div style="display:flex;gap:.85rem;padding:1.1rem;align-items:flex-start">
+        <img src="master_07.jpg" alt="劉師傅"
+          style="width:80px;height:80px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid #e5e7eb"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div style="width:80px;height:80px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,#1d4ed8,#0d9488);color:#fff;font-size:1.2rem;font-weight:700;display:none;align-items:center;justify-content:center">劉</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:1rem;font-weight:700;color:#111827">劉師傅</div>
+          <div style="font-size:.78rem;color:#0d9488;font-weight:600;margin-bottom:.3rem">地下室・車庫防水</div>
+          <div style="font-size:.88rem;color:#f59e0b">★★★★☆ <span style="color:#9ca3af;font-size:.75rem">4.7（11件）</span></div>
+        </div>
+      </div>
+      <div style="padding:0 1.1rem 1.1rem">
+        <div style="font-size:.72rem;font-weight:700;color:#6b7280;margin-bottom:.4rem">專長工法</div>
+        <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.65rem"><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">地下室防水</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">車庫積水</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">RC補強</span></div>
+        <div style="font-size:.82rem;color:#4b5563;line-height:1.72;margin-bottom:.75rem">專攻地下室及車庫的防水問題，有多個大型停車場施工經驗，熟悉地下滲水特性。</div>
+        <div style="display:flex;gap:1rem;font-size:.76rem;color:#9ca3af;margin-bottom:.85rem">
+          <span>🗓 14年資歷</span><span>📍 桃園台中</span>
+        </div>
+        <a href="https://lin.ee/rjmmYyC" target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:.4rem;background:#06C755;color:#fff;font-weight:700;font-size:.88rem;padding:.7rem;border-radius:10px;text-decoration:none">
+          📲 透過 LINE 預約 劉師傅
+        </a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div style="display:flex;gap:.85rem;padding:1.1rem;align-items:flex-start">
+        <img src="master_08.jpg" alt="蔡師傅"
+          style="width:80px;height:80px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid #e5e7eb"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div style="width:80px;height:80px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,#1d4ed8,#0d9488);color:#fff;font-size:1.2rem;font-weight:700;display:none;align-items:center;justify-content:center">蔡</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:1rem;font-weight:700;color:#111827">蔡師傅</div>
+          <div style="font-size:.78rem;color:#0d9488;font-weight:600;margin-bottom:.3rem">高空作業・外牆防水</div>
+          <div style="font-size:.88rem;color:#f59e0b">★★★★☆ <span style="color:#9ca3af;font-size:.75rem">4.9（9件）</span></div>
+        </div>
+      </div>
+      <div style="padding:0 1.1rem 1.1rem">
+        <div style="font-size:.72rem;font-weight:700;color:#6b7280;margin-bottom:.4rem">專長工法</div>
+        <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.65rem"><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">高空防水</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">外牆拉皮</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">大樓外牆</span></div>
+        <div style="font-size:.82rem;color:#4b5563;line-height:1.72;margin-bottom:.75rem">持有高空作業資格，擅長大樓外牆高空防水施工，使用吊籠作業，安全施工紀錄良好。</div>
+        <div style="display:flex;gap:1rem;font-size:.76rem;color:#9ca3af;margin-bottom:.85rem">
+          <span>🗓 16年資歷</span><span>📍 大台北全區</span>
+        </div>
+        <a href="https://lin.ee/rjmmYyC" target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:.4rem;background:#06C755;color:#fff;font-weight:700;font-size:.88rem;padding:.7rem;border-radius:10px;text-decoration:none">
+          📲 透過 LINE 預約 蔡師傅
+        </a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div style="display:flex;gap:.85rem;padding:1.1rem;align-items:flex-start">
+        <img src="master_09.jpg" alt="許師傅"
+          style="width:80px;height:80px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid #e5e7eb"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div style="width:80px;height:80px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,#1d4ed8,#0d9488);color:#fff;font-size:1.2rem;font-weight:700;display:none;align-items:center;justify-content:center">許</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:1rem;font-weight:700;color:#111827">許師傅</div>
+          <div style="font-size:.78rem;color:#0d9488;font-weight:600;margin-bottom:.3rem">鐵皮屋・頂樓加蓋</div>
+          <div style="font-size:.88rem;color:#f59e0b">★★★★☆ <span style="color:#9ca3af;font-size:.75rem">4.6（7件）</span></div>
+        </div>
+      </div>
+      <div style="padding:0 1.1rem 1.1rem">
+        <div style="font-size:.72rem;font-weight:700;color:#6b7280;margin-bottom:.4rem">專長工法</div>
+        <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.65rem"><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">鐵皮止漏</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">接縫防水</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">頂樓加蓋</span></div>
+        <div style="font-size:.82rem;color:#4b5563;line-height:1.72;margin-bottom:.75rem">專精頂樓鐵皮加蓋的各類漏水問題，熟悉加蓋結構特性，分段測試精準定位。</div>
+        <div style="display:flex;gap:1rem;font-size:.76rem;color:#9ca3af;margin-bottom:.85rem">
+          <span>🗓 11年資歷</span><span>📍 台北新北</span>
+        </div>
+        <a href="https://lin.ee/rjmmYyC" target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:.4rem;background:#06C755;color:#fff;font-weight:700;font-size:.88rem;padding:.7rem;border-radius:10px;text-decoration:none">
+          📲 透過 LINE 預約 許師傅
+        </a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div style="display:flex;gap:.85rem;padding:1.1rem;align-items:flex-start">
+        <img src="master_10.jpg" alt="鄭師傅"
+          style="width:80px;height:80px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid #e5e7eb"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div style="width:80px;height:80px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,#1d4ed8,#0d9488);color:#fff;font-size:1.2rem;font-weight:700;display:none;align-items:center;justify-content:center">鄭</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:1rem;font-weight:700;color:#111827">鄭師傅</div>
+          <div style="font-size:.78rem;color:#0d9488;font-weight:600;margin-bottom:.3rem">管路換新・老屋翻修</div>
+          <div style="font-size:.88rem;color:#f59e0b">★★★★☆ <span style="color:#9ca3af;font-size:.75rem">4.8（14件）</span></div>
+        </div>
+      </div>
+      <div style="padding:0 1.1rem 1.1rem">
+        <div style="font-size:.72rem;font-weight:700;color:#6b7280;margin-bottom:.4rem">專長工法</div>
+        <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.65rem"><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">換管</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">老屋管路</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">鑄鐵管更換</span></div>
+        <div style="font-size:.82rem;color:#4b5563;line-height:1.72;margin-bottom:.75rem">30 年以上老屋的鑄鐵管換新專家，熟悉老屋管路配置，以最小破牆範圍完成換管工程。</div>
+        <div style="display:flex;gap:1rem;font-size:.76rem;color:#9ca3af;margin-bottom:.85rem">
+          <span>🗓 22年資歷</span><span>📍 大台北全區</span>
+        </div>
+        <a href="https://lin.ee/rjmmYyC" target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:.4rem;background:#06C755;color:#fff;font-weight:700;font-size:.88rem;padding:.7rem;border-radius:10px;text-decoration:none">
+          📲 透過 LINE 預約 鄭師傅
+        </a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div style="display:flex;gap:.85rem;padding:1.1rem;align-items:flex-start">
+        <img src="master_11.jpg" alt="洪師傅"
+          style="width:80px;height:80px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid #e5e7eb"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div style="width:80px;height:80px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,#1d4ed8,#0d9488);color:#fff;font-size:1.2rem;font-weight:700;display:none;align-items:center;justify-content:center">洪</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:1rem;font-weight:700;color:#111827">洪師傅</div>
+          <div style="font-size:.78rem;color:#0d9488;font-weight:600;margin-bottom:.3rem">浴室防水・陽台止漏</div>
+          <div style="font-size:.88rem;color:#f59e0b">★★★★☆ <span style="color:#9ca3af;font-size:.75rem">4.7（10件）</span></div>
+        </div>
+      </div>
+      <div style="padding:0 1.1rem 1.1rem">
+        <div style="font-size:.72rem;font-weight:700;color:#6b7280;margin-bottom:.4rem">專長工法</div>
+        <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.65rem"><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">浴室防水</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">陽台防水</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">敲磚重做</span></div>
+        <div style="font-size:.82rem;color:#4b5563;line-height:1.72;margin-bottom:.75rem">以色素測試精準判斷浴室及陽台地板防水層破損位置，擅長局部精準敲磚，作業整潔。</div>
+        <div style="display:flex;gap:1rem;font-size:.76rem;color:#9ca3af;margin-bottom:.85rem">
+          <span>🗓 9年資歷</span><span>📍 台中高雄</span>
+        </div>
+        <a href="https://lin.ee/rjmmYyC" target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:.4rem;background:#06C755;color:#fff;font-weight:700;font-size:.88rem;padding:.7rem;border-radius:10px;text-decoration:none">
+          📲 透過 LINE 預約 洪師傅
+        </a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div style="display:flex;gap:.85rem;padding:1.1rem;align-items:flex-start">
+        <img src="master_12.jpg" alt="游師傅"
+          style="width:80px;height:80px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid #e5e7eb"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div style="width:80px;height:80px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,#1d4ed8,#0d9488);color:#fff;font-size:1.2rem;font-weight:700;display:none;align-items:center;justify-content:center">游</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:1rem;font-weight:700;color:#111827">游師傅</div>
+          <div style="font-size:.78rem;color:#0d9488;font-weight:600;margin-bottom:.3rem">外牆壁癌・結構補強</div>
+          <div style="font-size:.88rem;color:#f59e0b">★★★★☆ <span style="color:#9ca3af;font-size:.75rem">4.9（13件）</span></div>
+        </div>
+      </div>
+      <div style="padding:0 1.1rem 1.1rem">
+        <div style="font-size:.72rem;font-weight:700;color:#6b7280;margin-bottom:.4rem">專長工法</div>
+        <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.65rem"><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">外牆防水</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">壁癌處理</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">矽酸質</span></div>
+        <div style="font-size:.82rem;color:#4b5563;line-height:1.72;margin-bottom:.75rem">擅長追蹤外牆滲水源頭，結合外牆防水塗料與室內矽酸質工法雙管齊下，確保壁癌不復發。</div>
+        <div style="display:flex;gap:1rem;font-size:.76rem;color:#9ca3af;margin-bottom:.85rem">
+          <span>🗓 17年資歷</span><span>📍 台北新北</span>
+        </div>
+        <a href="https://lin.ee/rjmmYyC" target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:.4rem;background:#06C755;color:#fff;font-weight:700;font-size:.88rem;padding:.7rem;border-radius:10px;text-decoration:none">
+          📲 透過 LINE 預約 游師傅
+        </a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div style="display:flex;gap:.85rem;padding:1.1rem;align-items:flex-start">
+        <img src="master_13.jpg" alt="廖師傅"
+          style="width:80px;height:80px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid #e5e7eb"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div style="width:80px;height:80px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,#1d4ed8,#0d9488);color:#fff;font-size:1.2rem;font-weight:700;display:none;align-items:center;justify-content:center">廖</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:1rem;font-weight:700;color:#111827">廖師傅</div>
+          <div style="font-size:.78rem;color:#0d9488;font-weight:600;margin-bottom:.3rem">頂樓九宮格測試</div>
+          <div style="font-size:.88rem;color:#f59e0b">★★★★☆ <span style="color:#9ca3af;font-size:.75rem">4.8（16件）</span></div>
+        </div>
+      </div>
+      <div style="padding:0 1.1rem 1.1rem">
+        <div style="font-size:.72rem;font-weight:700;color:#6b7280;margin-bottom:.4rem">專長工法</div>
+        <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.65rem"><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">九宮格測試</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">頂樓防水</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">色素定位</span></div>
+        <div style="font-size:.82rem;color:#4b5563;line-height:1.72;margin-bottom:.75rem">擅長頂樓防水層老化案件，以九宮格色素分割測試系統性找出所有漏水點。</div>
+        <div style="display:flex;gap:1rem;font-size:.76rem;color:#9ca3af;margin-bottom:.85rem">
+          <span>🗓 13年資歷</span><span>📍 桃園台中</span>
+        </div>
+        <a href="https://lin.ee/rjmmYyC" target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:.4rem;background:#06C755;color:#fff;font-weight:700;font-size:.88rem;padding:.7rem;border-radius:10px;text-decoration:none">
+          📲 透過 LINE 預約 廖師傅
+        </a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div style="display:flex;gap:.85rem;padding:1.1rem;align-items:flex-start">
+        <img src="master_14.jpg" alt="邱師傅"
+          style="width:80px;height:80px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid #e5e7eb"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div style="width:80px;height:80px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,#1d4ed8,#0d9488);color:#fff;font-size:1.2rem;font-weight:700;display:none;align-items:center;justify-content:center">邱</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:1rem;font-weight:700;color:#111827">邱師傅</div>
+          <div style="font-size:.78rem;color:#0d9488;font-weight:600;margin-bottom:.3rem">冷氣排水・管道間</div>
+          <div style="font-size:.88rem;color:#f59e0b">★★★★☆ <span style="color:#9ca3af;font-size:.75rem">4.6（6件）</span></div>
+        </div>
+      </div>
+      <div style="padding:0 1.1rem 1.1rem">
+        <div style="font-size:.72rem;font-weight:700;color:#6b7280;margin-bottom:.4rem">專長工法</div>
+        <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.65rem"><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">冷氣排水管</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">管道間</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">內視鏡</span></div>
+        <div style="font-size:.82rem;color:#4b5563;line-height:1.72;margin-bottom:.75rem">專攻冷氣排水管堵塞逆流及管道間漏水，擅長以內視鏡確認管內狀況，大幅縮短施工時間。</div>
+        <div style="display:flex;gap:1rem;font-size:.76rem;color:#9ca3af;margin-bottom:.85rem">
+          <span>🗓 8年資歷</span><span>📍 台北新北</span>
+        </div>
+        <a href="https://lin.ee/rjmmYyC" target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:.4rem;background:#06C755;color:#fff;font-weight:700;font-size:.88rem;padding:.7rem;border-radius:10px;text-decoration:none">
+          📲 透過 LINE 預約 邱師傅
+        </a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div style="display:flex;gap:.85rem;padding:1.1rem;align-items:flex-start">
+        <img src="master_15.jpg" alt="施師傅"
+          style="width:80px;height:80px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid #e5e7eb"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div style="width:80px;height:80px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,#1d4ed8,#0d9488);color:#fff;font-size:1.2rem;font-weight:700;display:none;align-items:center;justify-content:center">施</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:1rem;font-weight:700;color:#111827">施師傅</div>
+          <div style="font-size:.78rem;color:#0d9488;font-weight:600;margin-bottom:.3rem">窗框嵌縫・高壓打針</div>
+          <div style="font-size:.88rem;color:#f59e0b">★★★★☆ <span style="color:#9ca3af;font-size:.75rem">4.7（8件）</span></div>
+        </div>
+      </div>
+      <div style="padding:0 1.1rem 1.1rem">
+        <div style="font-size:.72rem;font-weight:700;color:#6b7280;margin-bottom:.4rem">專長工法</div>
+        <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.65rem"><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">窗框嵌縫</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">高壓灌注</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">颱風防水</span></div>
+        <div style="font-size:.82rem;color:#4b5563;line-height:1.72;margin-bottom:.75rem">擅長颱風季前的窗框嵌縫全面檢查與施工，對透天厝多扇窗框同時處理有豐富經驗。</div>
+        <div style="display:flex;gap:1rem;font-size:.76rem;color:#9ca3af;margin-bottom:.85rem">
+          <span>🗓 11年資歷</span><span>📍 新竹苗栗</span>
+        </div>
+        <a href="https://lin.ee/rjmmYyC" target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:.4rem;background:#06C755;color:#fff;font-weight:700;font-size:.88rem;padding:.7rem;border-radius:10px;text-decoration:none">
+          📲 透過 LINE 預約 施師傅
+        </a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div style="display:flex;gap:.85rem;padding:1.1rem;align-items:flex-start">
+        <img src="master_16.jpg" alt="柯師傅"
+          style="width:80px;height:80px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid #e5e7eb"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div style="width:80px;height:80px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,#1d4ed8,#0d9488);color:#fff;font-size:1.2rem;font-weight:700;display:none;align-items:center;justify-content:center">柯</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:1rem;font-weight:700;color:#111827">柯師傅</div>
+          <div style="font-size:.78rem;color:#0d9488;font-weight:600;margin-bottom:.3rem">老屋整體評估</div>
+          <div style="font-size:.88rem;color:#f59e0b">★★★★★ <span style="color:#9ca3af;font-size:.75rem">5.0（5件）</span></div>
+        </div>
+      </div>
+      <div style="padding:0 1.1rem 1.1rem">
+        <div style="font-size:.72rem;font-weight:700;color:#6b7280;margin-bottom:.4rem">專長工法</div>
+        <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.65rem"><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">整體評估</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">老屋診斷</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">熱像儀</span></div>
+        <div style="font-size:.82rem;color:#4b5563;line-height:1.72;margin-bottom:.75rem">資歷最深的師傅之一，擅長對老屋進行全面漏水風險評估，提供修繕優先順序建議。</div>
+        <div style="display:flex;gap:1rem;font-size:.76rem;color:#9ca3af;margin-bottom:.85rem">
+          <span>🗓 25年資歷</span><span>📍 大台北全區</span>
+        </div>
+        <a href="https://lin.ee/rjmmYyC" target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:.4rem;background:#06C755;color:#fff;font-weight:700;font-size:.88rem;padding:.7rem;border-radius:10px;text-decoration:none">
+          📲 透過 LINE 預約 柯師傅
+        </a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div style="display:flex;gap:.85rem;padding:1.1rem;align-items:flex-start">
+        <img src="master_17.jpg" alt="韓師傅"
+          style="width:80px;height:80px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid #e5e7eb"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div style="width:80px;height:80px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,#1d4ed8,#0d9488);color:#fff;font-size:1.2rem;font-weight:700;display:none;align-items:center;justify-content:center">韓</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:1rem;font-weight:700;color:#111827">韓師傅</div>
+          <div style="font-size:.78rem;color:#0d9488;font-weight:600;margin-bottom:.3rem">南部防水・透天厝</div>
+          <div style="font-size:.88rem;color:#f59e0b">★★★★☆ <span style="color:#9ca3af;font-size:.75rem">4.8（11件）</span></div>
+        </div>
+      </div>
+      <div style="padding:0 1.1rem 1.1rem">
+        <div style="font-size:.72rem;font-weight:700;color:#6b7280;margin-bottom:.4rem">專長工法</div>
+        <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.65rem"><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">透天厝</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">頂樓防水</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">南部氣候</span></div>
+        <div style="font-size:.82rem;color:#4b5563;line-height:1.72;margin-bottom:.75rem">深耕南部市場多年，熟悉南部氣候對建築防水層的影響，在地服務反應速度快。</div>
+        <div style="display:flex;gap:1rem;font-size:.76rem;color:#9ca3af;margin-bottom:.85rem">
+          <span>🗓 14年資歷</span><span>📍 台南高雄</span>
+        </div>
+        <a href="https://lin.ee/rjmmYyC" target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:.4rem;background:#06C755;color:#fff;font-weight:700;font-size:.88rem;padding:.7rem;border-radius:10px;text-decoration:none">
+          📲 透過 LINE 預約 韓師傅
+        </a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div style="display:flex;gap:.85rem;padding:1.1rem;align-items:flex-start">
+        <img src="master_18.jpg" alt="唐師傅"
+          style="width:80px;height:80px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid #e5e7eb"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div style="width:80px;height:80px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,#1d4ed8,#0d9488);color:#fff;font-size:1.2rem;font-weight:700;display:none;align-items:center;justify-content:center">唐</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:1rem;font-weight:700;color:#111827">唐師傅</div>
+          <div style="font-size:.78rem;color:#0d9488;font-weight:600;margin-bottom:.3rem">水費異常・暗管定位</div>
+          <div style="font-size:.88rem;color:#f59e0b">★★★★☆ <span style="color:#9ca3af;font-size:.75rem">4.7（9件）</span></div>
+        </div>
+      </div>
+      <div style="padding:0 1.1rem 1.1rem">
+        <div style="font-size:.72rem;font-weight:700;color:#6b7280;margin-bottom:.4rem">專長工法</div>
+        <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.65rem"><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">定壓測試</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">聲音探測</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">給水暗管</span></div>
+        <div style="font-size:.82rem;color:#4b5563;line-height:1.72;margin-bottom:.75rem">水費突然暴增的首選師傅。以定壓測試確認是否有暗管漏水，再用聲音探測儀精準定位。</div>
+        <div style="display:flex;gap:1rem;font-size:.76rem;color:#9ca3af;margin-bottom:.85rem">
+          <span>🗓 16年資歷</span><span>📍 台中彰化</span>
+        </div>
+        <a href="https://lin.ee/rjmmYyC" target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:.4rem;background:#06C755;color:#fff;font-weight:700;font-size:.88rem;padding:.7rem;border-radius:10px;text-decoration:none">
+          📲 透過 LINE 預約 唐師傅
+        </a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div style="display:flex;gap:.85rem;padding:1.1rem;align-items:flex-start">
+        <img src="master_19.jpg" alt="方師傅"
+          style="width:80px;height:80px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid #e5e7eb"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div style="width:80px;height:80px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,#1d4ed8,#0d9488);color:#fff;font-size:1.2rem;font-weight:700;display:none;align-items:center;justify-content:center">方</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:1rem;font-weight:700;color:#111827">方師傅</div>
+          <div style="font-size:.78rem;color:#0d9488;font-weight:600;margin-bottom:.3rem">東部・花蓮台東</div>
+          <div style="font-size:.88rem;color:#f59e0b">★★★★☆ <span style="color:#9ca3af;font-size:.75rem">4.8（7件）</span></div>
+        </div>
+      </div>
+      <div style="padding:0 1.1rem 1.1rem">
+        <div style="font-size:.72rem;font-weight:700;color:#6b7280;margin-bottom:.4rem">專長工法</div>
+        <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.65rem"><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">東部服務</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">全工法</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">老屋</span></div>
+        <div style="font-size:.82rem;color:#4b5563;line-height:1.72;margin-bottom:.75rem">東部地區少數具備完整科技儀器的防水師傅，提供花蓮台東在地快速服務。</div>
+        <div style="display:flex;gap:1rem;font-size:.76rem;color:#9ca3af;margin-bottom:.85rem">
+          <span>🗓 12年資歷</span><span>📍 花蓮台東</span>
+        </div>
+        <a href="https://lin.ee/rjmmYyC" target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:.4rem;background:#06C755;color:#fff;font-weight:700;font-size:.88rem;padding:.7rem;border-radius:10px;text-decoration:none">
+          📲 透過 LINE 預約 方師傅
+        </a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div style="display:flex;gap:.85rem;padding:1.1rem;align-items:flex-start">
+        <img src="master_20.jpg" alt="潘師傅"
+          style="width:80px;height:80px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid #e5e7eb"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div style="width:80px;height:80px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,#1d4ed8,#0d9488);color:#fff;font-size:1.2rem;font-weight:700;display:none;align-items:center;justify-content:center">潘</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:1rem;font-weight:700;color:#111827">潘師傅</div>
+          <div style="font-size:.78rem;color:#0d9488;font-weight:600;margin-bottom:.3rem">中部老屋・壁癌</div>
+          <div style="font-size:.88rem;color:#f59e0b">★★★★☆ <span style="color:#9ca3af;font-size:.75rem">4.9（15件）</span></div>
+        </div>
+      </div>
+      <div style="padding:0 1.1rem 1.1rem">
+        <div style="font-size:.72rem;font-weight:700;color:#6b7280;margin-bottom:.4rem">專長工法</div>
+        <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.65rem"><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">老屋修繕</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">壁癌</span><span style="font-size:.72rem;background:#f3f4f6;color:#374151;padding:.18rem .6rem;border-radius:99px">矽酸質</span></div>
+        <div style="font-size:.82rem;color:#4b5563;line-height:1.72;margin-bottom:.75rem">中部地區資深師傅，對台中老舊公寓的外牆磚縫滲水及壁癌處理有豐富經驗，溝通耐心。</div>
+        <div style="display:flex;gap:1rem;font-size:.76rem;color:#9ca3af;margin-bottom:.85rem">
+          <span>🗓 19年資歷</span><span>📍 台中南投</span>
+        </div>
+        <a href="https://lin.ee/rjmmYyC" target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:.4rem;background:#06C755;color:#fff;font-weight:700;font-size:.88rem;padding:.7rem;border-radius:10px;text-decoration:none">
+          📲 透過 LINE 預約 潘師傅
+        </a>
+      </div>
+    </div>
+</div><!-- end carousel track -->
+</div><!-- end wrap -->
+<div class="tc-carousel-controls">
+  <button class="tc-carousel-btn" onclick="tcMove(-1)">‹</button>
+  <div class="tc-dots-wrap" id="tc-dots"></div>
+  <button class="tc-carousel-btn" onclick="tcMove(1)">›</button>
 </div>
+</div><!-- carousel outer -->
+
+<footer style="background:#111827;color:#fff;padding:2rem 1.25rem 1.5rem;margin-top:3rem">
+<div style="max-width:1200px;margin:0 auto">
+  <div style="font-size:1rem;font-weight:900;margin-bottom:.35rem">台灣漏水醫生</div>
+  <div style="font-size:.8rem;color:#9ca3af;margin-bottom:1rem">漏水工班媒合平台・全台服務</div>
+  <div style="font-size:.72rem;color:#6b7280;border-top:1px solid #374151;padding-top:.85rem">
+    © 2025 台灣漏水醫生　|　本平台為媒合服務，師傅資料以 LINE 媒合時確認為準
+  </div>
 </div>
-    <div class="tc-body">
-      <div class="tc-spec-title">專長工法</div>
-      <div class="tc-specs">
-        <span class="spec-tag">熱像儀診斷</span>
-        <span class="spec-tag">複雜老屋</span>
-        <span class="spec-tag">色素測試</span>
-        <span class="spec-tag">科技抓漏</span>
-      </div>
-      <div class="tc-rows">
-        <div class="tc-row"><span class="tc-lbl">年資</span><span class="tc-val">28 年</span></div>
-        <div class="tc-row"><span class="tc-lbl">服務區</span><span class="tc-val">大台北地區</span></div>
-        <div class="tc-row"><span class="tc-lbl">案件數</span><span class="tc-val">250 件以上</span></div>
-        <div class="tc-row"><span class="tc-lbl">回應</span><span class="tc-val">4 小時內</span></div>
-      </div>
-      <a href="https://lin.ee/rjmmYyC" class="tc-cta" target="_blank">📲 Line 指定諮詢</a>
-    </div>
-  </div>
-
-  <!-- 陳師傅 -->
-  <div class="team-card">
-    <div class="tc-top">
-      <img class="tc-avatar"
-        src="https://randomuser.me/api/portraits/men/46.jpg"
-        alt="陳師傅 科技抓漏內視鏡定位"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="tc-avatar-fallback" style="display:none">陳</div>
-      <div class="tc-info">
-        <div class="tc-name">陳師傅</div>
-        <div class="tc-title">科技抓漏・內視鏡定位</div>
-        <div class="tc-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-          <span class="tc-rating-text">4.9（18 件評價）</span>
-        </div>
-      </div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-spec-title">專長工法</div>
-      <div class="tc-specs">
-        <span class="spec-tag">內視鏡定位</span>
-        <span class="spec-tag">管路探測</span>
-        <span class="spec-tag">聲音探測</span>
-        <span class="spec-tag">排水管</span>
-      </div>
-      <div class="tc-rows">
-        <div class="tc-row"><span class="tc-lbl">年資</span><span class="tc-val">15 年</span></div>
-        <div class="tc-row"><span class="tc-lbl">服務區</span><span class="tc-val">台北・新北・基隆</span></div>
-        <div class="tc-row"><span class="tc-lbl">案件數</span><span class="tc-val">180 件以上</span></div>
-        <div class="tc-row"><span class="tc-lbl">回應</span><span class="tc-val">3 小時內</span></div>
-      </div>
-      <a href="https://lin.ee/rjmmYyC" class="tc-cta" target="_blank">📲 Line 指定諮詢</a>
-    </div>
-  </div>
-
-  <!-- 林師傅 -->
-  <div class="team-card">
-    <div class="tc-top">
-      <img class="tc-avatar"
-        src="https://randomuser.me/api/portraits/men/36.jpg"
-        alt="林師傅 打針止漏防水塗料"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="tc-avatar-fallback" style="display:none">林</div>
-      <div class="tc-info">
-        <div class="tc-name">林師傅</div>
-        <div class="tc-title">打針止漏・防水塗料</div>
-        <div class="tc-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-          <span class="tc-rating-text">4.8（24 件評價）</span>
-        </div>
-      </div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-spec-title">專長工法</div>
-      <div class="tc-specs">
-        <span class="spec-tag">高壓灌注</span>
-        <span class="spec-tag">防水塗料</span>
-        <span class="spec-tag">窗框嵌縫</span>
-        <span class="spec-tag">快速施工</span>
-      </div>
-      <div class="tc-rows">
-        <div class="tc-row"><span class="tc-lbl">年資</span><span class="tc-val">12 年</span></div>
-        <div class="tc-row"><span class="tc-lbl">服務區</span><span class="tc-val">台北・新北・桃園</span></div>
-        <div class="tc-row"><span class="tc-lbl">案件數</span><span class="tc-val">320 件以上</span></div>
-        <div class="tc-row"><span class="tc-lbl">回應</span><span class="tc-val">2 小時內</span></div>
-      </div>
-      <a href="https://lin.ee/rjmmYyC" class="tc-cta" target="_blank">📲 Line 指定諮詢</a>
-    </div>
-  </div>
-
-  <!-- 張師傅 -->
-  <div class="team-card">
-    <div class="tc-top">
-      <img class="tc-avatar"
-        src="https://randomuser.me/api/portraits/men/67.jpg"
-        alt="張師傅 頂樓防水外牆修復"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="tc-avatar-fallback" style="display:none">張</div>
-      <div class="tc-info">
-        <div class="tc-name">張師傅</div>
-        <div class="tc-title">頂樓防水・外牆修復</div>
-        <div class="tc-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-          <span class="tc-rating-text">4.9（15 件評價）</span>
-        </div>
-      </div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-spec-title">專長工法</div>
-      <div class="tc-specs">
-        <span class="spec-tag">頂樓防水</span>
-        <span class="spec-tag">外牆修復</span>
-        <span class="spec-tag">PU 防水膜</span>
-        <span class="spec-tag">透天厝</span>
-      </div>
-      <div class="tc-rows">
-        <div class="tc-row"><span class="tc-lbl">年資</span><span class="tc-val">18 年</span></div>
-        <div class="tc-row"><span class="tc-lbl">服務區</span><span class="tc-val">桃園・新竹・台中</span></div>
-        <div class="tc-row"><span class="tc-lbl">案件數</span><span class="tc-val">140 件以上</span></div>
-        <div class="tc-row"><span class="tc-lbl">回應</span><span class="tc-val">4 小時內</span></div>
-      </div>
-      <a href="https://lin.ee/rjmmYyC" class="tc-cta" target="_blank">📲 Line 指定諮詢</a>
-    </div>
-  </div>
-
-  <!-- 黃師傅 -->
-  <div class="team-card">
-    <div class="tc-top">
-      <img class="tc-avatar"
-        src="https://randomuser.me/api/portraits/men/43.jpg"
-        alt="黃師傅 浴室重做壁癌根治"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="tc-avatar-fallback" style="display:none">黃</div>
-      <div class="tc-info">
-        <div class="tc-name">黃師傅</div>
-        <div class="tc-title">浴室重做・壁癌根治</div>
-        <div class="tc-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-          <span class="tc-rating-text">4.8（20 件評價）</span>
-        </div>
-      </div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-spec-title">專長工法</div>
-      <div class="tc-specs">
-        <span class="spec-tag">浴室重做</span>
-        <span class="spec-tag">壁癌根治</span>
-        <span class="spec-tag">矽酸質防水</span>
-        <span class="spec-tag">磁磚修復</span>
-      </div>
-      <div class="tc-rows">
-        <div class="tc-row"><span class="tc-lbl">年資</span><span class="tc-val">10 年</span></div>
-        <div class="tc-row"><span class="tc-lbl">服務區</span><span class="tc-val">台中・彰化・台南</span></div>
-        <div class="tc-row"><span class="tc-lbl">案件數</span><span class="tc-val">95 件以上</span></div>
-        <div class="tc-row"><span class="tc-lbl">回應</span><span class="tc-val">4 小時內</span></div>
-      </div>
-      <a href="https://lin.ee/rjmmYyC" class="tc-cta" target="_blank">📲 Line 指定諮詢</a>
-    </div>
-  </div>
-
-  <!-- 吳師傅 -->
-  <div class="team-card">
-    <div class="tc-top">
-      <img class="tc-avatar"
-        src="https://randomuser.me/api/portraits/men/71.jpg"
-        alt="吳師傅 緊急應修全台服務"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="tc-avatar-fallback" style="display:none">吳</div>
-      <div class="tc-info">
-        <div class="tc-name">吳師傅</div>
-        <div class="tc-title">緊急應修・全台服務</div>
-        <div class="tc-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-          <span class="tc-rating-text">5.0（8 件評價）</span>
-        </div>
-      </div>
-    </div>
-    <div class="tc-body">
-      <div class="tc-spec-title">專長工法</div>
-      <div class="tc-specs">
-        <span class="spec-tag">緊急到場</span>
-        <span class="spec-tag">全工法</span>
-        <span class="spec-tag">大樓管委會</span>
-        <span class="spec-tag">商辦空間</span>
-      </div>
-      <div class="tc-rows">
-        <div class="tc-row"><span class="tc-lbl">年資</span><span class="tc-val">20 年</span></div>
-        <div class="tc-row"><span class="tc-lbl">服務區</span><span class="tc-val">全台灣（48H 安排）</span></div>
-        <div class="tc-row"><span class="tc-lbl">案件數</span><span class="tc-val">200 件以上</span></div>
-        <div class="tc-row"><span class="tc-lbl">回應</span><span class="tc-val">2 小時內</span></div>
-      </div>
-      <a href="https://lin.ee/rjmmYyC" class="tc-cta" target="_blank">📲 Line 指定諮詢</a>
-    </div>
-  </div>
-
-</div><!-- end team-grid -->
-
-<!-- 申請加入 -->
-<div class="join-section">
-  <div class="join-title">👷 您是防水師傅或工班嗎？歡迎加入合作</div>
-  <div class="join-desc">台灣漏水醫生持續招募各地區優質工班。我們提供穩定的案源接洽，您專注在施工品質，我們負責客戶媒合。</div>
-  <div class="join-requirements">
-    <div class="join-req"><span class="req-check">✓</span>具備防水相關施工經驗 3 年以上</div>
-    <div class="join-req"><span class="req-check">✓</span>願意配合平台媒合規範</div>
-    <div class="join-req"><span class="req-check">✓</span>施工全程拍照記錄</div>
-    <div class="join-req"><span class="req-check">✓</span>接受客戶評分監督</div>
-  </div>
-  <a href="https://lin.ee/rjmmYyC" class="join-btn" target="_blank">📲 Line 洽談加入</a>
-</div>
-
-<div class="cta-strip">
-  <div class="cs-title">不確定要找哪位師傅？</div>
-  <div class="cs-sub">告訴我們漏水狀況，我們幫您媒合最合適的工班</div>
-  <a href="https://lin.ee/rjmmYyC" class="cs-btn" target="_blank">📲 Line 免費諮詢媒合</a>
-</div>
-
-</div><!-- end team-section -->
-</div><!-- end container -->
-
-<footer>
-  <div class="footer-inner">
-    <div>
-      <div class="footer-brand">台灣漏水醫生</div>
-      <div class="footer-tagline">漏水工班媒合平台 · 免費諮詢 · 全台服務<br>看懂問題，才能真正修好。</div>
-    </div>
-    <div>
-      <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:.65rem">快速連結</div>
-      <div class="footer-links">
-        <a href="index.html">首頁</a>
-        <a href="knowledge.html">漏水百科</a>
-        <a href="cases.html">施工案例</a>
-      </div>
-    </div>
-    <div>
-      <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:.65rem">聯絡我們</div>
-      <div class="footer-links">
-        <a href="https://lin.ee/rjmmYyC" target="_blank">📲 Line 免費諮詢</a>
-        <span style="font-size:.8rem;color:#9ca3af">服務時間：週一至週六</span>
-        <span style="font-size:.8rem;color:#9ca3af">09:00 – 18:00</span>
-      </div>
-    </div>
-  </div>
-  <div class="footer-copy" style="max-width:1200px;margin:0 auto">© 2025 台灣漏水醫生　|　Line：台灣漏水醫生:防水抓漏免費諮詢　|　全台服務</div>
 </footer>
 
 <script>
 window.addEventListener('scroll',()=>{
-  document.querySelector('header').style.boxShadow=
-    window.scrollY>8?'0 2px 16px rgba(0,0,0,.09)':'none';
+  const h=document.querySelector('header');
+  if(h) h.style.boxShadow=window.scrollY>8?'0 2px 16px rgba(0,0,0,.09)':'none';
 });
+
+/* 師傅輪播 */
+(function(){
+  const track = document.getElementById('tc-track');
+  const wrap  = document.getElementById('tc-wrap');
+  const dotsEl= document.getElementById('tc-dots');
+  if(!track||!wrap)return;
+  const cards = Array.from(track.children);
+  const total = cards.length;
+  let cur=0, pv=1, timer=null;
+
+  function getPV(){const w=wrap.offsetWidth;return w>=900?3:w>=560?2:1}
+
+  function setW(){
+    pv=getPV();
+    const gap=16, cw=(wrap.offsetWidth-gap*(pv-1))/pv;
+    cards.forEach(c=>{c.style.minWidth=cw+'px';c.style.maxWidth=cw+'px'});
+    track.style.gap=gap+'px';
+    goTo(cur,false);
+  }
+
+  function buildDots(){
+    dotsEl.innerHTML='';
+    const pages=Math.ceil(total/pv);
+    for(let i=0;i<pages;i++){
+      const d=document.createElement('button');
+      d.className='tc-dot'+(i===0?' active':'');
+      d.onclick=()=>{goTo(i*pv);reset()};
+      dotsEl.appendChild(d);
+    }
+  }
+
+  function updDots(){
+    const ds=dotsEl.querySelectorAll('.tc-dot'),page=Math.floor(cur/pv);
+    ds.forEach((d,i)=>d.classList.toggle('active',i===page));
+  }
+
+  function goTo(idx,anim=true){
+    const gap=16,cw=cards[0]?.offsetWidth||0,max=Math.max(0,total-pv);
+    cur=Math.max(0,Math.min(idx,max));
+    track.style.transition=anim?'transform .5s cubic-bezier(.4,0,.2,1)':'none';
+    track.style.transform=`translateX(-${cur*(cw+gap)}px)`;
+    updDots();
+  }
+
+  function next(){goTo(cur+pv>=total?0:cur+1)}
+  function reset(){clearInterval(timer);timer=setInterval(next,5000)}
+
+  window.tcMove=function(dir){dir>0?next():goTo(cur===0?Math.max(0,total-pv):cur-1);reset()};
+
+  let tx=0;
+  wrap.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+  wrap.addEventListener('touchend',e=>{
+    const d=tx-e.changedTouches[0].clientX;
+    if(Math.abs(d)>40){d>0?next():goTo(cur-1);reset()}
+  },{passive:true});
+
+  window.addEventListener('resize',()=>{setW();buildDots()});
+  setW();buildDots();reset();
+})();
 </script>
 </body>
 </html>
