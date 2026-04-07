@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>台灣漏水醫生｜漏水快速媒合工班</title>
+<title>台灣漏水醫生｜漏水工班快速媒合・免費諮詢</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -24,60 +24,38 @@ img{display:block;max-width:100%}
 }
 
 /* Float */
-#float-line{position:fixed;right:1rem;top:50%;transform:translateY(-50%);z-index:999;width:62px;height:62px;border-radius:50%;background:var(--green-light);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;line-height:1.4;box-shadow:0 4px 20px rgba(34,197,94,.55);animation:gpulse 2.5s ease-in-out infinite;cursor:pointer}
-@keyframes gpulse{0%,100%{box-shadow:0 4px 20px rgba(34,197,94,.55)}50%{box-shadow:0 4px 32px rgba(34,197,94,.8),0 0 0 10px rgba(34,197,94,.12)}}
+
+50%{box-shadow:0 4px 32px rgba(34,197,94,.8),0 0 0 10px rgba(34,197,94,.12)}}
 
 /* Header */
-header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:2px solid var(--gray-200)}
-.header-top{padding:.55rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem}
-.brand-name{font-size:1.05rem;font-weight:900;color:var(--blue-dark);white-space:nowrap}
-.brand-sub{font-size:.6rem;color:var(--blue-mid);font-weight:500;display:block;margin-top:1px;white-space:nowrap}
+
+
+
+
 
 /* LINE 按鈕：手機版只顯示 icon + 短文字 */
-.line-cta{
-  display:flex;align-items:center;gap:.3rem;
-  background:#06C755;color:#fff;font-weight:700;
-  font-size:.75rem;padding:.38rem .7rem;border-radius:9px;
-  white-space:nowrap;text-decoration:none;flex-shrink:0;
-  box-shadow:0 2px 8px rgba(6,199,85,.35);
-  transition:.15s;
-}
-.line-cta:hover{background:#05b34c;transform:translateY(-1px);box-shadow:0 4px 14px rgba(6,199,85,.45)}
-.line-cta svg{flex-shrink:0;width:18px;height:18px}
+
+
+
 .line-cta-text{display:none}/* 手機隱藏文字 */
 
 /* 卡片式頁籤：手機版壓縮 */
-.page-nav{
-  background:#1e3a8a;
-  padding:.38rem .6rem;
-  display:flex;gap:.32rem;
-  overflow-x:auto;scrollbar-width:none;
-}
-.page-nav::-webkit-scrollbar{display:none}
-.pn-link{
-  display:flex;flex-direction:column;align-items:center;gap:.18rem;
-  padding:.4rem .55rem;border-radius:8px;min-width:52px;
-  background:rgba(255,255,255,.1);
-  border:1.5px solid rgba(255,255,255,.14);
-  cursor:pointer;transition:.2s;flex-shrink:0;
-  text-decoration:none;
-}
-.pn-link:hover{background:rgba(255,255,255,.22);transform:translateY(-2px);border-color:rgba(255,255,255,.3)}
-.pn-link.active-page{background:#fff;border-color:#fff}
-.pn-icon{font-size:1rem;line-height:1}
-.pn-label{font-size:.58rem;font-weight:700;color:rgba(255,255,255,.92);white-space:nowrap;line-height:1.2}
-.pn-sub{display:none}/* 手機隱藏副標，節省高度 */
-.pn-link.active-page .pn-label{color:#1e3a8a}
-.pn-link::after{
-  content:'';display:block;height:2px;border-radius:1px;
-  width:0;transition:width .2s;
-}
-.pn-link.c-teal::after{background:#2dd4bf}
-.pn-link.c-purple::after{background:#a78bfa}
-.pn-link.c-orange::after{background:#fb923c}
-.pn-link.c-blue::after{background:#60a5fa}
-.pn-link.c-green::after{background:#4ade80}
-.pn-link.c-red::after{background:#f87171}
+
+
+
+
+
+
+
+/* 手機隱藏副標，節省高度 */
+
+
+
+
+
+
+
+
 .pn-link:hover::after{width:100%}
 
 /* sec-tag / sec-title / sec-sub */
@@ -128,7 +106,7 @@ header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.97);backdr
 #cases-carousel{padding:2.5rem 0;background:#fff}
 #team-carousel{padding:2.5rem 0;background:var(--gray-50)}
 .carousel-outer{padding:0 1.25rem}
-.carousel-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:1.2rem}
+.carousel-
 .carousel-more{font-size:.84rem;font-weight:700;color:var(--blue);cursor:pointer}
 .carousel-more:hover{text-decoration:underline}
 .carousel-track-wrap{overflow:hidden;border-radius:14px}
@@ -308,20 +286,20 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 /* PC */
 @media(min-width:1024px){
   body{font-size:15px}
-  .header-top{max-width:1200px;margin:0 auto;padding:.85rem 2.5rem}
-  .brand-name{font-size:1.35rem}
-  .brand-sub{font-size:.72rem}
+  
+  
+  
   /* PC：LINE 按鈕顯示文字，圖示放大 */
-  .line-cta{font-size:.88rem;padding:.5rem 1.1rem;gap:.42rem}
-  .line-cta svg{width:22px;height:22px}
+  
+  
   .line-cta-text{display:inline}
   /* PC：頁籤恢復完整 */
-  .page-nav{padding:.85rem 2.5rem;justify-content:center;gap:.65rem}
-  .pn-link{min-width:90px;padding:.75rem 1rem;gap:.32rem;border-radius:12px}
-  .pn-icon{font-size:1.45rem}
-  .pn-label{font-size:.75rem}
-  .pn-sub{display:block;font-size:.62rem;color:rgba(255,255,255,.48)}
-  .pn-link.active-page .pn-sub{color:#64748b}
+  
+  
+  
+  
+  
+  
   #hero{padding:5.5rem 2.5rem 5rem}
   .hero-content-pc{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 340px;gap:3.8rem;align-items:center}
   .hero-h1{font-size:3.1rem}
@@ -359,89 +337,8 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </style>
 </head>
 <body>
+<script src="header.js"></script>
 
-<div id="float-line" onclick="alert('開啟 Line 諮詢')"><span>免費</span><span>諮詢</span></div>
-
-<header>
-  <div class="header-top">
-    <!-- Logo：聽診器×水滴 SVG -->
-    <a href="index.html" style="display:flex;align-items:center;gap:.55rem;text-decoration:none;min-width:0;overflow:hidden">
-      <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
-        <!-- 聽診器管身 -->
-        <path d="M22 18 L22 52 Q22 72 42 72 Q62 72 62 52 L62 44"
-              fill="none" stroke="#0d9488" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-        <!-- 聽診器耳塞 左 -->
-        <circle cx="22" cy="16" r="8" fill="#0d9488"/>
-        <circle cx="22" cy="16" r="4" fill="#f0fdfa"/>
-        <!-- 聽診器耳塞 右 -->
-        <circle cx="62" cy="42" r="8" fill="#0d9488"/>
-        <circle cx="62" cy="42" r="4" fill="#f0fdfa"/>
-        <!-- 水滴形（取代聽診器頭盤） -->
-        <path d="M42 56 C42 56 24 72 24 84 C24 93 32 100 42 100 C52 100 60 93 60 84 C60 72 42 56 42 56Z"
-              fill="#1d4ed8" stroke="#60a5fa" stroke-width="2"/>
-        <!-- 水滴內波紋 -->
-        <path d="M33 84 Q42 76 51 84" fill="none" stroke="#93c5fd" stroke-width="2.5" stroke-linecap="round"/>
-        <path d="M36 91 Q42 86 48 91" fill="none" stroke="#bfdbfe" stroke-width="2" stroke-linecap="round"/>
-        <!-- 水滴內十字（醫療） -->
-        <line x1="42" y1="72" x2="42" y2="96" stroke="rgba(255,255,255,.35)" stroke-width="2" stroke-linecap="round"/>
-        <line x1="30" y1="84" x2="54" y2="84" stroke="rgba(255,255,255,.35)" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-      <div>
-        <div class="brand-name">台灣漏水醫生</div>
-        <span class="brand-sub">漏水工班快速媒合平台</span>
-      </div>
-    </a>
-
-    <!-- LINE 官方按鈕 -->
-    <a href="https://lin.ee/rjmmYyC" target="_blank" rel="noopener" class="line-cta">
-      <svg width="18" height="18" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-        <rect width="48" height="48" rx="10" fill="#fff"/>
-        <path d="M40 22.3C40 15.0 33.3 9 25 9S10 15.0 10 22.3c0 6.5 5.8 12.0 13.6 13.0.5.1 1.2.4 1.4.9.2.5.1 1.2.1 1.2l-.2 1.5c-.1.5-.4 1.9 1.7.9 2.2-1.0 11.5-6.8 15.7-11.6 2.9-3.2 4.7-6.5 4.7-10.0v0z" fill="#06C755"/>
-        <path d="M21.2 19.2h-1.4c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h1.4c.3 0 .5-.2.5-.5v-6.6c0-.3-.2-.5-.5-.5z M28.6 19.2h-1.4c-.3 0-.5.2-.5.5v3.9l-3-4.2c0-.1-.1-.1-.1-.2l-.1-.1h-.1H22c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h1.4c.3 0 .5-.2.5-.5v-3.9l3 4.2.1.1.1.1h.1l.1.1h1.4c.3 0 .5-.2.5-.5v-6.6c.2-.3-.1-.5-.4-.5z M19.2 24.3h-2.4v-4.7c0-.3-.2-.5-.5-.5h-1.4c-.3 0-.5.2-.5.5v6.6c0 .1.1.3.2.4.1.1.2.1.4.1h4.2c.3 0 .5-.2.5-.5v-1.4c-.1-.3-.3-.5-.5-.5z M33.8 20.6c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5h-4.2c-.1 0-.3 0-.4.1-.1.1-.2.2-.2.4v6.6c0 .1.1.3.2.4.1.1.2.1.4.1h4.2c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5h-2.8v-1h2.8c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5h-2.8v-1.1h2.8z" fill="#fff"/>
-      </svg>
-      <span class="line-cta-text">加入 LINE 諮詢</span>
-    </a>
-  </div>
-
-  <!-- 卡片式頁籤 -->
-  <nav class="page-nav">
-    <a href="index.html" class="pn-link active-page">
-      <span class="pn-icon">🏠</span>
-      <span class="pn-label">首頁</span>
-      <span class="pn-sub">回主頁</span>
-    </a>
-    <a href="knowledge.html" class="pn-link c-teal">
-      <span class="pn-icon">📖</span>
-      <span class="pn-label">漏水百科</span>
-      <span class="pn-sub">免費知識</span>
-    </a>
-    <a href="cases.html" class="pn-link c-purple">
-      <span class="pn-icon">📋</span>
-      <span class="pn-label">施工案例</span>
-      <span class="pn-sub">真實記錄</span>
-    </a>
-    <a href="team.html" class="pn-link c-orange">
-      <span class="pn-icon">👷</span>
-      <span class="pn-label">合作廠商</span>
-      <span class="pn-sub">師傅介紹</span>
-    </a>
-    <a href="#pricing" class="pn-link c-blue">
-      <span class="pn-icon">💰</span>
-      <span class="pn-label">費用行情</span>
-      <span class="pn-sub">透明報價</span>
-    </a>
-    <a href="#service-area" class="pn-link c-green">
-      <span class="pn-icon">📍</span>
-      <span class="pn-label">服務地區</span>
-      <span class="pn-sub">全台本島</span>
-    </a>
-    <a href="#consumer-protect" class="pn-link c-red">
-      <span class="pn-icon">🛡️</span>
-      <span class="pn-label">消費者保障</span>
-      <span class="pn-sub">避免踩雷</span>
-    </a>
-  </nav>
-</header>
 
 <!-- Hero -->
 <section id="hero">
