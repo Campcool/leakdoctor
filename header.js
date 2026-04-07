@@ -50,6 +50,8 @@
     }
     /* body 補償 fixed header 佔的高度 */
     body{padding-top:var(--hdr-h,116px)}
+    /* 錨點補償：所有 section/div 有 id 時，跳轉位置補償 header 高度 */
+    section[id], div[id]{scroll-margin-top:var(--hdr-h,116px)}
 
     .hdr-top{
       padding:.52rem 1rem;
@@ -94,6 +96,7 @@
     /* ── PC ≥1024px ── */
     @media(min-width:1024px){
       body{font-size:15px;padding-top:var(--hdr-h,136px)}
+      section[id], div[id]{scroll-margin-top:var(--hdr-h,136px)}
       .hdr-top{padding:.85rem 2.5rem}
       .hdr-logo svg{width:52px;height:52px}
       .hdr-name{font-size:1.35rem}
