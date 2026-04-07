@@ -41,53 +41,59 @@
       0%,100%{box-shadow:0 4px 20px rgba(6,199,85,.55)}
       50%{box-shadow:0 4px 32px rgba(6,199,85,.8),0 0 0 10px rgba(6,199,85,.12)}
     }
-    /* Header */
+    /* ── Header：手機/PC 均固定在頂部 ── */
     #site-header{
-      position:sticky;top:0;z-index:100;
-      background:rgba(255,255,255,.97);backdrop-filter:blur(12px);
-      border-bottom:2px solid var(--gray-200);
+      position:fixed;top:0;left:0;right:0;z-index:1000;
+      background:rgba(255,255,255,.98);
+      border-bottom:2px solid #e5e7eb;
+      box-shadow:0 2px 12px rgba(0,0,0,.08);
     }
+    /* body 補償 fixed header 佔的高度 */
+    body{padding-top:var(--hdr-h,116px)}
+
     .hdr-top{
-      padding:.55rem 1rem;
+      padding:.52rem 1rem;
       display:flex;align-items:center;justify-content:space-between;gap:.5rem;
       max-width:1200px;margin:0 auto;
     }
-    .hdr-brand{display:flex;align-items:center;gap:.55rem;text-decoration:none}
-    .hdr-logo svg{width:40px;height:40px;flex-shrink:0}
-    .hdr-name{font-size:1.05rem;font-weight:900;color:var(--blue-dark);white-space:nowrap}
-    .hdr-sub{font-size:.6rem;color:var(--blue-mid);font-weight:500;display:block;margin-top:1px;white-space:nowrap}
+    .hdr-brand{display:flex;align-items:center;gap:.52rem;text-decoration:none}
+    .hdr-logo svg{width:38px;height:38px;flex-shrink:0}
+    .hdr-name{font-size:1rem;font-weight:900;color:#1e3a8a;white-space:nowrap}
+    .hdr-sub{font-size:.58rem;color:#3b82f6;font-weight:500;display:block;margin-top:1px;white-space:nowrap}
     .hdr-line{
-      display:flex;align-items:center;gap:.3rem;
+      display:flex;align-items:center;gap:.28rem;
       background:#06C755;color:#fff;font-weight:700;
-      font-size:.75rem;padding:.38rem .7rem;border-radius:9px;
+      font-size:.72rem;padding:.36rem .68rem;border-radius:9px;
       white-space:nowrap;text-decoration:none;flex-shrink:0;
     }
     .hdr-line svg{width:18px;height:18px;flex-shrink:0}
     .hdr-line-text{display:none}
-    /* 頁籤 */
+
+    /* ── 頁籤（手機版加大） ── */
     .page-nav{
       background:#1e3a8a;
-      padding:.38rem .6rem;
-      display:flex;gap:.32rem;
+      padding:.42rem .65rem;
+      display:flex;gap:.35rem;
       overflow-x:auto;scrollbar-width:none;
     }
     .page-nav::-webkit-scrollbar{display:none}
     .pn-link{
-      display:flex;flex-direction:column;align-items:center;gap:.18rem;
-      padding:.4rem .55rem;border-radius:8px;min-width:52px;
-      background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.14);
+      display:flex;flex-direction:column;align-items:center;gap:.22rem;
+      padding:.52rem .65rem;border-radius:10px;min-width:60px;
+      background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.16);
       cursor:pointer;transition:.2s;flex-shrink:0;text-decoration:none;
     }
-    .pn-link:hover{background:rgba(255,255,255,.22);transform:translateY(-2px)}
-    .pn-link.active{background:#fff;border-color:#fff}
-    .pn-icon{font-size:1rem;line-height:1}
-    .pn-label{font-size:.58rem;font-weight:700;color:rgba(255,255,255,.92);white-space:nowrap;line-height:1.2}
-    .pn-sub{display:none;font-size:.52rem;color:rgba(255,255,255,.48);white-space:nowrap}
+    .pn-link:hover{background:rgba(255,255,255,.24);transform:translateY(-1px)}
+    .pn-link.active{background:#fff;border-color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+    .pn-icon{font-size:1.15rem;line-height:1}
+    .pn-label{font-size:.65rem;font-weight:700;color:rgba(255,255,255,.94);white-space:nowrap;line-height:1.2}
+    .pn-sub{display:none;font-size:.52rem;color:rgba(255,255,255,.5);white-space:nowrap}
     .pn-link.active .pn-label{color:#1e3a8a}
     .pn-link.active .pn-sub{color:#64748b}
-    /* PC */
+
+    /* ── PC ≥1024px ── */
     @media(min-width:1024px){
-      body{font-size:15px}
+      body{font-size:15px;padding-top:var(--hdr-h,136px)}
       .hdr-top{padding:.85rem 2.5rem}
       .hdr-logo svg{width:52px;height:52px}
       .hdr-name{font-size:1.35rem}
@@ -96,7 +102,7 @@
       .hdr-line svg{width:22px;height:22px}
       .hdr-line-text{display:inline}
       .page-nav{padding:.85rem 2.5rem;justify-content:center;gap:.65rem}
-      .pn-link{min-width:90px;padding:.75rem 1rem;gap:.32rem;border-radius:12px}
+      .pn-link{min-width:90px;padding:.75rem 1rem;gap:.3rem;border-radius:12px}
       .pn-icon{font-size:1.45rem}
       .pn-label{font-size:.75rem}
       .pn-sub{display:block}
@@ -168,9 +174,17 @@
   // 插入到 body 最前面
   document.body.insertAdjacentHTML('afterbegin', headerHTML);
 
-  // Header scroll 陰影
-  window.addEventListener('scroll', () => {
+  // 動態計算 header 高度，確保 body padding-top 正確
+  function setHeaderOffset(){
     const h = document.getElementById('site-header');
-    if(h) h.style.boxShadow = window.scrollY > 8 ? '0 2px 16px rgba(0,0,0,.1)' : 'none';
-  });
+    if(h){
+      const hh = h.offsetHeight;
+      document.documentElement.style.setProperty('--hdr-h', hh + 'px');
+      document.body.style.paddingTop = hh + 'px';
+    }
+  }
+  setHeaderOffset();
+  window.addEventListener('resize', setHeaderOffset);
+  // 字體載入後再算一次
+  setTimeout(setHeaderOffset, 300);
 })();
