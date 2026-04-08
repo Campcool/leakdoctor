@@ -108,6 +108,9 @@
 .ld-tab.ld-active .ld-tab-label{color:#1e3a8a}
 .ld-tab.ld-active .ld-tab-sub{color:#6b7280}
 
+/* ── 錨點補償：fixed header 遮住錨點的修正 ── */
+[id]{scroll-margin-top:var(--ld-hdr-h,130px)}
+
 /* float */
 #ld-float{
   position:fixed;right:14px;top:50%;
@@ -236,7 +239,12 @@
   // 計算 header 高度，補 padding-top
   function setOffset(){
     const h = document.getElementById('ld-header');
-    if(h) document.body.style.paddingTop = h.offsetHeight + 'px';
+    if(h){
+      const hh = h.offsetHeight;
+      document.body.style.paddingTop = hh + 'px';
+      // 同步更新 CSS 變數，讓 scroll-margin-top 跟著 header 高度
+      document.documentElement.style.setProperty('--ld-hdr-h', hh + 'px');
+    }
   }
   setOffset();
   window.addEventListener('resize', setOffset);
