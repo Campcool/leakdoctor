@@ -46,9 +46,13 @@
 }
 .ld-sub{
   display:block;
-  font-size:10px;font-weight:500;
-  color:#3b82f6;white-space:nowrap;
+  font-size:9.5px;font-weight:500;
+  color:#3b82f6;
   line-height:1.3;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:200px;
 }
 .ld-line-btn{
   display:flex;align-items:center;gap:5px;
@@ -221,7 +225,7 @@
           <div class="ld-logo">${LOGO}</div>
           <div class="ld-texts">
             <span class="ld-name">台灣漏水醫生</span>
-            <span class="ld-sub">漏水工班快速媒合平台</span>
+            <span class="ld-sub" id="ld-rotating-sub">漏水狀況回報・免費諮詢・媒合廠商・款項第三方保管</span>
           </div>
         </a>
         <a href="${LINE}" target="_blank" rel="noopener" class="ld-line-btn">
