@@ -146,7 +146,7 @@ a{text-decoration:none;color:inherit}
 </script>
 </head>
 <body>
-<script src="header.js"></script>
+<script></script>
 
 
 <section id="page-hero">
@@ -167,20 +167,20 @@ a{text-decoration:none;color:inherit}
   <div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:.6rem">
     <div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap">
       <span style="font-size:.78rem;font-weight:700;color:#6b7280;flex-shrink:0">住宅類型：</span>
-      <button class="fb-type active" data-type="all" onclick="applyFilter()">全部</button>
-      <button class="fb-type" data-type="rc" onclick="applyFilter()">🏢 RC大樓</button>
-      <button class="fb-type" data-type="apt" onclick="applyFilter()">🏠 老公寓</button>
-      <button class="fb-type" data-type="house" onclick="applyFilter()">🏡 透天厝</button>
-      <button class="fb-type" data-type="roof" onclick="applyFilter()">🏗️ 頂樓加蓋</button>
+      <button class="fb-type active" data-type="all" onclick="applyFilter(this)">全部</button>
+      <button class="fb-type" data-type="rc" onclick="applyFilter(this)">🏢 RC大樓</button>
+      <button class="fb-type" data-type="apt" onclick="applyFilter(this)">🏠 老公寓</button>
+      <button class="fb-type" data-type="house" onclick="applyFilter(this)">🏡 透天厝</button>
+      <button class="fb-type" data-type="roof" onclick="applyFilter(this)">🏗️ 頂樓加蓋</button>
     </div>
     <div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap">
       <span style="font-size:.78rem;font-weight:700;color:#6b7280;flex-shrink:0">漏水位置：</span>
-      <button class="fb-loc active" data-loc="all" onclick="applyFilter()">全部</button>
-      <button class="fb-loc" data-loc="bath" onclick="applyFilter()">🚿 浴室</button>
-      <button class="fb-loc" data-loc="roof" onclick="applyFilter()">🏠 頂樓</button>
-      <button class="fb-loc" data-loc="wall" onclick="applyFilter()">🪟 外牆</button>
-      <button class="fb-loc" data-loc="pipe" onclick="applyFilter()">🔧 管路</button>
-      <button class="fb-loc" data-loc="mold" onclick="applyFilter()">🟤 壁癌</button>
+      <button class="fb-loc active" data-loc="all" onclick="applyFilter(this)">全部</button>
+      <button class="fb-loc" data-loc="bath" onclick="applyFilter(this)">🚿 浴室</button>
+      <button class="fb-loc" data-loc="roof" onclick="applyFilter(this)">🏠 頂樓</button>
+      <button class="fb-loc" data-loc="wall" onclick="applyFilter(this)">🪟 外牆</button>
+      <button class="fb-loc" data-loc="pipe" onclick="applyFilter(this)">🔧 管路</button>
+      <button class="fb-loc" data-loc="mold" onclick="applyFilter(this)">🟤 壁癌</button>
     </div>
   </div>
 </div>
@@ -230,284 +230,129 @@ a{text-decoration:none;color:inherit}
 <script>
 // 從 URL 參數自動篩選
 (function(){
-  const p=new URLSearchParams(location.search);
-  const t=p.get('type'), l=p.get('loc');
+  var p=new URLSearchParams(location.search);
+  var t=p.get('type'), l=p.get('loc');
   if(t){
-    const btn=document.querySelector('.fb-type[data-type="'+t+'"]');
-    if(btn){document.querySelectorAll('.fb-type').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+    var btn=document.querySelector('.fb-type[data-type="'+t+'"]');
+    if(btn){var _fb=document.querySelectorAll('.fb-type');for(var _i=0;_i<_fb.length;_i++)_fb[_i].classList.remove('active');btn.classList.add('active');}
   }
   if(l){
-    const btn=document.querySelector('.fb-loc[data-loc="'+l+'"]');
-    if(btn){document.querySelectorAll('.fb-loc').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+    var btn=document.querySelector('.fb-loc[data-loc="'+l+'"]');
+    if(btn){var _fl=document.querySelectorAll('.fb-loc');for(var _j=0;_j<_fl.length;_j++)_fl[_j].classList.remove('active');btn.classList.add('active');}
   }
   if(t||l) setTimeout(applyFilter, 50);
 })();
 
-function applyFilter(){
-  const activeType=document.querySelector('.fb-type.active')?.dataset.type||'all';
-  const activeLoc=document.querySelector('.fb-loc.active')?.dataset.loc||'all';
-  // 更新點擊的按鈕 active 狀態
-  if(event && event.target){
-    const btn=event.target;
-    if(btn.classList.contains('fb-type')){
-      document.querySelectorAll('.fb-type').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-    } else if(btn.classList.contains('fb-loc')){
-      document.querySelectorAll('.fb-loc').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
+function applyFilter(clickedBtn) {
+  // 更新 active 狀態
+  if (clickedBtn) {
+    if (clickedBtn.classList.contains('fb-type')) {
+      var typeBtns = document.querySelectorAll('.fb-type');
+      for (var i = 0; i < typeBtns.length; i++) typeBtns[i].classList.remove('active');
+      clickedBtn.classList.add('active');
+    } else if (clickedBtn.classList.contains('fb-loc')) {
+      var locBtns = document.querySelectorAll('.fb-loc');
+      for (var i = 0; i < locBtns.length; i++) locBtns[i].classList.remove('active');
+      clickedBtn.classList.add('active');
     }
   }
-  const curType=document.querySelector('.fb-type.active')?.dataset.type||'all';
-  const curLoc=document.querySelector('.fb-loc.active')?.dataset.loc||'all';
-  document.querySelectorAll('.case-card').forEach(card=>{
-    const matchType = curType==='all' || card.dataset.type===curType;
-    const matchLoc  = curLoc==='all'  || card.dataset.loc===curLoc;
+  // 取得目前篩選條件
+  var typeActive = document.querySelector('.fb-type.active');
+  var locActive  = document.querySelector('.fb-loc.active');
+  var curType = typeActive ? typeActive.getAttribute('data-type') : 'all';
+  var curLoc  = locActive  ? locActive.getAttribute('data-loc')  : 'all';
+  // 套用篩選
+  var cards = document.querySelectorAll('.case-card');
+  for (var j = 0; j < cards.length; j++) {
+    var card = cards[j];
+    var matchType = (curType === 'all' || card.getAttribute('data-type') === curType);
+    var matchLoc  = (curLoc  === 'all' || card.getAttribute('data-loc')  === curLoc);
     card.style.display = (matchType && matchLoc) ? '' : 'none';
-  });
+  }
 }
-// 展開案例詳情
-document.querySelectorAll('.case-card').forEach(card=>{
-  card.addEventListener('click',function(){
-    const expand = this.querySelector('.case-expand');
-    expand.classList.toggle('open');
-  });
-});
-window.addEventListener('scroll',()=>{
-  document.querySelector('header').style.boxShadow=
-    window.scrollY>8?'0 2px 16px rgba(0,0,0,.09)':'none';
+// 展開事件由 renderCases 統一處理
+window.addEventListener('scroll', function(){
+  var hdr = document.querySelector('header');
+  if (hdr) hdr.style.boxShadow = window.scrollY > 8 ? '0 2px 16px rgba(0,0,0,.09)' : 'none';
 });
 </script>
 
 <script>
-// ── 案例資料從 cases.json 載入 ──
-// 新增案例：只需在 cases.json 尾部新增一筆物件即可
-// 欄位說明：
-//   type: "rc"(RC大樓) | "apt"(老公寓) | "house"(透天厝) | "roof"(頂樓加蓋)
-//   loc:  "bath"(浴室) | "roof"(頂樓) | "wall"(外牆) | "pipe"(管路) | "mold"(壁癌)
-//   result: "pass"(通過) | "retry"(第二次通過) | "pending"(觀察中)
-
-const TYPE_STYLES = {
+var TYPE_STYLES = {
   rc:    { bg:'#eff6ff', color:'#1d4ed8', label:'🏢 RC大樓' },
   apt:   { bg:'#fef9c3', color:'#92400e', label:'🏠 老公寓' },
   house: { bg:'#f0fdf4', color:'#16a34a', label:'🏡 透天厝' },
   roof:  { bg:'#fef3c7', color:'#b45309', label:'🏗️ 頂樓加蓋' }
 };
-
-const LOC_STYLES = {
+var LOC_STYLES = {
   bath:  { cls:'ct-bath',  label:'🚿 浴室漏水' },
   roof:  { cls:'ct-roof',  label:'🏠 頂樓防水' },
   wall:  { cls:'ct-wall',  label:'🪟 外牆滲水' },
   pipe:  { cls:'ct-pipe',  label:'🔧 管路問題' },
   mold:  { cls:'ct-mold',  label:'🟤 壁癌根治' }
 };
-
-const RESULT_MAP = {
-  pass:    { cls:'r-pass',    icon:'✅', text:'驗收通過' },
-  retry:   { cls:'r-retry',   icon:'🔄', text:'二次施工通過' },
-  pending: { cls:'r-pending', icon:'⏳', text:'觀察期中' }
+var RESULT_MAP = {
+  pass:    { cls:'r-pass',   icon:'✅', text:'驗收通過' },
+  retry:   { cls:'r-retry',  icon:'🔄', text:'二次施工通過' },
+  pending: { cls:'r-pending',icon:'⏳', text:'觀察期中' }
 };
 
 function renderCases(data) {
-  const grid = document.getElementById('cases-grid');
-  const statEl = document.querySelector('.stat-num');
+  var grid = document.getElementById('cases-grid');
+  var statEl = document.querySelector('.stat-num');
   if (statEl) statEl.textContent = data.length;
 
-  grid.innerHTML = data.map((c, idx) => {
-    const ts = TYPE_STYLES[c.type] || TYPE_STYLES.rc;
-    const ls = LOC_STYLES[c.loc] || LOC_STYLES.bath;
-    const rs = RESULT_MAP[c.result] || RESULT_MAP.pass;
-    const detailHtml = (c.detail || '').split('\n\n').join('<br><br>').split('\n').join('<br>');
-    return `
-    <div class="case-card" data-type="${c.type}" data-loc="${c.loc}">
-      <div class="case-top">
-        <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.4rem">
-          <div class="case-type ${ls.cls}">${ls.label}</div>
-          <div class="case-type" style="background:${ts.bg};color:${ts.color}">${ts.label}</div>
-        </div>
-        <div class="case-title">${c.title}</div>
-        <div class="case-loc">📍 ${c.location}</div>
-      </div>
-      <div class="case-body">
-        <div class="case-row"><span class="case-lbl">問題</span><span class="case-val">${c.problem}</span></div>
-        <div class="case-row"><span class="case-lbl">診斷</span><span class="case-val">${c.diagnosis}</span></div>
-        <div class="case-row"><span class="case-lbl">工法</span><span class="case-val">${c.method}</span></div>
-        <div class="case-row"><span class="case-lbl">費用</span><span class="case-val">${c.cost}</span></div>
-        <div class="case-result ${rs.cls}">${rs.icon} ${rs.text}｜${c.resultText}</div>
-      </div>
-      ${c.detail ? `
-      <div class="case-expand" id="exp-${idx}">
-        <div class="expand-title">師傅施工記錄</div>
-        <div class="expand-text">${detailHtml}</div>
-      </div>` : ''}
-    </div>`;
-  }).join('
-');
+  var html = '';
+  for (var idx = 0; idx < data.length; idx++) {
+    var item = data[idx];
+    var ts = TYPE_STYLES[item.type] || TYPE_STYLES.rc;
+    var ls = LOC_STYLES[item.loc] || LOC_STYLES.bath;
+    var rs = RESULT_MAP[item.result] || RESULT_MAP.pass;
+    var detail = item.detail || '';
+    var detailHtml = detail.split('\n\n').join('<br><br>').split('\n').join('<br>');
+    var expandHtml = detail ? (
+      '<div class="case-expand" id="exp-' + idx + '">' +
+      '<div class="expand-title">師傅施工記錄</div>' +
+      '<div class="expand-text">' + detailHtml + '</div>' +
+      '</div>'
+    ) : '';
+    html += '<div class="case-card" data-type="' + item.type + '" data-loc="' + item.loc + '">' +
+      '<div class="case-top">' +
+        '<div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.4rem">' +
+          '<div class="case-type ' + ls.cls + '">' + ls.label + '</div>' +
+          '<div class="case-type" style="background:' + ts.bg + ';color:' + ts.color + '">' + ts.label + '</div>' +
+        '</div>' +
+        '<div class="case-title">' + item.title + '</div>' +
+        '<div class="case-loc">📍 ' + item.location + '</div>' +
+      '</div>' +
+      '<div class="case-body">' +
+        '<div class="case-row"><span class="case-lbl">問題</span><span class="case-val">' + item.problem + '</span></div>' +
+        '<div class="case-row"><span class="case-lbl">診斷</span><span class="case-val">' + item.diagnosis + '</span></div>' +
+        '<div class="case-row"><span class="case-lbl">工法</span><span class="case-val">' + item.method + '</span></div>' +
+        '<div class="case-row"><span class="case-lbl">費用</span><span class="case-val">' + item.cost + '</span></div>' +
+        '<div class="case-result ' + rs.cls + '">' + rs.icon + ' ' + rs.text + '｜' + item.resultText + '</div>' +
+      '</div>' +
+      expandHtml +
+    '</div>';
+  }
+  grid.innerHTML = html;
 
-  // 重新綁定展開事件
-  document.querySelectorAll('.case-card').forEach((card, idx) => {
-    card.addEventListener('click', () => {
-      const exp = document.getElementById('exp-' + idx);
-      if (exp) exp.classList.toggle('open');
-    });
-  });
-
+  // 展開/收合
+  var cards = document.querySelectorAll('.case-card');
+  for (var i = 0; i < cards.length; i++) {
+    (function(index) {
+      cards[index].addEventListener('click', function() {
+        var exp = document.getElementById('exp-' + index);
+        if (exp) exp.classList.toggle('open');
+      });
+    })(i);
+  }
   applyFilter();
 }
 
-// ════════════════════════════════════════════════════════
-// 施工案例資料（直接內嵌，不依賴外部 JSON 檔案）
-//
-// ✅ 新增案例方法：
-//   在 CASES_DATA 陣列最後加一筆物件，格式如下：
-//   {
-//     "id": 7,                      ← 流水號遞增
-//     "type": "rc",                 ← rc/apt/house/roof
-//     "loc": "bath",                ← bath/roof/wall/pipe/mold
-//     "title": "案例標題",
-//     "location": "地區｜建物類型",
-//     "problem": "問題描述",
-//     "diagnosis": "診斷方式",
-//     "method": "施工工法",
-//     "cost": "費用",
-//     "result": "pass",             ← pass/retry/pending
-//     "resultText": "驗收結果說明",
-//     "detail": "師傅施工記錄（詳細）"
-//   }
-// ════════════════════════════════════════════════════════
-const CASES_DATA = [
-  {
-    "id": 1,
-    "type": "rc",
-    "loc": "bath",
-    "tags": [
-      "🚿 浴室漏水",
-      "🏠 老公寓"
-    ],
-    "tagStyles": [
-      "ct-bath",
-      "style='background:#fef9c3;color:#92400e'"
-    ],
-    "title": "30 年老公寓浴室天花板持續滴水",
-    "location": "台北市大安區｜RC 公寓 4F",
-    "problem": "樓下住戶天花板積水，3 年換了 2 次師傅仍未解決",
-    "diagnosis": "熱像儀掃描 + 內視鏡確認排水管接頭鬆脫",
-    "method": "更換老化排水管，重做管路接頭",
-    "cost": "診斷 $6,000 + 施工 $8,500",
-    "result": "pass",
-    "resultText": "驗收通過｜後續梅雨季無再滲漏",
-    "detail": "前兩次師傅均採打針工法，但漏水原因是排水管接頭鬆脫，打針無法解決。本次先以熱像儀確認含水範圍，再用內視鏡找到接頭位置，開孔 2 處換管後復原，施工半天完成。\n\n驗收：施工後梅雨季連續降雨 48 小時觀察，樓下天花板完全無滲漏，業主確認通過。"
-  },
-  {
-    "id": 2,
-    "type": "apt",
-    "loc": "wall",
-    "tags": [
-      "🪟 外牆滲水",
-      "🏢 RC大樓"
-    ],
-    "tagStyles": [
-      "ct-wall",
-      "style='background:#eff6ff;color:#1d4ed8'"
-    ],
-    "title": "新大樓窗框雨天持續滲水壁癌",
-    "location": "新北市板橋區｜15 年華廈 8F",
-    "problem": "窗框左下角每次下雨就出現水痕，牆面白色結晶持續惡化",
-    "diagnosis": "目視 + 水分計確認窗框嵌縫老化開裂，無需儀器測試",
-    "method": "高壓灌注 3 針 + 外側重新嵌縫",
-    "cost": "$3,500（含材料）",
-    "result": "pass",
-    "resultText": "驗收通過｜颱風期間測試無滲漏",
-    "detail": "窗框案件屬於高成功率標準案例。師傅先目視確認裂縫位置，水分計量測含水量仍高，確認為活性漏水。外側搭鷹架重新嵌縫，室內高壓灌注 3 針填補縫隙，施工約 4 小時。\n\n驗收：施工後遇颱風外圍環流，持續降雨，窗框周圍 48 小時無滲水，業主確認通過。"
-  },
-  {
-    "id": 3,
-    "type": "house",
-    "loc": "roof",
-    "tags": [
-      "🏠 頂樓防水",
-      "🏡 透天厝"
-    ],
-    "tagStyles": [
-      "ct-roof",
-      "style='background:#f0fdf4;color:#16a34a'"
-    ],
-    "title": "20 年透天厝頂樓積水滲入 4 樓",
-    "location": "桃園市中壢區｜4 層透天厝",
-    "problem": "4 樓天花板雨後大面積滲水，防水層施工超過 20 年",
-    "diagnosis": "九宮格積水測試確認排水坡度失效，防水層全面老化",
-    "method": "移除隔熱磚，重做 PU 防水層，重鋪隔熱磚",
-    "cost": "$45,000（約 15 坪頂樓）",
-    "result": "pass",
-    "resultText": "驗收通過｜隔年梅雨季回訪確認",
-    "detail": "頂樓防水層全面失效，九宮格測試顯示積水路徑混亂，原有排水坡度不足。施工分 3 天：Day1 移除所有隔熱磚並清潔底面；Day2 重做 PU 防水層兩道，養護 24 小時；Day3 重鋪隔熱磚，確認排水坡度正確。\n\n驗收：施工後隔年梅雨季主動回訪，4 樓天花板確認無任何滲漏，業主給予五星評價。"
-  },
-  {
-    "id": 4,
-    "type": "rc",
-    "loc": "bath",
-    "tags": [
-      "🚿 浴室漏水",
-      "🏢 RC大樓"
-    ],
-    "tagStyles": [
-      "ct-bath",
-      "style='background:#eff6ff;color:#1d4ed8'"
-    ],
-    "title": "10 年新大樓浴室地板使用後滲漏",
-    "location": "台中市西屯區｜RC 大樓 12F",
-    "problem": "樓下 11F 住戶天花板溼斑，僅淋浴後才出現",
-    "diagnosis": "藍色色素測試確認 12F 浴室地磚下防水層破損",
-    "method": "局部敲磚（約 4 坪），重做防水層，復原磁磚",
-    "cost": "$22,000（局部施工）",
-    "result": "pass",
-    "resultText": "驗收通過｜淋浴後 48H 確認無滲漏",
-    "detail": "色素測試注入藍色色素，浸泡 2 小時後確認滲漏位置在淋浴區角落約 2 坪範圍。實際敲磚後發現防水層有明顯裂縫，牆角施工不確實，可能是建商施工疏失。重做防水層並延伸到牆面 30cm，復原磁磚。\n\n驗收：淋浴 3 次，每次 48 小時觀察，11F 天花板完全無溼斑，業主確認通過。"
-  },
-  {
-    "id": 5,
-    "type": "apt",
-    "loc": "mold",
-    "tags": [
-      "🟤 壁癌根治",
-      "🏠 老公寓"
-    ],
-    "tagStyles": [
-      "ct-mold",
-      "style='background:#fef9c3;color:#92400e'"
-    ],
-    "title": "40 年老屋外牆壁癌反覆無法根治",
-    "location": "台北市信義區｜磚牆老公寓 2F",
-    "problem": "牆面壁癌每年處理都復發，前後花超過 $30,000",
-    "diagnosis": "熱像儀確認外牆磚縫大量滲水，從室外側進入",
-    "method": "第一次室內矽酸質處理 → 第二次加做外牆防水塗料",
-    "cost": "兩次合計 $18,000",
-    "result": "retry",
-    "resultText": "第二次施工後驗收通過（首次部分有效）",
-    "detail": "第一次：室內矽酸質防水材處理，預計從內部阻水。驗收後下雨仍有少量滲水，判斷外部水源進入量超過內部阻水能力。\n\n第二次：搭鷹架，外牆磚縫全面重新填縫並塗佈防水塗料，再次施工後驗收通過。\n\n⚠️ 誠實記錄：這個案例首次施工效果不完整，需要第二次才根治。費用分兩次收，第一次驗收未通過退還差額，第二次才完整收費。"
-  },
-  {
-    "id": 6,
-    "type": "rc",
-    "loc": "pipe",
-    "tags": [
-      "🔧 管路問題",
-      "🏢 RC大樓"
-    ],
-    "tagStyles": [
-      "ct-pipe",
-      "style='background:#eff6ff;color:#1d4ed8'"
-    ],
-    "title": "辦公室冷氣排水管漏水天花板損壞",
-    "location": "新北市新店區｜商辦大樓 5F",
-    "problem": "輕鋼架天花板長期受潮，矽酸鈣板變色脫落",
-    "diagnosis": "內視鏡探測確認冷氣排水管管內堵塞導致逆流",
-    "method": "疏通 + 更換部分排水管路，更換受損天花板",
-    "cost": "$9,500（含天花板修復）",
-    "result": "pass",
-    "resultText": "驗收通過｜使用冷氣 2 週觀察正常",
-    "detail": "冷氣排水管使用超過 8 年，管內積累水垢和污垢造成嚴重堵塞。疏通後測試排水仍不順，判斷管路部分老化變形，更換 2 公尺管路後排水正常。天花板矽酸鈣板更換 3 片。\n\n驗收：連續使用冷氣 2 週，每日觀察天花板，無任何潮濕或滴水，業主確認通過。"
-  }
-];
+// 案例資料（直接內嵌）
+// 新增案例：在陣列最後加一筆物件即可
+var CASES_DATA = [{"id": 1, "type": "rc", "loc": "bath", "tags": ["🚿 浴室漏水", "🏠 老公寓"], "tagStyles": ["ct-bath", "style='background:#fef9c3;color:#92400e'"], "title": "30 年老公寓浴室天花板持續滴水", "location": "台北市大安區｜RC 公寓 4F", "problem": "樓下住戶天花板積水，3 年換了 2 次師傅仍未解決", "diagnosis": "熱像儀掃描 + 內視鏡確認排水管接頭鬆脫", "method": "更換老化排水管，重做管路接頭", "cost": "診斷 $6,000 + 施工 $8,500", "result": "pass", "resultText": "驗收通過｜後續梅雨季無再滲漏", "detail": "前兩次師傅均採打針工法，但漏水原因是排水管接頭鬆脫，打針無法解決。本次先以熱像儀確認含水範圍，再用內視鏡找到接頭位置，開孔 2 處換管後復原，施工半天完成。\n\n驗收：施工後梅雨季連續降雨 48 小時觀察，樓下天花板完全無滲漏，業主確認通過。"}, {"id": 2, "type": "apt", "loc": "wall", "tags": ["🪟 外牆滲水", "🏢 RC大樓"], "tagStyles": ["ct-wall", "style='background:#eff6ff;color:#1d4ed8'"], "title": "新大樓窗框雨天持續滲水壁癌", "location": "新北市板橋區｜15 年華廈 8F", "problem": "窗框左下角每次下雨就出現水痕，牆面白色結晶持續惡化", "diagnosis": "目視 + 水分計確認窗框嵌縫老化開裂，無需儀器測試", "method": "高壓灌注 3 針 + 外側重新嵌縫", "cost": "$3,500（含材料）", "result": "pass", "resultText": "驗收通過｜颱風期間測試無滲漏", "detail": "窗框案件屬於高成功率標準案例。師傅先目視確認裂縫位置，水分計量測含水量仍高，確認為活性漏水。外側搭鷹架重新嵌縫，室內高壓灌注 3 針填補縫隙，施工約 4 小時。\n\n驗收：施工後遇颱風外圍環流，持續降雨，窗框周圍 48 小時無滲水，業主確認通過。"}, {"id": 3, "type": "house", "loc": "roof", "tags": ["🏠 頂樓防水", "🏡 透天厝"], "tagStyles": ["ct-roof", "style='background:#f0fdf4;color:#16a34a'"], "title": "20 年透天厝頂樓積水滲入 4 樓", "location": "桃園市中壢區｜4 層透天厝", "problem": "4 樓天花板雨後大面積滲水，防水層施工超過 20 年", "diagnosis": "九宮格積水測試確認排水坡度失效，防水層全面老化", "method": "移除隔熱磚，重做 PU 防水層，重鋪隔熱磚", "cost": "$45,000（約 15 坪頂樓）", "result": "pass", "resultText": "驗收通過｜隔年梅雨季回訪確認", "detail": "頂樓防水層全面失效，九宮格測試顯示積水路徑混亂，原有排水坡度不足。施工分 3 天：Day1 移除所有隔熱磚並清潔底面；Day2 重做 PU 防水層兩道，養護 24 小時；Day3 重鋪隔熱磚，確認排水坡度正確。\n\n驗收：施工後隔年梅雨季主動回訪，4 樓天花板確認無任何滲漏，業主給予五星評價。"}, {"id": 4, "type": "rc", "loc": "bath", "tags": ["🚿 浴室漏水", "🏢 RC大樓"], "tagStyles": ["ct-bath", "style='background:#eff6ff;color:#1d4ed8'"], "title": "10 年新大樓浴室地板使用後滲漏", "location": "台中市西屯區｜RC 大樓 12F", "problem": "樓下 11F 住戶天花板溼斑，僅淋浴後才出現", "diagnosis": "藍色色素測試確認 12F 浴室地磚下防水層破損", "method": "局部敲磚（約 4 坪），重做防水層，復原磁磚", "cost": "$22,000（局部施工）", "result": "pass", "resultText": "驗收通過｜淋浴後 48H 確認無滲漏", "detail": "色素測試注入藍色色素，浸泡 2 小時後確認滲漏位置在淋浴區角落約 2 坪範圍。實際敲磚後發現防水層有明顯裂縫，牆角施工不確實，可能是建商施工疏失。重做防水層並延伸到牆面 30cm，復原磁磚。\n\n驗收：淋浴 3 次，每次 48 小時觀察，11F 天花板完全無溼斑，業主確認通過。"}, {"id": 5, "type": "apt", "loc": "mold", "tags": ["🟤 壁癌根治", "🏠 老公寓"], "tagStyles": ["ct-mold", "style='background:#fef9c3;color:#92400e'"], "title": "40 年老屋外牆壁癌反覆無法根治", "location": "台北市信義區｜磚牆老公寓 2F", "problem": "牆面壁癌每年處理都復發，前後花超過 $30,000", "diagnosis": "熱像儀確認外牆磚縫大量滲水，從室外側進入", "method": "第一次室內矽酸質處理 → 第二次加做外牆防水塗料", "cost": "兩次合計 $18,000", "result": "retry", "resultText": "第二次施工後驗收通過（首次部分有效）", "detail": "第一次：室內矽酸質防水材處理，預計從內部阻水。驗收後下雨仍有少量滲水，判斷外部水源進入量超過內部阻水能力。\n\n第二次：搭鷹架，外牆磚縫全面重新填縫並塗佈防水塗料，再次施工後驗收通過。\n\n⚠️ 誠實記錄：這個案例首次施工效果不完整，需要第二次才根治。費用分兩次收，第一次驗收未通過退還差額，第二次才完整收費。"}, {"id": 6, "type": "rc", "loc": "pipe", "tags": ["🔧 管路問題", "🏢 RC大樓"], "tagStyles": ["ct-pipe", "style='background:#eff6ff;color:#1d4ed8'"], "title": "辦公室冷氣排水管漏水天花板損壞", "location": "新北市新店區｜商辦大樓 5F", "problem": "輕鋼架天花板長期受潮，矽酸鈣板變色脫落", "diagnosis": "內視鏡探測確認冷氣排水管管內堵塞導致逆流", "method": "疏通 + 更換部分排水管路，更換受損天花板", "cost": "$9,500（含天花板修復）", "result": "pass", "resultText": "驗收通過｜使用冷氣 2 週觀察正常", "detail": "冷氣排水管使用超過 8 年，管內積累水垢和污垢造成嚴重堵塞。疏通後測試排水仍不順，判斷管路部分老化變形，更換 2 公尺管路後排水正常。天花板矽酸鈣板更換 3 片。\n\n驗收：連續使用冷氣 2 週，每日觀察天花板，無任何潮濕或滴水，業主確認通過。"}];
 renderCases(CASES_DATA);
 </script>
 
