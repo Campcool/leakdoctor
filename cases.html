@@ -316,10 +316,7 @@ function renderCases(data) {
     const ts = TYPE_STYLES[c.type] || TYPE_STYLES.rc;
     const ls = LOC_STYLES[c.loc] || LOC_STYLES.bath;
     const rs = RESULT_MAP[c.result] || RESULT_MAP.pass;
-    const detailHtml = (c.detail || '').replace(/
-
-/g,'<br><br>').replace(/
-/g,'<br>');
+    const detailHtml = (c.detail || '').split('\n\n').join('<br><br>').split('\n').join('<br>');
     return `
     <div class="case-card" data-type="${c.type}" data-loc="${c.loc}">
       <div class="case-top">
