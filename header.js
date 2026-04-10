@@ -2,6 +2,7 @@
   const path = location.pathname.split('/').pop() || 'index.html';
   const page = path.replace('.html','') || 'index';
   const LINE = 'https://lin.ee/rjmmYyC';
+  const JOIN_FORM = 'https://forms.gle/T4UTULXMaXaoGZQG8';
 
   // 字體
   if(!document.querySelector('link[href*="Noto+Sans"]')){
@@ -146,6 +147,29 @@
   line-height:1;
 }
 
+/* 加入我們按鈕 */
+#ld-join{
+  position:fixed;right:14px;
+  z-index:9991;
+  width:54px;height:54px;
+  border-radius:50%;
+  background:#1e3a8a;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:2px;
+  text-decoration:none;
+  box-shadow:0 4px 14px rgba(30,58,138,.45);
+  transition:background .2s,box-shadow .2s;
+}
+#ld-join:hover{background:#1d4ed8;box-shadow:0 4px 20px rgba(30,58,138,.6)}
+#ld-join-icon{font-size:20px;line-height:1}
+#ld-join-text{
+  display:block;
+  font-size:9.5px;font-weight:700;
+  color:#ffffff;
+  font-family:'Noto Sans TC',sans-serif;
+  line-height:1;letter-spacing:.02em;
+}
 /* PC */
 @media(min-width:1024px){
   .ld-top{padding:12px 40px}
@@ -219,6 +243,10 @@
       ${LINE_FLOAT_ICON}
       <span id="ld-float-text">LINE</span>
     </a>
+    <a id="ld-join" href="${JOIN_FORM}" target="_blank" rel="noopener" title="廠商合作申請">
+      <span id="ld-join-icon">🤝</span>
+      <span id="ld-join-text">加入我們</span>
+    </a>
     <header id="ld-header">
       <div class="ld-top">
         <a class="ld-brand" href="index.html">
@@ -260,6 +288,20 @@
   setTimeout(setOffset, 300);
   window.addEventListener('load', setOffset);
 
+
+  // 加入我們按鈕：固定在 LINE 按鈕下方
+  (function(){
+    function posJoin(){
+      const lineBtn = document.getElementById('ld-float');
+      const joinBtn = document.getElementById('ld-join');
+      if(!lineBtn || !joinBtn) return;
+      const lineRect = lineBtn.getBoundingClientRect();
+      // LINE 按鈕是 fixed top:50%，加入我們在它下方 66px
+      joinBtn.style.top = (window.innerHeight/2 + 33 + 8) + 'px';
+    }
+    posJoin();
+    window.addEventListener('resize', posJoin);
+  })();
   // 回到頂部按鈕顯示控制
   window.addEventListener('scroll', function(){
     const btn = document.getElementById('ld-back-top');
