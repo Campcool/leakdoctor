@@ -16,6 +16,11 @@
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="台灣漏水醫生">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="施工案例｜台灣漏水醫生・真實記錄含費用">
+<meta name="twitter:description" content="真實漏水修繕案例記錄，含地區、費用、工法、驗收結果。可依住宅類型與漏水位置篩選，找到與你家相似的案例。">
+<meta name="twitter:image" content="https://leakdoctor.tw/og-image.jpg">
+<meta name="keywords" content="漏水案例,施工案例,浴室漏水費用,頂樓防水費用,外牆漏水修繕,壁癌案例,抓漏費用,防水工程案例,漏水修繕記錄">
 <meta name="description" content="真實漏水修繕案例記錄，含地區、費用、工法、驗收結果。可依住宅類型與漏水位置篩選。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -136,6 +141,9 @@ a{text-decoration:none;color:inherit}
 .fb-type.active{background:#1d4ed8;color:#fff;border-color:#1d4ed8}
 .fb-loc.active{background:#0d9488;color:#fff;border-color:#0d9488}
 </style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"CollectionPage","name":"施工案例｜台灣漏水醫生","url":"https://leakdoctor.tw/cases.html","description":"真實漏水修繕案例記錄，含地區、費用、工法、驗收結果。","isPartOf":{"@type":"WebSite","name":"台灣漏水醫生","url":"https://leakdoctor.tw"}}
+</script>
 </head>
 <body>
 <script src="header.js"></script>
@@ -215,7 +223,7 @@ a{text-decoration:none;color:inherit}
       <a href="team.html" style="font-size:.78rem;color:#9ca3af">合作廠商</a>
       <a href="https://lin.ee/rjmmYyC" style="font-size:.78rem;color:#9ca3af" target="_blank">Line 諮詢</a>
     </div>
-    <div style="font-size:.72rem;color:#6b7280;border-top:1px solid #374151;padding-top:1rem">© 2026 台灣漏水醫生　|　Line 官方帳號：@guleak（待填寫）</div>
+    <div style="font-size:.72rem;color:#6b7280;border-top:1px solid #374151;padding-top:1rem">© <span id="copy-year">2026</span> 台灣漏水醫生　|　Line 官方帳號：@guleak（待填寫）</div>
   </div>
 </footer>
 
@@ -360,5 +368,7 @@ fetch('cases.json')
   });
 </script>
 
+
+<script>var y=document.getElementById("copy-year");if(y)y.textContent=new Date().getFullYear();</script>
 </body>
 </html>

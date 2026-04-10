@@ -16,6 +16,11 @@
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="台灣漏水醫生">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="合作廠商｜台灣漏水醫生・全台工班師傅介紹">
+<meta name="twitter:description" content="台灣漏水醫生合作工班師傅介紹，涵蓋北中南東各區域，各有不同防水工法專長，車馬費透明公開。">
+<meta name="twitter:image" content="https://leakdoctor.tw/og-image.jpg">
+<meta name="keywords" content="漏水師傅,防水工班,抓漏師傅,台灣漏水工班,防水師傅推薦,漏水工班媒合,台北漏水師傅,台中防水師傅,全台漏水工班">
 <meta name="description" content="台灣漏水醫生合作工班師傅介紹，涵蓋北中南東各區域，各有不同防水工法專長。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -221,6 +226,9 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   .footer-links{flex-direction:column;gap:.4rem;margin-bottom:0}
 }
 </style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ItemList","name":"台灣漏水醫生合作工班師傅","url":"https://leakdoctor.tw/team.html","description":"台灣漏水醫生合作工班師傅介紹，涵蓋北中南東各區域。","numberOfItems":20}
+</script>
 </head>
 <body>
 <script src="header.js"></script>
@@ -783,7 +791,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   <div style="font-size:1rem;font-weight:900;margin-bottom:.35rem">台灣漏水醫生</div>
   <div style="font-size:.8rem;color:#9ca3af;margin-bottom:1rem">漏水工班媒合平台・全台服務</div>
   <div style="font-size:.72rem;color:#6b7280;border-top:1px solid #374151;padding-top:.85rem">
-    © 2026 台灣漏水醫生　|　本平台為媒合服務，師傅資料以 LINE 媒合時確認為準
+    © <span id="copy-year">2026</span> 台灣漏水醫生　|　本平台為媒合服務，師傅資料以 LINE 媒合時確認為準
   </div>
 </div>
 </footer>
@@ -854,5 +862,7 @@ window.addEventListener('scroll',()=>{
   setW();buildDots();reset();
 })();
 </script>
+
+<script>var y=document.getElementById("copy-year");if(y)y.textContent=new Date().getFullYear();</script>
 </body>
 </html>

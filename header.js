@@ -156,6 +156,10 @@
   .ld-tab-label{font-size:12px}
   .ld-tab-sub{display:block}
 }
+
+#ld-back-top{position:fixed;right:14px;bottom:24px;z-index:9990;width:42px;height:42px;border-radius:50%;background:#1e3a8a;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;box-shadow:0 2px 12px rgba(30,58,138,.35);opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;pointer-events:none;}
+#ld-back-top.ld-show{opacity:1;transform:translateY(0);pointer-events:auto}
+#ld-back-top:hover{background:#1d4ed8}
 `;
 
   // 注入 CSS
@@ -226,7 +230,8 @@
         </a>
       </div>
       <nav class="ld-nav">${tabsHTML}</nav>
-    </header>`;
+    </header>
+    <button id="ld-back-top" onclick="window.scrollTo({top:0,behavior:\'smooth\'})" title="回到頂部">↑</button>`;
 
   // 移除舊版 header
   ['ld-header','site-header','ld-float','hdr-float','float-line'].forEach(id => {
@@ -250,4 +255,10 @@
   window.addEventListener('resize', setOffset);
   setTimeout(setOffset, 300);
   window.addEventListener('load', setOffset);
+
+  // 回到頂部按鈕顯示控制
+  window.addEventListener('scroll', function(){
+    const btn = document.getElementById('ld-back-top');
+    if(btn) btn.classList.toggle('ld-show', window.scrollY > 400);
+  }, {passive:true});
 })();
