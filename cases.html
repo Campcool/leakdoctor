@@ -102,8 +102,8 @@ a{text-decoration:none;color:inherit}
 .case-title{font-weight:700;color:var(--gray-900);font-size:.9rem;line-height:1.4;margin-bottom:.25rem}
 .case-loc{font-size:.75rem;color:var(--gray-400);display:flex;align-items:center;gap:.25rem}
 .case-body{padding:1rem 1.1rem}
-.case-row{display:flex;gap:.5rem;margin-bottom:.4rem;font-size:.82rem}
-.case-lbl{color:var(--gray-400);flex-shrink:0;width:44px;padding-top:.05rem}
+.case-row{display:grid;grid-template-columns:2.8em 1fr;gap:0;margin-bottom:.35rem;font-size:.82rem;border-bottom:1px solid #f3f4f6;padding:.3rem 0}
+.case-lbl{color:var(--gray-400);font-size:.75rem;font-weight:700;padding-top:.1rem;word-break:keep-all;white-space:nowrap}
 .case-val{color:var(--gray-700);line-height:1.55;flex:1}
 .case-result{margin-top:.75rem;padding:.55rem .85rem;border-radius:8px;font-size:.8rem;font-weight:600;display:flex;align-items:center;gap:.45rem}
 .r-pass{background:var(--green-100);color:var(--green)}
@@ -145,6 +145,8 @@ a{text-decoration:none;color:inherit}
 .case-related-label{font-size:.7rem;font-weight:700;color:#9ca3af;white-space:nowrap}
 .case-related-link{font-size:.78rem;font-weight:700;color:#1d4ed8;text-decoration:none;line-height:1.4}
 .case-related-link:hover{text-decoration:underline}
+
+td,th{word-break:keep-all}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"CollectionPage","name":"施工案例｜台灣漏水醫生","url":"https://leakdoctor.tw/cases.html","description":"真實漏水修繕案例記錄，含地區、費用、工法、驗收結果。","isPartOf":{"@type":"WebSite","name":"台灣漏水醫生","url":"https://leakdoctor.tw"}}

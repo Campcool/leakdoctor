@@ -26,7 +26,7 @@
 .ld-top{
   display:flex;align-items:center;
   justify-content:space-between;
-  gap:8px;padding:8px 14px;
+  gap:8px;padding:7px 12px;
   max-width:1200px;margin:0 auto;
 }
 .ld-brand{
@@ -35,25 +35,26 @@
   flex:1;min-width:0;
 }
 .ld-logo{
-  width:36px;height:36px;
+  width:40px;height:40px;
   flex-shrink:0;
 }
 .ld-texts{flex:1;min-width:0}
 .ld-name{
   display:block;
-  font-size:16px;font-weight:900;
+  font-size:18px;font-weight:900;
   color:#1e3a8a;white-space:nowrap;
   line-height:1.25;
 }
 .ld-sub{
   display:block;
-  font-size:9.5px;font-weight:500;
+  font-size:9px;font-weight:500;
   color:#3b82f6;
   line-height:1.3;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
-  max-width:200px;
+  max-width:220px;
+  letter-spacing:-.01em;
 }
 .ld-line-btn{
   display:flex;align-items:center;gap:5px;
@@ -70,7 +71,7 @@
 .ld-nav{
   background:#1e3a8a;
   display:flex;gap:5px;
-  padding:6px 10px;
+  padding:7px 8px;
   overflow-x:auto;
   -webkit-overflow-scrolling:touch;
   scrollbar-width:none;
@@ -79,8 +80,8 @@
 .ld-tab{
   display:flex;flex-direction:column;
   align-items:center;gap:3px;
-  padding:7px 9px;border-radius:9px;
-  min-width:58px;flex-shrink:0;
+  padding:8px 10px;border-radius:9px;
+  min-width:68px;flex-shrink:0;
   background:rgba(255,255,255,.12);
   border:1.5px solid rgba(255,255,255,.16);
   text-decoration:none;cursor:pointer;
@@ -93,12 +94,12 @@
   box-shadow:0 2px 6px rgba(0,0,0,.12);
 }
 .ld-tab-icon{
-  font-size:16px;line-height:1;
+  font-size:20px;line-height:1;
   display:block;
 }
 .ld-tab-label{
   display:block;
-  font-size:10px;font-weight:700;
+  font-size:11.5px;font-weight:700;
   font-family:'Noto Sans TC',sans-serif;
   color:rgba(255,255,255,.93);
   white-space:nowrap;line-height:1.2;
@@ -253,7 +254,7 @@
           <div class="ld-logo">${LOGO}</div>
           <div class="ld-texts">
             <span class="ld-name">台灣漏水醫生</span>
-            <span class="ld-sub" id="ld-rotating-sub">漏水狀況回報・免費諮詢・媒合廠商・款項第三方保管</span>
+            <span class="ld-sub">漏水狀況回報・免費諮詢・媒合廠商・款項第三方保管</span>
           </div>
         </a>
         <a href="${LINE}" target="_blank" rel="noopener" class="ld-line-btn">
