@@ -22,12 +22,10 @@
 <meta name="twitter:image" content="https://leakdoctor.tw/og-image.jpg">
 <meta name="keywords" content="漏水案例,施工案例,浴室漏水費用,頂樓防水費用,外牆漏水修繕,壁癌案例,抓漏費用,防水工程案例,漏水修繕記錄">
 <meta name="description" content="真實漏水修繕案例記錄，含地區、費用、工法、驗收結果。可依住宅類型與漏水位置篩選。">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Noto Sans TC',sans-serif;color:#1a202c;background:#fff;line-height:1.8;font-size:18px}
+body{font-family:'Noto Sans TC',sans-serif;color:#1a202c;background:#fff;line-height:1.8;font-size:18px;margin:0}
 a{text-decoration:none;color:inherit}
 
 :root{
@@ -62,7 +60,7 @@ a{text-decoration:none;color:inherit}
 .header-cta:hover{background:var(--green)}
 
 /* Page Hero */
-#page-hero{background:linear-gradient(135deg,#7c3aed 0%,#1d4ed8 100%);color:#fff;padding:2.5rem 1.25rem 2rem}
+#page-hero{background:linear-gradient(135deg,#7c3aed 0%,#1d4ed8 100%);color:#fff;padding:2.5rem 1.25rem 2rem;margin-top:0}
 .page-hero-inner{max-width:900px;margin:0 auto}
 .page-eyebrow{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.9);font-size:.72rem;font-weight:600;padding:.3rem .85rem;border-radius:99px;margin-bottom:1rem}
 .page-title{font-size:1.75rem;font-weight:900;line-height:1.2;margin-bottom:.65rem}
@@ -154,14 +152,18 @@ body { margin: 0; padding: 0; }
 /* paddingTop 由 header.js 動態設定，這裡設預設值防止閃爍 */
 body { padding-top: 115px; }
 @media(min-width:1024px){ body { padding-top: 130px; } }
+
+/* ── Header 防禦性補丁 ── */
+body{padding-top:115px}
+@media(min-width:1024px){body{padding-top:130px}}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"CollectionPage","name":"施工案例｜台灣漏水醫生","url":"https://leakdoctor.tw/cases.html","description":"真實漏水修繕案例記錄，含地區、費用、工法、驗收結果。","isPartOf":{"@type":"WebSite","name":"台灣漏水醫生","url":"https://leakdoctor.tw"}}
 </script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="header.js"></script>
 </head>
 <body>
-<script></script>
-
 
 <section id="page-hero">
   <div class="page-hero-inner">
