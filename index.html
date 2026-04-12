@@ -26,7 +26,7 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Noto Sans TC',sans-serif;color:#1a202c;background:#f8fafc;line-height:1.8;font-size:17px}
+body{font-family:'Noto Sans TC',sans-serif;color:#1a202c;background:#f8fafc;line-height:1.8;font-size:17px;margin:0}
 a{text-decoration:none;color:inherit}
 img{display:block;max-width:100%}
 :root{
@@ -356,11 +356,9 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 td,th{word-break:keep-all}
 
 /* ── Header 防禦性補丁：確保第一個 section 不被 fixed header 蓋住 ── */
-html { scroll-behavior: smooth; }
-body { margin: 0; padding: 0; }
 /* paddingTop 由 header.js 動態設定，這裡設預設值防止閃爍 */
-body { padding-top: 115px; }
-@media(min-width:1024px){ body { padding-top: 130px; } }
+
+/* padding-top 由 header.js 動態設定 */
 </style>
 
 <!-- JSON-LD 結構化數據 -->

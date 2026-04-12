@@ -27,7 +27,7 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Noto Sans TC',sans-serif;color:#1a202c;background:#fff;line-height:1.8;font-size:18px}
+body{font-family:'Noto Sans TC',sans-serif;color:#1a202c;background:#fff;line-height:1.8;font-size:18px;margin:0}
 a{text-decoration:none;color:inherit}
 
 :root{
@@ -220,11 +220,9 @@ a{text-decoration:none;color:inherit}
 td,th{word-break:keep-all}
 
 /* ── Header 防禦性補丁：確保第一個 section 不被 fixed header 蓋住 ── */
-html { scroll-behavior: smooth; }
-body { margin: 0; padding: 0; }
 /* paddingTop 由 header.js 動態設定，這裡設預設值防止閃爍 */
-body { padding-top: 115px; }
-@media(min-width:1024px){ body { padding-top: 130px; } }
+
+/* padding-top 由 header.js 動態設定 */
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"浴室漏水修繕費用多少？","acceptedAnswer":{"@type":"Answer","text":"浴室漏水修繕費用依原因而異。防水層重做約 NT$15,000–35,000，局部敲磚修繕約 NT$8,000–22,000，管路問題從 NT$3,000 起。"}},{"@type":"Question","name":"頂樓漏水要修多少錢？","acceptedAnswer":{"@type":"Answer","text":"頂樓防水層重做費用約 NT$30,000–80,000，依頂樓面積和工法不同。"}},{"@type":"Question","name":"壁癌怎麼根治？","acceptedAnswer":{"@type":"Answer","text":"壁癌必須先找到外部滲水源頭，從根本阻水後再做室內矽酸質防水處理。只做表面磨除重漆幾個月內幾乎必定復發。"}}]}

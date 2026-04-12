@@ -99,7 +99,7 @@ a{text-decoration:none;color:inherit}
 .ct-ac{background:#ecfdf5;color:#059669}
 .case-title{font-weight:700;color:var(--gray-900);font-size:.9rem;line-height:1.4;margin-bottom:.25rem}
 .case-loc{font-size:.75rem;color:var(--gray-400);display:flex;align-items:center;gap:.25rem}
-.case-body{padding:1rem 1.1rem}
+.case-
 .case-row{display:grid;grid-template-columns:2.8em 1fr;gap:0;margin-bottom:.35rem;font-size:.82rem;border-bottom:1px solid #f3f4f6;padding:.3rem 0}
 .case-lbl{color:var(--gray-400);font-size:.75rem;font-weight:700;padding-top:.1rem;word-break:keep-all;white-space:nowrap}
 .case-val{color:var(--gray-700);line-height:1.55;flex:1}
@@ -147,15 +147,10 @@ a{text-decoration:none;color:inherit}
 td,th{word-break:keep-all}
 
 /* ── Header 防禦性補丁：確保第一個 section 不被 fixed header 蓋住 ── */
-html { scroll-behavior: smooth; }
-body { margin: 0; padding: 0; }
 /* paddingTop 由 header.js 動態設定，這裡設預設值防止閃爍 */
-body { padding-top: 115px; }
-@media(min-width:1024px){ body { padding-top: 130px; } }
 
-/* ── Header 防禦性補丁 ── */
-body{padding-top:115px}
-@media(min-width:1024px){body{padding-top:130px}}
+
+/* padding-top 由 header.js 動態設定 */
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"CollectionPage","name":"施工案例｜台灣漏水醫生","url":"https://leakdoctor.tw/cases.html","description":"真實漏水修繕案例記錄，含地區、費用、工法、驗收結果。","isPartOf":{"@type":"WebSite","name":"台灣漏水醫生","url":"https://leakdoctor.tw"}}

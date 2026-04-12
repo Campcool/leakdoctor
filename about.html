@@ -27,7 +27,7 @@
 <script src="header.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Noto Sans TC',sans-serif;color:#1a202c;background:#f8fafc;line-height:1.8;font-size:16px}
+body{font-family:'Noto Sans TC',sans-serif;color:#1a202c;background:#f8fafc;line-height:1.8;font-size:16px;margin:0}
 a{text-decoration:none;color:inherit}
 .container{max-width:860px;margin:0 auto;padding:0 1.25rem}
 #page-hero{background:linear-gradient(135deg,#1e3a8a 0%,#0d9488 100%);color:#fff;padding:2.5rem 1.25rem 2rem}
@@ -56,11 +56,9 @@ footer{background:#111827;color:#9ca3af;padding:1.5rem 1.25rem;margin-top:2rem;f
 footer a{color:#6b7280}
 
 /* ── Header 防禦性補丁：確保第一個 section 不被 fixed header 蓋住 ── */
-html { scroll-behavior: smooth; }
-body { margin: 0; padding: 0; }
 /* paddingTop 由 header.js 動態設定，這裡設預設值防止閃爍 */
-body { padding-top: 115px; }
-@media(min-width:1024px){ body { padding-top: 130px; } }
+
+/* padding-top 由 header.js 動態設定 */
 </style>
 </head>
 <body>
