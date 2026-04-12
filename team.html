@@ -225,6 +225,13 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   .footer-inner{display:grid;grid-template-columns:2fr 1fr 1fr;gap:2.5rem;align-items:start}
   .footer-links{flex-direction:column;gap:.4rem;margin-bottom:0}
 }
+
+/* ── Header 防禦性補丁：確保第一個 section 不被 fixed header 蓋住 ── */
+html { scroll-behavior: smooth; }
+body { margin: 0; padding: 0; }
+/* paddingTop 由 header.js 動態設定，這裡設預設值防止閃爍 */
+body { padding-top: 115px; }
+@media(min-width:1024px){ body { padding-top: 130px; } }
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ItemList","name":"台灣漏水醫生合作工班師傅","url":"https://leakdoctor.tw/team.html","description":"台灣漏水醫生合作工班師傅介紹，涵蓋北中南東各區域。","numberOfItems":20}

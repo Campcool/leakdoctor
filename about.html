@@ -54,6 +54,13 @@ p{font-size:.9rem;color:#4b5563;line-height:1.8;margin-bottom:.75rem}
 .cs-btn{display:inline-flex;align-items:center;gap:.4rem;background:#06C755;color:#fff;font-weight:700;font-size:.9rem;padding:.7rem 1.5rem;border-radius:10px;text-decoration:none}
 footer{background:#111827;color:#9ca3af;padding:1.5rem 1.25rem;margin-top:2rem;font-size:.8rem;text-align:center}
 footer a{color:#6b7280}
+
+/* ── Header 防禦性補丁：確保第一個 section 不被 fixed header 蓋住 ── */
+html { scroll-behavior: smooth; }
+body { margin: 0; padding: 0; }
+/* paddingTop 由 header.js 動態設定，這裡設預設值防止閃爍 */
+body { padding-top: 115px; }
+@media(min-width:1024px){ body { padding-top: 130px; } }
 </style>
 </head>
 <body>

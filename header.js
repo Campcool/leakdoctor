@@ -14,6 +14,8 @@
 
   // CSS：全部用 ld- 前綴，不影響頁面其他元素
   const css = `
+/* body 預設 padding-top，JS 計算後覆蓋 */
+body{padding-top:115px}
 /* ld-header */
 #ld-header{
   position:fixed;top:0;left:0;right:0;
@@ -276,18 +278,27 @@
 
   // 計算 header 高度，補 padding-top
   function setOffset(){
-    const h = document.getElementById('ld-header');
-    if(h){
-      const hh = h.offsetHeight;
-      document.body.style.paddingTop = hh + 'px';
-      // 同步更新 CSS 變數，讓 scroll-margin-top 跟著 header 高度
-      document.documentElement.style.setProperty('--ld-hdr-h', hh + 'px');
+    var hdrEl = document.getElementById('ld-header');
+    if(hdrEl){
+      var hh = hdrEl.offsetHeight;
+      if(hh > 0){
+        document.body.style.paddingTop = hh + 'px';
+        document.documentElement.style.setProperty('--ld-hdr-h', hh + 'px');
+      }
     }
   }
   setOffset();
   window.addEventListener('resize', setOffset);
-  setTimeout(setOffset, 300);
-  window.addEventListener('load', setOffset);
+  // 多個時機確保字體載入後重新計算 header 高度
+  setTimeout(setOffset, 50);
+  setTimeout(setOffset, 200);
+  setTimeout(setOffset, 500);
+  setTimeout(setOffset, 1000);
+  window.addEventListener('load', function(){ setOffset(); setTimeout(setOffset, 200); });
+  // 字體載入完成也更新
+  if(document.fonts && document.fonts.ready){
+    document.fonts.ready.then(function(){ setOffset(); });
+  }
 
 
   // 加入我們按鈕：固定在 LINE 按鈕下方

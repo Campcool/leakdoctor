@@ -352,6 +352,15 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 @media(min-width:640px){
   .cc-card,.tc-carousel-card{min-width:calc(50% - .5rem)}
 }
+
+td,th{word-break:keep-all}
+
+/* ── Header 防禦性補丁：確保第一個 section 不被 fixed header 蓋住 ── */
+html { scroll-behavior: smooth; }
+body { margin: 0; padding: 0; }
+/* paddingTop 由 header.js 動態設定，這裡設預設值防止閃爍 */
+body { padding-top: 115px; }
+@media(min-width:1024px){ body { padding-top: 130px; } }
 </style>
 
 <!-- JSON-LD 結構化數據 -->

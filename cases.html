@@ -147,6 +147,13 @@ a{text-decoration:none;color:inherit}
 .case-related-link:hover{text-decoration:underline}
 
 td,th{word-break:keep-all}
+
+/* ── Header 防禦性補丁：確保第一個 section 不被 fixed header 蓋住 ── */
+html { scroll-behavior: smooth; }
+body { margin: 0; padding: 0; }
+/* paddingTop 由 header.js 動態設定，這裡設預設值防止閃爍 */
+body { padding-top: 115px; }
+@media(min-width:1024px){ body { padding-top: 130px; } }
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"CollectionPage","name":"施工案例｜台灣漏水醫生","url":"https://leakdoctor.tw/cases.html","description":"真實漏水修繕案例記錄，含地區、費用、工法、驗收結果。","isPartOf":{"@type":"WebSite","name":"台灣漏水醫生","url":"https://leakdoctor.tw"}}
