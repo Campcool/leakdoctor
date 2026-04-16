@@ -14,8 +14,6 @@
 
   // CSS：全部用 ld- 前綴，不影響頁面其他元素
   const css = `
-/* body 預設 padding-top，JS 計算後覆蓋 */
-body{padding-top:115px}
 /* ld-header */
 #ld-header{
   position:fixed;top:0;left:0;right:0;
@@ -281,7 +279,8 @@ body{padding-top:115px}
     var hdrEl = document.getElementById('ld-header');
     if(hdrEl){
       var hh = hdrEl.offsetHeight;
-      if(hh > 0){
+      // 限制在合理範圍：手機 80~140px，PC 100~160px
+      if(hh > 0 && hh < 160){
         document.body.style.paddingTop = hh + 'px';
         document.documentElement.style.setProperty('--ld-hdr-h', hh + 'px');
       }
