@@ -3,6 +3,10 @@
   const page = path.replace('.html','') || 'index';
   const LINE = 'https://lin.ee/rjmmYyC';
   const JOIN_FORM = 'https://forms.gle/T4UTULXMaXaoGZQG8';
+  const LINE_OA_ID = '@478xvlgl';
+
+  const SERVICE_OPTIONS = ['冷氣清洗','洗衣機清洗','居家清潔（含抽油煙機）','水管清潔・漏水檢測','其他（請於下方說明）'];
+  const PAGE_SERVICE = {aircon:'冷氣清洗', washer:'洗衣機清洗', homeclean:'居家清潔（含抽油煙機）', 'leak-repair':'水管清潔・漏水檢測'};
 
   // 字體
   if(!document.querySelector('link[href*="Noto+Sans"]')){
@@ -216,6 +220,54 @@
 @media(min-width:1024px){
   #ld-stickybar{display:none}
 }
+
+/* 快速預約表單 Modal */
+#ld-quote-overlay{
+  position:fixed;inset:0;z-index:9995;
+  background:rgba(17,24,39,.55);
+  display:none;align-items:flex-end;justify-content:center;
+  padding:0;
+  font-family:'Noto Sans TC',sans-serif;
+}
+#ld-quote-overlay.ld-show{display:flex}
+@media(min-width:640px){
+  #ld-quote-overlay{align-items:center;padding:20px}
+}
+#ld-quote-card{
+  background:#fff;width:100%;max-width:480px;
+  border-radius:18px 18px 0 0;
+  max-height:92vh;overflow-y:auto;
+  padding:1.4rem 1.3rem calc(1.4rem + env(safe-area-inset-bottom));
+  box-shadow:0 -8px 30px rgba(0,0,0,.25);
+}
+@media(min-width:640px){
+  #ld-quote-card{border-radius:18px;max-height:88vh}
+}
+.ld-q-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:.3rem}
+.ld-q-title{font-size:1.15rem;font-weight:900;color:#111827;line-height:1.35}
+.ld-q-sub{font-size:.82rem;color:#6b7280;margin-top:.25rem;line-height:1.6}
+.ld-q-close{flex-shrink:0;width:32px;height:32px;border-radius:50%;border:none;background:#f3f4f6;color:#374151;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.ld-q-close:hover{background:#e5e7eb}
+.ld-q-field{margin-top:.95rem}
+.ld-q-label{display:block;font-size:.83rem;font-weight:700;color:#111827;margin-bottom:.35rem}
+.ld-q-label .ld-req{color:#dc2626;margin-left:2px}
+.ld-q-input,.ld-q-select{
+  width:100%;padding:.7rem .85rem;border:1.5px solid #d1d5db;border-radius:10px;
+  font-size:.92rem;font-family:'Noto Sans TC',sans-serif;color:#111827;background:#fff;
+}
+.ld-q-input:focus,.ld-q-select:focus{outline:none;border-color:#1e3a8a}
+.ld-q-row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.ld-q-err{color:#dc2626;font-size:.76rem;margin-top:.3rem;display:none}
+.ld-q-field.ld-invalid .ld-q-input,.ld-q-field.ld-invalid .ld-q-select{border-color:#dc2626}
+.ld-q-field.ld-invalid .ld-q-err{display:block}
+.ld-q-submit{
+  width:100%;margin-top:1.3rem;background:#06C755;color:#fff;font-weight:900;font-size:1rem;
+  padding:.95rem;border:none;border-radius:12px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+  box-shadow:0 4px 14px rgba(6,199,85,.4);
+}
+.ld-q-submit:hover{background:#05b34c}
+.ld-q-note{font-size:.72rem;color:#9ca3af;text-align:center;margin-top:.65rem;line-height:1.6}
 `;
 
   // 注入 CSS
@@ -297,7 +349,59 @@
         <div class="ld-sticky-title">灰塵髒污，通通汰除</div>
         <div class="ld-sticky-sub">免費諮詢・不施工不收費</div>
       </div>
-      <a href="${LINE}" target="_blank" rel="noopener" class="ld-sticky-btn">📲 免費諮詢</a>
+      <button type="button" class="ld-sticky-btn" onclick="ldOpenQuote()">📋 線上預約估價</button>
+    </div>
+    <div id="ld-quote-overlay">
+      <div id="ld-quote-card" role="dialog" aria-modal="true" aria-labelledby="ld-q-title">
+        <div class="ld-q-head">
+          <div>
+            <div class="ld-q-title" id="ld-q-title">📋 免費估價・線上預約</div>
+            <div class="ld-q-sub">填寫基本資料，送出後開啟 LINE 傳送給我們，客服會盡快回覆報價</div>
+          </div>
+          <button type="button" class="ld-q-close" onclick="ldCloseQuote()" aria-label="關閉">✕</button>
+        </div>
+        <form id="ld-q-form" novalidate>
+          <div class="ld-q-field" id="ld-f-name">
+            <label class="ld-q-label" for="ld-q-name">姓名<span class="ld-req">*</span></label>
+            <input class="ld-q-input" id="ld-q-name" type="text" placeholder="您的稱呼" autocomplete="name">
+            <div class="ld-q-err">請輸入姓名</div>
+          </div>
+          <div class="ld-q-field" id="ld-f-phone">
+            <label class="ld-q-label" for="ld-q-phone">電話<span class="ld-req">*</span></label>
+            <input class="ld-q-input" id="ld-q-phone" type="tel" placeholder="0912-345-678" autocomplete="tel" inputmode="tel">
+            <div class="ld-q-err">請輸入正確的聯絡電話</div>
+          </div>
+          <div class="ld-q-field" id="ld-f-addr">
+            <label class="ld-q-label" for="ld-q-addr">服務地址<span class="ld-req">*</span></label>
+            <input class="ld-q-input" id="ld-q-addr" type="text" placeholder="市／區＋街道地址" autocomplete="street-address">
+            <div class="ld-q-err">請輸入服務地址</div>
+          </div>
+          <div class="ld-q-field" id="ld-f-service">
+            <label class="ld-q-label" for="ld-q-service">清洗項目<span class="ld-req">*</span></label>
+            <select class="ld-q-select" id="ld-q-service">
+              <option value="">請選擇服務項目</option>
+              ${SERVICE_OPTIONS.map(s=>`<option value="${s}">${s}</option>`).join('')}
+            </select>
+            <div class="ld-q-err">請選擇清洗項目</div>
+          </div>
+          <div class="ld-q-field">
+            <label class="ld-q-label">希望日期與時間</label>
+            <div class="ld-q-row">
+              <input class="ld-q-input" id="ld-q-date" type="date">
+              <select class="ld-q-select" id="ld-q-time">
+                <option value="">希望時段（可不填）</option>
+                <option value="上午 9:00-12:00">上午 9:00-12:00</option>
+                <option value="下午 13:00-17:00">下午 13:00-17:00</option>
+                <option value="傍晚 17:00-19:00">傍晚 17:00-19:00</option>
+                <option value="晚上 19:00-21:00">晚上 19:00-21:00</option>
+                <option value="時間皆可">時間皆可</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="ld-q-submit">📲 送出並開啟 LINE</button>
+          <div class="ld-q-note">送出後會開啟 LINE，訊息已幫您填好，再按一下「傳送」即可完成預約估價，純諮詢完全免費</div>
+        </form>
+      </div>
     </div>`;
 
   // 移除舊版 header
@@ -352,4 +456,86 @@
     const btn = document.getElementById('ld-back-top');
     if(btn) btn.classList.toggle('ld-show', window.scrollY > 400);
   }, {passive:true});
+
+  // ── 快速預約表單 ──
+  const qOverlay = document.getElementById('ld-quote-overlay');
+  const qForm = document.getElementById('ld-q-form');
+  const qDate = document.getElementById('ld-q-date');
+  if(qDate){
+    const today = new Date();
+    qDate.min = today.toISOString().slice(0,10);
+  }
+
+  window.ldOpenQuote = function(serviceKey){
+    if(!qOverlay) return;
+    const svc = document.getElementById('ld-q-service');
+    if(svc){
+      const preset = (serviceKey && PAGE_SERVICE[serviceKey]) || PAGE_SERVICE[page] || '';
+      if(preset) svc.value = preset;
+    }
+    qOverlay.classList.add('ld-show');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.ldCloseQuote = function(){
+    if(!qOverlay) return;
+    qOverlay.classList.remove('ld-show');
+    document.body.style.overflow = '';
+  };
+
+  if(qOverlay){
+    qOverlay.addEventListener('click', function(e){
+      if(e.target === qOverlay) ldCloseQuote();
+    });
+  }
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') ldCloseQuote();
+  });
+
+  function setFieldValid(id, valid){
+    const el = document.getElementById(id);
+    if(el) el.classList.toggle('ld-invalid', !valid);
+  }
+
+  if(qForm){
+    qForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = document.getElementById('ld-q-name').value.trim();
+      const phone = document.getElementById('ld-q-phone').value.trim();
+      const addr = document.getElementById('ld-q-addr').value.trim();
+      const service = document.getElementById('ld-q-service').value;
+      const date = document.getElementById('ld-q-date').value;
+      const time = document.getElementById('ld-q-time').value;
+
+      const phoneOk = /^[0-9+\-\s()]{8,}$/.test(phone);
+
+      let valid = true;
+      if(!name){ setFieldValid('ld-f-name', false); valid = false; } else setFieldValid('ld-f-name', true);
+      if(!phoneOk){ setFieldValid('ld-f-phone', false); valid = false; } else setFieldValid('ld-f-phone', true);
+      if(!addr){ setFieldValid('ld-f-addr', false); valid = false; } else setFieldValid('ld-f-addr', true);
+      if(!service){ setFieldValid('ld-f-service', false); valid = false; } else setFieldValid('ld-f-service', true);
+      if(!valid) return;
+
+      let dateLabel = '未指定';
+      if(date){
+        const d = new Date(date + 'T00:00:00');
+        dateLabel = (d.getMonth()+1) + '/' + d.getDate() + '（' + '日一二三四五六'[d.getDay()] + '）';
+      }
+      const timeLabel = time || '未指定';
+
+      const msg = [
+        '【灰汰郎 到府服務詢價】',
+        '姓名：' + name,
+        '電話：' + phone,
+        '服務地址：' + addr,
+        '清洗項目：' + service,
+        '希望日期：' + dateLabel,
+        '希望時段：' + timeLabel
+      ].join('\n');
+
+      const url = 'https://line.me/R/oaMessage/' + LINE_OA_ID + '/?' + encodeURIComponent(msg);
+      window.location.href = url;
+      ldCloseQuote();
+    });
+  }
 })();

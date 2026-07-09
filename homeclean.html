@@ -32,6 +32,7 @@
 html{scroll-behavior:smooth}
 body{font-family:'Noto Sans TC',sans-serif;color:#1a202c;background:#f8fafc;line-height:1.8;font-size:17px;margin:0;padding-top:100px}
 a{text-decoration:none;color:inherit}
+button{font:inherit;border:none;cursor:pointer}
 :root{
   --blue:#1d4ed8;--blue-dark:#1e3a8a;--blue-light:#eff6ff;--blue-mid:#3b82f6;
   --green:#16a34a;--green-100:#dcfce7;
@@ -111,7 +112,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
     <h1 class="page-title">居家清潔</h1>
     <p class="page-desc">居家除塵蟎、抽油煙機清洗、水塔清洗，打造乾淨衛生的居住環境。描述你的需求，我們快速媒合廠商到府服務。</p>
     <div class="trust-badges"><span class="trust-badge">🧽 專業安心工法</span><span class="trust-badge">🛡️ 完工保固</span><span class="trust-badge">📋 透明報價</span></div>
-    <a href="https://lin.ee/rjmmYyC" target="_blank" rel="noopener" class="page-btn">📲 免費 LINE 諮詢，快速預約</a>
+    <button type="button" class="page-btn" onclick="ldOpenQuote('homeclean')">📋 線上快速預約估價</button>
   </div>
 </section>
 
@@ -129,7 +130,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
     </div>
     <div class="mid-cta">
       <div class="mid-cta-text">想知道你家居家清潔實際費用？加 LINE 免費詢問，現場評估後才報價</div>
-      <a href="https://lin.ee/rjmmYyC" target="_blank" rel="noopener" class="mid-cta-btn">📲 免費 LINE 諮詢</a>
+      <button type="button" class="mid-cta-btn" onclick="ldOpenQuote('homeclean')">📋 線上預約估價</button>
     </div>
   </div>
 </section>
@@ -160,7 +161,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 <section id="cta-bottom">
   <div class="cta-title">居家清潔，交給灰汰郎</div>
   <div class="cta-sub">加入 LINE，免費諮詢並快速預約到府服務</div>
-  <a href="https://lin.ee/rjmmYyC" target="_blank" rel="noopener" class="cta-btn">📲 加入 LINE 免費諮詢</a>
+  <button type="button" class="cta-btn" onclick="ldOpenQuote('homeclean')">📋 線上預約估價</button>
 </section>
 
 <footer>

@@ -28,6 +28,7 @@
 html{scroll-behavior:smooth}
 body{font-family:'Noto Sans TC',sans-serif;color:#1a202c;background:#f8fafc;line-height:1.8;font-size:17px;margin:0;padding-top:100px}
 a{text-decoration:none;color:inherit}
+button{font:inherit;border:none;cursor:pointer}
 img{display:block;max-width:100%}
 :root{
   --blue:#1d4ed8;--blue-dark:#1e3a8a;--blue-light:#eff6ff;--blue-mid:#3b82f6;
@@ -429,10 +430,10 @@ td,th{word-break:keep-all}
     <div class="hero-eyebrow">💧 灰汰郎・水管抓漏／漏水檢測・免費諮詢</div>
     <h1 class="hero-h1">快速媒合<br><em>專業工班</em></h1>
     <p class="hero-desc">描述漏水狀況，我們依問題類型與地區，快速媒合合適的工班師傅。</p>
-    <div class="hero-btn" onclick="alert('Line 免費諮詢')">
-      📲&nbsp;免費 Line 諮詢，快速媒合師傅
+    <button type="button" class="hero-btn" onclick="ldOpenQuote('leak-repair')">
+      📋&nbsp;線上快速預約估價
       <span class="hero-btn-sub">（不收諮詢費）</span>
-    </div>
+    </button>
     <div class="hero-stats">
       <div><div class="stat-num">免費</div><div class="stat-label">漏水知識查詢</div></div>
       <div><div class="stat-num">全台</div><div class="stat-label">師傅媒合</div></div>
@@ -907,7 +908,7 @@ td,th{word-break:keep-all}
     <div class="sv-total">重度總費用參考：<strong>$30,000–150,000+</strong></div>
   </div>
   <div class="price-warn">⚠️ <strong>消費者注意：</strong>廠商以超低價吸引後大量追加是常見陷阱。我們的車馬費事先告知，師傅到場報價後由您決定是否施工，不強制。</div>
-  <div class="price-cta" onclick="alert('Line 免費諮詢')">📲 傳照片免費初估費用等級</div>
+  <button type="button" class="price-cta" onclick="ldOpenQuote('leak-repair')">📋 線上預約估價</button>
 </div>
 </section>
 
@@ -924,7 +925,7 @@ td,th{word-break:keep-all}
     <div class="area-card"><div class="area-region">🌿 東部</div><div class="area-cities">花蓮縣・台東縣</div><span class="area-badge">Line 確認可用師傅</span></div>
   </div>
   <div class="area-note-global">離島地區（澎湖、金門、馬祖）目前暫不提供服務</div>
-  <div class="price-cta" style="background:var(--teal)" onclick="alert('Line 免費諮詢')">📲 確認您的地區是否有師傅</div>
+  <button type="button" class="price-cta" style="background:var(--teal)" onclick="ldOpenQuote('leak-repair')">📋 線上預約估價</button>
 </div>
 </section>
 
@@ -990,7 +991,7 @@ td,th{word-break:keep-all}
 <section id="cta-bottom">
   <div class="cta-title">漏水問題<br>今天就開始解決</div>
   <div class="cta-sub">免費諮詢 · 依狀況快速媒合<br>酌收車馬費 · 報價透明</div>
-  <div class="cta-btn" onclick="alert('Line 免費諮詢')">📲 加入 Line 免費諮詢</div>
+  <button type="button" class="cta-btn" onclick="ldOpenQuote('leak-repair')">📋 線上預約估價</button>
 </section>
 
 <!-- Footer -->

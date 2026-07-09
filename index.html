@@ -48,6 +48,7 @@
 html{scroll-behavior:smooth}
 body{font-family:'Noto Sans TC',sans-serif;color:#1a202c;background:#f8fafc;line-height:1.8;font-size:17px;margin:0;padding-top:100px}
 a{text-decoration:none;color:inherit}
+button{font:inherit;border:none;cursor:pointer}
 img{display:block;max-width:100%}
 :root{
   --blue:#1d4ed8;--blue-dark:#1e3a8a;--blue-light:#eff6ff;--blue-mid:#3b82f6;
@@ -140,10 +141,10 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   <h1 class="hero-h1">居家大小事<br><em>灰汰郎</em>幫你搞定</h1>
   <p class="hero-desc">冷氣清洗、洗衣機清洗、居家清潔（含抽油煙機）、水管清潔與漏水檢測——描述你的需求，我們快速媒合合適的到府服務廠商，LINE 諮詢完全免費。</p>
   <div class="trust-badges"><span class="trust-badge">🛡️ 廠商保固服務</span><span class="trust-badge">📋 車馬費透明公開</span><span class="trust-badge">🚗 不施工不收費</span></div>
-  <a href="https://lin.ee/rjmmYyC" target="_blank" rel="noopener" class="hero-btn">
-    📲&nbsp;免費 Line 諮詢，快速預約
+  <button type="button" class="hero-btn" onclick="ldOpenQuote()">
+    📋&nbsp;線上快速預約估價
     <span class="hero-btn-sub">（不收諮詢費）</span>
-  </a>
+  </button>
 </div>
 </section>
 
@@ -203,8 +204,8 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 <!-- CTA -->
 <section id="cta-bottom">
   <div class="cta-title">灰塵髒污，交給灰汰郎</div>
-  <div class="cta-sub">加入 LINE，免費諮詢並快速預約到府服務</div>
-  <a href="https://lin.ee/rjmmYyC" target="_blank" rel="noopener" class="cta-btn">📲 加入 LINE 免費諮詢</a>
+  <div class="cta-sub">填寫基本資料，快速預約到府服務</div>
+  <button type="button" class="cta-btn" onclick="ldOpenQuote()">📋 線上預約估價</button>
 </section>
 
 <!-- Footer -->
