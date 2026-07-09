@@ -43,6 +43,7 @@
   width:40px;height:40px;
   flex-shrink:0;
 }
+.ld-logo-img{height:38px;width:auto;flex-shrink:0;display:block}
 .ld-texts{flex:1;min-width:0}
 .ld-name{
   display:block;
@@ -180,6 +181,7 @@
 @media(min-width:1024px){
   .ld-top{padding:12px 40px}
   .ld-logo{width:48px;height:48px}
+  .ld-logo-img{height:50px}
   .ld-name{font-size:22px}
   .ld-sub{font-size:11px}
   .ld-line-btn{font-size:14px;padding:8px 16px;gap:6px}
@@ -331,12 +333,11 @@
     </a>
     <header id="ld-header">
       <div class="ld-top">
-        <a class="ld-brand" href="/index.html">
-          <div class="ld-logo">${LOGO}</div>
-          <div class="ld-texts">
-            <span class="ld-name">灰汰郎</span>
-            <span class="ld-sub">冷氣・洗衣機・居家清潔・水管抓漏，一站到府服務</span>
-          </div>
+        <a class="ld-brand" href="/index.html" aria-label="灰汰郎 清潔公司｜冷氣・洗衣機・居家清潔・水管抓漏">
+          <picture>
+            <source srcset="/logo/logos/website-header-logo-640x240.webp" type="image/webp">
+            <img class="ld-logo-img" src="/logo/logos/website-header-logo-640x240.png" alt="灰汰郎 清潔公司" width="640" height="240">
+          </picture>
         </a>
         <a href="${LINE}" target="_blank" rel="noopener" class="ld-line-btn">
           ${LINE_ICON}
