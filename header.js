@@ -1,4 +1,5 @@
 (function(){
+  function ldInit(){
   const path = location.pathname.split('/').pop() || 'index.html';
   const page = path.replace('.html','') || 'index';
   const LINE = 'https://lin.ee/rjmmYyC';
@@ -311,7 +312,7 @@
   ];
 
   const tabsHTML = tabs.map(t =>
-    `<a href="${t.href}" class="ld-tab${t.id===page?' ld-active':''}">
+    `<a href="/${t.href}" class="ld-tab${t.id===page?' ld-active':''}">
       <span class="ld-tab-icon">${t.icon}</span>
       <span class="ld-tab-label">${t.label}</span>
       <span class="ld-tab-sub">${t.sub}</span>
@@ -329,7 +330,7 @@
     </a>
     <header id="ld-header">
       <div class="ld-top">
-        <a class="ld-brand" href="index.html">
+        <a class="ld-brand" href="/index.html">
           <div class="ld-logo">${LOGO}</div>
           <div class="ld-texts">
             <span class="ld-name">灰汰郎</span>
@@ -538,4 +539,7 @@
       ldCloseQuote();
     });
   }
+  }
+  if(document.body){ ldInit(); }
+  else { document.addEventListener('DOMContentLoaded', ldInit); }
 })();

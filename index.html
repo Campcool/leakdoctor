@@ -28,7 +28,7 @@
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "灰汰郎",
-  "alternateName": "LeakDoctor.tw",
+  "alternateName": ["LeakDoctor.tw", "台灣漏水醫生"],
   "url": "https://leakdoctor.tw",
   "logo": "https://leakdoctor.tw/favicon.svg",
   "description": "灰汰郎居家服務媒合平台，提供冷氣清洗、洗衣機清洗、居家清潔、水管清潔與漏水檢測，全台到府服務。",
@@ -92,6 +92,12 @@ img{display:block;max-width:100%}
 .svc-desc{font-size:.85rem;color:var(--gray-500);line-height:1.7;flex:1}
 .svc-price{font-size:.78rem;font-weight:700;color:var(--blue);background:var(--blue-light);display:inline-block;padding:.28rem .75rem;border-radius:99px;width:fit-content}
 .svc-link{font-size:.86rem;font-weight:700;color:var(--blue);display:flex;align-items:center;gap:.3rem;margin-top:.2rem}
+.svc-actions{display:flex;gap:.5rem;margin-top:.35rem}
+.svc-btn-price,.svc-btn-book{flex:1;text-align:center;font-size:.85rem;font-weight:700;padding:.6rem .5rem;border-radius:10px;transition:.15s}
+.svc-btn-price{color:var(--blue);background:var(--blue-light);border:1.5px solid #dbeafe}
+.svc-btn-price:hover{background:#dbeafe}
+.svc-btn-book{color:#fff;background:#06C755;cursor:pointer;box-shadow:0 2px 8px rgba(6,199,85,.3)}
+.svc-btn-book:hover{background:#05b34c}
 
 #promises{padding:2.5rem 1.25rem;background:#fff}
 .promises-inner{max-width:1200px;margin:0 auto}
@@ -155,34 +161,46 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   <h2 class="sec-title">四大居家服務，一站搞定</h2>
   <p class="sec-sub">點選項目查看服務內容與價格參考</p>
   <div class="svc-grid">
-    <a class="svc-card" href="aircon.html">
+    <div class="svc-card">
       <div class="svc-icon c1">❄️</div>
       <div class="svc-title">冷氣清洗</div>
       <div class="svc-desc">分離式、吊隱式、窗型全機拆洗，醫療級消毒殺菌，清洗完立即可用。</div>
       <div class="svc-price">$1,499 起</div>
-      <div class="svc-link">了解更多 →</div>
-    </a>
-    <a class="svc-card" href="washer.html">
+      <div class="svc-actions">
+        <a class="svc-btn-price" href="aircon.html">看價格</a>
+        <button type="button" class="svc-btn-book" onclick="ldOpenQuote('aircon')">立即預約</button>
+      </div>
+    </div>
+    <div class="svc-card">
       <div class="svc-icon c2">🧺</div>
       <div class="svc-title">洗衣機清洗</div>
       <div class="svc-desc">直立式、滾筒式洗衣機清洗，深層去除洗衣槽黑垢與霉味。</div>
       <div class="svc-price">現場報價</div>
-      <div class="svc-link">了解更多 →</div>
-    </a>
-    <a class="svc-card" href="homeclean.html">
+      <div class="svc-actions">
+        <a class="svc-btn-price" href="washer.html">看價格</a>
+        <button type="button" class="svc-btn-book" onclick="ldOpenQuote('washer')">立即預約</button>
+      </div>
+    </div>
+    <div class="svc-card">
       <div class="svc-icon c3">🧽</div>
       <div class="svc-title">居家清潔</div>
       <div class="svc-desc">居家除塵蟎、抽油煙機清洗，打造乾淨衛生的居住環境。</div>
       <div class="svc-price">現場報價</div>
-      <div class="svc-link">了解更多 →</div>
-    </a>
-    <a class="svc-card" href="leak-repair.html">
+      <div class="svc-actions">
+        <a class="svc-btn-price" href="homeclean.html">看價格</a>
+        <button type="button" class="svc-btn-book" onclick="ldOpenQuote('homeclean')">立即預約</button>
+      </div>
+    </div>
+    <div class="svc-card">
       <div class="svc-icon c4">💧</div>
       <div class="svc-title">水管抓漏</div>
       <div class="svc-desc">水管清潔、水塔清洗、漏水檢測與修補，找對師傅一次解決。</div>
       <div class="svc-price">免費初判</div>
-      <div class="svc-link">了解更多 →</div>
-    </a>
+      <div class="svc-actions">
+        <a class="svc-btn-price" href="leak-repair.html">看價格</a>
+        <button type="button" class="svc-btn-book" onclick="ldOpenQuote('leak-repair')">立即預約</button>
+      </div>
+    </div>
   </div>
 </div>
 </section>
@@ -233,7 +251,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </div>
 <div class="footer-copy">
   © <span id="copy-year">2026</span> 灰汰郎　|　LINE：灰汰郎居家服務・免費諮詢<br>
-  本平台為居家服務媒合服務，施工品質由合作廠商負責，平台不承擔施工連帶責任。網站案例與廠商資料為示意內容，實際以 LINE 媒合時確認為準。使用本服務即同意本平台服務條款。
+  灰汰郎為居家服務媒合平台，協助您媒合合適廠商、溝通需求與售後回報；實際施工由合作廠商執行並負責施工品質。網站案例與廠商資料為示意內容，實際內容以 LINE 媒合時確認為準。
 </div>
 </footer>
 
