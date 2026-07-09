@@ -5,6 +5,36 @@
   const LINE = 'https://lin.ee/rjmmYyC';
   const JOIN_FORM = 'https://forms.gle/T4UTULXMaXaoGZQG8';
   const LINE_OA_ID = '@478xvlgl';
+  const PHONE_DISPLAY = '0920-077-473';
+  const PHONE_TEL = 'tel:+886920077473';
+
+  // ── 分析追蹤：把下面的 G-XXXXXXXXXX 換成你的 GA4 評估 ID 即自動啟用 ──
+  const GA4_ID = 'G-XXXXXXXXXX';
+  const gaEnabled = /^G-[A-Z0-9]{6,}$/.test(GA4_ID) && GA4_ID !== 'G-XXXXXXXXXX';
+  if (gaEnabled) {
+    const gs = document.createElement('script');
+    gs.async = true;
+    gs.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA4_ID;
+    document.head.appendChild(gs);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function(){ dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', GA4_ID);
+  }
+  function ldTrack(name, params){
+    if (gaEnabled && window.gtag) gtag('event', name, params || {});
+  }
+  // 全站點擊追蹤：LINE 連結與電話
+  document.addEventListener('click', function(e){
+    const a = e.target.closest && e.target.closest('a');
+    if (!a) return;
+    const href = a.getAttribute('href') || '';
+    if (href.indexOf('lin.ee') !== -1 || href.indexOf('line.me') !== -1) {
+      ldTrack('line_click', { link_url: href, page: location.pathname });
+    } else if (href.indexOf('tel:') === 0) {
+      ldTrack('phone_click', { page: location.pathname });
+    }
+  }, true);
 
   const SERVICE_OPTIONS = ['冷氣清洗','洗衣機清洗','居家清潔（含抽油煙機）','水管清潔・漏水檢測','其他（請於下方說明）'];
   const PAGE_SERVICE = {aircon:'冷氣清洗', washer:'洗衣機清洗', homeclean:'居家清潔（含抽油煙機）', 'leak-repair':'水管清潔・漏水檢測'};
@@ -217,6 +247,12 @@
   padding:11px 18px;border-radius:11px;text-decoration:none;
   box-shadow:0 3px 10px rgba(6,199,85,.35);white-space:nowrap;
 }
+.ld-sticky-tel{
+  flex-shrink:0;width:42px;height:42px;border-radius:11px;
+  background:#1e3a8a;color:#fff;font-size:18px;
+  display:flex;align-items:center;justify-content:center;
+  text-decoration:none;box-shadow:0 3px 10px rgba(30,58,138,.3);
+}
 @media(max-width:1023px){
   body{padding-bottom:66px}
 }
@@ -308,7 +344,7 @@
     {id:'washer',    href:'washer.html',    icon:'\ud83e\uddfa', label:'\u6d17\u8863\u6a5f\u6e05\u6d17', sub:'\u9664\u83cc\u9664\u57a3'},
     {id:'homeclean', href:'homeclean.html', icon:'\ud83e\uddfd', label:'\u5c45\u5bb6\u6e05\u6f54', sub:'\u542b\u62bd\u6cb9\u7159\u6a5f'},
     {id:'leak-repair', href:'leak-repair.html', icon:'\ud83d\udca7', label:'\u6c34\u7ba1\u6293\u6f0f', sub:'\u6f0f\u6c34\u6aa2\u6e2c'},
-    {id:'knowledge', href:'knowledge.html', icon:'\ud83d\udcd6', label:'\u6f0f\u6c34\u767e\u79d1', sub:'\u514d\u8cbb\u77e5\u8b58'},
+    {id:'knowledge', href:'knowledge.html', icon:'\ud83d\udcd6', label:'\u5c45\u5bb6\u767e\u79d1', sub:'\u514d\u8cbb\u77e5\u8b58'},
     {id:'cases',     href:'cases.html',     icon:'\ud83d\udccb', label:'\u65bd\u5de5\u6848\u4f8b', sub:'\u771f\u5be6\u8a18\u9304'},
     {id:'team',      href:'team.html',      icon:'\ud83d\udc77', label:'\u5408\u4f5c\u5ee0\u5546', sub:'\u5e2b\u5085\u4ecb\u7d39'},
     {id:'areas',     href:'areas.html',     icon:'\ud83d\udccd', label:'\u670d\u52d9\u5730\u5340', sub:'\u5230\u5e9c\u7bc4\u570d'},
@@ -352,6 +388,7 @@
         <div class="ld-sticky-title">灰塵髒污，通通汰除</div>
         <div class="ld-sticky-sub">免費諮詢・不施工不收費</div>
       </div>
+      <a href="${PHONE_TEL}" class="ld-sticky-tel" aria-label="撥打電話 ${PHONE_DISPLAY}">📞</a>
       <button type="button" class="ld-sticky-btn" onclick="ldOpenQuote()">📋 線上預約估價</button>
     </div>
     <div id="ld-quote-overlay">
@@ -478,6 +515,7 @@
     }
     qOverlay.classList.add('ld-show');
     document.body.style.overflow = 'hidden';
+    ldTrack('quote_open', { service: serviceKey || page, page: location.pathname });
   };
 
   window.ldCloseQuote = function(){
@@ -536,6 +574,7 @@
         '希望時段：' + timeLabel
       ].join('\n');
 
+      ldTrack('quote_submit', { service: service, page: location.pathname });
       const url = 'https://line.me/R/oaMessage/' + LINE_OA_ID + '/?' + encodeURIComponent(msg);
       window.location.href = url;
       ldCloseQuote();
