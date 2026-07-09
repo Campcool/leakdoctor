@@ -309,6 +309,7 @@
     {id:'knowledge', href:'knowledge.html', icon:'\ud83d\udcd6', label:'\u6f0f\u6c34\u767e\u79d1', sub:'\u514d\u8cbb\u77e5\u8b58'},
     {id:'cases',     href:'cases.html',     icon:'\ud83d\udccb', label:'\u65bd\u5de5\u6848\u4f8b', sub:'\u771f\u5be6\u8a18\u9304'},
     {id:'team',      href:'team.html',      icon:'\ud83d\udc77', label:'\u5408\u4f5c\u5ee0\u5546', sub:'\u5e2b\u5085\u4ecb\u7d39'},
+    {id:'areas',     href:'areas.html',     icon:'\ud83d\udccd', label:'\u670d\u52d9\u5730\u5340', sub:'\u5230\u5e9c\u7bc4\u570d'},
   ];
 
   const tabsHTML = tabs.map(t =>
