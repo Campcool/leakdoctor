@@ -2,7 +2,7 @@
   function ldInit(){
   const path = location.pathname.split('/').pop() || 'index.html';
   const page = path.replace('.html','') || 'index';
-  const LINE = 'https://lin.ee/rjmmYyC';
+  const LINE = 'https://lin.ee/WVxmY65';
   const JOIN_FORM = 'https://forms.gle/T4UTULXMaXaoGZQG8';
   const LINE_OA_ID = '@478xvlgl';
   const PHONE_DISPLAY = '0920-077-473';
