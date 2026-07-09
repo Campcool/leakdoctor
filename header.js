@@ -201,13 +201,12 @@
 
   // SVG 定義
   const LOGO = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-    <path d="M22 18L22 52Q22 72 42 72Q62 72 62 52L62 44" fill="none" stroke="#0d9488" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="22" cy="16" r="8" fill="#0d9488"/><circle cx="22" cy="16" r="4" fill="#f0fdfa"/>
-    <circle cx="62" cy="42" r="8" fill="#0d9488"/><circle cx="62" cy="42" r="4" fill="#f0fdfa"/>
-    <path d="M42 56C42 56 24 72 24 84C24 93 32 100 42 100C52 100 60 93 60 84C60 72 42 56 42 56Z" fill="#1d4ed8" stroke="#60a5fa" stroke-width="2"/>
-    <path d="M33 84Q42 76 51 84" fill="none" stroke="#93c5fd" stroke-width="2.5" stroke-linecap="round"/>
-    <path d="M36 91Q42 86 48 91" fill="none" stroke="#bfdbfe" stroke-width="2" stroke-linecap="round"/>
-  </svg>`;
+    <circle cx="50" cy="50" r="46" fill="#1e3a8a"/>
+    <circle cx="50" cy="50" r="46" fill="none" stroke="#93c5fd" stroke-width="2"/>
+    <path d="M50 20L56 42L78 48L56 54L50 76L44 54L22 48L44 42Z" fill="#ffffff"/>
+    <circle cx="76" cy="24" r="6" fill="#06C755"/>
+    <circle cx="76" cy="24" r="2.4" fill="#ffffff"/>
+  </svg>`
 
   const LINE_ICON = `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" width="18" height="18" style="display:block;flex-shrink:0">
     <rect width="48" height="48" rx="10" fill="#fff"/>
@@ -222,13 +221,14 @@
 
   // 頁籤
   const tabs = [
-    {id:'index',    href:'index.html',               icon:'🏠', label:'首頁',     sub:'回主頁'},
-    {id:'knowledge',href:'knowledge.html',           icon:'📖', label:'漏水百科', sub:'免費知識'},
-    {id:'cases',    href:'cases.html',               icon:'📋', label:'施工案例', sub:'真實記錄'},
-    {id:'team',     href:'team.html',                icon:'👷', label:'合作廠商', sub:'師傅介紹'},
-    {id:'pricing',  href:'index.html#pricing',       icon:'💰', label:'費用行情', sub:'透明報價'},
-    {id:'area',     href:'index.html#service-area',  icon:'📍', label:'服務地區', sub:'全台本島'},
-    {id:'protect',  href:'index.html#consumer-protect', icon:'🛡️', label:'消費者保障', sub:'避免踩雷'},
+    {id:'index',     href:'index.html',     icon:'\ud83c\udfe0', label:'\u9996\u9801',     sub:'\u670d\u52d9\u7e3d\u89bd'},
+    {id:'aircon',    href:'aircon.html',    icon:'\u2744\ufe0f', label:'\u51b7\u6c23\u6e05\u6d17', sub:'\u5230\u5e9c\u6d17\u6de8'},
+    {id:'washer',    href:'washer.html',    icon:'\ud83e\uddfa', label:'\u6d17\u8863\u6a5f\u6e05\u6d17', sub:'\u9664\u83cc\u9664\u57a3'},
+    {id:'homeclean', href:'homeclean.html', icon:'\ud83e\uddfd', label:'\u5c45\u5bb6\u6e05\u6f54', sub:'\u542b\u62bd\u6cb9\u7159\u6a5f'},
+    {id:'leak-repair', href:'leak-repair.html', icon:'\ud83d\udca7', label:'\u6c34\u7ba1\u6293\u6f0f', sub:'\u6f0f\u6c34\u6aa2\u6e2c'},
+    {id:'knowledge', href:'knowledge.html', icon:'\ud83d\udcd6', label:'\u6f0f\u6c34\u767e\u79d1', sub:'\u514d\u8cbb\u77e5\u8b58'},
+    {id:'cases',     href:'cases.html',     icon:'\ud83d\udccb', label:'\u65bd\u5de5\u6848\u4f8b', sub:'\u771f\u5be6\u8a18\u9304'},
+    {id:'team',      href:'team.html',      icon:'\ud83d\udc77', label:'\u5408\u4f5c\u5ee0\u5546', sub:'\u5e2b\u5085\u4ecb\u7d39'},
   ];
 
   const tabsHTML = tabs.map(t =>
@@ -253,8 +253,8 @@
         <a class="ld-brand" href="index.html">
           <div class="ld-logo">${LOGO}</div>
           <div class="ld-texts">
-            <span class="ld-name">台灣漏水醫生</span>
-            <span class="ld-sub">漏水狀況回報・免費諮詢・媒合廠商・款項第三方保管</span>
+            <span class="ld-name">灰汰郎</span>
+            <span class="ld-sub">冷氣・洗衣機・居家清潔・水管抓漏，一站到府服務</span>
           </div>
         </a>
         <a href="${LINE}" target="_blank" rel="noopener" class="ld-line-btn">
