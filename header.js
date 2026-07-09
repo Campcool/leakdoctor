@@ -186,9 +186,36 @@
   .ld-tab-sub{display:block}
 }
 
-#ld-back-top{position:fixed;right:14px;bottom:24px;z-index:9990;width:42px;height:42px;border-radius:50%;background:#1e3a8a;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;box-shadow:0 2px 12px rgba(30,58,138,.35);opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;pointer-events:none;}
+#ld-back-top{position:fixed;right:14px;bottom:80px;z-index:9990;width:42px;height:42px;border-radius:50%;background:#1e3a8a;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;box-shadow:0 2px 12px rgba(30,58,138,.35);opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;pointer-events:none;}
+@media(min-width:1024px){#ld-back-top{bottom:24px}}
 #ld-back-top.ld-show{opacity:1;transform:translateY(0);pointer-events:auto}
 #ld-back-top:hover{background:#1d4ed8}
+
+/* Sticky 底部 CTA Bar */
+#ld-stickybar{
+  position:fixed;left:0;right:0;bottom:0;z-index:9989;
+  display:flex;align-items:center;gap:10px;
+  background:#ffffff;
+  border-top:2px solid #e5e7eb;
+  box-shadow:0 -4px 16px rgba(0,0,0,.08);
+  padding:10px 14px;
+  padding-bottom:calc(10px + env(safe-area-inset-bottom));
+}
+.ld-sticky-text{flex:1;min-width:0}
+.ld-sticky-title{font-size:13px;font-weight:900;color:#111827;line-height:1.3}
+.ld-sticky-sub{font-size:10.5px;color:#6b7280;line-height:1.3}
+.ld-sticky-btn{
+  flex-shrink:0;display:flex;align-items:center;gap:6px;
+  background:#06C755;color:#fff;font-weight:700;font-size:13.5px;
+  padding:11px 18px;border-radius:11px;text-decoration:none;
+  box-shadow:0 3px 10px rgba(6,199,85,.35);white-space:nowrap;
+}
+@media(max-width:1023px){
+  body{padding-bottom:66px}
+}
+@media(min-width:1024px){
+  #ld-stickybar{display:none}
+}
 `;
 
   // 注入 CSS
@@ -264,7 +291,14 @@
       </div>
       <nav class="ld-nav">${tabsHTML}</nav>
     </header>
-    <button id="ld-back-top" onclick="window.scrollTo({top:0,behavior:\'smooth\'})" title="回到頂部">↑</button>`;
+    <button id="ld-back-top" onclick="window.scrollTo({top:0,behavior:\'smooth\'})" title="回到頂部">↑</button>
+    <div id="ld-stickybar">
+      <div class="ld-sticky-text">
+        <div class="ld-sticky-title">灰塵髒污，通通汰除</div>
+        <div class="ld-sticky-sub">免費諮詢・不施工不收費</div>
+      </div>
+      <a href="${LINE}" target="_blank" rel="noopener" class="ld-sticky-btn">📲 免費諮詢</a>
+    </div>`;
 
   // 移除舊版 header
   ['ld-header','site-header','ld-float','hdr-float','float-line'].forEach(id => {
