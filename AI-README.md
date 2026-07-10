@@ -125,3 +125,10 @@ master_*.jpg                   漏水師傅頭像（master_08/16 不存在，頁
 ---
 
 *每次修改完成，請更新 §5 進度紀錄（加日期與執行者）、勾選或增補 §7 待辦，然後與程式碼一併 commit。*
+---
+
+## Codex 備註索引（2026-07-10 08:50 Asia/Taipei）
+
+- Codex 已讀取 GitHub 最新 `main`、`AI-README.md`、`CLAUDE.md`、`docs/BOT-PLAN.md`、網站頁面、`header.js`、`llms.txt`，並參考 Google / Cloudflare / LINE 官方文件補充評估。
+- 完整補充文件：`docs/CODEX-REVIEW-2026-07-10.md`
+- 原則：此段為 Codex 追加備註，不覆蓋 Claude 原始紀錄；後續 AI 可接續閱讀並追加各自時間戳備註。
