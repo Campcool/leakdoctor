@@ -1,0 +1,380 @@
+{
+  "version": "2026-07-10T09:07:00+08:00",
+  "owner": "graytailang",
+  "purpose": "Shared service option database for website estimator, LINE Bot quick replies, AI tool calls, and future D1 seed data.",
+  "currency": "TWD",
+  "pricing_policy": {
+    "public_fixed_prices": "Only use prices already confirmed in AI-README.md / live website.",
+    "quote_required": "Do not invent final prices. Ask for photos/details and create a draft order for human confirmation.",
+    "ai_rule": "AI may explain price basis and estimate workflow, but final quote for quote_required items must be confirmed by owner/partner."
+  },
+  "quick_select_flow": [
+    {
+      "step": "service_group",
+      "label": "想預約哪一類服務？",
+      "options": ["冷氣清洗", "洗衣機清洗", "水塔清洗", "其他居家清潔"]
+    },
+    {
+      "step": "equipment_type",
+      "label": "請選擇機型/水塔類型",
+      "source": "service_groups.*.options"
+    },
+    {
+      "step": "quantity_or_capacity",
+      "label": "請選擇數量或容量",
+      "source": "selected_option.quantity_selector"
+    },
+    {
+      "step": "area",
+      "label": "服務地區在哪裡？",
+      "options": ["台北市", "新北市", "基隆市", "桃園市", "新竹縣市", "苗栗縣", "台中市", "其他地區先詢問"]
+    },
+    {
+      "step": "preferred_time",
+      "label": "希望什麼時段？",
+      "options": ["平日上午", "平日下午", "平日晚上", "週末", "都可以"]
+    },
+    {
+      "step": "contact",
+      "label": "留下稱呼與電話，方便安排師傅"
+    }
+  ],
+  "service_groups": [
+    {
+      "id": "aircon_cleaning",
+      "label": "冷氣清洗",
+      "customer_prompt": "請選擇冷氣機型",
+      "default_unit": "台",
+      "handoff_rules": [
+        "商用空調、四方吹、吊隱式超過 3 台、高樓層外機清洗、需拆天花板、油煙/餐飲環境、漏水/不冷/異音維修問題"
+      ],
+      "options": [
+        {
+          "id": "wall_mounted_split",
+          "label": "壁掛分離式",
+          "short_label": "壁掛",
+          "aliases": ["壁掛", "壁掛式", "分離式", "一對一", "掛牆", "室內機掛牆"],
+          "customer_description": "最常見的家用分離式冷氣，室內機掛在牆面。",
+          "pricing": {
+            "status": "fixed",
+            "base_price": 1499,
+            "price_unit": "per_indoor_unit",
+            "source": "AI-README.md confirmed price anchor"
+          },
+          "quantity_selector": {
+            "type": "count",
+            "label": "幾台壁掛冷氣？",
+            "min": 1,
+            "max": 10,
+            "quick_options": [1, 2, 3, 4, "5 台以上"]
+          },
+          "required_fields": ["quantity", "area", "preferred_time", "customer_name", "phone"],
+          "optional_fields": ["brand", "tonnage", "has_outdoor_unit_cleaning", "heavy_oil_or_mold", "photo_url"],
+          "ai_notes": "若客戶提到不冷、漏水、異音，應轉為維修/檢測，不可只報清洗價。"
+        },
+        {
+          "id": "ceiling_concealed",
+          "label": "吊隱式冷氣",
+          "short_label": "吊隱",
+          "aliases": ["吊隱", "吊隱式", "隱藏式", "天花板裡", "風管機", "出風口在天花板"],
+          "customer_description": "室內機藏在天花板內，通常透過出風口送風。",
+          "pricing": {
+            "status": "fixed",
+            "base_price": 2599,
+            "price_unit": "per_indoor_unit",
+            "source": "AI-README.md confirmed price anchor"
+          },
+          "quantity_selector": {
+            "type": "count",
+            "label": "幾台吊隱式冷氣？",
+            "min": 1,
+            "max": 8,
+            "quick_options": [1, 2, 3, "4 台以上"]
+          },
+          "required_fields": ["quantity", "area", "preferred_time", "customer_name", "phone"],
+          "optional_fields": ["access_panel_exists", "ceiling_height", "brand", "tonnage", "photo_url"],
+          "ai_notes": "若沒有維修孔、天花板過高或需要拆裝裝潢，需人工確認。"
+        },
+        {
+          "id": "ceiling_cassette_4way",
+          "label": "四方吹冷氣",
+          "short_label": "四方吹",
+          "aliases": ["四方吹", "四面吹", "嵌入式", "卡式", "cassette", "天花板方形冷氣"],
+          "customer_description": "常見於辦公室、店面、商業空間，方形面板嵌在天花板。",
+          "pricing": {
+            "status": "quote_required",
+            "base_price": null,
+            "price_unit": "per_indoor_unit",
+            "reason": "需確認機型大小、天花高度、面板狀況、現場排水與施工空間。"
+          },
+          "quantity_selector": {
+            "type": "count",
+            "label": "幾台四方吹？",
+            "min": 1,
+            "max": 20,
+            "quick_options": [1, 2, 3, 4, "5 台以上"]
+          },
+          "required_fields": ["quantity", "area", "preferred_time", "photo_url", "customer_name", "phone"],
+          "optional_fields": ["ceiling_height", "business_type", "parking_or_loading_info", "brand", "tonnage"],
+          "ai_notes": "只可說明會依照片/現場條件確認報價，不可自行報固定價。"
+        },
+        {
+          "id": "commercial_aircon",
+          "label": "商用冷氣",
+          "short_label": "商用",
+          "aliases": ["商用", "商業空間", "辦公室冷氣", "店面冷氣", "箱型", "落地式", "中央空調", "VRV", "VRF"],
+          "customer_description": "辦公室、店面、餐飲、商場、廠辦等非一般家用機型。",
+          "pricing": {
+            "status": "quote_required",
+            "base_price": null,
+            "price_unit": "case",
+            "reason": "商用空調差異大，需依機型、數量、位置、營業環境與施工限制報價。"
+          },
+          "quantity_selector": {
+            "type": "count_or_case",
+            "label": "約幾台或多大空間？",
+            "quick_options": ["1-2 台", "3-5 台", "6-10 台", "10 台以上", "不確定，請協助判斷"]
+          },
+          "required_fields": ["area", "business_type", "photo_url", "customer_name", "phone"],
+          "optional_fields": ["quantity", "floor_area_ping", "ceiling_height", "preferred_non_business_hours", "parking_or_loading_info"],
+          "ai_notes": "餐飲油煙、夜間施工、百貨/大樓進場限制一定轉人工。"
+        },
+        {
+          "id": "window_aircon",
+          "label": "窗型冷氣",
+          "short_label": "窗型",
+          "aliases": ["窗型", "窗口式", "窗戶冷氣", "窗型機"],
+          "customer_description": "整台機器安裝在窗戶或牆洞內。",
+          "pricing": {
+            "status": "fixed",
+            "base_price": 3000,
+            "price_unit": "per_unit",
+            "source": "AI-README.md confirmed price anchor"
+          },
+          "quantity_selector": {
+            "type": "count",
+            "label": "幾台窗型冷氣？",
+            "min": 1,
+            "max": 5,
+            "quick_options": [1, 2, 3, "4 台以上"]
+          },
+          "required_fields": ["quantity", "area", "preferred_time", "customer_name", "phone"],
+          "optional_fields": ["installation_height", "photo_url"],
+          "ai_notes": "窗型可能涉及拆裝與重量，若安裝位置危險需人工確認。"
+        }
+      ]
+    },
+    {
+      "id": "washer_cleaning",
+      "label": "洗衣機清洗",
+      "customer_prompt": "請選擇洗衣機類型",
+      "default_unit": "台",
+      "handoff_rules": [
+        "洗衣機無法排水、故障碼、漏水、搬移困難、堆疊安裝、嵌入櫃體、商用投幣機"
+      ],
+      "options": [
+        {
+          "id": "top_load_washer",
+          "label": "直立式洗衣機",
+          "short_label": "直立式",
+          "aliases": ["直立", "直立式", "上掀式", "上開式", "波輪式", "葉輪式"],
+          "customer_description": "上方開蓋的常見家用洗衣機。",
+          "pricing": {
+            "status": "fixed",
+            "base_price": 1299,
+            "price_unit": "per_unit",
+            "source": "AI-README.md confirmed price anchor"
+          },
+          "quantity_selector": {
+            "type": "count",
+            "label": "幾台直立式洗衣機？",
+            "min": 1,
+            "max": 5,
+            "quick_options": [1, 2, "3 台以上"]
+          },
+          "capacity_selector": {
+            "type": "kg_range",
+            "label": "容量大約幾公斤？",
+            "quick_options": ["10kg 以下", "11-15kg", "16kg 以上", "不確定"]
+          },
+          "required_fields": ["quantity", "area", "preferred_time", "customer_name", "phone"],
+          "optional_fields": ["capacity_kg", "brand", "years_used", "has_dryer", "photo_url"],
+          "ai_notes": "若客戶說洗脫烘或前開門，多半是滾筒式，不要歸到直立式。"
+        },
+        {
+          "id": "front_load_drum_washer",
+          "label": "滾筒式洗衣機",
+          "short_label": "滾筒",
+          "aliases": ["滾筒", "滾筒式", "前開式", "前置式", "洗脫烘", "洗烘脫", "大眼仔"],
+          "customer_description": "前方開門，常見於洗脫烘或歐式洗衣機。",
+          "pricing": {
+            "status": "fixed",
+            "base_price": 2999,
+            "price_unit": "per_unit",
+            "source": "AI-README.md confirmed price anchor"
+          },
+          "quantity_selector": {
+            "type": "count",
+            "label": "幾台滾筒式洗衣機？",
+            "min": 1,
+            "max": 5,
+            "quick_options": [1, 2, "3 台以上"]
+          },
+          "capacity_selector": {
+            "type": "kg_range",
+            "label": "容量大約幾公斤？",
+            "quick_options": ["10kg 以下", "11-15kg", "16kg 以上", "不確定"]
+          },
+          "required_fields": ["quantity", "area", "preferred_time", "photo_url", "customer_name", "phone"],
+          "optional_fields": ["capacity_kg", "brand", "has_dryer", "is_stacked", "is_built_in", "years_used"],
+          "ai_notes": "滾筒式若是堆疊、嵌入櫃體或需搬移，需人工確認可否施工。"
+        },
+        {
+          "id": "commercial_washer",
+          "label": "商用/投幣洗衣機",
+          "short_label": "商用",
+          "aliases": ["商用洗衣機", "投幣式", "自助洗衣", "大型洗衣機", "洗衣店"],
+          "customer_description": "自助洗衣店、宿舍、公用空間或商用大型機台。",
+          "pricing": {
+            "status": "quote_required",
+            "base_price": null,
+            "price_unit": "case",
+            "reason": "商用機型、容量、拆裝方式差異大，需照片與型號確認。"
+          },
+          "quantity_selector": {
+            "type": "count_or_case",
+            "label": "約幾台商用洗衣機？",
+            "quick_options": ["1 台", "2-3 台", "4 台以上", "不確定"]
+          },
+          "required_fields": ["quantity", "area", "photo_url", "customer_name", "phone"],
+          "optional_fields": ["machine_model", "business_type", "preferred_non_business_hours"],
+          "ai_notes": "商用設備先建立案件，不要直接承諾可拆洗。"
+        }
+      ]
+    },
+    {
+      "id": "water_tank_cleaning",
+      "label": "水塔清洗",
+      "customer_prompt": "請選擇水塔類型",
+      "default_unit": "座/顆",
+      "handoff_rules": [
+        "水泥水塔、地下蓄水池、上下水塔同時清洗、大樓/社區、需要停水公告、密閉空間、無安全通道、容量不明"
+      ],
+      "options": [
+        {
+          "id": "rooftop_stainless_tank",
+          "label": "屋頂不鏽鋼/塑膠水塔",
+          "short_label": "屋頂水塔",
+          "aliases": ["屋頂水塔", "上水塔", "不鏽鋼水塔", "白鐵水塔", "塑膠水塔", "FRP水塔", "一顆水塔"],
+          "customer_description": "一般透天、公寓頂樓常見，以顆數與容量估價。",
+          "pricing": {
+            "status": "quote_required",
+            "base_price": null,
+            "price_unit": "per_tank",
+            "reason": "需依容量、顆數、樓層、通道與水塔髒污程度確認。"
+          },
+          "quantity_selector": {
+            "type": "count",
+            "label": "有幾顆水塔？",
+            "min": 1,
+            "max": 20,
+            "quick_options": [1, 2, 3, 4, "5 顆以上", "不確定"]
+          },
+          "capacity_selector": {
+            "type": "liter_or_ton_range",
+            "label": "單顆容量大約多大？",
+            "quick_options": ["500L / 0.5 噸", "1000L / 1 噸", "1500L / 1.5 噸", "2000L / 2 噸", "3000L / 3 噸", "5000L / 5 噸以上", "不確定"]
+          },
+          "required_fields": ["quantity", "area", "access_condition", "preferred_time", "customer_name", "phone"],
+          "optional_fields": ["capacity_liters", "floor_count", "has_ladder", "photo_url", "needs_water_shutdown_notice"],
+          "ai_notes": "1 公噸水約等於 1000 公升，可協助客戶用水塔標籤或照片判斷。"
+        },
+        {
+          "id": "concrete_upper_tank",
+          "label": "水泥上水塔",
+          "short_label": "水泥上塔",
+          "aliases": ["水泥水塔", "水泥上水塔", "頂樓水泥水塔", "RC水塔", "混凝土水塔"],
+          "customer_description": "建築物頂樓或高處的水泥/混凝土蓄水槽。",
+          "pricing": {
+            "status": "quote_required",
+            "base_price": null,
+            "price_unit": "case",
+            "reason": "水泥水塔需確認容量、入口尺寸、排水方式、安全通道與停水安排。"
+          },
+          "quantity_selector": {
+            "type": "case",
+            "label": "約幾座水泥上水塔？",
+            "quick_options": ["1 座", "2 座", "3 座以上", "不確定"]
+          },
+          "capacity_selector": {
+            "type": "unknown_allowed",
+            "label": "容量是否知道？",
+            "quick_options": ["5 噸以下", "6-10 噸", "11-20 噸", "20 噸以上", "不確定"]
+          },
+          "required_fields": ["area", "building_type", "photo_url", "customer_name", "phone"],
+          "optional_fields": ["capacity_tons", "manhole_size", "drainage_method", "needs_water_shutdown_notice", "management_committee_contact"],
+          "ai_notes": "水泥水塔一律先蒐集照片與現場條件，再人工確認。"
+        },
+        {
+          "id": "concrete_lower_tank",
+          "label": "水泥下水塔/地下蓄水池",
+          "short_label": "下水塔",
+          "aliases": ["下水塔", "地下水塔", "地下蓄水池", "水泥下水塔", "蓄水池", "地下水池"],
+          "customer_description": "地下室或一樓低處的蓄水池，常見於大樓、社區、店面或透天。",
+          "pricing": {
+            "status": "quote_required",
+            "base_price": null,
+            "price_unit": "case",
+            "reason": "需確認容量、入口、抽水/排水、通風、安全與停水安排。"
+          },
+          "quantity_selector": {
+            "type": "case",
+            "label": "是否有下水塔/地下蓄水池？",
+            "quick_options": ["只有下水塔", "上水塔 + 下水塔", "不確定"]
+          },
+          "capacity_selector": {
+            "type": "unknown_allowed",
+            "label": "容量是否知道？",
+            "quick_options": ["5 噸以下", "6-10 噸", "11-20 噸", "20 噸以上", "不確定"]
+          },
+          "required_fields": ["area", "building_type", "photo_url", "customer_name", "phone"],
+          "optional_fields": ["capacity_tons", "basement_access", "drainage_method", "needs_water_shutdown_notice", "management_committee_contact"],
+          "ai_notes": "地下蓄水池涉及密閉空間與安全，AI 不可承諾施工，需人工確認。"
+        },
+        {
+          "id": "upper_and_lower_tanks",
+          "label": "上下水塔一起清洗",
+          "short_label": "上下水塔",
+          "aliases": ["上下水塔", "上水塔下水塔", "整棟水塔", "大樓水塔清洗", "社區水塔清洗"],
+          "customer_description": "同時清洗屋頂水塔與地下/低處蓄水池。",
+          "pricing": {
+            "status": "quote_required",
+            "base_price": null,
+            "price_unit": "case",
+            "reason": "需依顆數、容量、停水時段、社區規模與施工安全報價。"
+          },
+          "quantity_selector": {
+            "type": "mixed",
+            "label": "請選擇大概狀況",
+            "quick_options": ["透天 1-2 顆", "公寓 3-5 顆", "社區/大樓", "不確定，請協助判斷"]
+          },
+          "required_fields": ["area", "building_type", "photo_url", "customer_name", "phone"],
+          "optional_fields": ["upper_tank_count", "lower_tank_count", "capacity_tons", "needs_water_shutdown_notice", "management_committee_contact"],
+          "ai_notes": "適合建立 draft order 後由人工確認。可詢問是否需公告停水、是否有管委會窗口。"
+        }
+      ]
+    }
+  ],
+  "ai_intent_mapping": {
+    "aircon_cleaning": ["冷氣清洗", "冷氣很臭", "冷氣發霉", "冷氣多久沒洗", "洗冷氣"],
+    "washer_cleaning": ["洗衣機清洗", "洗衣機很臭", "洗衣槽", "洗脫烘清洗", "洗衣機拆洗"],
+    "water_tank_cleaning": ["水塔清洗", "洗水塔", "水泥水塔", "上水塔", "下水塔", "地下蓄水池"]
+  },
+  "human_handoff_rules": [
+    "客戶詢問保固、客訴、殺價、退款",
+    "客戶描述漏水、不冷、異音、故障碼等維修問題",
+    "服務項目的 pricing.status 為 quote_required 且照片/容量/現場條件不足",
+    "商用、大樓、社區、管委會或需停水公告案件",
+    "AI 信心不足或工具查詢失敗"
+  ]
+}
