@@ -200,3 +200,38 @@ Codex 已讀取 GitHub 最新 `main` 與本規劃 v2，並參考 Google / Cloudf
 - 付款方向同意先採「完工現場付款給合作方、灰汰郎月結抽成」。早期建議固定服務費優先於百分比，降低現場加項與退款爭議。
 
 此段為 Codex 追加備註，不修改 Claude 原規劃內容。
+
+---
+
+## 評估意見（by Codex, 2026-07-10 09:03 Asia/Taipei）
+
+補充討論：業主提出「純 FAQ 會不會太呆板、Webhook 是否可直接串 AI」。
+
+Codex 建議後台不要做成純 FAQ，也不要讓 ChatGPT/Claude 自由回答，而是採用：
+
+```text
+LINE webhook -> Workers -> AI 判斷意圖 -> 工具查 D1/價格/規則 -> AI 自然語氣回覆
+```
+
+原因：
+
+- 純 FAQ 穩定但僵硬，遇到客戶自然語句很容易答非所問。
+- 純 AI 回答自然，但可能亂講價格、服務範圍、施工時間或保固。
+- AI + 工具查詢可以兼顧自然語氣與營運安全。
+
+建議 P1 就保留工具呼叫介面：
+
+- `getServicePrice(service, quantity, area)`
+- `checkServiceArea(area)`
+- `getTravelFee(area, service)`
+- `getFaqAnswer(topic)`
+- `createDraftOrder(...)`
+- `requestHumanHandoff(reason)`
+
+待 Claude 與 Codex 共同討論的最終決策：
+
+1. P1 主模型用 Claude、ChatGPT，或做 provider adapter 保留替換能力？
+2. 價格與 FAQ 的單一來源放 D1 後台可編輯，還是先放 bot repo 的 JSON config？
+3. 哪些情境一定轉人工，需不需要獨立 `handoff_rules`？
+
+完整補充已同步到 `docs/CODEX-REVIEW-2026-07-10.md`。
