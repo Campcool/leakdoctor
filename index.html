@@ -7,8 +7,8 @@
 <meta name="description" content="灰汰郎居家服務媒合平台：冷氣清洗、洗衣機清洗、居家清潔（含抽油煙機）、水管清潔與漏水檢測，全台到府服務，LINE免費諮詢，透明報價。">
 <meta name="keywords" content="灰汰郎,冷氣清洗,洗衣機清洗,居家清潔,抽油煙機清洗,水塔清洗,水管清洗,漏水檢測,到府清潔,居家服務媒合">
 <link rel="canonical" href="https://leakdoctor.tw/">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="alternate icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="alternate icon" href="/favicon.ico">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://leakdoctor.tw/">
 <meta property="og:title" content="灰汰郎｜冷氣・洗衣機・居家清潔・水管抓漏 到府服務媒合">
@@ -22,25 +22,27 @@
 <meta name="twitter:title" content="灰汰郎｜冷氣・洗衣機・居家清潔・水管抓漏 到府服務媒合">
 <meta name="twitter:description" content="灰塵髒污，通通汰除。全台到府服務，LINE免費諮詢。">
 <meta name="twitter:image" content="https://leakdoctor.tw/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "灰汰郎",
-  "alternateName": "LeakDoctor.tw",
+  "alternateName": ["LeakDoctor.tw", "台灣漏水醫生"],
   "url": "https://leakdoctor.tw",
-  "logo": "https://leakdoctor.tw/favicon.svg",
+  "logo": "https://leakdoctor.tw/logo/logos/logo-master-transparent.png",
   "description": "灰汰郎居家服務媒合平台，提供冷氣清洗、洗衣機清洗、居家清潔、水管清潔與漏水檢測，全台到府服務。",
   "areaServed": {"@type": "Country", "name": "台灣"},
   "serviceType": ["冷氣清洗", "洗衣機清洗", "居家清潔", "抽油煙機清洗", "水塔清洗", "水管清洗", "漏水檢測維修"],
   "contactPoint": {
     "@type": "ContactPoint",
     "contactType": "customer service",
-    "url": "https://lin.ee/rjmmYyC",
+    "url": "https://lin.ee/WVxmY65",
     "availableLanguage": "Chinese"
   },
-  "sameAs": ["https://lin.ee/rjmmYyC"]
+  "sameAs": ["https://lin.ee/WVxmY65"]
 }
 </script>
 <style>
@@ -48,6 +50,7 @@
 html{scroll-behavior:smooth}
 body{font-family:'Noto Sans TC',sans-serif;color:#1a202c;background:#f8fafc;line-height:1.8;font-size:17px;margin:0;padding-top:100px}
 a{text-decoration:none;color:inherit}
+button{font:inherit;border:none;cursor:pointer}
 img{display:block;max-width:100%}
 :root{
   --blue:#1d4ed8;--blue-dark:#1e3a8a;--blue-light:#eff6ff;--blue-mid:#3b82f6;
@@ -91,6 +94,42 @@ img{display:block;max-width:100%}
 .svc-desc{font-size:.85rem;color:var(--gray-500);line-height:1.7;flex:1}
 .svc-price{font-size:.78rem;font-weight:700;color:var(--blue);background:var(--blue-light);display:inline-block;padding:.28rem .75rem;border-radius:99px;width:fit-content}
 .svc-link{font-size:.86rem;font-weight:700;color:var(--blue);display:flex;align-items:center;gap:.3rem;margin-top:.2rem}
+.svc-actions{display:flex;gap:.5rem;margin-top:.35rem}
+.svc-btn-price,.svc-btn-book{flex:1;text-align:center;font-size:.85rem;font-weight:700;padding:.6rem .5rem;border-radius:10px;transition:.15s}
+.svc-btn-price{color:var(--blue);background:var(--blue-light);border:1.5px solid #dbeafe}
+.svc-btn-price:hover{background:#dbeafe}
+.svc-btn-book{color:#fff;background:#06C755;cursor:pointer;box-shadow:0 2px 8px rgba(6,199,85,.3)}
+.svc-btn-book:hover{background:#05b34c}
+
+/* 快速估價器 */
+#estimator{padding:2.6rem 1.25rem;background:linear-gradient(180deg,#eef2ff,#f8fafc)}
+.est-inner{max-width:720px;margin:0 auto}
+.est-head{text-align:center;margin-bottom:1.4rem}
+.est-title{font-size:1.5rem;font-weight:900;color:var(--gray-900);line-height:1.25;margin:.35rem 0 .35rem}
+.est-sub{font-size:.9rem;color:var(--gray-500)}
+.est-card{background:#fff;border:2px solid var(--gray-200);border-radius:18px;padding:1.4rem 1.25rem;box-shadow:0 6px 24px rgba(30,58,138,.08)}
+.est-step{margin-bottom:1.15rem}
+.est-step-label{display:flex;align-items:center;gap:.5rem;font-size:.95rem;font-weight:800;color:var(--gray-900);margin-bottom:.7rem}
+.est-num{width:24px;height:24px;border-radius:50%;background:var(--blue-dark);color:#fff;font-size:.8rem;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.est-opts{display:flex;flex-wrap:wrap;gap:.55rem}
+.est-opt{font-size:.88rem;font-weight:700;color:var(--gray-700);background:var(--gray-50);border:1.5px solid var(--gray-200);border-radius:11px;padding:.6rem 1rem;cursor:pointer;transition:.15s;display:flex;align-items:center;gap:.4rem}
+.est-opt:hover{border-color:var(--blue-mid)}
+.est-opt.est-on{background:var(--blue-dark);color:#fff;border-color:var(--blue-dark)}
+.est-extra{margin-top:.9rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center}
+.est-qty,.est-ping{display:flex;align-items:center;gap:.6rem;font-size:.85rem;font-weight:700;color:var(--gray-700)}
+.est-stepper{display:flex;align-items:center;gap:.2rem;border:1.5px solid var(--gray-200);border-radius:10px;overflow:hidden}
+.est-stepper button{width:36px;height:36px;background:var(--gray-50);color:var(--blue-dark);font-size:1.1rem;font-weight:900;border:none;cursor:pointer}
+.est-stepper button:hover{background:var(--blue-light)}
+.est-stepper span{min-width:36px;text-align:center;font-weight:800;color:var(--gray-900)}
+.est-ping input{width:96px;padding:.5rem .7rem;border:1.5px solid var(--gray-200);border-radius:9px;font-size:.9rem;font-family:inherit}
+.est-ping input:focus{outline:none;border-color:var(--blue-dark)}
+.est-result{margin-top:.3rem;background:linear-gradient(135deg,var(--blue-light),#e0e7ff);border:1.5px solid #c7d2fe;border-radius:14px;padding:1.15rem 1.2rem;text-align:center}
+.est-result-label{font-size:.78rem;font-weight:700;color:var(--blue);letter-spacing:.04em}
+.est-result-price{font-size:1.7rem;font-weight:900;color:var(--blue-dark);line-height:1.2;margin:.25rem 0}
+.est-result-note{font-size:.8rem;color:var(--gray-600);line-height:1.6;margin-bottom:.9rem}
+.est-book-btn{background:#06C755;color:#fff;font-weight:800;font-size:.95rem;padding:.8rem 1.5rem;border-radius:11px;cursor:pointer;box-shadow:0 3px 12px rgba(6,199,85,.35);width:100%}
+.est-book-btn:hover{background:#05b34c}
+.est-foot{font-size:.75rem;color:var(--gray-400);text-align:center;margin-top:.9rem;line-height:1.6}
 
 #promises{padding:2.5rem 1.25rem;background:#fff}
 .promises-inner{max-width:1200px;margin:0 auto}
@@ -140,11 +179,40 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   <h1 class="hero-h1">居家大小事<br><em>灰汰郎</em>幫你搞定</h1>
   <p class="hero-desc">冷氣清洗、洗衣機清洗、居家清潔（含抽油煙機）、水管清潔與漏水檢測——描述你的需求，我們快速媒合合適的到府服務廠商，LINE 諮詢完全免費。</p>
   <div class="trust-badges"><span class="trust-badge">🛡️ 廠商保固服務</span><span class="trust-badge">📋 車馬費透明公開</span><span class="trust-badge">🚗 不施工不收費</span></div>
-  <a href="https://lin.ee/rjmmYyC" target="_blank" rel="noopener" class="hero-btn">
-    📲&nbsp;免費 Line 諮詢，快速預約
+  <button type="button" class="hero-btn" onclick="ldOpenQuote()">
+    📋&nbsp;線上快速預約估價
     <span class="hero-btn-sub">（不收諮詢費）</span>
-  </a>
+  </button>
 </div>
+</section>
+
+<!-- 快速估價器 -->
+<section id="estimator">
+  <div class="est-inner">
+    <div class="est-head">
+      <div class="sec-tag blue">30 秒估價</div>
+      <h2 class="est-title">快速估價，先看行情再預約</h2>
+      <p class="est-sub">選服務、選細項，立即看到參考價格</p>
+    </div>
+    <div class="est-card">
+      <div class="est-step">
+        <div class="est-step-label"><span class="est-num">1</span>選擇服務</div>
+        <div class="est-opts" id="est-services"></div>
+      </div>
+      <div class="est-step" id="est-step2" style="display:none">
+        <div class="est-step-label"><span class="est-num">2</span><span id="est-step2-label">選擇項目</span></div>
+        <div class="est-opts" id="est-types"></div>
+        <div class="est-extra" id="est-extra"></div>
+      </div>
+      <div class="est-result" id="est-result" style="display:none">
+        <div class="est-result-label">參考價格</div>
+        <div class="est-result-price" id="est-price">—</div>
+        <div class="est-result-note" id="est-note"></div>
+        <button type="button" class="est-book-btn" id="est-book">📋 用這個項目立即預約</button>
+      </div>
+      <div class="est-foot">以上為參考估價，實際費用以師傅到府現場評估為準</div>
+    </div>
+  </div>
 </section>
 
 <!-- 四大服務 -->
@@ -154,34 +222,46 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   <h2 class="sec-title">四大居家服務，一站搞定</h2>
   <p class="sec-sub">點選項目查看服務內容與價格參考</p>
   <div class="svc-grid">
-    <a class="svc-card" href="aircon.html">
+    <div class="svc-card">
       <div class="svc-icon c1">❄️</div>
       <div class="svc-title">冷氣清洗</div>
       <div class="svc-desc">分離式、吊隱式、窗型全機拆洗，醫療級消毒殺菌，清洗完立即可用。</div>
       <div class="svc-price">$1,499 起</div>
-      <div class="svc-link">了解更多 →</div>
-    </a>
-    <a class="svc-card" href="washer.html">
+      <div class="svc-actions">
+        <a class="svc-btn-price" href="aircon.html">看價格</a>
+        <button type="button" class="svc-btn-book" onclick="ldOpenQuote('aircon')">立即預約</button>
+      </div>
+    </div>
+    <div class="svc-card">
       <div class="svc-icon c2">🧺</div>
       <div class="svc-title">洗衣機清洗</div>
       <div class="svc-desc">直立式、滾筒式洗衣機清洗，深層去除洗衣槽黑垢與霉味。</div>
-      <div class="svc-price">現場報價</div>
-      <div class="svc-link">了解更多 →</div>
-    </a>
-    <a class="svc-card" href="homeclean.html">
+      <div class="svc-price">$1,299 起</div>
+      <div class="svc-actions">
+        <a class="svc-btn-price" href="washer.html">看價格</a>
+        <button type="button" class="svc-btn-book" onclick="ldOpenQuote('washer')">立即預約</button>
+      </div>
+    </div>
+    <div class="svc-card">
       <div class="svc-icon c3">🧽</div>
       <div class="svc-title">居家清潔</div>
       <div class="svc-desc">居家除塵蟎、抽油煙機清洗，打造乾淨衛生的居住環境。</div>
-      <div class="svc-price">現場報價</div>
-      <div class="svc-link">了解更多 →</div>
-    </a>
-    <a class="svc-card" href="leak-repair.html">
+      <div class="svc-price">$2,500 起</div>
+      <div class="svc-actions">
+        <a class="svc-btn-price" href="homeclean.html">看價格</a>
+        <button type="button" class="svc-btn-book" onclick="ldOpenQuote('homeclean')">立即預約</button>
+      </div>
+    </div>
+    <div class="svc-card">
       <div class="svc-icon c4">💧</div>
       <div class="svc-title">水管抓漏</div>
       <div class="svc-desc">水管清潔、水塔清洗、漏水檢測與修補，找對師傅一次解決。</div>
       <div class="svc-price">免費初判</div>
-      <div class="svc-link">了解更多 →</div>
-    </a>
+      <div class="svc-actions">
+        <a class="svc-btn-price" href="leak-repair.html">看價格</a>
+        <button type="button" class="svc-btn-book" onclick="ldOpenQuote('leak-repair')">立即預約</button>
+      </div>
+    </div>
   </div>
 </div>
 </section>
@@ -200,11 +280,30 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </div>
 </section>
 
+<!-- 服務地區 -->
+<section id="areas-strip" style="padding:2.5rem 1.25rem;background:#fff">
+  <div style="max-width:900px;margin:0 auto;text-align:center">
+    <div class="sec-tag blue">服務地區</div>
+    <h2 class="sec-title">北台灣到台中，到府服務</h2>
+    <p class="sec-sub">依你的所在地區，媒合在地合適師傅</p>
+    <div style="display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center">
+      <a href="taipei.html" style="font-size:.88rem;font-weight:700;color:var(--blue);background:var(--blue-light);border:1.5px solid #dbeafe;border-radius:9px;padding:.55rem 1rem">📍 台北</a>
+      <a href="new-taipei.html" style="font-size:.88rem;font-weight:700;color:var(--blue);background:var(--blue-light);border:1.5px solid #dbeafe;border-radius:9px;padding:.55rem 1rem">📍 新北</a>
+      <a href="keelung.html" style="font-size:.88rem;font-weight:700;color:var(--blue);background:var(--blue-light);border:1.5px solid #dbeafe;border-radius:9px;padding:.55rem 1rem">📍 基隆</a>
+      <a href="taoyuan.html" style="font-size:.88rem;font-weight:700;color:var(--blue);background:var(--blue-light);border:1.5px solid #dbeafe;border-radius:9px;padding:.55rem 1rem">📍 桃園</a>
+      <a href="hsinchu.html" style="font-size:.88rem;font-weight:700;color:var(--blue);background:var(--blue-light);border:1.5px solid #dbeafe;border-radius:9px;padding:.55rem 1rem">📍 新竹</a>
+      <a href="miaoli.html" style="font-size:.88rem;font-weight:700;color:var(--blue);background:var(--blue-light);border:1.5px solid #dbeafe;border-radius:9px;padding:.55rem 1rem">📍 苗栗</a>
+      <a href="taichung.html" style="font-size:.88rem;font-weight:700;color:var(--blue);background:var(--blue-light);border:1.5px solid #dbeafe;border-radius:9px;padding:.55rem 1rem">📍 台中</a>
+      <a href="areas.html" style="font-size:.88rem;font-weight:700;color:#fff;background:var(--blue-dark);border:1.5px solid var(--blue-dark);border-radius:9px;padding:.55rem 1rem">全部地區 →</a>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section id="cta-bottom">
   <div class="cta-title">灰塵髒污，交給灰汰郎</div>
-  <div class="cta-sub">加入 LINE，免費諮詢並快速預約到府服務</div>
-  <a href="https://lin.ee/rjmmYyC" target="_blank" rel="noopener" class="cta-btn">📲 加入 LINE 免費諮詢</a>
+  <div class="cta-sub">填寫基本資料，快速預約到府服務</div>
+  <button type="button" class="cta-btn" onclick="ldOpenQuote()">📋 線上預約估價</button>
 </section>
 
 <!-- Footer -->
@@ -219,12 +318,13 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   </div>
   <div>
     <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:.62rem">快速連結</div>
-    <div class="footer-links" style="flex-direction:column;gap:.38rem"><a href="knowledge.html">漏水百科</a><a href="cases.html">施工案例</a><a href="team.html">合作廠商</a><a href="about.html">關於我們</a></div>
+    <div class="footer-links" style="flex-direction:column;gap:.38rem"><a href="areas.html">服務地區</a><a href="knowledge.html">漏水百科</a><a href="cases.html">施工案例</a><a href="team.html">合作廠商</a><a href="about.html">關於我們</a></div>
   </div>
   <div>
     <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:.62rem">聯絡我們</div>
     <div style="display:flex;flex-direction:column;gap:.38rem">
-      <a href="https://lin.ee/rjmmYyC" target="_blank" style="font-size:.8rem;color:#9ca3af">📲 Line 免費諮詢</a>
+      <a href="https://lin.ee/WVxmY65" target="_blank" style="font-size:.8rem;color:#9ca3af">📲 Line 免費諮詢</a>
+      <a href="tel:+886920077473" style="font-size:.8rem;color:#9ca3af">📞 0920-077-473</a>
       <span style="font-size:.78rem;color:#6b7280">服務時間：週一至週六</span>
       <span style="font-size:.78rem;color:#6b7280">09:00 – 18:00</span>
     </div>
@@ -232,10 +332,114 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </div>
 <div class="footer-copy">
   © <span id="copy-year">2026</span> 灰汰郎　|　LINE：灰汰郎居家服務・免費諮詢<br>
-  本平台為居家服務媒合服務，施工品質由合作廠商負責，平台不承擔施工連帶責任。網站案例與廠商資料為示意內容，實際以 LINE 媒合時確認為準。使用本服務即同意本平台服務條款。
+  灰汰郎為居家服務媒合平台，協助您媒合合適廠商、溝通需求與售後回報；實際施工由合作廠商執行並負責施工品質。網站施工案例為已去識別之真實紀錄，實際出勤廠商依 LINE 媒合時安排。
 </div>
 </footer>
 
 <script>document.getElementById('copy-year').textContent = new Date().getFullYear();</script>
+
+<script>
+/* 快速估價器 */
+(function(){
+  const EST = {
+    aircon:    {label:'冷氣清洗',   icon:'❄️', bookKey:'aircon',     unit:'台',
+      types:[{n:'分離式',p:1499},{n:'吊隱式',p:2599},{n:'窗型',p:3000}], qty:true},
+    washer:    {label:'洗衣機清洗', icon:'🧺', bookKey:'washer',     unit:'台',
+      types:[{n:'直立式',p:1299},{n:'滾筒式',p:2999}], qty:true},
+    homeclean: {label:'居家清潔',   icon:'🧽', bookKey:'homeclean',
+      types:[
+        {n:'定時維持清潔', base:2500, note:'4 小時起，超時每小時約 $450–600'},
+        {n:'大掃除・深度清潔', min:3500, low:200, high:350, ping:true},
+        {n:'退租・入住清潔', min:3000, low:200, high:350, ping:true},
+        {n:'裝潢後細清', min:6000, low:400, high:1000, ping:true}
+      ]},
+    leak:      {label:'水管抓漏',   icon:'💧', bookKey:'leak-repair', free:true}
+  };
+  const ORDER = ['aircon','washer','homeclean','leak'];
+  const $ = id => document.getElementById(id);
+  const svcBox=$('est-services'), step2=$('est-step2'), step2Label=$('est-step2-label'),
+        typeBox=$('est-types'), extra=$('est-extra'), result=$('est-result'),
+        priceEl=$('est-price'), noteEl=$('est-note'), bookBtn=$('est-book');
+  if(!svcBox) return;
+  const fmt = n => '$' + Number(n).toLocaleString('en-US');
+  let sel = {svc:null, ti:null, qty:1, ping:null};
+
+  // Step 1：服務按鈕
+  ORDER.forEach(k=>{
+    const s=EST[k];
+    const b=document.createElement('button');
+    b.type='button'; b.className='est-opt'; b.innerHTML=`<span>${s.icon}</span>${s.label}`;
+    b.onclick=()=>{ selectSvc(k,b); };
+    svcBox.appendChild(b);
+  });
+
+  function selectSvc(k,btn){
+    sel={svc:k,ti:null,qty:1,ping:null};
+    [...svcBox.children].forEach(c=>c.classList.remove('est-on'));
+    btn.classList.add('est-on');
+    const s=EST[k];
+    typeBox.innerHTML=''; extra.innerHTML=''; result.style.display='none';
+    if(s.free){
+      step2.style.display='none';
+      showResult('免費初步判斷', '傳照片給客服，免費初判漏水類型，再依現場狀況報價', 'leak-repair');
+      return;
+    }
+    step2.style.display='block';
+    step2Label.textContent = s.qty ? '選擇機型' : '選擇清潔類型';
+    s.types.forEach((t,i)=>{
+      const b=document.createElement('button');
+      b.type='button'; b.className='est-opt'; b.textContent=t.n;
+      b.onclick=()=>selectType(i,b);
+      typeBox.appendChild(b);
+    });
+  }
+
+  function selectType(i,btn){
+    sel.ti=i; sel.qty=1; sel.ping=null;
+    [...typeBox.children].forEach(c=>c.classList.remove('est-on'));
+    btn.classList.add('est-on');
+    const s=EST[sel.svc], t=s.types[i];
+    extra.innerHTML='';
+    if(s.qty){
+      const wrap=document.createElement('div'); wrap.className='est-qty';
+      wrap.innerHTML=`<span>數量</span>
+        <span class="est-stepper"><button type="button" aria-label="減少">−</button><span id="est-qv">1</span><button type="button" aria-label="增加">＋</button></span><span>${s.unit}</span>`;
+      const [minus,,plus]=wrap.querySelector('.est-stepper').children;
+      minus.onclick=()=>{ sel.qty=Math.max(1,sel.qty-1); wrap.querySelector('#est-qv').textContent=sel.qty; compute(); };
+      plus.onclick=()=>{ sel.qty=Math.min(20,sel.qty+1); wrap.querySelector('#est-qv').textContent=sel.qty; compute(); };
+      extra.appendChild(wrap);
+    } else if(t.ping){
+      const wrap=document.createElement('div'); wrap.className='est-ping';
+      wrap.innerHTML=`<span>坪數</span><input type="number" min="1" max="200" inputmode="numeric" placeholder="選填"><span>坪</span>`;
+      wrap.querySelector('input').oninput=e=>{ sel.ping=parseInt(e.target.value,10)||null; compute(); };
+      extra.appendChild(wrap);
+    }
+    compute();
+  }
+
+  function compute(){
+    const s=EST[sel.svc], t=s.types[sel.ti];
+    if(s.qty){
+      const total=t.p*sel.qty;
+      showResult('約 '+fmt(total)+' 起', `${t.n}　${fmt(t.p)} / ${s.unit} × ${sel.qty} ${s.unit}`, s.bookKey);
+    } else if(t.base){
+      showResult(fmt(t.base)+' 起', t.note, s.bookKey);
+    } else if(t.ping){
+      if(sel.ping && sel.ping>0){
+        const lo=Math.max(t.min, sel.ping*t.low), hi=Math.max(t.min, sel.ping*t.high);
+        showResult('約 '+fmt(lo)+'–'+fmt(hi), `${t.n}　約 $${t.low}–$${t.high}/坪，最低 ${fmt(t.min)}`, s.bookKey);
+      } else {
+        showResult(fmt(t.min)+' 起', `${t.n}　約 $${t.low}–$${t.high}/坪（輸入坪數看區間）`, s.bookKey);
+      }
+    }
+  }
+
+  function showResult(price,note,bookKey){
+    priceEl.textContent=price; noteEl.textContent=note;
+    result.style.display='block';
+    bookBtn.onclick=()=>{ if(window.ldOpenQuote) ldOpenQuote(bookKey); };
+  }
+})();
+</script>
 </body>
 </html>
