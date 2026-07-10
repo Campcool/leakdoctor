@@ -5,7 +5,7 @@
 > 2. **動手後**：完成任何修改，必須更新本檔案的「進度紀錄」與「待辦清單」，再一併 commit。
 > 3. 本檔案是唯一的交接依據，寫給 AI 看：請保持精確、可執行、不留模糊描述。
 
-最後更新：2026-07-10（by Claude）
+最後更新：2026-07-10（by Claude）— 已合併上線
 
 ---
 
@@ -69,8 +69,8 @@ master_*.jpg                   漏水師傅頭像（master_08/16 不存在，頁
 
 ## 4. Git 狀態與流程
 
-- **工作分支**：`claude/cleaning-service-search-scope-j8v2td`（所有近期工作都在這裡）
-- **`main` 落後**：main 最新只到 `104b9d0`（logo 素材上傳）。**分支尚未合併回 main，網站線上版還是舊的**——合併/開 PR 是待辦。
+- **工作分支**：`claude/cleaning-service-search-scope-j8v2td`
+- **2026-07-10 已合併回 `main` 並推送（merge commit `0a05232`）→ 網站已上線最新版**。後續工作繼續在工作分支開發，完成經業主同意後合併回 main。
 - 慣例：直接開發、清楚的 commit message、`git push -u origin <branch>`；**絕不 force push**；不建 PR 除非業主要求。
 - 修改後驗證慣例：`node --check header.js`；JSON-LD 用 python `json.loads` 驗證；有 Playwright（chromium 在 `/opt/pw-browsers/chromium`）可跑頁面測試（測試時 route abort `fonts.googleapis.com` 避免逾時）。
 
@@ -79,6 +79,7 @@ master_*.jpg                   漏水師傅頭像（master_08/16 不存在，頁
 ### 2026-07-10（Claude）
 - 全站 LINE 加好友連結換成 `lin.ee/WVxmY65`（業主確認同帳號）
 - 建立本檔案 AI-README.md + CLAUDE.md 指標
+- **合併工作分支回 main 並推送，全部更新正式上線**
 
 ### 2026-07-09（Claude）
 - **品牌收尾**：17 頁殘留「台灣漏水醫生」→「灰汰郎」；schema alternateName 保留舊名
@@ -104,11 +105,9 @@ master_*.jpg                   漏水師傅頭像（master_08/16 不存在，頁
 - [ ] 申請 GA4，把評估 ID 填入 `header.js` 的 `GA4_ID`（或提供給 AI 填）
 - [ ] LINE 官方帳號顯示名稱仍是「台灣漏水醫生_百科全書」→ 到 manager.line.biz 改名「灰汰郎」
 - [ ] 建立灰汰郎的 Google 商家檔案（現存搜尋結果掛美國電話 +1 407-917-1773 的商家檔案不是業主的）
-- [ ] 決定是否把工作分支合併回 main（合併後網站才會更新上線）
 - [ ] Google Search Console 提交新 sitemap、對改名頁面請求重新索引
 
 ### 🟠 高價值，AI 可做
-- [ ] **合併分支回 main**（業主同意後）：開 PR 或直接合併
 - [ ] **cases.html / team.html 清潔化**：目前案例頁與師傅頁內容 100% 漏水主題，與清潔主業錯位。加入清潔案例（cases-clean/ 還有 case02/03/06/08-11 未用，在 `Campcool/0988145875` repo 的 cases/），師傅頁加清潔技師
 - [ ] **about.html 檢查**：確認品牌敘事已更新為灰汰郎
 - [ ] **估價器全站化**：目前只在首頁；服務頁/地區頁是廣告落地頁卻沒有估價器
