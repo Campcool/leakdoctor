@@ -77,6 +77,7 @@ master_*.jpg                   漏水師傅頭像（master_08/16 不存在，頁
 ## 5. 進度紀錄（新條目加在最上面）
 
 ### 2026-07-10（Claude）
+- 完成 LINE Bot 後台規劃書 `docs/BOT-PLAN.md`（AI 自動接單/派工/對帳/結案全流程、分四期實作、待業主確認 §14 六個問題後開工）
 - 全站 LINE 加好友連結換成 `lin.ee/WVxmY65`（業主確認同帳號）
 - 建立本檔案 AI-README.md + CLAUDE.md 指標
 - **合併工作分支回 main 並推送，全部更新正式上線**
@@ -108,6 +109,7 @@ master_*.jpg                   漏水師傅頭像（master_08/16 不存在，頁
 - [ ] Google Search Console 提交新 sitemap、對改名頁面請求重新索引
 
 ### 🟠 高價值，AI 可做
+- [ ] **LINE Bot 後台**：規劃書在 `docs/BOT-PLAN.md`，業主回覆 §14 六個問題＋完成其 §13 業主前置作業後，即可從 P1 MVP 開工（新 repo，不放本 repo）
 - [ ] **cases.html / team.html 清潔化**：目前案例頁與師傅頁內容 100% 漏水主題，與清潔主業錯位。加入清潔案例（cases-clean/ 還有 case02/03/06/08-11 未用，在 `Campcool/0988145875` repo 的 cases/），師傅頁加清潔技師
 - [ ] **about.html 檢查**：確認品牌敘事已更新為灰汰郎
 - [ ] **估價器全站化**：目前只在首頁；服務頁/地區頁是廣告落地頁卻沒有估價器
