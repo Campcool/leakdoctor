@@ -24,6 +24,9 @@
   function ldTrack(name, params){
     if (gaEnabled && window.gtag) gtag('event', name, params || {});
   }
+  window.ldTrack = ldTrack;
+  const SVC_PAGES = {'/aircon.html':'aircon','/washer.html':'washer','/homeclean.html':'homeclean','/leak-repair.html':'leak-repair'};
+  const AREA_PAGES = ['/taipei.html','/new-taipei.html','/keelung.html','/taoyuan.html','/hsinchu.html','/miaoli.html','/taichung.html','/areas.html'];
   // 全站點擊追蹤：LINE 連結與電話
   document.addEventListener('click', function(e){
     const a = e.target.closest && e.target.closest('a');
@@ -33,6 +36,11 @@
       ldTrack('line_click', { link_url: href, page: location.pathname });
     } else if (href.indexOf('tel:') === 0) {
       ldTrack('phone_click', { page: location.pathname });
+    } else {
+      const clean = href.split('#')[0].split('?')[0];
+      const path = clean.charAt(0) === '/' ? clean : '/' + clean.split('/').pop();
+      if (SVC_PAGES[path]) ldTrack('service_click', { service: SVC_PAGES[path], page: location.pathname });
+      else if (AREA_PAGES.indexOf(path) !== -1) ldTrack('area_click', { area: path.replace('/','').replace('.html',''), page: location.pathname });
     }
   }, true);
 

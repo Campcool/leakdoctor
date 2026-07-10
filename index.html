@@ -101,35 +101,7 @@ img{display:block;max-width:100%}
 .svc-btn-book{color:#fff;background:#06C755;cursor:pointer;box-shadow:0 2px 8px rgba(6,199,85,.3)}
 .svc-btn-book:hover{background:#05b34c}
 
-/* 快速估價器 */
 #estimator{padding:2.6rem 1.25rem;background:linear-gradient(180deg,#eef2ff,#f8fafc)}
-.est-inner{max-width:720px;margin:0 auto}
-.est-head{text-align:center;margin-bottom:1.4rem}
-.est-title{font-size:1.5rem;font-weight:900;color:var(--gray-900);line-height:1.25;margin:.35rem 0 .35rem}
-.est-sub{font-size:.9rem;color:var(--gray-500)}
-.est-card{background:#fff;border:2px solid var(--gray-200);border-radius:18px;padding:1.4rem 1.25rem;box-shadow:0 6px 24px rgba(30,58,138,.08)}
-.est-step{margin-bottom:1.15rem}
-.est-step-label{display:flex;align-items:center;gap:.5rem;font-size:.95rem;font-weight:800;color:var(--gray-900);margin-bottom:.7rem}
-.est-num{width:24px;height:24px;border-radius:50%;background:var(--blue-dark);color:#fff;font-size:.8rem;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.est-opts{display:flex;flex-wrap:wrap;gap:.55rem}
-.est-opt{font-size:.88rem;font-weight:700;color:var(--gray-700);background:var(--gray-50);border:1.5px solid var(--gray-200);border-radius:11px;padding:.6rem 1rem;cursor:pointer;transition:.15s;display:flex;align-items:center;gap:.4rem}
-.est-opt:hover{border-color:var(--blue-mid)}
-.est-opt.est-on{background:var(--blue-dark);color:#fff;border-color:var(--blue-dark)}
-.est-extra{margin-top:.9rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center}
-.est-qty,.est-ping{display:flex;align-items:center;gap:.6rem;font-size:.85rem;font-weight:700;color:var(--gray-700)}
-.est-stepper{display:flex;align-items:center;gap:.2rem;border:1.5px solid var(--gray-200);border-radius:10px;overflow:hidden}
-.est-stepper button{width:36px;height:36px;background:var(--gray-50);color:var(--blue-dark);font-size:1.1rem;font-weight:900;border:none;cursor:pointer}
-.est-stepper button:hover{background:var(--blue-light)}
-.est-stepper span{min-width:36px;text-align:center;font-weight:800;color:var(--gray-900)}
-.est-ping input{width:96px;padding:.5rem .7rem;border:1.5px solid var(--gray-200);border-radius:9px;font-size:.9rem;font-family:inherit}
-.est-ping input:focus{outline:none;border-color:var(--blue-dark)}
-.est-result{margin-top:.3rem;background:linear-gradient(135deg,var(--blue-light),#e0e7ff);border:1.5px solid #c7d2fe;border-radius:14px;padding:1.15rem 1.2rem;text-align:center}
-.est-result-label{font-size:.78rem;font-weight:700;color:var(--blue);letter-spacing:.04em}
-.est-result-price{font-size:1.7rem;font-weight:900;color:var(--blue-dark);line-height:1.2;margin:.25rem 0}
-.est-result-note{font-size:.8rem;color:var(--gray-600);line-height:1.6;margin-bottom:.9rem}
-.est-book-btn{background:#06C755;color:#fff;font-weight:800;font-size:.95rem;padding:.8rem 1.5rem;border-radius:11px;cursor:pointer;box-shadow:0 3px 12px rgba(6,199,85,.35);width:100%}
-.est-book-btn:hover{background:#05b34c}
-.est-foot{font-size:.75rem;color:var(--gray-400);text-align:center;margin-top:.9rem;line-height:1.6}
 
 #promises{padding:2.5rem 1.25rem;background:#fff}
 .promises-inner{max-width:1200px;margin:0 auto}
@@ -186,33 +158,9 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </div>
 </section>
 
-<!-- 快速估價器 -->
+<!-- 快速估價器（共用元件 estimator.js）-->
 <section id="estimator">
-  <div class="est-inner">
-    <div class="est-head">
-      <div class="sec-tag blue">30 秒估價</div>
-      <h2 class="est-title">快速估價，先看行情再預約</h2>
-      <p class="est-sub">選服務、選細項，立即看到參考價格</p>
-    </div>
-    <div class="est-card">
-      <div class="est-step">
-        <div class="est-step-label"><span class="est-num">1</span>選擇服務</div>
-        <div class="est-opts" id="est-services"></div>
-      </div>
-      <div class="est-step" id="est-step2" style="display:none">
-        <div class="est-step-label"><span class="est-num">2</span><span id="est-step2-label">選擇項目</span></div>
-        <div class="est-opts" id="est-types"></div>
-        <div class="est-extra" id="est-extra"></div>
-      </div>
-      <div class="est-result" id="est-result" style="display:none">
-        <div class="est-result-label">參考價格</div>
-        <div class="est-result-price" id="est-price">—</div>
-        <div class="est-result-note" id="est-note"></div>
-        <button type="button" class="est-book-btn" id="est-book">📋 用這個項目立即預約</button>
-      </div>
-      <div class="est-foot">以上為參考估價，實際費用以師傅到府現場評估為準</div>
-    </div>
-  </div>
+  <div data-ld-estimator></div>
 </section>
 
 <!-- 四大服務 -->
@@ -338,108 +286,6 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 
 <script>document.getElementById('copy-year').textContent = new Date().getFullYear();</script>
 
-<script>
-/* 快速估價器 */
-(function(){
-  const EST = {
-    aircon:    {label:'冷氣清洗',   icon:'❄️', bookKey:'aircon',     unit:'台',
-      types:[{n:'分離式',p:1499},{n:'吊隱式',p:2599},{n:'窗型',p:3000}], qty:true},
-    washer:    {label:'洗衣機清洗', icon:'🧺', bookKey:'washer',     unit:'台',
-      types:[{n:'直立式',p:1299},{n:'滾筒式',p:2999}], qty:true},
-    homeclean: {label:'居家清潔',   icon:'🧽', bookKey:'homeclean',
-      types:[
-        {n:'定時維持清潔', base:2500, note:'4 小時起，超時每小時約 $450–600'},
-        {n:'大掃除・深度清潔', min:3500, low:200, high:350, ping:true},
-        {n:'退租・入住清潔', min:3000, low:200, high:350, ping:true},
-        {n:'裝潢後細清', min:6000, low:400, high:1000, ping:true}
-      ]},
-    leak:      {label:'水管抓漏',   icon:'💧', bookKey:'leak-repair', free:true}
-  };
-  const ORDER = ['aircon','washer','homeclean','leak'];
-  const $ = id => document.getElementById(id);
-  const svcBox=$('est-services'), step2=$('est-step2'), step2Label=$('est-step2-label'),
-        typeBox=$('est-types'), extra=$('est-extra'), result=$('est-result'),
-        priceEl=$('est-price'), noteEl=$('est-note'), bookBtn=$('est-book');
-  if(!svcBox) return;
-  const fmt = n => '$' + Number(n).toLocaleString('en-US');
-  let sel = {svc:null, ti:null, qty:1, ping:null};
-
-  // Step 1：服務按鈕
-  ORDER.forEach(k=>{
-    const s=EST[k];
-    const b=document.createElement('button');
-    b.type='button'; b.className='est-opt'; b.innerHTML=`<span>${s.icon}</span>${s.label}`;
-    b.onclick=()=>{ selectSvc(k,b); };
-    svcBox.appendChild(b);
-  });
-
-  function selectSvc(k,btn){
-    sel={svc:k,ti:null,qty:1,ping:null};
-    [...svcBox.children].forEach(c=>c.classList.remove('est-on'));
-    btn.classList.add('est-on');
-    const s=EST[k];
-    typeBox.innerHTML=''; extra.innerHTML=''; result.style.display='none';
-    if(s.free){
-      step2.style.display='none';
-      showResult('免費初步判斷', '傳照片給客服，免費初判漏水類型，再依現場狀況報價', 'leak-repair');
-      return;
-    }
-    step2.style.display='block';
-    step2Label.textContent = s.qty ? '選擇機型' : '選擇清潔類型';
-    s.types.forEach((t,i)=>{
-      const b=document.createElement('button');
-      b.type='button'; b.className='est-opt'; b.textContent=t.n;
-      b.onclick=()=>selectType(i,b);
-      typeBox.appendChild(b);
-    });
-  }
-
-  function selectType(i,btn){
-    sel.ti=i; sel.qty=1; sel.ping=null;
-    [...typeBox.children].forEach(c=>c.classList.remove('est-on'));
-    btn.classList.add('est-on');
-    const s=EST[sel.svc], t=s.types[i];
-    extra.innerHTML='';
-    if(s.qty){
-      const wrap=document.createElement('div'); wrap.className='est-qty';
-      wrap.innerHTML=`<span>數量</span>
-        <span class="est-stepper"><button type="button" aria-label="減少">−</button><span id="est-qv">1</span><button type="button" aria-label="增加">＋</button></span><span>${s.unit}</span>`;
-      const [minus,,plus]=wrap.querySelector('.est-stepper').children;
-      minus.onclick=()=>{ sel.qty=Math.max(1,sel.qty-1); wrap.querySelector('#est-qv').textContent=sel.qty; compute(); };
-      plus.onclick=()=>{ sel.qty=Math.min(20,sel.qty+1); wrap.querySelector('#est-qv').textContent=sel.qty; compute(); };
-      extra.appendChild(wrap);
-    } else if(t.ping){
-      const wrap=document.createElement('div'); wrap.className='est-ping';
-      wrap.innerHTML=`<span>坪數</span><input type="number" min="1" max="200" inputmode="numeric" placeholder="選填"><span>坪</span>`;
-      wrap.querySelector('input').oninput=e=>{ sel.ping=parseInt(e.target.value,10)||null; compute(); };
-      extra.appendChild(wrap);
-    }
-    compute();
-  }
-
-  function compute(){
-    const s=EST[sel.svc], t=s.types[sel.ti];
-    if(s.qty){
-      const total=t.p*sel.qty;
-      showResult('約 '+fmt(total)+' 起', `${t.n}　${fmt(t.p)} / ${s.unit} × ${sel.qty} ${s.unit}`, s.bookKey);
-    } else if(t.base){
-      showResult(fmt(t.base)+' 起', t.note, s.bookKey);
-    } else if(t.ping){
-      if(sel.ping && sel.ping>0){
-        const lo=Math.max(t.min, sel.ping*t.low), hi=Math.max(t.min, sel.ping*t.high);
-        showResult('約 '+fmt(lo)+'–'+fmt(hi), `${t.n}　約 $${t.low}–$${t.high}/坪，最低 ${fmt(t.min)}`, s.bookKey);
-      } else {
-        showResult(fmt(t.min)+' 起', `${t.n}　約 $${t.low}–$${t.high}/坪（輸入坪數看區間）`, s.bookKey);
-      }
-    }
-  }
-
-  function showResult(price,note,bookKey){
-    priceEl.textContent=price; noteEl.textContent=note;
-    result.style.display='block';
-    bookBtn.onclick=()=>{ if(window.ldOpenQuote) ldOpenQuote(bookKey); };
-  }
-})();
-</script>
+<script src="estimator.js" defer></script>
 </body>
 </html>

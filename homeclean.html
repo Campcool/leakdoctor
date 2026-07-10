@@ -29,6 +29,9 @@
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "抽油煙機多久該清洗一次？", "acceptedAnswer": {"@type": "Answer", "text": "建議每 3–6 個月清洗一次，若烹飪頻繁或常煮油炸類食物，建議縮短清洗週期以維持抽風效能。"}}, {"@type": "Question", "name": "居家清潔的服務範圍包含哪些？", "acceptedAnswer": {"@type": "Answer", "text": "依需求可包含客廳、臥室、廚房、浴室等區域的深度清潔，實際範圍與報價依坪數及現場狀況於預約時確認。"}}, {"@type": "Question", "name": "除塵蟎服務是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "針對床墊、沙發、地毯等容易累積塵蟎的家具進行深度清潔，改善居家過敏原問題，適合有過敏體質家庭成員的住家。"}}, {"@type": "Question", "name": "水塔多久該清洗一次？", "acceptedAnswer": {"@type": "Answer", "text": "一般建議每年清洗一次水塔，確保用水衛生安全，透天厝與集合式住宅水塔清洗方式略有不同，實際報價依水塔類型而定。"}}, {"@type": "Question", "name": "怎麼預約居家清潔服務？", "acceptedAnswer": {"@type": "Answer", "text": "加入灰汰郎官方 LINE，描述你需要的服務項目（抽油煙機／居家清潔／水塔清洗）與坪數，客服會安排到府時間並報價。"}}]}
 </script>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首頁", "item": "https://leakdoctor.tw/"}, {"@type": "ListItem", "position": 2, "name": "居家清潔", "item": "https://leakdoctor.tw/homeclean.html"}]}
+</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -117,6 +120,10 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
     <button type="button" class="page-btn" onclick="ldOpenQuote('homeclean')">📋 線上快速預約估價</button>
   </div>
 </section>
+<section style="padding:2.6rem 1.25rem;background:linear-gradient(180deg,#eef2ff,#f8fafc)">
+  <div data-ld-estimator data-preset="homeclean"></div>
+</section>
+
 
 <section class="section">
   <div class="container">
@@ -259,5 +266,6 @@ document.querySelectorAll('.faq-q').forEach(btn=>{
 });
 document.getElementById('copy-year').textContent = new Date().getFullYear();
 </script>
+<script src="estimator.js" defer></script>
 </body>
 </html>
