@@ -4,6 +4,7 @@
 > 1. **動手前**：先完整讀完本檔案，了解架構、進度與待辦。
 > 2. **動手後**：完成任何修改，必須更新本檔案的「進度紀錄」與「待辦清單」，再一併 commit。
 > 3. 本檔案是唯一的交接依據，寫給 AI 看：請保持精確、可執行、不留模糊描述。
+> 4. **所有時間戳一律台灣時間（Asia/Taipei, UTC+8）**。
 
 最後更新：2026-07-10（by Claude）— 已合併上線
 
@@ -78,6 +79,12 @@ master_*.jpg                   漏水師傅頭像（master_08/16 不存在，頁
 
 ## 5. 進度紀錄（新條目加在最上面）
 
+### 2026-07-10 18:40 +8（Claude）
+- 前置作業收齊：業主建立私有 repo **`Campcool/leakdoctor-bot`**；LINE Messaging API 金鑰與 Cloudflare Account/Token 已交付（存放於對話，待寫入 CF/Actions secrets，絕不入 git）；**Anthropic API key 尚缺**
+- 發現環境限制：Claude 雲端環境無法連 api.cloudflare.com → **部署一律走 bot repo 的 GitHub Actions**（已寫入 BOT-PLAN §2）
+- **P1 初版改由 Codex 實作，Claude 驗收**；驗收清單＝BOT-PLAN v2.2 全項＋安全掃描（金鑰不得入 git）＋cron UTC 換算＋無 AI key 優雅降級。業主通知發佈後啟動
+- 時間戳規範定為 Asia/Taipei（+8），入協作規則第 4 條
+
 ### 2026-07-10 下午（Claude｜採納 Codex 評估後執行）
 - **BOT-PLAN 升 v2.2**：採納 Codex 意見（webhook 快速回應+waitUntil 背景化、webhook_events 去重表、恢復 partners 表、AI 工具介面六函式、單一價格來源=bot repo JSON）；Codex 三題定案（provider adapter 預設 Claude／JSON 先行後 D1／獨立 handoff_rules）；修正一點：Queues 需付費方案，P1 用免費 waitUntil。回應以時間戳附於 BOT-PLAN 文末
 - **估價器全站化**：新共用元件 `estimator.js`（自 index.html 抽出），讀 `data/service-options.json` 增補需報價機型（四方吹/商用/水塔→導表單），部署首頁＋4 服務頁（預選服務）＋8 地區頁；index.html 舊內嵌估價器 CSS/JS 已移除
@@ -119,7 +126,7 @@ master_*.jpg                   漏水師傅頭像（master_08/16 不存在，頁
 - [ ] Google Search Console 提交新 sitemap、對改名頁面請求重新索引
 
 ### 🟠 高價值，AI 可做
-- [ ] **LINE Bot 後台**（規劃 **v2.2 定稿**，`docs/BOT-PLAN.md`，Codex 意見已採納入正文）：只待業主完成 §13 前置作業（建私有 repo `huitailang-bot`／LINE Messaging API 金鑰／Cloudflare／Anthropic API key）即可 P1 開工；拆帳比例談定前不擋 P1/P2
+- [ ] **LINE Bot 後台**：P1 初版 **Codex 實作中**（repo `Campcool/leakdoctor-bot`，私有）；**Claude 待驗收**（清單見 BOT-PLAN v2.2＋2026-07-10 備註：安全掃描/驗簽/去重/schema/護欄/Actions 部署/cron UTC/無 AI key 降級）。缺 Anthropic API key（業主）
 - [ ] **cases.html / team.html 清潔化**：目前案例頁與師傅頁內容 100% 漏水主題，與清潔主業錯位。加入清潔案例（cases-clean/ 還有 case02/03/06/08-11 未用，在 `Campcool/0988145875` repo 的 cases/），師傅頁加清潔技師
 - [ ] 更多清潔文章（水塔清洗、除塵蟎、冷氣省電、大掃除清單…），照 articles/ 現有 4 篇清潔文的模板
 - [ ] 剩餘地區頁（宜蘭？台中以南？）——先問業主服務範圍再做

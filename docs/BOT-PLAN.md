@@ -1,6 +1,7 @@
 # 灰汰郎 LINE Bot 後台規劃書 v2.2
 
-狀態：**規劃定稿（含 Codex 評估採納決議），僅剩拆帳比例待業主談定（不擋 P1/P2），尚未動工**
+狀態：**P1 由 Codex 實作中（2026-07-10 業主指派），Claude 為驗收者**；拆帳比例待談（不擋 P1/P2）
+時間規範：本專案所有時間戳一律台灣時間（Asia/Taipei, UTC+8）
 建立：2026-07-10｜v2.2 修訂：2026-07-10（採納 Codex 意見）｜對應待辦見 AI-README.md §7
 
 ## 0. 業主已確認的決策（v2 依此修訂）
@@ -15,6 +16,9 @@
 | 6 | AI 對客戶**不明寫時效承諾**：時間由洗洋洋與客戶直接洽談，話術僅暗示彈性配合（見 §4 護欄） |
 | 7 | **成單自動轉洗洋洋，不設核准關卡**（老闆全程 CC＋保留取消權）（2026-07-10 確認） |
 | 8 | 拆帳模式（固定介紹費 vs 抽成）：**業主與洗洋洋還在談**，P3 對帳實作前需定案；系統設計上兩種都支援（config 可切換） |
+| 9 | **後端 repo 定名 `Campcool/leakdoctor-bot`**（私有，2026-07-10 業主建立；取代原規劃名 huitailang-bot） |
+| 10 | 金鑰狀態（2026-07-10 18:35 +8）：LINE Channel secret/access token ✅、Cloudflare Account ID/API token ✅、**Anthropic API key ❌ 待業主提供**。金鑰僅存於 Cloudflare secrets／GitHub Actions secrets，絕不入 git |
+| 11 | **P1 初版由 Codex 實作，Claude 驗收**（驗收清單見本檔文末 Claude 2026-07-10 備註與 AI-README） |
 
 ---
 
@@ -46,6 +50,7 @@
 - **AI 引擎接法**：做一層薄 provider adapter，預設 Claude（tool use），保留可換 GPT 等
 - **AI 工具介面（P1 就實作）**：`getServicePrice(service, quantity, area)`、`checkServiceArea(area)`、`getTravelFee(area, service)`、`getFaqAnswer(topic)`、`createDraftOrder(...)`、`requestHumanHandoff(reason)`——價格與規則一律由工具查資料，AI 只負責理解與轉述
 - **價格/FAQ 單一來源**：bot repo 的 JSON config（以本 repo `data/service-options.json` 為種子），git 版控可稽核；穩定後再做 D1 管理頁供業主自行編輯
+- **部署路徑（2026-07-10 定案）**：bot repo 內建 GitHub Actions（cloudflare/wrangler-action），CF/LINE/Anthropic 金鑰放 repo Settings→Secrets→Actions。原因：Claude 的雲端環境網路政策擋 api.cloudflare.com，無法本地 deploy；Actions 部署對 Codex/Claude/業主三方都可用
 - **轉人工規則（handoff_rules，獨立設定不靠 AI 自行判斷）**：殺價／客訴／退款賠償、漏水複雜案、所有 `quote_required` 項目（商用、四方吹、水泥水塔…）、故障維修問題、AI 連續 2 次無法理解、客戶輸入「真人」
 單一夥伴讓系統少掉：夥伴註冊管理、地區/服務匹配、搶單鎖定、多方逾時改派——**P2 工作量約砍半**。
 
@@ -139,6 +144,9 @@ webhook_events(id, provider, event_id, line_user_id, body_hash, handled_at, crea
 （v2.2 orders 另補：`public_id`（對外單號）、`utm_json`（來源追蹤）、`quote_version`（報價版本）、`partner_id`。）
 
 ## 9. 排程（Cron）
+
+> ⚠️ Cloudflare Cron Triggers 使用 **UTC**。下列為台灣時間（+8），寫入 wrangler.toml 時須換算：09:00→`0 1 * * *`、18:00→`0 10 * * *`、21:00→`0 13 * * *`。
+
 
 - 每小時：成單 24hr 洗洋洋未回報 → 提醒她＋通知老闆；草稿 24hr 未確認 → 跟進客戶一次
 - 每日 09:00：今日施工清單 → 老闆＋洗洋洋
