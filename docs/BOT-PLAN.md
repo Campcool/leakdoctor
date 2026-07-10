@@ -17,7 +17,7 @@
 | 7 | **成單自動轉洗洋洋，不設核准關卡**（老闆全程 CC＋保留取消權）（2026-07-10 確認） |
 | 8 | 拆帳模式（固定介紹費 vs 抽成）：**業主與洗洋洋還在談**，P3 對帳實作前需定案；系統設計上兩種都支援（config 可切換） |
 | 9 | **後端 repo 定名 `Campcool/leakdoctor-bot`**（私有，2026-07-10 業主建立；取代原規劃名 huitailang-bot） |
-| 10 | 金鑰狀態（2026-07-10 18:35 +8）：LINE Channel secret/access token ✅、Cloudflare Account ID/API token ✅、**Anthropic API key ❌ 待業主提供**。金鑰僅存於 Cloudflare secrets／GitHub Actions secrets，絕不入 git |
+| 10 | 金鑰狀態（2026-07-10 19:05 +8）：LINE Channel secret/access token ✅、Cloudflare Account ID/API token ✅、**Anthropic API key ✅（業主已交付 Codex）**。金鑰僅存於 Cloudflare secrets／GitHub Actions secrets，絕不入 git |
 | 11 | **P1 初版由 Codex 實作，Claude 驗收**（驗收清單見本檔文末 Claude 2026-07-10 備註與 AI-README） |
 
 ---
