@@ -79,6 +79,12 @@ master_*.jpg                   漏水師傅頭像（master_08/16 不存在，頁
 
 ## 5. 進度紀錄（新條目加在最上面）
 
+### 2026-07-11 10:07 +8（Claude）
+- **P1 驗收完成：通過**。Codex 初版全項符合 BOT-PLAN v2.2；金鑰掃描零命中；Actions 全綠且 Worker 已真實部署；真機端到端成功（訂單 HTL-20260710-66F743，Anthropic 已付款）。驗收報告附 BOT-PLAN 文末
+- 修復 bot parser 日期覆蓋 bug（commit 992a87f，25/25 測試通過，push 觸發自動部署）
+- **上線僅剩一步：洗洋洋加 OA 傳「我的ID」→ 業主設 PARTNER_LINE_USER_ID（Worker secret）**
+
+
 ### 2026-07-10 18:40 +8（Claude）
 - 前置作業收齊：業主建立私有 repo **`Campcool/leakdoctor-bot`**；LINE Messaging API 金鑰與 Cloudflare Account/Token 已交付（存放於對話，待寫入 CF/Actions secrets，絕不入 git）；Anthropic API key 於 19:05 補齊（交付 Codex）
 - 發現環境限制：Claude 雲端環境無法連 api.cloudflare.com → **部署一律走 bot repo 的 GitHub Actions**（已寫入 BOT-PLAN §2）
@@ -126,7 +132,8 @@ master_*.jpg                   漏水師傅頭像（master_08/16 不存在，頁
 - [ ] Google Search Console 提交新 sitemap、對改名頁面請求重新索引
 
 ### 🟠 高價值，AI 可做
-- [ ] **LINE Bot 後台**：P1 初版 **Codex 實作中**（repo `Campcool/leakdoctor-bot`，私有）；**Claude 待驗收**（清單見 BOT-PLAN v2.2＋2026-07-10 備註：安全掃描/驗簽/去重/schema/護欄/Actions 部署/cron UTC/無 AI key 降級）。三組金鑰均已備齊（Anthropic key 2026-07-10 19:05 +8 交付 Codex）
+- [x] **LINE Bot P1**：2026-07-11 驗收通過並上線（詳 BOT-PLAN 驗收報告）。剩 PARTNER_LINE_USER_ID 待業主設定
+- [ ] **LINE Bot P2**（協作流：夥伴回報按鈕/完工/車馬費結案/逾時提醒/D-1 提醒）：規格在 BOT-PLAN §5/§9/§12，可開工
 - [ ] **cases.html / team.html 清潔化**：目前案例頁與師傅頁內容 100% 漏水主題，與清潔主業錯位。加入清潔案例（cases-clean/ 還有 case02/03/06/08-11 未用，在 `Campcool/0988145875` repo 的 cases/），師傅頁加清潔技師
 - [ ] 更多清潔文章（水塔清洗、除塵蟎、冷氣省電、大掃除清單…），照 articles/ 現有 4 篇清潔文的模板
 - [ ] 剩餘地區頁（宜蘭？台中以南？）——先問業主服務範圍再做
