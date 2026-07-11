@@ -572,6 +572,603 @@
       }
       const timeLabel = time || '未指定';
 
+      const guideSummary = typeof window.ldLeakGuideSummary === 'string' ? window.ldLeakGuideSummary.trim() : '';
+      const msgLines = [
+        '【灰汰郎 到府服務詢價】',
+        '姓名：' + name,
+        '電話：' + phone,
+        '服務地址：' + addr,
+        '清洗項目：' + service,
+        '希望日期：' + dateLabel,
+        '希望時段：' + timeLabel
+      ];
+      if(guideSummary) msgLines.push('漏水判讀摘要：' + guideSummary);
+      const msg = msgLines.join('\n');
+
+      ldTrack('quote_submit', { service: service, page: location.pathname });
+      const url = 'https://line.me/R/oaMessage/' + LINE_OA_ID + '/?' + encodeURIComponent(msg);
+      window.location.href = url;
+      ldCloseQuote();
+    });
+  }
+  }
+  if(document.body){ ldInit(); }
+  else { document.addEventListener('DOMContentLoaded', ldInit); }
+})();
+(function(){
+  function ldInit(){
+  const path = location.pathname.split('/').pop() || 'index.html';
+  const page = path.replace('.html','') || 'index';
+  const LINE = 'https://lin.ee/WVxmY65';
+  const JOIN_FORM = 'https://forms.gle/T4UTULXMaXaoGZQG8';
+  const LINE_OA_ID = '@478xvlgl';
+  const PHONE_DISPLAY = '0920-077-473';
+  const PHONE_TEL = 'tel:+886920077473';
+
+  // ── 分析追蹤：把下面的 G-XXXXXXXXXX 換成你的 GA4 評估 ID 即自動啟用 ──
+  const GA4_ID = 'G-XXXXXXXXXX';
+  const gaEnabled = /^G-[A-Z0-9]{6,}$/.test(GA4_ID) && GA4_ID !== 'G-XXXXXXXXXX';
+  if (gaEnabled) {
+    const gs = document.createElement('script');
+    gs.async = true;
+    gs.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA4_ID;
+    document.head.appendChild(gs);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function(){ dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', GA4_ID);
+  }
+  function ldTrack(name, params){
+    if (gaEnabled && window.gtag) gtag('event', name, params || {});
+  }
+  window.ldTrack = ldTrack;
+  const SVC_PAGES = {'/aircon.html':'aircon','/washer.html':'washer','/homeclean.html':'homeclean','/leak-repair.html':'leak-repair'};
+  const AREA_PAGES = ['/taipei.html','/new-taipei.html','/keelung.html','/taoyuan.html','/hsinchu.html','/miaoli.html','/taichung.html','/areas.html'];
+  // 全站點擊追蹤：LINE 連結與電話
+  document.addEventListener('click', function(e){
+    const a = e.target.closest && e.target.closest('a');
+    if (!a) return;
+    const href = a.getAttribute('href') || '';
+    if (href.indexOf('lin.ee') !== -1 || href.indexOf('line.me') !== -1) {
+      ldTrack('line_click', { link_url: href, page: location.pathname });
+    } else if (href.indexOf('tel:') === 0) {
+      ldTrack('phone_click', { page: location.pathname });
+    } else {
+      const clean = href.split('#')[0].split('?')[0];
+      const path = clean.charAt(0) === '/' ? clean : '/' + clean.split('/').pop();
+      if (SVC_PAGES[path]) ldTrack('service_click', { service: SVC_PAGES[path], page: location.pathname });
+      else if (AREA_PAGES.indexOf(path) !== -1) ldTrack('area_click', { area: path.replace('/','').replace('.html',''), page: location.pathname });
+    }
+  }, true);
+
+  const SERVICE_OPTIONS = ['冷氣清洗','洗衣機清洗','居家清潔（含抽油煙機）','水管清潔・漏水檢測','其他（請於下方說明）'];
+  const PAGE_SERVICE = {aircon:'冷氣清洗', washer:'洗衣機清洗', homeclean:'居家清潔（含抽油煙機）', 'leak-repair':'水管清潔・漏水檢測'};
+
+  // 字體
+  if(!document.querySelector('link[href*="Noto+Sans"]')){
+    const l=document.createElement('link');
+    l.rel='stylesheet';
+    l.href='https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap';
+    document.head.appendChild(l);
+  }
+
+  // CSS：全部用 ld- 前綴，不影響頁面其他元素
+  const css = `
+/* ld-header */
+#ld-header{
+  position:fixed;top:0;left:0;right:0;
+  z-index:9990;
+  background:#ffffff;
+  border-bottom:2px solid #e5e7eb;
+  box-shadow:0 2px 10px rgba(0,0,0,.07);
+  font-family:'Noto Sans TC',sans-serif;
+}
+.ld-top{
+  display:flex;align-items:center;
+  justify-content:space-between;
+  gap:8px;padding:7px 12px;
+  max-width:1200px;margin:0 auto;
+}
+.ld-brand{
+  display:flex;align-items:center;
+  gap:8px;text-decoration:none;
+  flex:1;min-width:0;
+}
+.ld-logo{
+  width:40px;height:40px;
+  flex-shrink:0;
+}
+.ld-logo-img{height:38px;width:auto;flex-shrink:0;display:block}
+.ld-texts{flex:1;min-width:0}
+.ld-name{
+  display:block;
+  font-size:18px;font-weight:900;
+  color:#1e3a8a;white-space:nowrap;
+  line-height:1.25;
+}
+.ld-sub{
+  display:block;
+  font-size:9px;font-weight:500;
+  color:#3b82f6;
+  line-height:1.3;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:220px;
+  letter-spacing:-.01em;
+}
+.ld-line-btn{
+  display:flex;align-items:center;gap:5px;
+  background:#06C755;color:#ffffff;
+  font-weight:700;font-size:12px;
+  font-family:'Noto Sans TC',sans-serif;
+  padding:6px 10px;border-radius:9px;
+  text-decoration:none;flex-shrink:0;
+  white-space:nowrap;
+}
+.ld-line-btn-text{display:none}
+
+/* nav */
+.ld-nav{
+  background:#1e3a8a;
+  display:flex;gap:5px;
+  padding:7px 8px;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.ld-nav::-webkit-scrollbar{display:none}
+.ld-tab{
+  display:flex;flex-direction:column;
+  align-items:center;gap:3px;
+  padding:8px 10px;border-radius:9px;
+  min-width:68px;flex-shrink:0;
+  background:rgba(255,255,255,.12);
+  border:1.5px solid rgba(255,255,255,.16);
+  text-decoration:none;cursor:pointer;
+  transition:background .15s;
+}
+.ld-tab:hover{background:rgba(255,255,255,.22)}
+.ld-tab.ld-active{
+  background:#ffffff;
+  border-color:#ffffff;
+  box-shadow:0 2px 6px rgba(0,0,0,.12);
+}
+.ld-tab-icon{
+  font-size:20px;line-height:1;
+  display:block;
+}
+.ld-tab-label{
+  display:block;
+  font-size:11.5px;font-weight:700;
+  font-family:'Noto Sans TC',sans-serif;
+  color:rgba(255,255,255,.93);
+  white-space:nowrap;line-height:1.2;
+}
+.ld-tab-sub{
+  display:none;
+  font-size:9px;
+  font-family:'Noto Sans TC',sans-serif;
+  color:rgba(255,255,255,.5);
+  white-space:nowrap;
+}
+.ld-tab.ld-active .ld-tab-label{color:#1e3a8a}
+.ld-tab.ld-active .ld-tab-sub{color:#6b7280}
+
+/* ── 錨點補償：fixed header 遮住錨點的修正 ── */
+[id]{scroll-margin-top:var(--ld-hdr-h,130px)}
+
+/* float */
+#ld-float{
+  position:fixed;right:14px;top:50%;
+  transform:translateY(-50%);
+  z-index:9991;
+  width:54px;height:54px;
+  border-radius:50%;
+  background:#06C755;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:2px;
+  text-decoration:none;
+  box-shadow:0 4px 16px rgba(6,199,85,.5);
+  animation:ld-pulse 2.5s ease-in-out infinite;
+}
+@keyframes ld-pulse{
+  0%,100%{box-shadow:0 4px 16px rgba(6,199,85,.5)}
+  50%{box-shadow:0 4px 26px rgba(6,199,85,.75),0 0 0 7px rgba(6,199,85,.1)}
+}
+#ld-float-icon{
+  display:block;
+  width:26px;height:26px;
+}
+#ld-float-text{
+  display:block;
+  font-size:10px;font-weight:700;
+  color:#ffffff;
+  font-family:'Noto Sans TC',sans-serif;
+  line-height:1;
+}
+
+/* 加入我們按鈕 */
+#ld-join{
+  position:fixed;right:14px;
+  z-index:9991;
+  width:54px;height:54px;
+  border-radius:50%;
+  background:#1e3a8a;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:2px;
+  text-decoration:none;
+  box-shadow:0 4px 14px rgba(30,58,138,.45);
+  transition:background .2s,box-shadow .2s;
+}
+#ld-join:hover{background:#1d4ed8;box-shadow:0 4px 20px rgba(30,58,138,.6)}
+#ld-join-icon{font-size:20px;line-height:1}
+#ld-join-text{
+  display:block;
+  font-size:9.5px;font-weight:700;
+  color:#ffffff;
+  font-family:'Noto Sans TC',sans-serif;
+  line-height:1;letter-spacing:.02em;
+}
+/* PC */
+@media(min-width:1024px){
+  .ld-top{padding:12px 40px}
+  .ld-logo{width:48px;height:48px}
+  .ld-logo-img{height:50px}
+  .ld-name{font-size:22px}
+  .ld-sub{font-size:11px}
+  .ld-line-btn{font-size:14px;padding:8px 16px;gap:6px}
+  .ld-line-btn-text{display:inline}
+  .ld-nav{padding:12px 40px;justify-content:center;gap:8px}
+  .ld-tab{min-width:86px;padding:10px 14px;gap:4px;border-radius:11px}
+  .ld-tab-icon{font-size:22px}
+  .ld-tab-label{font-size:12px}
+  .ld-tab-sub{display:block}
+}
+
+#ld-back-top{position:fixed;right:14px;bottom:80px;z-index:9990;width:42px;height:42px;border-radius:50%;background:#1e3a8a;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;box-shadow:0 2px 12px rgba(30,58,138,.35);opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;pointer-events:none;}
+@media(min-width:1024px){#ld-back-top{bottom:24px}}
+#ld-back-top.ld-show{opacity:1;transform:translateY(0);pointer-events:auto}
+#ld-back-top:hover{background:#1d4ed8}
+
+/* Sticky 底部 CTA Bar */
+#ld-stickybar{
+  position:fixed;left:0;right:0;bottom:0;z-index:9989;
+  display:flex;align-items:center;gap:10px;
+  background:#ffffff;
+  border-top:2px solid #e5e7eb;
+  box-shadow:0 -4px 16px rgba(0,0,0,.08);
+  padding:10px 14px;
+  padding-bottom:calc(10px + env(safe-area-inset-bottom));
+}
+.ld-sticky-text{flex:1;min-width:0}
+.ld-sticky-title{font-size:13px;font-weight:900;color:#111827;line-height:1.3}
+.ld-sticky-sub{font-size:10.5px;color:#6b7280;line-height:1.3}
+.ld-sticky-btn{
+  flex-shrink:0;display:flex;align-items:center;gap:6px;
+  background:#06C755;color:#fff;font-weight:700;font-size:13.5px;
+  padding:11px 18px;border-radius:11px;text-decoration:none;
+  box-shadow:0 3px 10px rgba(6,199,85,.35);white-space:nowrap;
+}
+.ld-sticky-tel{
+  flex-shrink:0;width:42px;height:42px;border-radius:11px;
+  background:#1e3a8a;color:#fff;font-size:18px;
+  display:flex;align-items:center;justify-content:center;
+  text-decoration:none;box-shadow:0 3px 10px rgba(30,58,138,.3);
+}
+@media(max-width:1023px){
+  body{padding-bottom:66px}
+}
+@media(min-width:1024px){
+  #ld-stickybar{display:none}
+}
+
+/* 快速預約表單 Modal */
+#ld-quote-overlay{
+  position:fixed;inset:0;z-index:9995;
+  background:rgba(17,24,39,.55);
+  display:none;align-items:flex-end;justify-content:center;
+  padding:0;
+  font-family:'Noto Sans TC',sans-serif;
+}
+#ld-quote-overlay.ld-show{display:flex}
+@media(min-width:640px){
+  #ld-quote-overlay{align-items:center;padding:20px}
+}
+#ld-quote-card{
+  background:#fff;width:100%;max-width:480px;
+  border-radius:18px 18px 0 0;
+  max-height:92vh;overflow-y:auto;
+  padding:1.4rem 1.3rem calc(1.4rem + env(safe-area-inset-bottom));
+  box-shadow:0 -8px 30px rgba(0,0,0,.25);
+}
+@media(min-width:640px){
+  #ld-quote-card{border-radius:18px;max-height:88vh}
+}
+.ld-q-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:.3rem}
+.ld-q-title{font-size:1.15rem;font-weight:900;color:#111827;line-height:1.35}
+.ld-q-sub{font-size:.82rem;color:#6b7280;margin-top:.25rem;line-height:1.6}
+.ld-q-close{flex-shrink:0;width:32px;height:32px;border-radius:50%;border:none;background:#f3f4f6;color:#374151;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.ld-q-close:hover{background:#e5e7eb}
+.ld-q-field{margin-top:.95rem}
+.ld-q-label{display:block;font-size:.83rem;font-weight:700;color:#111827;margin-bottom:.35rem}
+.ld-q-label .ld-req{color:#dc2626;margin-left:2px}
+.ld-q-input,.ld-q-select{
+  width:100%;padding:.7rem .85rem;border:1.5px solid #d1d5db;border-radius:10px;
+  font-size:.92rem;font-family:'Noto Sans TC',sans-serif;color:#111827;background:#fff;
+}
+.ld-q-input:focus,.ld-q-select:focus{outline:none;border-color:#1e3a8a}
+.ld-q-row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.ld-q-err{color:#dc2626;font-size:.76rem;margin-top:.3rem;display:none}
+.ld-q-field.ld-invalid .ld-q-input,.ld-q-field.ld-invalid .ld-q-select{border-color:#dc2626}
+.ld-q-field.ld-invalid .ld-q-err{display:block}
+.ld-q-submit{
+  width:100%;margin-top:1.3rem;background:#06C755;color:#fff;font-weight:900;font-size:1rem;
+  padding:.95rem;border:none;border-radius:12px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+  box-shadow:0 4px 14px rgba(6,199,85,.4);
+}
+.ld-q-submit:hover{background:#05b34c}
+.ld-q-note{font-size:.72rem;color:#9ca3af;text-align:center;margin-top:.65rem;line-height:1.6}
+`;
+
+  // 注入 CSS
+  const oldStyle = document.getElementById('ld-style');
+  if(oldStyle) oldStyle.remove();
+  const style = document.createElement('style');
+  style.id = 'ld-style';
+  style.textContent = css;
+  document.head.appendChild(style);
+
+  // SVG 定義
+  const LOGO = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+    <circle cx="50" cy="50" r="46" fill="#1e3a8a"/>
+    <circle cx="50" cy="50" r="46" fill="none" stroke="#93c5fd" stroke-width="2"/>
+    <path d="M50 20L56 42L78 48L56 54L50 76L44 54L22 48L44 42Z" fill="#ffffff"/>
+    <circle cx="76" cy="24" r="6" fill="#06C755"/>
+    <circle cx="76" cy="24" r="2.4" fill="#ffffff"/>
+  </svg>`
+
+  const LINE_ICON = `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" width="18" height="18" style="display:block;flex-shrink:0">
+    <rect width="48" height="48" rx="10" fill="#fff"/>
+    <path d="M40 22.3C40 15 33.3 9 25 9S10 15 10 22.3c0 6.5 5.8 12 13.6 13 .5.1 1.2.4 1.4.9.2.5.1 1.2.1 1.2l-.2 1.5c-.1.5-.4 1.9 1.7.9 2.2-1 11.5-6.8 15.7-11.6 2.9-3.2 4.7-6.5 4.7-10z" fill="#06C755"/>
+    <path d="M21.2 19.2h-1.4c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h1.4c.3 0 .5-.2.5-.5v-6.6c0-.3-.2-.5-.5-.5zM28.6 19.2h-1.4c-.3 0-.5.2-.5.5v3.9l-3-4.2-.2-.2H22c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h1.4c.3 0 .5-.2.5-.5v-3.9l3 4.2.2.2h1.5c.3 0 .5-.2.5-.5v-6.6c0-.3-.2-.5-.5-.5zM19.2 24.3h-2.4v-4.7c0-.3-.2-.5-.5-.5h-1.4c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h4.3c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5zM33.8 20.6c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5h-4.3c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h4.3c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5H31v-1h2.8c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5H31v-1h2.8z" fill="#fff"/>
+  </svg>`;
+
+  const LINE_FLOAT_ICON = `<svg id="ld-float-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" width="26" height="26" style="display:block">
+    <path d="M40 22.3C40 15 33.3 9 25 9S10 15 10 22.3c0 6.5 5.8 12 13.6 13 .5.1 1.2.4 1.4.9.2.5.1 1.2.1 1.2l-.2 1.5c-.1.5-.4 1.9 1.7.9 2.2-1 11.5-6.8 15.7-11.6 2.9-3.2 4.7-6.5 4.7-10z" fill="#fff"/>
+    <path d="M21.2 19.2h-1.4c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h1.4c.3 0 .5-.2.5-.5v-6.6c0-.3-.2-.5-.5-.5zM28.6 19.2h-1.4c-.3 0-.5.2-.5.5v3.9l-3-4.2-.2-.2H22c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h1.4c.3 0 .5-.2.5-.5v-3.9l3 4.2.2.2h1.5c.3 0 .5-.2.5-.5v-6.6c0-.3-.2-.5-.5-.5zM19.2 24.3h-2.4v-4.7c0-.3-.2-.5-.5-.5h-1.4c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h4.3c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5zM33.8 20.6c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5h-4.3c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h4.3c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5H31v-1h2.8c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5H31v-1h2.8z" fill="#06C755"/>
+  </svg>`;
+
+  // 頁籤
+  const tabs = [
+    {id:'index',     href:'index.html',     icon:'\ud83c\udfe0', label:'\u9996\u9801',     sub:'\u670d\u52d9\u7e3d\u89bd'},
+    {id:'aircon',    href:'aircon.html',    icon:'\u2744\ufe0f', label:'\u51b7\u6c23\u6e05\u6d17', sub:'\u5230\u5e9c\u6d17\u6de8'},
+    {id:'washer',    href:'washer.html',    icon:'\ud83e\uddfa', label:'\u6d17\u8863\u6a5f\u6e05\u6d17', sub:'\u9664\u83cc\u9664\u57a3'},
+    {id:'homeclean', href:'homeclean.html', icon:'\ud83e\uddfd', label:'\u5c45\u5bb6\u6e05\u6f54', sub:'\u542b\u62bd\u6cb9\u7159\u6a5f'},
+    {id:'leak-repair', href:'leak-repair.html', icon:'\ud83d\udca7', label:'\u6c34\u7ba1\u6293\u6f0f', sub:'\u6f0f\u6c34\u6aa2\u6e2c'},
+    {id:'knowledge', href:'knowledge.html', icon:'\ud83d\udcd6', label:'\u5c45\u5bb6\u767e\u79d1', sub:'\u514d\u8cbb\u77e5\u8b58'},
+    {id:'cases',     href:'cases.html',     icon:'\ud83d\udccb', label:'\u65bd\u5de5\u6848\u4f8b', sub:'\u771f\u5be6\u8a18\u9304'},
+    {id:'team',      href:'team.html',      icon:'\ud83d\udc77', label:'\u5408\u4f5c\u5ee0\u5546', sub:'\u5e2b\u5085\u4ecb\u7d39'},
+    {id:'areas',     href:'areas.html',     icon:'\ud83d\udccd', label:'\u670d\u52d9\u5730\u5340', sub:'\u5230\u5e9c\u7bc4\u570d'},
+  ];
+
+  const tabsHTML = tabs.map(t =>
+    `<a href="/${t.href}" class="ld-tab${t.id===page?' ld-active':''}">
+      <span class="ld-tab-icon">${t.icon}</span>
+      <span class="ld-tab-label">${t.label}</span>
+      <span class="ld-tab-sub">${t.sub}</span>
+    </a>`
+  ).join('');
+
+  const html = `
+    <a id="ld-float" href="${LINE}" target="_blank" rel="noopener">
+      ${LINE_FLOAT_ICON}
+      <span id="ld-float-text">LINE</span>
+    </a>
+    <a id="ld-join" href="${JOIN_FORM}" target="_blank" rel="noopener" title="廠商合作申請">
+      <span id="ld-join-icon">🤝</span>
+      <span id="ld-join-text">加入我們</span>
+    </a>
+    <header id="ld-header">
+      <div class="ld-top">
+        <a class="ld-brand" href="/index.html" aria-label="灰汰郎 清潔公司｜冷氣・洗衣機・居家清潔・水管抓漏">
+          <picture>
+            <source srcset="/logo/logos/website-header-logo-640x240.webp" type="image/webp">
+            <img class="ld-logo-img" src="/logo/logos/website-header-logo-640x240.png" alt="灰汰郎 清潔公司" width="640" height="240">
+          </picture>
+        </a>
+        <a href="${LINE}" target="_blank" rel="noopener" class="ld-line-btn">
+          ${LINE_ICON}
+          <span class="ld-line-btn-text">加入 LINE 諮詢</span>
+        </a>
+      </div>
+      <nav class="ld-nav">${tabsHTML}</nav>
+    </header>
+    <button id="ld-back-top" onclick="window.scrollTo({top:0,behavior:\'smooth\'})" title="回到頂部">↑</button>
+    <div id="ld-stickybar">
+      <div class="ld-sticky-text">
+        <div class="ld-sticky-title">灰塵髒污，通通汰除</div>
+        <div class="ld-sticky-sub">免費諮詢・不施工不收費</div>
+      </div>
+      <a href="${PHONE_TEL}" class="ld-sticky-tel" aria-label="撥打電話 ${PHONE_DISPLAY}">📞</a>
+      <button type="button" class="ld-sticky-btn" onclick="ldOpenQuote()">📋 線上預約估價</button>
+    </div>
+    <div id="ld-quote-overlay">
+      <div id="ld-quote-card" role="dialog" aria-modal="true" aria-labelledby="ld-q-title">
+        <div class="ld-q-head">
+          <div>
+            <div class="ld-q-title" id="ld-q-title">📋 免費估價・線上預約</div>
+            <div class="ld-q-sub">填寫基本資料，送出後開啟 LINE 傳送給我們，客服會盡快回覆報價</div>
+          </div>
+          <button type="button" class="ld-q-close" onclick="ldCloseQuote()" aria-label="關閉">✕</button>
+        </div>
+        <form id="ld-q-form" novalidate>
+          <div class="ld-q-field" id="ld-f-name">
+            <label class="ld-q-label" for="ld-q-name">姓名<span class="ld-req">*</span></label>
+            <input class="ld-q-input" id="ld-q-name" type="text" placeholder="您的稱呼" autocomplete="name">
+            <div class="ld-q-err">請輸入姓名</div>
+          </div>
+          <div class="ld-q-field" id="ld-f-phone">
+            <label class="ld-q-label" for="ld-q-phone">電話<span class="ld-req">*</span></label>
+            <input class="ld-q-input" id="ld-q-phone" type="tel" placeholder="0912-345-678" autocomplete="tel" inputmode="tel">
+            <div class="ld-q-err">請輸入正確的聯絡電話</div>
+          </div>
+          <div class="ld-q-field" id="ld-f-addr">
+            <label class="ld-q-label" for="ld-q-addr">服務地址<span class="ld-req">*</span></label>
+            <input class="ld-q-input" id="ld-q-addr" type="text" placeholder="市／區＋街道地址" autocomplete="street-address">
+            <div class="ld-q-err">請輸入服務地址</div>
+          </div>
+          <div class="ld-q-field" id="ld-f-service">
+            <label class="ld-q-label" for="ld-q-service">清洗項目<span class="ld-req">*</span></label>
+            <select class="ld-q-select" id="ld-q-service">
+              <option value="">請選擇服務項目</option>
+              ${SERVICE_OPTIONS.map(s=>`<option value="${s}">${s}</option>`).join('')}
+            </select>
+            <div class="ld-q-err">請選擇清洗項目</div>
+          </div>
+          <div class="ld-q-field">
+            <label class="ld-q-label">希望日期與時間</label>
+            <div class="ld-q-row">
+              <input class="ld-q-input" id="ld-q-date" type="date">
+              <select class="ld-q-select" id="ld-q-time">
+                <option value="">希望時段（可不填）</option>
+                <option value="上午 9:00-12:00">上午 9:00-12:00</option>
+                <option value="下午 13:00-17:00">下午 13:00-17:00</option>
+                <option value="傍晚 17:00-19:00">傍晚 17:00-19:00</option>
+                <option value="晚上 19:00-21:00">晚上 19:00-21:00</option>
+                <option value="時間皆可">時間皆可</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="ld-q-submit">📲 送出並開啟 LINE</button>
+          <div class="ld-q-note">送出後會開啟 LINE，訊息已幫您填好，再按一下「傳送」即可完成預約估價，純諮詢完全免費</div>
+        </form>
+      </div>
+    </div>`;
+
+  // 移除舊版 header
+  ['ld-header','site-header','ld-float','hdr-float','float-line'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.remove();
+  });
+
+  document.body.insertAdjacentHTML('afterbegin', html);
+
+  // 計算 header 高度，補 padding-top
+  function setOffset(){
+    var hdrEl = document.getElementById('ld-header');
+    if(hdrEl){
+      var hh = hdrEl.offsetHeight;
+      // 限制在合理範圍：手機 80~140px，PC 100~160px
+      if(hh > 0 && hh < 160){
+        document.body.style.paddingTop = hh + 'px';
+        document.documentElement.style.setProperty('--ld-hdr-h', hh + 'px');
+      }
+    }
+  }
+  setOffset();
+  window.addEventListener('resize', setOffset);
+  // 多個時機確保字體載入後重新計算 header 高度
+  setTimeout(setOffset, 50);
+  setTimeout(setOffset, 200);
+  setTimeout(setOffset, 500);
+  setTimeout(setOffset, 1000);
+  window.addEventListener('load', function(){ setOffset(); setTimeout(setOffset, 200); });
+  // 字體載入完成也更新
+  if(document.fonts && document.fonts.ready){
+    document.fonts.ready.then(function(){ setOffset(); });
+  }
+
+
+  // 加入我們按鈕：固定在 LINE 按鈕下方
+  (function(){
+    function posJoin(){
+      const lineBtn = document.getElementById('ld-float');
+      const joinBtn = document.getElementById('ld-join');
+      if(!lineBtn || !joinBtn) return;
+      const lineRect = lineBtn.getBoundingClientRect();
+      // LINE 按鈕是 fixed top:50%，加入我們在它下方 66px
+      joinBtn.style.top = (window.innerHeight/2 + 33 + 8) + 'px';
+    }
+    posJoin();
+    window.addEventListener('resize', posJoin);
+  })();
+  // 回到頂部按鈕顯示控制
+  window.addEventListener('scroll', function(){
+    const btn = document.getElementById('ld-back-top');
+    if(btn) btn.classList.toggle('ld-show', window.scrollY > 400);
+  }, {passive:true});
+
+  // ── 快速預約表單 ──
+  const qOverlay = document.getElementById('ld-quote-overlay');
+  const qForm = document.getElementById('ld-q-form');
+  const qDate = document.getElementById('ld-q-date');
+  if(qDate){
+    const today = new Date();
+    qDate.min = today.toISOString().slice(0,10);
+  }
+
+  window.ldOpenQuote = function(serviceKey){
+    if(!qOverlay) return;
+    const svc = document.getElementById('ld-q-service');
+    if(svc){
+      const preset = (serviceKey && PAGE_SERVICE[serviceKey]) || PAGE_SERVICE[page] || '';
+      if(preset) svc.value = preset;
+    }
+    qOverlay.classList.add('ld-show');
+    document.body.style.overflow = 'hidden';
+    ldTrack('quote_open', { service: serviceKey || page, page: location.pathname });
+  };
+
+  window.ldCloseQuote = function(){
+    if(!qOverlay) return;
+    qOverlay.classList.remove('ld-show');
+    document.body.style.overflow = '';
+  };
+
+  if(qOverlay){
+    qOverlay.addEventListener('click', function(e){
+      if(e.target === qOverlay) ldCloseQuote();
+    });
+  }
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') ldCloseQuote();
+  });
+
+  function setFieldValid(id, valid){
+    const el = document.getElementById(id);
+    if(el) el.classList.toggle('ld-invalid', !valid);
+  }
+
+  if(qForm){
+    qForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = document.getElementById('ld-q-name').value.trim();
+      const phone = document.getElementById('ld-q-phone').value.trim();
+      const addr = document.getElementById('ld-q-addr').value.trim();
+      const service = document.getElementById('ld-q-service').value;
+      const date = document.getElementById('ld-q-date').value;
+      const time = document.getElementById('ld-q-time').value;
+
+      const phoneOk = /^[0-9+\-\s()]{8,}$/.test(phone);
+
+      let valid = true;
+      if(!name){ setFieldValid('ld-f-name', false); valid = false; } else setFieldValid('ld-f-name', true);
+      if(!phoneOk){ setFieldValid('ld-f-phone', false); valid = false; } else setFieldValid('ld-f-phone', true);
+      if(!addr){ setFieldValid('ld-f-addr', false); valid = false; } else setFieldValid('ld-f-addr', true);
+      if(!service){ setFieldValid('ld-f-service', false); valid = false; } else setFieldValid('ld-f-service', true);
+      if(!valid) return;
+
+      let dateLabel = '未指定';
+      if(date){
+        const d = new Date(date + 'T00:00:00');
+        dateLabel = (d.getMonth()+1) + '/' + d.getDate() + '（' + '日一二三四五六'[d.getDay()] + '）';
+      }
+      const timeLabel = time || '未指定';
+
       const msg = [
         '【灰汰郎 到府服務詢價】',
         '姓名：' + name,
