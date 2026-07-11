@@ -45,6 +45,37 @@
 
   const SERVICE_OPTIONS = ['冷氣清洗','洗衣機清洗','居家清潔','漏水檢測與修補','其他（請於下方說明）'];
   const PAGE_SERVICE = {aircon:'冷氣清洗', washer:'洗衣機清洗', homeclean:'居家清潔', 'leak-repair':'漏水檢測與修補'};
+  const SERVICE_DETAIL_CATALOG = {
+    '冷氣清洗': [
+      {id:'aircon-wall',label:'壁掛內機',unit:'台',note:'參考價 $1,499／台'},
+      {id:'aircon-concealed',label:'吊隱式冷氣',unit:'台',note:'參考價 $2,599／台'},
+      {id:'aircon-outdoor',label:'室外機清洗',unit:'台',note:'加購 $500／台'},
+      {id:'aircon-window',label:'窗型冷氣',unit:'台',note:'參考價 $3,000／台'},
+      {id:'aircon-cassette',label:'四方吹／商用冷氣',unit:'台',note:'需照片與現場條件評估'}
+    ],
+    '洗衣機清洗': [
+      {id:'washer-top',label:'直立式洗衣機',unit:'台',note:'參考價 $1,299／台'},
+      {id:'washer-drum',label:'滾筒式洗衣機',unit:'台',note:'參考價 $2,999／台'},
+      {id:'washer-commercial',label:'商用／投幣洗衣機',unit:'台',note:'需型號與照片評估'}
+    ],
+    '居家清潔': [
+      {id:'home-regular',label:'定期居家清潔',unit:'次',note:'參考價 $2,500／4 小時'},
+      {id:'home-deep',label:'大掃除',unit:'案',note:'參考價 $3,500 起'},
+      {id:'home-move',label:'入住／退租清潔',unit:'案',note:'參考價 $3,000 起'},
+      {id:'home-renovation',label:'裝潢後細清',unit:'案',note:'參考價 $6,000 起'},
+      {id:'home-hood',label:'抽油煙機清潔',unit:'台',note:'依型號與油污程度評估'}
+    ],
+    '漏水檢測與修補': [
+      {id:'leak-inspection',label:'漏水初步檢測',unit:'處',note:'先依水痕、照片與現場狀況判讀'},
+      {id:'leak-pressure',label:'給水管壓力測試',unit:'區',note:'依管線範圍評估'},
+      {id:'leak-water',label:'排水／防水滿水測試',unit:'區',note:'依測試範圍評估'},
+      {id:'leak-infrared',label:'紅外線／含水率檢測',unit:'區',note:'依現場條件選用儀器'},
+      {id:'leak-repair',label:'漏水修補施工',unit:'處',note:'確認漏點與工法後報價'}
+    ],
+    '其他（請於下方說明）': [
+      {id:'other-request',label:'其他服務需求',unit:'項',note:'請在備註說明需求與現場狀況'}
+    ]
+  };
 
   // 字體
   if(!document.querySelector('link[href*="Noto+Sans"]')){
@@ -353,6 +384,29 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
 .ld-service-choice-label{font-size:.86rem;font-weight:900;line-height:1.35}
 .ld-service-choice-check{margin-left:auto;width:18px;height:18px;border:1.5px solid #aebdc2;border-radius:50%;background:#fff;flex:0 0 auto}
 .ld-service-choice.ld-selected .ld-service-choice-check{border:5px solid #7ee5da;background:#17324d}
+.ld-detail-section[hidden],.ld-add-menu[hidden]{display:none!important}
+.ld-detail-section{margin-top:1rem;padding:14px;border:1.5px solid var(--service-border,#dce4e7);border-radius:16px;background:var(--service-soft,#f7fafb)}
+.ld-detail-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+.ld-detail-title{font-size:.88rem;font-weight:900;color:#17324d}
+.ld-detail-help{font-size:.72rem;color:#667680;line-height:1.5;margin-top:2px}
+.ld-detail-list{display:grid;gap:9px}
+.ld-detail-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;gap:8px;align-items:center;padding:10px;border:1px solid #d5e0e3;border-radius:13px;background:#fff;box-shadow:0 4px 12px rgba(23,50,77,.055)}
+.ld-detail-main{min-width:0}
+.ld-detail-type{width:100%;border:0;background:transparent;color:#17324d;font:800 .86rem 'Noto Sans TC',sans-serif;padding:2px 22px 2px 0;cursor:pointer}
+.ld-detail-type:focus{outline:2px solid var(--service-accent,#138a80);outline-offset:3px;border-radius:4px}
+.ld-detail-note{font-size:.69rem;color:#667680;line-height:1.45;margin-top:3px}
+.ld-qty-control{display:grid;grid-template-columns:30px 42px 30px;align-items:center;border:1px solid #cbd7db;border-radius:10px;overflow:hidden;background:#fff}
+.ld-qty-btn{height:34px;border:0;background:#edf3f4;color:#17324d;font-size:1.05rem;font-weight:900;cursor:pointer}
+.ld-qty-btn:hover{background:var(--service-soft,#e8f5f3);color:var(--service-accent,#138a80)}
+.ld-detail-qty{width:42px;height:34px;border:0;text-align:center;font:800 .85rem 'Noto Sans TC',sans-serif;color:#17324d;-moz-appearance:textfield}
+.ld-detail-qty::-webkit-inner-spin-button,.ld-detail-qty::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.ld-detail-unit{font-size:.72rem;font-weight:800;color:#667680;min-width:18px}
+.ld-detail-remove{width:30px;height:30px;border:0;border-radius:9px;background:#fff1f2;color:#be123c;font-size:1rem;cursor:pointer}
+.ld-add-detail{width:100%;margin-top:10px;padding:10px 12px;border:1.5px dashed var(--service-accent,#138a80);border-radius:12px;background:#fff;color:var(--service-accent,#138a80);font:900 .82rem 'Noto Sans TC',sans-serif;cursor:pointer}
+.ld-add-detail:hover{background:var(--service-soft,#edf8f7)}
+.ld-add-menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:8px;padding:9px;border-radius:12px;background:#fff;border:1px solid #d5e0e3}
+.ld-add-option{padding:9px 8px;border:1px solid #d5e0e3;border-radius:10px;background:#fff;color:#17324d;font:800 .76rem 'Noto Sans TC',sans-serif;cursor:pointer;text-align:left}
+.ld-add-option:hover{border-color:var(--service-accent,#138a80);background:var(--service-soft,#edf8f7)}
 .ld-q-row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
 .ld-q-err{color:#dc2626;font-size:.76rem;margin-top:.3rem;display:none}
 .ld-q-field.ld-invalid .ld-q-input,.ld-q-field.ld-invalid .ld-q-select{border-color:#dc2626}
@@ -369,6 +423,9 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
 @media(max-width:390px){
   .ld-service-choices{grid-template-columns:1fr}
   .ld-service-choice:last-child{grid-column:auto}
+  .ld-detail-row{grid-template-columns:minmax(0,1fr) auto auto}
+  .ld-detail-unit{display:none}
+  .ld-add-menu{grid-template-columns:1fr}
 }
 `;
 
@@ -484,6 +541,17 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
             <input type="hidden" id="ld-q-service" value="">
             <div class="ld-q-err">請選擇服務項目</div>
           </div>
+          <div class="ld-detail-section" id="ld-q-detail-section" hidden>
+            <div class="ld-detail-head">
+              <div>
+                <div class="ld-detail-title">服務內容與數量</div>
+                <div class="ld-detail-help">已放入最常見項目；可直接改類型，或按＋增加其他設備／項目。</div>
+              </div>
+            </div>
+            <div class="ld-detail-list" id="ld-q-detail-list"></div>
+            <button type="button" class="ld-add-detail" id="ld-add-detail" aria-expanded="false">＋ 增加其他設備／項目</button>
+            <div class="ld-add-menu" id="ld-add-menu" hidden></div>
+          </div>
           <div class="ld-q-field">
             <label class="ld-q-label">希望日期與時間</label>
             <div class="ld-q-row">
@@ -497,6 +565,10 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
                 <option value="時間皆可">時間皆可</option>
               </select>
             </div>
+          </div>
+          <div class="ld-q-field">
+            <label class="ld-q-label" for="ld-q-note">現場狀況或其他需求</label>
+            <textarea class="ld-q-input" id="ld-q-note" rows="3" placeholder="例如：冷氣漏水、機型、樓層、停車或希望處理的範圍"></textarea>
           </div>
           <button type="submit" class="ld-q-submit">送出並開啟 LINE</button>
           <div class="ld-q-note">送出後會開啟 LINE，訊息已幫您填好，再按一下「傳送」即可完成預約估價，純諮詢完全免費</div>
@@ -562,13 +634,84 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   const qDate = document.getElementById('ld-q-date');
   const qService = document.getElementById('ld-q-service');
   const qServiceButtons = Array.from(document.querySelectorAll('.ld-service-choice'));
+  const qDetailSection = document.getElementById('ld-q-detail-section');
+  const qDetailList = document.getElementById('ld-q-detail-list');
+  const qAddDetail = document.getElementById('ld-add-detail');
+  const qAddMenu = document.getElementById('ld-add-menu');
+
+  function detailCatalog(service){
+    return SERVICE_DETAIL_CATALOG[service] || [];
+  }
+  function updateDetailRow(row, catalog){
+    const selected = catalog.find(function(item){ return item.id === row.querySelector('.ld-detail-type').value; }) || catalog[0];
+    if(!selected) return;
+    row.querySelector('.ld-detail-note').textContent = selected.note;
+    row.querySelector('.ld-detail-unit').textContent = selected.unit;
+  }
+  function addDetailRow(service, itemId, removable){
+    const catalog = detailCatalog(service);
+    if(!qDetailList || !catalog.length) return;
+    const selected = catalog.find(function(item){ return item.id === itemId; }) || catalog[0];
+    const row = document.createElement('div');
+    row.className = 'ld-detail-row';
+    row.innerHTML = '<div class="ld-detail-main">' +
+      '<select class="ld-detail-type" aria-label="服務類型">' + catalog.map(function(item){ return '<option value="' + item.id + '"' + (item.id === selected.id ? ' selected' : '') + '>' + item.label + '</option>'; }).join('') + '</select>' +
+      '<div class="ld-detail-note"></div></div>' +
+      '<div class="ld-qty-control"><button type="button" class="ld-qty-btn" data-step="-1" aria-label="減少數量">−</button><input class="ld-detail-qty" type="number" min="1" max="20" value="1" inputmode="numeric" aria-label="數量"><button type="button" class="ld-qty-btn" data-step="1" aria-label="增加數量">＋</button></div>' +
+      '<span class="ld-detail-unit"></span>' +
+      (removable ? '<button type="button" class="ld-detail-remove" aria-label="移除此項">✕</button>' : '');
+    qDetailList.appendChild(row);
+    updateDetailRow(row, catalog);
+    row.querySelector('.ld-detail-type').addEventListener('change', function(){ updateDetailRow(row, catalog); });
+    row.querySelectorAll('.ld-qty-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        const input = row.querySelector('.ld-detail-qty');
+        const next = Math.max(1, Math.min(20, Number(input.value || 1) + Number(btn.getAttribute('data-step'))));
+        input.value = String(next);
+      });
+    });
+    const remove = row.querySelector('.ld-detail-remove');
+    if(remove) remove.addEventListener('click', function(){ row.remove(); });
+  }
+  function renderAddMenu(service){
+    const catalog = detailCatalog(service);
+    if(!qAddMenu) return;
+    qAddMenu.innerHTML = catalog.map(function(item){ return '<button type="button" class="ld-add-option" data-item="' + item.id + '">＋ ' + item.label + '</button>'; }).join('');
+    qAddMenu.querySelectorAll('.ld-add-option').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        addDetailRow(service, btn.getAttribute('data-item'), true);
+        qAddMenu.hidden = true;
+        if(qAddDetail) qAddDetail.setAttribute('aria-expanded','false');
+      });
+    });
+  }
+  function renderServiceDetails(service){
+    const catalog = detailCatalog(service);
+    if(!qDetailSection || !qDetailList) return;
+    qDetailList.innerHTML = '';
+    if(!catalog.length){ qDetailSection.hidden = true; return; }
+    qDetailSection.hidden = false;
+    addDetailRow(service, catalog[0].id, false);
+    renderAddMenu(service);
+    if(qAddMenu) qAddMenu.hidden = true;
+    if(qAddDetail) qAddDetail.setAttribute('aria-expanded','false');
+  }
+  if(qAddDetail){
+    qAddDetail.addEventListener('click', function(){
+      if(!qAddMenu) return;
+      qAddMenu.hidden = !qAddMenu.hidden;
+      qAddDetail.setAttribute('aria-expanded', qAddMenu.hidden ? 'false' : 'true');
+    });
+  }
   function selectService(value){
+    const changed = qService && qService.value !== value;
     if(qService) qService.value = value || '';
     qServiceButtons.forEach(function(btn){
       const selected = btn.getAttribute('data-service') === value;
       btn.classList.toggle('ld-selected', selected);
       btn.setAttribute('aria-pressed', selected ? 'true' : 'false');
     });
+    if(changed || (qDetailList && !qDetailList.children.length)) renderServiceDetails(value);
     if(value) setFieldValid('ld-f-service', true);
   }
   qServiceButtons.forEach(function(btn){
@@ -636,6 +779,16 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
     if(el) el.classList.toggle('ld-invalid', !valid);
   }
 
+  function collectServiceDetails(service){
+    const catalog = detailCatalog(service);
+    if(!qDetailList || !catalog.length) return [];
+    return Array.from(qDetailList.querySelectorAll('.ld-detail-row')).map(function(row){
+      const item = catalog.find(function(entry){ return entry.id === row.querySelector('.ld-detail-type').value; });
+      const quantity = Math.max(1, Number(row.querySelector('.ld-detail-qty').value || 1));
+      return item ? item.label + ' × ' + quantity + item.unit + '（' + item.note + '）' : '';
+    }).filter(Boolean);
+  }
+
   if(qForm){
     qForm.addEventListener('submit', function(e){
       e.preventDefault();
@@ -645,6 +798,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
       const service = document.getElementById('ld-q-service').value;
       const date = document.getElementById('ld-q-date').value;
       const time = document.getElementById('ld-q-time').value;
+      const note = document.getElementById('ld-q-note').value.trim();
 
       const phoneOk = /^[0-9+\-\s()]{8,}$/.test(phone);
 
@@ -663,6 +817,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
       const timeLabel = time || '未指定';
 
       const guideSummary = typeof window.ldLeakGuideSummary === 'string' ? window.ldLeakGuideSummary.trim() : '';
+      const serviceDetails = collectServiceDetails(service);
       const msgLines = [
         '【灰汰郎 到府服務詢價】',
         '姓名：' + name,
@@ -672,6 +827,8 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
         '希望日期：' + dateLabel,
         '希望時段：' + timeLabel
       ];
+      serviceDetails.forEach(function(detail){ msgLines.push('服務內容：' + detail); });
+      if(note) msgLines.push('現場狀況／備註：' + note);
       if(guideSummary) msgLines.push('漏水判讀摘要：' + guideSummary);
       const msg = msgLines.join('\n');
 
