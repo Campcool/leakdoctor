@@ -143,6 +143,353 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </head>
 <body>
 <script src="header.js"></script>
+<link rel="stylesheet" href="assets/home-refresh.css">
+<link rel="stylesheet" href="assets/process-images.css">
+
+<!-- Hero -->
+<section id="hero">
+<div class="hero-inner">
+  <div class="hero-copy">
+    <div class="hero-eyebrow">先說清楚，再安排到府服務</div>
+    <h1 class="hero-h1">居家問題，<em>先看懂</em>再處理</h1>
+    <p class="hero-desc">冷氣、洗衣機、居家清潔與漏水問題，不必先猜價格。告訴我們設備與現場狀況，服務團隊會整理需求、說明處理方式，再協助安排合適的合作廠商。</p>
+    <div class="hero-actions">
+      <button type="button" class="hero-btn" onclick="ldOpenQuote()">開始免費估價</button>
+      <a class="hero-secondary" href="#service-process">先看服務流程</a>
+    </div>
+    <div class="hero-note">約 1 分鐘填寫・送出後開啟 LINE・未確認前不安排施工</div>
+    <div class="trust-badges"><span class="trust-badge">價格與條件先確認</span><span class="trust-badge">依地區安排團隊</span><span class="trust-badge">需要時由專員協處</span></div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-photo process-photo aircon" role="img" aria-label="冷氣清洗服務流程示意：技師保護家具並使用清洗罩清潔室內機"></div>
+    <div class="hero-caption"><strong>先保護環境，再拆洗設備</strong><span>流程示意圖・實際作業依機型與現場條件調整</span></div>
+  </div>
+</div>
+</section>
+
+<section class="confidence-strip" aria-label="服務原則">
+  <div class="confidence-inner">
+    <div class="confidence-item"><span class="confidence-dot"></span><span><b>先確認：</b>機型、數量與現場條件</span></div>
+    <div class="confidence-item"><span class="confidence-dot"></span><span><b>再報價：</b>固定價格或需要專員確認</span></div>
+    <div class="confidence-item"><span class="confidence-dot"></span><span><b>後安排：</b>確認內容後媒合服務團隊</span></div>
+  </div>
+</section>
+
+<!-- 快速估價器（共用元件 estimator.js）-->
+<section id="estimator">
+  <div data-ld-estimator></div>
+</section>
+
+<!-- 四大服務 -->
+<section id="services">
+<div class="services-inner">
+  <div class="sec-tag blue">我們的服務</div>
+  <h2 class="sec-title">四大居家服務，一站搞定</h2>
+  <p class="sec-sub">點選項目查看服務內容與價格參考</p>
+  <div class="svc-grid">
+    <div class="svc-card">
+      <div class="svc-icon c1">❄️</div>
+      <div class="svc-title">冷氣清洗</div>
+      <div class="svc-desc">分離式、吊隱式、窗型全機拆洗，醫療級消毒殺菌，清洗完立即可用。</div>
+      <div class="svc-price">$1,499 起</div>
+      <div class="svc-actions">
+        <a class="svc-btn-price" href="aircon.html">看價格</a>
+        <button type="button" class="svc-btn-book" onclick="ldOpenQuote('aircon')">立即預約</button>
+      </div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-icon c2">🧺</div>
+      <div class="svc-title">洗衣機清洗</div>
+      <div class="svc-desc">直立式、滾筒式洗衣機清洗，深層去除洗衣槽黑垢與霉味。</div>
+      <div class="svc-price">$1,299 起</div>
+      <div class="svc-actions">
+        <a class="svc-btn-price" href="washer.html">看價格</a>
+        <button type="button" class="svc-btn-book" onclick="ldOpenQuote('washer')">立即預約</button>
+      </div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-icon c3">🧽</div>
+      <div class="svc-title">居家清潔</div>
+      <div class="svc-desc">居家除塵蟎、抽油煙機清洗，打造乾淨衛生的居住環境。</div>
+      <div class="svc-price">$2,500 起</div>
+      <div class="svc-actions">
+        <a class="svc-btn-price" href="homeclean.html">看價格</a>
+        <button type="button" class="svc-btn-book" onclick="ldOpenQuote('homeclean')">立即預約</button>
+      </div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-icon c4">💧</div>
+      <div class="svc-title">水管抓漏</div>
+      <div class="svc-desc">水管清潔、水塔清洗、漏水檢測與修補，找對師傅一次解決。</div>
+      <div class="svc-price">免費初判</div>
+      <div class="svc-actions">
+        <a class="svc-btn-price" href="leak-repair.html">看價格</a>
+        <button type="button" class="svc-btn-book" onclick="ldOpenQuote('leak-repair')">立即預約</button>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- 服務流程示意 -->
+<section id="service-process">
+  <div class="process-inner">
+    <div class="process-head">
+      <div>
+        <div class="sec-tag">服務怎麼進行</div>
+        <h2 class="sec-title">不是「洗一洗」而已，每一步都有目的</h2>
+      </div>
+      <p class="sec-sub">先了解基本流程，現場溝通與報價才有共同標準。圖片為流程示意，並非特定案件紀錄。</p>
+    </div>
+    <div class="process-grid">
+      <article class="process-card">
+        <div class="process-photo aircon" role="img" aria-label="壁掛式冷氣專業清洗流程示意"></div>
+        <div class="process-body">
+          <div class="process-meta"><span class="process-kicker">冷氣清洗</span><span class="process-disclosure">AI 流程示意</span></div>
+          <h3 class="process-title">保護、拆洗、排污與測試</h3>
+          <ol class="process-steps"><li>確認機型與運轉狀況</li><li>保護家具並設置集水罩</li><li>清洗重點部件、復原後測試</li></ol>
+        </div>
+      </article>
+      <article class="process-card">
+        <div class="process-photo washer" role="img" aria-label="直立式洗衣機拆解與清洗流程示意"></div>
+        <div class="process-body">
+          <div class="process-meta"><span class="process-kicker">洗衣機清洗</span><span class="process-disclosure">AI 流程示意</span></div>
+          <h3 class="process-title">拆解不是越多越好，而是安全復原</h3>
+          <ol class="process-steps"><li>確認型號、容量與安裝空間</li><li>分類放置可拆洗部件</li><li>清潔內外槽、組裝並試運轉</li></ol>
+        </div>
+      </article>
+      <article class="process-card">
+        <div class="process-photo leak" role="img" aria-label="以含水率儀與熱像設備檢測漏水並局部修補的流程示意"></div>
+        <div class="process-body">
+          <div class="process-meta"><span class="process-kicker">抓漏與補漏</span><span class="process-disclosure">AI 流程示意</span></div>
+          <h3 class="process-title">先縮小範圍，再決定怎麼修</h3>
+          <ol class="process-steps"><li>詢問水痕、時間與用水情況</li><li>以儀器與現場條件交叉判斷</li><li>確認原因後提出局部修補方案</li></ol>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 我們提供什麼 -->
+<section id="promises">
+<div class="promises-inner">
+  <div class="sec-tag teal">我們提供什麼</div>
+  <h2 class="sec-title">知識 · 媒合 · 透明</h2>
+  <p class="sec-sub">先讓您看懂問題，再快速媒合合適廠商</p>
+  <div class="promise-list">
+    <div class="promise-item"><div class="promise-icon pi1">📖</div><div><div class="promise-title">免費居家知識庫</div><div class="promise-desc">冷氣、洗衣機保養與漏水檢測知識，全部免費查詢，看懂了才不會被亂報價。</div></div></div>
+    <div class="promise-item"><div class="promise-icon pi2">🔧</div><div><div class="promise-title">依需求媒合廠商</div><div class="promise-desc">依您的服務類型與地區，媒合最合適的廠商。純諮詢完全免費，預約才收費。</div></div></div>
+    <div class="promise-item"><div class="promise-icon pi3">🛡️</div><div><div class="promise-title">透明收費・售後保障</div><div class="promise-desc">價格事先公開，服務內容與保固清楚說明，沒有隱藏費用。</div></div></div>
+  </div>
+</div>
+</section>
+
+<!-- 服務地區 -->
+<section id="areas-strip" style="padding:2.5rem 1.25rem;background:#fff">
+  <div style="max-width:900px;margin:0 auto;text-align:center">
+    <div class="sec-tag blue">服務地區</div>
+    <h2 class="sec-title">北台灣到台中，到府服務</h2>
+    <p class="sec-sub">依你的所在地區，媒合在地合適師傅</p>
+    <div style="display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center">
+      <a href="taipei.html" style="font-size:.88rem;font-weight:700;color:var(--blue);background:var(--blue-light);border:1.5px solid #dbeafe;border-radius:9px;padding:.55rem 1rem">📍 台北</a>
+      <a href="new-taipei.html" style="font-size:.88rem;font-weight:700;color:var(--blue);background:var(--blue-light);border:1.5px solid #dbeafe;border-radius:9px;padding:.55rem 1rem">📍 新北</a>
+      <a href="keelung.html" style="font-size:.88rem;font-weight:700;color:var(--blue);background:var(--blue-light);border:1.5px solid #dbeafe;border-radius:9px;padding:.55rem 1rem">📍 基隆</a>
+      <a href="taoyuan.html" style="font-size:.88rem;font-weight:700;color:var(--blue);background:var(--blue-light);border:1.5px solid #dbeafe;border-radius:9px;padding:.55rem 1rem">📍 桃園</a>
+      <a href="hsinchu.html" style="font-size:.88rem;font-weight:700;color:var(--blue);background:var(--blue-light);border:1.5px solid #dbeafe;border-radius:9px;padding:.55rem 1rem">📍 新竹</a>
+      <a href="miaoli.html" style="font-size:.88rem;font-weight:700;color:var(--blue);background:var(--blue-light);border:1.5px solid #dbeafe;border-radius:9px;padding:.55rem 1rem">📍 苗栗</a>
+      <a href="taichung.html" style="font-size:.88rem;font-weight:700;color:var(--blue);background:var(--blue-light);border:1.5px solid #dbeafe;border-radius:9px;padding:.55rem 1rem">📍 台中</a>
+      <a href="areas.html" style="font-size:.88rem;font-weight:700;color:#fff;background:var(--blue-dark);border:1.5px solid var(--blue-dark);border-radius:9px;padding:.55rem 1rem">全部地區 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta-bottom">
+  <div class="cta-title">灰塵髒污，交給灰汰郎</div>
+  <div class="cta-sub">填寫基本資料，快速預約到府服務</div>
+  <button type="button" class="cta-btn" onclick="ldOpenQuote()">📋 線上預約估價</button>
+</section>
+
+<!-- Footer -->
+<footer>
+<div class="footer-inner-grid">
+  <div>
+    <div class="footer-brand">灰汰郎</div>
+    <div class="footer-tagline">居家清潔＋維修服務媒合平台 · 免費諮詢 · 全台服務<br>灰塵髒污，通通汰除。</div>
+    <div class="footer-links">
+      <a href="aircon.html">冷氣清洗</a><a href="washer.html">洗衣機清洗</a><a href="homeclean.html">居家清潔</a><a href="leak-repair.html">水管抓漏</a>
+    </div>
+  </div>
+  <div>
+    <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:.62rem">快速連結</div>
+    <div class="footer-links" style="flex-direction:column;gap:.38rem"><a href="areas.html">服務地區</a><a href="knowledge.html">漏水百科</a><a href="cases.html">施工案例</a><a href="team.html">合作廠商</a><a href="about.html">關於我們</a></div>
+  </div>
+  <div>
+    <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:.62rem">聯絡我們</div>
+    <div style="display:flex;flex-direction:column;gap:.38rem">
+      <a href="https://lin.ee/WVxmY65" target="_blank" style="font-size:.8rem;color:#9ca3af">📲 Line 免費諮詢</a>
+      <a href="tel:+886920077473" style="font-size:.8rem;color:#9ca3af">📞 0920-077-473</a>
+      <span style="font-size:.78rem;color:#6b7280">服務時間：週一至週六</span>
+      <span style="font-size:.78rem;color:#6b7280">09:00 – 18:00</span>
+    </div>
+  </div>
+</div>
+<div class="footer-copy">
+  © <span id="copy-year">2026</span> 灰汰郎　|　LINE：灰汰郎居家服務・免費諮詢<br>
+  灰汰郎為居家服務媒合平台，協助您媒合合適廠商、溝通需求與售後回報；實際施工由合作廠商執行並負責施工品質。網站施工案例為已去識別之真實紀錄，實際出勤廠商依 LINE 媒合時安排。
+</div>
+</footer>
+
+<script>document.getElementById('copy-year').textContent = new Date().getFullYear();</script>
+
+<script src="estimator.js" defer></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>灰汰郎｜冷氣・洗衣機・居家清潔・水管抓漏 到府服務媒合</title>
+<meta name="description" content="灰汰郎居家服務媒合平台：冷氣清洗、洗衣機清洗、居家清潔（含抽油煙機）、水管清潔與漏水檢測，全台到府服務，LINE免費諮詢，透明報價。">
+<meta name="keywords" content="灰汰郎,冷氣清洗,洗衣機清洗,居家清潔,抽油煙機清洗,水塔清洗,水管清洗,漏水檢測,到府清潔,居家服務媒合">
+<link rel="canonical" href="https://leakdoctor.tw/">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="alternate icon" href="/favicon.ico">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://leakdoctor.tw/">
+<meta property="og:title" content="灰汰郎｜冷氣・洗衣機・居家清潔・水管抓漏 到府服務媒合">
+<meta property="og:description" content="灰塵髒污，通通汰除。冷氣清洗、洗衣機清洗、居家清潔、水管抓漏，一站到府服務，LINE免費諮詢。">
+<meta property="og:image" content="https://leakdoctor.tw/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:site_name" content="灰汰郎">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="灰汰郎｜冷氣・洗衣機・居家清潔・水管抓漏 到府服務媒合">
+<meta name="twitter:description" content="灰塵髒污，通通汰除。全台到府服務，LINE免費諮詢。">
+<meta name="twitter:image" content="https://leakdoctor.tw/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "灰汰郎",
+  "alternateName": ["LeakDoctor.tw", "台灣漏水醫生"],
+  "url": "https://leakdoctor.tw",
+  "logo": "https://leakdoctor.tw/logo/logos/logo-master-transparent.png",
+  "description": "灰汰郎居家服務媒合平台，提供冷氣清洗、洗衣機清洗、居家清潔、水管清潔與漏水檢測，全台到府服務。",
+  "areaServed": {"@type": "Country", "name": "台灣"},
+  "serviceType": ["冷氣清洗", "洗衣機清洗", "居家清潔", "抽油煙機清洗", "水塔清洗", "水管清洗", "漏水檢測維修"],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "url": "https://lin.ee/WVxmY65",
+    "availableLanguage": "Chinese"
+  },
+  "sameAs": ["https://lin.ee/WVxmY65"]
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans TC',sans-serif;color:#1a202c;background:#f8fafc;line-height:1.8;font-size:17px;margin:0;padding-top:100px}
+a{text-decoration:none;color:inherit}
+button{font:inherit;border:none;cursor:pointer}
+img{display:block;max-width:100%}
+:root{
+  --blue:#1d4ed8;--blue-dark:#1e3a8a;--blue-light:#eff6ff;--blue-mid:#3b82f6;
+  --green:#16a34a;--green-light:#22c55e;--green-100:#dcfce7;
+  --orange:#ea580c;--orange-light:#fff7ed;
+  --teal:#0d9488;--teal-light:#f0fdfa;
+  --purple:#7c3aed;--purple-light:#f5f3ff;
+  --red:#dc2626;
+  --gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;
+  --gray-300:#d1d5db;--gray-400:#9ca3af;--gray-500:#6b7280;
+  --gray-600:#4b5563;--gray-700:#374151;--gray-800:#1f2937;--gray-900:#111827;
+}
+.sec-tag{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.26rem .8rem;border-radius:99px;margin-bottom:.65rem}
+.sec-tag.blue{background:var(--blue-light);color:var(--blue)}
+.sec-tag.teal{background:var(--teal-light);color:var(--teal)}
+.sec-title{font-size:1.65rem;font-weight:900;color:var(--gray-900);line-height:1.25;margin-bottom:.42rem}
+.sec-sub{font-size:.92rem;color:var(--gray-500);margin-bottom:1.65rem;line-height:1.7}
+
+#hero{background:linear-gradient(150deg,#0f2456 0%,#1d4ed8 55%,#2563eb 100%);color:#fff;padding:3rem 1.25rem 3.5rem;position:relative;overflow:hidden}
+#hero::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:50px;background:#f8fafc;clip-path:ellipse(55% 100% at 50% 100%)}
+.hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.92);font-size:.82rem;font-weight:600;padding:.38rem .95rem;border-radius:99px;margin-bottom:1.35rem}
+.hero-h1{font-size:2.5rem;font-weight:900;line-height:1.18;margin-bottom:.85rem}
+.hero-h1 em{color:#93c5fd;font-style:normal}
+.hero-desc{font-size:.98rem;color:rgba(255,255,255,.85);line-height:1.85;margin-bottom:1.85rem;max-width:56ch}
+.hero-btn{display:inline-flex;align-items:center;gap:.5rem;background:#06C755;color:#fff;font-weight:700;font-size:1.02rem;padding:.95rem 1.65rem;border-radius:13px;box-shadow:0 4px 20px rgba(34,197,94,.45);margin-bottom:2rem;cursor:pointer}
+.hero-btn-sub{font-size:.72rem;opacity:.82;font-weight:400}
+.trust-badges{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.trust-badge{display:flex;align-items:center;gap:.35rem;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);color:rgba(255,255,255,.95);font-size:.78rem;font-weight:600;padding:.4rem .8rem;border-radius:99px}
+
+#services{padding:2.5rem 1.25rem 3rem;background:#f8fafc;margin-top:-1.5rem;position:relative;z-index:2}
+.services-inner{max-width:1200px;margin:0 auto}
+.svc-grid{display:grid;gap:1.1rem;grid-template-columns:1fr}
+@media(min-width:640px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.svc-grid{grid-template-columns:repeat(4,1fr)}}
+.svc-card{background:#fff;border-radius:18px;border:2px solid var(--gray-200);padding:1.5rem 1.3rem;display:flex;flex-direction:column;gap:.7rem;box-shadow:0 4px 16px rgba(0,0,0,.05);transition:.2s}
+.svc-card:hover{border-color:var(--blue-mid);box-shadow:0 10px 28px rgba(0,0,0,.1);transform:translateY(-4px)}
+.svc-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.7rem}
+.svc-icon.c1{background:var(--blue-light)}.svc-icon.c2{background:var(--teal-light)}.svc-icon.c3{background:var(--green-100)}.svc-icon.c4{background:var(--orange-light)}
+.svc-title{font-size:1.08rem;font-weight:900;color:var(--gray-900)}
+.svc-desc{font-size:.85rem;color:var(--gray-500);line-height:1.7;flex:1}
+.svc-price{font-size:.78rem;font-weight:700;color:var(--blue);background:var(--blue-light);display:inline-block;padding:.28rem .75rem;border-radius:99px;width:fit-content}
+.svc-link{font-size:.86rem;font-weight:700;color:var(--blue);display:flex;align-items:center;gap:.3rem;margin-top:.2rem}
+.svc-actions{display:flex;gap:.5rem;margin-top:.35rem}
+.svc-btn-price,.svc-btn-book{flex:1;text-align:center;font-size:.85rem;font-weight:700;padding:.6rem .5rem;border-radius:10px;transition:.15s}
+.svc-btn-price{color:var(--blue);background:var(--blue-light);border:1.5px solid #dbeafe}
+.svc-btn-price:hover{background:#dbeafe}
+.svc-btn-book{color:#fff;background:#06C755;cursor:pointer;box-shadow:0 2px 8px rgba(6,199,85,.3)}
+.svc-btn-book:hover{background:#05b34c}
+
+#estimator{padding:2.6rem 1.25rem;background:linear-gradient(180deg,#eef2ff,#f8fafc)}
+
+#promises{padding:2.5rem 1.25rem;background:#fff}
+.promises-inner{max-width:1200px;margin:0 auto}
+.promise-list{display:flex;flex-direction:column;gap:1rem}
+@media(min-width:1024px){.promise-list{display:grid;grid-template-columns:repeat(3,1fr)}}
+.promise-item{display:flex;gap:1rem;padding:1.15rem;background:#fff;border-radius:16px;border:2px solid var(--gray-200);box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.promise-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.35rem;flex-shrink:0}
+.pi1{background:var(--blue-light)}.pi2{background:var(--green-100)}.pi3{background:#fef9c3}
+.promise-title{font-weight:700;color:var(--gray-900);font-size:.98rem;margin-bottom:.3rem}
+.promise-desc{font-size:.86rem;color:var(--gray-500);line-height:1.7}
+
+#cta-bottom{background:linear-gradient(135deg,var(--blue-dark),var(--blue));padding:3.5rem 1.25rem;text-align:center;color:#fff}
+.cta-title{font-size:1.85rem;font-weight:900;margin-bottom:.52rem;line-height:1.28}
+.cta-sub{font-size:.92rem;color:rgba(255,255,255,.78);margin-bottom:1.85rem;line-height:1.8}
+.cta-btn{display:inline-flex;align-items:center;gap:.5rem;background:#06C755;color:#fff;font-weight:700;font-size:1.02rem;padding:.95rem 2.2rem;border-radius:14px;box-shadow:0 4px 18px rgba(34,197,94,.4);cursor:pointer}
+
+footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
+.footer-inner-grid{max-width:1200px;margin:0 auto 1.5rem}
+.footer-brand{font-size:1.05rem;font-weight:900;margin-bottom:.32rem}
+.footer-tagline{font-size:.8rem;color:#9ca3af;line-height:1.7;margin-bottom:1.15rem}
+.footer-links{display:flex;flex-wrap:wrap;gap:.5rem 1.35rem;margin-bottom:1.15rem}
+.footer-links a{font-size:.8rem;color:#9ca3af}
+.footer-links a:hover{color:#fff}
+.footer-copy{max-width:1200px;margin:0 auto;font-size:.72rem;color:#6b7280;border-top:1px solid #374151;padding-top:1rem}
+
+@media(min-width:1024px){
+  body{font-size:15px}
+  #hero{padding:5.5rem 2.5rem 6.5rem}
+  .hero-h1{font-size:3.1rem}
+  .hero-desc{font-size:1.02rem}
+  #services{padding:3rem 2.5rem 4rem}
+  #promises{padding:4rem 2.5rem}
+  #cta-bottom{padding:5.5rem 2.5rem}
+  footer{padding:3.5rem 2.5rem 1.75rem}
+  .footer-inner-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:2.5rem;margin-bottom:2rem}
+  .footer-links{flex-direction:column;gap:.38rem;margin-bottom:0}
+}
+</style>
+</head>
+<body>
+<script src="header.js"></script>
 
 <!-- Hero -->
 <section id="hero">
