@@ -2,6 +2,8 @@
   function ldInit(){
   const path = location.pathname.split('/').pop() || 'index.html';
   const page = path.replace('.html','') || 'index';
+  const leakSubPages = ['cases','team','areas','leak-guide','taipei','new-taipei','keelung','taoyuan','hsinchu','miaoli','taichung'];
+  const activePage = leakSubPages.indexOf(page) !== -1 ? 'leak-repair' : page;
   const LINE = 'https://lin.ee/WVxmY65';
   const JOIN_FORM = 'https://forms.gle/T4UTULXMaXaoGZQG8';
   const LINE_OA_ID = '@478xvlgl';
@@ -54,6 +56,12 @@
     l.href='https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap';
     document.head.appendChild(l);
   }
+  if(!document.querySelector('link[href*="site-unified.css"]')){
+    const unified = document.createElement('link');
+    unified.rel = 'stylesheet';
+    unified.href = '/assets/site-unified.css';
+    document.head.appendChild(unified);
+  }
 
   // CSS：全部用 ld- 前綴，不影響頁面其他元素
   const css = `
@@ -62,26 +70,26 @@
   position:fixed;top:0;left:0;right:0;
   z-index:9990;
   background:#ffffff;
-  border-bottom:2px solid #e5e7eb;
-  box-shadow:0 2px 10px rgba(0,0,0,.07);
+  border-bottom:1px solid #dce4e7;
+  box-shadow:0 10px 30px rgba(23,50,77,.08);
   font-family:'Noto Sans TC',sans-serif;
 }
 .ld-top{
   display:flex;align-items:center;
   justify-content:space-between;
-  gap:8px;padding:7px 12px;
-  max-width:1200px;margin:0 auto;
+  gap:16px;padding:8px 20px;
+  max-width:1280px;margin:0 auto;
 }
 .ld-brand{
   display:flex;align-items:center;
-  gap:8px;text-decoration:none;
-  flex:1;min-width:0;
+  gap:10px;text-decoration:none;
+  flex:0 1 auto;min-width:0;
 }
 .ld-logo{
-  width:40px;height:40px;
+  width:52px;height:52px;
   flex-shrink:0;
 }
-.ld-logo-img{height:38px;width:auto;flex-shrink:0;display:block}
+.ld-logo-img{height:52px;width:auto;max-width:min(56vw,260px);object-fit:contain;flex-shrink:0;display:block}
 .ld-texts{flex:1;min-width:0}
 .ld-name{
   display:block;
@@ -103,9 +111,9 @@
 .ld-line-btn{
   display:flex;align-items:center;gap:5px;
   background:#06C755;color:#ffffff;
-  font-weight:700;font-size:12px;
+  font-weight:800;font-size:13px;
   font-family:'Noto Sans TC',sans-serif;
-  padding:6px 10px;border-radius:9px;
+  padding:9px 13px;border-radius:12px;
   text-decoration:none;flex-shrink:0;
   white-space:nowrap;
 }
@@ -113,50 +121,47 @@
 
 /* nav */
 .ld-nav{
-  background:#1e3a8a;
-  display:flex;gap:5px;
-  padding:7px 8px;
-  overflow-x:auto;
-  -webkit-overflow-scrolling:touch;
-  scrollbar-width:none;
+  background:#fff9f1;
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;
+  padding:8px 12px 10px;
+  max-width:100%;margin:0 auto;
 }
-.ld-nav::-webkit-scrollbar{display:none}
 .ld-tab{
-  display:flex;flex-direction:column;
-  align-items:center;gap:3px;
-  padding:8px 10px;border-radius:9px;
-  min-width:68px;flex-shrink:0;
-  background:rgba(255,255,255,.12);
-  border:1.5px solid rgba(255,255,255,.16);
-  text-decoration:none;cursor:pointer;
-  transition:background .15s;
-}
-.ld-tab:hover{background:rgba(255,255,255,.22)}
-.ld-tab.ld-active{
+  display:flex;flex-direction:row;
+  align-items:center;justify-content:center;gap:7px;
+  padding:9px 7px;border-radius:12px;
+  min-width:0;
   background:#ffffff;
-  border-color:#ffffff;
-  box-shadow:0 2px 6px rgba(0,0,0,.12);
+  border:1px solid #dce4e7;
+  text-decoration:none;cursor:pointer;
+  transition:background .18s,border-color .18s,transform .18s,box-shadow .18s;
+}
+.ld-tab:hover{background:#ffffff;border-color:#f28c28;transform:translateY(-1px)}
+.ld-tab.ld-active{
+  background:#17324d;
+  border-color:#17324d;
+  box-shadow:0 6px 16px rgba(23,50,77,.18);
 }
 .ld-tab-icon{
-  font-size:20px;line-height:1;
+  font-size:18px;line-height:1;
   display:block;
 }
 .ld-tab-label{
   display:block;
-  font-size:11.5px;font-weight:700;
+  font-size:12px;font-weight:800;
   font-family:'Noto Sans TC',sans-serif;
-  color:rgba(255,255,255,.93);
+  color:#17324d;
   white-space:nowrap;line-height:1.2;
 }
 .ld-tab-sub{
   display:none;
   font-size:9px;
   font-family:'Noto Sans TC',sans-serif;
-  color:rgba(255,255,255,.5);
+  color:#667680;
   white-space:nowrap;
 }
-.ld-tab.ld-active .ld-tab-label{color:#1e3a8a}
-.ld-tab.ld-active .ld-tab-sub{color:#6b7280}
+.ld-tab.ld-active .ld-tab-label{color:#ffffff}
+.ld-tab.ld-active .ld-tab-sub{color:#dbeafe}
 
 /* ── 錨點補償：fixed header 遮住錨點的修正 ── */
 [id]{scroll-margin-top:var(--ld-hdr-h,130px)}
@@ -217,18 +222,28 @@
 }
 /* PC */
 @media(min-width:1024px){
-  .ld-top{padding:12px 40px}
-  .ld-logo{width:48px;height:48px}
-  .ld-logo-img{height:50px}
+  .ld-top{padding:10px 32px}
+  .ld-logo{width:68px;height:68px}
+  .ld-logo-img{height:68px;max-width:320px}
   .ld-name{font-size:22px}
   .ld-sub{font-size:11px}
   .ld-line-btn{font-size:14px;padding:8px 16px;gap:6px}
   .ld-line-btn-text{display:inline}
-  .ld-nav{padding:12px 40px;justify-content:center;gap:8px}
-  .ld-tab{min-width:86px;padding:10px 14px;gap:4px;border-radius:11px}
-  .ld-tab-icon{font-size:22px}
-  .ld-tab-label{font-size:12px}
+  .ld-nav{grid-template-columns:repeat(6,minmax(128px,168px));justify-content:center;padding:10px 32px 12px;gap:10px}
+  .ld-tab{min-height:58px;padding:9px 14px;gap:9px;border-radius:14px}
+  .ld-tab-icon{font-size:23px}
+  .ld-tab-label{font-size:13px}
   .ld-tab-sub{display:block}
+}
+
+@media(max-width:420px){
+  .ld-top{padding:7px 12px}
+  .ld-logo-img{height:46px;max-width:58vw}
+  .ld-line-btn{padding:8px 10px}
+  .ld-nav{padding:7px 8px 9px;gap:5px}
+  .ld-tab{gap:5px;padding:8px 4px}
+  .ld-tab-icon{font-size:16px}
+  .ld-tab-label{font-size:10.5px}
 }
 
 #ld-back-top{position:fixed;right:14px;bottom:80px;z-index:9990;width:42px;height:42px;border-radius:50%;background:#1e3a8a;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;box-shadow:0 2px 12px rgba(30,58,138,.35);opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;pointer-events:none;}
@@ -351,15 +366,12 @@
     {id:'aircon',    href:'aircon.html',    icon:'\u2744\ufe0f', label:'\u51b7\u6c23\u6e05\u6d17', sub:'\u5230\u5e9c\u6d17\u6de8'},
     {id:'washer',    href:'washer.html',    icon:'\ud83e\uddfa', label:'\u6d17\u8863\u6a5f\u6e05\u6d17', sub:'\u9664\u83cc\u9664\u57a3'},
     {id:'homeclean', href:'homeclean.html', icon:'\ud83e\uddfd', label:'\u5c45\u5bb6\u6e05\u6f54', sub:'\u542b\u62bd\u6cb9\u7159\u6a5f'},
-    {id:'leak-repair', href:'leak-repair.html', icon:'\ud83d\udca7', label:'\u6c34\u7ba1\u6293\u6f0f', sub:'\u6f0f\u6c34\u6aa2\u6e2c'},
+    {id:'leak-repair', href:'leak-repair.html', icon:'\ud83d\udca7', label:'\u6c34\u7ba1\u6293\u6f0f\u4fee\u88dc', sub:'\u6aa2\u6e2c\u30fb\u4fee\u7e55'},
     {id:'knowledge', href:'knowledge.html', icon:'\ud83d\udcd6', label:'\u5c45\u5bb6\u767e\u79d1', sub:'\u514d\u8cbb\u77e5\u8b58'},
-    {id:'cases',     href:'cases.html',     icon:'\ud83d\udccb', label:'\u65bd\u5de5\u6848\u4f8b', sub:'\u771f\u5be6\u8a18\u9304'},
-    {id:'team',      href:'team.html',      icon:'\ud83d\udc77', label:'\u5408\u4f5c\u5ee0\u5546', sub:'\u5e2b\u5085\u4ecb\u7d39'},
-    {id:'areas',     href:'areas.html',     icon:'\ud83d\udccd', label:'\u670d\u52d9\u5730\u5340', sub:'\u5230\u5e9c\u7bc4\u570d'},
   ];
 
   const tabsHTML = tabs.map(t =>
-    `<a href="/${t.href}" class="ld-tab${t.id===page?' ld-active':''}">
+    `<a href="/${t.href}" class="ld-tab${t.id===activePage?' ld-active':''}">
       <span class="ld-tab-icon">${t.icon}</span>
       <span class="ld-tab-label">${t.label}</span>
       <span class="ld-tab-sub">${t.sub}</span>
@@ -460,13 +472,25 @@
 
   document.body.insertAdjacentHTML('afterbegin', html);
 
+  const mergedLeakTargets = {
+    cases:'cases-carousel', team:'team-carousel', areas:'service-area',
+    taipei:'service-area', 'new-taipei':'service-area', keelung:'service-area',
+    taoyuan:'service-area', hsinchu:'service-area', miaoli:'service-area', taichung:'service-area'
+  };
+  if(mergedLeakTargets[page]){
+    const firstContent = document.querySelector('main, body > section');
+    if(firstContent){
+      firstContent.insertAdjacentHTML('beforebegin', `<aside class="legacy-merge-notice"><div><strong>此內容已整合到「水管抓漏與修補」</strong><span>施工案例、專業人員與服務地區現在集中在同一頁，查找資訊更清楚。</span></div><a href="/leak-repair.html#${mergedLeakTargets[page]}">前往整合頁面 →</a></aside>`);
+    }
+  }
+
   // 計算 header 高度，補 padding-top
   function setOffset(){
     var hdrEl = document.getElementById('ld-header');
     if(hdrEl){
       var hh = hdrEl.offsetHeight;
       // 限制在合理範圍：手機 80~140px，PC 100~160px
-      if(hh > 0 && hh < 160){
+      if(hh > 0 && hh < 240){
         document.body.style.paddingTop = hh + 'px';
         document.documentElement.style.setProperty('--ld-hdr-h', hh + 'px');
       }

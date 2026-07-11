@@ -3,7 +3,7 @@
   --teal:#138a80;--cream:#fff9f1;--sand:#f3e8d8;--paper:#fff;
   --text:#263238;--muted:#667680;--border:#dce4e7;--soft:#f4f7f7;
 }
-body.service-page{background:#fff!important;color:var(--text)!important;padding-top:108px!important}
+body.service-page{background:#fff!important;color:var(--text)!important;padding-top:var(--ld-hdr-h,160px)!important}
 body.service-page #ld-header{border:0!important;box-shadow:0 1px 0 rgba(23,50,77,.1)!important;background:rgba(255,255,255,.96)!important;backdrop-filter:blur(14px)}
 body.service-page .ld-top{padding:10px 20px!important}
 body.service-page .ld-logo-img{height:42px!important}
@@ -100,7 +100,7 @@ body.leak-page .pain-item{border-color:var(--border)!important;background:var(--
   .drain-check{grid-template-columns:auto 1fr;align-items:start}
 }
 @media(min-width:1024px){
-  body.service-page{padding-top:118px!important}
+  body.service-page{padding-top:var(--ld-hdr-h,150px)!important}
   body.service-page .ld-top{padding:10px 40px!important}
   body.service-page .ld-nav{padding:8px 40px!important}
 }
@@ -115,7 +115,7 @@ body.leak-page .pain-item{border-color:var(--border)!important;background:var(--
   --teal:#138a80;--cream:#fff9f1;--sand:#f3e8d8;--paper:#fff;
   --text:#263238;--muted:#667680;--border:#dce4e7;--soft:#f4f7f7;
 }
-body.service-page{background:#fff!important;color:var(--text)!important;padding-top:108px!important}
+body.service-page{background:#fff!important;color:var(--text)!important;padding-top:var(--ld-hdr-h,160px)!important}
 body.service-page #ld-header{border:0!important;box-shadow:0 1px 0 rgba(23,50,77,.1)!important;background:rgba(255,255,255,.96)!important;backdrop-filter:blur(14px)}
 body.service-page .ld-top{padding:10px 20px!important}
 body.service-page .ld-logo-img{height:42px!important}
@@ -185,7 +185,7 @@ body.leak-page .pain-item{border-color:var(--border)!important;background:var(--
   body.service-page .page-hero-inner,body.leak-page .hero-content-pc{grid-template-columns:1fr 1fr!important}
 }
 @media(min-width:1024px){
-  body.service-page{padding-top:118px!important}
+  body.service-page{padding-top:var(--ld-hdr-h,150px)!important}
   body.service-page .ld-top{padding:10px 40px!important}
   body.service-page .ld-nav{padding:8px 40px!important}
 }
