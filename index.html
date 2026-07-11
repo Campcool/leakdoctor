@@ -11,17 +11,18 @@
 <link rel="alternate icon" href="/favicon.ico">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://leakdoctor.tw/">
-<meta property="og:title" content="灰汰郎｜冷氣・洗衣機・居家清潔・水管抓漏 到府服務媒合">
-<meta property="og:description" content="灰塵髒污，通通汰除。冷氣清洗、洗衣機清洗、居家清潔、水管抓漏，一站到府服務，LINE免費諮詢。">
-<meta property="og:image" content="https://leakdoctor.tw/og-image.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:title" content="家裡出現異味、髒污或漏水，應該先處理哪裡？">
+<meta property="og:description" content="從冷氣排水、洗衣槽隱藏污垢、居家清潔順序到漏水判讀，先看懂原因與流程，再決定怎麼處理。">
+<meta property="og:image" content="https://leakdoctor.tw/assets/og/home-care-knowledge.png">
+<meta property="og:image:width" content="1731">
+<meta property="og:image:height" content="909">
+<meta property="og:image:alt" content="居家清潔由高到低的實用流程圖解">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="灰汰郎">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="灰汰郎｜冷氣・洗衣機・居家清潔・水管抓漏 到府服務媒合">
-<meta name="twitter:description" content="灰塵髒污，通通汰除。全台到府服務，LINE免費諮詢。">
-<meta name="twitter:image" content="https://leakdoctor.tw/og-image.jpg">
+<meta name="twitter:title" content="家裡出現異味、髒污或漏水，應該先處理哪裡？">
+<meta name="twitter:description" content="先看懂常見居家問題的原因與處理流程。">
+<meta name="twitter:image" content="https://leakdoctor.tw/assets/og/home-care-knowledge.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -143,19 +144,36 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </head>
 <body>
 <script src="header.js"></script>
+<link rel="stylesheet" href="assets/home-refresh.css">
+<link rel="stylesheet" href="assets/process-images.css">
 
 <!-- Hero -->
 <section id="hero">
 <div class="hero-inner">
-  <div class="hero-eyebrow">🧹 灰塵髒污，通通汰除・LINE免費諮詢</div>
-  <h1 class="hero-h1">居家大小事<br><em>灰汰郎</em>幫你搞定</h1>
-  <p class="hero-desc">冷氣清洗、洗衣機清洗、居家清潔（含抽油煙機）、水管清潔與漏水檢測——描述你的需求，我們快速媒合合適的到府服務廠商，LINE 諮詢完全免費。</p>
-  <div class="trust-badges"><span class="trust-badge">🛡️ 廠商保固服務</span><span class="trust-badge">📋 車馬費透明公開</span><span class="trust-badge">🚗 不施工不收費</span></div>
-  <button type="button" class="hero-btn" onclick="ldOpenQuote()">
-    📋&nbsp;線上快速預約估價
-    <span class="hero-btn-sub">（不收諮詢費）</span>
-  </button>
+  <div class="hero-copy">
+    <div class="hero-eyebrow">先說清楚，再安排到府服務</div>
+    <h1 class="hero-h1">居家問題，<em>先看懂</em>再處理</h1>
+    <p class="hero-desc">冷氣、洗衣機、居家清潔與漏水問題，不必先猜價格。告訴我們設備與現場狀況，服務團隊會整理需求、說明處理方式，再協助安排合適的合作廠商。</p>
+    <div class="hero-actions">
+      <button type="button" class="hero-btn" onclick="ldOpenQuote()">開始免費估價</button>
+      <a class="hero-secondary" href="#service-process">先看服務流程</a>
+    </div>
+    <div class="hero-note">約 1 分鐘填寫・送出後開啟 LINE・未確認前不安排施工</div>
+    <div class="trust-badges"><span class="trust-badge">價格與條件先確認</span><span class="trust-badge">依地區安排團隊</span><span class="trust-badge">需要時由專員協處</span></div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-photo process-photo aircon" role="img" aria-label="冷氣清洗服務流程示意：技師保護家具並使用清洗罩清潔室內機"></div>
+    <div class="hero-caption"><strong>先保護環境，再拆洗設備</strong><span>流程示意圖・實際作業依機型與現場條件調整</span></div>
+  </div>
 </div>
+</section>
+
+<section class="confidence-strip" aria-label="服務原則">
+  <div class="confidence-inner">
+    <div class="confidence-item"><span class="confidence-dot"></span><span><b>先確認：</b>機型、數量與現場條件</span></div>
+    <div class="confidence-item"><span class="confidence-dot"></span><span><b>再報價：</b>固定價格或需要專員確認</span></div>
+    <div class="confidence-item"><span class="confidence-dot"></span><span><b>後安排：</b>確認內容後媒合服務團隊</span></div>
+  </div>
 </section>
 
 <!-- 快速估價器（共用元件 estimator.js）-->
@@ -212,6 +230,45 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
     </div>
   </div>
 </div>
+</section>
+
+<!-- 服務流程示意 -->
+<section id="service-process">
+  <div class="process-inner">
+    <div class="process-head">
+      <div>
+        <div class="sec-tag">服務怎麼進行</div>
+        <h2 class="sec-title">不是「洗一洗」而已，每一步都有目的</h2>
+      </div>
+      <p class="sec-sub">先了解基本流程，現場溝通與報價才有共同標準。圖片為流程示意，並非特定案件紀錄。</p>
+    </div>
+    <div class="process-grid">
+      <article class="process-card">
+        <div class="process-photo aircon" role="img" aria-label="壁掛式冷氣專業清洗流程示意"></div>
+        <div class="process-body">
+          <div class="process-meta"><span class="process-kicker">冷氣清洗</span><span class="process-disclosure">AI 流程示意</span></div>
+          <h3 class="process-title">保護、拆洗、排污與測試</h3>
+          <ol class="process-steps"><li>確認機型與運轉狀況</li><li>保護家具並設置集水罩</li><li>清洗後倒水確認排水，再復原測試</li></ol>
+        </div>
+      </article>
+      <article class="process-card">
+        <div class="process-photo washer" role="img" aria-label="直立式洗衣機拆解與清洗流程示意"></div>
+        <div class="process-body">
+          <div class="process-meta"><span class="process-kicker">洗衣機清洗</span><span class="process-disclosure">AI 流程示意</span></div>
+          <h3 class="process-title">拆解不是越多越好，而是安全復原</h3>
+          <ol class="process-steps"><li>確認型號、容量與安裝空間</li><li>分類放置可拆洗部件</li><li>清潔內外槽、組裝並試運轉</li></ol>
+        </div>
+      </article>
+      <article class="process-card">
+        <div class="process-photo leak" role="img" aria-label="以含水率儀與熱像設備檢測漏水並局部修補的流程示意"></div>
+        <div class="process-body">
+          <div class="process-meta"><span class="process-kicker">抓漏與補漏</span><span class="process-disclosure">AI 流程示意</span></div>
+          <h3 class="process-title">先縮小範圍，再決定怎麼修</h3>
+          <ol class="process-steps"><li>詢問水痕、時間與用水情況</li><li>以儀器與現場條件交叉判斷</li><li>確認原因後提出局部修補方案</li></ol>
+        </div>
+      </article>
+    </div>
+  </div>
 </section>
 
 <!-- 我們提供什麼 -->

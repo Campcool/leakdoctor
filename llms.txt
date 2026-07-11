@@ -10,7 +10,7 @@
 
 ## 服務項目與價格
 
-- [冷氣清洗](https://leakdoctor.tw/aircon.html)：分離式 $1,499 起／台、吊隱式 $2,599 起／台、窗型 $3,000 起／台。醫療級三重消毒（二氧化氯、高溫蒸氣、紫外線），清洗完立即可用。實際費用依機型、噸數與現場狀況報價。
+- [冷氣清洗](https://leakdoctor.tw/aircon.html)：分離式 $1,499 起／台、吊隱式 $2,599 起／台、窗型 $3,000 起／台。先確認機型、台數與現場條件；清洗後進行基本運轉與倒水排水測試。實際費用依機型、噸數與現場狀況報價。
 - [洗衣機清洗](https://leakdoctor.tw/washer.html)：直立式 $1,299 起／台、滾筒式 $2,999 起／台，全機拆洗深層去除洗衣槽黑垢與霉味。
 - [居家清潔](https://leakdoctor.tw/homeclean.html)：定時清潔 4 小時 $2,500 起、大掃除 $3,500 起（約 $200–350/坪）、退租入住 $3,000 起、裝潢後細清 $6,000 起（約 $400–1,000/坪）。抽油煙機、水塔清洗、除塵蟎另依需求報價。
 - [水管抓漏・漏水檢測](https://leakdoctor.tw/leak-repair.html)：水管清潔、水塔清洗、漏水檢測與修補。傳照片可免費初步判斷漏水類型，依狀況媒合工班師傅。
@@ -33,5 +33,6 @@
 
 - [服務總覽（首頁）](https://leakdoctor.tw/)
 - [居家知識庫](https://leakdoctor.tw/knowledge.html)
+- [三步漏水判讀指南](https://leakdoctor.tw/leak-guide.html)：依住宅類型、10–50 年以上屋齡與漏水表現，整理常見管線配置、可能成因、六種檢測、案例與修補方向。
 - [施工案例](https://leakdoctor.tw/cases.html)
 - [合作廠商／師傅介紹](https://leakdoctor.tw/team.html)

@@ -572,7 +572,8 @@
       }
       const timeLabel = time || '未指定';
 
-      const msg = [
+      const guideSummary = typeof window.ldLeakGuideSummary === 'string' ? window.ldLeakGuideSummary.trim() : '';
+      const msgLines = [
         '【灰汰郎 到府服務詢價】',
         '姓名：' + name,
         '電話：' + phone,
@@ -580,7 +581,9 @@
         '清洗項目：' + service,
         '希望日期：' + dateLabel,
         '希望時段：' + timeLabel
-      ].join('\n');
+      ];
+      if(guideSummary) msgLines.push('漏水判讀摘要：' + guideSummary);
+      const msg = msgLines.join('\n');
 
       ldTrack('quote_submit', { service: service, page: location.pathname });
       const url = 'https://line.me/R/oaMessage/' + LINE_OA_ID + '/?' + encodeURIComponent(msg);

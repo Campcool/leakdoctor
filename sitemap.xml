@@ -209,4 +209,11 @@
     <priority>0.75</priority>
   </url>
 
+  <url>
+    <loc>https://leakdoctor.tw/leak-guide.html</loc>
+    <lastmod>2026-07-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
 </urlset>
