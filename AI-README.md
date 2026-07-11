@@ -41,7 +41,7 @@
 
 - **純靜態站**，無框架、無打包工具，直接編輯 HTML。部署 = push 到 `main`（GitHub Pages）。
 - **`header.js` 是全站共用核心**（每頁 `<script src="header.js">` 或 `../header.js` 載入），runtime 注入：
-  - 固定 header＋9 個導覽頁籤（root 絕對路徑 `/xxx.html`，讓 /articles/ 下也正確）
+  - 固定 header＋4 個主服務頁籤（root 絕對路徑 `/xxx.html`，讓 /articles/ 下也正確）；首頁由 Logo 返回，居家知識為次要入口
   - LINE 浮動鈕、加入我們鈕、回頂鈕、手機底部黏性列（含 📞 與預約鈕）
   - **預約表單 modal**（`ldOpenQuote(serviceKey)` 全域函式）：姓名/電話/地址/清洗項目/日期時段，送出 → 組訊息 → `line.me/R/oaMessage/@478xvlgl/?<encoded>` 開 LINE 預填
   - GA4 載入與事件：`line_click`、`phone_click`、`quote_open`、`quote_submit`
@@ -80,7 +80,9 @@ master_*.jpg                   漏水師傅頭像（master_08/16 不存在，頁
 ## 5. 進度紀錄（新條目加在最上面）
 
 ### 2026-07-11（Codex・RWD 與資訊架構統一）
-- 共用導覽縮減為 6 個主要頁籤：首頁、冷氣清洗、洗衣機清洗、居家清潔、水管抓漏修補、居家百科；桌機置中放大，手機採 3 欄 × 2 列，Logo 同步放大。
+- 共用導覽收斂為 4 個主要服務頁籤：冷氣清洗、洗衣機清洗、居家清潔、漏水檢測與修補；桌機置中放大，手機採 2 欄 × 2 列，Logo 返回首頁，居家知識保留為次要入口。
+- 四個服務頁新增一致的「先了解，再決定」知識模組，分別說明症狀、處理邊界、週期／工法與驗收，避免頁面只剩估價下單。
+- 共用視覺加入低對比網格、柔和光暈、精準卡片層級、hover／focus-visible 與 reduced-motion；方向參考 Apple 的內容層級、Xiaomi 的分類探索、Samsung 的產品敘事，但不複製品牌外觀。
 - 新增 `assets/site-unified.css`，統一核心頁面的色彩、Hero、標題、按鈕、卡片、留白與手機斷點。
 - 冷氣、洗衣機、居家清潔、抓漏頁皆新增 6 步驟「簡易流程說明」：確認功能／範圍、關機或斷水斷電、保護、清洗或修補、復原、測試。
 - 施工案例、專業人員與服務地區移入 `leak-repair.html` 的頁內導覽；舊 `cases.html`、`team.html`、`areas.html` 與地區頁改為 noindex 並指向整合頁，且自 sitemap 移除。
@@ -141,7 +143,7 @@ master_*.jpg                   漏水師傅頭像（master_08/16 不存在，頁
 3. **LINE 連結不可隨意替換**：業主有多個事業（露涼社等）各有自己的 LINE。曾把露涼社連結誤換到全站（未推送即攔下）。**換任何 lin.ee 連結前必須向業主確認該連結屬於灰汰郎。**
 4. 價格改動同步點：頁面價目表、JSON-LD Offer、llms.txt、首頁服務卡、`estimator.js` 的 `CONFIG`、`data/service-options.json`。
 5. 雲端 session 容器會被回收：**成果要盡早 commit+push**，別累積大量未提交修改。
-6. `.ld-tab` 目前應為 9 個；Playwright 測試以此為基準。
+6. `.ld-tab` 目前應為 4 個主服務項目；首頁由 Logo 返回，居家知識是 header 次要入口。桌機 4 欄，手機 2 欄 × 2 列。
 
 ## 7. 待辦清單
 

@@ -46,8 +46,8 @@
     }
   }, true);
 
-  const SERVICE_OPTIONS = ['冷氣清洗','洗衣機清洗','居家清潔（含抽油煙機）','水管清潔・漏水檢測','其他（請於下方說明）'];
-  const PAGE_SERVICE = {aircon:'冷氣清洗', washer:'洗衣機清洗', homeclean:'居家清潔（含抽油煙機）', 'leak-repair':'水管清潔・漏水檢測'};
+  const SERVICE_OPTIONS = ['冷氣清洗','洗衣機清洗','居家清潔','漏水檢測與修補','其他（請於下方說明）'];
+  const PAGE_SERVICE = {aircon:'冷氣清洗', washer:'洗衣機清洗', homeclean:'居家清潔', 'leak-repair':'漏水檢測與修補'};
 
   // 字體
   if(!document.querySelector('link[href*="Noto+Sans"]')){
@@ -118,11 +118,20 @@
   white-space:nowrap;
 }
 .ld-line-btn-text{display:none}
+.ld-top-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.ld-knowledge-link{
+  display:flex;align-items:center;gap:6px;padding:9px 11px;border-radius:12px;
+  border:1px solid #dce4e7;background:#fff;color:#17324d;text-decoration:none;
+  font-size:12px;font-weight:900;white-space:nowrap;
+  transition:border-color .18s,background .18s,transform .18s;
+}
+.ld-knowledge-link:hover,.ld-knowledge-link.ld-active{border-color:#8bc9c3;background:#edf8f7;transform:translateY(-1px)}
+.ld-knowledge-text{display:none}
 
 /* nav */
 .ld-nav{
-  background:#fff9f1;
-  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;
+  background:linear-gradient(180deg,#fbfcfd,#f4f7f8);
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;
   padding:8px 12px 10px;
   max-width:100%;margin:0 auto;
 }
@@ -229,7 +238,8 @@
   .ld-sub{font-size:11px}
   .ld-line-btn{font-size:14px;padding:8px 16px;gap:6px}
   .ld-line-btn-text{display:inline}
-  .ld-nav{grid-template-columns:repeat(6,minmax(128px,168px));justify-content:center;padding:10px 32px 12px;gap:10px}
+  .ld-knowledge-text{display:inline}
+  .ld-nav{grid-template-columns:repeat(4,minmax(170px,210px));justify-content:center;padding:10px 32px 12px;gap:12px}
   .ld-tab{min-height:58px;padding:9px 14px;gap:9px;border-radius:14px}
   .ld-tab-icon{font-size:23px}
   .ld-tab-label{font-size:13px}
@@ -240,6 +250,7 @@
   .ld-top{padding:7px 12px}
   .ld-logo-img{height:46px;max-width:58vw}
   .ld-line-btn{padding:8px 10px}
+  .ld-knowledge-link{padding:8px 9px}
   .ld-nav{padding:7px 8px 9px;gap:5px}
   .ld-tab{gap:5px;padding:8px 4px}
   .ld-tab-icon{font-size:16px}
@@ -362,12 +373,10 @@
 
   // 頁籤
   const tabs = [
-    {id:'index',     href:'index.html',     icon:'\ud83c\udfe0', label:'\u9996\u9801',     sub:'\u670d\u52d9\u7e3d\u89bd'},
     {id:'aircon',    href:'aircon.html',    icon:'\u2744\ufe0f', label:'\u51b7\u6c23\u6e05\u6d17', sub:'\u5230\u5e9c\u6d17\u6de8'},
     {id:'washer',    href:'washer.html',    icon:'\ud83e\uddfa', label:'\u6d17\u8863\u6a5f\u6e05\u6d17', sub:'\u9664\u83cc\u9664\u57a3'},
     {id:'homeclean', href:'homeclean.html', icon:'\ud83e\uddfd', label:'\u5c45\u5bb6\u6e05\u6f54', sub:'\u542b\u62bd\u6cb9\u7159\u6a5f'},
-    {id:'leak-repair', href:'leak-repair.html', icon:'\ud83d\udca7', label:'\u6c34\u7ba1\u6293\u6f0f\u4fee\u88dc', sub:'\u6aa2\u6e2c\u30fb\u4fee\u7e55'},
-    {id:'knowledge', href:'knowledge.html', icon:'\ud83d\udcd6', label:'\u5c45\u5bb6\u767e\u79d1', sub:'\u514d\u8cbb\u77e5\u8b58'},
+    {id:'leak-repair', href:'leak-repair.html', icon:'\ud83d\udca7', label:'\u6f0f\u6c34\u6aa2\u6e2c\u8207\u4fee\u88dc', sub:'\u5b9a\u4f4d\u30fb\u6b62\u6f0f'},
   ];
 
   const tabsHTML = tabs.map(t =>
@@ -389,16 +398,21 @@
     </a>
     <header id="ld-header">
       <div class="ld-top">
-        <a class="ld-brand" href="/index.html" aria-label="灰汰郎 清潔公司｜冷氣・洗衣機・居家清潔・水管抓漏">
+        <a class="ld-brand" href="/index.html" aria-label="灰汰郎｜冷氣清洗・洗衣機清洗・居家清潔・漏水檢測與修補">
           <picture>
             <source srcset="/logo/logos/website-header-logo-640x240.webp" type="image/webp">
             <img class="ld-logo-img" src="/logo/logos/website-header-logo-640x240.png" alt="灰汰郎 清潔公司" width="640" height="240">
           </picture>
         </a>
-        <a href="${LINE}" target="_blank" rel="noopener" class="ld-line-btn">
-          ${LINE_ICON}
-          <span class="ld-line-btn-text">加入 LINE 諮詢</span>
-        </a>
+        <div class="ld-top-actions">
+          <a href="/knowledge.html" class="ld-knowledge-link${activePage==='knowledge'?' ld-active':''}" aria-label="開啟居家知識庫">
+            <span aria-hidden="true">⌁</span><span class="ld-knowledge-text">居家知識</span>
+          </a>
+          <a href="${LINE}" target="_blank" rel="noopener" class="ld-line-btn">
+            ${LINE_ICON}
+            <span class="ld-line-btn-text">加入 LINE 諮詢</span>
+          </a>
+        </div>
       </div>
       <nav class="ld-nav">${tabsHTML}</nav>
     </header>
@@ -480,7 +494,7 @@
   if(mergedLeakTargets[page]){
     const firstContent = document.querySelector('main, body > section');
     if(firstContent){
-      firstContent.insertAdjacentHTML('beforebegin', `<aside class="legacy-merge-notice"><div><strong>此內容已整合到「水管抓漏與修補」</strong><span>施工案例、專業人員與服務地區現在集中在同一頁，查找資訊更清楚。</span></div><a href="/leak-repair.html#${mergedLeakTargets[page]}">前往整合頁面 →</a></aside>`);
+      firstContent.insertAdjacentHTML('beforebegin', `<aside class="legacy-merge-notice"><div><strong>此內容已整合到「漏水檢測與修補」</strong><span>施工案例、專業人員與服務地區現在集中在同一頁，查找資訊更清楚。</span></div><a href="/leak-repair.html#${mergedLeakTargets[page]}">前往整合頁面 →</a></aside>`);
     }
   }
 
