@@ -46,7 +46,7 @@
 1. 啟用 GA4 與轉換事件
    - `header.js` 目前仍是 `G-XXXXXXXXXX`。
    - 做法：業主提供 GA4 Measurement ID 後，只替換 `GA4_ID`。
-   - 建議追蹤事件：`line_click`, `quote_open`, `quote_submit`, `phone_click`, `service_click`, `area_click`。
+   - 建議追蹤事件：`line_click`, `quote_open`, `quote_submit`, `service_click`, `area_click`。
    - 原因：未來投 Google Ads / Meta Ads 時，沒有轉換資料會很難優化。
 
 2. 修正品牌敘述仍偏「漏水」

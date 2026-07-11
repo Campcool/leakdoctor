@@ -7,8 +7,6 @@
   const LINE = 'https://lin.ee/WVxmY65';
   const JOIN_FORM = 'https://forms.gle/T4UTULXMaXaoGZQG8';
   const LINE_OA_ID = '@478xvlgl';
-  const PHONE_DISPLAY = '0920-077-473';
-  const PHONE_TEL = 'tel:+886920077473';
 
   // ── 分析追蹤：把下面的 G-XXXXXXXXXX 換成你的 GA4 評估 ID 即自動啟用 ──
   const GA4_ID = 'G-XXXXXXXXXX';
@@ -36,8 +34,6 @@
     const href = a.getAttribute('href') || '';
     if (href.indexOf('lin.ee') !== -1 || href.indexOf('line.me') !== -1) {
       ldTrack('line_click', { link_url: href, page: location.pathname });
-    } else if (href.indexOf('tel:') === 0) {
-      ldTrack('phone_click', { page: location.pathname });
     } else {
       const clean = href.split('#')[0].split('?')[0];
       const path = clean.charAt(0) === '/' ? clean : '/' + clean.split('/').pop();
@@ -67,17 +63,20 @@
   const css = `
 /* ld-header */
 #ld-header{
-  position:fixed;top:0;left:0;right:0;
+  position:sticky;top:0;
+  view-transition-name:ld-site-header;
   z-index:9990;
-  background:#ffffff;
-  border-bottom:1px solid #dce4e7;
-  box-shadow:0 10px 30px rgba(23,50,77,.08);
+  background:rgba(255,255,255,.97);
+  border-bottom:1px solid #cfdadd;
+  box-shadow:0 10px 30px rgba(23,50,77,.11);
+  backdrop-filter:saturate(150%) blur(16px);
   font-family:'Noto Sans TC',sans-serif;
 }
+body,body.service-page{padding-top:0!important}
 .ld-top{
   display:flex;align-items:center;
   justify-content:space-between;
-  gap:16px;padding:8px 20px;
+  gap:16px;padding:8px 18px;
   max-width:1280px;margin:0 auto;
 }
 .ld-brand{
@@ -89,7 +88,7 @@
   width:52px;height:52px;
   flex-shrink:0;
 }
-.ld-logo-img{height:52px;width:auto;max-width:min(56vw,260px);object-fit:contain;flex-shrink:0;display:block}
+.ld-logo-img{height:64px;width:auto;max-width:min(48vw,290px);object-fit:contain;flex-shrink:0;display:block;filter:drop-shadow(0 4px 8px rgba(23,50,77,.12))}
 .ld-texts{flex:1;min-width:0}
 .ld-name{
   display:block;
@@ -113,48 +112,53 @@
   background:#06C755;color:#ffffff;
   font-weight:800;font-size:13px;
   font-family:'Noto Sans TC',sans-serif;
-  padding:9px 13px;border-radius:12px;
+  min-height:44px;padding:9px 13px;border-radius:14px;
   text-decoration:none;flex-shrink:0;
   white-space:nowrap;
+  border:1px solid #05ad4b;box-shadow:0 8px 18px rgba(6,199,85,.24);
 }
 .ld-line-btn-text{display:none}
 .ld-top-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .ld-knowledge-link{
-  display:flex;align-items:center;gap:6px;padding:9px 11px;border-radius:12px;
-  border:1px solid #dce4e7;background:#fff;color:#17324d;text-decoration:none;
+  display:flex;align-items:center;gap:6px;min-height:44px;padding:9px 12px;border-radius:14px;
+  border:1.5px solid #cbd7db;background:#fff;color:#17324d;text-decoration:none;
   font-size:12px;font-weight:900;white-space:nowrap;
-  transition:border-color .18s,background .18s,transform .18s;
+  box-shadow:0 5px 14px rgba(23,50,77,.08);
+  transition:border-color .18s,background .18s,transform .18s,box-shadow .18s;
 }
-.ld-knowledge-link:hover,.ld-knowledge-link.ld-active{border-color:#8bc9c3;background:#edf8f7;transform:translateY(-1px)}
-.ld-knowledge-text{display:none}
+.ld-knowledge-link:hover,.ld-knowledge-link.ld-active{border-color:#138a80;background:#edf8f7;transform:translateY(-1px);box-shadow:0 8px 18px rgba(19,138,128,.14)}
+.ld-knowledge-link svg{width:18px;height:18px;display:block}
+.ld-knowledge-text{display:inline}
 
 /* nav */
 .ld-nav{
-  background:linear-gradient(180deg,#fbfcfd,#f4f7f8);
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;
-  padding:8px 12px 10px;
+  background:linear-gradient(180deg,#fbfcfd,#f0f4f5);
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;
+  padding:9px 12px 12px;
   max-width:100%;margin:0 auto;
 }
 .ld-tab{
   display:flex;flex-direction:row;
   align-items:center;justify-content:center;gap:7px;
-  padding:9px 7px;border-radius:12px;
+  padding:10px 8px;border-radius:14px;
   min-width:0;
   background:#ffffff;
-  border:1px solid #dce4e7;
+  border:1.5px solid #cbd7db;
+  box-shadow:0 5px 13px rgba(23,50,77,.075),inset 0 1px 0 rgba(255,255,255,.9);
   text-decoration:none;cursor:pointer;
   transition:background .18s,border-color .18s,transform .18s,box-shadow .18s;
 }
-.ld-tab:hover{background:#ffffff;border-color:#f28c28;transform:translateY(-1px)}
+.ld-tab:hover{background:#ffffff;border-color:#f28c28;transform:translateY(-2px);box-shadow:0 10px 22px rgba(23,50,77,.13)}
 .ld-tab.ld-active{
   background:#17324d;
   border-color:#17324d;
-  box-shadow:0 6px 16px rgba(23,50,77,.18);
+  box-shadow:0 9px 22px rgba(23,50,77,.25);
 }
 .ld-tab-icon{
-  font-size:18px;line-height:1;
-  display:block;
+  width:23px;height:23px;line-height:1;
+  display:flex;align-items:center;justify-content:center;color:#138a80;flex:0 0 auto;
 }
+.ld-tab-icon svg{display:block;width:100%;height:100%;stroke:currentColor}
 .ld-tab-label{
   display:block;
   font-size:12px;font-weight:800;
@@ -171,6 +175,7 @@
 }
 .ld-tab.ld-active .ld-tab-label{color:#ffffff}
 .ld-tab.ld-active .ld-tab-sub{color:#dbeafe}
+.ld-tab.ld-active .ld-tab-icon{color:#7ee5da}
 
 /* ── 錨點補償：fixed header 遮住錨點的修正 ── */
 [id]{scroll-margin-top:var(--ld-hdr-h,130px)}
@@ -233,7 +238,7 @@
 @media(min-width:1024px){
   .ld-top{padding:10px 32px}
   .ld-logo{width:68px;height:68px}
-  .ld-logo-img{height:68px;max-width:320px}
+  .ld-logo-img{height:76px;max-width:340px}
   .ld-name{font-size:22px}
   .ld-sub{font-size:11px}
   .ld-line-btn{font-size:14px;padding:8px 16px;gap:6px}
@@ -241,20 +246,21 @@
   .ld-knowledge-text{display:inline}
   .ld-nav{grid-template-columns:repeat(4,minmax(170px,210px));justify-content:center;padding:10px 32px 12px;gap:12px}
   .ld-tab{min-height:58px;padding:9px 14px;gap:9px;border-radius:14px}
-  .ld-tab-icon{font-size:23px}
+  .ld-tab-icon{width:27px;height:27px}
   .ld-tab-label{font-size:13px}
   .ld-tab-sub{display:block}
 }
 
 @media(max-width:420px){
-  .ld-top{padding:7px 12px}
-  .ld-logo-img{height:46px;max-width:58vw}
-  .ld-line-btn{padding:8px 10px}
-  .ld-knowledge-link{padding:8px 9px}
+  .ld-top{padding:7px 10px;gap:8px}
+  .ld-logo-img{height:58px;max-width:47vw}
+  .ld-top-actions{gap:6px}
+  .ld-line-btn{min-width:44px;padding:8px 10px}
+  .ld-knowledge-link{padding:8px 9px;font-size:11px}
   .ld-nav{padding:7px 8px 9px;gap:5px}
   .ld-tab{gap:5px;padding:8px 4px}
-  .ld-tab-icon{font-size:16px}
-  .ld-tab-label{font-size:10.5px}
+  .ld-tab-icon{width:20px;height:20px}
+  .ld-tab-label{font-size:11px}
 }
 
 #ld-back-top{position:fixed;right:14px;bottom:80px;z-index:9990;width:42px;height:42px;border-radius:50%;background:#1e3a8a;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;box-shadow:0 2px 12px rgba(30,58,138,.35);opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;pointer-events:none;}
@@ -281,12 +287,6 @@
   padding:11px 18px;border-radius:11px;text-decoration:none;
   box-shadow:0 3px 10px rgba(6,199,85,.35);white-space:nowrap;
 }
-.ld-sticky-tel{
-  flex-shrink:0;width:42px;height:42px;border-radius:11px;
-  background:#1e3a8a;color:#fff;font-size:18px;
-  display:flex;align-items:center;justify-content:center;
-  text-decoration:none;box-shadow:0 3px 10px rgba(30,58,138,.3);
-}
 @media(max-width:1023px){
   body{padding-bottom:66px}
 }
@@ -307,7 +307,7 @@
   #ld-quote-overlay{align-items:center;padding:20px}
 }
 #ld-quote-card{
-  background:#fff;width:100%;max-width:480px;
+  background:#fff;width:100%;max-width:560px;
   border-radius:18px 18px 0 0;
   max-height:92vh;overflow-y:auto;
   padding:1.4rem 1.3rem calc(1.4rem + env(safe-area-inset-bottom));
@@ -329,9 +329,27 @@
   font-size:.92rem;font-family:'Noto Sans TC',sans-serif;color:#111827;background:#fff;
 }
 .ld-q-input:focus,.ld-q-select:focus{outline:none;border-color:#1e3a8a}
+.ld-service-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.ld-service-choice{
+  display:flex;align-items:center;gap:10px;width:100%;min-height:64px;padding:10px 12px;
+  border:1.5px solid #cbd7db;border-radius:15px;background:linear-gradient(145deg,#fff,#f7f9fa);
+  color:#17324d;text-align:left;cursor:pointer;
+  box-shadow:0 5px 13px rgba(23,50,77,.07);
+  transition:transform .18s,border-color .18s,background .18s,box-shadow .18s;
+}
+.ld-service-choice:hover{transform:translateY(-2px);border-color:#f28c28;box-shadow:0 10px 22px rgba(23,50,77,.12)}
+.ld-service-choice.ld-selected{border-color:#17324d;background:#17324d;color:#fff;box-shadow:0 10px 24px rgba(23,50,77,.24)}
+.ld-service-choice:last-child{grid-column:1/-1}
+.ld-service-choice-icon{display:flex;align-items:center;justify-content:center;width:34px;height:34px;flex:0 0 auto;border-radius:10px;background:#edf8f7;color:#138a80}
+.ld-service-choice-icon svg{width:23px;height:23px;display:block;stroke:currentColor}
+.ld-service-choice.ld-selected .ld-service-choice-icon{background:rgba(255,255,255,.14);color:#7ee5da}
+.ld-service-choice-label{font-size:.86rem;font-weight:900;line-height:1.35}
+.ld-service-choice-check{margin-left:auto;width:18px;height:18px;border:1.5px solid #aebdc2;border-radius:50%;background:#fff;flex:0 0 auto}
+.ld-service-choice.ld-selected .ld-service-choice-check{border:5px solid #7ee5da;background:#17324d}
 .ld-q-row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
 .ld-q-err{color:#dc2626;font-size:.76rem;margin-top:.3rem;display:none}
 .ld-q-field.ld-invalid .ld-q-input,.ld-q-field.ld-invalid .ld-q-select{border-color:#dc2626}
+.ld-q-field.ld-invalid .ld-service-choices{padding:5px;border:1.5px solid #dc2626;border-radius:18px}
 .ld-q-field.ld-invalid .ld-q-err{display:block}
 .ld-q-submit{
   width:100%;margin-top:1.3rem;background:#06C755;color:#fff;font-weight:900;font-size:1rem;
@@ -341,6 +359,10 @@
 }
 .ld-q-submit:hover{background:#05b34c}
 .ld-q-note{font-size:.72rem;color:#9ca3af;text-align:center;margin-top:.65rem;line-height:1.6}
+@media(max-width:390px){
+  .ld-service-choices{grid-template-columns:1fr}
+  .ld-service-choice:last-child{grid-column:auto}
+}
 `;
 
   // 注入 CSS
@@ -371,12 +393,21 @@
     <path d="M21.2 19.2h-1.4c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h1.4c.3 0 .5-.2.5-.5v-6.6c0-.3-.2-.5-.5-.5zM28.6 19.2h-1.4c-.3 0-.5.2-.5.5v3.9l-3-4.2-.2-.2H22c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h1.4c.3 0 .5-.2.5-.5v-3.9l3 4.2.2.2h1.5c.3 0 .5-.2.5-.5v-6.6c0-.3-.2-.5-.5-.5zM19.2 24.3h-2.4v-4.7c0-.3-.2-.5-.5-.5h-1.4c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h4.3c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5zM33.8 20.6c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5h-4.3c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h4.3c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5H31v-1h2.8c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5H31v-1h2.8z" fill="#06C755"/>
   </svg>`;
 
+  const NAV_ICONS = {
+    aircon:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="8" rx="2"/><path d="M6 8h12M7 16c1.4-1.7 2.8-1.7 4.2 0s2.8 1.7 4.2 0M8 20c1-1.1 2-1.1 3 0s2 1.1 3 0"/></svg>',
+    washer:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2.5" width="16" height="19" rx="2.5"/><path d="M4 7.5h16M7 5h.01M10 5h.01"/><circle cx="12" cy="14.5" r="4.5"/><path d="M9.5 14.5c1.6-1.2 3.4 1.2 5 0"/></svg>',
+    homeclean:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 11.5 12 4l8.5 7.5M6 10v10h12V10M9.5 20v-5h5v5"/><path d="m18.5 3 .5 1.5L20.5 5 19 5.5 18.5 7 18 5.5 16.5 5 18 4.5Z"/></svg>',
+    leak:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 3.5S6 9 6 12.5a4.5 4.5 0 0 0 7.8 3.1"/><circle cx="16.5" cy="16.5" r="3.5"/><path d="m19 19 2.2 2.2"/></svg>',
+    knowledge:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v16H6.5A2.5 2.5 0 0 0 4 21.5Z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v16h4.5a2.5 2.5 0 0 1 2.5 2.5Z"/></svg>',
+    other:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg>'
+  };
+
   // 頁籤
   const tabs = [
-    {id:'aircon',    href:'aircon.html',    icon:'\u2744\ufe0f', label:'\u51b7\u6c23\u6e05\u6d17', sub:'\u5230\u5e9c\u6d17\u6de8'},
-    {id:'washer',    href:'washer.html',    icon:'\ud83e\uddfa', label:'\u6d17\u8863\u6a5f\u6e05\u6d17', sub:'\u9664\u83cc\u9664\u57a3'},
-    {id:'homeclean', href:'homeclean.html', icon:'\ud83e\uddfd', label:'\u5c45\u5bb6\u6e05\u6f54', sub:'\u542b\u62bd\u6cb9\u7159\u6a5f'},
-    {id:'leak-repair', href:'leak-repair.html', icon:'\ud83d\udca7', label:'\u6f0f\u6c34\u6aa2\u6e2c\u8207\u4fee\u88dc', sub:'\u5b9a\u4f4d\u30fb\u6b62\u6f0f'},
+    {id:'aircon', href:'aircon.html', icon:NAV_ICONS.aircon, label:'冷氣清洗', sub:'設備拆洗'},
+    {id:'washer', href:'washer.html', icon:NAV_ICONS.washer, label:'洗衣機清洗', sub:'內槽拆洗'},
+    {id:'homeclean', href:'homeclean.html', icon:NAV_ICONS.homeclean, label:'居家清潔', sub:'空間分區'},
+    {id:'leak-repair', href:'leak-repair.html', icon:NAV_ICONS.leak, label:'漏水檢測與修補', sub:'檢測・止漏'},
   ];
 
   const tabsHTML = tabs.map(t =>
@@ -386,6 +417,7 @@
       <span class="ld-tab-sub">${t.sub}</span>
     </a>`
   ).join('');
+  const SERVICE_CHOICE_ICONS = [NAV_ICONS.aircon,NAV_ICONS.washer,NAV_ICONS.homeclean,NAV_ICONS.leak,NAV_ICONS.other];
 
   const html = `
     <a id="ld-float" href="${LINE}" target="_blank" rel="noopener">
@@ -406,7 +438,7 @@
         </a>
         <div class="ld-top-actions">
           <a href="/knowledge.html" class="ld-knowledge-link${activePage==='knowledge'?' ld-active':''}" aria-label="開啟居家知識庫">
-            <span aria-hidden="true">⌁</span><span class="ld-knowledge-text">居家知識</span>
+            ${NAV_ICONS.knowledge}<span class="ld-knowledge-text">居家知識</span>
           </a>
           <a href="${LINE}" target="_blank" rel="noopener" class="ld-line-btn">
             ${LINE_ICON}
@@ -419,17 +451,16 @@
     <button id="ld-back-top" onclick="window.scrollTo({top:0,behavior:\'smooth\'})" title="回到頂部">↑</button>
     <div id="ld-stickybar">
       <div class="ld-sticky-text">
-        <div class="ld-sticky-title">灰塵髒污，通通汰除</div>
-        <div class="ld-sticky-sub">免費諮詢・不施工不收費</div>
+        <div class="ld-sticky-title">需要估價或先問問題？</div>
+        <div class="ld-sticky-sub">以 LINE 傳照片，資訊最完整</div>
       </div>
-      <a href="${PHONE_TEL}" class="ld-sticky-tel" aria-label="撥打電話 ${PHONE_DISPLAY}">📞</a>
-      <button type="button" class="ld-sticky-btn" onclick="ldOpenQuote()">📋 線上預約估價</button>
+      <button type="button" class="ld-sticky-btn" onclick="ldOpenQuote()">使用 LINE 預約</button>
     </div>
     <div id="ld-quote-overlay">
       <div id="ld-quote-card" role="dialog" aria-modal="true" aria-labelledby="ld-q-title">
         <div class="ld-q-head">
           <div>
-            <div class="ld-q-title" id="ld-q-title">📋 免費估價・線上預約</div>
+            <div class="ld-q-title" id="ld-q-title">LINE 預約估價</div>
             <div class="ld-q-sub">填寫基本資料，送出後開啟 LINE 傳送給我們，客服會盡快回覆報價</div>
           </div>
           <button type="button" class="ld-q-close" onclick="ldCloseQuote()" aria-label="關閉">✕</button>
@@ -451,12 +482,12 @@
             <div class="ld-q-err">請輸入服務地址</div>
           </div>
           <div class="ld-q-field" id="ld-f-service">
-            <label class="ld-q-label" for="ld-q-service">清洗項目<span class="ld-req">*</span></label>
-            <select class="ld-q-select" id="ld-q-service">
-              <option value="">請選擇服務項目</option>
-              ${SERVICE_OPTIONS.map(s=>`<option value="${s}">${s}</option>`).join('')}
-            </select>
-            <div class="ld-q-err">請選擇清洗項目</div>
+            <div class="ld-q-label" id="ld-q-service-label">選擇服務<span class="ld-req">*</span></div>
+            <div class="ld-service-choices" role="radiogroup" aria-labelledby="ld-q-service-label">
+              ${SERVICE_OPTIONS.map((s,i)=>`<button type="button" class="ld-service-choice" data-service="${s}" aria-pressed="false"><span class="ld-service-choice-icon">${SERVICE_CHOICE_ICONS[i]}</span><span class="ld-service-choice-label">${s==='其他（請於下方說明）'?'其他需求':s}</span><span class="ld-service-choice-check" aria-hidden="true"></span></button>`).join('')}
+            </div>
+            <input type="hidden" id="ld-q-service" value="">
+            <div class="ld-q-err">請選擇服務項目</div>
           </div>
           <div class="ld-q-field">
             <label class="ld-q-label">希望日期與時間</label>
@@ -472,7 +503,7 @@
               </select>
             </div>
           </div>
-          <button type="submit" class="ld-q-submit">📲 送出並開啟 LINE</button>
+          <button type="submit" class="ld-q-submit">送出並開啟 LINE</button>
           <div class="ld-q-note">送出後會開啟 LINE，訊息已幫您填好，再按一下「傳送」即可完成預約估價，純諮詢完全免費</div>
         </form>
       </div>
@@ -498,14 +529,12 @@
     }
   }
 
-  // 計算 header 高度，補 padding-top
+  // Header 保持在文件流中，僅同步高度給錨點與頁內 sticky 導覽。
   function setOffset(){
     var hdrEl = document.getElementById('ld-header');
     if(hdrEl){
       var hh = hdrEl.offsetHeight;
-      // 限制在合理範圍：手機 80~140px，PC 100~160px
       if(hh > 0 && hh < 240){
-        document.body.style.paddingTop = hh + 'px';
         document.documentElement.style.setProperty('--ld-hdr-h', hh + 'px');
       }
     }
@@ -547,6 +576,20 @@
   const qOverlay = document.getElementById('ld-quote-overlay');
   const qForm = document.getElementById('ld-q-form');
   const qDate = document.getElementById('ld-q-date');
+  const qService = document.getElementById('ld-q-service');
+  const qServiceButtons = Array.from(document.querySelectorAll('.ld-service-choice'));
+  function selectService(value){
+    if(qService) qService.value = value || '';
+    qServiceButtons.forEach(function(btn){
+      const selected = btn.getAttribute('data-service') === value;
+      btn.classList.toggle('ld-selected', selected);
+      btn.setAttribute('aria-pressed', selected ? 'true' : 'false');
+    });
+    if(value) setFieldValid('ld-f-service', true);
+  }
+  qServiceButtons.forEach(function(btn){
+    btn.addEventListener('click', function(){ selectService(btn.getAttribute('data-service') || ''); });
+  });
   if(qDate){
     const today = new Date();
     qDate.min = today.toISOString().slice(0,10);
@@ -554,11 +597,8 @@
 
   window.ldOpenQuote = function(serviceKey){
     if(!qOverlay) return;
-    const svc = document.getElementById('ld-q-service');
-    if(svc){
-      const preset = (serviceKey && PAGE_SERVICE[serviceKey]) || PAGE_SERVICE[page] || '';
-      if(preset) svc.value = preset;
-    }
+    const preset = (serviceKey && PAGE_SERVICE[serviceKey]) || PAGE_SERVICE[page] || '';
+    if(preset) selectService(preset);
     qOverlay.classList.add('ld-show');
     document.body.style.overflow = 'hidden';
     ldTrack('quote_open', { service: serviceKey || page, page: location.pathname });
@@ -616,7 +656,7 @@
         '姓名：' + name,
         '電話：' + phone,
         '服務地址：' + addr,
-        '清洗項目：' + service,
+        '服務項目：' + service,
         '希望日期：' + dateLabel,
         '希望時段：' + timeLabel
       ];

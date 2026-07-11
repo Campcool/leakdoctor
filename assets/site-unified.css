@@ -20,6 +20,12 @@ body *,body *::before,body *::after{box-sizing:border-box}
 img,svg,video{max-width:100%;height:auto}
 button,input,select,textarea{font:inherit}
 
+@view-transition{navigation:auto}
+::view-transition-old(root){animation:ld-page-out .16s ease both}
+::view-transition-new(root){animation:ld-page-in .26s ease both}
+@keyframes ld-page-out{to{opacity:.35;transform:translateY(-4px)}}
+@keyframes ld-page-in{from{opacity:.25;transform:translateY(7px)}}
+
 .section,.impact-section{padding:clamp(3.5rem,7vw,6rem) 1.25rem!important}
 .container,.impact-inner{width:min(1180px,100%)!important;margin-inline:auto!important}
 .sec-tag,.impact-kicker{color:var(--ld-orange-dark)!important;background:transparent!important;padding:0!important;letter-spacing:.13em!important;font-size:.76rem!important;font-weight:900!important}
@@ -48,12 +54,14 @@ button,input,select,textarea{font:inherit}
   grid-template-columns:minmax(0,1.02fr) minmax(360px,.98fr)!important;
   gap:clamp(2rem,5vw,4.5rem)!important;
   align-items:center!important;
+  min-height:clamp(480px,58vh,620px)!important;
 }
 .service-page .page-eyebrow,.service-page .hero-eyebrow{color:var(--ld-orange-dark)!important;background:transparent!important;padding:0!important;font-weight:900!important;letter-spacing:.08em!important}
 .service-page .page-title,.service-page .hero-h1{color:var(--ld-ink)!important;font-size:clamp(2.25rem,5vw,4rem)!important;line-height:1.12!important;letter-spacing:-.045em!important;margin:.75rem 0 1rem!important}
 .service-page .hero-h1 em{color:var(--ld-orange-dark)!important;font-style:normal!important}
 .service-page .page-desc,.service-page .hero-desc{color:var(--ld-muted)!important;font-size:clamp(1rem,1.5vw,1.14rem)!important;line-height:1.85!important;max-width:62ch!important}
 .service-page .page-btn,.service-page .hero-btn{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:52px!important;margin-top:1.4rem!important;padding:.85rem 1.35rem!important;border:0!important;border-radius:14px!important;background:var(--ld-orange)!important;color:#fff!important;font-weight:900!important;box-shadow:0 10px 24px rgba(242,140,40,.25)!important}
+.service-page .page-btn:hover,.service-page .hero-btn:hover{background:var(--ld-orange-dark)!important;transform:translateY(-2px)!important;box-shadow:0 15px 30px rgba(217,111,13,.3)!important}
 .service-page .trust-badges{display:flex!important;flex-wrap:wrap!important;gap:.55rem!important;margin:1.2rem 0 0!important}
 .service-page .trust-badge{background:#fff!important;color:var(--ld-ink)!important;border:1px solid var(--ld-border)!important;border-radius:999px!important;padding:.5rem .8rem!important;font-weight:800!important;font-size:.82rem!important}
 .service-visual{border:1px solid rgba(255,255,255,.8)!important;border-radius:28px!important;overflow:hidden!important;background:#fff!important;box-shadow:var(--ld-shadow),0 0 0 1px rgba(23,50,77,.06)!important;transition:transform .35s ease,box-shadow .35s ease}
@@ -94,6 +102,16 @@ button,input,select,textarea{font:inherit}
 .knowledge-card h3{color:var(--ld-ink);font-size:1.08rem;line-height:1.45;margin:0 0 .45rem}
 .knowledge-card p{color:var(--ld-muted);font-size:.88rem;line-height:1.7;margin:0}
 
+.item-card,.impact-card,.price-card,.myth-card,.instrument-card,.promise-item{
+  border-color:#cbd7db!important;
+  box-shadow:0 8px 22px rgba(23,50,77,.08)!important;
+  transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease!important;
+}
+.item-card:hover,.impact-card:hover,.price-card:hover,.myth-card:hover,.instrument-card:hover,.promise-item:hover{
+  transform:translateY(-3px)!important;border-color:#8fb4b0!important;box-shadow:0 16px 34px rgba(23,50,77,.13)!important;
+}
+.mid-cta-btn,.cta-btn,.price-cta{box-shadow:0 9px 20px rgba(6,199,85,.24)!important;border:1px solid rgba(0,0,0,.05)!important}
+
 a:focus-visible,button:focus-visible{outline:3px solid rgba(242,140,40,.45)!important;outline-offset:3px!important}
 
 .leak-subnav-wrap{position:sticky;top:var(--ld-hdr-h,150px);z-index:40;background:rgba(255,255,255,.95);border-bottom:1px solid var(--ld-border);backdrop-filter:blur(12px)}
@@ -117,6 +135,7 @@ footer,.footer{background:var(--ld-ink-deep)!important;color:#fff!important}
   .service-page .service-visual{width:min(680px,100%);margin-inline:auto}
   .service-step-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .knowledge-grid{grid-template-columns:1fr}
+  .service-page .page-hero-inner,.service-page .hero-content-pc{min-height:0!important}
 }
 
 @media(max-width:600px){
