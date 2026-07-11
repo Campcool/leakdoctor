@@ -68,14 +68,14 @@
   z-index:9990;
   background:rgba(255,255,255,.97);
   border-bottom:1px solid #cfdadd;
-  box-shadow:0 10px 30px rgba(23,50,77,.11);
+  box-shadow:none;
   backdrop-filter:saturate(150%) blur(16px);
   font-family:'Noto Sans TC',sans-serif;
 }
 body,body.service-page{padding-top:0!important}
 .ld-top{
   display:flex;align-items:center;
-  justify-content:space-between;
+  justify-content:flex-start;
   gap:16px;padding:8px 18px;
   max-width:1280px;margin:0 auto;
 }
@@ -182,8 +182,8 @@ body,body.service-page{padding-top:0!important}
 
 /* float */
 #ld-float{
-  position:fixed;right:14px;top:50%;
-  transform:translateY(-50%);
+  position:fixed;right:16px;bottom:calc(112px + env(safe-area-inset-bottom));top:auto;
+  transform:none;
   z-index:9991;
   width:54px;height:54px;
   border-radius:50%;
@@ -193,7 +193,7 @@ body,body.service-page{padding-top:0!important}
   gap:2px;
   text-decoration:none;
   box-shadow:0 4px 16px rgba(6,199,85,.5);
-  animation:ld-pulse 2.5s ease-in-out infinite;
+  animation:ld-pulse 2s ease-in-out infinite;
 }
 @keyframes ld-pulse{
   0%,100%{box-shadow:0 4px 16px rgba(6,199,85,.5)}
@@ -263,7 +263,7 @@ body,body.service-page{padding-top:0!important}
   .ld-tab-label{font-size:11px}
 }
 
-#ld-back-top{position:fixed;right:14px;bottom:80px;z-index:9990;width:42px;height:42px;border-radius:50%;background:#1e3a8a;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;box-shadow:0 2px 12px rgba(30,58,138,.35);opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;pointer-events:none;}
+#ld-back-top{position:fixed;right:20px;bottom:calc(180px + env(safe-area-inset-bottom));z-index:9990;width:42px;height:42px;border-radius:50%;background:#1e3a8a;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;box-shadow:0 2px 12px rgba(30,58,138,.35);opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;pointer-events:none;}
 @media(min-width:1024px){#ld-back-top{bottom:24px}}
 #ld-back-top.ld-show{opacity:1;transform:translateY(0);pointer-events:auto}
 #ld-back-top:hover{background:#1d4ed8}
@@ -436,15 +436,6 @@ body,body.service-page{padding-top:0!important}
             <img class="ld-logo-img" src="/logo/logos/website-header-logo-640x240.png" alt="灰汰郎 清潔公司" width="640" height="240">
           </picture>
         </a>
-        <div class="ld-top-actions">
-          <a href="/knowledge.html" class="ld-knowledge-link${activePage==='knowledge'?' ld-active':''}" aria-label="開啟居家知識庫">
-            ${NAV_ICONS.knowledge}<span class="ld-knowledge-text">居家知識</span>
-          </a>
-          <a href="${LINE}" target="_blank" rel="noopener" class="ld-line-btn">
-            ${LINE_ICON}
-            <span class="ld-line-btn-text">加入 LINE 諮詢</span>
-          </a>
-        </div>
       </div>
       <nav class="ld-nav">${tabsHTML}</nav>
     </header>
@@ -594,11 +585,26 @@ body,body.service-page{padding-top:0!important}
     const today = new Date();
     qDate.min = today.toISOString().slice(0,10);
   }
+  let qHistoryOpen = false;
+  let qPendingNavigation = '';
+  function hideQuote(){
+    if(!qOverlay) return;
+    qOverlay.classList.remove('ld-show');
+    document.body.style.overflow = '';
+  }
 
   window.ldOpenQuote = function(serviceKey){
     if(!qOverlay) return;
     const preset = (serviceKey && PAGE_SERVICE[serviceKey]) || PAGE_SERVICE[page] || '';
     if(preset) selectService(preset);
+    if(!qOverlay.classList.contains('ld-show')){
+      try{
+        history.pushState({ldQuote:true}, '', location.href);
+        qHistoryOpen = true;
+      }catch(error){
+        qHistoryOpen = false;
+      }
+    }
     qOverlay.classList.add('ld-show');
     document.body.style.overflow = 'hidden';
     ldTrack('quote_open', { service: serviceKey || page, page: location.pathname });
@@ -606,9 +612,22 @@ body,body.service-page{padding-top:0!important}
 
   window.ldCloseQuote = function(){
     if(!qOverlay) return;
-    qOverlay.classList.remove('ld-show');
-    document.body.style.overflow = '';
+    if(qHistoryOpen){
+      history.back();
+      return;
+    }
+    hideQuote();
   };
+
+  window.addEventListener('popstate', function(){
+    if(qOverlay && qOverlay.classList.contains('ld-show')) hideQuote();
+    qHistoryOpen = false;
+    if(qPendingNavigation){
+      const target = qPendingNavigation;
+      qPendingNavigation = '';
+      window.location.href = target;
+    }
+  });
 
   if(qOverlay){
     qOverlay.addEventListener('click', function(e){
@@ -665,8 +684,13 @@ body,body.service-page{padding-top:0!important}
 
       ldTrack('quote_submit', { service: service, page: location.pathname });
       const url = 'https://line.me/R/oaMessage/' + LINE_OA_ID + '/?' + encodeURIComponent(msg);
-      window.location.href = url;
-      ldCloseQuote();
+      hideQuote();
+      if(qHistoryOpen){
+        qPendingNavigation = url;
+        history.back();
+      }else{
+        window.location.href = url;
+      }
     });
   }
   }

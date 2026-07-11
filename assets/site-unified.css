@@ -150,7 +150,8 @@ footer,.footer{background:var(--ld-ink-deep)!important;color:#fff!important}
   .leak-subnav{justify-content:flex-start}
   .legacy-merge-notice{align-items:flex-start;flex-direction:column}
   .legacy-merge-notice a{width:100%;text-align:center}
-  #ld-float,#ld-join{display:none!important}
+  #ld-float{display:flex!important}
+  #ld-join{display:none!important}
 }
 
 @media(prefers-reduced-motion:reduce){

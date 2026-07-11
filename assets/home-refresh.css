@@ -4,25 +4,12 @@
   --text:#263238;--muted:#667680;--border:#dce4e7;--soft:#f4f7f7;
   --shadow:0 20px 55px rgba(23,50,77,.12);
 }
-body{color:var(--text)!important;background:#fff!important;padding-top:var(--ld-hdr-h,160px)!important}
+body{color:var(--text)!important;background:#fff!important}
 .sec-tag{background:transparent!important;color:var(--orange-dark)!important;padding:0!important;border-radius:0!important;letter-spacing:.14em!important}
 .sec-title{font-size:clamp(1.8rem,4vw,2.5rem)!important;color:var(--ink)!important;letter-spacing:-.025em}
 .sec-sub{color:var(--muted)!important;font-size:1rem!important;max-width:62ch}
 
-/* 共用導覽：降低九格選單的工具列感 */
-#ld-header{border:0!important;box-shadow:0 1px 0 rgba(23,50,77,.1)!important;background:rgba(255,255,255,.96)!important;backdrop-filter:blur(14px)}
-.ld-top{padding:10px 20px!important}
-.ld-logo-img{height:42px!important}
-.ld-line-btn{border-radius:999px!important;padding:10px 16px!important;box-shadow:none!important}
-.ld-nav{background:#fff!important;border-top:1px solid #eef1f2;padding:7px 16px!important;gap:4px!important;justify-content:flex-start!important}
-.ld-tab{min-width:auto!important;flex-direction:row!important;padding:8px 12px!important;border:0!important;border-radius:999px!important;background:transparent!important;gap:0!important}
-.ld-tab-icon,.ld-tab-sub{display:none!important}
-.ld-tab-label{color:#53656e!important;font-size:13px!important;font-weight:700!important}
-.ld-tab:hover{background:#f3f6f7!important}
-.ld-tab.ld-active{background:var(--ink)!important;box-shadow:none!important}
-.ld-tab.ld-active .ld-tab-label{color:#fff!important}
-#ld-float{animation:none!important;box-shadow:0 12px 28px rgba(6,199,85,.3)!important}
-#ld-join{display:none!important}
+/* Header 與浮動操作由 header.js 統一管理，避免各頁覆寫造成錯位。 */
 
 /* Hero */
 #hero{background:var(--cream)!important;color:var(--ink)!important;padding:clamp(3rem,7vw,6.5rem) 1.25rem!important;overflow:hidden}
@@ -97,12 +84,10 @@ footer{background:var(--ink-deep)!important}
   .process-grid{grid-template-columns:repeat(3,1fr)}
 }
 @media(min-width:1024px){
-  body{padding-top:var(--ld-hdr-h,150px)!important}
   .ld-top{padding:10px 40px!important}
   .ld-nav{padding:8px 40px!important}
 }
 @media(max-width:759px){
-  body{padding-top:var(--ld-hdr-h,160px)!important}
   .hero-copy{order:1}.hero-visual{order:2}
   .confidence-inner{grid-template-columns:1fr;gap:.55rem}
   .confidence-item{justify-content:flex-start;text-align:left}
