@@ -5,8 +5,9 @@
   const leakSubPages = ['cases','team','areas','leak-guide','taipei','new-taipei','keelung','taoyuan','hsinchu','miaoli','taichung'];
   const activePage = leakSubPages.indexOf(page) !== -1 ? 'leak-repair' : page;
   const LINE = 'https://lin.ee/WVxmY65';
-  const JOIN_FORM = 'https://forms.gle/T4UTULXMaXaoGZQG8';
   const LINE_OA_ID = '@478xvlgl';
+  const serviceTheme = ['aircon','washer','homeclean','leak-repair'].indexOf(activePage) !== -1 ? activePage : '';
+  if(serviceTheme) document.body.classList.add('ld-theme-' + serviceTheme);
 
   // ── 分析追蹤：把下面的 G-XXXXXXXXXX 換成你的 GA4 評估 ID 即自動啟用 ──
   const GA4_ID = 'G-XXXXXXXXXX';
@@ -63,7 +64,7 @@
   const css = `
 /* ld-header */
 #ld-header{
-  position:sticky;top:0;
+  position:fixed;top:0;left:0;right:0;
   view-transition-name:ld-site-header;
   z-index:9990;
   background:rgba(255,255,255,.97);
@@ -72,7 +73,14 @@
   backdrop-filter:saturate(150%) blur(16px);
   font-family:'Noto Sans TC',sans-serif;
 }
+#ld-header-spacer{display:block;width:100%;height:var(--ld-hdr-h,130px)}
 body,body.service-page{padding-top:0!important}
+
+/* Each service owns a distinct accent that continues from its tab into the page. */
+body.ld-theme-aircon{--service-accent:#087ea4;--service-accent-dark:#075f7d;--service-soft:#ecfeff;--service-border:#bae6fd;--orange:#087ea4;--orange-dark:#075f7d;--teal:#0891b2;--cream:#ecfeff;--sand:#bae6fd}
+body.ld-theme-washer{--service-accent:#6d5bd0;--service-accent-dark:#5142a7;--service-soft:#f5f3ff;--service-border:#ddd6fe;--orange:#6d5bd0;--orange-dark:#5142a7;--teal:#7c3aed;--cream:#f5f3ff;--sand:#ddd6fe}
+body.ld-theme-homeclean{--service-accent:#d97706;--service-accent-dark:#a94f08;--service-soft:#fffbeb;--service-border:#fde68a;--orange:#d97706;--orange-dark:#a94f08;--teal:#ca8a04;--cream:#fffbeb;--sand:#fde68a}
+body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59;--service-soft:#f0fdfa;--service-border:#99f6e4;--orange:#0f766e;--orange-dark:#115e59;--teal:#0d9488;--cream:#f0fdfa;--sand:#99f6e4}
 .ld-top{
   display:flex;align-items:center;
   justify-content:flex-start;
@@ -148,15 +156,19 @@ body,body.service-page{padding-top:0!important}
   text-decoration:none;cursor:pointer;
   transition:background .18s,border-color .18s,transform .18s,box-shadow .18s;
 }
-.ld-tab:hover{background:#ffffff;border-color:#f28c28;transform:translateY(-2px);box-shadow:0 10px 22px rgba(23,50,77,.13)}
+.ld-tab--aircon{--tab-accent:#087ea4;--tab-soft:#ecfeff;--tab-on:#cffafe}
+.ld-tab--washer{--tab-accent:#6d5bd0;--tab-soft:#f5f3ff;--tab-on:#ede9fe}
+.ld-tab--homeclean{--tab-accent:#d97706;--tab-soft:#fffbeb;--tab-on:#fef3c7}
+.ld-tab--leak-repair{--tab-accent:#0f766e;--tab-soft:#f0fdfa;--tab-on:#ccfbf1}
+.ld-tab:hover{background:var(--tab-soft);border-color:var(--tab-accent);transform:translateY(-2px);box-shadow:0 10px 22px rgba(23,50,77,.13)}
 .ld-tab.ld-active{
-  background:#17324d;
-  border-color:#17324d;
+  background:var(--tab-accent);
+  border-color:var(--tab-accent);
   box-shadow:0 9px 22px rgba(23,50,77,.25);
 }
 .ld-tab-icon{
   width:23px;height:23px;line-height:1;
-  display:flex;align-items:center;justify-content:center;color:#138a80;flex:0 0 auto;
+  display:flex;align-items:center;justify-content:center;color:var(--tab-accent);flex:0 0 auto;
 }
 .ld-tab-icon svg{display:block;width:100%;height:100%;stroke:currentColor}
 .ld-tab-label{
@@ -174,8 +186,8 @@ body,body.service-page{padding-top:0!important}
   white-space:nowrap;
 }
 .ld-tab.ld-active .ld-tab-label{color:#ffffff}
-.ld-tab.ld-active .ld-tab-sub{color:#dbeafe}
-.ld-tab.ld-active .ld-tab-icon{color:#7ee5da}
+.ld-tab.ld-active .ld-tab-sub{color:var(--tab-on)}
+.ld-tab.ld-active .ld-tab-icon{color:#fff}
 
 /* ── 錨點補償：fixed header 遮住錨點的修正 ── */
 [id]{scroll-margin-top:var(--ld-hdr-h,130px)}
@@ -211,43 +223,38 @@ body,body.service-page{padding-top:0!important}
   line-height:1;
 }
 
-/* 加入我們按鈕 */
-#ld-join{
-  position:fixed;right:14px;
-  z-index:9991;
-  width:54px;height:54px;
-  border-radius:50%;
-  background:#1e3a8a;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  gap:2px;
-  text-decoration:none;
-  box-shadow:0 4px 14px rgba(30,58,138,.45);
-  transition:background .2s,box-shadow .2s;
-}
-#ld-join:hover{background:#1d4ed8;box-shadow:0 4px 20px rgba(30,58,138,.6)}
-#ld-join-icon{font-size:20px;line-height:1}
-#ld-join-text{
-  display:block;
-  font-size:9.5px;font-weight:700;
-  color:#ffffff;
-  font-family:'Noto Sans TC',sans-serif;
-  line-height:1;letter-spacing:.02em;
-}
 /* PC */
 @media(min-width:1024px){
-  .ld-top{padding:10px 32px}
-  .ld-logo{width:68px;height:68px}
-  .ld-logo-img{height:76px;max-width:340px}
-  .ld-name{font-size:22px}
-  .ld-sub{font-size:11px}
-  .ld-line-btn{font-size:14px;padding:8px 16px;gap:6px}
-  .ld-line-btn-text{display:inline}
-  .ld-knowledge-text{display:inline}
-  .ld-nav{grid-template-columns:repeat(4,minmax(170px,210px));justify-content:center;padding:10px 32px 12px;gap:12px}
-  .ld-tab{min-height:58px;padding:9px 14px;gap:9px;border-radius:14px}
-  .ld-tab-icon{width:27px;height:27px}
-  .ld-tab-label{font-size:13px}
+  #ld-header{
+    display:flex;align-items:center;justify-content:center;
+    gap:12px;padding:12px 24px;
+  }
+  .ld-top{
+    flex:0 0 210px;width:210px;max-width:none;
+    margin:0;padding:0;
+  }
+  .ld-brand{
+    box-sizing:border-box;width:100%;height:72px;min-height:72px;
+    justify-content:center;padding:5px 12px;
+    border:1.5px solid #cbd7db;border-radius:16px;
+    background:#fff;
+    box-shadow:0 5px 13px rgba(23,50,77,.075),inset 0 1px 0 rgba(255,255,255,.9);
+    transition:border-color .18s,transform .18s,box-shadow .18s;
+  }
+  .ld-brand:hover{
+    border-color:#f28c28;transform:translateY(-2px);
+    box-shadow:0 10px 22px rgba(23,50,77,.13);
+  }
+  .ld-logo-img{height:60px;max-width:184px;filter:none}
+  .ld-nav{
+    flex:0 1 920px;width:min(920px,calc(100vw - 278px));max-width:920px;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    margin:0;padding:0;gap:12px;background:transparent;
+  }
+  .ld-tab{box-sizing:border-box;height:72px;min-height:72px;padding:10px 14px;gap:10px;border-radius:16px}
+  .ld-tab-icon{width:30px;height:30px}
+  .ld-tab-label{font-size:15px}
+  .ld-tab-sub{font-size:10.5px}
   .ld-tab-sub{display:block}
 }
 
@@ -411,7 +418,7 @@ body,body.service-page{padding-top:0!important}
   ];
 
   const tabsHTML = tabs.map(t =>
-    `<a href="/${t.href}" class="ld-tab${t.id===activePage?' ld-active':''}">
+    `<a href="/${t.href}" class="ld-tab ld-tab--${t.id}${t.id===activePage?' ld-active':''}">
       <span class="ld-tab-icon">${t.icon}</span>
       <span class="ld-tab-label">${t.label}</span>
       <span class="ld-tab-sub">${t.sub}</span>
@@ -424,10 +431,6 @@ body,body.service-page{padding-top:0!important}
       ${LINE_FLOAT_ICON}
       <span id="ld-float-text">LINE</span>
     </a>
-    <a id="ld-join" href="${JOIN_FORM}" target="_blank" rel="noopener" title="廠商合作申請">
-      <span id="ld-join-icon">🤝</span>
-      <span id="ld-join-text">加入我們</span>
-    </a>
     <header id="ld-header">
       <div class="ld-top">
         <a class="ld-brand" href="/index.html" aria-label="灰汰郎｜冷氣清洗・洗衣機清洗・居家清潔・漏水檢測與修補">
@@ -439,6 +442,7 @@ body,body.service-page{padding-top:0!important}
       </div>
       <nav class="ld-nav">${tabsHTML}</nav>
     </header>
+    <div id="ld-header-spacer" aria-hidden="true"></div>
     <button id="ld-back-top" onclick="window.scrollTo({top:0,behavior:\'smooth\'})" title="回到頂部">↑</button>
     <div id="ld-stickybar">
       <div class="ld-sticky-text">
@@ -501,7 +505,7 @@ body,body.service-page{padding-top:0!important}
     </div>`;
 
   // 移除舊版 header
-  ['ld-header','site-header','ld-float','hdr-float','float-line'].forEach(id => {
+  ['ld-header','ld-header-spacer','site-header','ld-float','ld-join','hdr-float','float-line'].forEach(id => {
     const el = document.getElementById(id);
     if(el) el.remove();
   });
@@ -520,13 +524,15 @@ body,body.service-page{padding-top:0!important}
     }
   }
 
-  // Header 保持在文件流中，僅同步高度給錨點與頁內 sticky 導覽。
+  // Fixed Header 的等高 spacer 避免內容被遮住，並同步頁內錨點高度。
   function setOffset(){
     var hdrEl = document.getElementById('ld-header');
     if(hdrEl){
       var hh = hdrEl.offsetHeight;
       if(hh > 0 && hh < 240){
         document.documentElement.style.setProperty('--ld-hdr-h', hh + 'px');
+        var spacer = document.getElementById('ld-header-spacer');
+        if(spacer) spacer.style.height = hh + 'px';
       }
     }
   }
@@ -544,19 +550,6 @@ body,body.service-page{padding-top:0!important}
   }
 
 
-  // 加入我們按鈕：固定在 LINE 按鈕下方
-  (function(){
-    function posJoin(){
-      const lineBtn = document.getElementById('ld-float');
-      const joinBtn = document.getElementById('ld-join');
-      if(!lineBtn || !joinBtn) return;
-      const lineRect = lineBtn.getBoundingClientRect();
-      // LINE 按鈕是 fixed top:50%，加入我們在它下方 66px
-      joinBtn.style.top = (window.innerHeight/2 + 33 + 8) + 'px';
-    }
-    posJoin();
-    window.addEventListener('resize', posJoin);
-  })();
   // 回到頂部按鈕顯示控制
   window.addEventListener('scroll', function(){
     const btn = document.getElementById('ld-back-top');

@@ -85,10 +85,6 @@ body.leak-page .pain-item{border-color:var(--border)!important;background:var(--
   .impact-grid{grid-template-columns:1fr 1fr}
   .drain-check{grid-template-columns:auto 1fr;align-items:start}
 }
-@media(min-width:1024px){
-  body.service-page .ld-top{padding:10px 40px!important}
-  body.service-page .ld-nav{padding:8px 40px!important}
-}
 @media(max-width:759px){
   body.service-page .trust-badge+.trust-badge::before{display:none}
   body.service-page .trust-badges{display:grid!important}
@@ -154,10 +150,6 @@ body.leak-page .pain-item{border-color:var(--border)!important;background:var(--
 
 @media(min-width:760px){
   body.service-page .page-hero-inner,body.leak-page .hero-content-pc{grid-template-columns:1fr 1fr!important}
-}
-@media(min-width:1024px){
-  body.service-page .ld-top{padding:10px 40px!important}
-  body.service-page .ld-nav{padding:8px 40px!important}
 }
 @media(max-width:759px){
   body.service-page .trust-badge+.trust-badge::before{display:none}

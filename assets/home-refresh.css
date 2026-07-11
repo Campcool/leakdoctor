@@ -83,10 +83,6 @@ footer{background:var(--ink-deep)!important}
   .hero-inner{grid-template-columns:1.02fr .98fr}
   .process-grid{grid-template-columns:repeat(3,1fr)}
 }
-@media(min-width:1024px){
-  .ld-top{padding:10px 40px!important}
-  .ld-nav{padding:8px 40px!important}
-}
 @media(max-width:759px){
   .hero-copy{order:1}.hero-visual{order:2}
   .confidence-inner{grid-template-columns:1fr;gap:.55rem}
