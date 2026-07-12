@@ -98,7 +98,7 @@
   }
   if(!document.querySelector('script[src*="craft.js"]')){
     const craftJs = document.createElement('script');
-    craftJs.src = '/assets/craft.js?v=20260712b';
+    craftJs.src = '/assets/craft.js?v=20260712d';
     craftJs.defer = true;
     document.head.appendChild(craftJs);
   }
@@ -139,7 +139,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   width:52px;height:52px;
   flex-shrink:0;
 }
-.ld-logo-img{height:64px;width:auto;max-width:min(48vw,290px);object-fit:contain;flex-shrink:0;display:block;filter:drop-shadow(0 4px 8px rgba(23,50,77,.12))}
+.ld-logo-img{width:min(52vw,190px);height:auto;max-height:84px;object-fit:contain;flex-shrink:0;display:block;filter:none}
 .ld-texts{flex:1;min-width:0}
 .ld-name{
   display:block;
@@ -216,20 +216,12 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
 .ld-tab-icon svg{display:block;width:100%;height:100%;stroke:currentColor}
 .ld-tab-label{
   display:block;
-  font-size:12px;font-weight:800;
+  font-size:13px;font-weight:900;
   font-family:'Noto Sans TC',sans-serif;
   color:#17324d;
   white-space:nowrap;line-height:1.2;
 }
-.ld-tab-sub{
-  display:none;
-  font-size:9px;
-  font-family:'Noto Sans TC',sans-serif;
-  color:#667680;
-  white-space:nowrap;
-}
 .ld-tab.ld-active .ld-tab-label{color:#ffffff}
-.ld-tab.ld-active .ld-tab-sub{color:var(--tab-on)}
 .ld-tab.ld-active .ld-tab-icon{color:#fff}
 
 /* ── 錨點補償：fixed header 遮住錨點的修正 ── */
@@ -269,48 +261,41 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
 /* PC */
 @media(min-width:1024px){
   #ld-header{
-    display:flex;align-items:center;justify-content:center;
-    gap:12px;padding:12px 24px;
+    display:flex;align-items:center;justify-content:flex-start;
+    gap:16px;padding:10px 28px;
   }
   .ld-top{
-    flex:0 0 210px;width:210px;max-width:none;
+    flex:0 0 220px;width:220px;height:88px;max-width:none;
     margin:0;padding:0;
   }
   .ld-brand{
-    box-sizing:border-box;width:100%;height:72px;min-height:72px;
-    justify-content:center;padding:5px 12px;
-    border:1.5px solid #cbd7db;border-radius:16px;
-    background:#fff;
-    box-shadow:0 5px 13px rgba(23,50,77,.075),inset 0 1px 0 rgba(255,255,255,.9);
-    transition:border-color .18s,transform .18s,box-shadow .18s;
+    box-sizing:border-box;width:100%;height:88px;min-height:88px;
+    justify-content:flex-start;padding:0;
+    border:0;border-radius:0;background:transparent;box-shadow:none;
   }
-  .ld-brand:hover{
-    border-color:#f28c28;transform:translateY(-2px);
-    box-shadow:0 10px 22px rgba(23,50,77,.13);
-  }
-  .ld-logo-img{height:60px;max-width:184px;filter:none}
+  .ld-logo-img{width:200px;height:auto;max-height:86px;filter:none}
   .ld-nav{
-    flex:0 1 920px;width:min(920px,calc(100vw - 278px));max-width:920px;
+    flex:1 1 auto;width:auto;max-width:none;
     grid-template-columns:repeat(4,minmax(0,1fr));
     margin:0;padding:0;gap:12px;background:transparent;
   }
-  .ld-tab{box-sizing:border-box;height:72px;min-height:72px;padding:10px 14px;gap:10px;border-radius:16px}
-  .ld-tab-icon{width:30px;height:30px}
-  .ld-tab-label{font-size:15px}
-  .ld-tab-sub{font-size:10.5px}
-  .ld-tab-sub{display:block}
+  .ld-tab{box-sizing:border-box;height:88px;min-height:88px;padding:10px 16px;gap:11px;border-radius:16px}
+  .ld-tab-icon{width:29px;height:29px}
+  .ld-tab-label{font-size:16px}
 }
+
+@media(min-width:1280px){.ld-tab-label{font-size:17px}}
 
 @media(max-width:420px){
   .ld-top{padding:7px 10px;gap:8px}
-  .ld-logo-img{height:58px;max-width:47vw}
+  .ld-logo-img{width:min(52vw,190px);height:auto;max-height:84px}
   .ld-top-actions{gap:6px}
   .ld-line-btn{min-width:44px;padding:8px 10px}
   .ld-knowledge-link{padding:8px 9px;font-size:11px}
   .ld-nav{padding:7px 8px 9px;gap:5px}
   .ld-tab{gap:5px;padding:8px 4px}
   .ld-tab-icon{width:20px;height:20px}
-  .ld-tab-label{font-size:11px}
+  .ld-tab-label{font-size:12px}
 }
 
 #ld-back-top{position:fixed;right:20px;bottom:calc(180px + env(safe-area-inset-bottom));z-index:9990;width:42px;height:42px;border-radius:50%;background:#1e3a8a;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;box-shadow:0 2px 12px rgba(30,58,138,.35);opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;pointer-events:none;}
@@ -481,17 +466,16 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
 
   // 頁籤
   const tabs = [
-    {id:'aircon', href:'aircon.html', icon:NAV_ICONS.aircon, label:'冷氣清洗', sub:'設備拆洗'},
-    {id:'washer', href:'washer.html', icon:NAV_ICONS.washer, label:'洗衣機清洗', sub:'內槽拆洗'},
-    {id:'homeclean', href:'homeclean.html', icon:NAV_ICONS.homeclean, label:'居家清潔', sub:'空間分區'},
-    {id:'leak-repair', href:'leak-repair.html', icon:NAV_ICONS.leak, label:'漏水檢測與修補', sub:'檢測・止漏'},
+    {id:'aircon', href:'aircon.html', icon:NAV_ICONS.aircon, label:'冷氣清洗'},
+    {id:'washer', href:'washer.html', icon:NAV_ICONS.washer, label:'洗衣機清洗'},
+    {id:'homeclean', href:'homeclean.html', icon:NAV_ICONS.homeclean, label:'居家清潔'},
+    {id:'leak-repair', href:'leak-repair.html', icon:NAV_ICONS.leak, label:'漏水檢測與修補'},
   ];
 
   const tabsHTML = tabs.map(t =>
     `<a href="/${t.href}" class="ld-tab ld-tab--${t.id}${t.id===activePage?' ld-active':''}">
       <span class="ld-tab-icon">${t.icon}</span>
       <span class="ld-tab-label">${t.label}</span>
-      <span class="ld-tab-sub">${t.sub}</span>
     </a>`
   ).join('');
   const SERVICE_CHOICE_ICONS = [NAV_ICONS.aircon,NAV_ICONS.washer,NAV_ICONS.homeclean,NAV_ICONS.leak,NAV_ICONS.other];
@@ -505,8 +489,8 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
       <div class="ld-top">
         <a class="ld-brand" href="/index.html" aria-label="灰汰郎｜冷氣清洗・洗衣機清洗・居家清潔・漏水檢測與修補">
           <picture>
-            <source srcset="/logo/logos/website-header-logo-640x240.webp" type="image/webp">
-            <img class="ld-logo-img" src="/logo/logos/website-header-logo-640x240.png" alt="灰汰郎 清潔公司" width="640" height="240">
+            <source srcset="/logo/logos/logo-master-transparent.webp" type="image/webp">
+            <img class="ld-logo-img" src="/logo/logos/logo-master-transparent.png" alt="灰汰郎 清潔公司" width="660" height="295">
           </picture>
         </a>
       </div>
