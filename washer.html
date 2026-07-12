@@ -115,6 +115,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 <script src="header.js"></script>
 <link rel="stylesheet" href="assets/service-refresh.css">
 <link rel="stylesheet" href="assets/process-images.css">
+<link rel="stylesheet" href="assets/craft.css">
 
 <section id="page-hero">
   <div class="page-hero-inner">
@@ -160,15 +161,15 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
     <h2 class="h">服務項目</h2>
     <div class="item-grid">
       
-<div class="item-card"><div class="item-name">🧺 直立式洗衣機清洗</div><div class="item-desc">拆解內槽深層清洗，去除洗衣槽黑垢、異味與洗衣精殘留。</div></div>
-<div class="item-card"><div class="item-name">🧺 滾筒式洗衣機清洗</div><div class="item-desc">拆解滾筒與門封膠條，清除隱藏黴斑與棉絮髒污。</div></div>
-<div class="item-card"><div class="item-name">🦠 除菌除垢</div><div class="item-desc">專用洗劑深層清潔，改善衣物洗後異味問題。</div></div>
-<div class="item-card"><div class="item-name">✅ 完工測試</div><div class="item-desc">清洗完成後試運轉確認排水、脫水功能正常。</div></div>
+<div class="item-card"><div class="item-name craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#washer"></use></svg>直立式洗衣機清洗</div><div class="item-desc">依品牌、容量與結構拆解可清潔部件，處理內外槽髒污與洗劑殘留。</div></div>
+<div class="item-card"><div class="item-name craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#washer"></use></svg>滾筒式洗衣機清洗</div><div class="item-desc">先確認型號、安裝空間與可拆程度，再安排合適的清潔方式。</div></div>
+<div class="item-card"><div class="item-name craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#sparkle"></use></svg>內槽與部件清潔</div><div class="item-desc">針對可拆部件、內槽、門封與棉絮區清潔，降低殘留髒污與異味。</div></div>
+<div class="item-card"><div class="item-name craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#check"></use></svg>復原與試運轉</div><div class="item-desc">組裝完成後確認進水、排水、脫水與基本運轉狀況。</div></div>
 
     </div>
     <div class="mid-cta">
       <div class="mid-cta-text">想知道你家洗衣機清洗實際費用？加 LINE 免費詢問，現場評估後才報價</div>
-      <button type="button" class="mid-cta-btn" onclick="ldOpenQuote('washer')">📋 線上預約估價</button>
+      <button type="button" class="mid-cta-btn craft-action-icon" onclick="ldOpenQuote('washer')"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#calendar"></use></svg>線上預約估價</button>
     </div>
   </div>
 </section>
@@ -182,7 +183,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 <tr><td>直立式洗衣機清洗</td><td class="price-amt">$1,299 起 / 台</td></tr>
 <tr><td>滾筒式洗衣機清洗</td><td class="price-amt">$2,999 起 / 台</td></tr>
 </table>
-<div class="price-note">⚠️ 實際費用依洗衣機類型（直立式／滾筒式）、容量與髒污程度由廠商到府評估後報價，預約時請提供品牌與型號以利估算。滾筒式因結構較複雜，費用高於直立式。</div>
+<div class="price-note craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#warning"></use></svg><span>實際費用依洗衣機類型（直立式／滾筒式）、容量與安裝條件由服務團隊評估後報價，預約時請提供品牌與型號。滾筒式因結構較複雜，費用通常高於直立式。</span></div>
 
   </div>
 </section>
@@ -205,8 +206,8 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   <div class="container">
     <h2 class="h">延伸閱讀</h2>
     <div style="display:grid;gap:.7rem">
-      <a href="articles/washer-cleaning-guide.html" style="display:block;background:#fff;border:2px solid var(--gray-200);border-radius:12px;padding:.9rem 1.05rem;font-size:.9rem;font-weight:700;color:var(--gray-900)">📖 洗衣機多久洗一次？黑垢黴菌完整解析 <span style="color:var(--blue)">→</span></a>
-      <a href="articles/aircon-cleaning-cost.html" style="display:block;background:#fff;border:2px solid var(--gray-200);border-radius:12px;padding:.9rem 1.05rem;font-size:.9rem;font-weight:700;color:var(--gray-900)">📖 冷氣清洗費用多少？2026行情 <span style="color:var(--blue)">→</span></a>
+      <a class="craft-icon-label" href="articles/washer-cleaning-guide.html" style="display:flex;background:#fff;border:2px solid var(--gray-200);border-radius:12px;padding:.9rem 1.05rem;font-size:.9rem;font-weight:700;color:var(--gray-900)"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#book"></use></svg>洗衣機多久洗一次？黑垢黴菌完整解析 <span style="color:var(--blue);margin-left:auto">→</span></a>
+      <a class="craft-icon-label" href="articles/aircon-cleaning-cost.html" style="display:flex;background:#fff;border:2px solid var(--gray-200);border-radius:12px;padding:.9rem 1.05rem;font-size:.9rem;font-weight:700;color:var(--gray-900)"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#book"></use></svg>冷氣清洗費用多少？2026行情 <span style="color:var(--blue);margin-left:auto">→</span></a>
     </div>
   </div>
 </section>
@@ -214,7 +215,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 <section id="cta-bottom">
   <div class="cta-title">洗衣機清洗，交給灰汰郎</div>
   <div class="cta-sub">加入 LINE，免費諮詢並快速預約到府服務</div>
-  <button type="button" class="cta-btn" onclick="ldOpenQuote('washer')">📋 線上預約估價</button>
+  <button type="button" class="cta-btn craft-action-icon" onclick="ldOpenQuote('washer')"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#calendar"></use></svg>線上預約估價</button>
 </section>
 
 <footer>

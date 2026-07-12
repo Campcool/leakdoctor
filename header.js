@@ -90,6 +90,18 @@
     unified.href = '/assets/site-unified.css';
     document.head.appendChild(unified);
   }
+  if(!document.querySelector('link[href*="craft.css"]')){
+    const craftCss = document.createElement('link');
+    craftCss.rel = 'stylesheet';
+    craftCss.href = '/assets/craft.css';
+    document.head.appendChild(craftCss);
+  }
+  if(!document.querySelector('script[src*="craft.js"]')){
+    const craftJs = document.createElement('script');
+    craftJs.src = '/assets/craft.js';
+    craftJs.defer = true;
+    document.head.appendChild(craftJs);
+  }
 
   // CSS：全部用 ld- 前綴，不影響頁面其他元素
   const css = `
@@ -457,12 +469,13 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
     <path d="M21.2 19.2h-1.4c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h1.4c.3 0 .5-.2.5-.5v-6.6c0-.3-.2-.5-.5-.5zM28.6 19.2h-1.4c-.3 0-.5.2-.5.5v3.9l-3-4.2-.2-.2H22c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h1.4c.3 0 .5-.2.5-.5v-3.9l3 4.2.2.2h1.5c.3 0 .5-.2.5-.5v-6.6c0-.3-.2-.5-.5-.5zM19.2 24.3h-2.4v-4.7c0-.3-.2-.5-.5-.5h-1.4c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h4.3c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5zM33.8 20.6c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5h-4.3c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h4.3c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5H31v-1h2.8c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5H31v-1h2.8z" fill="#06C755"/>
   </svg>`;
 
+  function craftIcon(id){ return '<svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#' + id + '"></use></svg>'; }
   const NAV_ICONS = {
-    aircon:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="8" rx="2"/><path d="M6 8h12M7 16c1.4-1.7 2.8-1.7 4.2 0s2.8 1.7 4.2 0M8 20c1-1.1 2-1.1 3 0s2 1.1 3 0"/></svg>',
-    washer:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2.5" width="16" height="19" rx="2.5"/><path d="M4 7.5h16M7 5h.01M10 5h.01"/><circle cx="12" cy="14.5" r="4.5"/><path d="M9.5 14.5c1.6-1.2 3.4 1.2 5 0"/></svg>',
-    homeclean:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 11.5 12 4l8.5 7.5M6 10v10h12V10M9.5 20v-5h5v5"/><path d="m18.5 3 .5 1.5L20.5 5 19 5.5 18.5 7 18 5.5 16.5 5 18 4.5Z"/></svg>',
-    leak:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 3.5S6 9 6 12.5a4.5 4.5 0 0 0 7.8 3.1"/><circle cx="16.5" cy="16.5" r="3.5"/><path d="m19 19 2.2 2.2"/></svg>',
-    knowledge:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v16H6.5A2.5 2.5 0 0 0 4 21.5Z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v16h4.5a2.5 2.5 0 0 1 2.5 2.5Z"/></svg>',
+    aircon:craftIcon('aircon'),
+    washer:craftIcon('washer'),
+    homeclean:craftIcon('homeclean'),
+    leak:craftIcon('leak'),
+    knowledge:craftIcon('book'),
     other:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg>'
   };
 

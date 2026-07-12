@@ -113,6 +113,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </head>
 <body class="service-page">
 <script src="header.js"></script>
+<link rel="stylesheet" href="assets/craft.css">
 
 <section id="page-hero">
   <div class="page-hero-inner">
@@ -158,7 +159,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
     <h2 class="h">服務項目</h2>
     <div class="item-grid">
       
-<div class="item-card"><div class="item-name">🧽 居家除塵蟎</div><div class="item-desc">床墊、沙發、地毯深度除塵蟎，改善居家過敏原問題。</div></div>
+<div class="item-card"><div class="item-name craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#homeclean"></use></svg>居家重點除塵</div><div class="item-desc">依材質與設備條件處理床墊、沙發或地毯表面與縫隙髒污；實際範圍先確認。</div></div>
 <div class="item-card"><div class="item-name">🍳 抽油煙機清洗</div><div class="item-desc">拆解扇葉與油網深層去油污，恢復抽風效能、降低油煙異味。</div></div>
 <div class="item-card"><div class="item-name">🚰 水塔清洗</div><div class="item-desc">透天白鐵水塔、集合式住宅水塔清洗，確保用水衛生安全。</div></div>
 <div class="item-card"><div class="item-name">🧴 居家深度清潔</div><div class="item-desc">依坪數與需求規劃清潔範圍，全面清潔居家環境。</div></div>
@@ -166,7 +167,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
     </div>
     <div class="mid-cta">
       <div class="mid-cta-text">想知道你家居家清潔實際費用？加 LINE 免費詢問，現場評估後才報價</div>
-      <button type="button" class="mid-cta-btn" onclick="ldOpenQuote('homeclean')">📋 線上預約估價</button>
+      <button type="button" class="mid-cta-btn craft-action-icon" onclick="ldOpenQuote('homeclean')"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#calendar"></use></svg>線上預約估價</button>
     </div>
   </div>
 </section>
@@ -182,7 +183,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 <tr><td>退租・入住清潔</td><td class="price-amt">$3,000 起</td></tr>
 <tr><td>裝潢後細清</td><td class="price-amt">$6,000 起</td></tr>
 </table>
-<div class="price-note">⚠️ 以上為常見清潔費用參考，實際依坪數、污染程度與服務範圍由師傅現場確認，不任意現場加價。抽油煙機、水塔清洗、除塵蟎等單項服務另依機型與需求報價。</div>
+<div class="price-note craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#warning"></use></svg><span>以上為常見清潔費用參考，實際依坪數、髒污程度與服務範圍確認；抽油煙機、水塔與其他單項服務另依設備及需求報價。</span></div>
 
   </div>
 </section>
@@ -191,16 +192,16 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   <div class="container">
     <h2 class="h">真實服務紀錄・清潔前後對比</h2>
     <div style="display:grid;gap:1rem;grid-template-columns:1fr">
-      <div style="background:#fff;border:2px solid var(--gray-200);border-radius:14px;overflow:hidden">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px">
-          <div style="position:relative"><picture><source srcset="/cases-clean/case01-before.webp" type="image/webp"><img src="/cases-clean/case01-before.jpg" alt="浴廁深度清潔 清潔前" loading="lazy" style="width:100%;height:150px;object-fit:cover;display:block"></picture><span style="position:absolute;top:8px;left:8px;background:rgba(17,24,39,.75);color:#fff;font-size:.68rem;font-weight:700;padding:.15rem .5rem;border-radius:6px">清潔前</span></div>
-          <div style="position:relative"><picture><source srcset="/cases-clean/case01-after.webp" type="image/webp"><img src="/cases-clean/case01-after.jpg" alt="浴廁深度清潔 清潔後" loading="lazy" style="width:100%;height:150px;object-fit:cover;display:block"></picture><span style="position:absolute;top:8px;left:8px;background:#16a34a;color:#fff;font-size:.68rem;font-weight:700;padding:.15rem .5rem;border-radius:6px">清潔後</span></div>
+      <article class="craft-case">
+        <div class="craft-compare craft-compare--portrait" style="--compare:50%">
+          <picture><source srcset="/cases-clean/case01-before.webp" type="image/webp"><img src="/cases-clean/case01-before.jpg" alt="浴廁深度清潔前的水垢與污漬狀況" loading="lazy" width="960" height="1280"></picture>
+          <picture class="craft-compare-after"><source srcset="/cases-clean/case01-after.webp" type="image/webp"><img src="/cases-clean/case01-after.jpg" alt="浴廁完成深度清潔後的表面狀況" loading="lazy" width="960" height="1280"></picture>
+          <span class="craft-compare-label before">清潔前</span><span class="craft-compare-label after">清潔後</span>
+          <span class="craft-compare-line"></span><span class="craft-compare-handle"></span>
+          <input class="craft-compare-range" type="range" min="0" max="100" value="50" aria-label="拖曳比較浴廁清潔前後">
         </div>
-        <div style="padding:.85rem 1rem">
-          <div style="font-weight:700;font-size:.92rem;color:var(--gray-900)">浴廁深度清潔</div>
-          <div style="font-size:.78rem;color:var(--gray-500);margin-top:.15rem">📍 基隆市中正區　水垢、污漬完全去除，恢復亮白潔淨</div>
-        </div>
-      </div>
+        <div class="craft-case-copy"><div class="craft-case-title">浴廁深度清潔</div><div class="craft-case-meta"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#location"></use></svg>基隆市中正區・已去識別真實服務紀錄</div><p class="craft-case-note">拖曳中線查看水垢與表面髒污處理前後；成果依材質老化與染色情況不同。</p></div>
+      </article>
       <div style="background:#fff;border:2px solid var(--gray-200);border-radius:14px;overflow:hidden">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px">
           <div style="position:relative"><picture><source srcset="/cases-clean/case07-before.webp" type="image/webp"><img src="/cases-clean/case07-before.jpg" alt="廚房重油污清潔 清潔前" loading="lazy" style="width:100%;height:150px;object-fit:cover;display:block"></picture><span style="position:absolute;top:8px;left:8px;background:rgba(17,24,39,.75);color:#fff;font-size:.68rem;font-weight:700;padding:.15rem .5rem;border-radius:6px">清潔前</span></div>
@@ -208,7 +209,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
         </div>
         <div style="padding:.85rem 1rem">
           <div style="font-weight:700;font-size:.92rem;color:var(--gray-900)">廚房重油污清潔</div>
-          <div style="font-size:.78rem;color:var(--gray-500);margin-top:.15rem">📍 基隆市仁愛區　重油垢深層分解，檯面爐具乾淨如新</div>
+          <div class="craft-case-meta" style="font-size:.78rem;margin-top:.15rem"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#location"></use></svg>基隆市仁愛區・重油垢分區處理紀錄</div>
         </div>
       </div>
       <div style="background:#fff;border:2px solid var(--gray-200);border-radius:14px;overflow:hidden">
@@ -218,7 +219,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
         </div>
         <div style="padding:.85rem 1rem">
           <div style="font-weight:700;font-size:.92rem;color:var(--gray-900)">抽油煙機清潔</div>
-          <div style="font-size:.78rem;color:var(--gray-500);margin-top:.15rem">📍 新北市瑞芳區　拆洗除油，吸力恢復、不再滴油</div>
+          <div class="craft-case-meta" style="font-size:.78rem;margin-top:.15rem"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#location"></use></svg>新北市瑞芳區・抽油煙機拆洗紀錄</div>
         </div>
       </div>
     </div>
@@ -244,8 +245,8 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   <div class="container">
     <h2 class="h">延伸閱讀</h2>
     <div style="display:grid;gap:.7rem">
-      <a href="articles/house-cleaning-cost.html" style="display:block;background:#fff;border:2px solid var(--gray-200);border-radius:12px;padding:.9rem 1.05rem;font-size:.9rem;font-weight:700;color:var(--gray-900)">📖 居家清潔費用怎麼算？四種清潔行情 <span style="color:var(--blue)">→</span></a>
-      <a href="articles/range-hood-cleaning.html" style="display:block;background:#fff;border:2px solid var(--gray-200);border-radius:12px;padding:.9rem 1.05rem;font-size:.9rem;font-weight:700;color:var(--gray-900)">📖 抽油煙機清洗指南：週期、費用、DIY極限 <span style="color:var(--blue)">→</span></a>
+      <a class="craft-icon-label" href="articles/house-cleaning-cost.html" style="display:flex;background:#fff;border:2px solid var(--gray-200);border-radius:12px;padding:.9rem 1.05rem;font-size:.9rem;font-weight:700;color:var(--gray-900)"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#book"></use></svg>居家清潔費用怎麼算？四種清潔行情 <span style="color:var(--blue);margin-left:auto">→</span></a>
+      <a class="craft-icon-label" href="articles/range-hood-cleaning.html" style="display:flex;background:#fff;border:2px solid var(--gray-200);border-radius:12px;padding:.9rem 1.05rem;font-size:.9rem;font-weight:700;color:var(--gray-900)"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#book"></use></svg>抽油煙機清洗指南：週期、費用、DIY極限 <span style="color:var(--blue);margin-left:auto">→</span></a>
     </div>
   </div>
 </section>
@@ -253,7 +254,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 <section id="cta-bottom">
   <div class="cta-title">居家清潔，交給灰汰郎</div>
   <div class="cta-sub">加入 LINE，免費諮詢並快速預約到府服務</div>
-  <button type="button" class="cta-btn" onclick="ldOpenQuote('homeclean')">📋 線上預約估價</button>
+  <button type="button" class="cta-btn craft-action-icon" onclick="ldOpenQuote('homeclean')"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#calendar"></use></svg>線上預約估價</button>
 </section>
 
 <footer>

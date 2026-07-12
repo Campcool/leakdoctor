@@ -115,6 +115,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 <script src="header.js"></script>
 <link rel="stylesheet" href="assets/service-refresh.css">
 <link rel="stylesheet" href="assets/process-images.css">
+<link rel="stylesheet" href="assets/craft.css">
 
 <section id="page-hero">
   <div class="page-hero-inner">
@@ -179,7 +180,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
       </article>
     </div>
     <aside class="drain-check" aria-label="冷氣排水檢查說明">
-      <div class="drain-icon">💧</div>
+      <div class="drain-icon"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#droplet"></use></svg></div>
       <div>
         <h3>清洗時同步倒水測試排水是否暢通</h3>
         <p>完成清洗與復原後，服務人員會以倒水方式進行基本排水測試，觀察排水盤與排水管是否能正常排出。若發現輕微髒污或簡易堵塞，會在可處理範圍內協助排除。</p>
@@ -197,15 +198,15 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
     <h2 class="h">服務項目</h2>
     <div class="item-grid">
       
-<div class="item-card"><div class="item-name">❄️ 分離式冷氣清洗</div><div class="item-desc">室內機、室外機全機拆洗，適用一般家庭壁掛式冷氣。</div></div>
-<div class="item-card"><div class="item-name">❄️ 吊隱式冷氣清洗</div><div class="item-desc">崁入天花板機型，全機拆洗保養，清除機體內部積垢。</div></div>
-<div class="item-card"><div class="item-name">❄️ 窗型冷氣清洗</div><div class="item-desc">窗型冷氣全機清洗消毒，改善出風異味與運轉效率。</div></div>
-<div class="item-card"><div class="item-name">🦠 醫療級三重殺菌</div><div class="item-desc">二氧化氯、高溫蒸氣、紫外線消毒，清洗完立即可用。</div></div>
+<div class="item-card"><div class="item-name craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#aircon"></use></svg>分離式冷氣清洗</div><div class="item-desc">依機型拆洗室內機；室外機為加購項目，預約時可一併選擇。</div></div>
+<div class="item-card"><div class="item-name craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#aircon"></use></svg>吊隱式冷氣清洗</div><div class="item-desc">確認維修孔、天花高度與施工空間後，安排適合的拆洗方式。</div></div>
+<div class="item-card"><div class="item-name craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#aircon"></use></svg>窗型冷氣清洗</div><div class="item-desc">先確認安裝位置與拆裝條件，再進行機體清潔、復原及測試。</div></div>
+<div class="item-card"><div class="item-name craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#check"></use></svg>復原與排水測試</div><div class="item-desc">清洗後試運轉，並以倒水方式確認集水盤與基本排水路徑。</div></div>
 
     </div>
     <div class="mid-cta">
       <div class="mid-cta-text">想知道你家冷氣清洗實際費用？加 LINE 免費詢問，現場評估後才報價</div>
-      <button type="button" class="mid-cta-btn" onclick="ldOpenQuote('aircon')">📋 線上預約估價</button>
+      <button type="button" class="mid-cta-btn craft-action-icon" onclick="ldOpenQuote('aircon')"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#calendar"></use></svg>線上預約估價</button>
     </div>
   </div>
 </section>
@@ -220,7 +221,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 <tr><td>吊隱式冷氣機清洗</td><td class="price-amt">$2,599 / 台</td></tr>
 <tr><td>窗型冷氣機清洗</td><td class="price-amt">$3,000 / 台</td></tr>
 </table>
-<div class="price-note">⚠️ 實際費用依冷氣機型、噸數與現場狀況（如是否需拆風鼓、機型老舊程度）由廠商到府評估後報價，預約時請提供冷氣型號與台數以利估算。</div>
+<div class="price-note craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#warning"></use></svg><span>實際費用依冷氣機型、噸數與現場狀況（如是否需拆風鼓、機型老舊程度）由服務團隊評估後報價，預約時請提供冷氣型號與台數以利估算。</span></div>
 
   </div>
 </section>
@@ -228,19 +229,16 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 <section class="section">
   <div class="container">
     <h2 class="h">真實服務紀錄・清洗前後對比</h2>
-    <div style="display:grid;gap:1rem;grid-template-columns:1fr">
-      <div style="background:#fff;border:2px solid var(--gray-200);border-radius:14px;overflow:hidden">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px">
-          <div style="position:relative"><picture><source srcset="/cases-clean/case04-after.webp" type="image/webp"><img src="/cases-clean/case04-after.jpg" alt="住家冷氣清潔 清潔前" loading="lazy" style="width:100%;height:150px;object-fit:cover;display:block"></picture><span style="position:absolute;top:8px;left:8px;background:rgba(17,24,39,.75);color:#fff;font-size:.68rem;font-weight:700;padding:.15rem .5rem;border-radius:6px">清潔前</span></div>
-          <div style="position:relative"><picture><source srcset="/cases-clean/case04-before.webp" type="image/webp"><img src="/cases-clean/case04-before.jpg" alt="住家冷氣清潔 清潔後" loading="lazy" style="width:100%;height:150px;object-fit:cover;display:block"></picture><span style="position:absolute;top:8px;left:8px;background:#16a34a;color:#fff;font-size:.68rem;font-weight:700;padding:.15rem .5rem;border-radius:6px">清潔後</span></div>
-        </div>
-        <div style="padding:.85rem 1rem">
-          <div style="font-weight:700;font-size:.92rem;color:var(--gray-900)">住家冷氣清潔</div>
-          <div style="font-size:.78rem;color:var(--gray-500);margin-top:.15rem">📍 台北市中山區　家有幼兒，清洗後出風乾淨、不再打噴嚏</div>
-        </div>
+    <article class="craft-case">
+      <div class="craft-compare" style="--compare:50%">
+        <picture><source srcset="/cases-clean/case04-after.webp" type="image/webp"><img src="/cases-clean/case04-after.jpg" alt="住家冷氣清潔前的室內機狀況" loading="lazy" width="1280" height="960"></picture>
+        <picture class="craft-compare-after"><source srcset="/cases-clean/case04-before.webp" type="image/webp"><img src="/cases-clean/case04-before.jpg" alt="住家冷氣完成清潔後的室內機狀況" loading="lazy" width="1280" height="960"></picture>
+        <span class="craft-compare-label before">清潔前</span><span class="craft-compare-label after">清潔後</span>
+        <span class="craft-compare-line"></span><span class="craft-compare-handle"></span>
+        <input class="craft-compare-range" type="range" min="0" max="100" value="50" aria-label="拖曳比較冷氣清潔前後">
       </div>
-    </div>
-    <p style="font-size:.75rem;color:var(--gray-500);margin-top:.8rem">以上為合作團隊已去識別之真實服務紀錄。</p>
+      <div class="craft-case-copy"><div class="craft-case-title">住家冷氣清潔</div><div class="craft-case-meta"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#location"></use></svg>台北市中山區・已去識別真實服務紀錄</div><p class="craft-case-note">拖曳中線比較清潔前後；實際成果依機型、使用環境與髒污狀況不同。</p></div>
+    </article>
   </div>
 </section>
 
@@ -262,8 +260,8 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   <div class="container">
     <h2 class="h">延伸閱讀</h2>
     <div style="display:grid;gap:.7rem">
-      <a href="articles/aircon-cleaning-cost.html" style="display:block;background:#fff;border:2px solid var(--gray-200);border-radius:12px;padding:.9rem 1.05rem;font-size:.9rem;font-weight:700;color:var(--gray-900)">📖 冷氣清洗費用多少？2026行情、多久洗一次 <span style="color:var(--blue)">→</span></a>
-      <a href="articles/washer-cleaning-guide.html" style="display:block;background:#fff;border:2px solid var(--gray-200);border-radius:12px;padding:.9rem 1.05rem;font-size:.9rem;font-weight:700;color:var(--gray-900)">📖 洗衣機多久洗一次？黑垢黴菌完整解析 <span style="color:var(--blue)">→</span></a>
+      <a class="craft-icon-label" href="articles/aircon-cleaning-cost.html" style="display:flex;background:#fff;border:2px solid var(--gray-200);border-radius:12px;padding:.9rem 1.05rem;font-size:.9rem;font-weight:700;color:var(--gray-900)"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#book"></use></svg>冷氣清洗費用多少？2026行情、多久洗一次 <span style="color:var(--blue);margin-left:auto">→</span></a>
+      <a class="craft-icon-label" href="articles/washer-cleaning-guide.html" style="display:flex;background:#fff;border:2px solid var(--gray-200);border-radius:12px;padding:.9rem 1.05rem;font-size:.9rem;font-weight:700;color:var(--gray-900)"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#book"></use></svg>洗衣機多久洗一次？黑垢黴菌完整解析 <span style="color:var(--blue);margin-left:auto">→</span></a>
     </div>
   </div>
 </section>
@@ -271,7 +269,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 <section id="cta-bottom">
   <div class="cta-title">冷氣清洗，交給灰汰郎</div>
   <div class="cta-sub">加入 LINE，免費諮詢並快速預約到府服務</div>
-  <button type="button" class="cta-btn" onclick="ldOpenQuote('aircon')">📋 線上預約估價</button>
+  <button type="button" class="cta-btn craft-action-icon" onclick="ldOpenQuote('aircon')"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#calendar"></use></svg>線上預約估價</button>
 </section>
 
 <footer>

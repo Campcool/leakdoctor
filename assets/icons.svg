@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <symbol id="aircon" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="8" rx="2" fill="currentColor" opacity=".13"/>
+    <g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="8" rx="2"/><path d="M6 8h12M7 16c1.4-1.7 2.8-1.7 4.2 0s2.8 1.7 4.2 0M8 20c1-1.1 2-1.1 3 0s2 1.1 3 0"/></g>
+  </symbol>
+  <symbol id="washer" viewBox="0 0 24 24">
+    <circle cx="12" cy="14.5" r="4.5" fill="currentColor" opacity=".13"/>
+    <g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2.5" width="16" height="19" rx="2.5"/><path d="M4 7.5h16M7 5h.01M10 5h.01"/><circle cx="12" cy="14.5" r="4.5"/><path d="M9.4 14.6c1.7-1.4 3.5 1.2 5.2-.1"/></g>
+  </symbol>
+  <symbol id="homeclean" viewBox="0 0 24 24">
+    <path d="M6 10v10h12V10l-6-5.3Z" fill="currentColor" opacity=".13"/>
+    <g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11.5 12 4l8.5 7.5M6 10v10h12V10M9.5 20v-5h5v5"/><path d="m18.5 3 .5 1.5L20.5 5 19 5.5 18.5 7 18 5.5 16.5 5 18 4.5Z"/></g>
+  </symbol>
+  <symbol id="leak" viewBox="0 0 24 24">
+    <path d="M10.5 3.5S6 9 6 12.5a4.5 4.5 0 0 0 7.8 3.1" fill="currentColor" opacity=".13"/>
+    <g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 3.5S6 9 6 12.5a4.5 4.5 0 0 0 7.8 3.1"/><circle cx="16.5" cy="16.5" r="3.5"/><path d="m19 19 2.2 2.2M15.2 16.5h2.6"/></g>
+  </symbol>
+  <symbol id="book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v16H6.5A2.5 2.5 0 0 0 4 21.5Z" fill="currentColor" opacity=".12"/><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v16H6.5A2.5 2.5 0 0 0 4 21.5Z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v16h4.5a2.5 2.5 0 0 1 2.5 2.5Z"/></g></symbol>
+  <symbol id="tools" viewBox="0 0 24 24"><path d="m14.5 6.2 3.3-3.3a4.2 4.2 0 0 1-5.2 5.2L5.1 15.6a2 2 0 0 0 2.8 2.8l7.5-7.5a4.2 4.2 0 0 1-.9-4.7Z" fill="currentColor" opacity=".12"/><path d="m14.5 6.2 3.3-3.3a4.2 4.2 0 0 1-5.2 5.2L5.1 15.6a2 2 0 0 0 2.8 2.8l7.5-7.5a4.2 4.2 0 0 1-.9-4.7Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="shield" viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.7 2.8 8.2 7 10 4.2-1.8 7-5.3 7-10V6Z" fill="currentColor" opacity=".13"/><path d="M12 3 5 6v5c0 4.7 2.8 8.2 7 10 4.2-1.8 7-5.3 7-10V6ZM9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2" fill="currentColor" opacity=".12"/><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 10h18m-13 4h3m2 0h3m-8 3h3"/></g></symbol>
+  <symbol id="warning" viewBox="0 0 24 24"><path d="M12 3 2.8 20h18.4Z" fill="currentColor" opacity=".13"/><path d="M12 3 2.8 20h18.4ZM12 9v5m0 3h.01" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="currentColor" opacity=".13"/><path d="m8 12 2.7 2.7L16.5 9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="droplet" viewBox="0 0 24 24"><path d="M12 3s-6 6.7-6 11a6 6 0 0 0 12 0c0-4.3-6-11-6-11Z" fill="currentColor" opacity=".13"/><path d="M12 3s-6 6.7-6 11a6 6 0 0 0 12 0c0-4.3-6-11-6-11Zm-3 11.5a3.2 3.2 0 0 0 3 2.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="sparkle" viewBox="0 0 24 24"><path d="m12 2 1.4 5.6L19 9l-5.6 1.4L12 16l-1.4-5.6L5 9l5.6-1.4ZM19 15l.7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7Z" fill="currentColor" opacity=".18"/><path d="m12 2 1.4 5.6L19 9l-5.6 1.4L12 16l-1.4-5.6L5 9l5.6-1.4ZM19 15l.7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+  <symbol id="location" viewBox="0 0 24 24"><path d="M12 21s7-6.3 7-12A7 7 0 1 0 5 9c0 5.7 7 12 7 12Z" fill="currentColor" opacity=".12"/><path d="M12 21s7-6.3 7-12A7 7 0 1 0 5 9c0 5.7 7 12 7 12Zm0-9a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
