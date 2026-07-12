@@ -56,6 +56,7 @@ html.craft-js [data-craft-reveal].craft-visible{opacity:1;transform:none}
 .craft-action-icon .craft-icon{width:19px;height:19px}
 
 @media(max-width:600px){
+  .section>.container,.impact-section>.impact-inner{padding-inline:0!important}
   .craft-compare{aspect-ratio:4/3}
   .craft-case{border-radius:19px}
   .craft-compare-handle{width:42px;height:42px}
