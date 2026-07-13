@@ -114,8 +114,8 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 <body class="service-page">
 <link rel="stylesheet" href="assets/service-refresh.css">
 <link rel="stylesheet" href="assets/process-images.css">
-<link rel="stylesheet" href="assets/craft.css?v=20260712d">
-<script src="header.js?v=20260712c"></script>
+<link rel="stylesheet" href="assets/craft.css?v=20260713b">
+<script src="header.js?v=20260713c"></script>
 
 <section id="page-hero">
   <div class="page-hero-inner">
@@ -131,11 +131,47 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </section>
 <nav class="service-toc" aria-label="洗衣機清洗頁內目錄">
   <div class="service-toc-inner">
-    <a href="#washer-services">服務項目與價格</a>
-    <a href="#washer-differences">直立式／滾筒與價格差異</a>
-    <a href="#washer-flow-title">清洗流程</a>
+    <a href="#washer-pricing">價格一覽表</a>
+    <a href="#washer-services">內容說明</a>
+    <a href="#washer-differences">直立式／滾筒差異</a>
+    <a href="#washer-cases">實際案例</a>
   </div>
 </nav>
+<section class="section" id="washer-pricing">
+  <div class="container">
+    <h2 class="h">價格參考</h2>
+<table class="price-table">
+<tr><th>服務項目</th><th>參考價格</th></tr>
+<tr><td>直立式洗衣機清洗</td><td class="price-amt">$1,299 起 / 台</td></tr>
+<tr><td>滾筒式洗衣機清洗</td><td class="price-amt">$2,999 起 / 台</td></tr>
+</table>
+<div class="price-note craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#warning"></use></svg><span>實際費用依洗衣機類型（直立式／滾筒式）、容量與安裝條件由服務團隊評估後報價，預約時請提供品牌與型號。滾筒式因結構較複雜，費用通常高於直立式。</span></div>
+    <figure class="education-figure">
+      <img src="/assets/illustrations/washer-dirt-source.png" alt="洗衣機髒污來源與拆內槽原因示意圖，標示內槽、外槽、槽背死角、洗劑殘留、棉絮皮屑與潮濕霉斑" loading="lazy" width="1024" height="1536">
+      <figcaption><strong>示意圖：</strong>一般槽洗多半只能處理看得到的內槽表面；洗劑殘留、棉絮、皮屑與潮濕霉斑常堆在內外槽夾層，所以拆內槽才能清到槽背死角。</figcaption>
+    </figure>
+
+  </div>
+</section>
+
+
+<section class="section" id="washer-services">
+  <div class="container">
+    <div class="crumb"><a href="index.html">灰汰郎首頁</a> ／ 洗衣機清洗</div>
+    <h2 class="h">服務項目</h2>
+    <div class="item-grid">
+<div class="item-card"><div class="item-name craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#washer"></use></svg>直立式洗衣機清洗</div><div class="item-desc">依品牌、容量與結構拆解可清潔部件，處理內外槽髒污與洗劑殘留。</div></div>
+<div class="item-card"><div class="item-name craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#washer"></use></svg>滾筒式洗衣機清洗</div><div class="item-desc">先確認型號、安裝空間與可拆程度，再安排合適的清潔方式。</div></div>
+<div class="item-card"><div class="item-name craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#sparkle"></use></svg>內槽與部件清潔</div><div class="item-desc">針對可拆部件、內槽、門封與棉絮區清潔，降低殘留髒污與異味。</div></div>
+<div class="item-card"><div class="item-name craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#check"></use></svg>復原與試運轉</div><div class="item-desc">組裝完成後確認進水、排水、脫水與基本運轉狀況。</div></div>
+
+    </div>
+    <div class="mid-cta">
+      <div class="mid-cta-text">想知道你家洗衣機清洗實際費用？加 LINE 免費詢問，現場評估後才報價</div>
+      <button type="button" class="mid-cta-btn craft-action-icon" onclick="ldOpenQuote('washer')"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#calendar"></use></svg>線上預約估價</button>
+    </div>
+  </div>
+</section>
 <section class="service-flow" aria-labelledby="washer-flow-title">
   <div class="service-flow-inner">
     <div class="service-flow-head"><div class="service-flow-kicker">洗衣機專屬流程</div><h2 id="washer-flow-title">拆洗、復位、試轉，六步不省略</h2><p class="service-flow-intro">直立式、滾筒式與洗脫烘結構不同；先核對機型與原始功能，再決定可拆範圍。</p></div>
@@ -162,36 +198,13 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   </div>
 </section>
 
-<section class="section" id="washer-services">
+<section class="section" id="washer-cases">
   <div class="container">
-    <div class="crumb"><a href="index.html">灰汰郎首頁</a> ／ 洗衣機清洗</div>
-    <h2 class="h">服務項目</h2>
-    <div class="item-grid">
-      
-<div class="item-card"><div class="item-name craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#washer"></use></svg>直立式洗衣機清洗</div><div class="item-desc">依品牌、容量與結構拆解可清潔部件，處理內外槽髒污與洗劑殘留。</div></div>
-<div class="item-card"><div class="item-name craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#washer"></use></svg>滾筒式洗衣機清洗</div><div class="item-desc">先確認型號、安裝空間與可拆程度，再安排合適的清潔方式。</div></div>
-<div class="item-card"><div class="item-name craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#sparkle"></use></svg>內槽與部件清潔</div><div class="item-desc">針對可拆部件、內槽、門封與棉絮區清潔，降低殘留髒污與異味。</div></div>
-<div class="item-card"><div class="item-name craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#check"></use></svg>復原與試運轉</div><div class="item-desc">組裝完成後確認進水、排水、脫水與基本運轉狀況。</div></div>
-
+    <h2 class="h">實際案例・照片待補</h2>
+    <div style="background:#fff;border:2px dashed var(--gray-200);border-radius:18px;padding:1.25rem">
+      <div style="font-weight:900;color:var(--gray-900);margin-bottom:.35rem">這裡會放你後續提供的洗衣機清洗前後照片</div>
+      <p style="font-size:.86rem;color:var(--gray-600);line-height:1.75;margin:0">目前先保留案例位置，避免使用非灰汰郎或合作團隊的素材。後續可補直立式內槽、滾筒膠圈、排水濾網與清洗後試運轉紀錄。</p>
     </div>
-    <div class="mid-cta">
-      <div class="mid-cta-text">想知道你家洗衣機清洗實際費用？加 LINE 免費詢問，現場評估後才報價</div>
-      <button type="button" class="mid-cta-btn craft-action-icon" onclick="ldOpenQuote('washer')"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#calendar"></use></svg>線上預約估價</button>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <h2 class="h">價格參考</h2>
-    
-<table class="price-table">
-<tr><th>服務項目</th><th>參考價格</th></tr>
-<tr><td>直立式洗衣機清洗</td><td class="price-amt">$1,299 起 / 台</td></tr>
-<tr><td>滾筒式洗衣機清洗</td><td class="price-amt">$2,999 起 / 台</td></tr>
-</table>
-<div class="price-note craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#warning"></use></svg><span>實際費用依洗衣機類型（直立式／滾筒式）、容量與安裝條件由服務團隊評估後報價，預約時請提供品牌與型號。滾筒式因結構較複雜，費用通常高於直立式。</span></div>
-
   </div>
 </section>
 
@@ -231,7 +244,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
     <div class="footer-brand">灰汰郎</div>
     <div class="footer-tagline">居家清潔＋設備維護服務 · 免費諮詢<br>灰塵髒污，通通汰除。</div>
     <div class="footer-links">
-      <a href="aircon.html">冷氣清洗</a><a href="washer.html">洗衣機清洗</a><a href="homeclean.html">居家清潔</a><a href="leak-repair.html">水管抓漏</a>
+      <a href="aircon.html">冷氣清洗</a><a href="washer.html">洗衣機清洗</a><a href="homeclean.html">居家清潔</a><a href="water-tank.html">水塔清洗</a><a href="pipe-cleaning.html">水管清洗</a><a href="leak-repair.html">漏水檢測與修補</a>
     </div>
   </div>
   <div>

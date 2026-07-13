@@ -12,7 +12,7 @@
     {
       "step": "service_group",
       "label": "想預約哪一類服務？",
-      "options": ["冷氣清洗", "洗衣機清洗", "水塔清洗", "其他居家清潔"]
+      "options": ["冷氣清洗", "洗衣機清洗", "水塔清洗", "水管清洗", "其他居家清潔"]
     },
     {
       "step": "equipment_type",
@@ -363,12 +363,66 @@
           "ai_notes": "適合建立 draft order 後由人工確認。可詢問是否需公告停水、是否有管委會窗口。"
         }
       ]
+    },
+    {
+      "id": "pipe_cleaning",
+      "label": "水管清洗",
+      "customer_prompt": "請選擇水管清洗需求",
+      "default_unit": "戶/案",
+      "handoff_rules": [
+        "管線漏水、不出水、嚴重鏽蝕、熱水管問題、加壓馬達異常、公寓大樓需停水公告、管委會案件、無法確認管材或屋齡"
+      ],
+      "options": [
+        {
+          "id": "home_pipe_cleaning",
+          "label": "住家水管清洗",
+          "short_label": "住家水管",
+          "aliases": ["水管清洗", "洗水管", "家裡水管清洗", "透天水管清洗", "公寓水管清洗"],
+          "customer_description": "針對住家自來水管路出水異味、黃水或水量變小等情況，先判斷是否適合清洗。",
+          "pricing": {
+            "status": "quote_required",
+            "base_price": null,
+            "price_unit": "case",
+            "reason": "需依屋齡、管材、出水點數、樓層、是否需停水與現場條件確認。"
+          },
+          "quantity_selector": {
+            "type": "case",
+            "label": "請選擇住宅類型",
+            "quick_options": ["公寓/大樓一戶", "透天/別墅", "店面/辦公室", "不確定"]
+          },
+          "required_fields": ["area", "building_type", "symptom", "customer_name", "phone"],
+          "optional_fields": ["house_age", "pipe_material", "water_outlet_count", "photo_url", "needs_water_shutdown_notice"],
+          "ai_notes": "先問黃水、異味、水量變小、哪幾個出水點受影響。若描述漏水或不出水，轉人工判斷維修。"
+        },
+        {
+          "id": "building_pipe_cleaning",
+          "label": "公寓大樓水管清洗",
+          "short_label": "大樓水管",
+          "aliases": ["大樓水管清洗", "社區水管清洗", "公寓水管清洗", "整棟水管清洗"],
+          "customer_description": "公寓、社區、大樓或多戶共同安排的水管清洗案件。",
+          "pricing": {
+            "status": "quote_required",
+            "base_price": null,
+            "price_unit": "case",
+            "reason": "需確認戶數、管委會窗口、停水時段、水塔與管線配置。"
+          },
+          "quantity_selector": {
+            "type": "mixed",
+            "label": "約幾戶或多大範圍？",
+            "quick_options": ["單戶", "2-5 戶", "整棟/社區", "不確定，請協助判斷"]
+          },
+          "required_fields": ["area", "building_type", "management_committee_contact", "customer_name", "phone"],
+          "optional_fields": ["household_count", "water_shutdown_window", "water_tank_cleaning_needed", "photo_url"],
+          "ai_notes": "涉及共同管線、公告停水或管委會時，需人工確認排程與可施工條件。"
+        }
+      ]
     }
   ],
   "ai_intent_mapping": {
     "aircon_cleaning": ["冷氣清洗", "冷氣很臭", "冷氣發霉", "冷氣多久沒洗", "洗冷氣"],
     "washer_cleaning": ["洗衣機清洗", "洗衣機很臭", "洗衣槽", "洗脫烘清洗", "洗衣機拆洗"],
-    "water_tank_cleaning": ["水塔清洗", "洗水塔", "水泥水塔", "上水塔", "下水塔", "地下蓄水池"]
+    "water_tank_cleaning": ["水塔清洗", "洗水塔", "水泥水塔", "上水塔", "下水塔", "地下蓄水池"],
+    "pipe_cleaning": ["水管清洗", "洗水管", "黃水", "自來水有味道", "水量變小", "公寓大樓水管清洗"]
   },
   "human_handoff_rules": [
     "客戶詢問保固、客訴、殺價、退款",

@@ -114,8 +114,8 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 <body class="service-page">
 <link rel="stylesheet" href="assets/service-refresh.css">
 <link rel="stylesheet" href="assets/process-images.css">
-<link rel="stylesheet" href="assets/craft.css?v=20260712d">
-<script src="header.js?v=20260712c"></script>
+<link rel="stylesheet" href="assets/craft.css?v=20260713b">
+<script src="header.js?v=20260713c"></script>
 
 <section id="page-hero">
   <div class="page-hero-inner">
@@ -132,10 +132,47 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 <nav class="service-toc" aria-label="冷氣清洗頁內目錄">
   <div class="service-toc-inner">
     <a href="#aircon-pricing">價格一覽表</a>
-    <a href="#aircon-knowledge-title">清洗知識</a>
-    <a href="#aircon-flow-title">清洗流程</a>
+    <a href="#aircon-services">內容說明</a>
+    <a href="#aircon-impact-title">差異說明</a>
+    <a href="#aircon-cases">實際案例</a>
   </div>
 </nav>
+<section class="section" id="aircon-pricing">
+  <div class="container">
+    <h2 class="h">價格參考</h2>
+<table class="price-table">
+<tr><th>服務項目</th><th>參考價格</th></tr>
+<tr><td>分離式冷氣機清洗</td><td class="price-amt">$1,499 / 台</td></tr>
+<tr><td>吊隱式冷氣機清洗</td><td class="price-amt">$2,599 / 台</td></tr>
+<tr><td>窗型冷氣機清洗</td><td class="price-amt">$3,000 / 台</td></tr>
+</table>
+<div class="price-note craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#warning"></use></svg><span>實際費用依冷氣機型、噸數與現場狀況（如是否需拆風鼓、機型老舊程度）由服務團隊評估後報價，預約時請提供冷氣型號與台數以利估算。</span></div>
+    <figure class="education-figure">
+      <img src="/assets/illustrations/aircon-dirt-map.png" alt="空調髒污位置與污染源示意圖，標示濾網、蒸發器鰭片、貫流風鼓、集水盤、排水管與異味風量下降滴水症狀" loading="lazy" width="1536" height="1024">
+      <figcaption><strong>示意圖：</strong>濾網、蒸發器鰭片、風鼓、集水盤與排水管都可能累積灰塵、油煙與濕氣；先看懂髒污位置，再決定是否安排拆洗。</figcaption>
+    </figure>
+
+  </div>
+</section>
+
+
+<section class="section" id="aircon-services">
+  <div class="container">
+    <div class="crumb"><a href="index.html">灰汰郎首頁</a> ／ 冷氣清洗</div>
+    <h2 class="h">服務項目</h2>
+    <div class="item-grid">
+<div class="item-card"><div class="item-name craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#aircon"></use></svg>分離式冷氣清洗</div><div class="item-desc">依機型拆洗室內機；室外機為加購項目，預約時可一併選擇。</div></div>
+<div class="item-card"><div class="item-name craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#aircon"></use></svg>吊隱式冷氣清洗</div><div class="item-desc">確認維修孔、天花高度與施工空間後，安排適合的拆洗方式。</div></div>
+<div class="item-card"><div class="item-name craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#aircon"></use></svg>窗型冷氣清洗</div><div class="item-desc">先確認安裝位置與拆裝條件，再進行機體清潔、復原及測試。</div></div>
+<div class="item-card"><div class="item-name craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#check"></use></svg>復原與排水測試</div><div class="item-desc">清洗後試運轉，並以倒水方式確認集水盤與基本排水路徑。</div></div>
+
+    </div>
+    <div class="mid-cta">
+      <div class="mid-cta-text">想知道你家冷氣清洗實際費用？加 LINE 免費詢問，現場評估後才報價</div>
+      <button type="button" class="mid-cta-btn craft-action-icon" onclick="ldOpenQuote('aircon')"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#calendar"></use></svg>線上預約估價</button>
+    </div>
+  </div>
+</section>
 <section class="service-flow" aria-labelledby="aircon-flow-title">
   <div class="service-flow-inner">
     <div class="service-flow-head"><div class="service-flow-kicker">冷氣專屬流程</div><h2 id="aircon-flow-title">從試機到排水，六步完整確認</h2><p class="service-flow-intro">先記錄原始狀態再動工；若試機發現故障或無法安全拆卸，會先說明處理界線。</p></div>
@@ -199,41 +236,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </section>
 
 
-<section class="section" id="aircon-services">
-  <div class="container">
-    <div class="crumb"><a href="index.html">灰汰郎首頁</a> ／ 冷氣清洗</div>
-    <h2 class="h">服務項目</h2>
-    <div class="item-grid">
-      
-<div class="item-card"><div class="item-name craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#aircon"></use></svg>分離式冷氣清洗</div><div class="item-desc">依機型拆洗室內機；室外機為加購項目，預約時可一併選擇。</div></div>
-<div class="item-card"><div class="item-name craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#aircon"></use></svg>吊隱式冷氣清洗</div><div class="item-desc">確認維修孔、天花高度與施工空間後，安排適合的拆洗方式。</div></div>
-<div class="item-card"><div class="item-name craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#aircon"></use></svg>窗型冷氣清洗</div><div class="item-desc">先確認安裝位置與拆裝條件，再進行機體清潔、復原及測試。</div></div>
-<div class="item-card"><div class="item-name craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#check"></use></svg>復原與排水測試</div><div class="item-desc">清洗後試運轉，並以倒水方式確認集水盤與基本排水路徑。</div></div>
-
-    </div>
-    <div class="mid-cta">
-      <div class="mid-cta-text">想知道你家冷氣清洗實際費用？加 LINE 免費詢問，現場評估後才報價</div>
-      <button type="button" class="mid-cta-btn craft-action-icon" onclick="ldOpenQuote('aircon')"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#calendar"></use></svg>線上預約估價</button>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="aircon-pricing">
-  <div class="container">
-    <h2 class="h">價格參考</h2>
-    
-<table class="price-table">
-<tr><th>服務項目</th><th>參考價格</th></tr>
-<tr><td>分離式冷氣機清洗</td><td class="price-amt">$1,499 / 台</td></tr>
-<tr><td>吊隱式冷氣機清洗</td><td class="price-amt">$2,599 / 台</td></tr>
-<tr><td>窗型冷氣機清洗</td><td class="price-amt">$3,000 / 台</td></tr>
-</table>
-<div class="price-note craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#warning"></use></svg><span>實際費用依冷氣機型、噸數與現場狀況（如是否需拆風鼓、機型老舊程度）由服務團隊評估後報價，預約時請提供冷氣型號與台數以利估算。</span></div>
-
-  </div>
-</section>
-
-<section class="section">
+<section class="section" id="aircon-cases">
   <div class="container">
     <h2 class="h">真實服務紀錄・清洗前後對比</h2>
     <article class="craft-case">
@@ -285,7 +288,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
     <div class="footer-brand">灰汰郎</div>
     <div class="footer-tagline">居家清潔＋設備維護服務 · 免費諮詢<br>灰塵髒污，通通汰除。</div>
     <div class="footer-links">
-      <a href="aircon.html">冷氣清洗</a><a href="washer.html">洗衣機清洗</a><a href="homeclean.html">居家清潔</a><a href="leak-repair.html">水管抓漏</a>
+      <a href="aircon.html">冷氣清洗</a><a href="washer.html">洗衣機清洗</a><a href="homeclean.html">居家清潔</a><a href="water-tank.html">水塔清洗</a><a href="pipe-cleaning.html">水管清洗</a><a href="leak-repair.html">漏水檢測與修補</a>
     </div>
   </div>
   <div>

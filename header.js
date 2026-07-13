@@ -6,11 +6,11 @@
   const activePage = leakSubPages.indexOf(page) !== -1 ? 'leak-repair' : page;
   const LINE = 'https://lin.ee/WVxmY65';
   const LINE_OA_ID = '@478xvlgl';
-  const serviceTheme = ['aircon','washer','homeclean','leak-repair'].indexOf(activePage) !== -1 ? activePage : '';
+  const serviceTheme = ['aircon','washer','homeclean','water-tank','pipe-cleaning','leak-repair'].indexOf(activePage) !== -1 ? activePage : '';
   if(serviceTheme) document.body.classList.add('ld-theme-' + serviceTheme);
 
-  // ── 分析追蹤：把下面的 G-XXXXXXXXXX 換成你的 GA4 評估 ID 即自動啟用 ──
-  const GA4_ID = 'G-XXXXXXXXXX';
+  // ── 分析追蹤：GA4 評估 ID ──
+  const GA4_ID = 'G-1H1X1X9QZE';
   const gaEnabled = /^G-[A-Z0-9]{6,}$/.test(GA4_ID) && GA4_ID !== 'G-XXXXXXXXXX';
   if (gaEnabled) {
     const gs = document.createElement('script');
@@ -26,7 +26,7 @@
     if (gaEnabled && window.gtag) gtag('event', name, params || {});
   }
   window.ldTrack = ldTrack;
-  const SVC_PAGES = {'/aircon.html':'aircon','/washer.html':'washer','/homeclean.html':'homeclean','/leak-repair.html':'leak-repair'};
+  const SVC_PAGES = {'/aircon.html':'aircon','/washer.html':'washer','/homeclean.html':'homeclean','/water-tank.html':'water_tank','/pipe-cleaning.html':'pipe_cleaning','/leak-repair.html':'leak-repair'};
   const AREA_PAGES = ['/taipei.html','/new-taipei.html','/keelung.html','/taoyuan.html','/hsinchu.html','/miaoli.html','/taichung.html','/areas.html'];
   // 全站點擊追蹤：LINE 連結與電話
   document.addEventListener('click', function(e){
@@ -43,8 +43,8 @@
     }
   }, true);
 
-  const SERVICE_OPTIONS = ['冷氣清洗','洗衣機清洗','居家清潔','漏水檢測與修補','其他（請於下方說明）'];
-  const PAGE_SERVICE = {aircon:'冷氣清洗', washer:'洗衣機清洗', homeclean:'居家清潔', 'leak-repair':'漏水檢測與修補'};
+  const SERVICE_OPTIONS = ['冷氣清洗','洗衣機清洗','居家清潔','水塔清洗','水管清洗','漏水檢測與修補','其他（請於下方說明）'];
+  const PAGE_SERVICE = {aircon:'冷氣清洗', washer:'洗衣機清洗', homeclean:'居家清潔', 'water-tank':'水塔清洗', 'pipe-cleaning':'水管清洗', 'leak-repair':'漏水檢測與修補'};
   const SERVICE_DETAIL_CATALOG = {
     '冷氣清洗': [
       {id:'aircon-wall',label:'壁掛內機',unit:'台',note:'參考價 $1,499／台'},
@@ -64,6 +64,18 @@
       {id:'home-move',label:'入住／退租清潔',unit:'案',note:'參考價 $3,000 起'},
       {id:'home-renovation',label:'裝潢後細清',unit:'案',note:'參考價 $6,000 起'},
       {id:'home-hood',label:'抽油煙機清潔',unit:'台',note:'依型號與油污程度評估'}
+    ],
+    '水塔清洗': [
+      {id:'tank-rooftop',label:'屋頂不鏽鋼／塑膠水塔',unit:'顆',note:'依容量、顆數、通道與停水條件報價'},
+      {id:'tank-concrete-upper',label:'水泥上水塔',unit:'座',note:'需照片、入口尺寸與排水方式評估'},
+      {id:'tank-concrete-lower',label:'地下蓄水池／下水塔',unit:'座',note:'涉及通風與安全條件，需人工確認'},
+      {id:'tank-building',label:'公寓／社區上下水塔',unit:'案',note:'依公告停水、管委會與施工時段報價'}
+    ],
+    '水管清洗': [
+      {id:'pipe-home',label:'住家水管清洗',unit:'戶',note:'依屋齡、管材、出水點與現場條件報價'},
+      {id:'pipe-apartment',label:'公寓／大樓水管清洗',unit:'案',note:'需確認樓層、停水、管線與管委會規範'},
+      {id:'pipe-yellow-water',label:'黃水／異味初步判斷',unit:'處',note:'先傳照片與用水狀況，確認是否適合清洗'},
+      {id:'pipe-low-flow',label:'水量變小檢查',unit:'處',note:'堵塞、鏽蝕或設備問題需先判斷原因'}
     ],
     '漏水檢測與修補': [
       {id:'leak-inspection',label:'漏水初步檢測',unit:'處',note:'先依水痕、照片與現場狀況判讀'},
@@ -123,6 +135,8 @@ body,body.service-page{padding-top:0!important}
 body.ld-theme-aircon{--service-accent:#087ea4;--service-accent-dark:#075f7d;--service-soft:#ecfeff;--service-border:#bae6fd;--orange:#087ea4;--orange-dark:#075f7d;--teal:#0891b2;--cream:#ecfeff;--sand:#bae6fd}
 body.ld-theme-washer{--service-accent:#6d5bd0;--service-accent-dark:#5142a7;--service-soft:#f5f3ff;--service-border:#ddd6fe;--orange:#6d5bd0;--orange-dark:#5142a7;--teal:#7c3aed;--cream:#f5f3ff;--sand:#ddd6fe}
 body.ld-theme-homeclean{--service-accent:#d97706;--service-accent-dark:#a94f08;--service-soft:#fffbeb;--service-border:#fde68a;--orange:#d97706;--orange-dark:#a94f08;--teal:#ca8a04;--cream:#fffbeb;--sand:#fde68a}
+body.ld-theme-water-tank{--service-accent:#0284c7;--service-accent-dark:#075985;--service-soft:#f0f9ff;--service-border:#bae6fd;--orange:#0284c7;--orange-dark:#075985;--teal:#0ea5e9;--cream:#f0f9ff;--sand:#bae6fd}
+body.ld-theme-pipe-cleaning{--service-accent:#0e7490;--service-accent-dark:#155e75;--service-soft:#ecfeff;--service-border:#a5f3fc;--orange:#0e7490;--orange-dark:#155e75;--teal:#0891b2;--cream:#ecfeff;--sand:#a5f3fc}
 body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59;--service-soft:#f0fdfa;--service-border:#99f6e4;--orange:#0f766e;--orange-dark:#115e59;--teal:#0d9488;--cream:#f0fdfa;--sand:#99f6e4}
 .ld-top{
   display:flex;align-items:center;
@@ -184,14 +198,14 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
 /* nav */
 .ld-nav{
   background:linear-gradient(180deg,#fbfcfd,#f0f4f5);
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;
   padding:9px 12px 12px;
   max-width:100%;margin:0 auto;
 }
 .ld-tab{
   display:flex;flex-direction:row;
-  align-items:center;justify-content:center;gap:7px;
-  padding:10px 8px;border-radius:14px;
+  align-items:center;justify-content:center;gap:5px;
+  padding:9px 5px;border-radius:14px;
   min-width:0;
   background:#ffffff;
   border:1.5px solid #cbd7db;
@@ -202,6 +216,8 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
 .ld-tab--aircon{--tab-accent:#087ea4;--tab-soft:#ecfeff;--tab-on:#cffafe}
 .ld-tab--washer{--tab-accent:#6d5bd0;--tab-soft:#f5f3ff;--tab-on:#ede9fe}
 .ld-tab--homeclean{--tab-accent:#d97706;--tab-soft:#fffbeb;--tab-on:#fef3c7}
+.ld-tab--water-tank{--tab-accent:#0284c7;--tab-soft:#f0f9ff;--tab-on:#e0f2fe}
+.ld-tab--pipe-cleaning{--tab-accent:#0e7490;--tab-soft:#ecfeff;--tab-on:#cffafe}
 .ld-tab--leak-repair{--tab-accent:#0f766e;--tab-soft:#f0fdfa;--tab-on:#ccfbf1}
 .ld-tab:hover{background:var(--tab-soft);border-color:var(--tab-accent);transform:translateY(-2px);box-shadow:0 10px 22px rgba(23,50,77,.13)}
 .ld-tab.ld-active{
@@ -210,16 +226,17 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   box-shadow:0 9px 22px rgba(23,50,77,.25);
 }
 .ld-tab-icon{
-  width:23px;height:23px;line-height:1;
+  width:19px;height:19px;line-height:1;
   display:flex;align-items:center;justify-content:center;color:var(--tab-accent);flex:0 0 auto;
 }
 .ld-tab-icon svg{display:block;width:100%;height:100%;stroke:currentColor}
 .ld-tab-label{
   display:block;
-  font-size:13px;font-weight:900;
+  font-size:14px;font-weight:900;
   font-family:'Noto Sans TC',sans-serif;
   color:#17324d;
-  white-space:nowrap;line-height:1.2;
+  white-space:normal;line-height:1.12;text-align:center;
+  flex:0 1 auto;
 }
 .ld-tab.ld-active .ld-tab-label{color:#ffffff}
 .ld-tab.ld-active .ld-tab-icon{color:#fff}
@@ -276,15 +293,15 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   .ld-logo-img{width:200px;height:auto;max-height:86px;filter:none}
   .ld-nav{
     flex:1 1 auto;width:auto;max-width:none;
-    grid-template-columns:repeat(4,minmax(0,1fr));
+    grid-template-columns:repeat(6,minmax(0,1fr));
     margin:0;padding:0;gap:12px;background:transparent;
   }
-  .ld-tab{box-sizing:border-box;height:88px;min-height:88px;padding:10px 16px;gap:11px;border-radius:16px}
-  .ld-tab-icon{width:29px;height:29px}
-  .ld-tab-label{font-size:16px}
+  .ld-tab{box-sizing:border-box;height:88px;min-height:88px;padding:10px 8px;gap:6px;border-radius:16px}
+  .ld-tab-icon{width:20px;height:20px}
+  .ld-tab-label{font-size:17px}
 }
 
-@media(min-width:1280px){.ld-tab-label{font-size:17px}}
+@media(min-width:1280px){.ld-tab-label{font-size:18px}.ld-tab-icon{width:21px;height:21px}}
 
 @media(max-width:420px){
   .ld-top{padding:7px 10px;gap:8px}
@@ -292,10 +309,10 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   .ld-top-actions{gap:6px}
   .ld-line-btn{min-width:44px;padding:8px 10px}
   .ld-knowledge-link{padding:8px 9px;font-size:11px}
-  .ld-nav{padding:7px 8px 9px;gap:5px}
-  .ld-tab{gap:5px;padding:8px 4px}
-  .ld-tab-icon{width:20px;height:20px}
-  .ld-tab-label{font-size:12px}
+  .ld-nav{grid-template-columns:repeat(3,minmax(0,1fr));padding:7px 8px 9px;gap:5px}
+  .ld-tab{gap:4px;padding:8px 3px}
+  .ld-tab-icon{width:16px;height:16px}
+  .ld-tab-label{font-size:13.5px}
 }
 
 #ld-back-top{position:fixed;right:20px;bottom:calc(180px + env(safe-area-inset-bottom));z-index:9990;width:42px;height:42px;border-radius:50%;background:#1e3a8a;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;box-shadow:0 2px 12px rgba(30,58,138,.35);opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;pointer-events:none;}
@@ -459,6 +476,8 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
     aircon:craftIcon('aircon'),
     washer:craftIcon('washer'),
     homeclean:craftIcon('homeclean'),
+    water:craftIcon('droplet'),
+    pipe:craftIcon('tools'),
     leak:craftIcon('leak'),
     knowledge:craftIcon('book'),
     other:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg>'
@@ -469,6 +488,8 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
     {id:'aircon', href:'aircon.html', icon:NAV_ICONS.aircon, label:'冷氣清洗'},
     {id:'washer', href:'washer.html', icon:NAV_ICONS.washer, label:'洗衣機清洗'},
     {id:'homeclean', href:'homeclean.html', icon:NAV_ICONS.homeclean, label:'居家清潔'},
+    {id:'water-tank', href:'water-tank.html', icon:NAV_ICONS.water, label:'水塔清洗'},
+    {id:'pipe-cleaning', href:'pipe-cleaning.html', icon:NAV_ICONS.pipe, label:'水管清洗'},
     {id:'leak-repair', href:'leak-repair.html', icon:NAV_ICONS.leak, label:'漏水檢測與修補'},
   ];
 
@@ -478,7 +499,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
       <span class="ld-tab-label">${t.label}</span>
     </a>`
   ).join('');
-  const SERVICE_CHOICE_ICONS = [NAV_ICONS.aircon,NAV_ICONS.washer,NAV_ICONS.homeclean,NAV_ICONS.leak,NAV_ICONS.other];
+  const SERVICE_CHOICE_ICONS = [NAV_ICONS.aircon,NAV_ICONS.washer,NAV_ICONS.homeclean,NAV_ICONS.water,NAV_ICONS.pipe,NAV_ICONS.leak,NAV_ICONS.other];
 
   const html = `
     <a id="ld-float" href="${LINE}" target="_blank" rel="noopener">
@@ -487,7 +508,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
     </a>
     <header id="ld-header">
       <div class="ld-top">
-        <a class="ld-brand" href="/index.html" aria-label="灰汰郎｜冷氣清洗・洗衣機清洗・居家清潔・漏水檢測與修補">
+        <a class="ld-brand" href="/index.html" aria-label="灰汰郎｜冷氣清洗・洗衣機清洗・居家清潔・水塔清洗・水管清洗・漏水檢測與修補">
           <picture>
             <source srcset="/logo/logos/logo-master-transparent.webp" type="image/webp">
             <img class="ld-logo-img" src="/logo/logos/logo-master-transparent.png" alt="灰汰郎 清潔公司" width="660" height="295">
