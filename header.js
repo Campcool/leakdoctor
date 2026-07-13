@@ -8,6 +8,13 @@
   const LINE_OA_ID = '@478xvlgl';
   const serviceTheme = ['aircon','washer','homeclean','water-tank','pipe-cleaning','leak-repair'].indexOf(activePage) !== -1 ? activePage : '';
   if(serviceTheme) document.body.classList.add('ld-theme-' + serviceTheme);
+  if(serviceTheme && !document.querySelector('link[data-ld-service-story]')){
+    const storyCss = document.createElement('link');
+    storyCss.rel = 'stylesheet';
+    storyCss.href = '/assets/service-story.css?v=20260713a';
+    storyCss.setAttribute('data-ld-service-story','true');
+    document.head.appendChild(storyCss);
+  }
 
   // ── 分析追蹤：GA4 評估 ID ──
   const GA4_ID = 'G-1H1X1X9QZE';
@@ -613,6 +620,91 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
       firstContent.insertAdjacentHTML('beforebegin', `<aside class="legacy-merge-notice"><div><strong>此內容已整合到「漏水檢測與修補」</strong><span>施工案例、專業人員與服務地區現在集中在同一頁，查找資訊更清楚。</span></div><a href="/leak-repair.html#${mergedLeakTargets[page]}">前往整合頁面 →</a></aside>`);
     }
   }
+
+  const SERVICE_STORIES = {
+    aircon:{
+      title:'冷氣清洗先看三張圖',
+      cards:[
+        {tag:'為什麼需要洗',title:'髒污常藏在濾網後面',text:'蒸發器、風鼓、集水盤與排水管累積灰塵後，容易出現異味、風量變小或滴水。',image:'/assets/illustrations/aircon-dirt-map.png'},
+        {tag:'怎麼洗',title:'先保護家具，再拆洗重點部件',text:'作業前會確認機型與現場，保護牆面、地面與家具，再依可拆程度清洗。',image:'/assets/og/aircon-leak-guide.png'},
+        {tag:'清洗前後案例',title:'案例照片可直接替換',text:'後續補上實際冷氣前後照後，這張會改成真實案例，讓客戶更快理解成果。',image:'/assets/illustrations/aircon-dirt-map.png'}
+      ]
+    },
+    washer:{
+      title:'洗衣機清洗先看三張圖',
+      cards:[
+        {tag:'為什麼需要洗',title:'內外槽夾層才是異味來源',text:'洗劑殘留、棉絮、皮屑與潮濕霉斑常堆在槽背，看起來乾淨也可能有黑屑。',image:'/assets/illustrations/washer-dirt-source.png'},
+        {tag:'怎麼洗',title:'先確認型號與可拆程度',text:'直立式與滾筒式結構不同，會先看品牌、容量、安裝空間，再安排清潔方式。',image:'/assets/og/washer-hidden-dirt.png'},
+        {tag:'清洗前後案例',title:'完工後要試運轉',text:'清洗後會復原部件並確認進水、排水與脫水，案例照之後可補上現場前後對比。',image:'/assets/illustrations/washer-dirt-source.png'}
+      ]
+    },
+    homeclean:{
+      title:'居家清潔先看三張圖',
+      cards:[
+        {tag:'為什麼需要洗',title:'油污、水垢與落塵要分區處理',text:'廚房、浴室、地面與高處灰塵的工具不同，先分區才不會重複污染。',image:'/assets/hero/homeclean-cleaning-hero-20260713.png'},
+        {tag:'怎麼洗',title:'由高到低、由乾到濕',text:'先確認範圍、材質與重點區域，再安排除塵、去油、水垢與地面整理。',image:'/assets/og/homeclean-service-og-20260713.png'},
+        {tag:'清洗前後案例',title:'真實前後照更容易下單',text:'先放既有案例作為範例，後續你補圖後可逐張替換成各空間的實拍成果。',image:'/cases-clean/case01-after.jpg'}
+      ]
+    },
+    'water-tank':{
+      title:'水塔清洗先看三張圖',
+      cards:[
+        {tag:'為什麼需要洗',title:'蓄水容器會累積沉積物',text:'屋頂水塔、塑膠水塔、水泥水塔與地下蓄水池，都要先看容量與內部狀況。',image:'/assets/hero/water-tank-hero.png'},
+        {tag:'怎麼洗',title:'停水、排水、復水要有順序',text:'上下水塔、加壓馬達與排水點會影響施工安排，報價前要先看照片。',image:'/assets/illustrations/water-tank-system.png'},
+        {tag:'清洗前後案例',title:'案例照補上後最有說服力',text:'目前先用系統示意圖說明；後續可換成水塔內壁清洗前後照片。',image:'/assets/hero/water-tank-hero.png'}
+      ]
+    },
+    'pipe-cleaning':{
+      title:'水管清洗先看三張圖',
+      cards:[
+        {tag:'為什麼需要洗',title:'黃水、異味、水量變小要先分類',text:'原因可能來自水塔、管材、熱水器或閥件，不一定全都適合直接清洗。',image:'/assets/hero/pipe-cleaning-hero.png'},
+        {tag:'怎麼洗',title:'先判斷管材與屋齡',text:'水管清洗可改善沉積，但老舊管線去除堵塞後可能讓滲漏更明顯。',image:'/assets/illustrations/pipe-cleaning-effects.png'},
+        {tag:'清洗前後案例',title:'前後水色與水量最直覺',text:'後續補上出水前後、濾網沉積與水量變化照片，能更快建立信任。',image:'/assets/hero/pipe-cleaning-hero.png'}
+      ]
+    },
+    'leak-repair':{
+      title:'漏水檢測先看三張圖',
+      cards:[
+        {tag:'為什麼需要檢測',title:'水痕不等於漏點',text:'牆面、天花、窗框或浴室滲水，需要先縮小範圍，避免盲目施工。',image:'/assets/og/leak-detection-methods.png'},
+        {tag:'怎麼查',title:'用現象與工具交叉判斷',text:'熱像、水分、色素或局部拆檢會依現場條件選用，不用同一套答案套所有漏水。',image:'/assets/og/leak-symptom-guide.png'},
+        {tag:'修補案例',title:'找到源頭再選工法',text:'檢測、灌注、防水或重做防水層的價格差很多，先判斷才能避免修錯。',image:'/assets/og/home-leak-knowledge.png'}
+      ]
+    }
+  };
+
+  function renderServiceStory(){
+    const config = SERVICE_STORIES[activePage];
+    if(!config || document.querySelector('.service-story')) return;
+    const hero = document.getElementById('page-hero') || (page === 'leak-repair' ? document.getElementById('hero') : null);
+    if(!hero){
+      if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', renderServiceStory, {once:true});
+      return;
+    }
+    const cards = config.cards.map(function(card){
+      return '<article class="service-story-card">' +
+        '<div class="service-story-media" role="img" aria-label="' + card.title + '" style="background-image:url(' + card.image + ')"></div>' +
+        '<div class="service-story-copy"><span class="service-story-tag">' + card.tag + '</span><h3>' + card.title + '</h3><p>' + card.text + '</p></div>' +
+      '</article>';
+    }).join('');
+    hero.insertAdjacentHTML('afterend',
+      '<section class="service-story" aria-label="' + config.title + '">' +
+        '<div class="service-story-inner">' +
+          '<div class="service-story-head"><div><div class="service-story-kicker">圖片先建立感覺</div><h2 class="service-story-title">' + config.title + '</h2></div>' +
+          '<div class="service-story-controls"><button type="button" class="service-story-btn" data-story-dir="-1" aria-label="上一張">‹</button><button type="button" class="service-story-btn" data-story-dir="1" aria-label="下一張">›</button></div></div>' +
+          '<div class="service-story-track" tabindex="0">' + cards + '</div>' +
+        '</div>' +
+      '</section>');
+    const story = hero.nextElementSibling;
+    const track = story && story.querySelector('.service-story-track');
+    story && story.querySelectorAll('.service-story-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(!track) return;
+        const dir = Number(btn.getAttribute('data-story-dir') || 1);
+        track.scrollBy({left: dir * Math.max(280, track.clientWidth * 0.85), behavior:'smooth'});
+      });
+    });
+  }
+  renderServiceStory();
 
   // Fixed Header 的等高 spacer 避免內容被遮住，並同步頁內錨點高度。
   function setOffset(){

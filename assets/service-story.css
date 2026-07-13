@@ -1,0 +1,25 @@
+.service-story{background:#fff;padding:1.35rem 1rem 1.6rem;border-bottom:1px solid #e5e7eb}
+.service-story-inner{max-width:1180px;margin:0 auto}
+.service-story-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:.9rem}
+.service-story-kicker{font-size:.74rem;font-weight:900;letter-spacing:.08em;color:var(--service-accent,#087ea4);margin-bottom:.2rem}
+.service-story-title{font-size:clamp(1.18rem,3vw,1.8rem);font-weight:900;line-height:1.25;color:#17324d}
+.service-story-controls{display:flex;gap:.45rem;flex-shrink:0}
+.service-story-btn{width:40px;height:40px;border-radius:999px;border:1px solid #cbd5e1;background:#fff;color:#17324d;font-size:1.25rem;font-weight:900;line-height:1;box-shadow:0 6px 18px rgba(15,23,42,.08)}
+.service-story-btn:hover{border-color:var(--service-accent,#087ea4);color:var(--service-accent,#087ea4)}
+.service-story-track{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(260px,84%);gap:.9rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:.2rem;padding:.15rem .1rem .75rem;-webkit-overflow-scrolling:touch}
+.service-story-track::-webkit-scrollbar{height:8px}
+.service-story-track::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:999px}
+.service-story-card{scroll-snap-align:start;overflow:hidden;border-radius:18px;border:1px solid #dbe3eb;background:#fff;box-shadow:0 12px 34px rgba(15,23,42,.08)}
+.service-story-media{height:clamp(210px,38vw,310px);background-size:cover;background-position:center;position:relative}
+.service-story-media::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,36,86,0) 44%,rgba(15,36,86,.62) 100%)}
+.service-story-copy{padding:1rem 1.05rem 1.1rem}
+.service-story-tag{display:inline-flex;align-items:center;border-radius:999px;background:var(--service-soft,#eff6ff);color:var(--service-accent,#087ea4);font-size:.72rem;font-weight:900;padding:.22rem .62rem;margin-bottom:.55rem}
+.service-story-card h2,.service-story-card h3{font-size:1.05rem;line-height:1.35;color:#111827;margin:0 0 .35rem;font-weight:900}
+.service-story-card p{font-size:.88rem;line-height:1.75;color:#4b5563;margin:0}
+@media(min-width:760px){
+  .service-story{padding:1.9rem 2rem 2.2rem}
+  .service-story-track{grid-auto-columns:minmax(280px,31.5%)}
+}
+@media(prefers-reduced-motion:no-preference){
+  .service-story-track{scroll-behavior:smooth}
+}
