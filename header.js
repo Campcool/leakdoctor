@@ -11,7 +11,7 @@
   if(serviceTheme && !document.querySelector('link[data-ld-service-story]')){
     const storyCss = document.createElement('link');
     storyCss.rel = 'stylesheet';
-    storyCss.href = '/assets/service-story.css?v=20260713a';
+    storyCss.href = '/assets/service-story.css?v=20260714a';
     storyCss.setAttribute('data-ld-service-story','true');
     document.head.appendChild(storyCss);
   }
@@ -625,49 +625,49 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
     aircon:{
       title:'冷氣清洗先看三張圖',
       cards:[
-        {tag:'為什麼需要洗',title:'髒污常藏在濾網後面',text:'蒸發器、風鼓、集水盤與排水管累積灰塵後，容易出現異味、風量變小或滴水。',image:'/assets/illustrations/aircon-dirt-map.png'},
-        {tag:'怎麼洗',title:'先保護家具，再拆洗重點部件',text:'作業前會確認機型與現場，保護牆面、地面與家具，再依可拆程度清洗。',image:'/assets/og/aircon-leak-guide.png'},
-        {tag:'清洗前後案例',title:'案例照片可直接替換',text:'後續補上實際冷氣前後照後，這張會改成真實案例，讓客戶更快理解成果。',image:'/assets/illustrations/aircon-dirt-map.png'}
+        {tag:'為什麼需要洗',title:'髒污常藏在濾網後面',text:'蒸發器、風鼓、集水盤與排水管累積灰塵後，容易出現異味、風量變小或滴水。',image:'/assets/optimized/aircon-dirt-map-sm.webp',fallback:'/assets/optimized/aircon-dirt-map-sm.jpg'},
+        {tag:'怎麼洗',title:'先保護家具，再拆洗重點部件',text:'作業前會確認機型與現場，保護牆面、地面與家具，再依可拆程度清洗。',image:'/assets/optimized/aircon-leak-guide-sm.webp',fallback:'/assets/optimized/aircon-leak-guide-sm.jpg'},
+        {tag:'清洗前後案例',title:'清洗完成後確認風量與排水',text:'完工後會復原部件並檢查出風、排水與運轉狀況，讓清洗成果可以被現場確認。',image:'/assets/optimized/aircon-dirt-map-sm.webp',fallback:'/assets/optimized/aircon-dirt-map-sm.jpg'}
       ]
     },
     washer:{
       title:'洗衣機清洗先看三張圖',
       cards:[
-        {tag:'為什麼需要洗',title:'內外槽夾層才是異味來源',text:'洗劑殘留、棉絮、皮屑與潮濕霉斑常堆在槽背，看起來乾淨也可能有黑屑。',image:'/assets/illustrations/washer-dirt-source.png'},
-        {tag:'怎麼洗',title:'先確認型號與可拆程度',text:'直立式與滾筒式結構不同，會先看品牌、容量、安裝空間，再安排清潔方式。',image:'/assets/og/washer-hidden-dirt.png'},
-        {tag:'清洗前後案例',title:'完工後要試運轉',text:'清洗後會復原部件並確認進水、排水與脫水，案例照之後可補上現場前後對比。',image:'/assets/illustrations/washer-dirt-source.png'}
+        {tag:'為什麼需要洗',title:'內外槽夾層才是異味來源',text:'洗劑殘留、棉絮、皮屑與潮濕霉斑常堆在槽背，看起來乾淨也可能有黑屑。',image:'/assets/optimized/washer-dirt-source-sm.webp',fallback:'/assets/optimized/washer-dirt-source-sm.jpg'},
+        {tag:'怎麼洗',title:'先確認型號與可拆程度',text:'直立式與滾筒式結構不同，會先看品牌、容量、安裝空間，再安排清潔方式。',image:'/assets/optimized/washer-hidden-dirt-sm.webp',fallback:'/assets/optimized/washer-hidden-dirt-sm.jpg'},
+        {tag:'清洗前後案例',title:'完工後要試運轉',text:'清洗後會復原部件並確認進水、排水與脫水，讓機器回到可正常使用的狀態。',image:'/assets/optimized/washer-dirt-source-sm.webp',fallback:'/assets/optimized/washer-dirt-source-sm.jpg'}
       ]
     },
     homeclean:{
       title:'居家清潔先看三張圖',
       cards:[
-        {tag:'為什麼需要洗',title:'油污、水垢與落塵要分區處理',text:'廚房、浴室、地面與高處灰塵的工具不同，先分區才不會重複污染。',image:'/assets/hero/homeclean-cleaning-hero-20260713.png'},
-        {tag:'怎麼洗',title:'由高到低、由乾到濕',text:'先確認範圍、材質與重點區域，再安排除塵、去油、水垢與地面整理。',image:'/assets/og/homeclean-service-og-20260713.png'},
-        {tag:'清洗前後案例',title:'真實前後照更容易下單',text:'先放既有案例作為範例，後續你補圖後可逐張替換成各空間的實拍成果。',image:'/cases-clean/case01-after.jpg'}
+        {tag:'為什麼需要洗',title:'油污、水垢與落塵要分區處理',text:'廚房、浴室、地面與高處灰塵的工具不同，先分區才不會重複污染。',image:'/assets/optimized/homeclean-cleaning-hero-20260713-sm.webp',fallback:'/assets/optimized/homeclean-cleaning-hero-20260713-sm.jpg'},
+        {tag:'怎麼洗',title:'由高到低、由乾到濕',text:'先確認範圍、材質與重點區域，再安排除塵、去油、水垢與地面整理。',image:'/assets/optimized/homeclean-service-og-20260713-sm.webp',fallback:'/assets/optimized/homeclean-service-og-20260713-sm.jpg'},
+        {tag:'清洗前後案例',title:'重點區域整理後更好維持',text:'廚房、浴室與地面依髒污分開處理，完工時確認容易忽略的角落與接縫。',image:'/cases-clean/case01-after.webp',fallback:'/cases-clean/case01-after.jpg'}
       ]
     },
     'water-tank':{
       title:'水塔清洗先看三張圖',
       cards:[
-        {tag:'為什麼需要洗',title:'蓄水容器會累積沉積物',text:'屋頂水塔、塑膠水塔、水泥水塔與地下蓄水池，都要先看容量與內部狀況。',image:'/assets/hero/water-tank-hero.png'},
-        {tag:'怎麼洗',title:'停水、排水、復水要有順序',text:'上下水塔、加壓馬達與排水點會影響施工安排，報價前要先看照片。',image:'/assets/illustrations/water-tank-system.png'},
-        {tag:'清洗前後案例',title:'案例照補上後最有說服力',text:'目前先用系統示意圖說明；後續可換成水塔內壁清洗前後照片。',image:'/assets/hero/water-tank-hero.png'}
+        {tag:'為什麼需要洗',title:'蓄水容器會累積沉積物',text:'屋頂水塔、塑膠水塔、水泥水塔與地下蓄水池，都要先看容量與內部狀況。',image:'/assets/optimized/water-tank-hero-sm.webp',fallback:'/assets/optimized/water-tank-hero-sm.jpg'},
+        {tag:'怎麼洗',title:'停水、排水、復水要有順序',text:'上下水塔、加壓馬達與排水點會影響施工安排，報價前要先看照片。',image:'/assets/optimized/water-tank-system-sm.webp',fallback:'/assets/optimized/water-tank-system-sm.jpg'},
+        {tag:'清洗前後案例',title:'內壁清潔與復水確認',text:'清洗後會確認水塔內壁、排水狀況與復水流程，降低沉積物再次進入用水端。',image:'/assets/optimized/water-tank-hero-sm.webp',fallback:'/assets/optimized/water-tank-hero-sm.jpg'}
       ]
     },
     'pipe-cleaning':{
       title:'水管清洗先看三張圖',
       cards:[
-        {tag:'為什麼需要洗',title:'黃水、異味、水量變小要先分類',text:'原因可能來自水塔、管材、熱水器或閥件，不一定全都適合直接清洗。',image:'/assets/hero/pipe-cleaning-hero.png'},
-        {tag:'怎麼洗',title:'先判斷管材與屋齡',text:'水管清洗可改善沉積，但老舊管線去除堵塞後可能讓滲漏更明顯。',image:'/assets/illustrations/pipe-cleaning-effects.png'},
-        {tag:'清洗前後案例',title:'前後水色與水量最直覺',text:'後續補上出水前後、濾網沉積與水量變化照片，能更快建立信任。',image:'/assets/hero/pipe-cleaning-hero.png'}
+        {tag:'為什麼需要洗',title:'黃水、異味、水量變小要先分類',text:'原因可能來自水塔、管材、熱水器或閥件，不一定全都適合直接清洗。',image:'/assets/optimized/pipe-cleaning-hero-sm.webp',fallback:'/assets/optimized/pipe-cleaning-hero-sm.jpg'},
+        {tag:'怎麼洗',title:'先判斷管材與屋齡',text:'水管清洗可改善沉積，但老舊管線去除堵塞後可能讓滲漏更明顯。',image:'/assets/optimized/pipe-cleaning-effects-sm.webp',fallback:'/assets/optimized/pipe-cleaning-effects-sm.jpg'},
+        {tag:'清洗前後案例',title:'前後水色與水量一起確認',text:'完工時會觀察出水狀況、水量變化與濾網沉積，協助判斷是否還需要檢修。',image:'/assets/optimized/pipe-cleaning-hero-sm.webp',fallback:'/assets/optimized/pipe-cleaning-hero-sm.jpg'}
       ]
     },
     'leak-repair':{
       title:'漏水檢測先看三張圖',
       cards:[
-        {tag:'為什麼需要檢測',title:'水痕不等於漏點',text:'牆面、天花、窗框或浴室滲水，需要先縮小範圍，避免盲目施工。',image:'/assets/og/leak-detection-methods.png'},
-        {tag:'怎麼查',title:'用現象與工具交叉判斷',text:'熱像、水分、色素或局部拆檢會依現場條件選用，不用同一套答案套所有漏水。',image:'/assets/og/leak-symptom-guide.png'},
-        {tag:'修補案例',title:'找到源頭再選工法',text:'檢測、灌注、防水或重做防水層的價格差很多，先判斷才能避免修錯。',image:'/assets/og/home-leak-knowledge.png'}
+        {tag:'為什麼需要檢測',title:'水痕不等於漏點',text:'牆面、天花、窗框或浴室滲水，需要先縮小範圍，避免盲目施工。',image:'/assets/optimized/leak-detection-methods-sm.webp',fallback:'/assets/optimized/leak-detection-methods-sm.jpg'},
+        {tag:'怎麼查',title:'用現象與工具交叉判斷',text:'熱像、水分、色素或局部拆檢會依現場條件選用，不用同一套答案套所有漏水。',image:'/assets/optimized/leak-symptom-guide-sm.webp',fallback:'/assets/optimized/leak-symptom-guide-sm.jpg'},
+        {tag:'修補案例',title:'找到源頭再選工法',text:'檢測、灌注、防水或重做防水層的價格差很多，先判斷才能避免修錯。',image:'/assets/optimized/home-leak-knowledge-sm.webp',fallback:'/assets/optimized/home-leak-knowledge-sm.jpg'}
       ]
     }
   };
@@ -680,29 +680,99 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
       if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', renderServiceStory, {once:true});
       return;
     }
-    const cards = config.cards.map(function(card){
+    const cards = config.cards.map(function(card, index){
+      const fallback = card.fallback || card.image;
+      const loading = index === 0 ? 'eager' : 'lazy';
+      const priority = index === 0 ? ' fetchpriority="high"' : '';
       return '<article class="service-story-card">' +
-        '<div class="service-story-media" role="img" aria-label="' + card.title + '" style="background-image:url(' + card.image + ')"></div>' +
+        '<div class="service-story-media">' +
+          '<picture><source srcset="' + card.image + '" type="image/webp"><img src="' + fallback + '" alt="' + card.title + '" loading="' + loading + '" decoding="async"' + priority + ' width="1200" height="760"></picture>' +
+        '</div>' +
         '<div class="service-story-copy"><span class="service-story-tag">' + card.tag + '</span><h3>' + card.title + '</h3><p>' + card.text + '</p></div>' +
       '</article>';
+    }).join('');
+    const dots = config.cards.map(function(card, index){
+      return '<button type="button" class="service-story-dot' + (index === 0 ? ' is-active' : '') + '" data-story-index="' + index + '" aria-label="切換到第 ' + (index + 1) + ' 張"></button>';
     }).join('');
     hero.insertAdjacentHTML('afterend',
       '<section class="service-story" aria-label="' + config.title + '">' +
         '<div class="service-story-inner">' +
-          '<div class="service-story-head"><div><div class="service-story-kicker">圖片先建立感覺</div><h2 class="service-story-title">' + config.title + '</h2></div>' +
+          '<div class="service-story-head"><div><div class="service-story-kicker">服務圖解</div><h2 class="service-story-title">' + config.title + '</h2></div>' +
           '<div class="service-story-controls"><button type="button" class="service-story-btn" data-story-dir="-1" aria-label="上一張">‹</button><button type="button" class="service-story-btn" data-story-dir="1" aria-label="下一張">›</button></div></div>' +
           '<div class="service-story-track" tabindex="0">' + cards + '</div>' +
+          '<div class="service-story-dots" aria-hidden="true">' + dots + '</div>' +
         '</div>' +
       '</section>');
     const story = hero.nextElementSibling;
     const track = story && story.querySelector('.service-story-track');
+    const storyCards = track ? Array.from(track.querySelectorAll('.service-story-card')) : [];
+    const storyDots = story ? Array.from(story.querySelectorAll('.service-story-dot')) : [];
+    let storyIndex = 0;
+    let storyTimer = null;
+    function setStoryIndex(index){
+      if(!storyCards.length) return;
+      storyIndex = (index + storyCards.length) % storyCards.length;
+      const target = storyCards[storyIndex];
+      try{
+        track.scrollTo({left: target.offsetLeft - track.offsetLeft, behavior:'smooth'});
+      }catch(error){
+        track.scrollLeft = target.offsetLeft - track.offsetLeft;
+      }
+      storyDots.forEach(function(dot, dotIndex){
+        dot.classList.toggle('is-active', dotIndex === storyIndex);
+      });
+    }
+    function syncStoryIndex(){
+      if(!track || !storyCards.length) return;
+      let nearest = 0;
+      let best = Infinity;
+      storyCards.forEach(function(card, index){
+        const distance = Math.abs(card.offsetLeft - track.offsetLeft - track.scrollLeft);
+        if(distance < best){ best = distance; nearest = index; }
+      });
+      storyIndex = nearest;
+      storyDots.forEach(function(dot, dotIndex){
+        dot.classList.toggle('is-active', dotIndex === storyIndex);
+      });
+    }
+    function startStoryAuto(){
+      if(!track || storyCards.length < 2 || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+      stopStoryAuto();
+      storyTimer = window.setInterval(function(){ setStoryIndex(storyIndex + 1); }, 4000);
+    }
+    function stopStoryAuto(){
+      if(storyTimer){ window.clearInterval(storyTimer); storyTimer = null; }
+    }
     story && story.querySelectorAll('.service-story-btn').forEach(function(btn){
       btn.addEventListener('click', function(){
-        if(!track) return;
+        if(!track || !storyCards.length) return;
         const dir = Number(btn.getAttribute('data-story-dir') || 1);
-        track.scrollBy({left: dir * Math.max(280, track.clientWidth * 0.85), behavior:'smooth'});
+        stopStoryAuto();
+        setStoryIndex(storyIndex + dir);
+        startStoryAuto();
       });
     });
+    storyDots.forEach(function(dot){
+      dot.addEventListener('click', function(){
+        stopStoryAuto();
+        setStoryIndex(Number(dot.getAttribute('data-story-index') || 0));
+        startStoryAuto();
+      });
+    });
+    if(track){
+      let scrollTimer = null;
+      track.addEventListener('scroll', function(){
+        if(scrollTimer) window.clearTimeout(scrollTimer);
+        scrollTimer = window.setTimeout(syncStoryIndex, 80);
+      }, {passive:true});
+      ['pointerdown','touchstart','mouseenter','focusin'].forEach(function(eventName){
+        track.addEventListener(eventName, stopStoryAuto, {passive:true});
+      });
+      ['pointerup','touchend','mouseleave','focusout'].forEach(function(eventName){
+        track.addEventListener(eventName, startStoryAuto, {passive:true});
+      });
+      startStoryAuto();
+    }
   }
   renderServiceStory();
 

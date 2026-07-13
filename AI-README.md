@@ -6,7 +6,7 @@
 > 3. 本檔案是唯一的交接依據，寫給 AI 看：請保持精確、可執行、不留模糊描述。
 > 4. **所有時間戳一律台灣時間（Asia/Taipei, UTC+8）**。
 
-最後更新：2026-07-14（by Codex）— 完善案例照片上傳、壓縮、上架與交接 SOP
+最後更新：2026-07-14（by Codex）— 修正服務圖輪播、正式站文案與 LINE 內建瀏覽器載入風險
 
 ---
 
@@ -65,6 +65,7 @@ assets/service-story.css        六大服務頁 hero 下方圖片主題輪播（
 assets/illustrations/           AI 生成教育型示意圖（水塔上下水塔、水管清洗效果與風險、空調髒污位置、洗衣機槽背髒污來源）
 assets/hero/                    各服務 hero 圖（含居家清潔新清洗情境圖）
 assets/og/                      社群分享圖；首頁與居家清潔目前共用 homeclean-service-og-20260713.png
+assets/optimized/               頁面實際載入用小圖（WebP + JPG fallback）；正式頁面不要直接載入 1–2MB 原始 PNG
 data/service-options.json     服務快選資料庫（Bot／AI tool call 與網站服務明細的價格來源種子）
 cases-clean/                   潔美淨真實前後對比照（case01/04/05/07）
 logo/                          完整品牌素材包（logos、social-ads、avatars-icons、manifest.csv）
@@ -133,6 +134,13 @@ cases/
 - 修改後驗證慣例：`node --check header.js`；以 Node 驗證 JSON-LD、內部連結、四頁流程與禁止字樣；本機網址受瀏覽器安全政策阻擋時，直接使用正式部署標記與真機驗證，不可繞過安全政策。
 
 ## 5. 進度紀錄（新條目加在最上面）
+
+### 2026-07-14（Codex・服務輪播與 LINE 瀏覽器載入修正）
+- 依業主回報修正服務頁圖片輪播：`header.js` 的 `SERVICE_STORIES` 改成同一個單張框架，可左右按鈕、手動滑動、圓點切換，並在非 reduced-motion 環境每 4 秒自動輪播。
+- 新增 `assets/optimized/`，把 1.7–2.5MB 的 AI PNG 轉成頁面用 WebP/JPG fallback；洗衣機說明圖從約 2.2MB 降到約 124KB WebP。OG 圖仍保留原路徑，避免影響 LINE 分享預覽。
+- 洗衣機與冷氣首屏不再載入 `assets/process-images.css` 內嵌大型 base64 圖，改用壓縮外部圖，降低 LINE 內建瀏覽器進頁空白或卡住風險；漏水頁仍使用該 CSS，後續若要優化再單獨處理。
+- 正式站文案移除「後續補圖」「照片待補」「更有說服力」等內部設計語氣，水塔、水管、洗衣機案例區改為客戶可閱讀的完工確認重點。
+- 驗證：`node --check header.js` 通過、`git diff --check` 僅 CRLF 提示、本機 `washer.html` 與壓縮圖 HTTP 200；Playwright 套件缺 `playwright-core`，本輪未完成截圖級瀏覽器驗證。
 
 ### 2026-07-14（Codex・交接文件完善）
 - 補齊案例照片上傳與上架 SOP：明確定義「一組案例」應包含清洗前、清洗後、過程照與髒污近照；業主上傳時需補服務、地點、空間、重點與公開授權狀態。

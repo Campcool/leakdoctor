@@ -113,7 +113,6 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </head>
 <body class="service-page">
 <link rel="stylesheet" href="assets/service-refresh.css">
-<link rel="stylesheet" href="assets/process-images.css">
 <link rel="stylesheet" href="assets/craft.css?v=20260713b">
 <script src="header.js?v=20260713e"></script>
 
@@ -126,7 +125,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
       <div class="trust-badges"><span class="trust-badge">環境保護</span><span class="trust-badge">依機型拆洗</span><span class="trust-badge">復原後測試</span></div>
       <button type="button" class="page-btn" onclick="ldOpenQuote('aircon')">開始冷氣清洗估價</button>
     </div>
-    <div class="service-visual"><div class="process-photo aircon" role="img" aria-label="冷氣清洗流程示意：保護居家環境並設置集水罩清潔室內機"></div><div class="service-visual-note"><strong>先保護，再拆洗</strong>簡易流程說明・實際作業依現場調整</div></div>
+    <div class="service-visual"><div class="service-visual-img" role="img" aria-label="冷氣清洗流程示意：保護居家環境並設置集水罩清潔室內機" style="background-image:url('/assets/optimized/aircon-dirt-map-sm.webp')"></div><div class="service-visual-note"><strong>先保護，再拆洗</strong>簡易流程說明・實際作業依現場調整</div></div>
   </div>
 </section>
 <nav class="service-toc" aria-label="冷氣清洗頁內目錄">
@@ -148,7 +147,10 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </table>
 <div class="price-note craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#warning"></use></svg><span>實際費用依冷氣機型、噸數與現場狀況（如是否需拆風鼓、機型老舊程度）由服務團隊評估後報價，預約時請提供冷氣型號與台數以利估算。</span></div>
     <figure class="education-figure">
-      <img src="/assets/illustrations/aircon-dirt-map.png" alt="空調髒污位置與污染源示意圖，標示濾網、蒸發器鰭片、貫流風鼓、集水盤、排水管與異味風量下降滴水症狀" loading="lazy" width="1536" height="1024">
+      <picture>
+        <source srcset="/assets/optimized/aircon-dirt-map-sm.webp" type="image/webp">
+        <img src="/assets/optimized/aircon-dirt-map-sm.jpg" alt="空調髒污位置與污染源示意圖，標示濾網、蒸發器鰭片、貫流風鼓、集水盤、排水管與異味風量下降滴水症狀" loading="lazy" decoding="async" width="1200" height="800">
+      </picture>
       <figcaption><strong>示意圖：</strong>濾網、蒸發器鰭片、風鼓、集水盤與排水管都可能累積灰塵、油煙與濕氣；先看懂髒污位置，再決定是否安排拆洗。</figcaption>
     </figure>
 
