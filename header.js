@@ -508,7 +508,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
     </a>
     <header id="ld-header">
       <div class="ld-top">
-        <a class="ld-brand" href="/index.html" aria-label="灰汰郎｜冷氣清洗・洗衣機清洗・居家清潔・水塔清洗・水管清洗・漏水檢測與修補">
+        <a class="ld-brand" href="/" aria-label="灰汰郎｜冷氣清洗・洗衣機清洗・居家清潔・水塔清洗・水管清洗・漏水檢測與修補">
           <picture>
             <source srcset="/logo/logos/logo-master-transparent.webp" type="image/webp">
             <img class="ld-logo-img" src="/logo/logos/logo-master-transparent.png" alt="灰汰郎 清潔公司" width="660" height="295">
