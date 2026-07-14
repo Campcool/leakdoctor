@@ -6,12 +6,14 @@
   const activePage = leakSubPages.indexOf(page) !== -1 ? 'leak-repair' : page;
   const LINE = 'https://lin.ee/WVxmY65';
   const LINE_OA_ID = '@478xvlgl';
+  const isLineWebView = /\bLine\//i.test(navigator.userAgent || '');
+  if(isLineWebView) document.body.classList.add('ld-line-webview');
   const serviceTheme = ['aircon','washer','homeclean','water-tank','pipe-cleaning','leak-repair'].indexOf(activePage) !== -1 ? activePage : '';
   if(serviceTheme) document.body.classList.add('ld-theme-' + serviceTheme);
   if(serviceTheme && !document.querySelector('link[data-ld-service-story]')){
     const storyCss = document.createElement('link');
     storyCss.rel = 'stylesheet';
-    storyCss.href = '/assets/service-story.css?v=20260714a';
+    storyCss.href = '/assets/service-story.css?v=20260714b';
     storyCss.setAttribute('data-ld-service-story','true');
     document.head.appendChild(storyCss);
   }
@@ -109,10 +111,13 @@
     unified.href = '/assets/site-unified.css';
     document.head.appendChild(unified);
   }
-  if(!document.querySelector('link[href*="craft.css"]')){
+  const existingCraftCss = document.querySelector('link[href*="craft.css"]');
+  if(existingCraftCss){
+    existingCraftCss.href = '/assets/craft.css?v=20260714a';
+  }else{
     const craftCss = document.createElement('link');
     craftCss.rel = 'stylesheet';
-    craftCss.href = '/assets/craft.css?v=20260712b';
+    craftCss.href = '/assets/craft.css?v=20260714a';
     document.head.appendChild(craftCss);
   }
   if(!document.querySelector('script[src*="craft.js"]')){
@@ -324,6 +329,10 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
 
 #ld-back-top{position:fixed;right:20px;bottom:calc(180px + env(safe-area-inset-bottom));z-index:9990;width:42px;height:42px;border-radius:50%;background:#1e3a8a;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;box-shadow:0 2px 12px rgba(30,58,138,.35);opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;pointer-events:none;}
 @media(min-width:1024px){#ld-back-top{bottom:24px}}
+@media(max-width:720px){
+  #ld-float{display:none!important}
+  #ld-back-top{right:14px;bottom:calc(98px + env(safe-area-inset-bottom))}
+}
 #ld-back-top.ld-show{opacity:1;transform:translateY(0);pointer-events:auto}
 #ld-back-top:hover{background:#1d4ed8}
 
@@ -626,22 +635,22 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
       title:'冷氣清洗先看三張圖',
       cards:[
         {tag:'為什麼需要洗',title:'髒污常藏在濾網後面',text:'蒸發器、風鼓、集水盤與排水管累積灰塵後，容易出現異味、風量變小或滴水。',image:'/assets/optimized/aircon-dirt-map-sm.webp',fallback:'/assets/optimized/aircon-dirt-map-sm.jpg'},
-        {tag:'怎麼洗',title:'先保護家具，再拆洗重點部件',text:'作業前會確認機型與現場，保護牆面、地面與家具，再依可拆程度清洗。',image:'/assets/optimized/aircon-leak-guide-sm.webp',fallback:'/assets/optimized/aircon-leak-guide-sm.jpg'},
-        {tag:'清洗前後案例',title:'清洗完成後確認風量與排水',text:'完工後會復原部件並檢查出風、排水與運轉狀況，讓清洗成果可以被現場確認。',image:'/assets/optimized/aircon-dirt-map-sm.webp',fallback:'/assets/optimized/aircon-dirt-map-sm.jpg'}
+        {tag:'怎麼洗',title:'打開面板清到風鼓與排水',text:'清洗前先保護現場，再依機型拆洗濾網、蒸發器、風鼓、集水盤與排水管。',image:'/assets/service-story/aircon-service-story-20260714.webp',fallback:'/assets/service-story/aircon-service-story-20260714.jpg'},
+        {tag:'清洗前後案例',title:'確認風量、異味與排水',text:'復原後檢查出風、排水與運轉狀況，避免只看外觀就結束。',image:'/assets/optimized/aircon-leak-guide-sm.webp',fallback:'/assets/optimized/aircon-leak-guide-sm.jpg'}
       ]
     },
     washer:{
       title:'洗衣機清洗先看三張圖',
       cards:[
         {tag:'為什麼需要洗',title:'內外槽夾層才是異味來源',text:'洗劑殘留、棉絮、皮屑與潮濕霉斑常堆在槽背，看起來乾淨也可能有黑屑。',image:'/assets/optimized/washer-dirt-source-sm.webp',fallback:'/assets/optimized/washer-dirt-source-sm.jpg'},
-        {tag:'怎麼洗',title:'先確認型號與可拆程度',text:'直立式與滾筒式結構不同，會先看品牌、容量、安裝空間，再安排清潔方式。',image:'/assets/optimized/washer-hidden-dirt-sm.webp',fallback:'/assets/optimized/washer-hidden-dirt-sm.jpg'},
-        {tag:'清洗前後案例',title:'完工後要試運轉',text:'清洗後會復原部件並確認進水、排水與脫水，讓機器回到可正常使用的狀態。',image:'/assets/optimized/washer-dirt-source-sm.webp',fallback:'/assets/optimized/washer-dirt-source-sm.jpg'}
+        {tag:'怎麼洗',title:'拆出內槽才看得到槽背',text:'直立式與滾筒式結構不同，會先看品牌、容量、安裝空間，再安排可拆洗範圍。',image:'/assets/service-story/washer-service-story-20260714.webp',fallback:'/assets/service-story/washer-service-story-20260714.jpg'},
+        {tag:'完工確認',title:'組裝後要試運轉',text:'清洗後會復原部件並確認進水、排水與脫水，讓機器回到可正常使用的狀態。',image:'/assets/optimized/washer-hidden-dirt-sm.webp',fallback:'/assets/optimized/washer-hidden-dirt-sm.jpg'}
       ]
     },
     homeclean:{
       title:'居家清潔先看三張圖',
       cards:[
-        {tag:'為什麼需要洗',title:'油污、水垢與落塵要分區處理',text:'廚房、浴室、地面與高處灰塵的工具不同，先分區才不會重複污染。',image:'/assets/optimized/homeclean-cleaning-hero-20260713-sm.webp',fallback:'/assets/optimized/homeclean-cleaning-hero-20260713-sm.jpg'},
+        {tag:'為什麼需要洗',title:'油污、水垢與落塵要分區處理',text:'廚房、浴室、地面與高處灰塵的工具不同，先分區才不會重複污染。',image:'/assets/service-story/homeclean-service-story-20260714.webp',fallback:'/assets/service-story/homeclean-service-story-20260714.jpg'},
         {tag:'怎麼洗',title:'由高到低、由乾到濕',text:'先確認範圍、材質與重點區域，再安排除塵、去油、水垢與地面整理。',image:'/assets/optimized/homeclean-service-og-20260713-sm.webp',fallback:'/assets/optimized/homeclean-service-og-20260713-sm.jpg'},
         {tag:'清洗前後案例',title:'重點區域整理後更好維持',text:'廚房、浴室與地面依髒污分開處理，完工時確認容易忽略的角落與接縫。',image:'/cases-clean/case01-after.webp',fallback:'/cases-clean/case01-after.jpg'}
       ]
@@ -649,7 +658,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
     'water-tank':{
       title:'水塔清洗先看三張圖',
       cards:[
-        {tag:'為什麼需要洗',title:'蓄水容器會累積沉積物',text:'屋頂水塔、塑膠水塔、水泥水塔與地下蓄水池，都要先看容量與內部狀況。',image:'/assets/optimized/water-tank-hero-sm.webp',fallback:'/assets/optimized/water-tank-hero-sm.jpg'},
+        {tag:'為什麼需要洗',title:'蓄水容器會累積沉積物',text:'屋頂水塔、塑膠水塔、水泥水塔與地下蓄水池，都要先看容量與內部狀況。',image:'/assets/service-story/water-tank-service-story-20260714.webp',fallback:'/assets/service-story/water-tank-service-story-20260714.jpg'},
         {tag:'怎麼洗',title:'停水、排水、復水要有順序',text:'上下水塔、加壓馬達與排水點會影響施工安排，報價前要先看照片。',image:'/assets/optimized/water-tank-system-sm.webp',fallback:'/assets/optimized/water-tank-system-sm.jpg'},
         {tag:'清洗前後案例',title:'內壁清潔與復水確認',text:'清洗後會確認水塔內壁、排水狀況與復水流程，降低沉積物再次進入用水端。',image:'/assets/optimized/water-tank-hero-sm.webp',fallback:'/assets/optimized/water-tank-hero-sm.jpg'}
       ]
@@ -657,7 +666,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
     'pipe-cleaning':{
       title:'水管清洗先看三張圖',
       cards:[
-        {tag:'為什麼需要洗',title:'黃水、異味、水量變小要先分類',text:'原因可能來自水塔、管材、熱水器或閥件，不一定全都適合直接清洗。',image:'/assets/optimized/pipe-cleaning-hero-sm.webp',fallback:'/assets/optimized/pipe-cleaning-hero-sm.jpg'},
+        {tag:'為什麼需要洗',title:'黃水、異味、水量變小要先分類',text:'原因可能來自水塔、管材、熱水器或閥件，不一定全都適合直接清洗。',image:'/assets/service-story/pipe-cleaning-service-story-20260714.webp',fallback:'/assets/service-story/pipe-cleaning-service-story-20260714.jpg'},
         {tag:'怎麼洗',title:'先判斷管材與屋齡',text:'水管清洗可改善沉積，但老舊管線去除堵塞後可能讓滲漏更明顯。',image:'/assets/optimized/pipe-cleaning-effects-sm.webp',fallback:'/assets/optimized/pipe-cleaning-effects-sm.jpg'},
         {tag:'清洗前後案例',title:'前後水色與水量一起確認',text:'完工時會觀察出水狀況、水量變化與濾網沉積，協助判斷是否還需要檢修。',image:'/assets/optimized/pipe-cleaning-hero-sm.webp',fallback:'/assets/optimized/pipe-cleaning-hero-sm.jpg'}
       ]
@@ -666,7 +675,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
       title:'漏水檢測先看三張圖',
       cards:[
         {tag:'為什麼需要檢測',title:'水痕不等於漏點',text:'牆面、天花、窗框或浴室滲水，需要先縮小範圍，避免盲目施工。',image:'/assets/optimized/leak-detection-methods-sm.webp',fallback:'/assets/optimized/leak-detection-methods-sm.jpg'},
-        {tag:'怎麼查',title:'用現象與工具交叉判斷',text:'熱像、水分、色素或局部拆檢會依現場條件選用，不用同一套答案套所有漏水。',image:'/assets/optimized/leak-symptom-guide-sm.webp',fallback:'/assets/optimized/leak-symptom-guide-sm.jpg'},
+        {tag:'怎麼查',title:'用現象與工具交叉判斷',text:'熱像、水分、色素或局部拆檢會依現場條件選用，不用同一套答案套所有漏水。',image:'/assets/service-story/leak-repair-service-story-20260714.webp',fallback:'/assets/service-story/leak-repair-service-story-20260714.jpg'},
         {tag:'修補案例',title:'找到源頭再選工法',text:'檢測、灌注、防水或重做防水層的價格差很多，先判斷才能避免修錯。',image:'/assets/optimized/home-leak-knowledge-sm.webp',fallback:'/assets/optimized/home-leak-knowledge-sm.jpg'}
       ]
     }
@@ -775,6 +784,21 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
     }
   }
   renderServiceStory();
+
+  function enhancePriceTables(){
+    document.querySelectorAll('.price-table').forEach(function(table){
+      const headers = Array.from(table.querySelectorAll('tr:first-child th')).map(function(th){
+        return th.textContent.trim();
+      });
+      if(!headers.length) return;
+      Array.from(table.querySelectorAll('tr')).slice(1).forEach(function(row){
+        Array.from(row.children).forEach(function(cell, index){
+          if(headers[index]) cell.setAttribute('data-label', headers[index]);
+        });
+      });
+    });
+  }
+  enhancePriceTables();
 
   // Fixed Header 的等高 spacer 避免內容被遮住，並同步頁內錨點高度。
   function setOffset(){
@@ -913,13 +937,15 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
     if(!qOverlay) return;
     const preset = (serviceKey && PAGE_SERVICE[serviceKey]) || PAGE_SERVICE[page] || '';
     if(preset) selectService(preset);
-    if(!qOverlay.classList.contains('ld-show')){
+    if(!isLineWebView && !qOverlay.classList.contains('ld-show')){
       try{
         history.pushState({ldQuote:true}, '', location.href);
         qHistoryOpen = true;
       }catch(error){
         qHistoryOpen = false;
       }
+    }else{
+      qHistoryOpen = false;
     }
     qOverlay.classList.add('ld-show');
     document.body.style.overflow = 'hidden';

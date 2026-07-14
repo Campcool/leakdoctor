@@ -122,8 +122,53 @@ body.service-page [id]{scroll-margin-top:calc(var(--ld-hdr-h,92px) + var(--servi
   .service-toc-inner{justify-content:flex-start;padding:.48rem .75rem;gap:.42rem}
   .service-toc a{min-height:37px;padding:.5rem .78rem;font-size:.76rem}
   body.service-page [id]{scroll-margin-top:calc(var(--ld-hdr-h,130px) + var(--service-toc-h,56px) + 10px)}
+  body.service-page .service-visual-note{display:none!important}
   .scope-grid,.quote-method-grid{grid-template-columns:1fr}
   .scope-panel,.pricing-block{border-radius:19px;padding:1.15rem}
+  .price-scroll{overflow:visible!important}
+  .pricing-block .price-table,.price-table{
+    display:block;
+    width:100%;
+    min-width:0!important;
+    border:0!important;
+    border-radius:0!important;
+    background:transparent!important;
+    overflow:visible!important;
+  }
+  .price-table tbody{display:block}
+  .price-table tr:first-child{display:none}
+  .price-table tr{
+    display:block;
+    margin:0 0 .85rem;
+    border:1px solid var(--ld-border,#dce4e7);
+    border-radius:18px;
+    background:#fff;
+    overflow:hidden;
+    box-shadow:0 10px 24px rgba(23,50,77,.06);
+  }
+  .price-table td{
+    display:grid;
+    grid-template-columns:minmax(5.8em,36%) minmax(0,1fr);
+    gap:.75rem;
+    align-items:start;
+    border-top:1px solid #eef2f6!important;
+    padding:.82rem .92rem!important;
+    font-size:.9rem!important;
+    line-height:1.75;
+    white-space:normal!important;
+    word-break:break-word;
+    overflow-wrap:anywhere;
+    text-align:left!important;
+  }
+  .price-table td:first-child{border-top:0!important}
+  .price-table td::before{
+    content:attr(data-label);
+    color:var(--service-accent-dark,var(--ld-ink,#17324d));
+    font-size:.78rem;
+    font-weight:900;
+    line-height:1.5;
+  }
+  .price-table .price-amt{white-space:normal!important}
 }
 
 /* Scroll reveal is progressive: content stays visible without JS. */
