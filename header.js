@@ -113,11 +113,11 @@
   }
   const existingCraftCss = document.querySelector('link[href*="craft.css"]');
   if(existingCraftCss){
-    existingCraftCss.href = '/assets/craft.css?v=20260714a';
+    existingCraftCss.href = '/assets/craft.css?v=20260714b';
   }else{
     const craftCss = document.createElement('link');
     craftCss.rel = 'stylesheet';
-    craftCss.href = '/assets/craft.css?v=20260714a';
+    craftCss.href = '/assets/craft.css?v=20260714b';
     document.head.appendChild(craftCss);
   }
   if(!document.querySelector('script[src*="craft.js"]')){
@@ -799,6 +799,9 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
     });
   }
   enhancePriceTables();
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', enhancePriceTables, {once:true});
+  }
 
   // Fixed Header 的等高 spacer 避免內容被遮住，並同步頁內錨點高度。
   function setOffset(){

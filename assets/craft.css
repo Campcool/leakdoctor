@@ -31,6 +31,29 @@ body.service-page .hero-h1 em{
   color:var(--service-accent,var(--ld-orange-dark,#d96f0d))!important;
   font-style:normal;
 }
+body.service-page .trust-badges{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:.5rem!important;
+  align-items:center!important;
+  margin-bottom:1.35rem!important;
+}
+body.service-page .trust-badge{
+  display:inline-flex!important;
+  width:auto!important;
+  align-items:center!important;
+  gap:.35rem!important;
+  padding:.38rem .72rem!important;
+  border-radius:999px!important;
+  border:1px solid var(--service-border,var(--ld-border,#dce4e7))!important;
+  background:#fff!important;
+  color:var(--ld-ink,#17324d)!important;
+  font-size:.78rem!important;
+  font-weight:900!important;
+  line-height:1.25!important;
+  box-shadow:0 6px 16px rgba(23,50,77,.06)!important;
+}
+body.service-page .trust-badge+.trust-badge::before{content:none!important}
 
 /* Keep the four service heroes aligned while each page retains its own brand color. */
 body.ld-theme-homeclean .service-visual-img{
@@ -139,32 +162,41 @@ body.service-page [id]{scroll-margin-top:calc(var(--ld-hdr-h,92px) + var(--servi
   .price-table tr:first-child{display:none}
   .price-table tr{
     display:block;
-    margin:0 0 .85rem;
+    margin:0 0 .7rem;
     border:1px solid var(--ld-border,#dce4e7);
-    border-radius:18px;
+    border-radius:14px;
     background:#fff;
     overflow:hidden;
-    box-shadow:0 10px 24px rgba(23,50,77,.06);
+    box-shadow:0 8px 18px rgba(23,50,77,.045);
   }
   .price-table td{
     display:grid;
-    grid-template-columns:minmax(5.8em,36%) minmax(0,1fr);
-    gap:.75rem;
+    grid-template-columns:minmax(5.25em,34%) minmax(0,1fr);
+    gap:.65rem;
     align-items:start;
     border-top:1px solid #eef2f6!important;
-    padding:.82rem .92rem!important;
-    font-size:.9rem!important;
-    line-height:1.75;
+    padding:.62rem .78rem!important;
+    font-size:.86rem!important;
+    line-height:1.65;
     white-space:normal!important;
     word-break:break-word;
     overflow-wrap:anywhere;
     text-align:left!important;
   }
-  .price-table td:first-child{border-top:0!important}
+  .price-table td:first-child{
+    display:block;
+    border-top:0!important;
+    background:color-mix(in srgb,var(--service-soft,#f8fbfc) 70%,#fff)!important;
+    color:var(--ld-ink,#17324d)!important;
+    font-size:.9rem!important;
+    font-weight:900!important;
+    text-align:left!important;
+  }
+  .price-table td:first-child::before{display:none}
   .price-table td::before{
     content:attr(data-label);
     color:var(--service-accent-dark,var(--ld-ink,#17324d));
-    font-size:.78rem;
+    font-size:.72rem;
     font-weight:900;
     line-height:1.5;
   }
