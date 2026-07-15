@@ -131,7 +131,7 @@ cases/
 ## 4. Git 狀態與流程
 
 - **正式分支**：`main`；2026-07-13 由 Codex 補齊水塔清洗、水管清洗服務頁、六服務導覽、首頁 root 連結、favicon 與服務圖片輪播。
-- **正式網站版本**：GitHub Pages 追蹤 `main`；2026-07-15 本批服務頁第三層分頁、居家清潔案例與錨點修正完成後直接部署，實際版本以 `origin/main` 最新提交為準。
+- **正式網站版本**：功能版本 `7bfe813`（GitHub Pages 追蹤 `main`；後續若只有交接文件提交，前台仍以此功能 commit 為準）。
 - 慣例：直接開發、清楚的 commit message、`git push -u origin <branch>`；**絕不 force push**；不建 PR 除非業主要求。
 - 修改後驗證慣例：`node --check header.js`；以 Node 驗證 JSON-LD、內部連結、四頁流程與禁止字樣；本機網址受瀏覽器安全政策阻擋時，直接使用正式部署標記與真機驗證，不可繞過安全政策。
 
@@ -144,6 +144,7 @@ cases/
 - 手機價格表改為緊湊卡片；超過四筆的價目表預設收合並提供「看完整報價項目」，桌面版維持完整表格。
 - 居家清潔頁精簡預約說明與流程，新增 3 組已去識別真實服務前後對比（`case03`、`case08`、`case11`），手機可橫向瀏覽，桌面三欄呈現。
 - 全站共用資源快取版本更新為 `20260715e`。部署前已通過：全站 JavaScript 語法、JSON-LD、CSS 括號、主要頁重複 ID／本機資源引用、`git diff --check`；瀏覽器驗證六服務頁 390×844 與居家清潔 1365×768，無破圖、無水平溢出，第三層落點正常。
+- 已部署 `main` 功能 commit `7bfe813`。正式站六個服務頁皆載入 `craft.js?v=20260715e`，第三層切換與錨點正常、無水平溢出；六張新案例圖片正式網址均回應 200，首頁維持 `https://leakdoctor.tw/`，不會導向 `/index.html`。
 
 ### 2026-07-15（Codex・Google Ads 第一階段啟動包）
 - 建立 `docs/GOOGLE-ADS-PLAN.md`：定義 Google Search 第一階段架構，先投高意圖搜尋，不先開 Performance Max / Display / YouTube；主轉換為 GA4 `quote_submit`，`quote_open` / `line_click` 僅作 Secondary 觀察。
