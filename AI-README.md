@@ -6,7 +6,7 @@
 > 3. 本檔案是唯一的交接依據，寫給 AI 看：請保持精確、可執行、不留模糊描述。
 > 4. **所有時間戳一律台灣時間（Asia/Taipei, UTC+8）**。
 
-最後更新：2026-07-14（by Codex）— 修正首屏標注與手機價格表呈現
+最後更新：2026-07-15（by Codex）— 建立 Google Ads 第一階段啟動包
 
 ---
 
@@ -66,6 +66,8 @@ assets/illustrations/           AI 生成教育型示意圖（水塔上下水塔
 assets/hero/                    各服務 hero 圖（含居家清潔新清洗情境圖）
 assets/og/                      社群分享圖；首頁與居家清潔目前共用 homeclean-service-og-20260713.png
 assets/optimized/               頁面實際載入用小圖（WebP + JPG fallback）；正式頁面不要直接載入 1–2MB 原始 PNG
+ads/                             Google Ads 第一階段素材：關鍵字、RSA 文案、否定字、sitelinks/callouts
+docs/GOOGLE-ADS-PLAN.md          Google Ads 第一階段投放架構、追蹤設定與上線順序
 data/service-options.json     服務快選資料庫（Bot／AI tool call 與網站服務明細的價格來源種子）
 cases-clean/                   潔美淨真實前後對比照（case01/04/05/07）
 logo/                          完整品牌素材包（logos、social-ads、avatars-icons、manifest.csv）
@@ -134,6 +136,14 @@ cases/
 - 修改後驗證慣例：`node --check header.js`；以 Node 驗證 JSON-LD、內部連結、四頁流程與禁止字樣；本機網址受瀏覽器安全政策阻擋時，直接使用正式部署標記與真機驗證，不可繞過安全政策。
 
 ## 5. 進度紀錄（新條目加在最上面）
+
+### 2026-07-15（Codex・Google Ads 第一階段啟動包）
+- 建立 `docs/GOOGLE-ADS-PLAN.md`：定義 Google Search 第一階段架構，先投高意圖搜尋，不先開 Performance Max / Display / YouTube；主轉換為 GA4 `quote_submit`，`quote_open` / `line_click` 僅作 Secondary 觀察。
+- 依 Google 官方文件整理追蹤 SOP：Google Ads 與 GA4 需連結、Google Ads 開啟 auto-tagging、GA4 `quote_submit` 需標記 key event 後匯入 Google Ads；GCLID 不可在導向流程中遺失。暫不直接安裝 `AW-XXXXXXXXX`，因尚未提供 Google Ads Conversion ID / Label。
+- 新增 `ads/google-ads-keywords.csv`：第一波 Campaign 分為清潔核心、用水/漏水高意圖、品牌保護；涵蓋冷氣、洗衣機、居家清潔、水塔、水管、漏水與品牌詞。
+- 新增 `ads/google-ads-rsa.csv`：7 個 ad group 的 RSA 文案，每組 15 headlines + 4 descriptions；已用 PowerShell 自檢標題 ≤30 字、描述 ≤90 字。
+- 新增 `ads/google-ads-negative-keywords.txt` 與 `ads/google-ads-assets.md`：共用否定字、sitelinks、callouts、structured snippets 與 UTM template。
+- 尚未實際進 Google Ads 後台建立 campaign；下一步需要業主提供每日預算、Google Ads Customer ID、是否授權 AI 直接操作帳號。
 
 ### 2026-07-14（Codex・首屏標注與價格表資訊密度調整）
 - 依業主 LINE 真機截圖修正首屏三個標注：`trust-badge` 不再於手機被 `service-refresh.css` 改成直排純文字，改由 `craft.css` 統一覆蓋為膠囊備註，避免冷氣頁「環境保護／依機型拆洗／復原後測試」看起來像散落文字。
@@ -292,7 +302,9 @@ cases/
 ### 🟠 高價值，AI 可做
 - [x] **廣告投放前視覺改版 P1**：首頁＋冷氣／洗衣機／抓漏首屏、DESIGN.md、流程示意與知識型 OG；2026-07-11 已部署並完成正式網址驗證。
 - [ ] **視覺改版 P2**：延伸至居家清潔、地區、案例、百科與文章頁；建立真實案例／流程示意的圖片標示規格
-- [ ] **廣告數據門檻**：取得 GA4 Measurement ID，驗證 quote_open／quote_submit／line_click，再建立廣告落地頁
+- [x] **廣告啟動包 P0**：已建立 Google Ads 第一階段投放架構、關鍵字、RSA 文案、否定字、assets 與追蹤 SOP（`docs/GOOGLE-ADS-PLAN.md` + `ads/`）。
+- [ ] **Google Ads 帳號設定 P1**：連結 GA4、開啟 auto-tagging、將 `quote_submit` 設為 GA4 key event 並匯入 Google Ads Primary conversion；`quote_open` / `line_click` 設 Secondary。
+- [ ] **Google Ads 上線 P2**：業主確認每日預算、Google Ads Customer ID、投放地區後，建立 Search campaigns；第一階段不開 PMax/Display/YouTube。
 - [x] **LINE Bot P1**：2026-07-11 驗收通過並上線（詳 BOT-PLAN 驗收報告）。剩 PARTNER_LINE_USER_ID 待業主設定
 - [x] **LINE Bot P2**：夥伴回報、完工、車馬費、逾時／D-1／今日提醒與戰情室程式已完成；仍待 PARTNER_LINE_USER_ID 與管理 Secrets
 - [ ] **cases.html / team.html 清潔化**：目前案例頁與師傅頁內容 100% 漏水主題，與清潔主業錯位。加入清潔案例（cases-clean/ 還有 case02/03/06/08-11 未用，在 `Campcool/0988145875` repo 的 cases/），師傅頁加清潔技師

@@ -1,0 +1,45 @@
+Campaign,Ad group,Match type,Keyword,Final URL,Note
+GOOG_Search_HighIntent_Cleaning_NorthWest_2026Q3,AG_AirconCleaning,phrase,冷氣清洗,https://leakdoctor.tw/aircon.html,核心
+GOOG_Search_HighIntent_Cleaning_NorthWest_2026Q3,AG_AirconCleaning,phrase,洗冷氣,https://leakdoctor.tw/aircon.html,口語
+GOOG_Search_HighIntent_Cleaning_NorthWest_2026Q3,AG_AirconCleaning,phrase,冷氣清潔,https://leakdoctor.tw/aircon.html,核心
+GOOG_Search_HighIntent_Cleaning_NorthWest_2026Q3,AG_AirconCleaning,exact,分離式冷氣清洗,https://leakdoctor.tw/aircon.html,機型
+GOOG_Search_HighIntent_Cleaning_NorthWest_2026Q3,AG_AirconCleaning,exact,吊隱式冷氣清洗,https://leakdoctor.tw/aircon.html,高單價
+GOOG_Search_HighIntent_Cleaning_NorthWest_2026Q3,AG_AirconCleaning,exact,窗型冷氣清洗,https://leakdoctor.tw/aircon.html,機型
+GOOG_Search_HighIntent_Cleaning_NorthWest_2026Q3,AG_AirconCleaning,phrase,冷氣清洗 價格,https://leakdoctor.tw/aircon.html,價格意圖
+GOOG_Search_HighIntent_Cleaning_NorthWest_2026Q3,AG_AirconCleaning,phrase,冷氣清洗 到府,https://leakdoctor.tw/aircon.html,到府意圖
+GOOG_Search_HighIntent_Cleaning_NorthWest_2026Q3,AG_WasherCleaning,phrase,洗衣機清洗,https://leakdoctor.tw/washer.html,核心
+GOOG_Search_HighIntent_Cleaning_NorthWest_2026Q3,AG_WasherCleaning,phrase,洗衣機清潔,https://leakdoctor.tw/washer.html,核心
+GOOG_Search_HighIntent_Cleaning_NorthWest_2026Q3,AG_WasherCleaning,exact,直立式洗衣機清洗,https://leakdoctor.tw/washer.html,機型
+GOOG_Search_HighIntent_Cleaning_NorthWest_2026Q3,AG_WasherCleaning,exact,滾筒洗衣機清洗,https://leakdoctor.tw/washer.html,機型
+GOOG_Search_HighIntent_Cleaning_NorthWest_2026Q3,AG_WasherCleaning,phrase,洗衣機拆洗,https://leakdoctor.tw/washer.html,高意圖
+GOOG_Search_HighIntent_Cleaning_NorthWest_2026Q3,AG_WasherCleaning,phrase,洗衣機清洗 價格,https://leakdoctor.tw/washer.html,價格意圖
+GOOG_Search_HighIntent_Cleaning_NorthWest_2026Q3,AG_HomeCleaning,phrase,居家清潔,https://leakdoctor.tw/homeclean.html,核心
+GOOG_Search_HighIntent_Cleaning_NorthWest_2026Q3,AG_HomeCleaning,phrase,到府清潔,https://leakdoctor.tw/homeclean.html,到府意圖
+GOOG_Search_HighIntent_Cleaning_NorthWest_2026Q3,AG_HomeCleaning,phrase,大掃除,https://leakdoctor.tw/homeclean.html,服務分類
+GOOG_Search_HighIntent_Cleaning_NorthWest_2026Q3,AG_HomeCleaning,phrase,退租清潔,https://leakdoctor.tw/homeclean.html,高意圖
+GOOG_Search_HighIntent_Cleaning_NorthWest_2026Q3,AG_HomeCleaning,phrase,裝潢細清,https://leakdoctor.tw/homeclean.html,高單價
+GOOG_Search_HighIntent_Cleaning_NorthWest_2026Q3,AG_HomeCleaning,phrase,抽油煙機清洗,https://leakdoctor.tw/homeclean.html,居家清潔內項目
+GOOG_Search_HighIntent_WaterLeak_NorthWest_2026Q3,AG_WaterTankCleaning,phrase,水塔清洗,https://leakdoctor.tw/water-tank.html,核心
+GOOG_Search_HighIntent_WaterLeak_NorthWest_2026Q3,AG_WaterTankCleaning,phrase,洗水塔,https://leakdoctor.tw/water-tank.html,口語
+GOOG_Search_HighIntent_WaterLeak_NorthWest_2026Q3,AG_WaterTankCleaning,phrase,白鐵水塔清洗,https://leakdoctor.tw/water-tank.html,材質
+GOOG_Search_HighIntent_WaterLeak_NorthWest_2026Q3,AG_WaterTankCleaning,phrase,水泥水塔清洗,https://leakdoctor.tw/water-tank.html,材質
+GOOG_Search_HighIntent_WaterLeak_NorthWest_2026Q3,AG_WaterTankCleaning,phrase,地下蓄水池清洗,https://leakdoctor.tw/water-tank.html,高意圖
+GOOG_Search_HighIntent_WaterLeak_NorthWest_2026Q3,AG_WaterTankCleaning,phrase,水塔清洗 價格,https://leakdoctor.tw/water-tank.html,價格意圖
+GOOG_Search_HighIntent_WaterLeak_NorthWest_2026Q3,AG_PipeCleaning,phrase,水管清洗,https://leakdoctor.tw/pipe-cleaning.html,核心
+GOOG_Search_HighIntent_WaterLeak_NorthWest_2026Q3,AG_PipeCleaning,phrase,洗水管,https://leakdoctor.tw/pipe-cleaning.html,口語
+GOOG_Search_HighIntent_WaterLeak_NorthWest_2026Q3,AG_PipeCleaning,phrase,水管清洗 價格,https://leakdoctor.tw/pipe-cleaning.html,價格意圖
+GOOG_Search_HighIntent_WaterLeak_NorthWest_2026Q3,AG_PipeCleaning,phrase,黃水 水管清洗,https://leakdoctor.tw/pipe-cleaning.html,症狀
+GOOG_Search_HighIntent_WaterLeak_NorthWest_2026Q3,AG_PipeCleaning,phrase,水量變小 水管,https://leakdoctor.tw/pipe-cleaning.html,症狀
+GOOG_Search_HighIntent_WaterLeak_NorthWest_2026Q3,AG_PipeCleaning,phrase,水管異味,https://leakdoctor.tw/pipe-cleaning.html,症狀
+GOOG_Search_HighIntent_WaterLeak_NorthWest_2026Q3,AG_LeakRepair,phrase,漏水檢測,https://leakdoctor.tw/leak-repair.html,核心
+GOOG_Search_HighIntent_WaterLeak_NorthWest_2026Q3,AG_LeakRepair,phrase,抓漏,https://leakdoctor.tw/leak-repair.html,核心
+GOOG_Search_HighIntent_WaterLeak_NorthWest_2026Q3,AG_LeakRepair,phrase,漏水修補,https://leakdoctor.tw/leak-repair.html,修補
+GOOG_Search_HighIntent_WaterLeak_NorthWest_2026Q3,AG_LeakRepair,phrase,壁癌漏水,https://leakdoctor.tw/leak-repair.html,症狀
+GOOG_Search_HighIntent_WaterLeak_NorthWest_2026Q3,AG_LeakRepair,phrase,天花板漏水,https://leakdoctor.tw/leak-repair.html,症狀
+GOOG_Search_HighIntent_WaterLeak_NorthWest_2026Q3,AG_LeakRepair,phrase,浴室漏水,https://leakdoctor.tw/leak-repair.html,症狀
+GOOG_Search_Brand_GreyTaro_All_2026Q3,AG_Brand,exact,灰汰郎,https://leakdoctor.tw/,品牌
+GOOG_Search_Brand_GreyTaro_All_2026Q3,AG_Brand,phrase,灰汰郎 清潔,https://leakdoctor.tw/,品牌
+GOOG_Search_Brand_GreyTaro_All_2026Q3,AG_Brand,phrase,灰汰郎 漏水,https://leakdoctor.tw/,品牌
+GOOG_Search_Brand_GreyTaro_All_2026Q3,AG_Brand,exact,台灣漏水醫生,https://leakdoctor.tw/,舊品牌
+GOOG_Search_Brand_GreyTaro_All_2026Q3,AG_Brand,exact,leakdoctor,https://leakdoctor.tw/,網域品牌
+
