@@ -1,8 +1,10 @@
 # Google Ads 建立計畫｜灰汰郎（leakdoctor.tw）
 
+> ⚠️ **本檔已被取代（2026-07-15 定案）。** 正本＝Codex 版 `docs/GOOGLE-ADS-PLAN.md`（在 `main`，另附 `ads/*.csv` 可匯入資產）。
+> 評比與定案理由見 `docs/GOOGLE-ADS-DECISION.md`。本檔與 `GOOGLE-ADS-BUILD-SPEC.md` 只保留兩項要併入正本的修正：**①預算重算到 NT$4,000/月；②漏水優先、居家減弱**。其餘內容不再維護。
+
 > 建立：2026-07-12（by Claude, Asia/Taipei）
 > 用途：這是「投 Google 廣告」的評估與建置藍圖，並明確劃分 **Claude / Codex / 業主** 各自負責的事項。
-> 現況前提請先讀 `AI-README.md`（前台）與 bot repo 的 `AI-README.md`（後台）。
 
 ---
 
