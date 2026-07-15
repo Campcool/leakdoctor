@@ -13,7 +13,7 @@
   if(serviceTheme && !document.querySelector('link[data-ld-service-story]')){
     const storyCss = document.createElement('link');
     storyCss.rel = 'stylesheet';
-    storyCss.href = '/assets/service-story.css?v=20260715e';
+    storyCss.href = '/assets/service-story.css?v=20260715g';
     storyCss.setAttribute('data-ld-service-story','true');
     document.head.appendChild(storyCss);
   }
@@ -113,16 +113,16 @@
   }
   const existingCraftCss = document.querySelector('link[href*="craft.css"]');
   if(existingCraftCss){
-    existingCraftCss.href = '/assets/craft.css?v=20260715e';
+    existingCraftCss.href = '/assets/craft.css?v=20260715g';
   }else{
     const craftCss = document.createElement('link');
     craftCss.rel = 'stylesheet';
-    craftCss.href = '/assets/craft.css?v=20260715e';
+    craftCss.href = '/assets/craft.css?v=20260715g';
     document.head.appendChild(craftCss);
   }
   if(!document.querySelector('script[src*="craft.js"]')){
     const craftJs = document.createElement('script');
-    craftJs.src = '/assets/craft.js?v=20260715e';
+    craftJs.src = '/assets/craft.js?v=20260715g';
     craftJs.defer = true;
     document.head.appendChild(craftJs);
   }
@@ -642,7 +642,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
     washer:{
       title:'洗衣機清洗先看三張圖',
       cards:[
-        {tag:'為什麼需要洗',title:'內外槽夾層才是異味來源',text:'洗劑殘留、棉絮、皮屑與潮濕霉斑常堆在槽背，看起來乾淨也可能有黑屑。',image:'/assets/optimized/washer-dirt-source-sm.webp',fallback:'/assets/optimized/washer-dirt-source-sm.jpg'},
+        {tag:'為什麼需要洗',title:'內外槽夾層才是異味來源',text:'洗劑殘留、棉絮、皮屑與潮濕霉斑常堆在槽背，看起來乾淨也可能有黑屑。',image:'/assets/optimized/washer-dirt-source-sm.webp',fallback:'/assets/optimized/washer-dirt-source-sm.jpg',fit:'contain',width:733,height:1100},
         {tag:'怎麼洗',title:'拆出內槽才看得到槽背',text:'直立式與滾筒式結構不同，會先看品牌、容量、安裝空間，再安排可拆洗範圍。',image:'/assets/service-story/washer-service-story-20260714.webp',fallback:'/assets/service-story/washer-service-story-20260714.jpg'},
         {tag:'完工確認',title:'組裝後要試運轉',text:'清洗後會復原部件並確認進水、排水與脫水，讓機器回到可正常使用的狀態。',image:'/assets/optimized/washer-hidden-dirt-sm.webp',fallback:'/assets/optimized/washer-hidden-dirt-sm.jpg'}
       ]
@@ -659,7 +659,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
       title:'水塔清洗先看三張圖',
       cards:[
         {tag:'為什麼需要洗',title:'蓄水容器會累積沉積物',text:'屋頂水塔、塑膠水塔、水泥水塔與地下蓄水池，都要先看容量與內部狀況。',image:'/assets/service-story/water-tank-service-story-20260714.webp',fallback:'/assets/service-story/water-tank-service-story-20260714.jpg'},
-        {tag:'怎麼洗',title:'停水、排水、復水要有順序',text:'上下水塔、加壓馬達與排水點會影響施工安排，報價前要先看照片。',image:'/assets/optimized/water-tank-system-sm.webp',fallback:'/assets/optimized/water-tank-system-sm.jpg'},
+        {tag:'怎麼洗',title:'停水、排水、復水要有順序',text:'上下水塔、加壓馬達與排水點會影響施工安排，報價前要先看照片。',image:'/assets/optimized/water-tank-system-sm.webp',fallback:'/assets/optimized/water-tank-system-sm.jpg',fit:'contain',width:733,height:1100},
         {tag:'清洗前後案例',title:'內壁清潔與復水確認',text:'清洗後會確認水塔內壁、排水狀況與復水流程，降低沉積物再次進入用水端。',image:'/assets/optimized/water-tank-hero-sm.webp',fallback:'/assets/optimized/water-tank-hero-sm.jpg'}
       ]
     },
@@ -667,7 +667,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
       title:'水管清洗先看三張圖',
       cards:[
         {tag:'為什麼需要洗',title:'黃水、異味、水量變小要先分類',text:'原因可能來自水塔、管材、熱水器或閥件，不一定全都適合直接清洗。',image:'/assets/service-story/pipe-cleaning-service-story-20260714.webp',fallback:'/assets/service-story/pipe-cleaning-service-story-20260714.jpg'},
-        {tag:'怎麼洗',title:'先判斷管材與屋齡',text:'水管清洗可改善沉積，但老舊管線去除堵塞後可能讓滲漏更明顯。',image:'/assets/optimized/pipe-cleaning-effects-sm.webp',fallback:'/assets/optimized/pipe-cleaning-effects-sm.jpg'},
+        {tag:'怎麼洗',title:'先判斷管材與屋齡',text:'水管清洗可改善沉積，但老舊管線去除堵塞後可能讓滲漏更明顯。',image:'/assets/optimized/pipe-cleaning-effects-sm.webp',fallback:'/assets/optimized/pipe-cleaning-effects-sm.jpg',fit:'contain',width:733,height:1100},
         {tag:'清洗前後案例',title:'前後水色與水量一起確認',text:'完工時會觀察出水狀況、水量變化與濾網沉積，協助判斷是否還需要檢修。',image:'/assets/optimized/pipe-cleaning-hero-sm.webp',fallback:'/assets/optimized/pipe-cleaning-hero-sm.jpg'}
       ]
     },
@@ -693,9 +693,12 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
       const fallback = card.fallback || card.image;
       const loading = index === 0 ? 'eager' : 'lazy';
       const priority = index === 0 ? ' fetchpriority="high"' : '';
+      const mediaClass = card.fit === 'contain' ? ' service-story-media--contain' : '';
+      const imageWidth = card.width || 1200;
+      const imageHeight = card.height || 675;
       return '<article class="service-story-card">' +
-        '<div class="service-story-media">' +
-          '<picture><source srcset="' + card.image + '" type="image/webp"><img src="' + fallback + '" alt="' + card.title + '" loading="' + loading + '" decoding="async"' + priority + ' width="1200" height="760"></picture>' +
+        '<div class="service-story-media' + mediaClass + '">' +
+          '<picture><source srcset="' + card.image + '" type="image/webp"><img src="' + fallback + '" alt="' + card.title + '" loading="' + loading + '" decoding="async"' + priority + ' width="' + imageWidth + '" height="' + imageHeight + '"></picture>' +
         '</div>' +
         '<div class="service-story-copy"><span class="service-story-tag">' + card.tag + '</span><h3>' + card.title + '</h3><p>' + card.text + '</p></div>' +
       '</article>';

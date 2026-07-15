@@ -13,6 +13,8 @@
 .service-story-media{height:clamp(230px,48vw,380px);background:linear-gradient(135deg,#eff6ff,#f8fafc);position:relative;overflow:hidden}
 .service-story-media picture,.service-story-media img{display:block;width:100%;height:100%}
 .service-story-media img{object-fit:cover;object-position:center}
+.service-story-media--contain{height:clamp(440px,110vw,520px);background:#fff}
+.service-story-media--contain img{box-sizing:border-box;object-fit:contain;padding:.35rem}
 .service-story-media::after{display:none}
 .service-story-copy{padding:1rem 1.05rem 1.1rem}
 .service-story-tag{display:inline-flex;align-items:center;border-radius:999px;background:var(--service-soft,#eff6ff);color:var(--service-accent,#087ea4);font-size:.72rem;font-weight:900;padding:.22rem .62rem;margin-bottom:.55rem}
@@ -25,6 +27,7 @@
   .service-story{padding:1.9rem 2rem 2.2rem}
   .service-story-card{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(290px,.75fr);align-items:stretch}
   .service-story-media{height:auto;min-height:360px}
+  .service-story-media--contain{min-height:460px;background:#fff}
   .service-story-copy{display:flex;flex-direction:column;justify-content:center;padding:1.35rem 1.45rem}
   .service-story-card h2,.service-story-card h3{font-size:1.25rem}
   .service-story-card p{font-size:.95rem}

@@ -38,45 +38,8 @@
         document.documentElement.style.setProperty('--service-toc-h',toc.offsetHeight + 'px');
       }
       setTocHeight();
-      var tocLinks = Array.prototype.slice.call(toc.querySelectorAll('a[href^="#"]'));
-      var tocTargets = tocLinks.map(function(link){
-        try { return document.querySelector(link.getAttribute('href')); }
-        catch(error) { return null; }
-      });
-      function setCurrentToc(){
-        var offset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--ld-hdr-h')) || 100;
-        var marker = window.scrollY + offset + toc.offsetHeight + 28;
-        var current = -1;
-        var currentOffset = -1;
-        tocTargets.forEach(function(target,index){
-          if(target && target.offsetTop <= marker && target.offsetTop >= currentOffset){
-            current = index;
-            currentOffset = target.offsetTop;
-          }
-        });
-        tocLinks.forEach(function(link,index){
-          var active = index === current;
-          link.classList.toggle('is-current',active);
-          if(active) link.setAttribute('aria-current','location');
-          else link.removeAttribute('aria-current');
-        });
-      }
-      var tocTicking = false;
-      function requestTocUpdate(){
-        if(tocTicking) return;
-        tocTicking = true;
-        window.requestAnimationFrame(function(){ tocTicking=false; setCurrentToc(); });
-      }
-      window.addEventListener('scroll',requestTocUpdate,{passive:true});
-      window.addEventListener('resize',function(){ setTocHeight(); requestTocUpdate(); },{passive:true});
-      tocLinks.forEach(function(link){
-        link.addEventListener('click',function(){
-          tocLinks.forEach(function(item){ item.classList.remove('is-current'); item.removeAttribute('aria-current'); });
-          link.classList.add('is-current');
-          link.setAttribute('aria-current','location');
-        });
-      });
-      setCurrentToc();
+      toc.dataset.localCount = toc.querySelectorAll('a[href^="#"]').length;
+      window.addEventListener('resize',setTocHeight,{passive:true});
     }
 
     initPriceTableLabels();
@@ -85,6 +48,10 @@
 
   function initServiceLayerTabs(){
     if(!document.body.classList.contains('service-page')) return;
+    var toc = document.querySelector('.service-toc');
+    if(!toc) return;
+    var tocLinks = Array.prototype.slice.call(toc.querySelectorAll('a[href^="#"]'));
+    if(!tocLinks.length) return;
     var cta = document.querySelector('#cta-bottom');
     var bodyChildren = Array.prototype.slice.call(document.body.children);
     var blocks = bodyChildren.filter(function(el){
@@ -111,27 +78,48 @@
 
     var tabs = document.createElement('section');
     tabs.className = 'service-layer-tabs';
+    tabs.id = 'service-layer-tabs';
+    tabs.hidden = true;
     tabs.setAttribute('aria-label','服務內容分頁');
-    tabs.innerHTML = '<div class="service-layer-tabs-inner"><div class="service-layer-kicker">深入了解</div><div class="service-layer-tablist" role="tablist" aria-label="切換服務內容"></div></div>';
+    tabs.innerHTML = '<div class="service-layer-tabs-inner"><div class="service-layer-kicker">分類分支</div><div class="service-layer-tablist" role="tablist" aria-label="切換分類分支"></div></div>';
+    var kicker = tabs.querySelector('.service-layer-kicker');
     var tablist = tabs.querySelector('.service-layer-tablist');
+    var activeGroup = null;
+    var activePanelId = '';
+    var scrollRequestId = 0;
 
-    var usedLabels = {};
     panels.forEach(function(panel,index){
       panel.classList.add('service-layer-panel');
       if(!panel.id) panel.id = 'service-layer-panel-' + index;
-      var label = getLayerLabel(panel);
-      if(usedLabels[label]){
-        label = label === '內容' ? '延伸' : label + ' ' + (usedLabels[label] + 1);
-      }
-      usedLabels[label] = (usedLabels[label] || 0) + 1;
-      var button = document.createElement('button');
-      button.type = 'button';
-      button.className = 'service-layer-tab';
-      button.setAttribute('role','tab');
-      button.setAttribute('aria-controls',panel.id);
-      button.dataset.layerTarget = panel.id;
-      button.textContent = label;
-      tablist.appendChild(button);
+    });
+
+    var groups = tocLinks.map(function(link,index){
+      var hash = link.getAttribute('href');
+      var target = null;
+      try { target = document.querySelector(hash); }
+      catch(error) {}
+      link.setAttribute('aria-controls',tabs.id);
+      return {
+        id:'service-group-' + index,
+        link:link,
+        hash:hash,
+        target:target,
+        role:getTocRole(link),
+        panels:[]
+      };
+    });
+
+    panels.forEach(function(panel){
+      var directGroup = groups.find(function(group){
+        return group.target && (group.target === panel || panel.contains(group.target));
+      });
+      var role = getPanelRole(panel);
+      var group = directGroup || groups.find(function(item){ return item.role === role; });
+      if(!group && role === 'difference') group = groups.find(function(item){ return item.role === 'knowledge'; });
+      if(!group && role === 'knowledge') group = groups.find(function(item){ return item.role === 'content'; });
+      if(!group && role === 'people') group = groups.find(function(item){ return item.role === 'cases'; });
+      if(!group) group = groups.find(function(item){ return item.role === 'content'; });
+      if(group) group.panels.push(panel);
     });
 
     pricingBlock.parentNode.insertBefore(tabs,pricingBlock.nextSibling);
@@ -141,36 +129,69 @@
       insertionPoint = panel;
     });
 
-    function setLayerHeight(){
-      document.documentElement.style.setProperty('--service-layer-h',tabs.offsetHeight + 'px');
+    function setStickyHeights(){
+      document.documentElement.style.setProperty('--service-toc-h',toc.offsetHeight + 'px');
+      document.documentElement.style.setProperty('--service-layer-h',tabs.hidden ? '0px' : tabs.offsetHeight + 'px');
     }
 
-    function getLayerStickyTop(){
-      var top = parseFloat(getComputedStyle(tabs).top);
-      if(Number.isFinite(top)) return top;
+    function getStickyHeight(){
       var rootStyle = getComputedStyle(document.documentElement);
       var headerHeight = parseFloat(rootStyle.getPropertyValue('--ld-hdr-h')) || 0;
-      var tocHeight = parseFloat(rootStyle.getPropertyValue('--service-toc-h')) || 0;
-      return headerHeight + tocHeight;
+      return headerHeight + toc.offsetHeight + (tabs.hidden ? 0 : tabs.offsetHeight) + 10;
     }
 
-    function scrollToLayerTarget(target,behavior){
+    function scrollToLayerTarget(target,behavior,expectedPanel){
       if(!target) return;
+      var requestId = ++scrollRequestId;
       window.requestAnimationFrame(function(){
+        if(requestId !== scrollRequestId) return;
         window.requestAnimationFrame(function(){
-          setLayerHeight();
+          if(requestId !== scrollRequestId) return;
+          if(expectedPanel && activePanelId !== expectedPanel.id) return;
+          setStickyHeights();
           var documentTop = target.getBoundingClientRect().top + window.pageYOffset;
-          var stickyHeight = getLayerStickyTop() + tabs.offsetHeight + 10;
           window.scrollTo({
-            top:Math.max(0,documentTop - stickyHeight),
+            top:Math.max(0,documentTop - getStickyHeight()),
             behavior:behavior || (window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth')
           });
         });
       });
     }
 
+    function setCurrentGroup(group){
+      groups.forEach(function(item){
+        var active = item === group;
+        item.link.classList.toggle('is-current',active);
+        item.link.setAttribute('aria-expanded',active && item.panels.length ? 'true' : 'false');
+        if(active) item.link.setAttribute('aria-current','location');
+        else item.link.removeAttribute('aria-current');
+      });
+    }
+
+    function renderGroupTabs(group){
+      tablist.innerHTML = '';
+      kicker.textContent = group.link.textContent.trim() + '分支';
+      tablist.setAttribute('aria-label',group.link.textContent.trim() + '的細項');
+      var usedLabels = {};
+      group.panels.forEach(function(panel){
+        var label = getLayerLabel(panel);
+        if(usedLabels[label]) label = label === '內容' ? '延伸資訊' : label + ' ' + (usedLabels[label] + 1);
+        usedLabels[label] = (usedLabels[label] || 0) + 1;
+        var button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'service-layer-tab';
+        button.setAttribute('role','tab');
+        button.setAttribute('aria-controls',panel.id);
+        button.dataset.layerTarget = panel.id;
+        button.textContent = label;
+        tablist.appendChild(button);
+      });
+    }
+
     function activatePanel(panel,shouldScroll,scrollTarget){
       if(!panel || !panel.classList.contains('service-layer-panel')) return;
+      activePanelId = panel.id;
+      tabs.dataset.activePanel = panel.id;
       panels.forEach(function(item){
         var active = item === panel;
         item.classList.toggle('is-layer-active',active);
@@ -184,14 +205,59 @@
         button.tabIndex = active ? 0 : -1;
       });
       if(shouldScroll){
-        scrollToLayerTarget(scrollTarget || panel);
+        scrollToLayerTarget(scrollTarget || panel,undefined,panel);
       }
+    }
+
+    function panelForTarget(target){
+      return target && target.closest ? target.closest('.service-layer-panel') : null;
+    }
+
+    function groupForTarget(target){
+      var panel = panelForTarget(target);
+      if(panel){
+        return groups.find(function(group){ return group.panels.indexOf(panel) !== -1; }) || null;
+      }
+      return groups.find(function(group){
+        return group.target && target && (group.target === target || group.target.contains(target) || target.contains(group.target));
+      }) || null;
+    }
+
+    function activateGroup(group,options){
+      if(!group) return;
+      options = options || {};
+      activeGroup = group;
+      scrollRequestId++;
+      setCurrentGroup(group);
+      var directPanel = panelForTarget(group.target);
+      var panel = options.panel || (directPanel && group.panels.indexOf(directPanel) !== -1 ? directPanel : group.panels[0]);
+      if(group.role === 'price' || !group.panels.length){
+        activePanelId = '';
+        delete tabs.dataset.activePanel;
+        tabs.hidden = true;
+        tablist.innerHTML = '';
+        panels.forEach(function(item){ item.setAttribute('hidden',''); item.classList.remove('is-layer-active'); });
+        setStickyHeights();
+        if(options.scroll !== false) scrollToLayerTarget(options.target || group.target || pricingBlock,options.behavior);
+        return;
+      }
+      renderGroupTabs(group);
+      tabs.hidden = false;
+      activatePanel(panel,false);
+      setStickyHeights();
+      if(options.scroll !== false) scrollToLayerTarget(options.target || group.target || panel,options.behavior,panel);
     }
 
     tablist.addEventListener('click',function(event){
       var button = event.target.closest('.service-layer-tab');
       if(!button) return;
-      activatePanel(document.getElementById(button.dataset.layerTarget),true);
+      event.preventDefault();
+      event.stopPropagation();
+      var panel = document.getElementById(button.dataset.layerTarget);
+      activatePanel(panel,true);
+      if(activeGroup && activeGroup.hash && location.hash !== activeGroup.hash){
+        history.replaceState(null,'',activeGroup.hash);
+      }
     });
 
     tablist.addEventListener('keydown',function(event){
@@ -204,49 +270,95 @@
       if(next < 0) next = buttons.length - 1;
       if(next >= buttons.length) next = 0;
       buttons[next].focus();
-      activatePanel(document.getElementById(buttons[next].dataset.layerTarget),false);
+      activatePanel(document.getElementById(buttons[next].dataset.layerTarget),true);
+    });
+
+    groups.forEach(function(group){
+      group.link.addEventListener('click',function(event){
+        event.preventDefault();
+        activateGroup(group,{target:group.target});
+        if(group.hash && location.hash !== group.hash) history.pushState(null,'',group.hash);
+      });
     });
 
     document.querySelectorAll('a[href^="#"]').forEach(function(link){
+      if(toc.contains(link)) return;
       link.addEventListener('click',function(event){
         var hash = link.getAttribute('href');
         if(!hash || hash === '#') return;
         var target = null;
         try { target = document.querySelector(hash); }
         catch(error) { return; }
-        var panel = target && target.closest('.service-layer-panel');
-        if(panel){
+        var panel = panelForTarget(target);
+        var group = groupForTarget(target);
+        if(group){
           event.preventDefault();
-          activatePanel(panel,true,target);
+          activateGroup(group,{panel:panel,target:target});
           if(location.hash !== hash) history.pushState(null,'',hash);
         }
       });
     });
 
-    var initialPanel = null;
+    var hashTarget = null;
     if(location.hash){
       try {
-        var hashTarget = document.querySelector(location.hash);
-        initialPanel = hashTarget && hashTarget.closest('.service-layer-panel');
+        hashTarget = document.querySelector(location.hash);
       } catch(error) {}
     }
-    var activePanel = initialPanel || panels[0];
-    activatePanel(activePanel,false);
-    setLayerHeight();
-    if(location.hash && initialPanel){
-      scrollToLayerTarget(hashTarget,'auto');
+    var initialGroup = groupForTarget(hashTarget) || groups.find(function(group){ return group.role === 'price'; }) || groups[0];
+    activateGroup(initialGroup,{panel:panelForTarget(hashTarget),target:hashTarget || initialGroup.target,scroll:!!hashTarget,behavior:'auto'});
+    if(hashTarget && /^service-layer-panel-\d+$/.test(hashTarget.id || '') && initialGroup.hash){
+      history.replaceState(null,'',initialGroup.hash);
     }
-    window.addEventListener('resize',setLayerHeight,{passive:true});
+    setStickyHeights();
+
+    var compactTicking = false;
+    function updateCompactNav(){
+      compactTicking = false;
+      var shouldCompact = window.scrollY > 180;
+      var changed = document.body.classList.contains('service-nav-compact') !== shouldCompact;
+      document.body.classList.toggle('service-nav-compact',shouldCompact);
+      if(changed) window.requestAnimationFrame(setStickyHeights);
+    }
+    function requestCompactNav(){
+      if(compactTicking) return;
+      compactTicking = true;
+      window.requestAnimationFrame(updateCompactNav);
+    }
+    updateCompactNav();
+    window.addEventListener('scroll',requestCompactNav,{passive:true});
+    window.addEventListener('resize',setStickyHeights,{passive:true});
+    toc.addEventListener('transitionend',setStickyHeights);
+    tabs.addEventListener('transitionend',setStickyHeights);
     window.addEventListener('hashchange',function(){
       var target = null;
       try { target = location.hash ? document.querySelector(location.hash) : null; }
       catch(error) { return; }
-      var panel = target && target.closest('.service-layer-panel');
-      if(panel){
-        activatePanel(panel,false);
-        scrollToLayerTarget(target,'auto');
-      }
+      var panel = panelForTarget(target);
+      var group = groupForTarget(target);
+      if(group) activateGroup(group,{panel:panel,target:target,behavior:'auto'});
     });
+  }
+
+  function getTocRole(link){
+    var value = ((link.getAttribute('href') || '') + ' ' + link.textContent).toLowerCase();
+    if(/pricing|價格|費用/.test(value)) return 'price';
+    if(/case|案例/.test(value)) return 'cases';
+    if(/team|area|人員|地區/.test(value)) return 'people';
+    if(/difference|impact|差異|機型/.test(value)) return 'difference';
+    if(/flow|knowledge|知識|流程/.test(value)) return 'knowledge';
+    return 'content';
+  }
+
+  function getPanelRole(panel){
+    var id = (panel.id || '').toLowerCase();
+    var classes = (panel.className || '').toString().toLowerCase();
+    if(panel.classList.contains('service-story')) return 'content';
+    if(/case|carousel/.test(id) && !/team/.test(id)) return 'cases';
+    if(/team|area|consumer-protect/.test(id)) return 'people';
+    if(/difference|impact|myth|instrument/.test(id) || /impact-section/.test(classes)) return 'difference';
+    if(/flow|process|knowledge|faq/.test(id + ' ' + classes) || panel.querySelector('.faq-list')) return 'knowledge';
+    return 'content';
   }
 
   function initPriceTableLabels(){
@@ -297,13 +409,17 @@
       'service-area':'地區',
       'consumer-protect':'保障',
       'process':'預約',
-      'faq':'FAQ'
+      'faq':'FAQ',
+      'washer-differences':'機型比較',
+      'homeclean-difference':'清潔差異',
+      'water-tank-difference':'水塔差異',
+      'pipe-difference':'適用差異'
     };
     if(labelById[id]) return labelById[id];
     if(panel.classList.contains('service-story')) return '圖解';
     if(panel.classList.contains('service-flow') || /flow|process/.test(id)) return '流程';
-    if(panel.classList.contains('knowledge-rail')) return '知識';
     if(panel.classList.contains('impact-section') || /difference|impact|myth/.test(id)) return '差異';
+    if(panel.classList.contains('knowledge-rail')) return '知識';
     if(/case|carousel/.test(id)) return '案例';
     if(/area/.test(id)) return '地區';
     if(panel.querySelector('.faq-list')) return 'FAQ';
