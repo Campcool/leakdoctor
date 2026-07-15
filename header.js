@@ -13,7 +13,7 @@
   if(serviceTheme && !document.querySelector('link[data-ld-service-story]')){
     const storyCss = document.createElement('link');
     storyCss.rel = 'stylesheet';
-    storyCss.href = '/assets/service-story.css?v=20260714b';
+    storyCss.href = '/assets/service-story.css?v=20260715e';
     storyCss.setAttribute('data-ld-service-story','true');
     document.head.appendChild(storyCss);
   }
@@ -113,16 +113,16 @@
   }
   const existingCraftCss = document.querySelector('link[href*="craft.css"]');
   if(existingCraftCss){
-    existingCraftCss.href = '/assets/craft.css?v=20260714b';
+    existingCraftCss.href = '/assets/craft.css?v=20260715e';
   }else{
     const craftCss = document.createElement('link');
     craftCss.rel = 'stylesheet';
-    craftCss.href = '/assets/craft.css?v=20260714b';
+    craftCss.href = '/assets/craft.css?v=20260715e';
     document.head.appendChild(craftCss);
   }
   if(!document.querySelector('script[src*="craft.js"]')){
     const craftJs = document.createElement('script');
-    craftJs.src = '/assets/craft.js?v=20260712d';
+    craftJs.src = '/assets/craft.js?v=20260715e';
     craftJs.defer = true;
     document.head.appendChild(craftJs);
   }
