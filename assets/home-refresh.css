@@ -21,9 +21,9 @@ body{color:var(--text)!important;background:#fff!important}
 .hero-h1 em{color:var(--teal)!important}
 .hero-desc{color:#53656e!important;font-size:clamp(1rem,1.8vw,1.16rem)!important;line-height:1.9!important;max-width:56ch!important;margin-bottom:1.5rem!important}
 .hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:1.25rem}
-.hero-btn{background:var(--orange)!important;border-radius:14px!important;box-shadow:0 12px 26px rgba(242,140,40,.25)!important;margin:0!important;padding:1rem 1.35rem!important}
-.hero-btn:hover{background:var(--orange-dark)!important;transform:translateY(-1px)}
-.hero-secondary{display:inline-flex;align-items:center;padding:.92rem 1.25rem;border:1px solid #cbd7db;border-radius:14px;color:var(--ink);background:#fff;font-weight:800}
+.hero-btn{background:#06c755!important;border:1px solid #05ad4b!important;border-radius:14px!important;box-shadow:0 12px 26px rgba(6,199,85,.24)!important;margin:0!important;padding:1rem 1.35rem!important;text-decoration:none!important}
+.hero-btn:hover{background:#05ad4b!important;transform:translateY(-1px)}
+.hero-secondary{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:.92rem 1.25rem;border:1px solid #cbd7db;border-radius:14px;color:var(--ink);background:#fff;font:800 1rem 'Noto Sans TC',sans-serif;cursor:pointer}
 .hero-note{font-size:.8rem;color:var(--muted);margin-bottom:1.4rem}
 .trust-badges{margin:0!important;gap:.55rem!important}
 .trust-badge{background:transparent!important;border:0!important;color:#53656e!important;padding:.25rem .2rem!important;font-weight:700!important}

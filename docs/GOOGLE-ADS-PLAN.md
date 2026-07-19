@@ -6,7 +6,7 @@
 網站：`https://leakdoctor.tw/`  
 GA4：`G-1H1X1X9QZE`  
 主要轉換：`quote_submit`（送出網站表單並開啟 LINE 預填訊息）  
-次要訊號：`quote_open`、`line_click`
+次要訊號：`quote_open`、`line_click`、`line_direct_click`
 
 ---
 
@@ -17,6 +17,7 @@ GA4：`G-1H1X1X9QZE`
   - `quote_open`：使用者打開預約/估價 modal。
   - `quote_submit`：使用者填完表單送出，網站會組 LINE 預填訊息。
   - `line_click`：使用者點 LINE 連結。
+  - `line_direct_click`：使用者從首頁首屏或手機底部列直接開啟 LINE；`placement` 可區分入口。
   - `service_click` / `area_click`：服務與地區入口點擊。
 - 首頁與六大服務頁皆可作為搜尋廣告落地頁：
   - `/aircon.html`
@@ -52,6 +53,7 @@ GA4：`G-1H1X1X9QZE`
 6. 建立次要轉換：
    - `quote_open`：Secondary，觀察用，不給出價最佳化。
    - `line_click`：Secondary，觀察用。LINE 點擊不等於有效詢價，不建議第一階段當 Primary。
+   - `line_direct_click`：Secondary，觀察雙 CTA 中直接 LINE 路徑；不可與 `line_click` 相加當成獨立人次。
 
 ### 暫不做
 
@@ -189,7 +191,7 @@ Ad groups:
 2. 開啟 auto-tagging。
 3. 確認 `quote_submit` 在 GA4 事件中出現並設為 key event。
 4. 匯入 `quote_submit` 為 Primary conversion。
-5. 匯入 `quote_open`、`line_click` 為 Secondary conversions。
+5. 匯入 `quote_open`、`line_click`、`line_direct_click` 為 Secondary conversions。
 6. 建立 shared negative keyword list：見 `ads/google-ads-negative-keywords.txt`。
 7. 建立 Campaign A / B / C。
 8. 匯入關鍵字：見 `ads/google-ads-keywords.csv`。

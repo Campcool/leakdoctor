@@ -13,7 +13,25 @@
 }
 .svc-icon .craft-icon{width:27px;height:27px}
 .promise-icon .craft-icon,.item-icon .craft-icon,.drain-icon .craft-icon{width:25px;height:25px}
-.svc-card:nth-child(1){--service-accent:#087ea4}.svc-card:nth-child(2){--service-accent:#6d5bd0}.svc-card:nth-child(3){--service-accent:#d97706}.svc-card:nth-child(4){--service-accent:#0f766e}
+.svc-card[data-service="aircon"]{--service-accent:#087ea4;--service-accent-dark:#075f7d}
+.svc-card[data-service="washer"]{--service-accent:#6d5bd0;--service-accent-dark:#5142a7}
+.svc-card[data-service="homeclean"]{--service-accent:#d97706;--service-accent-dark:#a94f08}
+.svc-card[data-service="water-tank"]{--service-accent:#0284c7;--service-accent-dark:#075985}
+.svc-card[data-service="pipe-cleaning"]{--service-accent:#0e7490;--service-accent-dark:#155e75}
+.svc-card[data-service="leak-repair"]{--service-accent:#0f766e;--service-accent-dark:#115e59}
+.svc-card[data-service] .svc-price{
+  color:var(--service-accent-dark)!important;
+  background:color-mix(in srgb,var(--service-accent) 10%,#fff)!important;
+}
+.svc-card[data-service] .svc-btn-price{
+  color:var(--service-accent-dark)!important;
+  border-color:color-mix(in srgb,var(--service-accent) 38%,#fff)!important;
+}
+.svc-card[data-service] .svc-btn-book{
+  background:var(--service-accent)!important;
+  border-color:var(--service-accent)!important;
+}
+.svc-card[data-service]:hover{border-color:var(--service-accent)!important}
 
 /* Default surfaces are quiet. Depth appears only as feedback. */
 .item-card,.impact-card,.price-card,.myth-card,.instrument-card,.promise-item,.process-card,.service-step,.knowledge-card{

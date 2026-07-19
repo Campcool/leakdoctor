@@ -45,7 +45,7 @@
   - 右側 LINE 浮動鈕、回頂鈕、手機底部 LINE 預約列；網站不提供公開電話 CTA，也不顯示「加入我們」
   - 六服務專屬色系由 body theme class 與 CSS variables 串接頁籤及頁面 CTA：冷氣青藍、洗衣機紫、居家清潔琥珀、水塔綠、水管靛藍、漏水青綠
   - **預約表單 modal**（`ldOpenQuote(serviceKey)` 全域函式）：姓名/電話/地址/服務卡片/日期時段，送出 → 組訊息 → `line.me/R/oaMessage/@478xvlgl/?<encoded>` 開 LINE 預填
-  - GA4 載入與事件：`line_click`、`quote_open`、`quote_submit`
+  - GA4 載入與事件：`line_click`、`line_direct_click`、`quote_open`、`quote_submit`
   - ⚠️ 全部包在 `ldInit()`，body 未就緒時等 `DOMContentLoaded`——**文章頁在 `<head>` 載入 header.js，改壞這個模式會讓文章頁整個導覽消失**（曾發生）
 - 首頁、服務頁與地區頁不再常駐快速估價器；客戶點聯絡／預約 CTA 後才由 `header.js` 開啟共用 modal。
 - 頁面樣式：每頁 `<style>` 內嵌（同一套設計 token：--blue-dark #1e3a8a 等）。地區頁由產生器生成（腳本在 session scratchpad，已遺失，需要時照現有頁面仿寫）。
@@ -136,6 +136,14 @@ cases/
 - 修改後驗證慣例：`node --check header.js`；以 Node 驗證 JSON-LD、內部連結、四頁流程與禁止字樣；本機網址受瀏覽器安全政策阻擋時，直接使用正式部署標記與真機驗證，不可繞過安全政策。
 
 ## 5. 進度紀錄（新條目加在最上面）
+
+### 2026-07-19（Codex・前台 P0 轉換路徑與手機首屏）
+- 依 Claude 前台審查的 P0 方向執行，但維持目前六服務架構，不合併會刪除水塔／水管頁與新素材的舊分支。
+- 共用 LINE 預約表單降低阻力：姓名、電話、服務仍必填；服務地區改為選填，完整地址可在確認預約前補；機型與數量改為明確的選填收合區，未展開時不送出預設明細。後台已支援缺地址草稿與後續補問。
+- 首頁 Hero 與手機底部列改為雙路徑：「LINE 直接問／加入 LINE 免費初判」直接開啟官方帳號，「填單估價」再開共用表單；新增 GA4 `line_direct_click`，以 `placement=home-hero|mobile-sticky` 區分直接 LINE 入口，既有 `line_click`／`quote_open`／`quote_submit` 保留。
+- 手機 Header Logo 與服務列改成穩定尺寸，預設 spacer 從 130px 調整為接近實際首屏高度，並用 `ResizeObserver` 持續同步 fixed header 與錨點偏移，降低字體／圖片載入後的首屏跳動。
+- 首頁六張服務卡改用 `data-service` 明確綁定六組專屬色，價格、查價邊框、預約 CTA 與 hover 邊框都延續該服務色，不再由 `nth-child` 造成第 5／6 項掉色。
+- 共用資源快取版本升為 `20260719a`；部署前需驗證 390×844 與 1366×768 的 Header、雙 CTA、表單收合、六色服務卡、水平溢出與七個主要入口。
 
 ### 2026-07-16（Claude・前台四視角綜合審查 + 業主定案兩決策 → 交接 Codex）
 > 由 Claude 在文件分支產出後合入；正文以 Codex 的 main 版為準，本條為交接指標。
@@ -346,11 +354,12 @@ cases/
 - [ ] Google Search Console 提交新 sitemap、對改名頁面請求重新索引
 
 ### 🟠 高價值，AI 可做
-- [ ] **前台優化執行 — 依 `docs/FRONTEND-REVIEW-2026-07-16.md` 排序**（四視角綜合審查，已含業主定案 A/B 收費/保固口徑）。建議節奏：**P0 快贏**（表單地址降選填/市區級＋步進子表單收合、手機補一鍵直達 LINE、首屏雙 CTA、修 header spacer 130→~168 消跳動、服務頁主 CTA/價格吃專屬色＋修 craft.css 首頁六 icon 掉色）→ **P1 信任地基**（補真實評價、清洗頁保固區塊、統一商業模式敘事、hero 信任膠囊＋補「可開發票」、首屏效能）→ **P2 內容對等**（cases/team/knowledge 補清潔素材、首屏價值主張、導覽補百科/案例入口、水塔水管補價錨案例、漏水文章接統一漏斗、地理統一八縣市）→ **P3 精修**。P0 五項附「實作建議草圖（參考非要求）」；business 口徑（A/B）為必守準據，技術做法由 Codex 評估。§7 既有「cases/team 清潔化」「Google Ads」等項與本清單對應細項可併看。
+- [x] **前台轉換 P0**：地址選填、機型數量收合、首頁／手機雙 CTA、`line_direct_click`、手機 Header CLS 與六服務卡配色已於 2026-07-19 完成。
+- [ ] **前台優化 P1–P3 — 依 `docs/FRONTEND-REVIEW-2026-07-16.md` 排序**：P1 信任地基（真實評價、清洗保固、商業模式敘事、可開發票、首屏效能）→ P2 內容對等（cases/team/knowledge 清潔素材、水塔水管價錨案例、漏水文章漏斗、地理統一）→ P3 精修。業主定案 A／B 收費與保固口徑為必守準據。
 - [x] **廣告投放前視覺改版 P1**：首頁＋冷氣／洗衣機／抓漏首屏、DESIGN.md、流程示意與知識型 OG；2026-07-11 已部署並完成正式網址驗證。
 - [ ] **視覺改版 P2**：延伸至居家清潔、地區、案例、百科與文章頁；建立真實案例／流程示意的圖片標示規格
 - [x] **廣告啟動包 P0**：已建立 Google Ads 第一階段投放架構、關鍵字、RSA 文案、否定字、assets 與追蹤 SOP（`docs/GOOGLE-ADS-PLAN.md` + `ads/`）。
-- [ ] **Google Ads 帳號設定 P1**：連結 GA4、開啟 auto-tagging、將 `quote_submit` 設為 GA4 key event 並匯入 Google Ads Primary conversion；`quote_open` / `line_click` 設 Secondary。
+- [ ] **Google Ads 帳號設定 P1**：連結 GA4、開啟 auto-tagging、將 `quote_submit` 設為 GA4 key event 並匯入 Google Ads Primary conversion；`quote_open` / `line_click` / `line_direct_click` 設 Secondary。
 - [ ] **Google Ads 上線 P2**：業主確認每日預算、Google Ads Customer ID、投放地區後，建立 Search campaigns；第一階段不開 PMax/Display/YouTube。
 - [x] **LINE Bot P1**：2026-07-11 驗收通過並上線（詳 BOT-PLAN 驗收報告）。剩 PARTNER_LINE_USER_ID 待業主設定
 - [x] **LINE Bot P2**：夥伴回報、完工、車馬費、逾時／D-1／今日提醒與戰情室程式已完成；仍待 PARTNER_LINE_USER_ID 與管理 Secrets
@@ -360,7 +369,7 @@ cases/
 - [ ] 剩餘地區頁（宜蘭？台中以南？）——先問業主服務範圍再做
 
 ### 🟡 中低優先
-- [x] header 導覽改為文件流內 sticky 並取消 runtime body padding；跨頁首屏不再依延遲 padding 校正
+- [x] Header 採 fixed＋等高 spacer；2026-07-19 補上穩定手機尺寸與 `ResizeObserver`，避免初始高度與載入後高度不一致
 - [x] 主導覽與估價服務項目改為一致 SVG；內容區既有 emoji 後續依需求逐批替換
 - [ ] footer「服務時間」文案是否改為「LINE 24 小時可留言預約・客服回覆 週一至週六 09:00–18:00」（待業主確認）
 - [ ] og-image.html 舊工具頁決定去留

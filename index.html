@@ -144,10 +144,10 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </style>
 </head>
 <body>
-<link rel="stylesheet" href="assets/home-refresh.css">
+<link rel="stylesheet" href="assets/home-refresh.css?v=20260719a">
 <link rel="stylesheet" href="assets/process-images.css">
-<link rel="stylesheet" href="assets/craft.css?v=20260716a">
-<script src="header.js?v=20260716a"></script>
+<link rel="stylesheet" href="assets/craft.css?v=20260719a">
+<script src="header.js?v=20260719a"></script>
 
 <!-- Hero -->
 <section id="hero">
@@ -157,10 +157,10 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
     <h1 class="hero-h1">居家問題，<em>先看懂</em>再處理</h1>
     <p class="hero-desc">冷氣、洗衣機、居家清潔與漏水問題，不必先猜價格。告訴我們設備與現場狀況，服務團隊會整理需求、說明處理方式，再確認適合的到府人員與時間。</p>
     <div class="hero-actions">
-      <button type="button" class="hero-btn" onclick="ldOpenQuote()">開始免費估價</button>
-      <a class="hero-secondary" href="#service-process">先看服務流程</a>
+      <a class="hero-btn" href="https://lin.ee/WVxmY65" target="_blank" rel="noopener" data-line-direct="home-hero">加入 LINE 免費初判</a>
+      <button type="button" class="hero-secondary" onclick="ldOpenQuote()">填表快速估價</button>
     </div>
-    <div class="hero-note">約 1 分鐘填寫・送出後開啟 LINE・未確認前不安排施工</div>
+    <div class="hero-note">可直接傳照片詢問・填表約 1 分鐘・未確認前不安排施工</div>
     <div class="trust-badges"><span class="trust-badge">價格與條件先確認</span><span class="trust-badge">依地區安排團隊</span><span class="trust-badge">需要時由專員協處</span></div>
   </div>
   <div class="hero-visual">
@@ -185,7 +185,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   <h2 class="sec-title">六大居家服務，一站搞定</h2>
   <p class="sec-sub">點選項目查看服務內容與價格參考</p>
   <div class="svc-grid">
-    <div class="svc-card">
+    <div class="svc-card" data-service="aircon">
       <div class="svc-icon c1"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#aircon"></use></svg></div>
       <div class="svc-title">冷氣清洗</div>
       <div class="svc-desc">分離式、吊隱式與窗型依機型拆洗，完成後復原、試運轉並確認基本排水。</div>
@@ -195,7 +195,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
         <button type="button" class="svc-btn-book" onclick="ldOpenQuote('aircon')">立即預約</button>
       </div>
     </div>
-    <div class="svc-card">
+    <div class="svc-card" data-service="washer">
       <div class="svc-icon c2"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#washer"></use></svg></div>
       <div class="svc-title">洗衣機清洗</div>
       <div class="svc-desc">直立式、滾筒式洗衣機清洗，深層去除洗衣槽黑垢與霉味。</div>
@@ -205,7 +205,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
         <button type="button" class="svc-btn-book" onclick="ldOpenQuote('washer')">立即預約</button>
       </div>
     </div>
-    <div class="svc-card">
+    <div class="svc-card" data-service="homeclean">
       <div class="svc-icon c3"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#homeclean"></use></svg></div>
       <div class="svc-title">居家清潔</div>
       <div class="svc-desc">定期清潔、大掃除、入住退租與單項加強清潔；抽油煙機清洗放在這一類中確認。</div>
@@ -215,7 +215,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
         <button type="button" class="svc-btn-book" onclick="ldOpenQuote('homeclean')">立即預約</button>
       </div>
     </div>
-    <div class="svc-card">
+    <div class="svc-card" data-service="water-tank">
       <div class="svc-icon c1"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#droplet"></use></svg></div>
       <div class="svc-title">水塔清洗</div>
       <div class="svc-desc">白鐵／塑膠水塔、水泥水塔、地下蓄水池與社區案件，先確認容量、顆數與停水條件。</div>
@@ -225,7 +225,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
         <button type="button" class="svc-btn-book" onclick="ldOpenQuote('water-tank')">立即預約</button>
       </div>
     </div>
-    <div class="svc-card">
+    <div class="svc-card" data-service="pipe-cleaning">
       <div class="svc-icon c2"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#tools"></use></svg></div>
       <div class="svc-title">水管清洗</div>
       <div class="svc-desc">黃水、異味、水量變小先分類；依屋齡、管材、出水點與停水條件判斷是否適合清洗。</div>
@@ -235,7 +235,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
         <button type="button" class="svc-btn-book" onclick="ldOpenQuote('pipe-cleaning')">立即預約</button>
       </div>
     </div>
-    <div class="svc-card">
+    <div class="svc-card" data-service="leak-repair">
       <div class="svc-icon c4"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#leak"></use></svg></div>
       <div class="svc-title">漏水檢測與修補</div>
       <div class="svc-desc">依現象安排檢測、定位水源，再選擇適合的止漏與修補方式。</div>
