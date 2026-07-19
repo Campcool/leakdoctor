@@ -2,7 +2,7 @@
 
 > 目標：先用 Google Search 抓「已經在找清洗/檢測/修補」的高意圖需求，讓客戶進站後用 LINE 預約或送出需求表單。暫不先開 Performance Max / Display / YouTube，避免沒有轉換資料時被系統花在低意圖流量。
 
-最後更新：2026-07-15（Asia/Taipei）  
+最後更新：2026-07-19（Asia/Taipei）
 網站：`https://leakdoctor.tw/`  
 GA4：`G-1H1X1X9QZE`  
 主要轉換：`quote_submit`（送出網站表單並開啟 LINE 預填訊息）  
@@ -80,6 +80,7 @@ Name: `GOOG_Search_HighIntent_Cleaning_NorthWest_2026Q3`
 
 Ad groups:
 - `AG_AirconCleaning`
+- `AG_AirconSymptoms`：室內機結霜／結冰、吹白霧／霧氣、風量變小；文案先分流髒污與故障，不承諾清洗必定解決。
 - `AG_WasherCleaning`
 - `AG_HomeCleaning`
 
@@ -94,7 +95,15 @@ Name: `GOOG_Search_HighIntent_WaterLeak_NorthWest_2026Q3`
 Ad groups:
 - `AG_WaterTankCleaning`
 - `AG_PipeCleaning`
+- `AG_PipeSymptoms`：熱水器點不著、只有熱水變小、熱水水量／水壓不足；文案先比較冷熱水並排除熱水器與閥件問題。
 - `AG_LeakRepair`
+
+### 症狀型搜尋的投放原則
+
+- 客戶不一定先搜尋服務名稱，常從「冷氣結霜」「冷氣吹白霧」「熱水器點不著」「熱水水量不足」開始找原因；這些字另建 ad group，讓廣告與落地頁使用相同語言。
+- 第一階段只使用 exact／phrase，不先使用 broad。症狀查詢較容易混入維修、DIY 與危險故障需求，需要每週檢查 Search terms 再擴字。
+- 廣告不可宣稱清洗一定能修好：冷氣結霜也可能是冷媒、風扇或感測器；熱水器點火失敗也可能是電池、瓦斯、點火器、濾網、閥件或本體故障。
+- 安全分流：冷氣若有焦味、真正煙霧或異常聲音，文案與頁面都要求先停機維修；不要用「洗完就好」吸引不適合的案件。
 
 ### Campaign C：品牌保護
 
@@ -163,10 +172,12 @@ Ad groups:
 | Ad group | Landing page | 轉換重點 |
 |---|---|---|
 | `AG_AirconCleaning` | `/aircon.html` | 價格清楚、機型、台數、LINE 預約 |
+| `AG_AirconSymptoms` | `/aircon.html` | 結霜先停機、白霧與煙分辨、清洗／維修分流 |
 | `AG_WasherCleaning` | `/washer.html` | 直立式/滾筒式、拆槽理由、品牌型號 |
 | `AG_HomeCleaning` | `/homeclean.html` | 定期、大掃除、退租、裝潢細清，抽油煙機放在居家清潔內 |
 | `AG_WaterTankCleaning` | `/water-tank.html` | 容量、顆數、停水、入口通道 |
 | `AG_PipeCleaning` | `/pipe-cleaning.html` | 屋齡、管材、出水點、漏水風險 |
+| `AG_PipeSymptoms` | `/pipe-cleaning.html` | 冷熱水比較、熱水器點火、水量不足、設備／管路分流 |
 | `AG_LeakRepair` | `/leak-repair.html` | 水痕、壁癌、漏點定位、修補方式 |
 | `AG_Brand` | `/` | 品牌保護、全服務入口 |
 
@@ -196,4 +207,3 @@ Ad groups:
 - Google Ads 帳號是否已建立、付款方式是否已設定。
 - Google Ads Customer ID。
 - 是否要我後續直接在帳號內建立 campaign。
-
