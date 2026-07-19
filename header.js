@@ -119,11 +119,11 @@
   }
   const existingCraftCss = document.querySelector('link[href*="craft.css"]');
   if(existingCraftCss){
-    existingCraftCss.href = '/assets/craft.css?v=20260719a';
+    existingCraftCss.href = '/assets/craft.css?v=20260719b';
   }else{
     const craftCss = document.createElement('link');
     craftCss.rel = 'stylesheet';
-    craftCss.href = '/assets/craft.css?v=20260719a';
+    craftCss.href = '/assets/craft.css?v=20260719b';
     document.head.appendChild(craftCss);
   }
   if(!document.querySelector('script[src*="craft.js"]')){

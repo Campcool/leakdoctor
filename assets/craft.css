@@ -49,6 +49,30 @@ body.service-page .hero-h1 em{
   color:var(--service-accent,var(--ld-orange-dark,#d96f0d))!important;
   font-style:normal;
 }
+body.service-page .page-btn,
+body.service-page .mid-cta-btn,
+body.service-page .cta-btn,
+body.leak-page .hero-btn,
+body.leak-page .cta-btn{
+  background:var(--service-accent,var(--ld-teal,#138a80))!important;
+  border-color:var(--service-accent,var(--ld-teal,#138a80))!important;
+  box-shadow:0 10px 22px color-mix(in srgb,var(--service-accent,var(--ld-teal,#138a80)) 24%,transparent)!important;
+}
+body.service-page .page-btn:hover,
+body.service-page .mid-cta-btn:hover,
+body.service-page .cta-btn:hover,
+body.leak-page .hero-btn:hover,
+body.leak-page .cta-btn:hover{
+  background:var(--service-accent-dark,var(--service-accent,var(--ld-teal,#138a80)))!important;
+}
+body.service-page .price-amt,
+body.leak-page .price-num,
+body.leak-page .price-main{
+  color:var(--service-accent-dark,var(--service-accent,var(--ld-teal,#138a80)))!important;
+}
+body.service-page .price-note{
+  border-color:var(--service-accent,var(--ld-teal,#138a80))!important;
+}
 body.service-page .trust-badges{
   display:flex!important;
   flex-wrap:wrap!important;
