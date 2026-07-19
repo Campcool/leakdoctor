@@ -374,7 +374,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
 }
 .ld-sticky-actions{display:flex;align-items:center;gap:7px;flex-shrink:0}
 .ld-sticky-btn--form{border-color:#cbd7db;background:#fff;color:#17324d;box-shadow:none}
-@media(max-width:370px){
+@media(max-width:420px){
   #ld-stickybar{gap:7px;padding-left:9px;padding-right:9px}
   .ld-sticky-text{display:none}
   .ld-sticky-actions{width:100%}
