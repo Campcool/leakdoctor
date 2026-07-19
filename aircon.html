@@ -69,6 +69,14 @@ h2.h{font-size:1.35rem;font-weight:900;color:var(--blue-dark);margin-bottom:1.1r
 .item-card:hover{border-color:var(--blue-mid);box-shadow:0 6px 20px rgba(0,0,0,.08);transform:translateY(-2px)}
 .item-name{font-weight:700;font-size:.98rem;color:var(--gray-900);margin-bottom:.4rem}
 .item-desc{font-size:.85rem;color:var(--gray-500);line-height:1.7}
+.symptom-photo{display:grid;margin:1rem 0 0;background:#fff;border:2px solid var(--gray-200);border-radius:8px;overflow:hidden}
+.symptom-photo picture,.symptom-photo img{display:block;width:100%}
+.symptom-photo img{aspect-ratio:16/10;object-fit:cover}
+.symptom-photo-copy{padding:1.05rem 1.1rem;align-self:center}
+.symptom-photo-label{display:block;margin-bottom:.45rem;color:var(--blue);font-size:.76rem;font-weight:800}
+.symptom-photo-copy strong{display:block;color:var(--gray-900);font-size:1.02rem;line-height:1.5}
+.symptom-photo-copy p{margin-top:.5rem;color:var(--gray-500);font-size:.84rem;line-height:1.75}
+@media(min-width:760px){.symptom-photo{grid-template-columns:minmax(0,1.25fr) minmax(270px,.75fr)}.symptom-photo picture,.symptom-photo img{height:100%}}
 .price-table{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;border:2px solid var(--gray-200)}
 .price-table th{background:var(--blue-dark);color:#fff;font-size:.85rem;text-align:left;padding:.75rem 1rem}
 .price-table td{padding:.85rem 1rem;font-size:.9rem;border-top:1px solid var(--gray-100);color:var(--gray-700)}
@@ -163,6 +171,10 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 <div class="item-card"><div class="item-name craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#droplet"></use></svg>出風口吹白霧／霧氣</div><div class="item-desc">潮濕環境下可能只是短暫凝結；若伴隨焦味、異常煙霧或異音，應立即停機並安排維修。</div></div>
 
     </div>
+    <figure class="symptom-photo">
+      <picture><img src="/cases/aircon/aircon-icing-inquiry-20260719.jpg" alt="分離式冷氣室內機蒸發器表面大範圍結霜的實際詢問照片" loading="lazy" width="1200" height="750"></picture>
+      <figcaption class="symptom-photo-copy"><span class="symptom-photo-label">實際症狀照片</span><strong>室內機蒸發器表面大範圍結霜</strong><p>這是客戶提供的初步詢問照片，尚未進行現場檢測。結霜可能與髒污造成的風量不足有關，也可能涉及冷媒、風扇、感測器或控制故障；建議先停機退冰，再安排清洗或維修判斷。</p></figcaption>
+    </figure>
     <div class="mid-cta">
       <div class="mid-cta-text">想知道你家冷氣清洗實際費用？加 LINE 免費詢問，現場評估後才報價</div>
       <button type="button" class="mid-cta-btn craft-action-icon" onclick="ldOpenQuote('aircon')"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#calendar"></use></svg>線上預約估價</button>

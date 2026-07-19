@@ -52,6 +52,20 @@ Header: `清潔類型`
 - 白鐵水塔
 - 住家水管
 
+## Image Assets
+
+| Ad group | Ratio | File | 使用情境 |
+|---|---|---|---|
+| `AG_AirconSymptoms` | 1.91:1 | `ads/assets/aircon-icing-landscape-1200x628.jpg` | 冷氣結霜、室內機結冰、風量不足等橫式版位 |
+| `AG_AirconSymptoms` | 1:1 | `ads/assets/aircon-icing-square-960x960.jpg` | 冷氣結霜症狀的方形版位 |
+
+素材規則：
+
+- 照片已取得網站與廣告使用同意，輸出檔已移除原始 EXIF／GPS metadata。
+- 這是客戶提供的實際症狀照片，尚未進行現場檢測，不可標示為清洗前後案例或宣稱清洗一定能排除結霜。
+- 廣告文字應搭配「結霜先停機」「髒污或故障先分流」，不要加上療效、節電或修復保證。
+- 上傳 Google Ads 時同一 asset group 同時提供橫式與方形版本，避免平台以單一圖片自動裁切。
+
 ## UTM Template
 
 Final URL suffix:
@@ -61,4 +75,3 @@ utm_source=google&utm_medium=cpc&utm_campaign={campaignid}&utm_content={creative
 ```
 
 如果使用 Google Ads auto-tagging，GCLID 會自動附加；UTM 主要給 GA4 報表與人工查詢使用。
-
