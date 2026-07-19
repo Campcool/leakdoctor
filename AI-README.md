@@ -143,7 +143,8 @@ cases/
 - 首頁 Hero 與手機底部列改為雙路徑：「LINE 直接問／加入 LINE 免費初判」直接開啟官方帳號，「填單估價」再開共用表單；新增 GA4 `line_direct_click`，以 `placement=home-hero|mobile-sticky` 區分直接 LINE 入口，既有 `line_click`／`quote_open`／`quote_submit` 保留。
 - 手機 Header Logo 與服務列改成穩定尺寸，預設 spacer 從 130px 調整為接近實際首屏高度，並用 `ResizeObserver` 持續同步 fixed header 與錨點偏移，降低字體／圖片載入後的首屏跳動。
 - 首頁六張服務卡改用 `data-service` 明確綁定六組專屬色，價格、查價邊框、預約 CTA 與 hover 邊框都延續該服務色，不再由 `nth-child` 造成第 5／6 項掉色。
-- 共用資源快取版本升為 `header.js?v=20260719c`、`craft.css?v=20260719b`；420px 以下的手機底部列隱藏說明文字，兩顆 CTA 平均分寬，避免窄螢幕溢出；服務頁 Hero／中段／底部估價 CTA 與價格文字明確套用各服務主色。部署前需驗證 390×844 與 1366×768 的 Header、雙 CTA、表單收合、六色服務卡、水平溢出與七個主要入口。
+- 共用資源快取版本升為 `header.js?v=20260719c`、`craft.css?v=20260719b`；420px 以下的手機底部列隱藏說明文字，兩顆 CTA 平均分寬，避免窄螢幕溢出；服務頁 Hero／中段／底部估價 CTA 與價格文字明確套用各服務主色。
+- 已部署功能 commits `ebd362d`、`186f112`、`cf0d7e2`。正式站 390×844 驗證：Header／spacer 同為 172px、文件 `scrollWidth=375` 無橫向溢出、六個服務鍵完整、底部兩顆 CTA 各 175px；表單地址為選填、選服務後機型數量仍收合且可正常展開。水管頁驗證 Hero CTA 與價格文字均為主色 `#0e7490`，七個主入口使用最終快取版本且無破圖；1366×768 首頁 Header 為 79px、六張服務卡色彩正常。
 
 ### 2026-07-16（Claude・前台四視角綜合審查 + 業主定案兩決策 → 交接 Codex）
 > 由 Claude 在文件分支產出後合入；正文以 Codex 的 main 版為準，本條為交接指標。
