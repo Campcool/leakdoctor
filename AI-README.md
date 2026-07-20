@@ -40,6 +40,7 @@
 ## 3. 技術架構
 
 - **純靜態站**，無框架、無打包工具，直接編輯 HTML。部署 = push 到 `main`（GitHub Pages）。
+- 根目錄保留 `.nojekyll`，讓 GitHub Pages 直接發布靜態檔案，不執行不必要的 Jekyll metadata build；勿刪除。
 - **`header.js` 是全站共用核心**（每頁 `<script src="header.js">` 或 `../header.js` 載入），runtime 注入：
   - fixed header＋6 個主服務頁籤（root 絕對路徑 `/xxx.html`，讓 /articles/ 下也正確）；桌機 Logo 首頁入口與服務頁籤同列等高，手機維持 Logo＋3×2 服務選項
   - 右側 LINE 浮動鈕、回頂鈕、手機底部 LINE 預約列；網站不提供公開電話 CTA，也不顯示「加入我們」
@@ -146,6 +147,7 @@ cases/
 - 漏水頁上架 3 張「插座異常出水／灌注施工／局部開孔」真實紀錄；六服務 hero 圖片輪播的第三張已改用相對應實拍（居家清潔沿用既有實拍）。
 - 修正共用橫向案例 grid 同時保留明示欄位與 auto-column，導致手機第一張卡片曾被壓成約 2px 的問題；現在手機為 280px 橫滑、桌機 2–3 欄，六頁均無頁面級橫向溢出。
 - 驗證：`header.js`／`craft.js` 語法、`git diff --check`、37 個 `/cases/` 圖片引用零缺檔；本機瀏覽器檢查六服務頁桌機卡片數與圖片錯誤皆正常，390px 手機抽查案例卡寬 280px、無破圖與頁面溢出。
+- 首次部署遭 GitHub Pages API 連續回傳 `503`（程式 build 本身無錯）；純靜態站已新增 `.nojekyll`，後續部署直接發布檔案並略過 Jekyll metadata build。
 
 ### 2026-07-19（Codex・前台 P0 轉換路徑與手機首屏）
 - 依 Claude 前台審查的 P0 方向執行，但維持目前六服務架構，不合併會刪除水塔／水管頁與新素材的舊分支。
