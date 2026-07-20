@@ -1,12 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <rect width="128" height="128" rx="32" fill="#f8fafc"/>
-  <path d="M22 68c7-30 30-49 62-50" fill="none" stroke="#078b91" stroke-width="10" stroke-linecap="round"/>
-  <path d="M47 82c14 9 33 8 50-6" fill="none" stroke="#078b91" stroke-width="8" stroke-linecap="round"/>
-  <path d="M86 19l5 12 12 5-12 5-5 12-5-12-12-5 12-5 5-12z" fill="#078b91"/>
-  <path d="M40 48l27 18-15 23-27-18z" fill="#1f2937"/>
-  <path d="M61 33c4-6 13-2 10 5L60 63l-11-7z" fill="#111827"/>
-  <path d="M27 70l27 18-3 5c-5 8-16 10-24 5l-7-4z" fill="#111827"/>
-  <path d="M24 96c10 5 21 3 27-6" fill="none" stroke="#078b91" stroke-width="5" stroke-linecap="round"/>
-  <circle cx="26" cy="47" r="4" fill="#078b91"/>
-  <circle cx="104" cy="67" r="5" fill="#078b91"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="8 8 112 112" role="img" aria-label="灰汰郎刷子標誌">
+  <g transform="rotate(15 64 64)">
+    <g transform="translate(-9 -42) scale(1.6)">
+      <path d="M61 33c4-6 13-2 10 5L60 63l-11-7z" fill="#25313d"/>
+      <path d="M40 48l27 18-15 23-27-18z" fill="#25313d"/>
+      <path d="M27 70l27 18-3 5c-5 8-16 10-24 5l-7-4z" fill="#078b91"/>
+    </g>
+  </g>
 </svg>

@@ -44,6 +44,8 @@
 .svc-price,.price-amt,.price-row,.price-table{font-variant-numeric:tabular-nums}
 .hero-h1,.page-title,.hero-h1,.sec-title,.impact-title,.service-flow h2,.knowledge-rail h2{text-wrap:balance}
 .hero-desc,.page-desc,.impact-lead,.service-flow-intro,.knowledge-rail-intro{text-wrap:pretty}
+.headline-line{display:block;white-space:nowrap}
+.headline-line+.headline-line{margin-top:.08em}
 body.service-page .page-title em,
 body.service-page .hero-h1 em{
   color:var(--service-accent,var(--ld-orange-dark,#d96f0d))!important;
