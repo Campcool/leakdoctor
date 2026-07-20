@@ -148,7 +148,7 @@ cases/
 - 修正共用橫向案例 grid 同時保留明示欄位與 auto-column，導致手機第一張卡片曾被壓成約 2px 的問題；現在手機為 280px 橫滑、桌機 2–3 欄，六頁均無頁面級橫向溢出。
 - 驗證：`header.js`／`craft.js` 語法、`git diff --check`、37 個 `/cases/` 圖片引用零缺檔；本機瀏覽器檢查六服務頁桌機卡片數與圖片錯誤皆正常，390px 手機抽查案例卡寬 280px、無破圖與頁面溢出。
 - 首次部署遭 GitHub Pages API 連續回傳 `503`（程式 build 本身無錯）；純靜態站已新增 `.nojekyll`，後續部署直接發布檔案並略過 Jekyll metadata build。
-- 正式站抽查時發現 `header.js` 仍會把 `craft.css` runtime 版號覆寫回 `20260719b`，已同步更新為 `20260720a`；後續修改共用 CSS 時需同時更新 HTML query 與此 runtime 注入版號。
+- 正式站抽查時發現 `header.js` 仍會把 `craft.css` runtime 版號覆寫回 `20260719b`，已同步更新並將 HTML／runtime 的 JS、CSS cache key 統一升為 `20260720b`；後續修改共用檔案時兩處版號必須一起更新。
 
 ### 2026-07-19（Codex・前台 P0 轉換路徑與手機首屏）
 - 依 Claude 前台審查的 P0 方向執行，但維持目前六服務架構，不合併會刪除水塔／水管頁與新素材的舊分支。
