@@ -669,7 +669,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
       cards:[
         {tag:'為什麼需要洗',title:'髒污常藏在濾網後面',text:'蒸發器、風鼓、集水盤與排水管累積灰塵後，容易出現異味、風量變小或滴水。',image:'/assets/optimized/aircon-dirt-map-sm.webp',fallback:'/assets/optimized/aircon-dirt-map-sm.jpg'},
         {tag:'怎麼洗',title:'打開面板清到風鼓與排水',text:'清洗前先保護現場，再依機型拆洗濾網、蒸發器、風鼓、集水盤與排水管。',image:'/assets/service-story/aircon-service-story-20260714.webp',fallback:'/assets/service-story/aircon-service-story-20260714.jpg'},
-        {tag:'清洗前後案例',title:'確認風量、異味與排水',text:'復原後檢查出風、排水與運轉狀況，避免只看外觀就結束。',image:'/assets/optimized/aircon-leak-guide-sm.webp',fallback:'/assets/optimized/aircon-leak-guide-sm.jpg'}
+        {tag:'清洗前後案例',title:'風鼓與出風口清潔前後',text:'真實服務紀錄可直接看出霉斑與附著髒污的處理差異，復原後仍會檢查出風、排水與運轉。',image:'/cases/aircon/case02-combined.webp',fallback:'/cases/aircon/case02-combined.jpg',width:1200,height:1200}
       ]
     },
     washer:{
@@ -677,7 +677,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
       cards:[
         {tag:'為什麼需要洗',title:'內外槽夾層才是異味來源',text:'洗劑殘留、棉絮、皮屑與潮濕霉斑常堆在槽背，看起來乾淨也可能有黑屑。',image:'/assets/optimized/washer-dirt-source-sm.webp',fallback:'/assets/optimized/washer-dirt-source-sm.jpg',fit:'contain',width:733,height:1100},
         {tag:'怎麼洗',title:'拆出內槽才看得到槽背',text:'直立式與滾筒式結構不同，會先看品牌、容量、安裝空間，再安排可拆洗範圍。',image:'/assets/service-story/washer-service-story-20260714.webp',fallback:'/assets/service-story/washer-service-story-20260714.jpg'},
-        {tag:'完工確認',title:'組裝後要試運轉',text:'清洗後會復原部件並確認進水、排水與脫水，讓機器回到可正常使用的狀態。',image:'/assets/optimized/washer-hidden-dirt-sm.webp',fallback:'/assets/optimized/washer-hidden-dirt-sm.jpg'}
+        {tag:'清洗前後案例',title:'拆出內槽才看得到的差異',text:'槽背、底盤與支架的髒污藏在外觀下方；清潔完成、復原後還要確認進水、排水與脫水。',image:'/cases/washer/case02-combined.webp',fallback:'/cases/washer/case02-combined.jpg',width:1200,height:1200}
       ]
     },
     homeclean:{
@@ -693,7 +693,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
       cards:[
         {tag:'為什麼需要洗',title:'蓄水容器會累積沉積物',text:'屋頂水塔、塑膠水塔、水泥水塔與地下蓄水池，都要先看容量與內部狀況。',image:'/assets/service-story/water-tank-service-story-20260714.webp',fallback:'/assets/service-story/water-tank-service-story-20260714.jpg'},
         {tag:'怎麼洗',title:'停水、排水、復水要有順序',text:'上下水塔、加壓馬達與排水點會影響施工安排，報價前要先看照片。',image:'/assets/optimized/water-tank-system-sm.webp',fallback:'/assets/optimized/water-tank-system-sm.jpg',fit:'contain',width:733,height:1100},
-        {tag:'清洗前後案例',title:'內壁清潔與復水確認',text:'清洗後會確認水塔內壁、排水狀況與復水流程，降低沉積物再次進入用水端。',image:'/assets/optimized/water-tank-hero-sm.webp',fallback:'/assets/optimized/water-tank-hero-sm.jpg'}
+        {tag:'清洗前後案例',title:'從頂部人孔看內壁與底部',text:'真實服務紀錄呈現內壁與底部沉積清除後的狀況，完工還會確認排水與復水流程。',image:'/cases/water-tank/case01-after.webp',fallback:'/cases/water-tank/case01-after.jpg',width:1200,height:1600}
       ]
     },
     'pipe-cleaning':{
@@ -701,7 +701,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
       cards:[
         {tag:'為什麼需要洗',title:'黃水、異味、水量變小要先分類',text:'原因可能來自水塔、管材、熱水器或閥件，不一定全都適合直接清洗。',image:'/assets/service-story/pipe-cleaning-service-story-20260714.webp',fallback:'/assets/service-story/pipe-cleaning-service-story-20260714.jpg'},
         {tag:'怎麼洗',title:'先判斷管材與屋齡',text:'水管清洗可改善沉積，但老舊管線去除堵塞後可能讓滲漏更明顯。',image:'/assets/optimized/pipe-cleaning-effects-sm.webp',fallback:'/assets/optimized/pipe-cleaning-effects-sm.jpg',fit:'contain',width:733,height:1100},
-        {tag:'清洗前後案例',title:'前後水色與水量一起確認',text:'完工時會觀察出水狀況、水量變化與濾網沉積，協助判斷是否還需要檢修。',image:'/assets/optimized/pipe-cleaning-hero-sm.webp',fallback:'/assets/optimized/pipe-cleaning-hero-sm.jpg'}
+        {tag:'現場實拍',title:'堵塞可能發生在管件與接頭',text:'鏽蝕、沉積、濾網或閥件都可能讓水量變小；是否適合清洗要搭配管材、屋齡與設備一起判斷。',image:'/cases/pipe-cleaning/case01-blockage.webp',fallback:'/cases/pipe-cleaning/case01-blockage.jpg',width:1200,height:1600}
       ]
     },
     'leak-repair':{
@@ -709,7 +709,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
       cards:[
         {tag:'為什麼需要檢測',title:'水痕不等於漏點',text:'牆面、天花、窗框或浴室滲水，需要先縮小範圍，避免盲目施工。',image:'/assets/optimized/leak-detection-methods-sm.webp',fallback:'/assets/optimized/leak-detection-methods-sm.jpg'},
         {tag:'怎麼查',title:'用現象與工具交叉判斷',text:'熱像、水分、色素或局部拆檢會依現場條件選用，不用同一套答案套所有漏水。',image:'/assets/service-story/leak-repair-service-story-20260714.webp',fallback:'/assets/service-story/leak-repair-service-story-20260714.jpg'},
-        {tag:'修補案例',title:'找到源頭再選工法',text:'檢測、灌注、防水或重做防水層的價格差很多，先判斷才能避免修錯。',image:'/assets/optimized/home-leak-knowledge-sm.webp',fallback:'/assets/optimized/home-leak-knowledge-sm.jpg'}
+        {tag:'現場實拍',title:'異常出水位置不等於真正漏點',text:'水甚至可能從插座或接縫流出；先停用附近電源並縮小水源範圍，再決定檢測與修補方式。',image:'/cases/leak-repair/case01-outlet.webp',fallback:'/cases/leak-repair/case01-outlet.jpg',width:1200,height:1600}
       ]
     }
   };

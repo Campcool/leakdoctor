@@ -113,8 +113,8 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </head>
 <body class="service-page">
 <link rel="stylesheet" href="assets/service-refresh.css">
-<link rel="stylesheet" href="assets/craft.css?v=20260719b">
-<script src="header.js?v=20260719c"></script>
+<link rel="stylesheet" href="assets/craft.css?v=20260720a">
+<script src="header.js?v=20260720a"></script>
 
 <section id="page-hero">
   <div class="page-hero-inner">
@@ -195,9 +195,25 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 <section class="section" id="washer-cases">
   <div class="container">
     <h2 class="h">實際案例・完工確認重點</h2>
-    <div style="background:#fff;border:2px dashed var(--gray-200);border-radius:18px;padding:1.25rem">
-      <div style="font-weight:900;color:var(--gray-900);margin-bottom:.35rem">清洗完成後會確認內槽、濾網與試運轉</div>
-      <p style="font-size:.86rem;color:var(--gray-600);line-height:1.75;margin:0">直立式與滾筒式會依機型檢查可拆部件、槽背髒污、門封或濾網區域，復原後再確認進水、排水、脫水與異音。</p>
+    <div class="real-case-grid">
+      <article class="craft-case">
+        <div class="craft-compare" style="--compare:50%;aspect-ratio:3/4">
+          <picture><source srcset="/cases/washer/case01-before.webp" type="image/webp"><img src="/cases/washer/case01-before.jpg" alt="直立式洗衣機拆除內槽後的外槽清潔前" loading="lazy" decoding="async" width="890" height="1188"></picture>
+          <picture class="craft-compare-after"><source srcset="/cases/washer/case01-after.webp" type="image/webp"><img src="/cases/washer/case01-after.jpg" alt="直立式洗衣機外槽清潔後" loading="lazy" decoding="async" width="890" height="1188"></picture>
+          <span class="craft-compare-label before">清潔前</span><span class="craft-compare-label after">清潔後</span>
+          <span class="craft-compare-line"></span><span class="craft-compare-handle"></span>
+          <input class="craft-compare-range" type="range" min="0" max="100" value="50" aria-label="拖曳比較直立式洗衣機外槽清潔前後">
+        </div>
+        <div class="craft-case-copy"><div class="craft-case-title">直立式洗衣機外槽</div><div class="craft-case-meta"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#location"></use></svg>已去識別真實服務紀錄</div><p class="craft-case-note">拆出內槽後才能處理槽底、側壁與底盤累積的污垢。</p></div>
+      </article>
+      <article class="craft-case">
+        <div class="real-case-media"><picture><source srcset="/cases/washer/case02-combined.webp" type="image/webp"><img src="/cases/washer/case02-combined.jpg" alt="直立式洗衣機內槽底部清潔前後合併實拍" loading="lazy" decoding="async" width="1280" height="1280"></picture><span class="real-case-media-label">內槽底部前後實拍</span></div>
+        <div class="craft-case-copy"><div class="craft-case-title">內槽底部與支架</div><div class="craft-case-meta"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#location"></use></svg>已去識別真實服務紀錄</div><p class="craft-case-note">格柵、支架與接縫容易卡住洗劑殘留、棉絮與潮濕污垢。</p></div>
+      </article>
+      <article class="craft-case">
+        <div class="real-case-media"><picture><source srcset="/cases/washer/case03-combined.webp" type="image/webp"><img src="/cases/washer/case03-combined.jpg" alt="洗衣機內槽支架清潔前後合併實拍" loading="lazy" decoding="async" width="1280" height="1280"></picture><span class="real-case-media-label">完工驗收前後實拍</span></div>
+        <div class="craft-case-copy"><div class="craft-case-title">槽背與支架細節</div><div class="craft-case-meta"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#location"></use></svg>已去識別真實服務紀錄</div><p class="craft-case-note">復原後仍需確認進水、排水、脫水與運轉異音。</p></div>
+      </article>
     </div>
   </div>
 </section>

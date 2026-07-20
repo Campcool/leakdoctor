@@ -121,8 +121,8 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </head>
 <body class="service-page">
 <link rel="stylesheet" href="assets/service-refresh.css">
-<link rel="stylesheet" href="assets/craft.css?v=20260719b">
-<script src="header.js?v=20260719c"></script>
+<link rel="stylesheet" href="assets/craft.css?v=20260720a">
+<script src="header.js?v=20260720a"></script>
 
 <section id="page-hero">
   <div class="page-hero-inner">
@@ -247,16 +247,26 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 <section class="section" id="aircon-cases">
   <div class="container">
     <h2 class="h">真實服務紀錄・清洗前後對比</h2>
-    <article class="craft-case">
-      <div class="craft-compare" style="--compare:50%">
-        <picture><source srcset="/cases-clean/case04-after.webp" type="image/webp"><img src="/cases-clean/case04-after.jpg" alt="住家冷氣清潔前的室內機狀況" loading="lazy" width="1280" height="960"></picture>
-        <picture class="craft-compare-after"><source srcset="/cases-clean/case04-before.webp" type="image/webp"><img src="/cases-clean/case04-before.jpg" alt="住家冷氣完成清潔後的室內機狀況" loading="lazy" width="1280" height="960"></picture>
-        <span class="craft-compare-label before">清潔前</span><span class="craft-compare-label after">清潔後</span>
-        <span class="craft-compare-line"></span><span class="craft-compare-handle"></span>
-        <input class="craft-compare-range" type="range" min="0" max="100" value="50" aria-label="拖曳比較冷氣清潔前後">
-      </div>
-      <div class="craft-case-copy"><div class="craft-case-title">住家冷氣清潔</div><div class="craft-case-meta"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#location"></use></svg>台北市中山區・已去識別真實服務紀錄</div><p class="craft-case-note">拖曳中線比較清潔前後；實際成果依機型、使用環境與髒污狀況不同。</p></div>
-    </article>
+    <div class="real-case-grid">
+      <article class="craft-case">
+        <div class="craft-compare" style="--compare:50%;aspect-ratio:1">
+          <picture><source srcset="/cases/aircon/case01-before.webp" type="image/webp"><img src="/cases/aircon/case01-before.jpg" alt="分離式冷氣風鼓與出風口清潔前的霉斑髒污" loading="lazy" decoding="async" width="1280" height="960"></picture>
+          <picture class="craft-compare-after"><source srcset="/cases/aircon/case01-after.webp" type="image/webp"><img src="/cases/aircon/case01-after.jpg" alt="分離式冷氣風鼓與出風口清潔後" loading="lazy" decoding="async" width="1280" height="960"></picture>
+          <span class="craft-compare-label before">清潔前</span><span class="craft-compare-label after">清潔後</span>
+          <span class="craft-compare-line"></span><span class="craft-compare-handle"></span>
+          <input class="craft-compare-range" type="range" min="0" max="100" value="50" aria-label="拖曳比較分離式冷氣清潔前後">
+        </div>
+        <div class="craft-case-copy"><div class="craft-case-title">分離式冷氣風鼓清潔</div><div class="craft-case-meta"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#location"></use></svg>已去識別真實服務紀錄</div><p class="craft-case-note">手拉中線查看風鼓、出風口與周邊霉斑清潔前後。</p></div>
+      </article>
+      <article class="craft-case">
+        <div class="real-case-media"><picture><source srcset="/cases/aircon/case02-combined.webp" type="image/webp"><img src="/cases/aircon/case02-combined.jpg" alt="分離式冷氣出風口清潔前後合併實拍" loading="lazy" decoding="async" width="1600" height="1600"></picture><span class="real-case-media-label">同角度前後實拍</span></div>
+        <div class="craft-case-copy"><div class="craft-case-title">出風口與風鼓髒污</div><div class="craft-case-meta"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#location"></use></svg>已去識別真實服務紀錄</div><p class="craft-case-note">清潔範圍依機型與可拆卸結構確認，不只擦拭外殼。</p></div>
+      </article>
+      <article class="craft-case">
+        <div class="real-case-media"><picture><source srcset="/cases/aircon/case03-combined.webp" type="image/webp"><img src="/cases/aircon/case03-combined.jpg" alt="窗型冷氣風鼓清潔前後合併實拍" loading="lazy" decoding="async" width="1600" height="1600"></picture><span class="real-case-media-label">窗型冷氣前後實拍</span></div>
+        <div class="craft-case-copy"><div class="craft-case-title">窗型冷氣風鼓清潔</div><div class="craft-case-meta"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#location"></use></svg>已去識別真實服務紀錄</div><p class="craft-case-note">不同機型拆洗方式不同，預約前會先確認照片與型號。</p></div>
+      </article>
+    </div>
   </div>
 </section>
 
