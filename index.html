@@ -80,7 +80,7 @@ img{display:block;max-width:100%}
 .hero-desc{font-size:.98rem;color:rgba(255,255,255,.85);line-height:1.85;margin-bottom:1.85rem;max-width:56ch}
 .hero-btn{display:inline-flex;align-items:center;gap:.5rem;background:#06C755;color:#fff;font-weight:700;font-size:1.02rem;padding:.95rem 1.65rem;border-radius:13px;box-shadow:0 4px 20px rgba(34,197,94,.45);margin-bottom:2rem;cursor:pointer;position:relative;overflow:hidden;isolation:isolate}
 .hero-btn::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%);transform:translateX(-130%);pointer-events:none}
-@media(prefers-reduced-motion:no-preference){.hero-btn::before{animation:ld-shine 4s ease-in-out infinite}}
+@media(prefers-reduced-motion:no-preference){.hero-btn::before{animation:ld-shine 8s ease-in-out infinite}}
 @keyframes ld-shine{0%,25%{transform:translateX(-130%)}65%,100%{transform:translateX(130%)}}
 .hero-btn-sub{font-size:.72rem;opacity:.82;font-weight:400}
 .trust-badges{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
@@ -106,6 +106,13 @@ img{display:block;max-width:100%}
 @supports(background:color-mix(in srgb,red,blue)){
   @media(hover:none){.svc-card::before{background:linear-gradient(135deg,var(--service-accent,var(--blue-mid)),color-mix(in srgb,var(--service-accent,var(--blue-mid)) 45%,#fff))}}
 }
+/* 卡片內部：同服務色系極淡填滿（不支援 color-mix 時維持白底） */
+@supports(background:color-mix(in srgb,red,blue)){
+  .svc-card[data-service]{background:color-mix(in srgb,var(--service-accent,var(--blue-mid)) 7%,#fff)}
+}
+/* icon 與標題同一行：icon 左、標題右 */
+.svc-head{display:flex;align-items:center;gap:.85rem}
+.svc-head .svc-title{margin:0}
 .svc-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.7rem}
 .svc-icon.c1{background:var(--blue-light)}.svc-icon.c2{background:var(--teal-light)}.svc-icon.c3{background:var(--green-100)}.svc-icon.c4{background:var(--orange-light)}
 .svc-title{font-size:1.08rem;font-weight:900;color:var(--gray-900)}
@@ -160,9 +167,9 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </style>
 </head>
 <body>
-<link rel="stylesheet" href="assets/home-refresh.css?v=20260719a">
+<link rel="stylesheet" href="assets/home-refresh.css?v=20260723a">
 <link rel="stylesheet" href="assets/process-images.css">
-<link rel="stylesheet" href="assets/craft.css?v=20260720e">
+<link rel="stylesheet" href="assets/craft.css?v=20260723a">
 <script src="header.js?v=20260720e"></script>
 
 <!-- Hero -->
@@ -202,9 +209,11 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   <p class="sec-sub">點選項目查看服務內容與價格參考</p>
   <div class="svc-grid">
     <div class="svc-card" data-service="aircon">
-      <div class="svc-icon c1"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#aircon"></use></svg></div>
-      <div class="svc-title">冷氣清洗</div>
-      <div class="svc-desc">分離式、吊隱式與窗型依機型拆洗，完成後復原、試運轉並確認基本排水。</div>
+      <div class="svc-head">
+        <div class="svc-icon c1"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#aircon"></use></svg></div>
+        <div class="svc-title">冷氣清洗</div>
+      </div>
+      <div class="svc-desc">分離式、吊隱式、窗型，依機型拆洗。<br>清洗後復原、試運轉，並確認基本排水。</div>
       <div class="svc-price">$1,499 起</div>
       <div class="svc-actions">
         <a class="svc-btn-price" href="aircon.html">看價格</a>
@@ -212,9 +221,11 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
       </div>
     </div>
     <div class="svc-card" data-service="washer">
-      <div class="svc-icon c2"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#washer"></use></svg></div>
-      <div class="svc-title">洗衣機清洗</div>
-      <div class="svc-desc">直立式、滾筒式洗衣機清洗，深層去除洗衣槽黑垢與霉味。</div>
+      <div class="svc-head">
+        <div class="svc-icon c2"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#washer"></use></svg></div>
+        <div class="svc-title">洗衣機清洗</div>
+      </div>
+      <div class="svc-desc">直立式、滾筒式皆可拆洗。<br>深層去除洗衣槽黑垢與霉味。</div>
       <div class="svc-price">$1,299 起</div>
       <div class="svc-actions">
         <a class="svc-btn-price" href="washer.html">看價格</a>
@@ -222,9 +233,11 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
       </div>
     </div>
     <div class="svc-card" data-service="homeclean">
-      <div class="svc-icon c3"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#homeclean"></use></svg></div>
-      <div class="svc-title">居家清潔</div>
-      <div class="svc-desc">定期清潔、大掃除、入住退租與單項加強清潔；抽油煙機清洗放在這一類中確認。</div>
+      <div class="svc-head">
+        <div class="svc-icon c3"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#homeclean"></use></svg></div>
+        <div class="svc-title">居家清潔</div>
+      </div>
+      <div class="svc-desc">定期清潔、大掃除、入住退租都能安排。<br>抽油煙機等單項加強，也在這一類確認。</div>
       <div class="svc-price">$2,500 起</div>
       <div class="svc-actions">
         <a class="svc-btn-price" href="homeclean.html">看價格</a>
@@ -232,9 +245,11 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
       </div>
     </div>
     <div class="svc-card" data-service="water-tank">
-      <div class="svc-icon c1"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#droplet"></use></svg></div>
-      <div class="svc-title">水塔清洗</div>
-      <div class="svc-desc">白鐵／塑膠水塔、水泥水塔、地下蓄水池與社區案件，先確認容量、顆數與停水條件。</div>
+      <div class="svc-head">
+        <div class="svc-icon c1"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#droplet"></use></svg></div>
+        <div class="svc-title">水塔清洗</div>
+      </div>
+      <div class="svc-desc">白鐵、塑膠、水泥水塔與地下蓄水池皆可洗。<br>先確認容量、顆數與停水條件，再報價。</div>
       <div class="svc-price">照片初估後報價</div>
       <div class="svc-actions">
         <a class="svc-btn-price" href="water-tank.html">看價格</a>
@@ -242,9 +257,11 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
       </div>
     </div>
     <div class="svc-card" data-service="pipe-cleaning">
-      <div class="svc-icon c2"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#tools"></use></svg></div>
-      <div class="svc-title">水管清洗</div>
-      <div class="svc-desc">黃水、異味、水量變小先分類；依屋齡、管材、出水點與停水條件判斷是否適合清洗。</div>
+      <div class="svc-head">
+        <div class="svc-icon c2"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#tools"></use></svg></div>
+        <div class="svc-title">水管清洗</div>
+      </div>
+      <div class="svc-desc">黃水、異味、水量變小，先分類原因。<br>依屋齡、管材與停水條件，評估是否適合清洗。</div>
       <div class="svc-price">依現場條件報價</div>
       <div class="svc-actions">
         <a class="svc-btn-price" href="pipe-cleaning.html">看價格</a>
@@ -252,9 +269,11 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
       </div>
     </div>
     <div class="svc-card" data-service="leak-repair">
-      <div class="svc-icon c4"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#leak"></use></svg></div>
-      <div class="svc-title">漏水檢測與修補</div>
-      <div class="svc-desc">依現象安排檢測、定位水源，再選擇適合的止漏與修補方式。</div>
+      <div class="svc-head">
+        <div class="svc-icon c4"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#leak"></use></svg></div>
+        <div class="svc-title">漏水檢測與修補</div>
+      </div>
+      <div class="svc-desc">依漏水現象安排檢測、定位水源。<br>確認原因後，再選擇適合的止漏與修補方式。</div>
       <div class="svc-price">免費初判</div>
       <div class="svc-actions">
         <a class="svc-btn-price" href="leak-repair.html">看價格</a>

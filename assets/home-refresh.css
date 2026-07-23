@@ -46,8 +46,9 @@ body{color:var(--text)!important;background:#fff!important}
 .svc-grid{gap:1rem!important}
 .svc-card{border:1px solid var(--border)!important;border-radius:22px!important;box-shadow:none!important;padding:1.55rem!important;transition:border-color .2s,transform .2s,box-shadow .2s!important}
 .svc-card:hover{border-color:#9fb4bc!important;box-shadow:0 18px 38px rgba(23,50,77,.09)!important;transform:translateY(-3px)!important}
-.svc-icon{width:42px!important;height:42px!important;border-radius:12px!important;font-size:1.2rem!important}
-.svc-title{color:var(--ink)!important;font-size:1.15rem!important}
+.svc-icon{width:60px!important;height:60px!important;border-radius:15px!important;font-size:1.2rem!important}
+.svc-icon .craft-icon{width:34px!important;height:34px!important}
+.svc-title{color:var(--ink)!important;font-size:1.4rem!important;line-height:1.2!important}
 .svc-desc{color:var(--muted)!important}
 .svc-price{background:var(--cream)!important;color:var(--orange-dark)!important}
 .svc-btn-price{background:#fff!important;color:var(--ink)!important;border-color:var(--border)!important}
