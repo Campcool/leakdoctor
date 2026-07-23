@@ -78,7 +78,10 @@ img{display:block;max-width:100%}
 .hero-h1{font-size:2.5rem;font-weight:900;line-height:1.18;margin-bottom:.85rem}
 .hero-h1 em{color:#93c5fd;font-style:normal}
 .hero-desc{font-size:.98rem;color:rgba(255,255,255,.85);line-height:1.85;margin-bottom:1.85rem;max-width:56ch}
-.hero-btn{display:inline-flex;align-items:center;gap:.5rem;background:#06C755;color:#fff;font-weight:700;font-size:1.02rem;padding:.95rem 1.65rem;border-radius:13px;box-shadow:0 4px 20px rgba(34,197,94,.45);margin-bottom:2rem;cursor:pointer}
+.hero-btn{display:inline-flex;align-items:center;gap:.5rem;background:#06C755;color:#fff;font-weight:700;font-size:1.02rem;padding:.95rem 1.65rem;border-radius:13px;box-shadow:0 4px 20px rgba(34,197,94,.45);margin-bottom:2rem;cursor:pointer;position:relative;overflow:hidden;isolation:isolate}
+.hero-btn::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%);transform:translateX(-130%);pointer-events:none}
+@media(prefers-reduced-motion:no-preference){.hero-btn::before{animation:ld-shine 4s ease-in-out infinite}}
+@keyframes ld-shine{0%,25%{transform:translateX(-130%)}65%,100%{transform:translateX(130%)}}
 .hero-btn-sub{font-size:.72rem;opacity:.82;font-weight:400}
 .trust-badges{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
 .trust-badge{display:flex;align-items:center;gap:.35rem;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);color:rgba(255,255,255,.95);font-size:.78rem;font-weight:600;padding:.4rem .8rem;border-radius:99px}
@@ -88,8 +91,16 @@ img{display:block;max-width:100%}
 .svc-grid{display:grid;gap:1.1rem;grid-template-columns:1fr}
 @media(min-width:640px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1024px){.svc-grid{grid-template-columns:repeat(3,1fr)}}
-.svc-card{background:#fff;border-radius:18px;border:2px solid var(--gray-200);padding:1.5rem 1.3rem;display:flex;flex-direction:column;gap:.7rem;box-shadow:0 4px 16px rgba(0,0,0,.05);transition:.2s}
+.svc-card{background:#fff;border-radius:18px;border:2px solid var(--gray-200);padding:1.5rem 1.3rem;display:flex;flex-direction:column;gap:.7rem;box-shadow:0 4px 16px rgba(0,0,0,.05);transition:.2s;position:relative}
 .svc-card:hover{border-color:var(--blue-mid);box-shadow:0 10px 28px rgba(0,0,0,.1);transform:translateY(-4px)}
+@property --ld-angle{syntax:'<angle>';inherits:false;initial-value:0deg}
+.svc-card::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:2px;opacity:0;pointer-events:none;
+  background:conic-gradient(from var(--ld-angle),transparent 8%,var(--service-accent,var(--blue-mid)) 45%,#fff 50%,var(--service-accent,var(--blue-mid)) 55%,transparent 92%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+  transition:opacity .25s ease}
+.svc-card:hover::before{opacity:1}
+@media(prefers-reduced-motion:no-preference){.svc-card:hover::before{animation:ld-rotate 2.6s linear infinite}}
+@keyframes ld-rotate{to{--ld-angle:360deg}}
 .svc-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.7rem}
 .svc-icon.c1{background:var(--blue-light)}.svc-icon.c2{background:var(--teal-light)}.svc-icon.c3{background:var(--green-100)}.svc-icon.c4{background:var(--orange-light)}
 .svc-title{font-size:1.08rem;font-weight:900;color:var(--gray-900)}

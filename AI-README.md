@@ -6,7 +6,7 @@
 > 3. 本檔案是唯一的交接依據，寫給 AI 看：請保持精確、可執行、不留模糊描述。
 > 4. **所有時間戳一律台灣時間（Asia/Taipei, UTC+8）**。
 
-最後更新：2026-07-20（by Codex）— Hero 口號斷句統一並重製透明滿版刷子 favicon
+最後更新：2026-07-23（by Claude）— 首頁導入 galaxy（uiverse.io）兩個品牌化點綴元件：Hero LINE 光掃鈕、六服務卡轉動漸層邊框
 
 ---
 
@@ -138,6 +138,14 @@ cases/
 - 修改後驗證慣例：`node --check header.js`；以 Node 驗證 JSON-LD、內部連結、四頁流程與禁止字樣；本機網址受瀏覽器安全政策阻擋時，直接使用正式部署標記與真機驗證，不可繞過安全政策。
 
 ## 5. 進度紀錄（新條目加在最上面）
+
+### 2026-07-23（Claude・首頁導入 galaxy 品牌化點綴元件）
+- 參考 GitHub `uiverse-io/galaxy`（MIT，3,000+ 純 HTML/CSS 元件）挑選其中兩種常見 pattern，改成灰汰郎品牌色後導入首頁，全部包 `prefers-reduced-motion`：
+  - **Hero 主 CTA「加入 LINE 免費初判」光掃鈕**：在既有 LINE 綠鈕上加白色高光掃過（`.hero-btn::before` + `@keyframes ld-shine`，`overflow:hidden;isolation:isolate;z-index:-1` 讓高光在底色上、文字下）。減少動態時停止掃光，只留 hover 上浮。
+  - **六大服務卡轉動漸層邊框**：`.svc-card::before` 用 `conic-gradient` + `mask` 疊出邊框光環，角度由 `@property --ld-angle` 驅動（`@keyframes ld-rotate`），顏色吃 `craft.css` 既有的 `--service-accent`（青藍/紫/琥珀/水塔藍/靛藍/青綠）。**僅 hover 觸發**、桌機才會轉；減少動態時顯示靜態彩邊不旋轉；`@property` 不支援的舊瀏覽器自動退回不顯示、不破版。
+- **改動範圍僅 `index.html` 內嵌 `<style>`**，未動 `header.js`／`craft.css` 等共用檔，故**未動任何 cache key**；HTML 為 GitHub Pages 直發，部署後即生效。
+- 驗證：`node --check header.js` 通過、`index.html` `<style>` 大括號平衡（96/96）、`git diff --stat` 僅 index.html。
+- **未做**：galaxy Loaders（表單送出／開 LINE 瞬間的極簡 loader）——需改共用 `header.js` 送出流程（易壞區），且「按了即跳 LINE」情境收益低，暫緩，待業主確認前兩者後再單獨處理。
 
 ### 2026-07-20（Codex・透明滿版刷子 favicon）
 - 移除舊 favicon 的白色方底、外圈與星光，改為單一深灰／青綠刷子符號；透明底主體邊界約占畫布寬 93%、高 88%，提升 16–32px 分頁圖示辨識度。
@@ -399,6 +407,7 @@ cases/
 - [ ] **前台優化 P1–P3 — 依 `docs/FRONTEND-REVIEW-2026-07-16.md` 排序**：P1 信任地基（真實評價、清洗保固、商業模式敘事、可開發票、首屏效能）→ P2 內容對等（cases/team/knowledge 清潔素材、水塔水管價錨案例、漏水文章漏斗、地理統一）→ P3 精修。業主定案 A／B 收費與保固口徑為必守準據。
 - [x] **廣告投放前視覺改版 P1**：首頁＋冷氣／洗衣機／抓漏首屏、DESIGN.md、流程示意與知識型 OG；2026-07-11 已部署並完成正式網址驗證。
 - [ ] **視覺改版 P2**：延伸至居家清潔、地區、案例、百科與文章頁；建立真實案例／流程示意的圖片標示規格
+- [ ] **galaxy 點綴元件延伸**：首頁已導入 Hero 光掃鈕與服務卡漸層邊框（2026-07-23）。可評估：(a) galaxy Loaders 接入送出流程；(b) 六服務頁 Hero CTA 沿用同款光掃；(c) 服務卡漸層邊框效果推廣到服務頁與地區頁卡片。導入時一律套品牌色 + `prefers-reduced-motion`，並注意共用檔 cache key 同步。
 - [x] **廣告啟動包 P0**：已建立 Google Ads 第一階段投放架構、關鍵字、RSA 文案、否定字、assets 與追蹤 SOP（`docs/GOOGLE-ADS-PLAN.md` + `ads/`）。
 - [ ] **Google Ads 帳號設定 P1**：連結 GA4、開啟 auto-tagging、將 `quote_submit` 設為 GA4 key event 並匯入 Google Ads Primary conversion；`quote_open` / `line_click` / `line_direct_click` 設 Secondary。
 - [ ] **Google Ads 上線 P2**：業主確認每日預算、Google Ads Customer ID、投放地區後，建立 Search campaigns；第一階段不開 PMax/Display/YouTube。
