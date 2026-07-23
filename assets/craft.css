@@ -67,6 +67,29 @@ body.leak-page .hero-btn:hover,
 body.leak-page .cta-btn:hover{
   background:var(--service-accent-dark,var(--service-accent,var(--ld-teal,#138a80)))!important;
 }
+/* 立即預約／估價 CTA：LINE 風光掃（8s，較不頻繁）——galaxy Buttons pattern */
+body.service-page .page-btn,
+body.service-page .mid-cta-btn,
+body.service-page .cta-btn,
+body.leak-page .hero-btn,
+body.leak-page .cta-btn{position:relative;overflow:hidden;isolation:isolate}
+body.service-page .page-btn::before,
+body.service-page .mid-cta-btn::before,
+body.service-page .cta-btn::before,
+body.leak-page .hero-btn::before,
+body.leak-page .cta-btn::before{
+  content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%);
+  transform:translateX(-130%);
+}
+@media(prefers-reduced-motion:no-preference){
+  body.service-page .page-btn::before,
+  body.service-page .mid-cta-btn::before,
+  body.service-page .cta-btn::before,
+  body.leak-page .hero-btn::before,
+  body.leak-page .cta-btn::before{animation:ld-shine-slow 8s ease-in-out infinite}
+}
+@keyframes ld-shine-slow{0%,30%{transform:translateX(-130%)}70%,100%{transform:translateX(130%)}}
 body.service-page .price-amt,
 body.leak-page .price-num,
 body.leak-page .price-main{

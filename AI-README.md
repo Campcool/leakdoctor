@@ -6,7 +6,7 @@
 > 3. 本檔案是唯一的交接依據，寫給 AI 看：請保持精確、可執行、不留模糊描述。
 > 4. **所有時間戳一律台灣時間（Asia/Taipei, UTC+8）**。
 
-最後更新：2026-07-23（by Claude）— 首頁導入 galaxy（uiverse.io）兩個品牌化點綴元件：Hero LINE 光掃鈕、六服務卡轉動漸層邊框
+最後更新：2026-07-23（by Claude）— 服務卡改版（內部淡色填滿＋icon 標題同行放大＋內文斷句）、光掃頻率放慢並延伸到各服務頁 CTA
 
 ---
 
@@ -138,6 +138,18 @@ cases/
 - 修改後驗證慣例：`node --check header.js`；以 Node 驗證 JSON-LD、內部連結、四頁流程與禁止字樣；本機網址受瀏覽器安全政策阻擋時，直接使用正式部署標記與真機驗證，不可繞過安全政策。
 
 ## 5. 進度紀錄（新條目加在最上面）
+
+### 2026-07-23（Claude・服務卡改版＋光掃放慢延伸）
+- 依業主真機回饋調整首頁六服務卡：
+  - **卡片內部同服務色系極淡填滿**：`@supports color-mix` 下 `.svc-card[data-service]` 背景 = `color-mix(accent 7%, #fff)`；不支援時退回白底。邊框維持既有粗細。
+  - **icon 與標題改同一行**（icon 左、標題右）：新增 `.svc-head` flex 容器包住 `.svc-icon`＋`.svc-title`（6 張卡 HTML 均改）。
+  - **icon 與標題放大**：`home-refresh.css` 的 `.svc-icon` 42→60px、內部 `.craft-icon` 27→34px、`.svc-title` 1.15→1.4rem（皆 `!important`，因 home-refresh 原本就用 !important 壓著）。`home-refresh.css` cache key `20260719a→20260723a`（僅 index.html 引用，bump 一處）。
+  - **內文潤飾斷句**：6 張卡 `.svc-desc` 改為兩句、用 `<br>` 明確斷行，敘述更清楚。
+- **光掃頻率放慢＋延伸到服務頁**：
+  - 首頁 Hero 光掃 `ld-shine` 由 4s→8s（不要那麼頻繁）。
+  - 各服務頁「立即預約／估價」CTA（`body.service-page .page-btn/.mid-cta-btn/.cta-btn`、`body.leak-page .hero-btn/.cta-btn`）新增 `ld-shine-slow` 8s 光掃，放進 `craft.css`；同色白光掃過、`z-index:-1` 在服務色底上文字下。全部包 `prefers-reduced-motion`。
+  - **`craft.css` cache key `20260720e→20260723a`**：已同步 7 個 HTML `<link>` ＋ `header.js` 兩處 runtime upgrade（共 9 處）。
+- 驗證：`node --check header.js` 通過；`index.html` `<style>`（105/105）、`craft.css`（259/259）、`home-refresh.css`（78/78）大括號平衡；6 張卡皆含 `.svc-head`；無殘留舊 cache key。
 
 ### 2026-07-23（Claude・首頁導入 galaxy 品牌化點綴元件）
 - 參考 GitHub `uiverse-io/galaxy`（MIT，3,000+ 純 HTML/CSS 元件）挑選其中兩種常見 pattern，改成灰汰郎品牌色後導入首頁，全部包 `prefers-reduced-motion`：
