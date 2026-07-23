@@ -142,7 +142,7 @@ cases/
 ### 2026-07-23（Claude・首頁導入 galaxy 品牌化點綴元件）
 - 參考 GitHub `uiverse-io/galaxy`（MIT，3,000+ 純 HTML/CSS 元件）挑選其中兩種常見 pattern，改成灰汰郎品牌色後導入首頁，全部包 `prefers-reduced-motion`：
   - **Hero 主 CTA「加入 LINE 免費初判」光掃鈕**：在既有 LINE 綠鈕上加白色高光掃過（`.hero-btn::before` + `@keyframes ld-shine`，`overflow:hidden;isolation:isolate;z-index:-1` 讓高光在底色上、文字下）。減少動態時停止掃光，只留 hover 上浮。
-  - **六大服務卡轉動漸層邊框**：`.svc-card::before` 用 `conic-gradient` + `mask` 疊出邊框光環，角度由 `@property --ld-angle` 驅動（`@keyframes ld-rotate`），顏色吃 `craft.css` 既有的 `--service-accent`（青藍/紫/琥珀/水塔藍/靛藍/青綠）。**僅 hover 觸發**、桌機才會轉；減少動態時顯示靜態彩邊不旋轉；`@property` 不支援的舊瀏覽器自動退回不顯示、不破版。
+  - **六大服務卡轉動漸層邊框**：`.svc-card::before` 用 `conic-gradient` + `mask` 疊出邊框光環，角度由 `@property --ld-angle` 驅動（`@keyframes ld-rotate`），顏色吃 `craft.css` 既有的 `--service-accent`（青藍/紫/琥珀/水塔藍/靛藍/青綠）。**桌機 hover 才觸發並旋轉**；減少動態時顯示靜態彩邊不旋轉；`@property` 不支援的舊瀏覽器自動退回不顯示、不破版。**手機／觸控（`@media(hover:none)`）改為常駐靜態彩邊、不旋轉不閃**，並用 `@supports color-mix` 漸層加分、不支援時退回實色邊。
 - **改動範圍僅 `index.html` 內嵌 `<style>`**，未動 `header.js`／`craft.css` 等共用檔，故**未動任何 cache key**；HTML 為 GitHub Pages 直發，部署後即生效。
 - 驗證：`node --check header.js` 通過、`index.html` `<style>` 大括號平衡（96/96）、`git diff --stat` 僅 index.html。
 - **未做**：galaxy Loaders（表單送出／開 LINE 瞬間的極簡 loader）——需改共用 `header.js` 送出流程（易壞區），且「按了即跳 LINE」情境收益低，暫緩，待業主確認前兩者後再單獨處理。
