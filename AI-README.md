@@ -36,6 +36,7 @@
 | LINE 加好友連結 | `https://lin.ee/WVxmY65` | 全站 82 處（html/schema/llms.txt）＋ `header.js` 的 `LINE` 常數 |
 | LINE 官方帳號 ID | `@478xvlgl` | `header.js` 的 `LINE_OA_ID`（表單 oaMessage 深層連結用） |
 | GA4 評估 ID | `G-1H1X1X9QZE` | `header.js` 開頭 `GA4_ID` 常數；全站事件由 `ldTrack` 統一送出 |
+| 灰汰郎線索 API | `https://leakdoctor-bot.a0920077473.workers.dev/api/leads` | `header.js` 的 `LEAD_API`；表單必須先寫 D1 成功，才可開啟 LINE |
 
 ## 3. 技術架構
 
@@ -45,8 +46,8 @@
   - fixed header＋6 個主服務頁籤（root 絕對路徑 `/xxx.html`，讓 /articles/ 下也正確）；桌機 Logo 首頁入口與服務頁籤同列等高，手機維持 Logo＋3×2 服務選項
   - 右側 LINE 浮動鈕、回頂鈕、手機底部 LINE 預約列；網站不提供公開電話 CTA，也不顯示「加入我們」
   - 六服務專屬色系由 body theme class 與 CSS variables 串接頁籤及頁面 CTA：冷氣青藍、洗衣機紫、居家清潔琥珀、水塔綠、水管靛藍、漏水青綠
-  - **預約表單 modal**（`ldOpenQuote(serviceKey)` 全域函式）：姓名/電話/地址/服務卡片/日期時段，送出 → 組訊息 → `line.me/R/oaMessage/@478xvlgl/?<encoded>` 開 LINE 預填
-  - GA4 載入與事件：`line_click`、`line_direct_click`、`quote_open`、`quote_submit`
+  - **預約表單 modal**（`ldOpenQuote(serviceKey)` 全域函式）：姓名/電話/地址/服務卡片/日期時段，送出 → `POST /api/leads` 寫入灰汰郎 D1 → 取得 `HTL-L-*` 線索編號 → 組訊息 → `line.me/R/oaMessage/@478xvlgl/?<encoded>` 開 LINE 預填；API 失敗時不開 LINE，避免需求未落案
+  - GA4 載入與事件：`line_click`、`line_direct_click`、`quote_open`、`generate_lead`、`quote_submit`；`generate_lead` 只在 D1 建案成功後送出
   - ⚠️ 全部包在 `ldInit()`，body 未就緒時等 `DOMContentLoaded`——**文章頁在 `<head>` 載入 header.js，改壞這個模式會讓文章頁整個導覽消失**（曾發生）
 - 首頁、服務頁與地區頁不再常駐快速估價器；客戶點聯絡／預約 CTA 後才由 `header.js` 開啟共用 modal。
 - 頁面樣式：每頁 `<style>` 內嵌（同一套設計 token：--blue-dark #1e3a8a 等）。地區頁由產生器生成（腳本在 session scratchpad，已遺失，需要時照現有頁面仿寫）。
@@ -410,6 +411,7 @@ cases/
 
 ### 🔑 只有業主能做（AI 請勿代做，可提醒）
 - [x] GA4 已提供並填入 `header.js`：`G-1H1X1X9QZE`
+- [ ] 在 GA4 Web 資料串流建立 Measurement Protocol API secret，存入灰汰郎 Worker Secret `GA4_API_SECRET`；未設定前，官網 `generate_lead` 正常，但 `working_lead`／`qualify_lead`／`close_convert_lead` 不會送出。
 - [ ] LINE 官方帳號顯示名稱仍是「台灣漏水醫生_百科全書」→ 到 manager.line.biz 改名「灰汰郎」
 - [ ] 建立灰汰郎的 Google 商家檔案（現存搜尋結果掛美國電話 +1 407-917-1773 的商家檔案不是業主的）
 - [ ] Google Search Console 提交新 sitemap、對改名頁面請求重新索引
@@ -421,7 +423,7 @@ cases/
 - [ ] **視覺改版 P2**：延伸至居家清潔、地區、案例、百科與文章頁；建立真實案例／流程示意的圖片標示規格
 - [ ] **galaxy 點綴元件延伸**：首頁已導入 Hero 光掃鈕與服務卡漸層邊框（2026-07-23）。可評估：(a) galaxy Loaders 接入送出流程；(b) 六服務頁 Hero CTA 沿用同款光掃；(c) 服務卡漸層邊框效果推廣到服務頁與地區頁卡片。導入時一律套品牌色 + `prefers-reduced-motion`，並注意共用檔 cache key 同步。
 - [x] **廣告啟動包 P0**：已建立 Google Ads 第一階段投放架構、關鍵字、RSA 文案、否定字、assets 與追蹤 SOP（`docs/GOOGLE-ADS-PLAN.md` + `ads/`）。
-- [ ] **Google Ads 帳號設定 P1**：連結 GA4、開啟 auto-tagging、將 `quote_submit` 設為 GA4 key event 並匯入 Google Ads Primary conversion；`quote_open` / `line_click` / `line_direct_click` 設 Secondary。
+- [ ] **Google Ads 帳號設定 P1**：連結 GA4、開啟 auto-tagging、將 `generate_lead` 設為 GA4 key event 並匯入 Google Ads Primary conversion；`quote_submit` 保留相容觀察，`quote_open` / `line_click` / `line_direct_click` 設 Secondary。後續累積足夠資料後，再以 `qualify_lead` 或 `close_convert_lead` 作更深層優化，避免重複計算主要轉換。
 - [ ] **Google Ads 上線 P2**：業主確認每日預算、Google Ads Customer ID、投放地區後，建立 Search campaigns；第一階段不開 PMax/Display/YouTube。
 - [x] **LINE Bot P1**：2026-07-11 驗收通過並上線（詳 BOT-PLAN 驗收報告）。剩 PARTNER_LINE_USER_ID 待業主設定
 - [x] **LINE Bot P2**：夥伴回報、完工、車馬費、逾時／D-1／今日提醒與戰情室程式已完成；仍待 PARTNER_LINE_USER_ID 與管理 Secrets

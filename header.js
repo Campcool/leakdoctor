@@ -6,6 +6,7 @@
   const activePage = leakSubPages.indexOf(page) !== -1 ? 'leak-repair' : page;
   const LINE = 'https://lin.ee/WVxmY65';
   const LINE_OA_ID = '@478xvlgl';
+  const LEAD_API = 'https://leakdoctor-bot.a0920077473.workers.dev/api/leads';
   const isLineWebView = /\bLine\//i.test(navigator.userAgent || '');
   if(isLineWebView) document.body.classList.add('ld-line-webview');
   const serviceTheme = ['aircon','washer','homeclean','water-tank','pipe-cleaning','leak-repair'].indexOf(activePage) !== -1 ? activePage : '';
@@ -35,6 +36,56 @@
     if (gaEnabled && window.gtag) gtag('event', name, params || {});
   }
   window.ldTrack = ldTrack;
+  function gaValue(field, timeoutMs){
+    return new Promise(function(resolve){
+      if(!gaEnabled || !window.gtag){ resolve(''); return; }
+      let settled = false;
+      const finish = function(value){
+        if(settled) return;
+        settled = true;
+        resolve(value == null ? '' : String(value));
+      };
+      try{ gtag('get', GA4_ID, field, finish); }
+      catch(error){ finish(''); }
+      setTimeout(function(){ finish(''); }, timeoutMs || 900);
+    });
+  }
+  function cookieGaClientId(){
+    const match = document.cookie.match(/(?:^|;\s*)_ga=GA\d+\.\d+\.(\d+\.\d+)/);
+    return match ? match[1] : '';
+  }
+  const ATTR_KEYS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','gbraid','wbraid'];
+  function leadAttribution(){
+    const current = {};
+    const params = new URLSearchParams(location.search);
+    ATTR_KEYS.forEach(function(key){
+      const value = params.get(key);
+      if(value) current[key] = value.slice(0,240);
+    });
+    let first = {};
+    try{
+      first = JSON.parse(sessionStorage.getItem('ld_attribution') || '{}') || {};
+      if(Object.keys(current).length){
+        first = Object.assign({}, first, current);
+        sessionStorage.setItem('ld_attribution', JSON.stringify(first));
+      }
+    }catch(error){ first = current; }
+    return Object.keys(current).length ? current : first;
+  }
+  function landingPage(){
+    try{
+      const saved = sessionStorage.getItem('ld_landing_page');
+      if(saved) return saved;
+      const value = location.href.slice(0,500);
+      sessionStorage.setItem('ld_landing_page', value);
+      return value;
+    }catch(error){
+      return location.href.slice(0,500);
+    }
+  }
+  // 在訪客落地當下保存來源；若等到送出表單才記錄，跨頁後 UTM 會遺失。
+  leadAttribution();
+  landingPage();
   const SVC_PAGES = {'/aircon.html':'aircon','/washer.html':'washer','/homeclean.html':'homeclean','/water-tank.html':'water_tank','/pipe-cleaning.html':'pipe_cleaning','/leak-repair.html':'leak-repair'};
   const AREA_PAGES = ['/taipei.html','/new-taipei.html','/keelung.html','/taoyuan.html','/hsinchu.html','/miaoli.html','/taichung.html','/areas.html'];
   // 全站點擊追蹤：LINE 連結與電話
@@ -477,6 +528,10 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   box-shadow:0 4px 14px rgba(6,199,85,.4);
 }
 .ld-q-submit:hover{background:#05b34c}
+.ld-q-submit:disabled{opacity:.68;cursor:wait}
+.ld-q-hp{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important}
+.ld-q-status{min-height:1.25rem;margin-top:.55rem;font-size:.78rem;line-height:1.5;text-align:center;color:#5b6b73}
+.ld-q-status.ld-error{color:#b42318}
 .ld-q-note{font-size:.72rem;color:#9ca3af;text-align:center;margin-top:.65rem;line-height:1.6}
 .ld-q-privacy{margin-top:.8rem;padding:.72rem .8rem;border-radius:10px;background:#f7fafb;color:#667680;font-size:.74rem;line-height:1.55;text-align:left}
 @media(max-width:390px){
@@ -636,8 +691,13 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
             <label class="ld-q-label" for="ld-q-note">現場狀況或其他需求</label>
             <textarea class="ld-q-input" id="ld-q-note" rows="3" placeholder="例如：冷氣漏水、機型、樓層、停車或希望處理的範圍"></textarea>
           </div>
-          <div class="ld-q-privacy">資料僅用於本次服務聯繫，不會公開；完整地址可於確認預約前再提供。</div>
+          <div class="ld-q-hp" aria-hidden="true">
+            <label for="ld-q-website">網站</label>
+            <input id="ld-q-website" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
+          <div class="ld-q-privacy">送出後資料會先安全儲存於灰汰郎案件系統，僅用於本次估價、聯繫與服務安排，不會公開；完整地址可於確認預約前再提供。</div>
           <button type="submit" class="ld-q-submit">送出並開啟 LINE</button>
+          <div class="ld-q-status" id="ld-q-status" role="status" aria-live="polite"></div>
           <div class="ld-q-note">送出後會開啟 LINE，訊息已幫您填好，再按一下「傳送」即可完成預約估價，純諮詢完全免費</div>
         </form>
       </div>
@@ -1055,8 +1115,9 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   }
 
   if(qForm){
-    qForm.addEventListener('submit', function(e){
+    qForm.addEventListener('submit', async function(e){
       e.preventDefault();
+      if(qForm.dataset.submitting === '1') return;
       const name = document.getElementById('ld-q-name').value.trim();
       const phone = document.getElementById('ld-q-phone').value.trim();
       const addr = document.getElementById('ld-q-addr').value.trim();
@@ -1073,6 +1134,18 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
       if(!service){ setFieldValid('ld-f-service', false); valid = false; } else setFieldValid('ld-f-service', true);
       if(!valid) return;
 
+      const submitButton = qForm.querySelector('.ld-q-submit');
+      const submitStatus = document.getElementById('ld-q-status');
+      qForm.dataset.submitting = '1';
+      if(submitButton){
+        submitButton.disabled = true;
+        submitButton.textContent = '正在建立詢價案件…';
+      }
+      if(submitStatus){
+        submitStatus.classList.remove('ld-error');
+        submitStatus.textContent = '正在安全儲存資料，完成後會開啟 LINE';
+      }
+
       let dateLabel = '未指定';
       if(date){
         const d = new Date(date + 'T00:00:00');
@@ -1082,8 +1155,57 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
 
       const guideSummary = typeof window.ldLeakGuideSummary === 'string' ? window.ldLeakGuideSummary.trim() : '';
       const serviceDetails = collectServiceDetails(service);
+      const attribution = leadAttribution();
+      const identifiers = await Promise.all([gaValue('client_id', 900), gaValue('session_id', 900)]);
+      const gaClientId = identifiers[0] || cookieGaClientId();
+      let leadId = '';
+      let leadTimer = 0;
+      try{
+        const controller = new AbortController();
+        leadTimer = setTimeout(function(){ controller.abort(); }, 8000);
+        const response = await fetch(LEAD_API, {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          signal: controller.signal,
+          body: JSON.stringify({
+            name: name,
+            phone: phone,
+            service: service,
+            address: addr,
+            preferredTime: [date || '', time || ''].filter(Boolean).join(' '),
+            note: [note, guideSummary ? '漏水判讀摘要：' + guideSummary : ''].filter(Boolean).join('\n'),
+            details: serviceDetails,
+            attribution: attribution,
+            sourcePage: location.pathname,
+            landingPage: landingPage(),
+            referrer: (document.referrer || '').slice(0,500),
+            gaClientId: gaClientId,
+            gaSessionId: identifiers[1],
+            website: (document.getElementById('ld-q-website') || {}).value || ''
+          })
+        });
+        const result = await response.json().catch(function(){ return {}; });
+        if(!response.ok || !result.leadId) throw new Error(result.error || 'lead_capture_failed');
+        leadId = result.leadId;
+      }catch(error){
+        qForm.dataset.submitting = '0';
+        if(submitButton){
+          submitButton.disabled = false;
+          submitButton.textContent = '重新送出並開啟 LINE';
+        }
+        if(submitStatus){
+          submitStatus.classList.add('ld-error');
+          submitStatus.textContent = '目前無法建立案件，資料尚未送出。請稍後重試，或使用頁面上的「LINE 直接問」。';
+        }
+        ldTrack('lead_capture_error', { service: service, page: location.pathname });
+        return;
+      }finally{
+        if(leadTimer) clearTimeout(leadTimer);
+      }
+
       const msgLines = [
         '【灰汰郎 到府服務詢價】',
+        '線索編號：' + leadId,
         '姓名：' + name,
         '電話：' + phone,
         '服務項目：' + service,
@@ -1096,7 +1218,12 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
       if(guideSummary) msgLines.push('漏水判讀摘要：' + guideSummary);
       const msg = msgLines.join('\n');
 
-      ldTrack('quote_submit', { service: service, page: location.pathname });
+      ldTrack('generate_lead', {
+        lead_source: attribution.utm_source || 'website',
+        items: [{item_name: service, quantity: 1}]
+      });
+      ldTrack('quote_submit', { service: service, page: location.pathname, lead_id: leadId });
+      if(submitStatus) submitStatus.textContent = '案件 ' + leadId + ' 已建立，正在開啟 LINE';
       const url = 'https://line.me/R/oaMessage/' + LINE_OA_ID + '/?' + encodeURIComponent(msg);
       hideQuote();
       if(qHistoryOpen){
