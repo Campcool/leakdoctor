@@ -139,6 +139,12 @@ cases/
 - 修改後驗證慣例：`node --check header.js`；以 Node 驗證 JSON-LD、內部連結、四頁流程與禁止字樣；本機網址受瀏覽器安全政策阻擋時，直接使用正式部署標記與真機驗證，不可繞過安全政策。
 
 ## 5. 進度紀錄（新條目加在最上面）
+### 2026-08-16（Manus・防回歸驗證＋CI 自動化）
+- 建立 `scripts/validate-site.mjs` 品牌事實防回歸驗證（11 項）：sitemap↔實體頁面雙向對應、header.js 常數唯一性（LINE/LINE_OA_ID/GA4_ID/LEAD_API）、全站 LINE 短連結 ID 統一（防露涼社混入）、GA4 無占位假 ID、根/子目錄頁面 header.js 引用路徑一致性、header.js 語法＋ldInit/DOMContentLoaded 結構、表單個資保護文案。
+- **刪除根目錄重複頁 `mold-wall-cure.html`**：與 `articles/mold-wall-cure.html` 同題不同版（291/282 行），sitemap 只收 articles 版且根目錄版引用 `../header.js` 在根目錄會 404；AI-README §7 成長批次待辦的「刪重複頁」於此次完成。validate 的「根目錄頁引用 ../header.js 硬錯誤」規則正是抓住此殘留。
+- 建立 `.github/workflows/site-check.yml`：push/PR 自動跑 validate＋CI 內建**防假綠步驟**（故意破壞 header.js 常數再恢復，確認 validate 能抓住）＋og-image noindex＋llms.txt 常數一致性。防假綠本地驗證通過。
+- **header.js（62KB/25 函式）本次不拆**：辯證結論——全部函式在同一 IIFE scope 互相引用（ldTrack 被表單提交用、detailCatalog 被 renderServiceDetails 用），拆模組會破壞文章頁 <head> 載入模式或需改造 global bridge，風險>收益；靜態站 62KB 單檔解析成本可接受。
+- 驗證：validate-site.mjs 全綠（22 頁面、26 sitemap 網址）＋防假綠通過＋workflow 建立。
 
 ### 2026-07-23（Claude・服務卡改版＋光掃放慢延伸）
 - 依業主真機回饋調整首頁六服務卡：
@@ -395,7 +401,7 @@ cases/
 - **價格**：洗衣機/居家清潔價目表+Offer schema（原本只寫現場報價）
 - **地區頁**：7 城市 + areas.html hub（各自行政區、在地需求、FAQ、schema）
 - **品牌素材**：header 換正式 logo、OG 換深藍卡、favicon 全套更新
-- **成長批次**：GA4 佔位與轉換事件；4 篇清潔文章；潔美淨真實案例照上服務頁；12 篇舊文加快速答案；「漏水百科」→「居家百科」；fonts preconnect；刪重複頁 knowledge-1/mold-wall-cure-1；llms.txt
+- **成長批次**：GA4 佔位與轉換事件；4 篇清潔文章；潔美淨真實案例照上服務頁；12 篇舊文加快速答案；「漏水百科」→「居家百科」；fonts preconnect；~~刪重複頁 knowledge-1/mold-wall-cure-1~~（2026-08-16 Manus 已刪根目錄 mold-wall-cure.html 重複頁）；llms.txt
 
 ## 6. 已知陷阱（改壞過的地方，小心）
 

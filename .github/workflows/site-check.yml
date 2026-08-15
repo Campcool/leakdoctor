@@ -1,0 +1,27 @@
+name: Site check
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Brand fact + structural validation (validate-site.mjs)
+        run: node scripts/validate-site.mjs
+      - name: 防假綠：故意破壞 header.js 常數，確認 validate 能抓住
+        run: |
+          cp header.js header.js.bak
+          node -e "const fs=require('fs'); const s=fs.readFileSync('header.js','utf8'); fs.writeFileSync('header.js', s.replace(\"G-1H1X1X9QZE\", 'G-XXXXXXXXXX').replace(\"lin.ee/WVxmY65\", 'lin.ee/FAKE123'));"
+          node scripts/validate-site.mjs && { echo "::error::validate 未抓住破壞的常數（防假綠失敗）"; exit 1; } || echo "validate 成功抓住常數破壞"
+          mv header.js.bak header.js
+          node scripts/validate-site.mjs || exit 1
+      - name: og-image.html 工具頁維持 noindex
+        run: grep -q 'noindex' og-image.html
+      - name: llms.txt 常數一致性
+        run: |
+          grep -q 'lin.ee/WVxmY65' llms.txt && grep -q '@478xvlgl' llms.txt && echo "llms.txt LINE 資訊一致"
