@@ -54,6 +54,8 @@ for (const url of sitemapUrls) {
 // 排除工具頁與轉跳頁：不在 sitemap 但存在的特殊頁（工具頁必須標 noindex 才能豁免）
 const SKIP_PAGES = new Set(['og-image.html', 'google00a268e494d7ca7a.html']);
 for (const f of htmlFiles) {
+  // Google 驗證檔必須保持單行純文字內容，不可加 noindex；僅豁免 sitemap 檢查
+  if (f === 'google00a268e494d7ca7a.html') continue;
   const content = fs.readFileSync(path.join(root, f), 'utf8');
   if (SKIP_PAGES.has(f)) {
     if (!/meta name="robots" content="noindex"/.test(content)) {
