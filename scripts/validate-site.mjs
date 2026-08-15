@@ -51,15 +51,20 @@ for (const url of sitemapUrls) {
     report('sitemap <loc>' + url + '</loc> 無對應頁面');
   }
 }
-// 排除工具頁與轉跳頁：不在 sitemap 但存在的特殊頁
+// 排除工具頁與轉跳頁：不在 sitemap 但存在的特殊頁（工具頁必須標 noindex 才能豁免）
 const SKIP_PAGES = new Set(['og-image.html', 'google00a268e494d7ca7a.html']);
 for (const f of htmlFiles) {
-  if (SKIP_PAGES.has(f)) continue;
+  const content = fs.readFileSync(path.join(root, f), 'utf8');
+  if (SKIP_PAGES.has(f)) {
+    if (!/meta name="robots" content="noindex"/.test(content)) {
+      report(f + ' 是不收錄的工具頁但沒有 noindex 標記（會污染搜尋索引）');
+    }
+    continue;
+  }
   if (f === 'index.html' && sitemapUrls.has('/')) continue;
   if (f !== 'index.html' && sitemapUrls.has('/' + f)) continue;
-  const content = fs.readFileSync(path.join(root, f), 'utf8');
   // noindex 轉跳頁允許不在 sitemap
-  if (/noindex/i.test(content) && /meta name="robots" content="noindex|<meta name="robots" content="noindex/.test(content)) continue;
+  if (/meta name="robots" content="noindex"/.test(content)) continue;
   report(f + ' 是正式頁面但不在 sitemap（或該頁應標 noindex）');
 }
 if (sitemapUrls.size) ok('sitemap ' + sitemapUrls.size + ' 個網址與實體頁面對應完成');
