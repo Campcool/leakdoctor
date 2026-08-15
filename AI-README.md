@@ -139,6 +139,8 @@ cases/
 - 修改後驗證慣例：`node --check header.js`；以 Node 驗證 JSON-LD、內部連結、四頁流程與禁止字樣；本機網址受瀏覽器安全政策阻擋時，直接使用正式部署標記與真機驗證，不可繞過安全政策。
 
 ## 5. 進度紀錄（新條目加在最上面）
+- **更新 `sitemap.xml`（26→36 網址）**：areas/地區頁 8 張、cases、team 長期未收錄（sitemap 停在 2026-07-13）。新增 `scripts/update-sitemap.mjs` 依實體頁面與 git 最後修改日重生成，並納入 CI 自動重跑（`scripts/update-sitemap.mjs && node scripts/validate-site.mjs`）。
+- **og-image.html 補 noindex**：工具頁原本可被索引，會污染搜尋結果。validate 新增「工具頁必須標 noindex」檢查（Google 驗證檔維持單行純文字，豁免 noindex 檢查）。
 ### 2026-08-16（Manus・防回歸驗證＋CI 自動化）
 - 建立 `scripts/validate-site.mjs` 品牌事實防回歸驗證（11 項）：sitemap↔實體頁面雙向對應、header.js 常數唯一性（LINE/LINE_OA_ID/GA4_ID/LEAD_API）、全站 LINE 短連結 ID 統一（防露涼社混入）、GA4 無占位假 ID、根/子目錄頁面 header.js 引用路徑一致性、header.js 語法＋ldInit/DOMContentLoaded 結構、表單個資保護文案。
 - **刪除根目錄重複頁 `mold-wall-cure.html`**：與 `articles/mold-wall-cure.html` 同題不同版（291/282 行），sitemap 只收 articles 版且根目錄版引用 `../header.js` 在根目錄會 404；AI-README §7 成長批次待辦的「刪重複頁」於此次完成。validate 的「根目錄頁引用 ../header.js 硬錯誤」規則正是抓住此殘留。
@@ -420,7 +422,7 @@ cases/
 - [ ] 在 GA4 Web 資料串流建立 Measurement Protocol API secret，存入灰汰郎 Worker Secret `GA4_API_SECRET`；未設定前，官網 `generate_lead` 正常，但 `working_lead`／`qualify_lead`／`close_convert_lead` 不會送出。
 - [ ] LINE 官方帳號顯示名稱仍是「台灣漏水醫生_百科全書」→ 到 manager.line.biz 改名「灰汰郎」
 - [ ] 建立灰汰郎的 Google 商家檔案（現存搜尋結果掛美國電話 +1 407-917-1773 的商家檔案不是業主的）
-- [ ] Google Search Console 提交新 sitemap、對改名頁面請求重新索引
+- [ ] Google Search Console ~~提交新 sitemap~~（2026-08-16 Manus 已更新為 36 網址，含未收錄的地區頁）＋對改名頁面請求重新索引（仍需業主手動在 GSC 操作）
 
 ### 🟠 高價值，AI 可做
 - [x] **前台轉換 P0**：地址選填、機型數量收合、首頁／手機雙 CTA、`line_direct_click`、手機 Header CLS 與六服務卡配色已於 2026-07-19 完成。
