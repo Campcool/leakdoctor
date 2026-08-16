@@ -142,6 +142,20 @@ const rmOk = /data-ld-reduced-motion/.test(headerJs) &&
 if (!rmOk) report('header.js 缺少全站 reduced-motion 停用規則（WCAG 2.3.3：內嵌動畫 109 處、keyframes 2 組，必須由 header.js 動態 style 統一覆蓋）');
 else ok('全站 reduced-motion 規則存在（所有內嵌動畫統一覆蓋）');
 
+// ── 4c. 無障礙防回歸：main landmark + 區塊可識別 ──────────────
+let a11yFail = 0;
+for (const f of htmlFiles) {
+  if (SKIP_PAGES.has(f)) continue;
+  const c = fs.readFileSync(path.join(root, f), 'utf8');
+  if (!/<main\b/.test(c)) { report(f + ' 缺少 main landmark（WCAG 1.3.1：螢幕閱讀器需頁面主要內容起點）'); a11yFail++; }
+  const missingA11y = (c.match(/<section(?![^>]*aria-label)(?![^>]*role=)[^>]*>/g) || []).length;
+  if (missingA11y) { report(f + ' 有 ' + missingA11y + ' 個 section 缺 aria-label 與 role（WCAG 1.3.1 region）'); a11yFail++; }
+}
+if (a11yFail === 0) ok('無障礙結構：全部正式頁面 main landmark + section 皆可識別（region）');
+const greenText = (headerJs.match(/#06C755/g) || []).length;
+if (greenText > 3) report('header.js 殘留 #06C755 白字低對比色（應全部改 #047a36 5.47:1；允許 3 處裝飾用 SVG 內 fill）');
+else ok('header.js 對比重修完成（#047a36 5.47:1，裝飾 SVG 除外）');
+
 // ── 5. 表單個資保護文案 ───────────────────────────────────────
 const formText = headerJs.slice(headerJs.indexOf('姓名'), headerJs.indexOf('姓名') + 20000) || '';
 const leakyPhrases = ['此裝置', '裝置資料', '自動收集', '自動擷取', '裝置編號'];
