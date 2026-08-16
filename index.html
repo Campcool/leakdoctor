@@ -173,6 +173,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 <script src="header.js?v=20260727a"></script>
 
 <!-- Hero -->
+<main id="main">
 <section id="hero">
 <div class="hero-inner">
   <div class="hero-copy">
@@ -193,7 +194,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </div>
 </section>
 
-<section class="confidence-strip" aria-label="服務原則">
+<section class="confidence-strip" aria-label="服務原則" aria-label="服務原則" role="region">
   <div class="confidence-inner">
     <div class="confidence-item"><span class="confidence-dot"></span><span><b>先確認：</b>機型、數量與現場條件</span></div>
     <div class="confidence-item"><span class="confidence-dot"></span><span><b>再報價：</b>固定價格或需要專員確認</span></div>
@@ -202,7 +203,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </section>
 
 <!-- 核心服務 -->
-<section id="services">
+<section id="services" aria-label="services">
 <div class="services-inner">
   <div class="sec-tag blue">我們的服務</div>
   <h2 class="sec-title">六大居家服務，一站搞定</h2>
@@ -324,7 +325,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </section>
 
 <!-- 我們提供什麼 -->
-<section class="service-flow" aria-labelledby="home-flow-title">
+<section class="service-flow" aria-labelledby="home-flow-title" aria-label="服務流程">
   <div class="service-flow-inner">
     <div class="service-flow-head"><div class="service-flow-kicker">簡易流程說明</div><h2 id="home-flow-title">到府服務都應該走完這六個步驟</h2><p class="service-flow-intro">不同服務的工具與細節不同，但安全確認、環境保護、復原和測試不能省略。點進各服務頁可查看專屬說明。</p></div>
     <div class="service-step-grid">
@@ -338,7 +339,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   </div>
 </section>
 
-<section id="promises">
+<section id="promises" aria-label="服務承諾">
 <div class="promises-inner">
   <div class="sec-tag teal">我們提供什麼</div>
   <h2 class="sec-title">知識 · 專業 · 透明</h2>
@@ -352,7 +353,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </section>
 
 <!-- 服務地區 -->
-<section id="areas-strip" style="padding:2.5rem 1.25rem;background:#fff">
+<section id="areas-strip" style="padding:2.5rem 1.25rem;background:#fff" aria-label="服務地區">
   <div style="max-width:900px;margin:0 auto;text-align:center">
     <div class="sec-tag blue">服務地區</div>
     <h2 class="sec-title">北台灣到台中，到府服務</h2>
@@ -366,7 +367,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </section>
 
 <!-- CTA -->
-<section id="cta-bottom">
+<section id="cta-bottom" aria-label="預約行動呼籲" role="region">
   <div class="cta-title">灰塵髒污，交給灰汰郎</div>
   <div class="cta-sub">填寫基本資料，快速預約到府服務</div>
   <button type="button" class="cta-btn craft-action-icon" onclick="ldOpenQuote()"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#calendar"></use></svg>線上預約估價</button>
@@ -403,5 +404,6 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 
 <script>document.getElementById('copy-year').textContent = new Date().getFullYear();</script>
 
+</main>
 </body>
 </html>

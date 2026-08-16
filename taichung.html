@@ -139,7 +139,8 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 <body>
 <script src="header.js?v=20260727a"></script>
 
-<section id="page-hero">
+<main id="main">
+<section id="page-hero" aria-label="page hero">
   <div class="page-hero-inner">
     <div class="loc-badge">📍 台中市・全區到府服務</div>
     <h1 class="page-title">台中市居家服務<br>冷氣・洗衣機・清潔・抓漏</h1>
@@ -148,7 +149,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
     <button type="button" class="page-btn" onclick="ldOpenQuote()">📋 線上快速預約估價</button>
   </div>
 </section>
-<section class="section">
+<section class="section" aria-label="section">
   <div class="container">
     <div class="crumb"><a href="/">灰汰郎首頁</a> ／ <a href="areas.html">服務地區</a> ／ 台中市</div>
     <h2 class="h">台中市・四大到府服務</h2>
@@ -165,7 +166,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   </div>
 </section>
 
-<section class="section">
+<section class="section" aria-label="section">
   <div class="container">
     <h2 class="h">台中市服務範圍</h2>
     <div class="area-tags">
@@ -196,7 +197,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   </div>
 </section>
 
-<section class="section">
+<section class="section" aria-label="section">
   <div class="container">
     <h2 class="h">為什麼選擇灰汰郎</h2>
     <div class="why-grid">
@@ -208,7 +209,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   </div>
 </section>
 
-<section class="section">
+<section class="section" aria-label="section">
   <div class="container">
     <h2 class="h">台中市在地服務</h2>
     <div class="local-box">
@@ -223,7 +224,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   </div>
 </section>
 
-<section class="section">
+<section class="section" aria-label="section">
   <div class="container">
     <h2 class="h">台中市常見問題</h2>
     <div class="faq-list">
@@ -235,7 +236,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   </div>
 </section>
 
-<section class="section">
+<section class="section" aria-label="section">
   <div class="container">
     <h2 class="h">其他服務地區</h2>
     <div class="region-links">
@@ -250,7 +251,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   </div>
 </section>
 
-<section id="cta-bottom">
+<section id="cta-bottom" aria-label="預約行動呼籲" role="region">
   <div class="cta-title">台中市到府服務・立即預約</div>
   <div class="cta-sub">填寫基本資料或加 LINE，免費諮詢並快速安排在地師傅</div>
   <button type="button" class="cta-btn" onclick="ldOpenQuote()">📋 線上預約估價</button>
@@ -292,5 +293,6 @@ document.querySelectorAll('.faq-q').forEach(btn=>{
 });
 document.getElementById('copy-year').textContent = new Date().getFullYear();
 </script>
+</main>
 </body>
 </html>

@@ -40,6 +40,7 @@
 <body class="service-page">
 <script src="header.js?v=20260727a"></script>
 
+<main id="main">
 <section id="page-hero">
   <div class="page-hero-inner">
     <div>
@@ -62,7 +63,7 @@
   </div>
 </nav>
 
-<section class="section" id="pipe-pricing">
+<section class="section" id="pipe-pricing" aria-label="pipe pricing">
   <div class="container">
     <div class="section-kicker">價格優先</div>
     <h2 class="h">水管清洗依戶型、管材與出水點報價</h2>
@@ -78,7 +79,7 @@
   </div>
 </section>
 
-<section class="section" id="pipe-content">
+<section class="section" id="pipe-content" aria-label="pipe content">
   <div class="container">
     <div class="section-kicker">內容說明</div>
     <h2 class="h">適合先詢問水管清洗的情況</h2>
@@ -94,7 +95,7 @@
   </div>
 </section>
 
-<section class="service-flow" aria-labelledby="pipe-flow-title">
+<section class="service-flow" aria-labelledby="pipe-flow-title" aria-label="服務流程">
   <div class="service-flow-inner">
     <div class="service-flow-head"><div class="service-flow-kicker">服務流程</div><h2 id="pipe-flow-title">水管清洗前，先把症狀分清楚</h2><p class="service-flow-intro">灰汰郎的重點不是急著賣清洗，而是先判斷這個問題是否適合清洗處理。</p></div>
     <div class="service-step-grid">
@@ -108,7 +109,7 @@
   </div>
 </section>
 
-<section class="section" id="pipe-difference">
+<section class="section" id="pipe-difference" aria-label="pipe difference">
   <div class="container">
     <div class="section-kicker">差異說明</div>
     <h2 class="h">水管清洗、水塔清洗與漏水維修要分開</h2>
@@ -121,7 +122,7 @@
   </div>
 </section>
 
-<section class="section" id="pipe-cases">
+<section class="section" id="pipe-cases" aria-label="pipe cases">
   <div class="container">
     <div class="section-kicker">實際案例</div>
     <h2 class="h">管內沉積與現場排出物實拍</h2>
@@ -142,7 +143,7 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section" aria-label="section">
   <div class="container">
     <h2 class="h">常見問題</h2>
     <div class="faq-list">
@@ -155,7 +156,7 @@
   </div>
 </section>
 
-<section id="cta-bottom">
+<section id="cta-bottom" aria-label="預約行動呼籲" role="region">
   <div class="cta-title">水管清洗，先判斷是否適合</div>
   <div class="cta-sub">傳冷熱水出水影片、地址、屋齡與熱水器狀況，專員協助分類</div>
   <button type="button" class="cta-btn craft-action-icon" onclick="ldOpenQuote('pipe-cleaning')"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#calendar"></use></svg>線上預約估價</button>
@@ -177,5 +178,6 @@
 document.querySelectorAll('.faq-q').forEach(btn=>btn.addEventListener('click',()=>{const a=btn.nextElementSibling;const open=btn.classList.toggle('open');a.classList.toggle('open',open)}));
 document.getElementById('copy-year').textContent=new Date().getFullYear();
 </script>
+</main>
 </body>
 </html>

@@ -60,7 +60,7 @@
 
   <div class="lg-source">內容依<a href="https://www.nlma.gov.tw/ch/legislation/regsearch/1487" target="_blank" rel="noopener">內政部國土管理署《建築物給水排水設備設計技術規範》</a>整理；住宅年代僅作風險提示，不直接推定管材。</div>
 
-  <section class="lg-era" aria-labelledby="lg-era-title">
+  <section class="lg-era" aria-labelledby="lg-era-title" aria-label="lg era">
     <div class="lg-container">
       <div class="lg-era-head"><div class="lg-kicker">台灣住宅屋齡脈絡</div><h2 id="lg-era-title">從 10 年到 50 年以上，看的是維護歷程</h2><p>屋齡越高，不代表一定使用某種管材；真正重要的是原始設計、是否翻修、哪些區域仍是舊管，以及共用管線能否檢修。</p></div>
       <div class="lg-era-grid">
@@ -73,26 +73,26 @@
     </div>
   </section>
 
-  <section id="leak-guide-tool">
+  <section id="leak-guide-tool" aria-label="leak guide tool">
     <div class="lg-container">
       <div class="lg-tool-shell">
         <div class="lg-tool-top"><div class="lg-progress"><span class="lg-progress-item is-active" data-progress="1"></span><span class="lg-progress-item" data-progress="2"></span><span class="lg-progress-item" data-progress="3"></span></div><div id="lg-progress-label">步驟 1／3</div></div>
         <div id="lg-loading" class="lg-loading">正在載入住宅與漏水資料…</div>
         <div id="lg-app" hidden>
-          <section class="lg-step" data-step="1">
+          <section class="lg-step" data-step="1" aria-label="lg step">
             <div class="lg-step-head"><div class="lg-step-number">STEP 01</div><h2>你住的是什麼住宅？屋齡多久？</h2><p class="lg-step-lead">住宅型態影響共用管線與責任範圍；屋齡只用來提示維護風險，不直接推定管材。</p></div>
             <fieldset class="lg-fieldset"><legend>住宅類型</legend><div class="lg-options housing" id="lg-housing-options"></div></fieldset>
             <fieldset class="lg-fieldset"><legend>大約屋齡</legend><div class="lg-options age" id="lg-age-options"></div></fieldset>
             <div class="lg-step-actions"><button class="lg-next" id="lg-next-1" type="button" data-go-step="2" disabled>下一步：選漏水表現</button></div>
           </section>
 
-          <section class="lg-step" data-step="2" hidden>
+          <section class="lg-step" data-step="2" hidden aria-label="lg step">
             <div class="lg-step-head"><div class="lg-step-number">STEP 02</div><h2>漏水通常在什麼情況出現？</h2><p class="lg-step-lead">發生時間往往比水痕形狀更有用。請選最接近的一項，結果仍需現場交叉確認。</p></div>
             <fieldset class="lg-fieldset"><legend>漏水表現</legend><div class="lg-options symptom" id="lg-symptom-options"></div></fieldset>
             <div class="lg-step-actions"><button class="lg-back" type="button" data-go-step="1">上一步</button><button class="lg-next" id="lg-next-2" type="button" data-go-step="3" disabled>查看可能成因與案例</button></div>
           </section>
 
-          <section class="lg-step" data-step="3" hidden>
+          <section class="lg-step" data-step="3" hidden aria-label="lg step">
             <div class="lg-step-head"><div class="lg-step-number">STEP 03</div><h2>你的初步判讀結果</h2><p class="lg-step-lead">以下是優先排查順序，不是遠端判定。請保留照片、發生時間與用水紀錄，方便現場縮小範圍。</p></div>
             <div class="lg-result-summary" id="lg-result-summary"></div>
             <div class="lg-result-block"><div id="lg-layout"></div><div id="lg-age-note"></div></div>
@@ -108,7 +108,7 @@
     </div>
   </section>
 
-  <section class="lg-library">
+  <section class="lg-library" aria-label="lg library">
     <div class="lg-container"><div class="lg-kicker">深入理解</div><h2>判讀器負責整理，百科負責說清楚</h2><div class="lg-library-grid">
       <a class="lg-library-card" href="knowledge.html#tab-structure"><span>住宅與管線</span><strong>透天、公寓、華廈與大樓</strong><p>理解共用立管、支管、樓板與外牆之間的關係。</p></a>
       <a class="lg-library-card" href="knowledge.html#tab-detect"><span>六種抓漏方式</span><strong>熱像、壓力、滿水、色水、濕度與聽音</strong><p>每種方法能回答的問題與限制不同。</p></a>
@@ -116,7 +116,7 @@
     </div></div>
   </section>
 
-  <section class="lg-cta"><h2>不知道該選哪一項，也可以直接描述</h2><p>拍下漏水位置與周圍環境，記錄下雨或用水後多久出現。</p><button class="lg-primary" type="button" onclick="ldOpenQuote('leak-repair')">LINE 免費初步諮詢</button></section>
+  <section class="lg-cta" aria-label="lg cta"><h2>不知道該選哪一項，也可以直接描述</h2><p>拍下漏水位置與周圍環境，記錄下雨或用水後多久出現。</p><button class="lg-primary" type="button" onclick="ldOpenQuote('leak-repair')">LINE 免費初步諮詢</button></section>
 </main>
 
 <script src="leak-guide.js" defer></script>

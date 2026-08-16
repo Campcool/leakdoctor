@@ -37,6 +37,7 @@
 <body class="service-page">
 <script src="header.js?v=20260727a"></script>
 
+<main id="main">
 <section id="page-hero">
   <div class="page-hero-inner">
     <div>
@@ -59,7 +60,7 @@
   </div>
 </nav>
 
-<section class="section" id="water-tank-pricing">
+<section class="section" id="water-tank-pricing" aria-label="water tank pricing">
   <div class="container">
     <div class="section-kicker">價格優先</div>
     <h2 class="h">水塔清洗先用照片與條件報價，不直接套單一價格</h2>
@@ -75,7 +76,7 @@
   </div>
 </section>
 
-<section class="section" id="water-tank-content">
+<section class="section" id="water-tank-content" aria-label="water tank content">
   <div class="container">
     <div class="section-kicker">內容說明</div>
     <h2 class="h">水塔清洗要先確認四件事</h2>
@@ -89,7 +90,7 @@
   </div>
 </section>
 
-<section class="service-flow" aria-labelledby="water-tank-flow-title">
+<section class="service-flow" aria-labelledby="water-tank-flow-title" aria-label="服務流程">
   <div class="service-flow-inner">
     <div class="service-flow-head"><div class="service-flow-kicker">服務流程</div><h2 id="water-tank-flow-title">從停水到復水，重點是安全與順序</h2><p class="service-flow-intro">以下是常見作業順序；實際流程會依水塔材質、容量、通道及現場安全條件調整。</p></div>
     <div class="service-step-grid">
@@ -103,7 +104,7 @@
   </div>
 </section>
 
-<section class="section" id="water-tank-difference">
+<section class="section" id="water-tank-difference" aria-label="water tank difference">
   <div class="container">
     <div class="section-kicker">差異說明</div>
     <h2 class="h">水塔清洗、水管清洗與抓漏不是同一件事</h2>
@@ -145,7 +146,7 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section" aria-label="section">
   <div class="container">
     <h2 class="h">常見問題</h2>
     <div class="faq-list">
@@ -156,7 +157,7 @@
   </div>
 </section>
 
-<section id="cta-bottom">
+<section id="cta-bottom" aria-label="預約行動呼籲" role="region">
   <div class="cta-title">水塔清洗，先把條件說清楚</div>
   <div class="cta-sub">傳照片、容量與地址，專員協助確認是否可安排</div>
   <button type="button" class="cta-btn craft-action-icon" onclick="ldOpenQuote('water-tank')"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#calendar"></use></svg>線上預約估價</button>
@@ -178,5 +179,6 @@
 document.querySelectorAll('.faq-q').forEach(btn=>btn.addEventListener('click',()=>{const a=btn.nextElementSibling;const open=btn.classList.toggle('open');a.classList.toggle('open',open)}));
 document.getElementById('copy-year').textContent=new Date().getFullYear();
 </script>
+</main>
 </body>
 </html>

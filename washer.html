@@ -117,6 +117,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 <link rel="stylesheet" href="assets/craft.css?v=20260723a">
 <script src="header.js?v=20260727a"></script>
 
+<main id="main">
 <section id="page-hero">
   <div class="page-hero-inner">
     <div>
@@ -137,7 +138,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
     <a href="#washer-cases">實際案例</a>
   </div>
 </nav>
-<section class="section" id="washer-pricing">
+<section class="section" id="washer-pricing" aria-label="washer pricing">
   <div class="container">
     <h2 class="h">價格參考</h2>
 <table class="price-table">
@@ -150,7 +151,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </section>
 
 
-<section class="section" id="washer-services">
+<section class="section" id="washer-services" aria-label="washer services">
   <div class="container">
     <div class="crumb"><a href="/">灰汰郎首頁</a> ／ 洗衣機清洗</div>
     <h2 class="h">服務項目</h2>
@@ -167,7 +168,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
     </div>
   </div>
 </section>
-<section class="service-flow" aria-labelledby="washer-flow-title">
+<section class="service-flow" aria-labelledby="washer-flow-title" aria-label="服務流程">
   <div class="service-flow-inner">
     <div class="service-flow-head"><div class="service-flow-kicker">洗衣機專屬流程</div><h2 id="washer-flow-title">拆洗、復位、試轉，六步不省略</h2><p class="service-flow-intro">直立式、滾筒式與洗脫烘結構不同；先核對機型與原始功能，再決定可拆範圍。</p></div>
     <div class="service-step-grid">
@@ -182,7 +183,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </section>
 
 
-<section class="knowledge-rail" id="washer-differences" aria-labelledby="washer-knowledge-title">
+<section class="knowledge-rail" id="washer-differences" aria-labelledby="washer-knowledge-title" aria-label="washer differences">
   <div class="knowledge-rail-inner">
     <div class="knowledge-rail-head"><div><div class="knowledge-rail-kicker">機型不同，拆法與價格也不同</div><h2 id="washer-knowledge-title">直立式與滾筒式，差別不只方向</h2><p class="knowledge-rail-intro">直立式通常由上方拆卸內槽；滾筒式涉及門封、配重、線組與前後結構，拆裝工時及風險較高，因此參考價格通常較高。</p></div><a class="knowledge-more" href="articles/washer-cleaning-guide.html">閱讀清洗知識 <span aria-hidden="true">→</span></a></div>
     <div class="knowledge-grid">
@@ -219,7 +220,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   </div>
 </section>
 
-<section class="section">
+<section class="section" aria-label="section">
   <div class="container">
     <h2 class="h">常見問題</h2>
     <div class="faq-list">
@@ -233,7 +234,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   </div>
 </section>
 
-<section class="section">
+<section class="section" aria-label="section">
   <div class="container">
     <h2 class="h">延伸閱讀</h2>
     <div style="display:grid;gap:.7rem">
@@ -243,7 +244,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   </div>
 </section>
 
-<section id="cta-bottom">
+<section id="cta-bottom" aria-label="預約行動呼籲" role="region">
   <div class="cta-title">洗衣機清洗，交給灰汰郎</div>
   <div class="cta-sub">加入 LINE，免費諮詢並快速預約到府服務</div>
   <button type="button" class="cta-btn craft-action-icon" onclick="ldOpenQuote('washer')"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#calendar"></use></svg>線上預約估價</button>
@@ -285,5 +286,6 @@ document.querySelectorAll('.faq-q').forEach(btn=>{
 });
 document.getElementById('copy-year').textContent = new Date().getFullYear();
 </script>
+</main>
 </body>
 </html>

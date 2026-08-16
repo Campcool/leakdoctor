@@ -117,6 +117,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 <link rel="stylesheet" href="assets/craft.css?v=20260723a">
 <script src="header.js?v=20260727a"></script>
 
+<main id="main">
 <section id="page-hero">
   <div class="page-hero-inner">
     <div>
@@ -137,7 +138,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
     <a href="#homeclean-cases">實際案例</a>
   </div>
 </nav>
-<section class="section" id="homeclean-services">
+<section class="section" id="homeclean-services" aria-label="homeclean services">
   <div class="container">
     <div class="crumb"><a href="/">灰汰郎首頁</a> ／ 居家清潔</div>
     <div class="section-kicker">七種需求，不用都叫大掃除</div>
@@ -184,7 +185,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   </div>
 </section>
 
-<section class="service-flow" aria-labelledby="homeclean-flow-title">
+<section class="service-flow" aria-labelledby="homeclean-flow-title" aria-label="服務流程">
   <div class="service-flow-inner">
     <div class="service-flow-head"><div class="service-flow-kicker">預約流程</div><h2 id="homeclean-flow-title">三步就能安排</h2><p class="service-flow-intro">先用 LINE 照片確認，避免看完一堆說明還不知道該選哪一項。</p></div>
     <div class="service-step-grid">
@@ -196,7 +197,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </section>
 
 
-<section class="knowledge-rail" id="homeclean-difference" aria-labelledby="homeclean-knowledge-title">
+<section class="knowledge-rail" id="homeclean-difference" aria-labelledby="homeclean-knowledge-title" aria-label="homeclean difference">
   <div class="knowledge-rail-inner">
     <div class="knowledge-rail-head"><div><div class="knowledge-rail-kicker">先了解，再決定</div><h2 id="homeclean-knowledge-title">清潔成果，取決於範圍與材質</h2><p class="knowledge-rail-intro">定期維持、大掃除、退租與裝潢細清不是同一件事；先把範圍說清楚，報價與成果才有共同標準。</p></div><a class="knowledge-more" href="knowledge.html">瀏覽居家知識 <span aria-hidden="true">→</span></a></div>
     <div class="knowledge-grid">
@@ -207,7 +208,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   </div>
 </section>
 
-<section class="section" id="homeclean-areas">
+<section class="section" id="homeclean-areas" aria-label="homeclean areas">
   <div class="container">
     <div class="section-kicker">由基隆出發，依區域安排</div>
     <h2 class="h">雙北、基隆為主要到府範圍</h2>
@@ -261,7 +262,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   </div>
 </section>
 
-<section class="section">
+<section class="section" aria-label="section">
   <div class="container">
     <h2 class="h">常見問題</h2>
     <div class="faq-list">
@@ -275,7 +276,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   </div>
 </section>
 
-<section class="section">
+<section class="section" aria-label="section">
   <div class="container">
     <h2 class="h">延伸閱讀</h2>
     <div style="display:grid;gap:.7rem">
@@ -285,7 +286,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   </div>
 </section>
 
-<section id="cta-bottom">
+<section id="cta-bottom" aria-label="預約行動呼籲" role="region">
   <div class="cta-title">居家清潔，交給灰汰郎</div>
   <div class="cta-sub">加入 LINE，免費諮詢並快速預約到府服務</div>
   <button type="button" class="cta-btn craft-action-icon" onclick="ldOpenQuote('homeclean')"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#calendar"></use></svg>線上預約估價</button>
@@ -327,5 +328,6 @@ document.querySelectorAll('.faq-q').forEach(btn=>{
 });
 document.getElementById('copy-year').textContent = new Date().getFullYear();
 </script>
+</main>
 </body>
 </html>
