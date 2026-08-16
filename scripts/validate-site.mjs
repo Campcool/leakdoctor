@@ -134,6 +134,14 @@ const headModeNote = '文章頁在 <head> 載入 header.js，改壞 ldInit 會�
 if (!ldInitPresent) report('ldInit/DOMContentLoaded 結構缺失（' + headModeNote + '）');
 else ok('ldInit + DOMContentLoaded 結構存在（保護文章頁導覽）');
 
+// ── 4b. 全站減少動態偏好：使用者開啟 prefers-reduced-motion 時
+// 所有頁面動畫必須被停用（header.js 動態注入 data-ld-reduced-motion 樣式）
+const rmOk = /data-ld-reduced-motion/.test(headerJs) &&
+  /animation:none/.test(headerJs) && /transition:none/.test(headerJs) &&
+  /prefers-reduced-motion: reduce/.test(headerJs);
+if (!rmOk) report('header.js 缺少全站 reduced-motion 停用規則（WCAG 2.3.3：內嵌動畫 109 處、keyframes 2 組，必須由 header.js 動態 style 統一覆蓋）');
+else ok('全站 reduced-motion 規則存在（所有內嵌動畫統一覆蓋）');
+
 // ── 5. 表單個資保護文案 ───────────────────────────────────────
 const formText = headerJs.slice(headerJs.indexOf('姓名'), headerJs.indexOf('姓名') + 20000) || '';
 const leakyPhrases = ['此裝置', '裝置資料', '自動收集', '自動擷取', '裝置編號'];

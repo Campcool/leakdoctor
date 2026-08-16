@@ -1,5 +1,15 @@
 (function(){
-  function ldInit(){
+    // ── 全站減少動態偏好：使用者開啟 prefers-reduced-motion 時停用所有過場動畫與轉場 ──
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const rm = document.createElement('style');
+    rm.setAttribute('data-ld-reduced-motion', 'true');
+    rm.textContent = (
+      '*,*::before,*::after{animation:none!important;transition:none!important;}' +
+      '@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important;}}'
+    );
+    document.head.appendChild(rm);
+  }
+function ldInit(){
   const path = location.pathname.split('/').pop() || 'index.html';
   const page = path.replace('.html','') || 'index';
   const leakSubPages = ['cases','team','areas','leak-guide','taipei','new-taipei','keelung','taoyuan','hsinchu','miaoli','taichung'];

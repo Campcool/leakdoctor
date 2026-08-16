@@ -139,6 +139,14 @@ cases/
 - 修改後驗證慣例：`node --check header.js`；以 Node 驗證 JSON-LD、內部連結、四頁流程與禁止字樣；本機網址受瀏覽器安全政策阻擋時，直接使用正式部署標記與真機驗證，不可繞過安全政策。
 
 ## 5. 進度紀錄（新條目加在最上面）
+
+### 2026-08-16（Manus・滿分制第二輪・可及性補強）
+
+- **全站 `prefers-reduced-motion` 統一停用規則**：滿分制盤點發現 38 頁中有 32 頁含 CSS 動畫（109 處 transition、2 組 keyframes），但只有 1 頁有減少動態處理（WCAG 2.3.3）。因動畫分散在各頁內嵌 `<style>`，採單一生效點修法：`header.js` 的 `ldInit` 頭部注入動態 `<style>`（`data-ld-reduced-motion`），使用者開啟減少動態偏好時全站動畫與轉場統一停用；文章頁 `<head>` 載入模式同樣覆蓋。一處修改、全站生效，不碰各頁內嵌樣式。
+- **validate 新增斷言**：header.js 必須同時含 `data-ld-reduced-motion`、`animation:none`、`transition:none`、`prefers-reduced-motion: reduce` 四項，防假綠通過（故意移除注入後正確報錯）。
+- **sitemap 驗證確認**：`update-sitemap.mjs` 已正確覆蓋 articles/ 16 篇（36 個網址全收錄），本盤點曾誤判漏收，實為檢查指令引號問題，腳本無 bug。
+- 驗證：validate-site.mjs 全綠（22 頁面、36 sitemap 網址）＋防假綠通過。
+
 - **更新 `sitemap.xml`（26→36 網址）**：areas/地區頁 8 張、cases、team 長期未收錄（sitemap 停在 2026-07-13）。新增 `scripts/update-sitemap.mjs` 依實體頁面與 git 最後修改日重生成，並納入 CI 自動重跑（`scripts/update-sitemap.mjs && node scripts/validate-site.mjs`）。
 - **og-image.html 補 noindex**：工具頁原本可被索引，會污染搜尋結果。validate 新增「工具頁必須標 noindex」檢查（Google 驗證檔維持單行純文字，豁免 noindex 檢查）。
 ### 2026-08-16（Manus・防回歸驗證＋CI 自動化）
