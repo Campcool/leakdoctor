@@ -832,6 +832,7 @@ window.addEventListener('scroll',()=>{
     for(let i=0;i<pages;i++){
       const d=document.createElement('button');
       d.className='tc-dot'+(i===0?' active':'');
+      d.setAttribute('aria-label','切換到第'+(i+1)+'頁');
       d.onclick=()=>{goTo(i*pv);reset()};
       dotsEl.appendChild(d);
     }

@@ -815,7 +815,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
           '<div class="service-story-head"><div><div class="service-story-kicker">服務圖解</div><h2 class="service-story-title">' + config.title + '</h2></div>' +
           '<div class="service-story-controls"><button type="button" class="service-story-btn" data-story-dir="-1" aria-label="上一張">‹</button><button type="button" class="service-story-btn" data-story-dir="1" aria-label="下一張">›</button></div></div>' +
           '<div class="service-story-track" tabindex="0">' + cards + '</div>' +
-          '<div class="service-story-dots" aria-hidden="true">' + dots + '</div>' +
+          '<div class="service-story-dots" role="group" aria-label="' + config.title + '照片輪播指標">' + dots + '</div>' +
         '</div>' +
       '</section>');
     const story = hero.nextElementSibling;
