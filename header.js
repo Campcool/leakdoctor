@@ -254,7 +254,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
 }
 .ld-line-btn{
   display:flex;align-items:center;gap:5px;
-  background:#06C755;color:#ffffff;
+  background:#047a36;color:#ffffff;
   font-weight:800;font-size:13px;
   font-family:'Noto Sans TC',sans-serif;
   min-height:44px;padding:9px 13px;border-radius:14px;
@@ -331,7 +331,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   z-index:9991;
   width:54px;height:54px;
   border-radius:50%;
-  background:#06C755;
+  background:#047a36;
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
   gap:2px;
@@ -429,7 +429,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
 .ld-sticky-btn{
   flex-shrink:0;display:flex;align-items:center;justify-content:center;gap:5px;
   min-height:44px;padding:9px 13px;border-radius:11px;text-decoration:none;
-  border:1.5px solid #06C755;background:#06C755;color:#fff;
+  border:1.5px solid #047a36;background:#047a36;color:#fff;
   font:800 12.5px 'Noto Sans TC',sans-serif;cursor:pointer;
   box-shadow:0 3px 10px rgba(6,199,85,.28);white-space:nowrap;
 }
@@ -532,12 +532,12 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
 .ld-q-field.ld-invalid .ld-service-choices{padding:5px;border:1.5px solid #dc2626;border-radius:18px}
 .ld-q-field.ld-invalid .ld-q-err{display:block}
 .ld-q-submit{
-  width:100%;margin-top:1.3rem;background:#06C755;color:#fff;font-weight:900;font-size:1rem;
+  width:100%;margin-top:1.3rem;background:#047a36;color:#fff;font-weight:900;font-size:1rem;
   padding:.95rem;border:none;border-radius:12px;cursor:pointer;
   display:flex;align-items:center;justify-content:center;gap:.5rem;
   box-shadow:0 4px 14px rgba(6,199,85,.4);
 }
-.ld-q-submit:hover{background:#05b34c}
+.ld-q-submit:hover{background:#036a2f}
 .ld-q-submit:disabled{opacity:.68;cursor:wait}
 .ld-q-hp{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important}
 .ld-q-status{min-height:1.25rem;margin-top:.55rem;font-size:.78rem;line-height:1.5;text-align:center;color:#5b6b73}
@@ -562,7 +562,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   document.head.appendChild(style);
 
   // SVG 定義
-  const LOGO = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+  const LOGO = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" aria-hidden="true" focusable="false">
     <circle cx="50" cy="50" r="46" fill="#1e3a8a"/>
     <circle cx="50" cy="50" r="46" fill="none" stroke="#93c5fd" stroke-width="2"/>
     <path d="M50 20L56 42L78 48L56 54L50 76L44 54L22 48L44 42Z" fill="#ffffff"/>
@@ -570,13 +570,13 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
     <circle cx="76" cy="24" r="2.4" fill="#ffffff"/>
   </svg>`
 
-  const LINE_ICON = `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" width="18" height="18" style="display:block;flex-shrink:0">
+  const LINE_ICON = `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" width="18" height="18" style="display:block;flex-shrink:0" aria-hidden="true" focusable="false">
     <rect width="48" height="48" rx="10" fill="#fff"/>
     <path d="M40 22.3C40 15 33.3 9 25 9S10 15 10 22.3c0 6.5 5.8 12 13.6 13 .5.1 1.2.4 1.4.9.2.5.1 1.2.1 1.2l-.2 1.5c-.1.5-.4 1.9 1.7.9 2.2-1 11.5-6.8 15.7-11.6 2.9-3.2 4.7-6.5 4.7-10z" fill="#06C755"/>
     <path d="M21.2 19.2h-1.4c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h1.4c.3 0 .5-.2.5-.5v-6.6c0-.3-.2-.5-.5-.5zM28.6 19.2h-1.4c-.3 0-.5.2-.5.5v3.9l-3-4.2-.2-.2H22c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h1.4c.3 0 .5-.2.5-.5v-3.9l3 4.2.2.2h1.5c.3 0 .5-.2.5-.5v-6.6c0-.3-.2-.5-.5-.5zM19.2 24.3h-2.4v-4.7c0-.3-.2-.5-.5-.5h-1.4c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h4.3c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5zM33.8 20.6c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5h-4.3c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h4.3c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5H31v-1h2.8c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5H31v-1h2.8z" fill="#fff"/>
   </svg>`;
 
-  const LINE_FLOAT_ICON = `<svg id="ld-float-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" width="26" height="26" style="display:block">
+  const LINE_FLOAT_ICON = `<svg id="ld-float-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" width="26" height="26" style="display:block" aria-hidden="true" focusable="false">
     <path d="M40 22.3C40 15 33.3 9 25 9S10 15 10 22.3c0 6.5 5.8 12 13.6 13 .5.1 1.2.4 1.4.9.2.5.1 1.2.1 1.2l-.2 1.5c-.1.5-.4 1.9 1.7.9 2.2-1 11.5-6.8 15.7-11.6 2.9-3.2 4.7-6.5 4.7-10z" fill="#fff"/>
     <path d="M21.2 19.2h-1.4c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h1.4c.3 0 .5-.2.5-.5v-6.6c0-.3-.2-.5-.5-.5zM28.6 19.2h-1.4c-.3 0-.5.2-.5.5v3.9l-3-4.2-.2-.2H22c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h1.4c.3 0 .5-.2.5-.5v-3.9l3 4.2.2.2h1.5c.3 0 .5-.2.5-.5v-6.6c0-.3-.2-.5-.5-.5zM19.2 24.3h-2.4v-4.7c0-.3-.2-.5-.5-.5h-1.4c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h4.3c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5zM33.8 20.6c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5h-4.3c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h4.3c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5H31v-1h2.8c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5H31v-1h2.8z" fill="#06C755"/>
   </svg>`;
