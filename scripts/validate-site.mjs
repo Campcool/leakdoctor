@@ -205,6 +205,64 @@ if (altHits.length) {
   ok('品牌綠全站單一：' + BRAND_GREEN + ' 共 ' + brandHits + ' 處（掃描 ' + styleFiles.length + ' 個 html/css/js），無 ' + ALT_GREEN + ' 殘留');
 }
 
+// ── 4e. 地區頁差異化：防止量產式重複內容（doorway pages）──────
+// 2026-08-17 把 7 個地區頁從 noindex 放出來可被索引。它們是同一份模板，
+// 差異在各市的行政區清單、到府時間、專屬 FAQ 與 LocalBusiness schema。
+// Google 會處罰「只換城市名的量產落地頁」，所以差異度必須維持。
+// 本斷言不追求某個「正確」的相似度，只做兩件事：
+//   1. 每次都把實際最高相似度印出來，讓這個數字可被觀察、不會悄悄惡化
+//   2. 相似度 ≥ CEILING 時擋下——那代表有人純複製貼上只改了地名
+//
+// 門檻用實測校準，不是憑感覺訂的（2026-08-17，本檔的行集合指標）：
+//   現有 17 個可索引頁的最高相似度      64.6%（keelung vs taipei）
+//   純複製 miaoli→changhua 只換地名     78.8%
+//   → 門檻取 75%，夾在兩者之間，離現況留 10.4 個百分點餘裕
+// ⚠️ 換了相似度算法就必須重新校準。初版憑另一種 token 指標的 85.9% 訂了
+// 95% 門檻，結果純複製頁只有 78.8%，完全擋不下來——防假綠測試才抓到。
+// ⚠️ 刻意不維護「哪些是地區頁」的清單。初版寫死了 7 個檔名，防假綠測試
+// （複製 miaoli.html 成 changhua.html 只換地名）當場沒抓到——因為新頁不在
+// 清單裡就完全逃過檢查。這正是本專案 2026-08-16 三次漏判的同一個形狀。
+// 改為兩兩比對所有可索引頁面：任何位置的複製貼上都看得見，清單也不會過時。
+const SIMILARITY_CEILING = 0.75;
+const pageText = new Map();
+for (const f of htmlFiles) {
+  if (SKIP_PAGES.has(f)) continue;
+  const content = fs.readFileSync(path.join(root, f), 'utf8');
+  if (isNoindex(content)) continue; // 不可索引的頁不參與重複度判定
+  const lines = content
+    .replace(/<script[\s\S]*?<\/script>/gi, '')
+    .replace(/<style[\s\S]*?<\/style>/gi, '')
+    .replace(/<[^>]*>/g, '\n')
+    .split('\n').map((s) => s.trim()).filter(Boolean);
+  pageText.set(f, new Set(lines));
+}
+let maxSim = 0;
+let maxPair = '';
+const pageList = [...pageText.keys()];
+for (let i = 0; i < pageList.length; i++) {
+  for (let j = i + 1; j < pageList.length; j++) {
+    const a = pageText.get(pageList[i]);
+    const b = pageText.get(pageList[j]);
+    let shared = 0;
+    for (const line of a) if (b.has(line)) shared++;
+    const sim = shared / Math.max(a.size, b.size);
+    if (sim > maxSim) { maxSim = sim; maxPair = pageList[i] + ' vs ' + pageList[j]; }
+  }
+}
+const pairCount = (pageList.length * (pageList.length - 1)) / 2;
+if (pageList.length < 2) {
+  ok('頁面差異化：不足 2 頁可比對，本項未執行');
+} else if (maxSim >= SIMILARITY_CEILING) {
+  report('頁面重複度過高：' + maxPair + ' 相似 ' + (maxSim * 100).toFixed(1) + '%'
+    + '（上限 ' + (SIMILARITY_CEILING * 100) + '%）。這是複製貼上只換了地名或服務名——'
+    + 'Google 會判定為量產落地頁（doorway pages）並降權。'
+    + '請補該頁專屬內容：實際案例、在地師傅、常見屋型；或該頁不應獨立存在。');
+} else {
+  ok('頁面差異化：' + pageList.length + ' 個可索引頁兩兩比對共 ' + pairCount
+    + ' 組，最高相似度 ' + (maxSim * 100).toFixed(1) + '%（' + maxPair + '），上限 '
+    + (SIMILARITY_CEILING * 100) + '%');
+}
+
 // ── 5. 表單個資保護文案 ───────────────────────────────────────
 const formText = headerJs.slice(headerJs.indexOf('姓名'), headerJs.indexOf('姓名') + 20000) || '';
 const leakyPhrases = ['此裝置', '裝置資料', '自動收集', '自動擷取', '裝置編號'];
