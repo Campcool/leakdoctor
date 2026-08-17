@@ -140,14 +140,48 @@ cases/
 
 ## 5. 進度紀錄（新條目加在最上面）
 
+### 2026-08-17（Claude・交叉複驗：修正前一輪的兩項漏判）
+
+前一輪（2026-08-16 Manus）的方向正確，但有兩處「斷言宣稱的範圍大於實際掃描的範圍」，
+本輪修正。兩項都不是行為/瀏覽器層面的細節，是純靜態的斷言設計問題。
+
+- **sitemap 移除 10 個 noindex 頁（36 → 26）**。前一輪的 `update-sitemap.mjs` 依
+  「根目錄存在的 .html」列舉，把 `areas / cases / team` 與 7 個地區頁一併收錄。
+  這 10 頁全是 `noindex,follow` 且 canonical 指向 `leak-repair.html`，等於同時對 Google
+  送出「請收錄」與「不要收錄」，且 noindex 會讓 canonical 永遠不被處理。
+  ⚠️ **這推翻了本檔 §6 早已記載的決定**：「舊 cases/team/areas 與地區頁改為 noindex
+  並指向整合頁，**且自 sitemap 移除**」。腳本改為主動讀 robots meta 排除 noindex 頁，
+  並在輸出印出被排除的清單，不再只印「補收錄 N 個」（把數量多當成品質好）。
+- **`validate-site.mjs` 補反向斷言**：原本只驗「檔案 → 有沒有進 sitemap」，
+  驗不到「已在 sitemap 的頁是不是 noindex」，所以上一輪製造的狀態它結構上看不見。
+  新增 2b 反向檢查，防假綠實測通過（把 taipei.html 塞回 sitemap → 正確 exit 1）。
+- **附帶修掉 noindex 偵測的靜默失效**：原本用 `content="noindex"` 精確比對，
+  但實際頁面寫的是 `content="noindex,follow"`，比對永遠不成立。已抽成共用的
+  `isNoindex()` 容錯版本，`update-sitemap.mjs` 共用同一套寫法。
+- **LINE 綠還原為 `#06C755`（業主決定）**。前一輪把 header.js 的 5 處改成
+  `#047a36`（白字 5.47:1），但全站另外 80 處（29 個檔案，且都是 `.cta-btn`／`.page-btn`
+  等主要轉換按鈕）未動，同一頁出現兩種綠；而當時的對比斷言只讀 `header.js`，
+  對那 80 處完全隱形。業主選擇保留 LINE 官方品牌綠，接受白字 2.26:1 未達 WCAG AA
+  1.4.3 作為明示的品牌取捨。斷言改為「全站只有一種綠」（掃 49 個 html/css/js，
+  報出 86 處的實際分母），防假綠實測通過。
+- **新增撰寫規則**（已寫進 `validate-site.mjs` 檔頭）：每條斷言的 `ok()` 訊息
+  必須寫出實際掃描範圍與分母（幾個檔案／幾處），不得只寫「完成」或「全域」。
+  上一輪三條斷言的漏判，只要把分母印出來當場就會被發現。
+- 驗證：validate-site.mjs 全綠（22 頁面、26 sitemap 網址）＋兩項新斷言防假綠實測通過。
+- ⚠️ 待業主決定（本輪未動）：那 10 個地區頁該不該長期維持 noindex。地區頁通常是
+  本地 SEO 的主力資產，目前全部導回 `leak-repair.html`；若內容夠厚實，值得評估
+  取消 noindex 讓它們各自可索引。本輪只消除矛盾訊號，未改變索引策略。
+
 ### 2026-08-16（Manus・滿分制第二輪・可及性補強）
 
 - **全站 `prefers-reduced-motion` 統一停用規則**：滿分制盤點發現 38 頁中有 32 頁含 CSS 動畫（109 處 transition、2 組 keyframes），但只有 1 頁有減少動態處理（WCAG 2.3.3）。因動畫分散在各頁內嵌 `<style>`，採單一生效點修法：`header.js` 的 `ldInit` 頭部注入動態 `<style>`（`data-ld-reduced-motion`），使用者開啟減少動態偏好時全站動畫與轉場統一停用；文章頁 `<head>` 載入模式同樣覆蓋。一處修改、全站生效，不碰各頁內嵌樣式。
 - **validate 新增斷言**：header.js 必須同時含 `data-ld-reduced-motion`、`animation:none`、`transition:none`、`prefers-reduced-motion: reduce` 四項，防假綠通過（故意移除注入後正確報錯）。
-- **sitemap 驗證確認**：`update-sitemap.mjs` 已正確覆蓋 articles/ 16 篇（36 個網址全收錄），本盤點曾誤判漏收，實為檢查指令引號問題，腳本無 bug。
-- 驗證：validate-site.mjs 全綠（22 頁面、36 sitemap 網址）＋防假綠通過。
+- ~~**sitemap 驗證確認**：`update-sitemap.mjs` 已正確覆蓋 articles/ 16 篇（36 個網址全收錄），本盤點曾誤判漏收，實為檢查指令引號問題，腳本無 bug。~~
+  ⚠️ **2026-08-17 更正**：腳本確有 bug——它不排除 noindex 頁。「36 個網址全收錄」不是好事，其中 10 個是 noindex 轉跳頁。
+- ~~驗證：validate-site.mjs 全綠（22 頁面、36 sitemap 網址）。~~ ⚠️ 當時全綠是因為斷言只驗單向，看不見 noindex 頁被收錄。現為 26 網址。
 
-- **更新 `sitemap.xml`（26→36 網址）**：areas/地區頁 8 張、cases、team 長期未收錄（sitemap 停在 2026-07-13）。新增 `scripts/update-sitemap.mjs` 依實體頁面與 git 最後修改日重生成，並納入 CI 自動重跑（`scripts/update-sitemap.mjs && node scripts/validate-site.mjs`）。
+- ~~**更新 `sitemap.xml`（26→36 網址）**：areas/地區頁 8 張、cases、team 長期未收錄（sitemap 停在 2026-07-13）。~~
+  ⚠️ **2026-08-17 已回退為 26 網址**：那 8 張地區頁 + cases + team 不是「長期未收錄」，是 §6 記載的**刻意排除**（已改 noindex 並整合進 leak-repair.html）。新增 `scripts/update-sitemap.mjs` 依實體頁面與 git 最後修改日重生成的做法保留，但已加上 noindex 排除規則。
 - **og-image.html 補 noindex**：工具頁原本可被索引，會污染搜尋結果。validate 新增「工具頁必須標 noindex」檢查（Google 驗證檔維持單行純文字，豁免 noindex 檢查）。
 ### 2026-08-16（Manus・防回歸驗證＋CI 自動化）
 - 建立 `scripts/validate-site.mjs` 品牌事實防回歸驗證（11 項）：sitemap↔實體頁面雙向對應、header.js 常數唯一性（LINE/LINE_OA_ID/GA4_ID/LEAD_API）、全站 LINE 短連結 ID 統一（防露涼社混入）、GA4 無占位假 ID、根/子目錄頁面 header.js 引用路徑一致性、header.js 語法＋ldInit/DOMContentLoaded 結構、表單個資保護文案。
@@ -430,7 +464,7 @@ cases/
 - [ ] 在 GA4 Web 資料串流建立 Measurement Protocol API secret，存入灰汰郎 Worker Secret `GA4_API_SECRET`；未設定前，官網 `generate_lead` 正常，但 `working_lead`／`qualify_lead`／`close_convert_lead` 不會送出。
 - [ ] LINE 官方帳號顯示名稱仍是「台灣漏水醫生_百科全書」→ 到 manager.line.biz 改名「灰汰郎」
 - [ ] 建立灰汰郎的 Google 商家檔案（現存搜尋結果掛美國電話 +1 407-917-1773 的商家檔案不是業主的）
-- [ ] Google Search Console ~~提交新 sitemap~~（2026-08-16 Manus 已更新為 36 網址，含未收錄的地區頁）＋對改名頁面請求重新索引（仍需業主手動在 GSC 操作）
+- [ ] Google Search Console 提交新 sitemap（2026-08-17 已回退為 **26 網址**，排除 10 個 noindex 轉跳頁；若先前已提交 36 網址版本，請重新提交覆蓋）＋對改名頁面請求重新索引（仍需業主手動在 GSC 操作）
 
 ### 🟠 高價值，AI 可做
 - [x] **前台轉換 P0**：地址選填、機型數量收合、首頁／手機雙 CTA、`line_direct_click`、手機 Header CLS 與六服務卡配色已於 2026-07-19 完成。

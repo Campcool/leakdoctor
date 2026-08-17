@@ -11,12 +11,17 @@
 // 驗證項目（全部本地檢查，不外送請求）：
 //   1. 每個 sitemap <loc> 對應的實體 .html 存在且 HTTP 正常（本地路徑對應）
 //   2. 每個實體 .html 被 sitemap 收錄或被 noindex 轉跳頁說明排除
+//   2b. 反向：任何 noindex 頁都不得出現在 sitemap（矛盾訊號）
 //   3. header.js 與各頁面引用路徑一致性（../header.js 在子目錄、header.js 在根）
 //   4. 品牌常數一致性：LINE / LINE_OA_ID / GA4_ID / LEAD_API 唯一且正確
+//   4d. 品牌綠 #06C755 全站單一，不得出現第二種綠
 //   5. 全站 LINE 連結覆蓋率（根 HTML 每頁至少 1 處 LINE CTA）
 //   6. 反個資：表單說明不得出現「此裝置」等暗示可收集個人訊息的詞彙；
 //      個資由客戶在 LINE 內自行送出，站內表單只寫草稿
 //   7. og-image.html 等工具頁維持 noindex 或不在 sitemap
+//
+// 撰寫規則：每條斷言的 ok() 訊息必須寫出實際掃描範圍與分母（幾個檔案／幾處），
+// 不得只寫「完成」。2026-08-16 有三條斷言因為只讀單一檔案卻宣稱「全域」而漏判。
 //
 // 使用：node scripts/validate-site.mjs
 import fs from 'node:fs';
@@ -27,6 +32,10 @@ let fail = 0;
 const errors = [];
 const report = (msg) => { errors.push(msg); fail++; console.error('✗ ' + msg); };
 const ok = (msg) => console.log('✓ ' + msg);
+
+// 實際頁面寫的是 content="noindex,follow"，早期版本用 content="noindex" 精確比對
+// 抓不到帶 ,follow 的寫法，導致 noindex 判斷靜默失效。一律走這個容錯版本。
+const isNoindex = (html) => /<meta[^>]+name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html);
 
 // ── 0. 全站內容彙整 ─────────────────────────────────────────
 const allText = fs.readdirSync(root, { recursive: true })
@@ -58,7 +67,7 @@ for (const f of htmlFiles) {
   if (f === 'google00a268e494d7ca7a.html') continue;
   const content = fs.readFileSync(path.join(root, f), 'utf8');
   if (SKIP_PAGES.has(f)) {
-    if (!/meta name="robots" content="noindex"/.test(content)) {
+    if (!isNoindex(content)) {
       report(f + ' 是不收錄的工具頁但沒有 noindex 標記（會污染搜尋索引）');
     }
     continue;
@@ -66,9 +75,26 @@ for (const f of htmlFiles) {
   if (f === 'index.html' && sitemapUrls.has('/')) continue;
   if (f !== 'index.html' && sitemapUrls.has('/' + f)) continue;
   // noindex 轉跳頁允許不在 sitemap
-  if (/meta name="robots" content="noindex"/.test(content)) continue;
+  if (isNoindex(content)) continue;
   report(f + ' 是正式頁面但不在 sitemap（或該頁應標 noindex）');
 }
+
+// ── 1b. 反向檢查：noindex 頁不得出現在 sitemap ────────────────
+// 上面那圈只驗「檔案 → 有沒有進 sitemap」，驗不到「已經在 sitemap 裡的頁是不是 noindex」。
+// 2026-08-15 的 update-sitemap.mjs 依「根目錄存在的 .html」列舉，把 10 個 noindex
+// 轉跳頁一併收錄（26 → 36），而當時的斷言結構上看不見這個組合，所以全綠。
+// sitemap 收錄 + noindex 是互相矛盾的訊號，且 noindex 會讓該頁的 canonical 永遠不被處理。
+let noindexInSitemap = 0;
+for (const f of htmlFiles) {
+  const content = fs.readFileSync(path.join(root, f), 'utf8');
+  if (!isNoindex(content)) continue;
+  const p = f === 'index.html' ? '/' : '/' + f;
+  if (sitemapUrls.has(p)) {
+    report(f + ' 標了 noindex 卻仍列在 sitemap（矛盾訊號；且 Google 不會處理其 canonical）');
+    noindexInSitemap++;
+  }
+}
+if (noindexInSitemap === 0) ok('sitemap 未收錄任何 noindex 頁（雙向一致）');
 if (sitemapUrls.size) ok('sitemap ' + sitemapUrls.size + ' 個網址與實體頁面對應完成');
 
 // ── 2. 品牌常數一致性 ─────────────────────────────────────────
@@ -152,9 +178,32 @@ for (const f of htmlFiles) {
   if (missingA11y) { report(f + ' 有 ' + missingA11y + ' 個 section 缺 aria-label 與 role（WCAG 1.3.1 region）'); a11yFail++; }
 }
 if (a11yFail === 0) ok('無障礙結構：全部正式頁面 main landmark + section 皆可識別（region）');
-const greenText = (headerJs.match(/#06C755/g) || []).length;
-if (greenText > 3) report('header.js 殘留 #06C755 白字低對比色（應全部改 #047a36 5.47:1；允許 3 處裝飾用 SVG 內 fill）');
-else ok('header.js 對比重修完成（#047a36 5.47:1，裝飾 SVG 除外）');
+// ── 4d. 品牌色單一來源：LINE 綠必須全站一致 ──────────────────
+// 業主決定保留 LINE 官方品牌綠 #06C755（白字對比 2.26:1，未達 WCAG AA 1.4.3）。
+// 這是明示的品牌取捨、不是疏漏，所以本斷言檢查的是「全站只有一種綠」，
+// 而不是「對比達標」。
+// 2026-08-16 曾把 header.js 的 5 處改成深綠 #047a36（5.47:1）但其餘 80 處未動，
+// 造成同一頁出現兩種綠；當時的斷言只讀 header.js，看不到那 80 處。
+// 若日後決定改用深綠，必須 29 個檔案一次改完，這條斷言才會轉綠。
+const BRAND_GREEN = '#06C755';
+const ALT_GREEN = '#047a36';
+const styleFiles = fs.readdirSync(root, { recursive: true })
+  .map(String)
+  .filter((f) => /\.(html|css|js)$/i.test(f) && !f.startsWith('.git') && !f.startsWith('node_modules'));
+const altHits = [];
+let brandHits = 0;
+for (const f of styleFiles) {
+  let c;
+  try { c = fs.readFileSync(path.join(root, f), 'utf8'); } catch { continue; }
+  const alt = (c.match(new RegExp(ALT_GREEN, 'gi')) || []).length;
+  if (alt) altHits.push(f + '×' + alt);
+  brandHits += (c.match(new RegExp(BRAND_GREEN, 'gi')) || []).length;
+}
+if (altHits.length) {
+  report('品牌綠不一致：' + ALT_GREEN + ' 殘留於 ' + altHits.join('、') + '（全站應統一為 ' + BRAND_GREEN + '）');
+} else {
+  ok('品牌綠全站單一：' + BRAND_GREEN + ' 共 ' + brandHits + ' 處（掃描 ' + styleFiles.length + ' 個 html/css/js），無 ' + ALT_GREEN + ' 殘留');
+}
 
 // ── 5. 表單個資保護文案 ───────────────────────────────────────
 const formText = headerJs.slice(headerJs.indexOf('姓名'), headerJs.indexOf('姓名') + 20000) || '';

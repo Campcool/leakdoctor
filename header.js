@@ -254,7 +254,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
 }
 .ld-line-btn{
   display:flex;align-items:center;gap:5px;
-  background:#047a36;color:#ffffff;
+  background:#06C755;color:#ffffff;
   font-weight:800;font-size:13px;
   font-family:'Noto Sans TC',sans-serif;
   min-height:44px;padding:9px 13px;border-radius:14px;
@@ -331,7 +331,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   z-index:9991;
   width:54px;height:54px;
   border-radius:50%;
-  background:#047a36;
+  background:#06C755;
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
   gap:2px;
@@ -429,7 +429,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
 .ld-sticky-btn{
   flex-shrink:0;display:flex;align-items:center;justify-content:center;gap:5px;
   min-height:44px;padding:9px 13px;border-radius:11px;text-decoration:none;
-  border:1.5px solid #047a36;background:#047a36;color:#fff;
+  border:1.5px solid #06C755;background:#06C755;color:#fff;
   font:800 12.5px 'Noto Sans TC',sans-serif;cursor:pointer;
   box-shadow:0 3px 10px rgba(6,199,85,.28);white-space:nowrap;
 }
@@ -532,7 +532,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
 .ld-q-field.ld-invalid .ld-service-choices{padding:5px;border:1.5px solid #dc2626;border-radius:18px}
 .ld-q-field.ld-invalid .ld-q-err{display:block}
 .ld-q-submit{
-  width:100%;margin-top:1.3rem;background:#047a36;color:#fff;font-weight:900;font-size:1rem;
+  width:100%;margin-top:1.3rem;background:#06C755;color:#fff;font-weight:900;font-size:1rem;
   padding:.95rem;border:none;border-radius:12px;cursor:pointer;
   display:flex;align-items:center;justify-content:center;gap:.5rem;
   box-shadow:0 4px 14px rgba(6,199,85,.4);
