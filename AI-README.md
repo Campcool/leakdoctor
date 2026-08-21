@@ -140,6 +140,17 @@ cases/
 
 ## 5. 進度紀錄（新條目加在最上面）
 
+### 2026-08-21（Codex・Pages 部署門禁 PR）
+
+依 `Campcool/AI-skill` 的跨倉庫優化專案 P0-1，將 `.github/workflows/site-check.yml`
+從純 Site check 升級為 `Validate and deploy to GitHub Pages`：
+
+- PR 仍只跑既有 `validate-site.mjs`、防假綠、`og-image.html` noindex 與 `llms.txt` 常數檢查。
+- main push 時必須先通過同一組檢查，才執行 `actions/deploy-pages`。
+- 此變更需搭配 GitHub Pages 設定從 legacy branch deploy 改為 GitHub Actions workflow；合併後再切換 Pages source。
+
+本輪只改部署 workflow 與交接文件，未改任何網站內容、LINE、GA4、schema 或素材。
+
 ### 2026-08-17（Claude・7 個地區頁補在地內容）
 
 上一項把地區頁放出來索引後，差異度只有 64.6%，偏低。本項補內容拉開差異。
