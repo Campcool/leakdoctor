@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-
+  workflow_dispatch:
 permissions:
   contents: read
   pages: write
@@ -38,7 +38,7 @@ jobs:
           grep -q 'lin.ee/WVxmY65' llms.txt && grep -q '@478xvlgl' llms.txt && echo "llms.txt LINE 資訊一致"
 
   deploy:
-    if: github.event_name == 'push'
+    if: github.event_name != 'pull_request'
     needs: check
     runs-on: ubuntu-latest
     environment:
