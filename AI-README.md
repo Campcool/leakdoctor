@@ -6,7 +6,15 @@
 > 3. 本檔案是唯一的交接依據，寫給 AI 看：請保持精確、可執行、不留模糊描述。
 > 4. **所有時間戳一律台灣時間（Asia/Taipei, UTC+8）**。
 
-最後更新：2026-08-24（by Codex；Claude 審查後追加修正）— 手機共用頁首改為單列滑動、首頁六步整併四階段、字級與觸控區補強；draft PR **待 Codex 覆審，尚未合併**
+最後更新：2026-08-24（Codex／Claude）— UI/UX 與 U4 cascade 門禁已合併；Pages artifact 公開範圍收斂仍待合併與 Source 切換
+
+## 2026-08-24 Pages artifact 公開範圍收斂（Codex）
+
+實測 `https://leakdoctor.tw/AI-README.md` 為 HTTP 200。新增
+`scripts/prepare-pages-artifact.sh`，PR check 與 deploy 都以明確公開白名單建立 `_site`；
+未列入白名單的維護文件、廣告投放資料與品牌素材封裝預設不發佈。本 PR 只改 Actions artifact 內容；
+本站 Pages `build_type` 目前仍為 `legacy`，因此合併後線上發佈內容不會改變，必須另外把
+Pages Source 切到 GitHub Actions 才會生效。本輪未改價格、電話、LINE、服務區、GA4、案例或網站內容。
 
 ## 2026-08-24 Claude 審查後追加修正（四項）
 
