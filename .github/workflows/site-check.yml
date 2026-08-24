@@ -36,6 +36,8 @@ jobs:
       - name: llms.txt 常數一致性
         run: |
           grep -q 'lin.ee/WVxmY65' llms.txt && grep -q '@478xvlgl' llms.txt && echo "llms.txt LINE 資訊一致"
+      - name: Pages artifact excludes internal docs
+        run: bash scripts/prepare-pages-artifact.sh
 
   deploy:
     if: github.event_name != 'pull_request'
@@ -47,8 +49,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      - name: Prepare public artifact
+        run: bash scripts/prepare-pages-artifact.sh
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
       - id: deployment
         uses: actions/deploy-pages@v4
