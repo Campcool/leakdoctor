@@ -52,7 +52,75 @@
 
 以 `main` 的原始六步切出 **27 個實質短語**逐一比對，四階段現在**全數涵蓋、遺漏 0 個**。
 
-### ④ `validate-site.mjs` 導覽斷言改為驗證數值
+### ④-2 導覽門禁改為計算 CSS cascade（2026-08-24 覆審後第二次重做，**目前生效版本**）
+
+> 🔴 **這條斷言前後被證明假綠兩次，根因都一樣：用字串／regex 檢查 CSS。**
+> 任何「字串是否存在」的門禁，都能被 specificity、屬性選擇器、複合選擇器或 `!important` 繞過。
+> **不要再往這條路上加第三層 regex。**
+
+覆審提出的反例（瀏覽器 computed height 確實變 28px，validator 卻仍 exit 0 並宣稱「最小值 44px」）：
+
+```css
+.ld-tab[aria-current="page"] { height:28px!important; min-height:28px!important; padding:0!important }
+```
+
+`/\.ld-tab\s*\{/` 只命中「純 `.ld-tab{`」，看不到帶屬性或複合的選擇器，所以完全漏判。
+
+**現在的做法**：新增 `scripts/css-cascade.mjs`（**零相依**——本站沒有 `package.json`，
+CI 只跑 `setup-node` + `node`，不能引外部套件），實際解析 `header.js` 的 `const css` 樣板並**計算 cascade**：
+
+1. 解析規則（含巢狀 `@media`、逗號分列、`!important`）
+2. 對每個受測 viewport 判定 media 條件
+3. 用選擇器比對合成的元素描述（`a.ld-tab.ld-tab--aircon[href]`，以及帶 `.ld-active` +
+   `aria-current="page"` 的作用中版本），支援複合／屬性／後代選擇器
+4. 依 **specificity → `!important` → 來源順序**決出勝出宣告
+5. 實際盒高下限取 `max(min-height, height)`，低於 44px 即失敗，錯誤訊息**印出勝出的選擇器**
+
+`overflow-x` 也改成只解析 `.ld-nav` **自己**算出來的值，無關元件寫 `overflow-x:hidden` 不會誤殺。
+
+**受測範圍**：CSS 內所有 `max-width ≤ 1023px` 的宣告斷點（目前 220／390／420／560／720／1023px），
+各取「剛好命中」與「再窄 1px」，另補 320／360／375／390／414／768px，
+共 **16 個寬度 × 2 種頁籤狀態**。解析器看不懂的選擇器（`:is()`／`:not()`／`:nth-child()` 等）
+**不會靜默放行**，會列為「需人工確認」並讓門禁失敗。
+
+**已知限制**（寫在 `css-cascade.mjs` 檔頭）：不處理繼承、`var()` 求值、`calc()`、
+`@container`／`@layer`／style attribute；`:is()/:not()` 的內部 specificity 不精算。
+
+#### mutation test：`scripts/test-mobile-nav-gate.mjs`
+
+門禁會綠不等於門禁有效。這支測試注入 13 種真實繞過寫法，確認該紅的會紅、該綠的不被誤殺：
+
+| 必須攔截 | 必須放行 |
+|---|---|
+| `.ld-tab[aria-current="page"]` + `!important` 壓 28px（覆審反例） | `.other-component{overflow-x:hidden}`（無關元件） |
+| `.ld-tab.ld-active` 複合選擇器壓 28px | media query 改等價空白寫法 |
+| `.ld-nav .ld-tab` 後代選擇器壓 30px | 只在**桌機**斷點縮小 `.ld-tab` |
+| `a.ld-tab[href]` 標籤＋屬性壓 20px | 手機斷點把觸控區**加大**到 56px |
+| 直接改基準規則 44px→30px | |
+| `.ld-nav{overflow-x:hidden}`（含 `!important` 版） | |
+| `scroll-snap-align` 改 `start` | |
+| 置中改回 `scrollLeft` 算式 | |
+
+**結果 13/13 全部符合期望。** 執行 `node scripts/test-mobile-nav-gate.mjs`（測完自動還原）。
+
+#### 與瀏覽器交叉驗證
+
+把覆審反例注入後兩邊分別量測：
+
+| | validator（靜態 cascade） | 瀏覽器 computed style |
+|---|---|---|
+| 作用中頁籤 | 28px、exit 1、指出勝出選擇器 `.ld-tab[aria-current="page"]` | **28px**（375／414px 皆同） |
+| 一般頁籤 | 未標記（≥44px） | **44px** |
+
+還原後，頂層視窗 320／375／414／720／1023px 實測：六個頁籤高度皆 **44px**、
+`.ld-nav` 為 `flex` + `overflow-x:auto`、作用中頁籤 `scroll-snap-align:center`。
+
+> ⚠️ **量測陷阱**：用 `<iframe>` 設寬度在斷點邊界（例如 1023px）量測**不可信**——
+> iframe 的實際媒體查詢寬度有子像素誤差（實測 MQ 臨界點落在 **1022.98**），
+> 會造成 `max-width:1023px` 與 `min-width:1024px` 同時不成立、量到錯誤的 42px／grid。
+> **邊界值要用頂層視窗量**；頂層設 1023px 時結果正確（44px、flex、auto）。
+
+### ④ 第一次重做（已被 ④-2 取代，保留紀錄）
 
 初版是 `headerJs.includes(字串)` 的存在檢查，**攔不住真實回歸**。突變測試 6 項只符合 3 項：
 觸控區改 30px、`!important` 壓到 28px、`!important` 關掉橫向捲動**全部放行**
@@ -66,9 +134,12 @@
 
 ### 本輪未處理（留給後續）
 
-- 全站仍有 36 處字級 < 14px、11 處 < 12px；**預約 modal 內 30 處 < 14px、13/28 控制項 < 44px**，
-  含「參考價 $1,499／台」11.04px、隱私聲明 11.84px。`.footer-copy` 仍 11.5px。
+- **U5（已裁決為獨立高優先 PR，不併入本次小修）**：全站仍 36 處字級 < 14px、11 處 < 12px。
+  **優先順序：預約 modal** —— 隱私聲明 11.84px、價格註記「參考價 $1,499／台」11.04px、
+  核心控制項 13/28 不足 44px；之後才做全站 30+ 頁的字級與觸控矩陣。`.footer-copy` 仍 11.5px。
 - 手機導覽的捲軸被完全隱藏，可發現性靠第 4 個頁籤露出一角，無漸層或箭頭等明確提示。
+- **`fonts.ready` 在實體手機上是否有可見跳動：未驗。** 本輪只有無頭／桌面 Chromium，
+  沒有實體手機可測。**不得因為桌面測起來正常就宣稱已驗證。**
 
 ---
 

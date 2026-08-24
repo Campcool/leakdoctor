@@ -181,16 +181,22 @@ for (const f of htmlFiles) {
 if (a11yFail === 0) ok('無障礙結構：全部正式頁面 main landmark + section 皆可識別（region）');
 
 // ── 4d. 手機導覽與首頁流程結構 ──────────────────────────────
-// 初版這條斷言只做 headerJs.includes(字串) 的存在檢查，攔不住真實回歸：
-// 2026-08-24 突變測試中，把 .ld-tab 的觸控區改成 30px、用 !important 壓到 28px、
-// 用 !important 關掉橫向捲動，三者全部放行——因為 min-height:44px 在 header.js
-// 出現 6 次、分散在 6 個不相干的選擇器，改一處其他 5 處仍讓斷言通過。
-// 而且純排版（media query 加空白）會誤殺。
-// 現在改為：先切出 1023px 以下的 media 區塊，再從區塊內解析出實際數值來比對。
+// 這條斷言前後改過兩次，兩次都被證明是假綠，原因都一樣：**用字串／regex 檢查 CSS**。
+//   第一版：headerJs.includes('min-height:44px')。因為該字串在 header.js 出現 6 次、
+//           分散在 6 個不相干選擇器，改掉 .ld-tab 那一處仍然通過。
+//   第二版：切出 media 區塊後用 /\.ld-tab\s*\{/ 取數值。仍然漏掉複合／屬性選擇器——
+//           覆審用 `.ld-tab[aria-current="page"]{height:28px!important;min-height:28px!important}`
+//           把作用中頁籤實際壓到 28px，validator 照樣 exit 0 並宣稱「最小值 44px」。
+//
+// 只要是「字串是否存在」就一定能被 specificity、屬性選擇器、!important 繞過。
+// 現在改成解析 CSS 並實際計算 cascade：對每個手機斷點、每種頁籤狀態，
+// 算出真正生效的 min-height / height / overflow-x，再比對門檻。
+import { parseCss, resolve, toPx } from './css-cascade.mjs';
+
 const MOBILE_NAV_MIN_TOUCH = 44;
 const MOBILE_NAV_BREAKPOINT = 1023;
 const mobileNavIssues = [];
-let ldTabMinHeight = null;
+const mobileNavNotes = [];
 let serviceTabCount = 0;
 
 // header.js 的 tabs 陣列就是導覽項目的單一來源，直接數它，不要寫死 6
@@ -198,56 +204,83 @@ const tabsArray = headerJs.match(/const\s+tabs\s*=\s*\[([\s\S]*?)\];/);
 serviceTabCount = tabsArray ? (tabsArray[1].match(/\{\s*id\s*:/g) || []).length : 0;
 if (serviceTabCount === 0) mobileNavIssues.push('找不到 tabs 陣列，無法確認導覽項目數');
 
-// 收集「所有」會在手機生效的斷點（max-width <= 1023），不能只看 1023 那一個——
-// 較窄的斷點（例如 420px）同樣會套用，可以在那裡用 !important 把觸控區壓小。
-const mobileBlocks = [];
-const mediaRe = /@media\s*\(\s*max-width\s*:\s*(\d+)px\s*\)\s*\{/g;
-let mm;
-while ((mm = mediaRe.exec(headerJs)) !== null) {
-  const bp = Number(mm[1]);
-  if (bp > MOBILE_NAV_BREAKPOINT) continue;
-  let depth = 0, i = headerJs.indexOf('{', mm.index), end = -1;
-  for (let j = i; j < headerJs.length; j++) {
-    if (headerJs[j] === '{') depth++;
-    else if (headerJs[j] === '}' && --depth === 0) { end = j; break; }
-  }
-  if (end !== -1) mobileBlocks.push({ bp, css: headerJs.slice(i + 1, end) });
-}
+// 取出 header.js 內注入的 CSS（`const css = \`...\``）
+const cssBlock = headerJs.match(/const\s+css\s*=\s*`([\s\S]*?)`/);
+let cssRules = [];
+if (!cssBlock) mobileNavIssues.push('header.js 內找不到 css 樣板字串，無法計算 cascade');
+else cssRules = parseCss(cssBlock[1]);
 
-if (!mobileBlocks.length) {
-  mobileNavIssues.push('找不到任何 max-width <= ' + MOBILE_NAV_BREAKPOINT + 'px 的斷點區塊');
-} else {
-  const allCss = mobileBlocks.map((b) => b.css).join('\n');
+// 受測的手機 viewport：CSS 內所有 max-width <= 1023 的斷點，各取「剛好命中」與「再窄 1px」，
+// 另外補幾個常見實機寬度，確保沒有漏掉某個區間。
+const declaredBps = [...new Set(
+  (cssBlock ? [...cssBlock[1].matchAll(/max-width\s*:\s*(\d+)px/g)].map((m) => Number(m[1])) : [])
+    .filter((n) => n <= MOBILE_NAV_BREAKPOINT),
+)];
+const testWidths = [...new Set(
+  declaredBps.flatMap((b) => [b, Math.max(320, b - 1)]).concat([320, 360, 375, 390, 414, 768, 1023]),
+)].sort((a, b) => a - b);
 
-  const navRule = allCss.match(/\.ld-nav\s*\{([^}]*)\}/);
-  if (!navRule) mobileNavIssues.push('手機斷點內找不到 .ld-nav 規則');
-  else {
-    if (!/overflow-x\s*:\s*auto/.test(navRule[1])) mobileNavIssues.push('.ld-nav 未設 overflow-x:auto（服務項無法單列滑動）');
-    if (!/display\s*:\s*flex/.test(navRule[1])) mobileNavIssues.push('.ld-nav 未設 display:flex');
-  }
+// 兩種必測狀態：一般頁籤，以及「作用中」頁籤（同時帶 .ld-active 與 aria-current="page"）
+const TAB_STATES = [
+  { label: '一般頁籤', el: { tag: 'a', classes: ['ld-tab', 'ld-tab--aircon'], attrs: { href: '/aircon.html' }, ancestors: ['ld-nav'], states: [] } },
+  { label: '作用中頁籤', el: { tag: 'a', classes: ['ld-tab', 'ld-tab--aircon', 'ld-active'], attrs: { href: '/aircon.html', 'aria-current': 'page' }, ancestors: ['ld-nav'], states: [] } },
+];
+const NAV_EL = { tag: 'nav', classes: ['ld-nav'], attrs: { 'aria-label': '主要服務' }, ancestors: ['ld-header'], states: [] };
 
-  // 逐個斷點蒐集 .ld-tab 的 min-height，取最小值——任何一個斷點壓低都算不合格
-  const tabRules = [];
-  for (const b of mobileBlocks) {
-    for (const m of b.css.matchAll(/\.ld-tab\s*\{([^}]*)\}/g)) tabRules.push({ bp: b.bp, css: m[1] });
-  }
-  if (!tabRules.length) mobileNavIssues.push('手機斷點內找不到 .ld-tab 規則');
-  else {
-    let worst = null;
-    for (const r of tabRules) {
-      const h = (r.css.match(/min-height\s*:\s*([\d.]+)px/) || [])[1];
-      if (h === undefined) continue;
-      if (worst === null || Number(h) < worst.h) worst = { h: Number(h), bp: r.bp };
+if (cssRules.length) {
+  let worstTouch = null;
+  const uncertain = new Set();
+
+  for (const w of testWidths) {
+    for (const st of TAB_STATES) {
+      const mh = resolve(cssRules, st.el, 'min-height', w);
+      const h = resolve(cssRules, st.el, 'height', w);
+      mh.uncertain.forEach((u) => uncertain.add(u));
+      h.uncertain.forEach((u) => uncertain.add(u));
+      const mhPx = toPx(mh.value);
+      const hPx = toPx(h.value);
+      // 實際盒高下限 = max(min-height, height)；height:auto 時由內容決定，只能靠 min-height 保證
+      const effective = Math.max(mhPx ?? 0, hPx ?? 0);
+      if (mhPx === null && hPx === null) {
+        mobileNavIssues.push(w + 'px／' + st.label + '：min-height 與 height 都不是固定 px（'
+          + (mh.value ?? 'auto') + ' / ' + (h.value ?? 'auto') + '），無法保證觸控區');
+        continue;
+      }
+      if (effective < MOBILE_NAV_MIN_TOUCH) {
+        const src = (hPx !== null && hPx <= (mhPx ?? Infinity)) ? h : mh;
+        mobileNavIssues.push(w + 'px／' + st.label + ' 實際生效高度 ' + effective + 'px（應至少 '
+          + MOBILE_NAV_MIN_TOUCH + 'px）；勝出宣告來自 `' + src.selector + '`'
+          + (src.media.length ? ' @' + src.media.join(' and ') : '') + (src.important ? ' !important' : ''));
+      }
+      if (worstTouch === null || effective < worstTouch.px) worstTouch = { px: effective, w, label: st.label };
     }
-    ldTabMinHeight = worst ? worst.h : null;
-    if (ldTabMinHeight === null) mobileNavIssues.push('.ld-tab 未宣告 min-height');
-    else if (ldTabMinHeight < MOBILE_NAV_MIN_TOUCH) {
-      mobileNavIssues.push('.ld-tab 在 ' + worst.bp + 'px 斷點的觸控高度僅 ' + ldTabMinHeight + 'px（應至少 ' + MOBILE_NAV_MIN_TOUCH + 'px）');
+
+    // .ld-nav 必須維持橫向可捲動——只看 .ld-nav 自己算出來的值，
+    // 無關元件寫 overflow-x:hidden 不該讓門禁失敗
+    const ox = resolve(cssRules, NAV_EL, 'overflow-x', w);
+    ox.uncertain.forEach((u) => uncertain.add(u));
+    if (ox.value === null) mobileNavIssues.push(w + 'px：.ld-nav 未宣告 overflow-x（六服務無法單列滑動）');
+    else if (!/^(auto|scroll)$/i.test(ox.value.trim())) {
+      mobileNavIssues.push(w + 'px：.ld-nav 的 overflow-x 實際為 `' + ox.value + '`（來自 `' + ox.selector + '`'
+        + (ox.important ? ' !important' : '') + '），六服務無法單列滑動');
     }
-    if (!tabRules.some((r) => /scroll-snap-align\s*:\s*center/.test(r.css))) mobileNavIssues.push('.ld-tab 未設 scroll-snap-align:center（作用中頁籤無法置中）');
+    const disp = resolve(cssRules, NAV_EL, 'display', w);
+    if (disp.value === null || !/flex/i.test(disp.value)) {
+      mobileNavIssues.push(w + 'px：.ld-nav 的 display 實際為 `' + (disp.value ?? '未宣告') + '`（應為 flex）');
+    }
+    const snap = resolve(cssRules, TAB_STATES[1].el, 'scroll-snap-align', w);
+    if (snap.value === null || !/center/i.test(snap.value)) {
+      mobileNavIssues.push(w + 'px：作用中頁籤的 scroll-snap-align 實際為 `' + (snap.value ?? '未宣告') + '`（應為 center）');
+    }
   }
-  const hidden = mobileBlocks.find((b) => /\.ld-nav\s*\{[^}]*overflow-x\s*:\s*hidden/.test(b.css) || /overflow-x\s*:\s*hidden/.test(b.css));
-  if (hidden) mobileNavIssues.push(hidden.bp + 'px 斷點內有 overflow-x:hidden，會關掉橫向滑動');
+
+  if (uncertain.size) {
+    // 解析器看不懂的東西不可以靜默放行，寧可讓人來判斷
+    mobileNavIssues.push('cascade 有無法判定的部分，請人工確認：' + [...uncertain].slice(0, 3).join('；'));
+  }
+  mobileNavNotes.push('掃描 ' + testWidths.length + ' 個手機寬度（' + testWidths.join('／') + 'px）× '
+    + TAB_STATES.length + ' 種頁籤狀態，實際生效高度最小值 ' + (worstTouch ? worstTouch.px : '?') + 'px'
+    + (worstTouch ? '（' + worstTouch.w + 'px／' + worstTouch.label + '）' : ''));
 }
 
 if (!/aria-label="主要服務"/.test(headerJs)) mobileNavIssues.push('導覽缺 aria-label="主要服務"');
@@ -258,11 +291,11 @@ if (!/scrollIntoView\(\s*\{[^}]*inline\s*:\s*['"]center['"]/.test(headerJs)) {
 }
 
 if (mobileNavIssues.length) report('手機服務導覽：' + mobileNavIssues.join('；'));
-else ok('手機服務導覽：tabs 陣列 ' + serviceTabCount + ' 個服務；掃描 header.js 內 '
-  + mobileBlocks.length + ' 個 max-width<=' + MOBILE_NAV_BREAKPOINT + 'px 斷點（'
-  + mobileBlocks.map((b) => b.bp).join('／') + 'px）：.ld-nav 為 flex+overflow-x:auto、'
-  + '.ld-tab min-height 最小值 ' + ldTabMinHeight + 'px（下限 ' + MOBILE_NAV_MIN_TOUCH + '）、'
-  + 'scroll-snap-align:center、aria-label／aria-current 齊備、置中使用 scrollIntoView');
+else ok('手機服務導覽（依 CSS cascade 實算，非字串比對）：tabs 陣列 ' + serviceTabCount + ' 個服務、'
+  + 'header.js CSS 解析出 ' + cssRules.length + ' 條規則、宣告的手機斷點 '
+  + declaredBps.sort((a, b) => a - b).join('／') + 'px；' + mobileNavNotes.join('；')
+  + '；.ld-nav 各寬度 display:flex 且 overflow-x 可捲、作用中頁籤 scroll-snap-align:center、'
+  + 'aria-label／aria-current 齊備、置中使用 scrollIntoView');
 
 const indexHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const compactFlow = indexHtml.match(/<section class="service-flow service-flow--compact"[\s\S]*?<\/section>/);
