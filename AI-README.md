@@ -6,7 +6,7 @@
 > 3. 本檔案是唯一的交接依據，寫給 AI 看：請保持精確、可執行、不留模糊描述。
 > 4. **所有時間戳一律台灣時間（Asia/Taipei, UTC+8）**。
 
-最後更新：2026-07-23（by Claude）— 服務卡改版（內部淡色填滿＋icon 標題同行放大＋內文斷句）、光掃頻率放慢並延伸到各服務頁 CTA
+最後更新：2026-08-24（by Codex）— 手機共用頁首改為單列滑動、首頁六步整併四階段、字級與觸控區補強；draft PR 待他方審查，尚未合併
 
 ---
 
@@ -43,7 +43,7 @@
 - **純靜態站**，無框架、無打包工具，直接編輯 HTML。部署 = push 到 `main`（GitHub Pages）。
 - 根目錄保留 `.nojekyll`，讓 GitHub Pages 直接發布靜態檔案，不執行不必要的 Jekyll metadata build；勿刪除。
 - **`header.js` 是全站共用核心**（每頁 `<script src="header.js">` 或 `../header.js` 載入），runtime 注入：
-  - fixed header＋6 個主服務頁籤（root 絕對路徑 `/xxx.html`，讓 /articles/ 下也正確）；桌機 Logo 首頁入口與服務頁籤同列等高，手機維持 Logo＋3×2 服務選項
+  - fixed header＋6 個主服務頁籤（root 絕對路徑 `/xxx.html`，讓 /articles/ 下也正確）；桌機 Logo 首頁入口與服務頁籤同列等高，手機／平板維持 Logo＋單列橫向滑動服務選項，服務頁會把作用中頁籤置中
   - 右側 LINE 浮動鈕、回頂鈕、手機底部 LINE 預約列；網站不提供公開電話 CTA，也不顯示「加入我們」
   - 六服務專屬色系由 body theme class 與 CSS variables 串接頁籤及頁面 CTA：冷氣青藍、洗衣機紫、居家清潔琥珀、水塔綠、水管靛藍、漏水青綠
   - **預約表單 modal**（`ldOpenQuote(serviceKey)` 全域函式）：姓名/電話/地址/服務卡片/日期時段，送出 → `POST /api/leads` 寫入灰汰郎 D1 → 取得 `HTL-L-*` 線索編號 → 組訊息 → `line.me/R/oaMessage/@478xvlgl/?<encoded>` 開 LINE 預填；API 失敗時不開 LINE，避免需求未落案
@@ -139,6 +139,14 @@ cases/
 - 修改後驗證慣例：`node --check header.js`；以 Node 驗證 JSON-LD、內部連結、四頁流程與禁止字樣；本機網址受瀏覽器安全政策阻擋時，直接使用正式部署標記與真機驗證，不可繞過安全政策。
 
 ## 5. 進度紀錄（新條目加在最上面）
+
+### 2026-08-24（Codex・灰汰郎 UI/UX 結構優化）
+- 分支 `codex/ui-polish-gray-wolf-2026-08-24`，基準 `main@ba0dc95`；與公開範圍 draft PR #3 分開施工，**本輪不合併、不切 Pages Source**。
+- `header.js`：1023px 以下的六服務導覽由 3×2 改為單列橫向滑動，保留 44px 觸控高度、`aria-current="page"`，並讓服務頁的作用中頁籤自動置中；手機 Header 實測由約 172px 降到 `114.8px`，固定底部 CTA 保留。
+- `index.html`／`assets/site-unified.css`：首頁重複的六張通用流程卡整併為「確認範圍／安全準備／分區處理／復原驗收」四階段，原本的斷電、關水電、環境保護、整理與成果測試資訊均保留；六服務卡與三張圖片流程卡不動。
+- 服務卡說明、價格、按鈕、承諾文字與 Footer 連結提升至至少 14px；服務卡按鈕、Footer 連結、回頂按鈕補到至少 44px，並把兩處不明確的 transition 改為指定屬性。
+- `DESIGN.md` 同步更新手機導覽與首頁四階段規則。未新增或變更價格、LINE、電話、GA4、服務地區、案例、圖片與其他對外營運事實。
+- 驗證：`validate-site.mjs` 新增「手機導覽單列可滑動＋44px」與「首頁恰為四階段」斷言；故意改成 `overflow-x:visible` 並移除 compact class 時正確回報 2 項失敗、exit 1，還原後全綠。`node --check header.js`、完整 validate（22 頁／33 sitemap 網址）、`node scripts/inspect-header.mjs`、`git diff --check` 均通過。瀏覽器實測 375×812／768×900／1440×1000：無水平溢位；Header 分別 `114.8px`／`116.8px`／`78.8px`；中間服務頁籤置中誤差 `0px`；首頁流程手機 1 欄、平板 2 欄、桌機 4 欄；預約 modal 開關正常且未送出資料；console 0 error／0 warning。
 
 ### 2026-08-21（Codex・Pages 部署門禁 PR）
 
@@ -544,7 +552,7 @@ GSC 存取：`leakdoctor.tw` 與 `blossomkids.tw` 皆已驗證，共用驗證碼
 3. **LINE 連結不可隨意替換**：業主有多個事業（露涼社等）各有自己的 LINE。曾把露涼社連結誤換到全站（未推送即攔下）。**換任何 lin.ee 連結前必須向業主確認該連結屬於灰汰郎。**
 4. 價格改動同步點：頁面價目表、JSON-LD Offer、llms.txt、首頁服務卡、`header.js` 的 `SERVICE_DETAIL_CATALOG`、`data/service-options.json`。
 5. 雲端 session 容器會被回收：**成果要盡早 commit+push**，別累積大量未提交修改。
-6. `.ld-tab` 目前應為 6 個主服務項目；首頁由 Logo 返回，居家知識是 header 次要入口。桌機 6 欄，手機 3 欄 × 2 列。
+6. `.ld-tab` 目前應為 6 個主服務項目；首頁由 Logo 返回，居家知識是 header 次要入口。桌機 6 欄；1023px 以下是可橫向滑動的單列，服務頁需維持作用中頁籤置中。不要恢復 3×2，否則手機固定 Header 會重新佔掉約 172px。
 7. 第二層 `.service-toc` 不可再用所有內容區塊的 `offsetTop` 做 scroll-spy：第三層會把非作用中區塊設為 `hidden`，其 offset 不可靠。第二層與第三層狀態統一由 `initServiceLayerTabs()` 管理。
 
 ## 7. 待辦清單
@@ -570,6 +578,7 @@ GSC 存取：`leakdoctor.tw` 與 `blossomkids.tw` 皆已驗證，共用驗證碼
 
 ### 🟠 高價值，AI 可做
 - [x] **前台轉換 P0**：地址選填、機型數量收合、首頁／手機雙 CTA、`line_direct_click`、手機 Header CLS 與六服務卡配色已於 2026-07-19 完成。
+- [x] **2026-08-24 UI/UX 結構補強**：手機／平板導覽單列滑動、首頁流程六併四、服務卡／Footer 字級與 44px 操作區已完成於 draft PR，待 Claude／Manus 審查及使用者同意後才可合併。
 - [ ] **前台優化 P1–P3 — 依 `docs/FRONTEND-REVIEW-2026-07-16.md` 排序**：P1 信任地基（真實評價、清洗保固、商業模式敘事、可開發票、首屏效能）→ P2 內容對等（cases/team/knowledge 清潔素材、水塔水管價錨案例、漏水文章漏斗、地理統一）→ P3 精修。業主定案 A／B 收費與保固口徑為必守準據。
 - [x] **廣告投放前視覺改版 P1**：首頁＋冷氣／洗衣機／抓漏首屏、DESIGN.md、流程示意與知識型 OG；2026-07-11 已部署並完成正式網址驗證。
 - [ ] **視覺改版 P2**：延伸至居家清潔、地區、案例、百科與文章頁；建立真實案例／流程示意的圖片標示規格

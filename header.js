@@ -390,21 +390,38 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
 @media(min-width:1280px){.ld-tab-label{font-size:17px}.ld-tab-icon{width:20px;height:20px}}
 @keyframes ld-active-flow{0%,18%{left:-42%;opacity:0}28%{opacity:1}68%{opacity:1}82%,100%{left:118%;opacity:0}}
 
-@media(min-width:421px) and (max-width:1023px){:root{--ld-hdr-h:175px}}
+@media(max-width:1023px){
+  :root{--ld-hdr-h:116px}
+  .ld-top{height:62px;padding:3px 12px;gap:8px}
+  .ld-logo-img{width:min(42vw,142px);height:auto;max-height:56px}
+  .ld-nav{
+    display:flex;overflow-x:auto;overscroll-behavior-x:contain;
+    scroll-snap-type:x proximity;scrollbar-width:none;
+    padding:4px 12px 6px;gap:6px;
+  }
+  .ld-nav::-webkit-scrollbar{display:none}
+  .ld-tab{
+    flex:0 0 auto;min-width:112px;min-height:44px;
+    gap:5px;padding:7px 10px;scroll-snap-align:center;
+  }
+  .ld-tab-icon{width:17px;height:17px}
+  .ld-tab-label{font-size:14px;white-space:nowrap}
+}
 
 @media(max-width:420px){
-  .ld-top{height:68px;padding:3px 10px;gap:8px}
-  .ld-logo-img{width:min(43vw,145px);height:auto;max-height:64px}
+  :root{--ld-hdr-h:114px}
+  .ld-top{height:60px;padding:3px 10px;gap:8px}
+  .ld-logo-img{width:min(43vw,138px);height:auto;max-height:54px}
   .ld-top-actions{gap:6px}
   .ld-line-btn{min-width:44px;padding:8px 10px}
   .ld-knowledge-link{padding:8px 9px;font-size:11px}
-  .ld-nav{grid-template-columns:repeat(3,minmax(0,1fr));padding:5px 8px 7px;gap:5px}
-  .ld-tab{min-height:42px;gap:4px;padding:6px 3px}
+  .ld-nav{padding:4px 10px 6px;gap:5px}
+  .ld-tab{min-width:104px;min-height:44px;gap:4px;padding:7px 8px}
   .ld-tab-icon{width:16px;height:16px}
-  .ld-tab-label{font-size:13.5px}
+  .ld-tab-label{font-size:14px}
 }
 
-#ld-back-top{position:fixed;right:20px;bottom:calc(180px + env(safe-area-inset-bottom));z-index:9990;width:42px;height:42px;border-radius:50%;background:#1e3a8a;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;box-shadow:0 2px 12px rgba(30,58,138,.35);opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;pointer-events:none;}
+#ld-back-top{position:fixed;right:20px;bottom:calc(180px + env(safe-area-inset-bottom));z-index:9990;width:44px;height:44px;border-radius:50%;background:#1e3a8a;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;box-shadow:0 2px 12px rgba(30,58,138,.35);opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;pointer-events:none;}
 @media(min-width:1024px){#ld-back-top{bottom:24px}}
 @media(max-width:720px){
   #ld-float{display:none!important}
@@ -424,7 +441,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   padding-bottom:calc(10px + env(safe-area-inset-bottom));
 }
 .ld-sticky-text{flex:1;min-width:0}
-.ld-sticky-title{font-size:13px;font-weight:900;color:#111827;line-height:1.3}
+.ld-sticky-title{font-size:14px;font-weight:900;color:#111827;line-height:1.3}
 .ld-sticky-sub{font-size:10.5px;color:#6b7280;line-height:1.3}
 .ld-sticky-btn{
   flex-shrink:0;display:flex;align-items:center;justify-content:center;gap:5px;
@@ -604,7 +621,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   ];
 
   const tabsHTML = tabs.map(t =>
-    `<a href="/${t.href}" class="ld-tab ld-tab--${t.id}${t.id===activePage?' ld-active':''}">
+    `<a href="/${t.href}" class="ld-tab ld-tab--${t.id}${t.id===activePage?' ld-active':''}"${t.id===activePage?' aria-current="page"':''}>
       <span class="ld-tab-icon">${t.icon}</span>
       <span class="ld-tab-label">${t.label}</span>
     </a>`
@@ -625,7 +642,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
           </picture>
         </a>
       </div>
-      <nav class="ld-nav">${tabsHTML}</nav>
+      <nav class="ld-nav" aria-label="主要服務">${tabsHTML}</nav>
     </header>
     <div id="ld-header-spacer" aria-hidden="true"></div>
     <button id="ld-back-top" onclick="window.scrollTo({top:0,behavior:\'smooth\'})" title="回到頂部">↑</button>
@@ -720,6 +737,15 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   });
 
   document.body.insertAdjacentHTML('afterbegin', html);
+
+  function centerActiveServiceTab(){
+    const nav = document.querySelector('.ld-nav');
+    const activeTab = nav && nav.querySelector('.ld-active');
+    if(!nav || !activeTab || window.innerWidth >= 1024) return;
+    nav.scrollLeft = Math.max(0, activeTab.offsetLeft - (nav.clientWidth - activeTab.offsetWidth) / 2);
+  }
+  requestAnimationFrame(centerActiveServiceTab);
+  window.addEventListener('resize', centerActiveServiceTab);
 
   const mergedLeakTargets = {
     cases:'cases-carousel', team:'team-carousel', areas:'service-area',

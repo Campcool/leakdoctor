@@ -65,7 +65,7 @@ img{display:block;max-width:100%}
   --gray-300:#d1d5db;--gray-400:#9ca3af;--gray-500:#6b7280;
   --gray-600:#4b5563;--gray-700:#374151;--gray-800:#1f2937;--gray-900:#111827;
 }
-.sec-tag{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.26rem .8rem;border-radius:99px;margin-bottom:.65rem}
+.sec-tag{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.26rem .8rem;border-radius:99px;margin-bottom:.65rem}
 .sec-tag.blue{background:var(--blue-light);color:var(--blue)}
 .sec-tag.teal{background:var(--teal-light);color:var(--teal)}
 .sec-title{font-size:1.65rem;font-weight:900;color:var(--gray-900);line-height:1.25;margin-bottom:.42rem}
@@ -84,14 +84,14 @@ img{display:block;max-width:100%}
 @keyframes ld-shine{0%,25%{transform:translateX(-130%)}65%,100%{transform:translateX(130%)}}
 .hero-btn-sub{font-size:.72rem;opacity:.82;font-weight:400}
 .trust-badges{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
-.trust-badge{display:flex;align-items:center;gap:.35rem;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);color:rgba(255,255,255,.95);font-size:.78rem;font-weight:600;padding:.4rem .8rem;border-radius:99px}
+.trust-badge{display:flex;align-items:center;gap:.35rem;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);color:rgba(255,255,255,.95);font-size:13px;font-weight:600;padding:.4rem .8rem;border-radius:99px}
 
 #services{padding:2.5rem 1.25rem 3rem;background:#f8fafc;margin-top:-1.5rem;position:relative;z-index:2}
 .services-inner{max-width:1200px;margin:0 auto}
 .svc-grid{display:grid;gap:1.1rem;grid-template-columns:1fr}
 @media(min-width:640px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1024px){.svc-grid{grid-template-columns:repeat(3,1fr)}}
-.svc-card{background:#fff;border-radius:18px;border:2px solid var(--gray-200);padding:1.5rem 1.3rem;display:flex;flex-direction:column;gap:.7rem;box-shadow:0 4px 16px rgba(0,0,0,.05);transition:.2s;position:relative}
+.svc-card{background:#fff;border-radius:18px;border:2px solid var(--gray-200);padding:1.5rem 1.3rem;display:flex;flex-direction:column;gap:.7rem;box-shadow:0 4px 16px rgba(0,0,0,.05);transition:border-color .2s,box-shadow .2s,transform .2s;position:relative}
 .svc-card:hover{border-color:var(--blue-mid);box-shadow:0 10px 28px rgba(0,0,0,.1);transform:translateY(-4px)}
 @property --ld-angle{syntax:'<angle>';inherits:false;initial-value:0deg}
 .svc-card::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:2px;opacity:0;pointer-events:none;
@@ -116,11 +116,11 @@ img{display:block;max-width:100%}
 .svc-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.7rem}
 .svc-icon.c1{background:var(--blue-light)}.svc-icon.c2{background:var(--teal-light)}.svc-icon.c3{background:var(--green-100)}.svc-icon.c4{background:var(--orange-light)}
 .svc-title{font-size:1.08rem;font-weight:900;color:var(--gray-900)}
-.svc-desc{font-size:.85rem;color:var(--gray-500);line-height:1.7;flex:1}
-.svc-price{font-size:.78rem;font-weight:700;color:var(--blue);background:var(--blue-light);display:inline-block;padding:.28rem .75rem;border-radius:99px;width:fit-content}
+.svc-desc{font-size:14px;color:var(--gray-500);line-height:1.75;flex:1}
+.svc-price{font-size:14px;font-weight:700;color:var(--blue);background:var(--blue-light);display:inline-block;padding:.28rem .75rem;border-radius:99px;width:fit-content}
 .svc-link{font-size:.86rem;font-weight:700;color:var(--blue);display:flex;align-items:center;gap:.3rem;margin-top:.2rem}
 .svc-actions{display:flex;gap:.5rem;margin-top:.35rem}
-.svc-btn-price,.svc-btn-book{flex:1;text-align:center;font-size:.85rem;font-weight:700;padding:.6rem .5rem;border-radius:10px;transition:.15s}
+.svc-btn-price,.svc-btn-book{flex:1;display:inline-flex;align-items:center;justify-content:center;min-height:44px;text-align:center;font-size:14px;font-weight:700;padding:.6rem .5rem;border-radius:10px;transition:background-color .15s,border-color .15s,box-shadow .15s}
 .svc-btn-price{color:var(--blue);background:var(--blue-light);border:1.5px solid #dbeafe}
 .svc-btn-price:hover{background:#dbeafe}
 .svc-btn-book{color:#fff;background:#06C755;cursor:pointer;box-shadow:0 2px 8px rgba(6,199,85,.3)}
@@ -136,7 +136,7 @@ img{display:block;max-width:100%}
 .promise-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.35rem;flex-shrink:0}
 .pi1{background:var(--blue-light)}.pi2{background:var(--green-100)}.pi3{background:#fef9c3}
 .promise-title{font-weight:700;color:var(--gray-900);font-size:.98rem;margin-bottom:.3rem}
-.promise-desc{font-size:.86rem;color:var(--gray-500);line-height:1.7}
+.promise-desc{font-size:14px;color:var(--gray-500);line-height:1.75}
 
 #cta-bottom{background:linear-gradient(135deg,var(--blue-dark),var(--blue));padding:3.5rem 1.25rem;text-align:center;color:#fff}
 .cta-title{font-size:1.85rem;font-weight:900;margin-bottom:.52rem;line-height:1.28}
@@ -146,9 +146,9 @@ img{display:block;max-width:100%}
 footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 .footer-inner-grid{max-width:1200px;margin:0 auto 1.5rem}
 .footer-brand{font-size:1.05rem;font-weight:900;margin-bottom:.32rem}
-.footer-tagline{font-size:.8rem;color:#9ca3af;line-height:1.7;margin-bottom:1.15rem}
+.footer-tagline{font-size:14px;color:#9ca3af;line-height:1.7;margin-bottom:1.15rem}
 .footer-links{display:flex;flex-wrap:wrap;gap:.5rem 1.35rem;margin-bottom:1.15rem}
-.footer-links a{font-size:.8rem;color:#9ca3af}
+.footer-links a{display:inline-flex;align-items:center;min-height:44px;font-size:14px;color:#9ca3af}
 .footer-links a:hover{color:#fff}
 .footer-copy{max-width:1200px;margin:0 auto;font-size:.72rem;color:#6b7280;border-top:1px solid #374151;padding-top:1rem}
 
@@ -325,16 +325,14 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </section>
 
 <!-- 我們提供什麼 -->
-<section class="service-flow" aria-labelledby="home-flow-title" aria-label="服務流程">
+<section class="service-flow service-flow--compact" aria-labelledby="home-flow-title" aria-label="服務流程">
   <div class="service-flow-inner">
-    <div class="service-flow-head"><div class="service-flow-kicker">簡易流程說明</div><h2 id="home-flow-title">到府服務都應該走完這六個步驟</h2><p class="service-flow-intro">不同服務的工具與細節不同，但安全確認、環境保護、復原和測試不能省略。點進各服務頁可查看專屬說明。</p></div>
+    <div class="service-flow-head"><div class="service-flow-kicker">簡易流程說明</div><h2 id="home-flow-title">四個階段，把到府服務說清楚</h2><p class="service-flow-intro">不同服務的工具與細節不同，但安全確認、環境保護、復原和測試不能省略。點進各服務頁可查看專屬說明。</p></div>
     <div class="service-step-grid">
-      <article class="service-step"><h3>確認功能與範圍</h3><p>確認設備原始功能、現場條件與本次處理範圍，避免清洗前後認知不同。</p></article>
-      <article class="service-step"><h3>關機／斷電</h3><p>涉及設備時先停機並隔離電源；漏水或一般清潔則依現場關閉相關水電。</p></article>
-      <article class="service-step"><h3>環境保護</h3><p>保護家具、地板、牆面、插座與動線，劃分工具、零件及污水處理區。</p></article>
-      <article class="service-step"><h3>分區清洗或修補</h3><p>依設備、材質或漏水原因分區處理，不用單一方式套用所有現場。</p></article>
-      <article class="service-step"><h3>復原與整理</h3><p>將部件與物品復位，確認固定、接頭、表面與作業區皆完成整理。</p></article>
-      <article class="service-step"><h3>功能與成果測試</h3><p>共同確認運轉、進排水、清潔範圍或止漏結果，必要時說明後續觀察期。</p></article>
+      <article class="service-step"><h3>確認範圍</h3><p>確認設備原始功能、現場條件與處理範圍，避免服務前後認知不同。</p></article>
+      <article class="service-step"><h3>安全準備</h3><p>依服務停機、斷電或關閉相關水電，並保護家具、地板、牆面、插座與動線。</p></article>
+      <article class="service-step"><h3>分區處理</h3><p>劃分工具、零件及污水處理區，再依設備、材質或漏水原因清洗或修補。</p></article>
+      <article class="service-step"><h3>復原驗收</h3><p>完成復位與環境整理，共同確認運轉、進排水、清潔範圍或止漏結果。</p></article>
     </div>
   </div>
 </section>

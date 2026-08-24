@@ -19,6 +19,7 @@
 //   6. 反個資：表單說明不得出現「此裝置」等暗示可收集個人訊息的詞彙；
 //      個資由客戶在 LINE 內自行送出，站內表單只寫草稿
 //   7. og-image.html 等工具頁維持 noindex 或不在 sitemap
+//   8. 手機導覽維持單列可滑動，首頁通用流程維持四階段
 //
 // 撰寫規則：每條斷言的 ok() 訊息必須寫出實際掃描範圍與分母（幾個檔案／幾處），
 // 不得只寫「完成」。2026-08-16 有三條斷言因為只讀單一檔案卻宣稱「全域」而漏判。
@@ -178,7 +179,27 @@ for (const f of htmlFiles) {
   if (missingA11y) { report(f + ' 有 ' + missingA11y + ' 個 section 缺 aria-label 與 role（WCAG 1.3.1 region）'); a11yFail++; }
 }
 if (a11yFail === 0) ok('無障礙結構：全部正式頁面 main landmark + section 皆可識別（region）');
-// ── 4d. 品牌色單一來源：LINE 綠必須全站一致 ──────────────────
+
+// ── 4d. 手機導覽與首頁流程結構 ──────────────────────────────
+const mobileNavChecks = [
+  ['@media(max-width:1023px)', '1023px 以下斷點'],
+  ['display:flex;overflow-x:auto', '單列橫向滑動'],
+  ['scroll-snap-align:center', '服務頁籤置中'],
+  ['min-height:44px', '44px 觸控高度'],
+  ['aria-label="主要服務"', '主導覽名稱'],
+  ['aria-current="page"', '作用中頁面狀態'],
+];
+const missingMobileNav = mobileNavChecks.filter(([needle]) => !headerJs.includes(needle)).map(([, label]) => label);
+if (missingMobileNav.length) report('手機六服務導覽缺少：' + missingMobileNav.join('、') + '（應維持單列可滑動與 44px 觸控區）');
+else ok('手機六服務導覽：6 項單列可滑動、作用中頁籤置中、觸控高度至少 44px');
+
+const indexHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+const compactFlow = indexHtml.match(/<section class="service-flow service-flow--compact"[\s\S]*?<\/section>/);
+const compactStepCount = compactFlow ? (compactFlow[0].match(/class="service-step"/g) || []).length : 0;
+if (compactStepCount !== 4) report('首頁通用流程為 ' + compactStepCount + ' 階段（應為 4；完整專屬步驟留在服務頁）');
+else ok('首頁通用流程維持 4 階段（確認、安全準備、分區處理、復原驗收）');
+
+// ── 4e. 品牌色單一來源：LINE 綠必須全站一致 ──────────────────
 // 業主決定保留 LINE 官方品牌綠 #06C755（白字對比 2.26:1，未達 WCAG AA 1.4.3）。
 // 這是明示的品牌取捨、不是疏漏，所以本斷言檢查的是「全站只有一種綠」，
 // 而不是「對比達標」。
@@ -205,7 +226,7 @@ if (altHits.length) {
   ok('品牌綠全站單一：' + BRAND_GREEN + ' 共 ' + brandHits + ' 處（掃描 ' + styleFiles.length + ' 個 html/css/js），無 ' + ALT_GREEN + ' 殘留');
 }
 
-// ── 4e. 地區頁差異化：防止量產式重複內容（doorway pages）──────
+// ── 4f. 地區頁差異化：防止量產式重複內容（doorway pages）──────
 // 2026-08-17 把 7 個地區頁從 noindex 放出來可被索引。它們是同一份模板，
 // 差異在各市的行政區清單、到府時間、專屬 FAQ 與 LocalBusiness schema。
 // Google 會處罰「只換城市名的量產落地頁」，所以差異度必須維持。

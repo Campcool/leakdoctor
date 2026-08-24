@@ -86,6 +86,8 @@ button,input,select,textarea{font:inherit}
 .service-step p{color:var(--ld-muted);font-size:.9rem;line-height:1.7;margin:0}
 .service-step:last-child{border-color:#b9ddd9;background:#f1fbfa}
 .service-step:last-child::before{background:var(--ld-teal)}
+.service-flow--compact .service-step-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.service-flow--compact .service-step{min-height:160px}
 
 .knowledge-rail{padding:clamp(3.5rem,7vw,5.8rem) 1.25rem;background:#fff}
 .knowledge-rail-inner{width:min(1180px,100%);margin:0 auto}
@@ -134,6 +136,7 @@ footer,.footer{background:var(--ld-ink-deep)!important;color:#fff!important}
   .service-page .page-hero-inner,.service-page .hero-content-pc{grid-template-columns:1fr!important;gap:2rem!important}
   .service-page .service-visual{width:min(680px,100%);margin-inline:auto}
   .service-step-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .service-flow--compact .service-step-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .knowledge-grid{grid-template-columns:1fr}
   .service-page .page-hero-inner,.service-page .hero-content-pc{min-height:0!important}
 }
@@ -144,6 +147,7 @@ footer,.footer{background:var(--ld-ink-deep)!important;color:#fff!important}
   .service-page .page-title,.service-page .hero-h1{font-size:clamp(2rem,10vw,2.75rem)!important}
   .service-page .page-btn,.service-page .hero-btn{width:100%!important}
   .service-step-grid{grid-template-columns:1fr}
+  .service-flow--compact .service-step-grid{grid-template-columns:1fr}
   .service-step{min-height:0}
   .knowledge-rail-head{grid-template-columns:1fr;align-items:start}
   .knowledge-more{width:100%;justify-content:center}
