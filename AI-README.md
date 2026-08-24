@@ -6,7 +6,140 @@
 > 3. 本檔案是唯一的交接依據，寫給 AI 看：請保持精確、可執行、不留模糊描述。
 > 4. **所有時間戳一律台灣時間（Asia/Taipei, UTC+8）**。
 
-最後更新：2026-07-23（by Claude）— 服務卡改版（內部淡色填滿＋icon 標題同行放大＋內文斷句）、光掃頻率放慢並延伸到各服務頁 CTA
+最後更新：2026-08-24（by Codex；Claude 審查後追加修正）— 手機共用頁首改為單列滑動、首頁六步整併四階段、字級與觸控區補強；draft PR **待 Codex 覆審，尚未合併**
+
+## 2026-08-24 Claude 審查後追加修正（四項）
+
+### ① 作用中頁籤置中：`scrollLeft` 算式改為 `scrollIntoView`
+
+初版用 `requestAnimationFrame` + `nav.scrollLeft = offsetLeft - ...`。算式本身沒錯，
+但那個 rAF 在 `insertAdjacentHTML` 之後立刻執行，**版面尚未定案**，
+`offsetLeft`／`clientWidth` 還不是最終值，算出來是 0；之後除了 `resize` 沒有補算機制。
+
+實測（完整載入 + 等 2 秒）：三個服務頁 `scrollLeft` **全為 0**，
+`leak-repair.html` 的作用中頁籤置中誤差 **439px、完全在畫面外**。
+
+改為 `activeTab.scrollIntoView({ block:'nearest', inline:'center' })` 由瀏覽器處理版面時機，
+並在 `load` 與 `document.fonts.ready` 之後各補一次（字體換掉會改變頁籤寬度）。
+
+修正後實測：
+
+| 頁面 | 作用中頁籤 | `scrollLeft` | 置中誤差 | 完全可見 |
+|---|---|---:|---:|---|
+| `aircon.html` | 第 1 個 | 0 | −126px（已到最左，正確） | ✅ |
+| `washer.html` | 第 2 個 | 0 | −15px | ✅ |
+| `homeclean.html` | 第 3 個 | 96 | **0px** | ✅ |
+| `leak-repair.html` | 第 6 個 | 329 | 110px（已到最右，正確） | ✅ |
+
+> ⚠️ 舊文件記載的「中間服務置中誤差 0px」在初版**並未成立**（實測 96px）；修正後才真的是 0px。
+
+### ② `resize` 不再搶走使用者手動捲動的位置
+
+初版 `resize` 監聽無防抖也無條件，**手機網址列一收合就把導覽捲回作用中頁籤**，
+蓋掉使用者自己滑到的位置。改為：使用者用手指／滾輪／鍵盤操作過導覽後就不再自動置中；
+`resize` 只在**跨過 1024px 斷點**時重算。實測同斷點 resize 不改變位置，跨斷點會重新置中。
+
+### ③ 首頁四階段補回被刪的事實（**階段數不變，仍是 4**）
+
+初版整併時刪掉三處實質內容並弱化一處安全語意，已逐句補回：
+
+| 補回內容 | 屬性 |
+|---|---|
+| 「隔離電源」（原被弱化為「斷電」） | 安全事實 |
+| 「不用單一方式套用所有現場」 | 服務差異化說明 |
+| 「確認**固定、接頭、表面**與作業區皆完成整理」 | 驗收檢查項 |
+| 「**必要時說明後續觀察期**」 | 止漏後觀察期，抓漏本業最相關的驗收事實 |
+
+以 `main` 的原始六步切出 **27 個實質短語**逐一比對，四階段現在**全數涵蓋、遺漏 0 個**。
+
+### ④-2 導覽門禁改為計算 CSS cascade（2026-08-24 覆審後第二次重做，**目前生效版本**）
+
+> 🔴 **這條斷言前後被證明假綠兩次，根因都一樣：用字串／regex 檢查 CSS。**
+> 任何「字串是否存在」的門禁，都能被 specificity、屬性選擇器、複合選擇器或 `!important` 繞過。
+> **不要再往這條路上加第三層 regex。**
+
+覆審提出的反例（瀏覽器 computed height 確實變 28px，validator 卻仍 exit 0 並宣稱「最小值 44px」）：
+
+```css
+.ld-tab[aria-current="page"] { height:28px!important; min-height:28px!important; padding:0!important }
+```
+
+`/\.ld-tab\s*\{/` 只命中「純 `.ld-tab{`」，看不到帶屬性或複合的選擇器，所以完全漏判。
+
+**現在的做法**：新增 `scripts/css-cascade.mjs`（**零相依**——本站沒有 `package.json`，
+CI 只跑 `setup-node` + `node`，不能引外部套件），實際解析 `header.js` 的 `const css` 樣板並**計算 cascade**：
+
+1. 解析規則（含巢狀 `@media`、逗號分列、`!important`）
+2. 對每個受測 viewport 判定 media 條件
+3. 用選擇器比對合成的元素描述（`a.ld-tab.ld-tab--aircon[href]`，以及帶 `.ld-active` +
+   `aria-current="page"` 的作用中版本），支援複合／屬性／後代選擇器
+4. 依 **specificity → `!important` → 來源順序**決出勝出宣告
+5. 實際盒高下限取 `max(min-height, height)`，低於 44px 即失敗，錯誤訊息**印出勝出的選擇器**
+
+`overflow-x` 也改成只解析 `.ld-nav` **自己**算出來的值，無關元件寫 `overflow-x:hidden` 不會誤殺。
+
+**受測範圍**：CSS 內所有 `max-width ≤ 1023px` 的宣告斷點（目前 220／390／420／560／720／1023px），
+各取「剛好命中」與「再窄 1px」，另補 320／360／375／390／414／768px，
+共 **16 個寬度 × 2 種頁籤狀態**。解析器看不懂的選擇器（`:is()`／`:not()`／`:nth-child()` 等）
+**不會靜默放行**，會列為「需人工確認」並讓門禁失敗。
+
+**已知限制**（寫在 `css-cascade.mjs` 檔頭）：不處理繼承、`var()` 求值、`calc()`、
+`@container`／`@layer`／style attribute；`:is()/:not()` 的內部 specificity 不精算。
+
+#### mutation test：`scripts/test-mobile-nav-gate.mjs`
+
+門禁會綠不等於門禁有效。這支測試注入 13 種真實繞過寫法，確認該紅的會紅、該綠的不被誤殺：
+
+| 必須攔截 | 必須放行 |
+|---|---|
+| `.ld-tab[aria-current="page"]` + `!important` 壓 28px（覆審反例） | `.other-component{overflow-x:hidden}`（無關元件） |
+| `.ld-tab.ld-active` 複合選擇器壓 28px | media query 改等價空白寫法 |
+| `.ld-nav .ld-tab` 後代選擇器壓 30px | 只在**桌機**斷點縮小 `.ld-tab` |
+| `a.ld-tab[href]` 標籤＋屬性壓 20px | 手機斷點把觸控區**加大**到 56px |
+| 直接改基準規則 44px→30px | |
+| `.ld-nav{overflow-x:hidden}`（含 `!important` 版） | |
+| `scroll-snap-align` 改 `start` | |
+| 置中改回 `scrollLeft` 算式 | |
+
+**結果 13/13 全部符合期望。** 執行 `node scripts/test-mobile-nav-gate.mjs`（測完自動還原）。
+
+#### 與瀏覽器交叉驗證
+
+把覆審反例注入後兩邊分別量測：
+
+| | validator（靜態 cascade） | 瀏覽器 computed style |
+|---|---|---|
+| 作用中頁籤 | 28px、exit 1、指出勝出選擇器 `.ld-tab[aria-current="page"]` | **28px**（375／414px 皆同） |
+| 一般頁籤 | 未標記（≥44px） | **44px** |
+
+還原後，頂層視窗 320／375／414／720／1023px 實測：六個頁籤高度皆 **44px**、
+`.ld-nav` 為 `flex` + `overflow-x:auto`、作用中頁籤 `scroll-snap-align:center`。
+
+> ⚠️ **量測陷阱**：用 `<iframe>` 設寬度在斷點邊界（例如 1023px）量測**不可信**——
+> iframe 的實際媒體查詢寬度有子像素誤差（實測 MQ 臨界點落在 **1022.98**），
+> 會造成 `max-width:1023px` 與 `min-width:1024px` 同時不成立、量到錯誤的 42px／grid。
+> **邊界值要用頂層視窗量**；頂層設 1023px 時結果正確（44px、flex、auto）。
+
+### ④ 第一次重做（已被 ④-2 取代，保留紀錄）
+
+初版是 `headerJs.includes(字串)` 的存在檢查，**攔不住真實回歸**。突變測試 6 項只符合 3 項：
+觸控區改 30px、`!important` 壓到 28px、`!important` 關掉橫向捲動**全部放行**
+（因為 `min-height:44px` 在 `header.js` 出現 6 次、分散 6 個不相干選擇器），純排版改寫則**誤殺**。
+
+改為掃出**所有 `max-width <= 1023px` 的斷點區塊**（目前 6 個），解析 `.ld-nav`／`.ld-tab`
+的實際宣告值，取 `min-height` **最小值**比對 44px 下限，並偵測任何斷點內的 `overflow-x:hidden`。
+`ok()` 訊息改為輸出實際掃描的斷點清單與最小值，不再宣稱未驗證的事。
+
+修正後突變測試 **7/7 全部符合期望**（含先前漏放的三項與誤殺的一項）。
+
+### 本輪未處理（留給後續）
+
+- **U5（已裁決為獨立高優先 PR，不併入本次小修）**：全站仍 36 處字級 < 14px、11 處 < 12px。
+  **優先順序：預約 modal** —— 隱私聲明 11.84px、價格註記「參考價 $1,499／台」11.04px、
+  核心控制項 13/28 不足 44px；之後才做全站 30+ 頁的字級與觸控矩陣。`.footer-copy` 仍 11.5px。
+- 手機導覽的捲軸被完全隱藏，可發現性靠第 4 個頁籤露出一角，無漸層或箭頭等明確提示。
+- **`fonts.ready` 在實體手機上是否有可見跳動：未驗。** 本輪只有無頭／桌面 Chromium，
+  沒有實體手機可測。**不得因為桌面測起來正常就宣稱已驗證。**
 
 ---
 
@@ -43,7 +176,7 @@
 - **純靜態站**，無框架、無打包工具，直接編輯 HTML。部署 = push 到 `main`（GitHub Pages）。
 - 根目錄保留 `.nojekyll`，讓 GitHub Pages 直接發布靜態檔案，不執行不必要的 Jekyll metadata build；勿刪除。
 - **`header.js` 是全站共用核心**（每頁 `<script src="header.js">` 或 `../header.js` 載入），runtime 注入：
-  - fixed header＋6 個主服務頁籤（root 絕對路徑 `/xxx.html`，讓 /articles/ 下也正確）；桌機 Logo 首頁入口與服務頁籤同列等高，手機維持 Logo＋3×2 服務選項
+  - fixed header＋6 個主服務頁籤（root 絕對路徑 `/xxx.html`，讓 /articles/ 下也正確）；桌機 Logo 首頁入口與服務頁籤同列等高，手機／平板維持 Logo＋單列橫向滑動服務選項，服務頁會把作用中頁籤置中
   - 右側 LINE 浮動鈕、回頂鈕、手機底部 LINE 預約列；網站不提供公開電話 CTA，也不顯示「加入我們」
   - 六服務專屬色系由 body theme class 與 CSS variables 串接頁籤及頁面 CTA：冷氣青藍、洗衣機紫、居家清潔琥珀、水塔綠、水管靛藍、漏水青綠
   - **預約表單 modal**（`ldOpenQuote(serviceKey)` 全域函式）：姓名/電話/地址/服務卡片/日期時段，送出 → `POST /api/leads` 寫入灰汰郎 D1 → 取得 `HTL-L-*` 線索編號 → 組訊息 → `line.me/R/oaMessage/@478xvlgl/?<encoded>` 開 LINE 預填；API 失敗時不開 LINE，避免需求未落案
@@ -139,6 +272,14 @@ cases/
 - 修改後驗證慣例：`node --check header.js`；以 Node 驗證 JSON-LD、內部連結、四頁流程與禁止字樣；本機網址受瀏覽器安全政策阻擋時，直接使用正式部署標記與真機驗證，不可繞過安全政策。
 
 ## 5. 進度紀錄（新條目加在最上面）
+
+### 2026-08-24（Codex・灰汰郎 UI/UX 結構優化）
+- 分支 `codex/ui-polish-gray-wolf-2026-08-24`，基準 `main@ba0dc95`；與公開範圍 draft PR #3 分開施工，**本輪不合併、不切 Pages Source**。
+- `header.js`：1023px 以下的六服務導覽由 3×2 改為單列橫向滑動，保留 44px 觸控高度、`aria-current="page"`，並讓服務頁的作用中頁籤自動置中；手機 Header 實測由約 172px 降到 `114.8px`，固定底部 CTA 保留。
+- `index.html`／`assets/site-unified.css`：首頁重複的六張通用流程卡整併為「確認範圍／安全準備／分區處理／復原驗收」四階段，原本的斷電、關水電、環境保護、整理與成果測試資訊均保留；六服務卡與三張圖片流程卡不動。
+- 服務卡說明、價格、按鈕、承諾文字與 Footer 連結提升至至少 14px；服務卡按鈕、Footer 連結、回頂按鈕補到至少 44px，並把兩處不明確的 transition 改為指定屬性。
+- `DESIGN.md` 同步更新手機導覽與首頁四階段規則。未新增或變更價格、LINE、電話、GA4、服務地區、案例、圖片與其他對外營運事實。
+- 驗證：`validate-site.mjs` 新增「手機導覽單列可滑動＋44px」與「首頁恰為四階段」斷言；故意改成 `overflow-x:visible` 並移除 compact class 時正確回報 2 項失敗、exit 1，還原後全綠。`node --check header.js`、完整 validate（22 頁／33 sitemap 網址）、`node scripts/inspect-header.mjs`、`git diff --check` 均通過。瀏覽器實測 375×812／768×900／1440×1000：無水平溢位；Header 分別 `114.8px`／`116.8px`／`78.8px`；中間服務頁籤置中誤差 `0px`；首頁流程手機 1 欄、平板 2 欄、桌機 4 欄；預約 modal 開關正常且未送出資料；console 0 error／0 warning。
 
 ### 2026-08-21（Codex・Pages 部署門禁 PR）
 
@@ -544,7 +685,7 @@ GSC 存取：`leakdoctor.tw` 與 `blossomkids.tw` 皆已驗證，共用驗證碼
 3. **LINE 連結不可隨意替換**：業主有多個事業（露涼社等）各有自己的 LINE。曾把露涼社連結誤換到全站（未推送即攔下）。**換任何 lin.ee 連結前必須向業主確認該連結屬於灰汰郎。**
 4. 價格改動同步點：頁面價目表、JSON-LD Offer、llms.txt、首頁服務卡、`header.js` 的 `SERVICE_DETAIL_CATALOG`、`data/service-options.json`。
 5. 雲端 session 容器會被回收：**成果要盡早 commit+push**，別累積大量未提交修改。
-6. `.ld-tab` 目前應為 6 個主服務項目；首頁由 Logo 返回，居家知識是 header 次要入口。桌機 6 欄，手機 3 欄 × 2 列。
+6. `.ld-tab` 目前應為 6 個主服務項目；首頁由 Logo 返回，居家知識是 header 次要入口。桌機 6 欄；1023px 以下是可橫向滑動的單列，服務頁需維持作用中頁籤置中。不要恢復 3×2，否則手機固定 Header 會重新佔掉約 172px。
 7. 第二層 `.service-toc` 不可再用所有內容區塊的 `offsetTop` 做 scroll-spy：第三層會把非作用中區塊設為 `hidden`，其 offset 不可靠。第二層與第三層狀態統一由 `initServiceLayerTabs()` 管理。
 
 ## 7. 待辦清單
@@ -570,6 +711,7 @@ GSC 存取：`leakdoctor.tw` 與 `blossomkids.tw` 皆已驗證，共用驗證碼
 
 ### 🟠 高價值，AI 可做
 - [x] **前台轉換 P0**：地址選填、機型數量收合、首頁／手機雙 CTA、`line_direct_click`、手機 Header CLS 與六服務卡配色已於 2026-07-19 完成。
+- [x] **2026-08-24 UI/UX 結構補強**：手機／平板導覽單列滑動、首頁流程六併四、服務卡／Footer 字級與 44px 操作區已完成於 draft PR，待 Claude／Manus 審查及使用者同意後才可合併。
 - [ ] **前台優化 P1–P3 — 依 `docs/FRONTEND-REVIEW-2026-07-16.md` 排序**：P1 信任地基（真實評價、清洗保固、商業模式敘事、可開發票、首屏效能）→ P2 內容對等（cases/team/knowledge 清潔素材、水塔水管價錨案例、漏水文章漏斗、地理統一）→ P3 精修。業主定案 A／B 收費與保固口徑為必守準據。
 - [x] **廣告投放前視覺改版 P1**：首頁＋冷氣／洗衣機／抓漏首屏、DESIGN.md、流程示意與知識型 OG；2026-07-11 已部署並完成正式網址驗證。
 - [ ] **視覺改版 P2**：延伸至居家清潔、地區、案例、百科與文章頁；建立真實案例／流程示意的圖片標示規格
