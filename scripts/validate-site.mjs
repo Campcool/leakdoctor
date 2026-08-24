@@ -181,17 +181,88 @@ for (const f of htmlFiles) {
 if (a11yFail === 0) ok('無障礙結構：全部正式頁面 main landmark + section 皆可識別（region）');
 
 // ── 4d. 手機導覽與首頁流程結構 ──────────────────────────────
-const mobileNavChecks = [
-  ['@media(max-width:1023px)', '1023px 以下斷點'],
-  ['display:flex;overflow-x:auto', '單列橫向滑動'],
-  ['scroll-snap-align:center', '服務頁籤置中'],
-  ['min-height:44px', '44px 觸控高度'],
-  ['aria-label="主要服務"', '主導覽名稱'],
-  ['aria-current="page"', '作用中頁面狀態'],
-];
-const missingMobileNav = mobileNavChecks.filter(([needle]) => !headerJs.includes(needle)).map(([, label]) => label);
-if (missingMobileNav.length) report('手機六服務導覽缺少：' + missingMobileNav.join('、') + '（應維持單列可滑動與 44px 觸控區）');
-else ok('手機六服務導覽：6 項單列可滑動、作用中頁籤置中、觸控高度至少 44px');
+// 初版這條斷言只做 headerJs.includes(字串) 的存在檢查，攔不住真實回歸：
+// 2026-08-24 突變測試中，把 .ld-tab 的觸控區改成 30px、用 !important 壓到 28px、
+// 用 !important 關掉橫向捲動，三者全部放行——因為 min-height:44px 在 header.js
+// 出現 6 次、分散在 6 個不相干的選擇器，改一處其他 5 處仍讓斷言通過。
+// 而且純排版（media query 加空白）會誤殺。
+// 現在改為：先切出 1023px 以下的 media 區塊，再從區塊內解析出實際數值來比對。
+const MOBILE_NAV_MIN_TOUCH = 44;
+const MOBILE_NAV_BREAKPOINT = 1023;
+const mobileNavIssues = [];
+let ldTabMinHeight = null;
+let serviceTabCount = 0;
+
+// header.js 的 tabs 陣列就是導覽項目的單一來源，直接數它，不要寫死 6
+const tabsArray = headerJs.match(/const\s+tabs\s*=\s*\[([\s\S]*?)\];/);
+serviceTabCount = tabsArray ? (tabsArray[1].match(/\{\s*id\s*:/g) || []).length : 0;
+if (serviceTabCount === 0) mobileNavIssues.push('找不到 tabs 陣列，無法確認導覽項目數');
+
+// 收集「所有」會在手機生效的斷點（max-width <= 1023），不能只看 1023 那一個——
+// 較窄的斷點（例如 420px）同樣會套用，可以在那裡用 !important 把觸控區壓小。
+const mobileBlocks = [];
+const mediaRe = /@media\s*\(\s*max-width\s*:\s*(\d+)px\s*\)\s*\{/g;
+let mm;
+while ((mm = mediaRe.exec(headerJs)) !== null) {
+  const bp = Number(mm[1]);
+  if (bp > MOBILE_NAV_BREAKPOINT) continue;
+  let depth = 0, i = headerJs.indexOf('{', mm.index), end = -1;
+  for (let j = i; j < headerJs.length; j++) {
+    if (headerJs[j] === '{') depth++;
+    else if (headerJs[j] === '}' && --depth === 0) { end = j; break; }
+  }
+  if (end !== -1) mobileBlocks.push({ bp, css: headerJs.slice(i + 1, end) });
+}
+
+if (!mobileBlocks.length) {
+  mobileNavIssues.push('找不到任何 max-width <= ' + MOBILE_NAV_BREAKPOINT + 'px 的斷點區塊');
+} else {
+  const allCss = mobileBlocks.map((b) => b.css).join('\n');
+
+  const navRule = allCss.match(/\.ld-nav\s*\{([^}]*)\}/);
+  if (!navRule) mobileNavIssues.push('手機斷點內找不到 .ld-nav 規則');
+  else {
+    if (!/overflow-x\s*:\s*auto/.test(navRule[1])) mobileNavIssues.push('.ld-nav 未設 overflow-x:auto（服務項無法單列滑動）');
+    if (!/display\s*:\s*flex/.test(navRule[1])) mobileNavIssues.push('.ld-nav 未設 display:flex');
+  }
+
+  // 逐個斷點蒐集 .ld-tab 的 min-height，取最小值——任何一個斷點壓低都算不合格
+  const tabRules = [];
+  for (const b of mobileBlocks) {
+    for (const m of b.css.matchAll(/\.ld-tab\s*\{([^}]*)\}/g)) tabRules.push({ bp: b.bp, css: m[1] });
+  }
+  if (!tabRules.length) mobileNavIssues.push('手機斷點內找不到 .ld-tab 規則');
+  else {
+    let worst = null;
+    for (const r of tabRules) {
+      const h = (r.css.match(/min-height\s*:\s*([\d.]+)px/) || [])[1];
+      if (h === undefined) continue;
+      if (worst === null || Number(h) < worst.h) worst = { h: Number(h), bp: r.bp };
+    }
+    ldTabMinHeight = worst ? worst.h : null;
+    if (ldTabMinHeight === null) mobileNavIssues.push('.ld-tab 未宣告 min-height');
+    else if (ldTabMinHeight < MOBILE_NAV_MIN_TOUCH) {
+      mobileNavIssues.push('.ld-tab 在 ' + worst.bp + 'px 斷點的觸控高度僅 ' + ldTabMinHeight + 'px（應至少 ' + MOBILE_NAV_MIN_TOUCH + 'px）');
+    }
+    if (!tabRules.some((r) => /scroll-snap-align\s*:\s*center/.test(r.css))) mobileNavIssues.push('.ld-tab 未設 scroll-snap-align:center（作用中頁籤無法置中）');
+  }
+  const hidden = mobileBlocks.find((b) => /\.ld-nav\s*\{[^}]*overflow-x\s*:\s*hidden/.test(b.css) || /overflow-x\s*:\s*hidden/.test(b.css));
+  if (hidden) mobileNavIssues.push(hidden.bp + 'px 斷點內有 overflow-x:hidden，會關掉橫向滑動');
+}
+
+if (!/aria-label="主要服務"/.test(headerJs)) mobileNavIssues.push('導覽缺 aria-label="主要服務"');
+if (!/aria-current="page"/.test(headerJs)) mobileNavIssues.push('作用中頁籤缺 aria-current="page"');
+// 置中改用 scrollIntoView 由瀏覽器處理版面時機；用 scrollLeft 算式會在載入時算出 0
+if (!/scrollIntoView\(\s*\{[^}]*inline\s*:\s*['"]center['"]/.test(headerJs)) {
+  mobileNavIssues.push('作用中頁籤未用 scrollIntoView({inline:"center"}) 捲入（scrollLeft 算式在載入時會算出 0）');
+}
+
+if (mobileNavIssues.length) report('手機服務導覽：' + mobileNavIssues.join('；'));
+else ok('手機服務導覽：tabs 陣列 ' + serviceTabCount + ' 個服務；掃描 header.js 內 '
+  + mobileBlocks.length + ' 個 max-width<=' + MOBILE_NAV_BREAKPOINT + 'px 斷點（'
+  + mobileBlocks.map((b) => b.bp).join('／') + 'px）：.ld-nav 為 flex+overflow-x:auto、'
+  + '.ld-tab min-height 最小值 ' + ldTabMinHeight + 'px（下限 ' + MOBILE_NAV_MIN_TOUCH + '）、'
+  + 'scroll-snap-align:center、aria-label／aria-current 齊備、置中使用 scrollIntoView');
 
 const indexHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const compactFlow = indexHtml.match(/<section class="service-flow service-flow--compact"[\s\S]*?<\/section>/);

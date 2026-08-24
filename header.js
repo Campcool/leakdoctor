@@ -738,14 +738,50 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
 
   document.body.insertAdjacentHTML('afterbegin', html);
 
+  // 手機導覽是單列橫向滑動，六個服務放不進一個畫面，所以要把「目前所在的服務」捲進可視範圍。
+  //
+  // 為什麼不用 nav.scrollLeft = offsetLeft - ...：
+  // 那條算式本身沒錯，但在 insertAdjacentHTML 之後的第一個 requestAnimationFrame 裡，
+  // 版面尚未定案，offsetLeft／clientWidth 還不是最終值，算出來是 0；而且之後除了 resize
+  // 沒有任何補算機制。2026-08-24 實測三個服務頁載入後 scrollLeft 全為 0，
+  // 漏水檢測頁的作用中頁籤完全在畫面外（誤差 439px）。
+  //
+  // 改用 scrollIntoView 由瀏覽器自行處理版面時機，並在 load 與字體載入完成後各補一次
+  // （字體換掉會改變頁籤寬度，位置要重算）。
+  let userScrolledNav = false;
   function centerActiveServiceTab(){
     const nav = document.querySelector('.ld-nav');
     const activeTab = nav && nav.querySelector('.ld-active');
     if(!nav || !activeTab || window.innerWidth >= 1024) return;
-    nav.scrollLeft = Math.max(0, activeTab.offsetLeft - (nav.clientWidth - activeTab.offsetWidth) / 2);
+    if(nav.scrollWidth <= nav.clientWidth) return;           // 放得下就不用捲
+    activeTab.scrollIntoView({ block:'nearest', inline:'center' });
   }
-  requestAnimationFrame(centerActiveServiceTab);
-  window.addEventListener('resize', centerActiveServiceTab);
+  function centerIfUntouched(){
+    if(userScrolledNav) return;                              // 使用者自己捲過就不要搶回去
+    centerActiveServiceTab();
+  }
+  requestAnimationFrame(() => requestAnimationFrame(centerActiveServiceTab));
+  window.addEventListener('load', centerIfUntouched);
+  if(document.fonts && document.fonts.ready){
+    document.fonts.ready.then(centerIfUntouched).catch(() => {});
+  }
+  (function bindNavScrollGuards(){
+    const nav = document.querySelector('.ld-nav');
+    if(!nav) return;
+    // 只認使用者自己的操作（滑動／滾輪／鍵盤方向鍵），程式捲動不算
+    ['pointerdown','touchstart','wheel','keydown'].forEach(evt => {
+      nav.addEventListener(evt, () => { userScrolledNav = true; }, { passive:true });
+    });
+  })();
+  // resize 只在跨過 1024px 斷點時重算；否則手機網址列一收合就會把使用者捲到的位置搶走。
+  let wasMobileNav = window.innerWidth < 1024;
+  window.addEventListener('resize', () => {
+    const isMobileNav = window.innerWidth < 1024;
+    if(isMobileNav === wasMobileNav) return;
+    wasMobileNav = isMobileNav;
+    userScrolledNav = false;                                 // 換版面等於重新開始
+    centerActiveServiceTab();
+  });
 
   const mergedLeakTargets = {
     cases:'cases-carousel', team:'team-carousel', areas:'service-area',
