@@ -303,42 +303,55 @@ const MODAL_MIN_FONT = 14;
 const MODAL_MIN_TOUCH = 44;
 const modalWidths = [320, 375, 390, 414, 560];
 const modalIssues = [];
-const modalEl = (tag, className, ancestors = ['ld-quote-card']) => ({
-  tag, classes: [className], attrs: {}, ancestors, states: [],
+// 祖先鏈全部取自真實 DOM 實測（開啟 modal → 選服務 → 展開明細 → 新增第二列 → 觸發驗證錯誤，
+// 逐一印出 element.parentElement 鏈）。**不可以憑印象命名**：初版寫成 ld-quote-card，
+// 那個 class 在真實 DOM 根本不存在，導致用真實祖先寫的規則被放行（假綠）、
+// 用虛構祖先寫的反被攔截（假紅）。改動這份清單前先重量一次 DOM。
+const MODAL_ROOT = ['ld-show', 'service-page'];
+const D_SECTION = ['ld-detail-section', ...MODAL_ROOT];
+const D_ROW = ['ld-detail-row', 'ld-detail-list', ...D_SECTION];
+const modalEl = (tag, classes, ancestors) => ({
+  tag,
+  classes: Array.isArray(classes) ? classes : [classes],
+  attrs: {}, ancestors, states: [],
 });
 const modalTextTargets = [
-  ['表單標題', modalEl('div', 'ld-q-title')],
-  ['表單說明', modalEl('div', 'ld-q-sub')],
-  ['欄位標籤', modalEl('label', 'ld-q-label')],
-  ['服務名稱', modalEl('span', 'ld-service-choice-label')],
-  ['明細開關', modalEl('button', 'ld-detail-toggle')],
-  ['明細標題', modalEl('div', 'ld-detail-title')],
-  ['明細說明', modalEl('div', 'ld-detail-help')],
-  ['明細類型', modalEl('select', 'ld-detail-type')],
-  ['參考價註記', modalEl('div', 'ld-detail-note')],
-  ['明細數量', modalEl('input', 'ld-detail-qty')],
-  ['明細單位', modalEl('span', 'ld-detail-unit')],
-  ['新增明細', modalEl('button', 'ld-add-detail')],
-  ['新增選項', modalEl('button', 'ld-add-option')],
-  ['欄位錯誤', modalEl('div', 'ld-q-err')],
-  ['送出按鈕', modalEl('button', 'ld-q-submit')],
-  ['送出狀態', modalEl('div', 'ld-q-status')],
-  ['送出提示', modalEl('div', 'ld-q-note')],
-  ['隱私聲明', modalEl('div', 'ld-q-privacy')],
+  ['表單標題', modalEl('div', 'ld-q-title', ['ld-q-head', ...MODAL_ROOT])],
+  ['表單說明', modalEl('div', 'ld-q-sub', ['ld-q-head', ...MODAL_ROOT])],
+  ['欄位標籤', modalEl('label', 'ld-q-label', ['ld-q-field', ...MODAL_ROOT])],
+  ['欄位標籤（驗證失敗）', modalEl('label', 'ld-q-label', ['ld-q-field', 'ld-invalid', ...MODAL_ROOT])],
+  ['服務名稱', modalEl('span', 'ld-service-choice-label', ['ld-service-choice', 'ld-service-choices', 'ld-q-field', ...MODAL_ROOT])],
+  ['服務名稱（已選取）', modalEl('span', 'ld-service-choice-label', ['ld-service-choice', 'ld-selected', 'ld-service-choices', 'ld-q-field', ...MODAL_ROOT])],
+  ['明細開關', modalEl('button', 'ld-detail-toggle', MODAL_ROOT)],
+  ['明細標題', modalEl('div', 'ld-detail-title', ['ld-detail-head', ...D_SECTION])],
+  ['明細說明', modalEl('div', 'ld-detail-help', ['ld-detail-head', ...D_SECTION])],
+  ['明細類型', modalEl('select', 'ld-detail-type', ['ld-detail-main', ...D_ROW])],
+  ['參考價註記', modalEl('div', 'ld-detail-note', ['ld-detail-main', ...D_ROW])],
+  ['明細數量', modalEl('input', 'ld-detail-qty', ['ld-qty-control', ...D_ROW])],
+  ['明細單位', modalEl('span', 'ld-detail-unit', D_ROW)],
+  ['新增明細', modalEl('button', 'ld-add-detail', D_SECTION)],
+  ['新增選項', modalEl('button', 'ld-add-option', ['ld-add-menu', ...D_SECTION])],
+  ['欄位錯誤', modalEl('div', 'ld-q-err', ['ld-q-field', 'ld-invalid', ...MODAL_ROOT])],
+  ['送出按鈕', modalEl('button', 'ld-q-submit', MODAL_ROOT)],
+  ['送出狀態', modalEl('div', 'ld-q-status', MODAL_ROOT)],
+  ['送出提示', modalEl('div', 'ld-q-note', MODAL_ROOT)],
+  ['隱私聲明', modalEl('div', 'ld-q-privacy', MODAL_ROOT)],
 ];
 const modalControlTargets = [
-  ['關閉按鈕', modalEl('button', 'ld-q-close')],
-  ['文字輸入', modalEl('input', 'ld-q-input')],
-  ['下拉選單', modalEl('select', 'ld-q-select')],
-  ['服務選項', modalEl('button', 'ld-service-choice')],
-  ['明細開關', modalEl('button', 'ld-detail-toggle')],
-  ['明細類型', modalEl('select', 'ld-detail-type')],
-  ['數量按鈕', modalEl('button', 'ld-qty-btn')],
-  ['數量輸入', modalEl('input', 'ld-detail-qty')],
-  ['移除明細', modalEl('button', 'ld-detail-remove')],
-  ['新增明細', modalEl('button', 'ld-add-detail')],
-  ['新增選項', modalEl('button', 'ld-add-option')],
-  ['送出按鈕', modalEl('button', 'ld-q-submit')],
+  ['關閉按鈕', modalEl('button', 'ld-q-close', ['ld-q-head', ...MODAL_ROOT])],
+  ['文字輸入', modalEl('input', 'ld-q-input', ['ld-q-field', ...MODAL_ROOT])],
+  ['文字輸入（驗證失敗）', modalEl('input', 'ld-q-input', ['ld-q-field', 'ld-invalid', ...MODAL_ROOT])],
+  ['下拉選單', modalEl('select', 'ld-q-select', ['ld-q-row', 'ld-q-field', ...MODAL_ROOT])],
+  ['服務選項', modalEl('button', 'ld-service-choice', ['ld-service-choices', 'ld-q-field', ...MODAL_ROOT])],
+  ['服務選項（已選取）', modalEl('button', ['ld-service-choice', 'ld-selected'], ['ld-service-choices', 'ld-q-field', ...MODAL_ROOT])],
+  ['明細開關', modalEl('button', 'ld-detail-toggle', MODAL_ROOT)],
+  ['明細類型', modalEl('select', 'ld-detail-type', ['ld-detail-main', ...D_ROW])],
+  ['數量按鈕', modalEl('button', 'ld-qty-btn', ['ld-qty-control', ...D_ROW])],
+  ['數量輸入', modalEl('input', 'ld-detail-qty', ['ld-qty-control', ...D_ROW])],
+  ['移除明細', modalEl('button', 'ld-detail-remove', D_ROW)],
+  ['新增明細', modalEl('button', 'ld-add-detail', D_SECTION)],
+  ['新增選項', modalEl('button', 'ld-add-option', ['ld-add-menu', ...D_SECTION])],
+  ['送出按鈕', modalEl('button', 'ld-q-submit', MODAL_ROOT)],
 ];
 
 function modalFontPx(value) {
