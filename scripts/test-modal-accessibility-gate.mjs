@@ -25,6 +25,12 @@ function inject(anchor, cssSnippet) {
   return source.replace(anchor, anchor + '\n  ' + cssSnippet + '\n');
 }
 
+function replaceSource(from, to) {
+  const source = original.toString('utf8');
+  if (!source.includes(from)) throw new Error('Missing source mutation anchor: ' + from);
+  return source.replace(from, to);
+}
+
 const MOBILE_ANCHOR = '@media(max-width:390px){';
 const DESKTOP_ANCHOR = '@media(min-width:640px){';
 const CASES = [
@@ -109,6 +115,27 @@ const CASES = [
     // 門禁若攔它就是誤殺。有效反例必須同時壓 height。
     mutate: () => inject(MOBILE_ANCHOR, '.ld-detail-section .ld-qty-btn{min-height:24px!important}'),
     expectFail: false,
+  },
+  // ── modal focus lifecycle ────────────────────────────────────────────────
+  {
+    name: 'dialog programmatic focus target removed',
+    mutate: () => replaceSource('aria-labelledby="ld-q-title" tabindex="-1"', 'aria-labelledby="ld-q-title"'),
+    expectFail: true,
+  },
+  {
+    name: 'Tab focus trap disabled',
+    mutate: () => replaceSource("if(e.key !== 'Tab') return;", "if(e.key !== 'Tab-disabled') return;"),
+    expectFail: true,
+  },
+  {
+    name: 'opening trigger is no longer remembered',
+    mutate: () => replaceSource('qReturnFocus = document.activeElement', 'qReturnFocus = null'),
+    expectFail: true,
+  },
+  {
+    name: 'focus is no longer restored on close',
+    mutate: () => replaceSource('returnFocus.focus();', 'void returnFocus;'),
+    expectFail: true,
   },
 ];
 

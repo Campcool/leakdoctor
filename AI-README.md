@@ -6,7 +6,26 @@
 > 3. 本檔案是唯一的交接依據，寫給 AI 看：請保持精確、可執行、不留模糊描述。
 > 4. **所有時間戳一律台灣時間（Asia/Taipei, UTC+8）**。
 
-最後更新：2026-08-24（Codex／Claude）— Pages artifact 已合併並切至 GitHub Actions；U5 預約 modal 改善仍為 draft、待另一位 AI 覆審
+最後更新：2026-08-25（Codex）— GitHub Actions runtime 升級分支待審查；U5 預約 modal 已合併
+
+## 2026-08-25 GitHub Actions Node 24 runtime（Codex）
+
+依 GitHub 官方各 Action 的 `action.yml` 實際 runtime，將 workflow 升至 `checkout@v7`、
+`setup-node@v7`、`configure-pages@v6`、`upload-pages-artifact@v5`、`deploy-pages@v5`。
+前四個 JavaScript Action 使用 Node 24；Pages 上傳 Action 為 composite，內部已使用
+`upload-artifact@v7`（Node 24）。網站執行用 Node 版本仍為 22，本輪未改網站內容或對外事實。
+
+同一分支補上預約 modal 的完整焦點生命週期：開啟時保存觸發元素並把焦點移到 dialog，
+Tab／Shift+Tab 留在 18 個可操作元素內循環，Esc／背景點擊／瀏覽器返回關閉後把焦點還給原按鈕。
+`validate-site.mjs` 新增 7 項焦點契約；modal mutation 測試由 14 增至 18 案，18/18 符合預期。
+390×844 無頭 Chrome 實測：開啟焦點為 `ld-quote-card`、Tab 首站為關閉鈕、正反循環皆通過、
+Esc 後焦點回到手機「填單估價」按鈕，body scroll lock 清除，console error 0。
+
+U5 非 modal 字級仍未完成，且不得用全域 `!important` 粗暴放大。2026-08-25 以無頭 Chrome
+掃描 20 個根頁面、390px 與 1440px，得到 366 個「頁寬／選擇器／實算字級」低於 14px 的
+可見文字組合；其中混有正文、按鈕、footer 與儀器示意圖 3.5–6px 的裝飾刻度。下一階段須先分成
+正文／控制項／裝飾標記，再以頁面群分批修正與目視回歸。`fonts.ready` 的可見跳動仍未經真實手機
+驗證；本輪無實機，沒有以無頭瀏覽器冒充。
 
 ## 2026-08-24 Pages artifact 公開範圍收斂（Codex）
 
