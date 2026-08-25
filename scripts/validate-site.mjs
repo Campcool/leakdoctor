@@ -297,6 +297,92 @@ else ok('手機服務導覽（依 CSS cascade 實算，非字串比對）：tabs
   + '；.ld-nav 各寬度 display:flex 且 overflow-x 可捲、作用中頁籤 scroll-snap-align:center、'
   + 'aria-label／aria-current 齊備、置中使用 scrollIntoView');
 
+// ── 4e. 預約 modal 可讀性與觸控區 ───────────────────────────
+// 直接沿用 CSS cascade 計算，不再以字串存在與否宣稱「已補到 14/44px」。
+const MODAL_MIN_FONT = 14;
+const MODAL_MIN_TOUCH = 44;
+const modalWidths = [320, 375, 390, 414, 560];
+const modalIssues = [];
+// 祖先鏈全部取自真實 DOM 實測（開啟 modal → 選服務 → 展開明細 → 新增第二列 → 觸發驗證錯誤，
+// 逐一印出 element.parentElement 鏈）。**不可以憑印象命名**：初版寫成 ld-quote-card，
+// 那個 class 在真實 DOM 根本不存在，導致用真實祖先寫的規則被放行（假綠）、
+// 用虛構祖先寫的反被攔截（假紅）。改動這份清單前先重量一次 DOM。
+const MODAL_ROOT = ['ld-show', 'service-page'];
+const D_SECTION = ['ld-detail-section', ...MODAL_ROOT];
+const D_ROW = ['ld-detail-row', 'ld-detail-list', ...D_SECTION];
+const modalEl = (tag, classes, ancestors) => ({
+  tag,
+  classes: Array.isArray(classes) ? classes : [classes],
+  attrs: {}, ancestors, states: [],
+});
+const modalTextTargets = [
+  ['表單標題', modalEl('div', 'ld-q-title', ['ld-q-head', ...MODAL_ROOT])],
+  ['表單說明', modalEl('div', 'ld-q-sub', ['ld-q-head', ...MODAL_ROOT])],
+  ['欄位標籤', modalEl('label', 'ld-q-label', ['ld-q-field', ...MODAL_ROOT])],
+  ['欄位標籤（驗證失敗）', modalEl('label', 'ld-q-label', ['ld-q-field', 'ld-invalid', ...MODAL_ROOT])],
+  ['服務名稱', modalEl('span', 'ld-service-choice-label', ['ld-service-choice', 'ld-service-choices', 'ld-q-field', ...MODAL_ROOT])],
+  ['服務名稱（已選取）', modalEl('span', 'ld-service-choice-label', ['ld-service-choice', 'ld-selected', 'ld-service-choices', 'ld-q-field', ...MODAL_ROOT])],
+  ['明細開關', modalEl('button', 'ld-detail-toggle', MODAL_ROOT)],
+  ['明細標題', modalEl('div', 'ld-detail-title', ['ld-detail-head', ...D_SECTION])],
+  ['明細說明', modalEl('div', 'ld-detail-help', ['ld-detail-head', ...D_SECTION])],
+  ['明細類型', modalEl('select', 'ld-detail-type', ['ld-detail-main', ...D_ROW])],
+  ['參考價註記', modalEl('div', 'ld-detail-note', ['ld-detail-main', ...D_ROW])],
+  ['明細數量', modalEl('input', 'ld-detail-qty', ['ld-qty-control', ...D_ROW])],
+  ['明細單位', modalEl('span', 'ld-detail-unit', D_ROW)],
+  ['新增明細', modalEl('button', 'ld-add-detail', D_SECTION)],
+  ['新增選項', modalEl('button', 'ld-add-option', ['ld-add-menu', ...D_SECTION])],
+  ['欄位錯誤', modalEl('div', 'ld-q-err', ['ld-q-field', 'ld-invalid', ...MODAL_ROOT])],
+  ['送出按鈕', modalEl('button', 'ld-q-submit', MODAL_ROOT)],
+  ['送出狀態', modalEl('div', 'ld-q-status', MODAL_ROOT)],
+  ['送出提示', modalEl('div', 'ld-q-note', MODAL_ROOT)],
+  ['隱私聲明', modalEl('div', 'ld-q-privacy', MODAL_ROOT)],
+];
+const modalControlTargets = [
+  ['關閉按鈕', modalEl('button', 'ld-q-close', ['ld-q-head', ...MODAL_ROOT])],
+  ['文字輸入', modalEl('input', 'ld-q-input', ['ld-q-field', ...MODAL_ROOT])],
+  ['文字輸入（驗證失敗）', modalEl('input', 'ld-q-input', ['ld-q-field', 'ld-invalid', ...MODAL_ROOT])],
+  ['下拉選單', modalEl('select', 'ld-q-select', ['ld-q-row', 'ld-q-field', ...MODAL_ROOT])],
+  ['服務選項', modalEl('button', 'ld-service-choice', ['ld-service-choices', 'ld-q-field', ...MODAL_ROOT])],
+  ['服務選項（已選取）', modalEl('button', ['ld-service-choice', 'ld-selected'], ['ld-service-choices', 'ld-q-field', ...MODAL_ROOT])],
+  ['明細開關', modalEl('button', 'ld-detail-toggle', MODAL_ROOT)],
+  ['明細類型', modalEl('select', 'ld-detail-type', ['ld-detail-main', ...D_ROW])],
+  ['數量按鈕', modalEl('button', 'ld-qty-btn', ['ld-qty-control', ...D_ROW])],
+  ['數量輸入', modalEl('input', 'ld-detail-qty', ['ld-qty-control', ...D_ROW])],
+  ['移除明細', modalEl('button', 'ld-detail-remove', D_ROW)],
+  ['新增明細', modalEl('button', 'ld-add-detail', D_SECTION)],
+  ['新增選項', modalEl('button', 'ld-add-option', ['ld-add-menu', ...D_SECTION])],
+  ['送出按鈕', modalEl('button', 'ld-q-submit', MODAL_ROOT)],
+];
+
+function modalFontPx(value) {
+  if (value === null) return null;
+  const px = toPx(value);
+  if (px !== null) return px;
+  const rem = /^\s*(-?[\d.]+)rem\s*$/.exec(value);
+  return rem ? Number(rem[1]) * 16 : null;
+}
+
+for (const w of modalWidths) {
+  for (const [label, el] of modalTextTargets) {
+    const font = resolve(cssRules, el, 'font-size', w);
+    const px = modalFontPx(font.value);
+    if (font.uncertain.length) modalIssues.push(w + 'px／' + label + ' 的 cascade 無法判定：' + font.uncertain[0]);
+    else if (px === null) modalIssues.push(w + 'px／' + label + ' 的 font-size 無法換算：' + (font.value ?? '未宣告'));
+    else if (px < MODAL_MIN_FONT) modalIssues.push(w + 'px／' + label + ' 字級 ' + px + 'px（應至少 14px；來自 `' + font.selector + '`）');
+  }
+  for (const [label, el] of modalControlTargets) {
+    const mh = resolve(cssRules, el, 'min-height', w);
+    const h = resolve(cssRules, el, 'height', w);
+    const effective = Math.max(toPx(mh.value) ?? 0, toPx(h.value) ?? 0);
+    if (mh.uncertain.length || h.uncertain.length) modalIssues.push(w + 'px／' + label + ' 的高度 cascade 無法判定');
+    else if (effective < MODAL_MIN_TOUCH) modalIssues.push(w + 'px／' + label + ' 高度下限 ' + effective + 'px（應至少 44px）');
+  }
+}
+
+if (modalIssues.length) report('預約 modal 可讀性／觸控區：' + modalIssues.join('；'));
+else ok('預約 modal（依 CSS cascade 實算）：' + modalWidths.length + ' 個手機寬度 × '
+  + modalTextTargets.length + ' 種文字皆至少 14px，' + modalControlTargets.length + ' 種控制項皆至少 44px');
+
 const indexHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const compactFlow = indexHtml.match(/<section class="service-flow service-flow--compact"[\s\S]*?<\/section>/);
 const compactStepCount = compactFlow ? (compactFlow[0].match(/class="service-step"/g) || []).length : 0;

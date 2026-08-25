@@ -6,15 +6,27 @@
 > 3. 本檔案是唯一的交接依據，寫給 AI 看：請保持精確、可執行、不留模糊描述。
 > 4. **所有時間戳一律台灣時間（Asia/Taipei, UTC+8）**。
 
-最後更新：2026-08-24（Codex／Claude）— UI/UX 與 U4 cascade 門禁已合併；Pages artifact 公開範圍收斂仍待合併與 Source 切換
+最後更新：2026-08-24（Codex／Claude）— Pages artifact 已合併並切至 GitHub Actions；U5 預約 modal 改善仍為 draft、待另一位 AI 覆審
 
 ## 2026-08-24 Pages artifact 公開範圍收斂（Codex）
 
-實測 `https://leakdoctor.tw/AI-README.md` 為 HTTP 200。新增
+修正前實測 `https://leakdoctor.tw/AI-README.md` 為 HTTP 200。新增
 `scripts/prepare-pages-artifact.sh`，PR check 與 deploy 都以明確公開白名單建立 `_site`；
-未列入白名單的維護文件、廣告投放資料與品牌素材封裝預設不發佈。本 PR 只改 Actions artifact 內容；
-本站 Pages `build_type` 目前仍為 `legacy`，因此合併後線上發佈內容不會改變，必須另外把
-Pages Source 切到 GitHub Actions 才會生效。本輪未改價格、電話、LINE、服務區、GA4、案例或網站內容。
+未列入白名單的維護文件、廣告投放資料與品牌素材封裝預設不發佈。artifact PR #3 已合併，
+Pages Source 已由 `legacy` 切為 `workflow`；首頁 bytes／SHA256 與切換前一致，交接文件、廣告資料與
+`data/service-options.json` 實測 404，網站使用的 `cases.json`／`data/leak-guide.json` 維持 200。
+本輪未改價格、電話、LINE、服務區、GA4、案例或網站內容。
+
+## 2026-08-24 U5 預約 modal 可讀性與觸控區
+
+- 本輪只處理預約 modal，不宣稱全站小字已清完；`.footer-copy` 等非 modal 項目仍留在後續矩陣。
+- 18 類 modal 文字在 320／375／390／414／560px 均至少 14px，包含隱私聲明與參考價註記。
+- 12 類可操作元件的實際高度下限至少 44px，包含關閉、服務選項、機型、數量、新增／移除與送出按鈕。
+- `scripts/validate-site.mjs` 直接使用 `scripts/css-cascade.mjs` 的 `resolve()` 計算生效宣告；`scripts/test-modal-accessibility-gate.mjs` 注入 7 種變異，結果 7/7 符合預期。
+- 瀏覽器實測上述五個寬度：可見文字無低於 14px、可操作元件無低於 44px、文件與 modal 水平溢位皆 0。320px 的機型／數量列另改為兩列配置，避免下拉文字被擠到只剩一字。
+- `css-cascade.mjs` 只在規則真的宣告受測屬性時才把不支援的 selector 記為不確定；既有手機導覽 mutation test 仍為 13/13。
+- 未修改價格、LINE、電話、GA4、服務範圍、案例或照片。
+- **`fonts.ready` 的可見跳動仍無實體手機驗證；桌面瀏覽器響應式測試不算實機。**
 
 ## 2026-08-24 Claude 審查後追加修正（四項）
 
@@ -142,9 +154,8 @@ CI 只跑 `setup-node` + `node`，不能引外部套件），實際解析 `heade
 
 ### 本輪未處理（留給後續）
 
-- **U5（已裁決為獨立高優先 PR，不併入本次小修）**：全站仍 36 處字級 < 14px、11 處 < 12px。
-  **優先順序：預約 modal** —— 隱私聲明 11.84px、價格註記「參考價 $1,499／台」11.04px、
-  核心控制項 13/28 不足 44px；之後才做全站 30+ 頁的字級與觸控矩陣。`.footer-copy` 仍 11.5px。
+- **U5 後續矩陣**：預約 modal 已由獨立分支處理；全站其餘小字與觸控區仍需逐頁盤點，
+  `.footer-copy` 目前仍 11.5px。不可把本輪 modal 門禁誤寫成「全站已完成」。
 - 手機導覽的捲軸被完全隱藏，可發現性靠第 4 個頁籤露出一角，無漸層或箭頭等明確提示。
 - **`fonts.ready` 在實體手機上是否有可見跳動：未驗。** 本輪只有無頭／桌面 Chromium，
   沒有實體手機可測。**不得因為桌面測起來正常就宣稱已驗證。**

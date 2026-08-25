@@ -283,11 +283,11 @@ export function resolve(rules, el, prop, viewportWidth) {
     const mm = mediaMatches(r.media, viewportWidth);
     if (mm === false) continue;
     if (mm === null) { uncertain.push('無法判定的 media 條件：' + r.media.join(' and ')); continue; }
+    const d = [...r.decls].reverse().find((x) => x.prop === prop);
+    if (!d) continue;
     const sm = selectorMatches(r.selector, el);
     if (sm === false) continue;
     if (sm === 'maybe') uncertain.push('無法判定的選擇器：' + r.selector);
-    const d = [...r.decls].reverse().find((x) => x.prop === prop);
-    if (!d) continue;
     const cand = { value: d.value, selector: r.selector, important: d.important, media: r.media, spec: specificity(r.selector), order: r.order };
     if (!win) { win = cand; continue; }
     if (cand.important !== win.important) { if (cand.important) win = cand; continue; }
