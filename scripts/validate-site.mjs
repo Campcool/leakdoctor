@@ -383,6 +383,23 @@ if (modalIssues.length) report('預約 modal 可讀性／觸控區：' + modalIs
 else ok('預約 modal（依 CSS cascade 實算）：' + modalWidths.length + ' 個手機寬度 × '
   + modalTextTargets.length + ' 種文字皆至少 14px，' + modalControlTargets.length + ' 種控制項皆至少 44px');
 
+// ── 4f. 預約 modal 焦點生命週期 ─────────────────────────────
+// role="dialog"／aria-modal 只提供語意；若開啟時焦點仍在背景、Tab 可跑出
+// overlay，鍵盤與螢幕閱讀器使用者仍無法可靠操作。
+const modalFocusChecks = [
+  ['dialog 可由程式聚焦', /id="ld-quote-card"[^>]*\btabindex="-1"/],
+  ['開啟前保存觸發元素', /qReturnFocus\s*=\s*document\.activeElement/],
+  ['開啟後把焦點移入 dialog', /requestAnimationFrame\(focusQuoteCard\)/],
+  ['Tab 鍵啟用 focus trap', /e\.key\s*!==\s*['"]Tab['"]/],
+  ['Shift+Tab 從首項循環到末項', /e\.shiftKey[\s\S]{0,240}last\.focus\(\)/],
+  ['Tab 從末項或 dialog 外循環到首項', /!e\.shiftKey\s*&&\s*\(document\.activeElement\s*===\s*last\s*\|\|\s*!qCard\.contains\(document\.activeElement\)\)[\s\S]{0,160}first\.focus\(\)/],
+  ['焦點清單排除 hidden input 與 CSS 隱藏元素', /el\.type\s*!==\s*['"]hidden['"][\s\S]{0,160}el\.offsetParent\s*!==\s*null/],
+  ['關閉後把焦點還給觸發元素', /returnFocus\.focus\(\)/],
+];
+const missingModalFocus = modalFocusChecks.filter(([, pattern]) => !pattern.test(headerJs)).map(([label]) => label);
+if (missingModalFocus.length) report('預約 modal 焦點管理缺失：' + missingModalFocus.join('、'));
+else ok('預約 modal 焦點管理：開啟移入、Tab/Shift+Tab 循環、關閉還原共 ' + modalFocusChecks.length + ' 項');
+
 const indexHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const compactFlow = indexHtml.match(/<section class="service-flow service-flow--compact"[\s\S]*?<\/section>/);
 const compactStepCount = compactFlow ? (compactFlow[0].match(/class="service-step"/g) || []).length : 0;

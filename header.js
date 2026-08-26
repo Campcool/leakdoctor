@@ -659,7 +659,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
       </div>
     </div>
     <div id="ld-quote-overlay">
-      <div id="ld-quote-card" role="dialog" aria-modal="true" aria-labelledby="ld-q-title">
+      <div id="ld-quote-card" role="dialog" aria-modal="true" aria-labelledby="ld-q-title" tabindex="-1">
         <div class="ld-q-head">
           <div>
             <div class="ld-q-title" id="ld-q-title">LINE 預約估價</div>
@@ -1012,6 +1012,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
 
   // ── 快速預約表單 ──
   const qOverlay = document.getElementById('ld-quote-overlay');
+  const qCard = document.getElementById('ld-quote-card');
   const qForm = document.getElementById('ld-q-form');
   const qDate = document.getElementById('ld-q-date');
   const qService = document.getElementById('ld-q-service');
@@ -1120,14 +1121,34 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   }
   let qHistoryOpen = false;
   let qPendingNavigation = '';
+  let qReturnFocus = null;
+  function quoteFocusable(){
+    if(!qCard) return [];
+    return Array.from(qCard.querySelectorAll('button, input, select, textarea, a[href], [tabindex]')).filter(function(el){
+      return !el.disabled && el.type !== 'hidden' && el.tabIndex >= 0 && el.offsetParent !== null
+        && !el.closest('[hidden]') && el.getAttribute('aria-hidden') !== 'true';
+    });
+  }
+  function focusQuoteCard(){
+    if(!qCard || !qOverlay || !qOverlay.classList.contains('ld-show')) return;
+    try{ qCard.focus({preventScroll:true}); }
+    catch(error){ qCard.focus(); }
+  }
   function hideQuote(){
     if(!qOverlay) return;
     qOverlay.classList.remove('ld-show');
     document.body.style.overflow = '';
+    const returnFocus = qReturnFocus;
+    qReturnFocus = null;
+    if(returnFocus && document.contains(returnFocus) && typeof returnFocus.focus === 'function'){
+      requestAnimationFrame(function(){ returnFocus.focus(); });
+    }
   }
 
   window.ldOpenQuote = function(serviceKey){
     if(!qOverlay) return;
+    const wasOpen = qOverlay.classList.contains('ld-show');
+    if(!wasOpen) qReturnFocus = document.activeElement;
     const preset = (serviceKey && PAGE_SERVICE[serviceKey]) || PAGE_SERVICE[page] || '';
     if(preset) selectService(preset);
     if(!isLineWebView && !qOverlay.classList.contains('ld-show')){
@@ -1142,6 +1163,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
     }
     qOverlay.classList.add('ld-show');
     document.body.style.overflow = 'hidden';
+    if(!wasOpen) requestAnimationFrame(focusQuoteCard);
     ldTrack('quote_open', { service: serviceKey || page, page: location.pathname });
   };
 
@@ -1170,7 +1192,28 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
     });
   }
   document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape') ldCloseQuote();
+    if(!qOverlay || !qOverlay.classList.contains('ld-show')) return;
+    if(e.key === 'Escape'){
+      e.preventDefault();
+      ldCloseQuote();
+      return;
+    }
+    if(e.key !== 'Tab') return;
+    const focusable = quoteFocusable();
+    if(!focusable.length){
+      e.preventDefault();
+      focusQuoteCard();
+      return;
+    }
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if(e.shiftKey && (document.activeElement === first || !qCard.contains(document.activeElement))){
+      e.preventDefault();
+      last.focus();
+    }else if(!e.shiftKey && (document.activeElement === last || !qCard.contains(document.activeElement))){
+      e.preventDefault();
+      first.focus();
+    }
   });
 
   function setFieldValid(id, valid){
