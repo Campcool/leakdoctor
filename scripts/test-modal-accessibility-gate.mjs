@@ -128,6 +128,22 @@ const CASES = [
     expectFail: true,
   },
   {
+    name: 'Tab from outside the dialog is no longer trapped',
+    mutate: () => replaceSource(
+      "document.activeElement === last || !qCard.contains(document.activeElement)",
+      'document.activeElement === last',
+    ),
+    expectFail: true,
+  },
+  {
+    name: 'hidden controls are no longer excluded from the focus list',
+    mutate: () => replaceSource(
+      "!el.disabled && el.type !== 'hidden' && el.tabIndex >= 0 && el.offsetParent !== null",
+      '!el.disabled && el.tabIndex >= 0',
+    ),
+    expectFail: true,
+  },
+  {
     name: 'opening trigger is no longer remembered',
     mutate: () => replaceSource('qReturnFocus = document.activeElement', 'qReturnFocus = null'),
     expectFail: true,

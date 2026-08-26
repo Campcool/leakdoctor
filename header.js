@@ -1125,7 +1125,8 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   function quoteFocusable(){
     if(!qCard) return [];
     return Array.from(qCard.querySelectorAll('button, input, select, textarea, a[href], [tabindex]')).filter(function(el){
-      return !el.disabled && el.tabIndex >= 0 && !el.closest('[hidden]') && el.getAttribute('aria-hidden') !== 'true';
+      return !el.disabled && el.type !== 'hidden' && el.tabIndex >= 0 && el.offsetParent !== null
+        && !el.closest('[hidden]') && el.getAttribute('aria-hidden') !== 'true';
     });
   }
   function focusQuoteCard(){
@@ -1209,7 +1210,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
     if(e.shiftKey && (document.activeElement === first || !qCard.contains(document.activeElement))){
       e.preventDefault();
       last.focus();
-    }else if(!e.shiftKey && document.activeElement === last){
+    }else if(!e.shiftKey && (document.activeElement === last || !qCard.contains(document.activeElement))){
       e.preventDefault();
       first.focus();
     }

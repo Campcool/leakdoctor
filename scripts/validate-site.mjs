@@ -392,7 +392,8 @@ const modalFocusChecks = [
   ['開啟後把焦點移入 dialog', /requestAnimationFrame\(focusQuoteCard\)/],
   ['Tab 鍵啟用 focus trap', /e\.key\s*!==\s*['"]Tab['"]/],
   ['Shift+Tab 從首項循環到末項', /e\.shiftKey[\s\S]{0,240}last\.focus\(\)/],
-  ['Tab 從末項循環到首項', /document\.activeElement\s*===\s*last[\s\S]{0,160}first\.focus\(\)/],
+  ['Tab 從末項或 dialog 外循環到首項', /!e\.shiftKey\s*&&\s*\(document\.activeElement\s*===\s*last\s*\|\|\s*!qCard\.contains\(document\.activeElement\)\)[\s\S]{0,160}first\.focus\(\)/],
+  ['焦點清單排除 hidden input 與 CSS 隱藏元素', /el\.type\s*!==\s*['"]hidden['"][\s\S]{0,160}el\.offsetParent\s*!==\s*null/],
   ['關閉後把焦點還給觸發元素', /returnFocus\.focus\(\)/],
 ];
 const missingModalFocus = modalFocusChecks.filter(([, pattern]) => !pattern.test(headerJs)).map(([label]) => label);
