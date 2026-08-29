@@ -57,7 +57,7 @@
           "customer_description": "最常見的家用分離式冷氣，室內機掛在牆面。",
           "pricing": {
             "status": "fixed",
-            "base_price": 1499,
+            "base_price": 1599,
             "price_unit": "per_indoor_unit",
             "source": "AI-README.md confirmed price anchor"
           },
@@ -80,7 +80,7 @@
           "customer_description": "室內機藏在天花板內，通常透過出風口送風。",
           "pricing": {
             "status": "fixed",
-            "base_price": 2599,
+            "base_price": 2799,
             "price_unit": "per_indoor_unit",
             "source": "AI-README.md confirmed price anchor"
           },
@@ -146,8 +146,8 @@
           "aliases": ["窗型", "窗口式", "窗戶冷氣", "窗型機"],
           "customer_description": "整台機器安裝在窗戶或牆洞內。",
           "pricing": {
-            "status": "fixed",
-            "base_price": 3000,
+            "status": "quote_required",
+            "base_price": null,
             "price_unit": "per_unit",
             "source": "AI-README.md confirmed price anchor"
           },
@@ -181,7 +181,7 @@
           "customer_description": "上方開蓋的常見家用洗衣機。",
           "pricing": {
             "status": "fixed",
-            "base_price": 1299,
+            "base_price": 1599,
             "price_unit": "per_unit",
             "source": "AI-README.md confirmed price anchor"
           },
@@ -209,7 +209,7 @@
           "customer_description": "前方開門，常見於洗脫烘或歐式洗衣機。",
           "pricing": {
             "status": "fixed",
-            "base_price": 2999,
+            "base_price": 3599,
             "price_unit": "per_unit",
             "source": "AI-README.md confirmed price anchor"
           },

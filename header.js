@@ -16,7 +16,9 @@ function ldInit(){
   const activePage = leakSubPages.indexOf(page) !== -1 ? 'leak-repair' : page;
   const LINE = 'https://lin.ee/WVxmY65';
   const LINE_OA_ID = '@478xvlgl';
-  const LEAD_API = 'https://leakdoctor-bot.a0920077473.workers.dev/api/leads';
+  const BOT_API_BASE = 'https://leakdoctor-bot.a0920077473.workers.dev';
+  const LEAD_API = BOT_API_BASE + '/api/leads';
+  const AVAILABILITY_API = BOT_API_BASE + '/api/service-availability';
   const isLineWebView = /\bLine\//i.test(navigator.userAgent || '');
   if(isLineWebView) document.body.classList.add('ld-line-webview');
   const serviceTheme = ['aircon','washer','homeclean','water-tank','pipe-cleaning','leak-repair'].indexOf(activePage) !== -1 ? activePage : '';
@@ -123,42 +125,42 @@ function ldInit(){
   const PAGE_SERVICE = {aircon:'冷氣清洗', washer:'洗衣機清洗', homeclean:'居家清潔', 'water-tank':'水塔清洗', 'pipe-cleaning':'水管清洗', 'leak-repair':'漏水檢測與修補'};
   const SERVICE_DETAIL_CATALOG = {
     '冷氣清洗': [
-      {id:'aircon-wall',label:'壁掛內機',unit:'台',note:'參考價 $1,499／台'},
-      {id:'aircon-concealed',label:'吊隱式冷氣',unit:'台',note:'參考價 $2,599／台'},
-      {id:'aircon-outdoor',label:'室外機清洗',unit:'台',note:'加購 $500／台'},
-      {id:'aircon-window',label:'窗型冷氣',unit:'台',note:'參考價 $3,000／台'},
-      {id:'aircon-cassette',label:'四方吹／商用冷氣',unit:'台',note:'需照片與現場條件評估'}
+      {id:'aircon-wall',backendId:'wall_mounted_split',label:'壁掛內機',unit:'台',note:'參考價 $1,599／台'},
+      {id:'aircon-concealed',backendId:'ceiling_concealed',label:'吊隱式冷氣',unit:'台',note:'參考價 $2,799／台'},
+      {id:'aircon-outdoor',backendId:'aircon_outdoor_unit',label:'室外機清洗',unit:'台',note:'加購 $500／台'},
+      {id:'aircon-window',backendId:'window_aircon',label:'窗型冷氣',unit:'台',note:'需確認台數與出勤條件'},
+      {id:'aircon-cassette',backendId:'ceiling_cassette_4way',label:'四方吹／商用冷氣',unit:'台',note:'需照片與現場條件評估'}
     ],
     '洗衣機清洗': [
-      {id:'washer-top',label:'直立式洗衣機',unit:'台',note:'參考價 $1,299／台'},
-      {id:'washer-drum',label:'滾筒式洗衣機',unit:'台',note:'參考價 $2,999／台'},
-      {id:'washer-commercial',label:'商用／投幣洗衣機',unit:'台',note:'需型號與照片評估'}
+      {id:'washer-top',backendId:'top_load_washer',label:'直立式洗衣機',unit:'台',note:'參考價 $1,599／台'},
+      {id:'washer-drum',backendId:'front_load_drum_washer',label:'滾筒式洗衣機',unit:'台',note:'參考價 $3,599／台'},
+      {id:'washer-commercial',backendId:'commercial_washer',label:'商用／投幣洗衣機',unit:'台',note:'需型號與照片評估'}
     ],
     '居家清潔': [
-      {id:'home-regular',label:'定期居家清潔',unit:'次',note:'參考價 $2,500／4 小時'},
-      {id:'home-deep',label:'大掃除',unit:'案',note:'參考價 $3,500 起'},
-      {id:'home-move',label:'入住／退租清潔',unit:'案',note:'參考價 $3,000 起'},
-      {id:'home-renovation',label:'裝潢後細清',unit:'案',note:'參考價 $6,000 起'},
-      {id:'home-hood',label:'抽油煙機清潔',unit:'台',note:'依型號與油污程度評估'}
+      {id:'home-regular',backendId:'home_cleaning_4h',label:'定期居家清潔',unit:'次',note:'參考價 $2,500／4 小時'},
+      {id:'home-deep',backendId:'deep_cleaning',label:'大掃除',unit:'案',note:'依範圍個案報價'},
+      {id:'home-move',backendId:'move_out_cleaning',label:'入住／退租清潔',unit:'案',note:'依範圍個案報價'},
+      {id:'home-renovation',backendId:'post_renovation_cleaning',label:'裝潢後細清',unit:'案',note:'依範圍個案報價'},
+      {id:'home-hood',backendId:'range_hood_cleaning',label:'抽油煙機清潔',unit:'台',note:'依型號與油污程度個案報價'}
     ],
     '水塔清洗': [
-      {id:'tank-rooftop',label:'屋頂不鏽鋼／塑膠水塔',unit:'顆',note:'依容量、顆數、通道與停水條件報價'},
-      {id:'tank-concrete-upper',label:'水泥上水塔',unit:'座',note:'需照片、入口尺寸與排水方式評估'},
-      {id:'tank-concrete-lower',label:'地下蓄水池／下水塔',unit:'座',note:'涉及通風與安全條件，需人工確認'},
-      {id:'tank-building',label:'公寓／社區上下水塔',unit:'案',note:'依公告停水、管委會與施工時段報價'}
+      {id:'tank-rooftop',backendId:'rooftop_tank',label:'屋頂不鏽鋼水塔',unit:'顆',note:'參考價 $1,599／顆'},
+      {id:'tank-concrete-upper',backendId:'concrete_upper_tank',label:'水泥上水塔',unit:'座',note:'需照片、入口尺寸與排水方式評估'},
+      {id:'tank-concrete-lower',backendId:'concrete_lower_tank',label:'地下蓄水池／下水塔',unit:'座',note:'涉及通風與安全條件，需人工確認'},
+      {id:'tank-building',backendId:'upper_lower_tanks',label:'公寓／社區上下水塔',unit:'案',note:'依公告停水、管委會與施工時段報價'}
     ],
     '水管清洗': [
-      {id:'pipe-home',label:'住家水管清洗',unit:'戶',note:'依屋齡、管材、出水點與現場條件報價'},
-      {id:'pipe-apartment',label:'公寓／大樓水管清洗',unit:'案',note:'需確認樓層、停水、管線與管委會規範'},
-      {id:'pipe-yellow-water',label:'黃水／異味初步判斷',unit:'處',note:'先傳照片與用水狀況，確認是否適合清洗'},
-      {id:'pipe-low-flow',label:'水量變小檢查',unit:'處',note:'堵塞、鏽蝕或設備問題需先判斷原因'}
+      {id:'pipe-home',backendId:'water_pipe_cleaning_house',label:'透天水管清洗',unit:'戶',note:'參考價 $4,999／戶'},
+      {id:'pipe-apartment',backendId:'water_pipe_cleaning',label:'公寓／大樓水管清洗',unit:'戶',note:'參考價 $3,599／戶'},
+      {id:'pipe-yellow-water',backendId:'water_pipe_cleaning',label:'黃水／異味初步判斷',unit:'處',note:'先傳照片與用水狀況，確認是否適合清洗'},
+      {id:'pipe-low-flow',backendId:'water_pipe_cleaning',label:'水量變小檢查',unit:'處',note:'堵塞、鏽蝕或設備問題需先判斷原因'}
     ],
     '漏水檢測與修補': [
-      {id:'leak-inspection',label:'漏水初步檢測',unit:'處',note:'先依水痕、照片與現場狀況判讀'},
-      {id:'leak-pressure',label:'給水管壓力測試',unit:'區',note:'依管線範圍評估'},
-      {id:'leak-water',label:'排水／防水滿水測試',unit:'區',note:'依測試範圍評估'},
-      {id:'leak-infrared',label:'紅外線／含水率檢測',unit:'區',note:'依現場條件選用儀器'},
-      {id:'leak-repair',label:'漏水修補施工',unit:'處',note:'確認漏點與工法後報價'}
+      {id:'leak-inspection',backendId:'leak_inspection',label:'漏水初步檢測',unit:'處',note:'先依水痕、照片與現場狀況判讀'},
+      {id:'leak-pressure',backendId:'leak_inspection',label:'給水管壓力測試',unit:'區',note:'依管線範圍評估'},
+      {id:'leak-water',backendId:'leak_inspection',label:'排水／防水滿水測試',unit:'區',note:'依測試範圍評估'},
+      {id:'leak-infrared',backendId:'leak_inspection',label:'紅外線／含水率檢測',unit:'區',note:'依現場條件選用儀器'},
+      {id:'leak-repair',backendId:'leak_inspection',label:'漏水修補施工',unit:'處',note:'確認漏點與工法後報價'}
     ],
     '其他（請於下方說明）': [
       {id:'other-request',label:'其他服務需求',unit:'項',note:'請在備註說明需求與現場狀況'}
@@ -825,7 +827,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
     'water-tank':{
       title:'水塔清洗先看三張圖',
       cards:[
-        {tag:'為什麼需要洗',title:'蓄水容器會累積沉積物',text:'屋頂水塔、塑膠水塔、水泥水塔與地下蓄水池，都要先看容量與內部狀況。',image:'/assets/service-story/water-tank-service-story-20260714.webp',fallback:'/assets/service-story/water-tank-service-story-20260714.jpg'},
+        {tag:'為什麼需要洗',title:'蓄水容器會累積沉積物',text:'目前承接屋頂白鐵水塔；先看容量、內部狀況與頂樓通道，再確認是否能安排。',image:'/assets/service-story/water-tank-service-story-20260714.webp',fallback:'/assets/service-story/water-tank-service-story-20260714.jpg'},
         {tag:'怎麼洗',title:'停水、排水、復水要有順序',text:'上下水塔、加壓馬達與排水點會影響施工安排，報價前要先看照片。',image:'/assets/optimized/water-tank-system-sm.webp',fallback:'/assets/optimized/water-tank-system-sm.jpg',fit:'contain',width:733,height:1100},
         {tag:'清洗前後案例',title:'從頂部人孔看內壁與底部',text:'真實服務紀錄呈現內壁與底部沉積清除後的狀況，完工還會確認排水與復水流程。',image:'/cases/water-tank/case01-after.webp',fallback:'/cases/water-tank/case01-after.jpg',width:1200,height:1600}
       ]
@@ -1023,6 +1025,39 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   const qAddDetail = document.getElementById('ld-add-detail');
   const qAddMenu = document.getElementById('ld-add-menu');
   let detailsExpanded = false;
+  let liveAvailableServiceIds = null;
+
+  function serviceIsAvailable(service){
+    if(service === '其他（請於下方說明）') return true;
+    const catalog = SERVICE_DETAIL_CATALOG[service] || [];
+    return !liveAvailableServiceIds || catalog.some(function(item){ return !item.backendId || liveAvailableServiceIds.has(item.backendId); });
+  }
+
+  function applyServiceAvailability(payload){
+    liveAvailableServiceIds = new Set(Array.isArray(payload.serviceIds) ? payload.serviceIds : []);
+    qServiceButtons.forEach(function(btn){
+      const service = btn.getAttribute('data-service') || '';
+      btn.hidden = !serviceIsAvailable(service);
+    });
+    const pageServices = {
+      aircon:['wall_mounted_split','ceiling_concealed','window_aircon','ceiling_cassette_4way','commercial_aircon'],
+      washer:['top_load_washer','front_load_drum_washer','commercial_washer'],
+      homeclean:['home_cleaning_4h','deep_cleaning','move_out_cleaning','post_renovation_cleaning','range_hood_cleaning'],
+      'water-tank':['rooftop_tank','concrete_upper_tank','concrete_lower_tank','upper_lower_tanks'],
+      'pipe-cleaning':['water_pipe_cleaning','water_pipe_cleaning_house'],
+      'leak-repair':['leak_inspection']
+    };
+    Object.keys(pageServices).forEach(function(pageId){
+      const visible = pageServices[pageId].some(function(id){ return liveAvailableServiceIds.has(id); });
+      document.querySelectorAll('.ld-tab--'+pageId).forEach(function(tab){ tab.hidden = !visible; });
+    });
+    if(qService && qService.value && !serviceIsAvailable(qService.value)) selectService('');
+  }
+
+  fetch(AVAILABILITY_API, {headers:{'Accept':'application/json'}})
+    .then(function(response){ if(!response.ok) throw new Error('HTTP '+response.status); return response.json(); })
+    .then(applyServiceAvailability)
+    .catch(function(){ /* API 暫時失敗時保留內容瀏覽與 LINE 直接詢問，不阻斷網站。 */ });
 
   function setDetailsExpanded(expanded){
     detailsExpanded = Boolean(expanded && qDetailList && qDetailList.children.length);
@@ -1034,7 +1069,9 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   }
 
   function detailCatalog(service){
-    return SERVICE_DETAIL_CATALOG[service] || [];
+    const catalog = SERVICE_DETAIL_CATALOG[service] || [];
+    if(!liveAvailableServiceIds) return catalog;
+    return catalog.filter(function(item){ return !item.backendId || liveAvailableServiceIds.has(item.backendId); });
   }
   function updateDetailRow(row, catalog){
     const selected = catalog.find(function(item){ return item.id === row.querySelector('.ld-detail-type').value; }) || catalog[0];
