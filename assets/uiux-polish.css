@@ -1,0 +1,249 @@
+/* 灰汰郎 UI/UX 精修層 — 2026-08-30
+ * 以 DESIGN.md 為準；本檔只做跨頁一致性、RWD、無障礙與互動層級。
+ */
+:root{
+  --ld-ink:#17324d;
+  --ld-ink-deep:#10273b;
+  --ld-orange:#f28c28;
+  --ld-teal:#138a80;
+  --ld-line:#06c755;
+  --ld-paper:#fff;
+  --ld-cream:#fff9f1;
+  --ld-muted:#667680;
+  --ld-border:#dce4e7;
+  --ld-radius-sm:12px;
+  --ld-radius-md:18px;
+  --ld-radius-lg:28px;
+  --ld-shadow-action:0 14px 34px rgba(23,50,77,.12);
+  color-scheme:light;
+}
+
+html{scroll-behavior:smooth}
+body{color:var(--ld-ink-deep);text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit}
+a,button{-webkit-tap-highlight-color:transparent}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{
+  outline:3px solid color-mix(in srgb,var(--service-accent,var(--ld-teal)) 58%,#fff);
+  outline-offset:3px;
+}
+.ld-skip-link{
+  position:fixed;top:8px;left:12px;z-index:10020;
+  padding:.72rem 1rem;border-radius:10px;background:var(--ld-ink-deep);color:#fff;
+  font-size:.9rem;font-weight:900;text-decoration:none;
+}
+.ld-skip-link:not(:focus){width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.ld-skip-link:focus{width:auto;height:auto;clip-path:none}
+
+/* ── 全站固定表頭：品牌是品牌，服務按鈕是服務按鈕 ── */
+#ld-header{
+  background:rgba(255,255,255,.975)!important;
+  border-bottom:1px solid rgba(23,50,77,.13)!important;
+  box-shadow:none!important;
+}
+.ld-brand{border:0!important;background:transparent!important;box-shadow:none!important}
+.ld-logo-img{filter:none!important;object-position:left center}
+.ld-tab{
+  border-color:#d8e2e6!important;
+  background:#fff!important;
+  box-shadow:0 2px 8px rgba(23,50,77,.045)!important;
+}
+.ld-tab::before{
+  content:"";position:absolute;left:14px;right:14px;bottom:-1px;height:3px;border-radius:3px 3px 0 0;
+  background:var(--tab-accent);opacity:0;transform:scaleX(.38);transition:opacity .18s ease,transform .18s ease;
+}
+.ld-tab:hover{transform:translateY(-1px)!important;background:var(--tab-soft)!important;box-shadow:0 9px 22px rgba(23,50,77,.09)!important}
+.ld-tab.ld-active{
+  background:var(--tab-soft)!important;border-color:color-mix(in srgb,var(--tab-accent) 54%,#fff)!important;
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--tab-accent) 10%,transparent),0 8px 22px rgba(23,50,77,.09)!important;
+}
+.ld-tab.ld-active::before{opacity:1;transform:scaleX(1)}
+.ld-tab.ld-active::after{display:none!important}
+.ld-tab.ld-active .ld-tab-label{color:var(--ld-ink)!important}
+.ld-tab.ld-active .ld-tab-icon{color:var(--tab-accent)!important}
+.ld-tab-label{letter-spacing:-.02em}
+
+@media(min-width:1024px){
+  :root{--ld-hdr-h:86px}
+  #ld-header{padding:7px clamp(18px,2.2vw,34px)!important;gap:clamp(18px,2vw,30px)!important}
+  .ld-top{flex-basis:218px!important;width:218px!important;height:71px!important}
+  .ld-logo-img{width:215px!important;max-height:71px!important;transform:scale(1.15);transform-origin:left center}
+  .ld-nav{grid-template-columns:repeat(4,minmax(155px,1fr))!important;max-width:980px!important;gap:10px!important}
+  .ld-tab{height:70px!important;min-height:70px!important;padding:9px 13px!important;border-radius:14px!important}
+  .ld-tab-icon{width:22px!important;height:22px!important}
+  .ld-tab-label{font-size:clamp(15px,1.2vw,17px)!important}
+}
+
+@media(max-width:1023px){
+  #ld-header::after{
+    content:"";position:absolute;right:0;bottom:0;width:22px;height:53px;z-index:4;pointer-events:none;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.96));
+  }
+  .ld-nav{position:relative;padding-right:22px!important}
+  .ld-tab{min-width:112px!important}
+  .ld-tab:last-child{margin-right:5px}
+}
+
+@media(max-width:420px){
+  .ld-top{height:64px!important}
+  .ld-logo-img{width:min(52vw,162px)!important;max-height:60px!important;transform:scale(1.06);transform-origin:left center}
+  .ld-tab{min-width:108px!important;padding-inline:8px!important}
+  .ld-tab--leak-repair{min-width:152px!important}
+  .ld-tab-label{font-size:13.5px!important}
+}
+
+/* ── 內容層級：較少廣告感、較穩定的閱讀節奏 ── */
+.hero-desc,.page-desc,.sec-sub,.section-lead,.service-flow-intro,.knowledge-rail-intro,
+.impact-lead,.svc-desc,.process-card p,.service-step p,.knowledge-card p,.faq-a{
+  max-width:66ch;text-wrap:pretty;
+}
+.hero-h1,.page-title,.hero-h1,.sec-title,.h,.impact-title,.service-flow h2,.knowledge-rail h2{
+  letter-spacing:-.045em;text-wrap:balance;
+}
+.hero-eyebrow,.page-eyebrow,.sec-tag,.section-kicker,.service-flow-kicker,.knowledge-rail-kicker{
+  letter-spacing:.035em!important;
+}
+.svc-card,.process-card,.promise-item,.service-step,.knowledge-card,.pricing-block,.quick-book-panel,.craft-case{
+  border-color:rgba(23,50,77,.13)!important;
+}
+.svc-card,.process-card,.promise-item,.knowledge-card{
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
+.svc-card:hover,.process-card:hover,.promise-item:hover,.knowledge-card:hover{
+  transform:translateY(-3px);box-shadow:var(--ld-shadow-action)!important;
+}
+.svc-card:focus-within,.process-card:focus-within,.promise-item:focus-within,.knowledge-card:focus-within{
+  border-color:var(--service-accent,var(--ld-teal))!important;
+}
+.svc-title,.promise-title,.process-title{letter-spacing:-.025em}
+.svc-actions a,.svc-actions button,.hero-actions a,.hero-actions button,.page-btn,.quick-book-btn,.cta-btn{
+  min-height:48px!important;
+}
+
+/* 首頁：將導覽式卡片和知識內容拉開層級。 */
+#services .services-inner,#service-process .process-inner,#promises .promises-inner{max-width:1180px!important}
+#services .sec-sub{margin-bottom:1.5rem!important}
+.svc-grid{gap:1rem!important}
+.svc-card{border-radius:20px!important;padding:1.2rem!important;background:linear-gradient(180deg,#fff 0%,#fbfcfc 100%)!important}
+.svc-desc{line-height:1.72!important;color:var(--ld-muted)!important}
+.svc-price{display:inline-flex;width:max-content;max-width:100%;border-radius:999px!important;padding:.38rem .7rem!important}
+.process-card{overflow:hidden;border-radius:22px!important}
+.process-body{padding:1.1rem 1.15rem 1.25rem!important}
+.promise-item{border-radius:18px!important}
+footer a,.crumb a{display:inline-flex;align-items:center;min-height:44px}
+
+/* 輪播圓點保留小巧外觀，但實際觸控區達 44px。 */
+.service-story-dots{gap:0!important}
+.service-story-dot{
+  position:relative;width:44px!important;height:44px!important;padding:0!important;background:transparent!important;border:0!important;
+}
+.service-story-dot::after{
+  content:"";position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:999px;background:#cbd5e1;transform:translate(-50%,-50%);
+  transition:width .18s ease,background .18s ease;
+}
+.service-story-dot.is-active::after{width:24px;background:var(--service-accent,var(--ld-teal))}
+.service-story-btn{width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important}
+.cc-prev,.cc-next{width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important}
+.cc-dot{position:relative;width:24px!important;height:44px!important;background:transparent!important;transform:none!important}
+.cc-dot::after{content:"";position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:50%;background:#d1d5db;transform:translate(-50%,-50%)}
+.cc-dot.active::after{width:10px;height:10px;background:var(--service-accent,var(--ld-teal))}
+.faq-q,.pa-btn{min-height:48px!important}
+.price-expand-btn{min-height:44px!important}
+
+/* 服務頁：首屏與各段落使用相同的視覺網格。 */
+body.service-page #page-hero,body.leak-page #hero{position:relative;isolation:isolate}
+body.service-page #page-hero::after,body.leak-page #hero::after{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(circle at 80% 8%,color-mix(in srgb,var(--service-accent,var(--ld-teal)) 9%,transparent),transparent 34%);
+}
+body.service-page .page-hero-inner{max-width:1120px!important;gap:clamp(2rem,5vw,5rem)!important}
+body.service-page .page-desc{font-size:clamp(1rem,1.5vw,1.14rem)!important;line-height:1.85!important}
+body.service-page .trust-badge{box-shadow:none!important;background:rgba(255,255,255,.84)!important}
+body.service-page .service-visual{border-radius:28px!important;overflow:hidden;border:1px solid color-mix(in srgb,var(--service-accent) 24%,#fff)!important;box-shadow:0 22px 50px rgba(23,50,77,.12)!important}
+body.service-page .service-visual-img{border-radius:0!important}
+body.service-page .service-visual-note{left:18px!important;bottom:18px!important;right:auto!important;max-width:min(76%,360px)!important;border:1px solid rgba(255,255,255,.8)!important;box-shadow:0 12px 28px rgba(16,39,59,.16)!important}
+.service-toc{box-shadow:none!important}
+.service-toc a{box-shadow:none!important}
+.service-toc a.is-current{box-shadow:0 6px 16px color-mix(in srgb,var(--service-accent) 20%,transparent)!important}
+.service-step{position:relative;overflow:hidden}
+.service-step::before{
+  content:counter(ld-step,decimal-leading-zero);counter-increment:ld-step;
+  display:block;margin-bottom:.55rem;color:var(--service-accent,var(--ld-teal));font-size:.72rem;font-weight:900;letter-spacing:.08em;
+}
+.service-step-grid{counter-reset:ld-step}
+
+/* 表單：第一眼保留必要資訊；操作元件一致、錯誤和選填更明確。 */
+#ld-quote-overlay{background:rgba(16,39,59,.66)!important;backdrop-filter:blur(5px)}
+#ld-quote-card{max-width:590px!important;border:1px solid rgba(255,255,255,.72);box-shadow:0 26px 80px rgba(16,39,59,.3)!important}
+.ld-q-title{color:var(--ld-ink)!important;font-size:1.28rem!important;letter-spacing:-.03em}
+.ld-q-sub{max-width:46ch;color:var(--ld-muted)!important}
+.ld-optional{display:inline-flex;margin-left:.35rem;padding:.1rem .42rem;border-radius:999px;background:#edf2f3;color:#667680;font-size:.68rem;font-weight:800;vertical-align:.08em}
+.ld-q-input,.ld-q-select{min-height:48px!important;border-color:#cbd7db!important;border-radius:12px!important;transition:border-color .16s ease,box-shadow .16s ease}
+.ld-q-input:focus,.ld-q-select:focus{border-color:var(--service-accent,var(--ld-teal))!important;box-shadow:0 0 0 4px color-mix(in srgb,var(--service-accent,var(--ld-teal)) 12%,transparent)!important;outline:0!important}
+.ld-service-choice{min-height:56px!important;gap:7px!important;padding-inline:9px!important;border-radius:14px!important;box-shadow:none!important;background:#fff!important}
+.ld-service-choice:hover{transform:none!important;box-shadow:0 8px 18px rgba(23,50,77,.08)!important;border-color:var(--service-accent,var(--ld-teal))!important}
+.ld-service-choice.ld-selected{background:var(--ld-ink)!important;border-color:var(--ld-ink)!important}
+.ld-service-choice-icon{width:31px!important;height:31px!important;border-radius:9px!important}
+.ld-service-choice-check{width:16px!important;height:16px!important}
+.ld-service-choice.ld-selected .ld-service-choice-check{border-width:4px!important}
+.ld-q-privacy{border:1px solid #e5ecef;background:#f8fafb!important}
+.ld-q-submit{min-height:52px!important;border-radius:14px!important;box-shadow:0 12px 26px rgba(6,199,85,.25)!important}
+.ld-q-submit:hover{background:#05a848!important}
+
+/* 只保留 LINE 脈衝；其餘持續掃光會分散閱讀注意力。 */
+body.service-page .page-btn::before,body.service-page .mid-cta-btn::before,body.service-page .cta-btn::before,
+body.leak-page .hero-btn::before,body.leak-page .cta-btn::before{animation:none!important;display:none!important}
+
+/* 底部行動列更像一組選擇，而不是兩顆彼此競爭的廣告。 */
+#ld-stickybar{border-top:1px solid rgba(23,50,77,.14)!important;box-shadow:0 -12px 30px rgba(16,39,59,.09)!important}
+.ld-sticky-btn{min-height:48px!important;border-radius:13px!important}
+.ld-sticky-btn--form{border-color:#cbd7db!important}
+
+@media(min-width:860px){
+  .svc-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
+
+@media(max-width:720px){
+  html{scroll-behavior:auto}
+  .headline-line{white-space:normal!important}
+  .hero-h1,.page-title{font-size:clamp(2.15rem,10.4vw,2.75rem)!important;line-height:1.08!important}
+  .hero-desc,.page-desc{font-size:1rem!important;line-height:1.78!important}
+  body.service-page #page-hero{padding:2.25rem 1.15rem 2.7rem!important}
+  body.service-page .page-hero-inner{gap:1.55rem!important}
+  body.service-page .service-visual{border-radius:22px!important;min-height:0!important}
+  body.service-page .service-visual-img{min-height:0!important;height:auto!important;aspect-ratio:16/10!important;background-position:center!important}
+  body.service-page .service-visual-note{display:block!important;position:static!important;max-width:none!important;border:0!important;border-top:1px solid rgba(23,50,77,.1)!important;border-radius:0!important;box-shadow:none!important;padding:.8rem 1rem!important;background:#fff!important}
+  .service-story{padding-inline:.75rem!important}
+  .service-story-track{scroll-padding-inline:0}
+  .service-story-card{border-radius:18px!important}
+  .service-story-copy{padding:1rem!important}
+  .service-toc-inner{scroll-padding-inline:.75rem}
+  .service-toc::before{
+    content:"";position:absolute;right:0;top:0;bottom:0;width:24px;z-index:2;pointer-events:none;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.94));
+  }
+  #ld-quote-card{padding:1.15rem 1.1rem calc(1.25rem + env(safe-area-inset-bottom))!important;border-radius:22px 22px 0 0!important}
+  .ld-q-head{position:sticky;top:-1.15rem;z-index:4;margin:-1.15rem -1.1rem .2rem;padding:1.1rem 1.1rem .75rem;background:rgba(255,255,255,.97);border-bottom:1px solid #edf1f3;backdrop-filter:blur(12px)}
+  .ld-q-sub{font-size:.82rem!important;line-height:1.55!important}
+  .ld-service-choice{min-height:54px!important;padding:8px 10px!important}
+  .ld-service-choice-label{font-size:.82rem!important}
+  .ld-q-row{grid-template-columns:1fr!important}
+  .svc-card{padding:1.08rem!important}
+  .cc-dots{display:none!important}
+}
+
+@media(max-width:390px){
+  .ld-service-choices{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .ld-service-choice:last-child{grid-column:1/-1!important}
+  .ld-service-choice-icon{width:28px!important;height:28px!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto!important}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  #ld-float{animation:none!important}
+}
+
+@media(prefers-contrast:more){
+  .ld-tab,.svc-card,.process-card,.promise-item,.knowledge-card,.service-step{border-color:#667680!important}
+  .hero-desc,.page-desc,.sec-sub,.svc-desc,.service-step p,.knowledge-card p{color:#394b55!important}
+}

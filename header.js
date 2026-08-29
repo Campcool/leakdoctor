@@ -582,6 +582,17 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   style.textContent = css;
   document.head.appendChild(style);
 
+  // 最後載入全站精修層，集中處理視覺、無障礙與 RWD，不再把覆寫散落到各頁。
+  const existingPolishCss = document.querySelector('link[href*="uiux-polish.css"]');
+  if(existingPolishCss){
+    existingPolishCss.href = '/assets/uiux-polish.css?v=20260830a';
+  }else{
+    const polishCss = document.createElement('link');
+    polishCss.rel = 'stylesheet';
+    polishCss.href = '/assets/uiux-polish.css?v=20260830a';
+    document.head.appendChild(polishCss);
+  }
+
   // SVG 定義
   const LOGO = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" aria-hidden="true" focusable="false">
     <circle cx="50" cy="50" r="46" fill="#1e3a8a"/>
@@ -615,17 +626,18 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   };
 
   // 頁籤
+  // 首層只保留四個高頻服務大項。水塔與水管仍有完整服務頁與首頁入口，
+  // 但在導覽層歸入「漏水檢測與修補」的水路相關服務，避免六顆按鈕擠壓品牌。
+  const activeNavId = ['water-tank','pipe-cleaning'].includes(activePage) ? 'leak-repair' : activePage;
   const tabs = [
     {id:'aircon', href:'aircon.html', icon:NAV_ICONS.aircon, label:'冷氣清洗'},
     {id:'washer', href:'washer.html', icon:NAV_ICONS.washer, label:'洗衣機清洗'},
     {id:'homeclean', href:'homeclean.html', icon:NAV_ICONS.homeclean, label:'居家清潔'},
-    {id:'water-tank', href:'water-tank.html', icon:NAV_ICONS.water, label:'水塔清洗'},
-    {id:'pipe-cleaning', href:'pipe-cleaning.html', icon:NAV_ICONS.pipe, label:'水管清洗'},
     {id:'leak-repair', href:'leak-repair.html', icon:NAV_ICONS.leak, label:'漏水檢測與修補'},
   ];
 
   const tabsHTML = tabs.map(t =>
-    `<a href="/${t.href}" class="ld-tab ld-tab--${t.id}${t.id===activePage?' ld-active':''}"${t.id===activePage?' aria-current="page"':''}>
+    `<a href="/${t.href}" class="ld-tab ld-tab--${t.id}${t.id===activeNavId?' ld-active':''}"${t.id===activeNavId?' aria-current="page"':''}>
       <span class="ld-tab-icon">${t.icon}</span>
       <span class="ld-tab-label">${t.label}</span>
     </a>`
@@ -633,6 +645,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   const SERVICE_CHOICE_ICONS = [NAV_ICONS.aircon,NAV_ICONS.washer,NAV_ICONS.homeclean,NAV_ICONS.water,NAV_ICONS.pipe,NAV_ICONS.leak,NAV_ICONS.other];
 
   const html = `
+    <a class="ld-skip-link" href="#main">跳到主要內容</a>
     <a id="ld-float" href="${LINE}" target="_blank" rel="noopener">
       ${LINE_FLOAT_ICON}
       <span id="ld-float-text">LINE</span>
@@ -641,8 +654,8 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
       <div class="ld-top">
         <a class="ld-brand" href="/" aria-label="灰汰郎｜冷氣清洗・洗衣機清洗・居家清潔・水塔清洗・水管清洗・漏水檢測與修補">
           <picture>
-            <source srcset="/logo/logos/logo-master-transparent.webp" type="image/webp">
-            <img class="ld-logo-img" src="/logo/logos/logo-master-transparent.png" alt="灰汰郎 清潔公司" width="660" height="295">
+            <source srcset="/logo/logos/website-header-logo-640x240.webp" type="image/webp">
+            <img class="ld-logo-img" src="/logo/logos/website-header-logo-640x240.png" alt="灰汰郎居家服務" width="640" height="240">
           </picture>
         </a>
       </div>
@@ -664,8 +677,8 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
       <div id="ld-quote-card" role="dialog" aria-modal="true" aria-labelledby="ld-q-title" tabindex="-1">
         <div class="ld-q-head">
           <div>
-            <div class="ld-q-title" id="ld-q-title">LINE 預約估價</div>
-            <div class="ld-q-sub">填寫基本資料，送出後開啟 LINE 傳送給我們，客服會盡快回覆報價</div>
+            <div class="ld-q-title" id="ld-q-title">整理需求，LINE 接著聊</div>
+            <div class="ld-q-sub">先填必要資料；設備型號、數量與照片可到 LINE 再補充，專員確認後才安排服務。</div>
           </div>
           <button type="button" class="ld-q-close" onclick="ldCloseQuote()" aria-label="關閉">✕</button>
         </div>
@@ -681,8 +694,8 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
             <div class="ld-q-err">請輸入正確的聯絡電話</div>
           </div>
           <div class="ld-q-field" id="ld-f-addr">
-            <label class="ld-q-label" for="ld-q-addr">服務地區（選填）</label>
-            <input class="ld-q-input" id="ld-q-addr" type="text" placeholder="例如：台北市中山區，完整地址可稍後提供" autocomplete="address-level2">
+            <label class="ld-q-label" for="ld-q-addr">服務地區 <span class="ld-optional">選填</span></label>
+            <input class="ld-q-input" id="ld-q-addr" type="text" placeholder="例如：台北市中山區（完整地址稍後提供）" autocomplete="address-level2">
           </div>
           <div class="ld-q-field" id="ld-f-service">
             <div class="ld-q-label" id="ld-q-service-label">選擇服務<span class="ld-req">*</span></div>
@@ -705,7 +718,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
             <div class="ld-add-menu" id="ld-add-menu" hidden></div>
           </div>
           <div class="ld-q-field">
-            <label class="ld-q-label">希望日期與時間</label>
+            <label class="ld-q-label">希望日期與時間 <span class="ld-optional">選填</span></label>
             <div class="ld-q-row">
               <input class="ld-q-input" id="ld-q-date" type="date">
               <select class="ld-q-select" id="ld-q-time">
@@ -719,17 +732,17 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
             </div>
           </div>
           <div class="ld-q-field">
-            <label class="ld-q-label" for="ld-q-note">現場狀況或其他需求</label>
-            <textarea class="ld-q-input" id="ld-q-note" rows="3" placeholder="例如：冷氣漏水、機型、樓層、停車或希望處理的範圍"></textarea>
+            <label class="ld-q-label" for="ld-q-note">現場狀況 <span class="ld-optional">選填</span></label>
+            <textarea class="ld-q-input" id="ld-q-note" rows="3" placeholder="例如：冷氣漏水、設備型號、樓層或希望處理的範圍"></textarea>
           </div>
           <div class="ld-q-hp" aria-hidden="true">
             <label for="ld-q-website">網站</label>
             <input id="ld-q-website" name="website" type="text" tabindex="-1" autocomplete="off">
           </div>
-          <div class="ld-q-privacy">送出後資料會先安全儲存於灰汰郎案件系統，僅用於本次估價、聯繫與服務安排，不會公開；完整地址可於確認預約前再提供。</div>
-          <button type="submit" class="ld-q-submit">送出並開啟 LINE</button>
+          <div class="ld-q-privacy">資料只用於本次估價、聯繫與服務安排，不會公開；完整地址可等確認預約時再提供。</div>
+          <button type="submit" class="ld-q-submit">建立需求並開啟 LINE</button>
           <div class="ld-q-status" id="ld-q-status" role="status" aria-live="polite"></div>
-          <div class="ld-q-note">送出後會開啟 LINE，訊息已幫您填好，再按一下「傳送」即可完成預約估價，純諮詢完全免費</div>
+          <div class="ld-q-note">開啟 LINE 後再按一次「傳送」即可；詢問與照片初判不收費。</div>
         </form>
       </div>
     </div>`;

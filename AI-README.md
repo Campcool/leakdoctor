@@ -311,6 +311,16 @@ cases/
 
 ## 5. 進度紀錄（新條目加在最上面）
 
+### 2026-08-30（Codex・AI-skill UI/UX 全站精修＋LINE 視覺同步）
+- 完整讀取 `Campcool/AI-skill` 的 `uiux-design/SKILL.md`、Improve UI／Baseline UI／Accessibility／Motion／Metadata 參考技能，並以 `DESIGN.md` 與 `docs/FRONTEND-CRAFT.md` 作為品牌約束；稽核紀錄在 `design-plans/GRAYWOLF-UIUX-2026-08-30.md`。
+- 新增 `assets/uiux-polish.css` 作為最後載入的跨頁精修層：統一焦點、字級、閱讀行長、卡片層級、服務專屬色、首屏圖片、表單、固定底部 CTA、輪播觸控區與 reduced-motion；不再把覆寫分散到各頁。
+- 首層固定導覽重新收斂為四個高頻服務大項：冷氣、洗衣機、居家清潔、漏水檢測與修補。水塔、水管仍保留首頁入口與完整服務頁，於導覽層歸入水路／漏水相關服務；桌機四等分，手機單列滑動且作用中頁籤置中。
+- Header 改用 `website-header-logo-640x240`，品牌標誌維持非按鈕外觀並放大；新增鍵盤「跳到主要內容」，所有頁面保留 fixed header＋runtime spacer，1024／1440 與 375／768 實測無溢位。
+- 預約視窗改為「整理需求，LINE 接著聊」：選填標籤、隱私文案、送出按鈕與說明層級統一，仍沿用原有案件 API、焦點循環、Escape／手機返回關閉與服務明細漸進揭露。
+- 修正首頁重複 `aria-label`、偏廣告式「一站搞定」與角色不清文案；全站 LINE 大小寫統一，移除 CTA／footer 的電話 emoji，主要服務頁改用可驗證的專員確認與服務邊界說明。
+- 輪播圓點保留 8px／24px 視覺，但實際觸控區升至 44px；漏水長輪播手機隱藏密集圓點，只留明確前後按鈕。八條核心路由於 375 與 1440 實測：零水平溢位、零破圖。
+- Bot repo 同輪更新客戶／廠商／業主 LINE Flex：`bubble.size = mega`、移除 emoji 功能圖示、加寬卡片並重整預約成功與完工感謝段落。Bot 23 個測試檔、260 項測試與 TypeScript typecheck 全數通過。
+
 ### 2026-08-24（Codex・灰汰郎 UI/UX 結構優化）
 - 分支 `codex/ui-polish-gray-wolf-2026-08-24`，基準 `main@ba0dc95`；與公開範圍 draft PR #3 分開施工，**本輪不合併、不切 Pages Source**。
 - `header.js`：1023px 以下的六服務導覽由 3×2 改為單列橫向滑動，保留 44px 觸控高度、`aria-current="page"`，並讓服務頁的作用中頁籤自動置中；手機 Header 實測由約 172px 降到 `114.8px`，固定底部 CTA 保留。
@@ -723,7 +733,7 @@ GSC 存取：`leakdoctor.tw` 與 `blossomkids.tw` 皆已驗證，共用驗證碼
 3. **LINE 連結不可隨意替換**：業主有多個事業（露涼社等）各有自己的 LINE。曾把露涼社連結誤換到全站（未推送即攔下）。**換任何 lin.ee 連結前必須向業主確認該連結屬於灰汰郎。**
 4. 價格改動同步點：頁面價目表、JSON-LD Offer、llms.txt、首頁服務卡、`header.js` 的 `SERVICE_DETAIL_CATALOG`、`data/service-options.json`。
 5. 雲端 session 容器會被回收：**成果要盡早 commit+push**，別累積大量未提交修改。
-6. `.ld-tab` 目前應為 6 個主服務項目；首頁由 Logo 返回，居家知識是 header 次要入口。桌機 6 欄；1023px 以下是可橫向滑動的單列，服務頁需維持作用中頁籤置中。不要恢復 3×2，否則手機固定 Header 會重新佔掉約 172px。
+6. `.ld-tab` 目前應為 **4 個主服務大項**（冷氣、洗衣機、居家清潔、漏水檢測與修補）；水塔／水管仍是可承接服務，但由首頁卡片與漏水／水路脈絡進入，不放回首層 Header。1023px 以下維持可橫向滑動單列，服務頁作用中頁籤置中；不要恢復 2×2 或 3×2。
 7. 第二層 `.service-toc` 不可再用所有內容區塊的 `offsetTop` 做 scroll-spy：第三層會把非作用中區塊設為 `hidden`，其 offset 不可靠。第二層與第三層狀態統一由 `initServiceLayerTabs()` 管理。
 
 ## 7. 待辦清單
@@ -749,7 +759,7 @@ GSC 存取：`leakdoctor.tw` 與 `blossomkids.tw` 皆已驗證，共用驗證碼
 
 ### 🟠 高價值，AI 可做
 - [x] **前台轉換 P0**：地址選填、機型數量收合、首頁／手機雙 CTA、`line_direct_click`、手機 Header CLS 與六服務卡配色已於 2026-07-19 完成。
-- [x] **2026-08-24 UI/UX 結構補強**：手機／平板導覽單列滑動、首頁流程六併四、服務卡／Footer 字級與 44px 操作區已完成於 draft PR，待 Claude／Manus 審查及使用者同意後才可合併。
+- [x] **2026-08-30 UI/UX 全站精修**：四大項固定導覽、跨頁 polish layer、LINE modal、輪播觸控區、首頁文案、LINE Flex mega 卡片及 375／768／1024／1440 複核完成；詳本輪進度與 design plan。
 - [ ] **前台優化 P1–P3 — 依 `docs/FRONTEND-REVIEW-2026-07-16.md` 排序**：P1 信任地基（真實評價、清洗保固、商業模式敘事、可開發票、首屏效能）→ P2 內容對等（cases/team/knowledge 清潔素材、水塔水管價錨案例、漏水文章漏斗、地理統一）→ P3 精修。業主定案 A／B 收費與保固口徑為必守準據。
 - [x] **廣告投放前視覺改版 P1**：首頁＋冷氣／洗衣機／抓漏首屏、DESIGN.md、流程示意與知識型 OG；2026-07-11 已部署並完成正式網址驗證。
 - [ ] **視覺改版 P2**：延伸至居家清潔、地區、案例、百科與文章頁；建立真實案例／流程示意的圖片標示規格

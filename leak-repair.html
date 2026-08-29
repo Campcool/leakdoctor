@@ -601,9 +601,9 @@ td,th{word-break:keep-all}
     <div class="cc-card"><div class="cc-top"><span class="cc-type pipe">管路問題</span><span class="cc-house house">透天厝</span></div><div class="cc-title">透天厝水塔給水管破裂水費異常</div><div class="cc-meta">桃園八德&nbsp;・&nbsp;$6,500&nbsp;・&nbsp;換管</div><div class="cc-detail">定壓測試確認後聲音探測定位屋頂管路接頭破裂，當日換管完成。</div><div class="cc-result pass">水費恢復正常</div></div>
   </div></div>
   <div class="carousel-controls">
-    <button class="cc-prev" onclick="moveCarousel('cases',-1)">‹</button>
+    <button class="cc-prev" onclick="moveCarousel('cases',-1)" aria-label="上一個施工案例">‹</button>
     <div class="cc-dots" id="cases-dots"></div>
-    <button class="cc-next" onclick="moveCarousel('cases',1)">›</button>
+    <button class="cc-next" onclick="moveCarousel('cases',1)" aria-label="下一個施工案例">›</button>
   </div>
 </div>
 </section>
@@ -708,9 +708,9 @@ td,th{word-break:keep-all}
     </div>
 </div></div>
   <div class="carousel-controls">
-    <button class="cc-prev" onclick="moveCarousel('team',-1)">‹</button>
+    <button class="cc-prev" onclick="moveCarousel('team',-1)" aria-label="上一位專業人員">‹</button>
     <div class="cc-dots" id="team-dots"></div>
-    <button class="cc-next" onclick="moveCarousel('team',1)">›</button>
+    <button class="cc-next" onclick="moveCarousel('team',1)" aria-label="下一位專業人員">›</button>
   </div>
 </div>
 </section>
@@ -982,7 +982,7 @@ td,th{word-break:keep-all}
     <div class="area-card"><div class="area-region craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#location"></use></svg>北部</div><div class="area-cities">台北市・新北市・基隆市・桃園市・新竹市・新竹縣・宜蘭縣</div><span class="area-badge">大台北 48H・其他 72H</span></div>
     <div class="area-card"><div class="area-region">🌾 中部</div><div class="area-cities">苗栗縣・台中市・彰化縣・南投縣・雲林縣</div><span class="area-badge">72H 內安排</span></div>
     <div class="area-card"><div class="area-region craft-icon-label"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#location"></use></svg>南部</div><div class="area-cities">嘉義市・嘉義縣・台南市・高雄市・屏東縣</div><span class="area-badge">72H 內安排</span></div>
-    <div class="area-card"><div class="area-region">🌿 東部</div><div class="area-cities">花蓮縣・台東縣</div><span class="area-badge">Line 確認可用師傅</span></div>
+    <div class="area-card"><div class="area-region">東部</div><div class="area-cities">花蓮縣・台東縣</div><span class="area-badge">LINE 確認可安排人員</span></div>
   </div>
   <div class="area-note-global">離島地區（澎湖、金門、馬祖）目前暫不提供服務</div>
   <button type="button" class="price-cta craft-action-icon" style="background:var(--teal)" onclick="ldOpenQuote('leak-repair')"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#calendar"></use></svg>線上預約估價</button>
@@ -1019,11 +1019,11 @@ td,th{word-break:keep-all}
   <div class="sec-tag blue">服務流程</div>
   <h2 class="sec-title">5 個步驟，全程透明</h2>
   <div class="process-accordion">
-    <div class="pa-item"><button class="pa-btn" onclick="togglePa(this)"><span class="pa-num n1">01</span><span class="pa-label">Line 免費諮詢・傳照片</span><span class="pa-arrow">▼</span></button><div class="pa-body">傳照片描述漏水位置，我們免費提供初步判斷與建議工法，不收任何諮詢費。</div></div>
+    <div class="pa-item"><button class="pa-btn" onclick="togglePa(this)"><span class="pa-num n1">01</span><span class="pa-label">LINE 免費諮詢・傳照片</span><span class="pa-arrow">▼</span></button><div class="pa-body">傳照片描述漏水位置，我們免費提供初步判斷與建議工法，不收任何諮詢費。</div></div>
     <div class="pa-item"><button class="pa-btn" onclick="togglePa(this)"><span class="pa-num n2">02</span><span class="pa-label">確認報價・酌收車馬費</span><span class="pa-arrow">▼</span></button><div class="pa-body">確認漏水狀況後安排適合師傅，業主與師傅直接確認報價。車馬費依地區酌收，費用事先告知。</div></div>
     <div class="pa-item"><button class="pa-btn" onclick="togglePa(this)"><span class="pa-num n3">03</span><span class="pa-label">師傅到場施工・全程拍照</span><span class="pa-arrow">▼</span></button><div class="pa-body">48 小時內安排師傅，施工全程拍照記錄。師傅會說明使用材料與施工方式，歡迎當場詢問。</div></div>
     <div class="pa-item"><button class="pa-btn" onclick="togglePa(this)"><span class="pa-num n4">04</span><span class="pa-label">藥劑固化後・客戶自行驗收</span><span class="pa-arrow">▼</span></button><div class="pa-body">等待藥劑或防水層完全乾燥固化（通常 24–72 小時），由您自行觀察是否仍有滲漏。</div></div>
-    <div class="pa-item"><button class="pa-btn" onclick="togglePa(this)"><span class="pa-num n5">05</span><span class="pa-label">施工完成・有問題 Line 反映</span><span class="pa-arrow">▼</span></button><div class="pa-body">驗收無問題即完成。若固化後仍有滲漏疑慮，可 Line 回傳照片，我們協助判斷並安排師傅回訪。</div></div>
+    <div class="pa-item"><button class="pa-btn" onclick="togglePa(this)"><span class="pa-num n5">05</span><span class="pa-label">施工完成・有問題 LINE 反映</span><span class="pa-arrow">▼</span></button><div class="pa-body">驗收無問題即完成。若固化後仍有滲漏疑慮，可在 LINE 回傳照片，由專員協助判斷後續處理。</div></div>
   </div>
 </div>
 </section>
@@ -1039,9 +1039,9 @@ td,th{word-break:keep-all}
     <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">車馬費大概多少？<span class="faq-chevron">▼</span></button><div class="faq-a">大台北地區約 $500–1,000，桃園新竹台中約 $800–1,500，南部地區另計。安排前先告知，確認後才安排出發。</div></div>
     <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">漏水要找水電還是防水工班？<span class="faq-chevron">▼</span></button><div class="faq-a">水電師傅擅長管路但通常沒有科技儀器。輕微管路問題可找水電；複雜結構漏水、壁癌、頂樓防水建議找防水專業工班，避免反覆施工。</div></div>
     <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">壁癌處理完還會再發作嗎？<span class="faq-chevron">▼</span></button><div class="faq-a">只做表面（磨除+粉刷）沒找水源，幾個月內必定復發。正確做法是先阻外部滲水來源，再做室內矽酸質防水，才能根治。</div></div>
-    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">師傅說修好了，怎麼確認真的好了？<span class="faq-chevron">▼</span></button><div class="faq-a">施工當天看起來正常不代表修好。正確驗收：等待藥劑固化 24–72 小時後觀察。有任何異狀 Line 傳照片回報，我們協助確認。</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">師傅說修好了，怎麼確認真的好了？<span class="faq-chevron">▼</span></button><div class="faq-a">施工當天看起來正常不代表已驗收。應依工法等待 24–72 小時固化或持續觀察；有異狀可在 LINE 回傳照片，由專員協助確認。</div></div>
     <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">漏水來自樓上鄰居，怎麼處理？<span class="faq-chevron">▼</span></button><div class="faq-a">師傅確認漏水源頭後提供初步判斷記錄，協助您與鄰居溝通。若無法在您家根治，車馬費照收但不另收其他費用。</div></div>
-    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">老房子住的是長輩，師傅會耐心嗎？<span class="faq-chevron">▼</span></button><div class="faq-a">合作師傅都有老屋修繕經驗，習慣用簡單的話解釋，不趕時間。Line 諮詢時告知家中為長輩居住，我們特別注意安排溝通耐心好的師傅。</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">老房子住的是長輩，師傅會耐心嗎？<span class="faq-chevron">▼</span></button><div class="faq-a">合作師傅都有老屋修繕經驗，會用簡單的話說明判斷與施工內容。LINE 諮詢時可先告知家中為長輩居住，專員會把溝通需求列入安排條件。</div></div>
     <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">怎麼判斷輕度還是重度漏水？<span class="faq-chevron">▼</span></button><div class="faq-a">輕度：牆面微潮、點狀水漬。中度：明顯水漬 &gt;30cm、偶爾滴水、壁癌出現。重度：持續滴水、大面積壁癌、樓下已受影響。不確定傳照片免費初判。</div></div>
   </div>
 </div>
@@ -1072,7 +1072,7 @@ td,th{word-break:keep-all}
   <div>
     <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:.62rem">聯絡我們</div>
     <div style="display:flex;flex-direction:column;gap:.38rem">
-      <a href="https://lin.ee/WVxmY65" target="_blank" style="font-size:.8rem;color:#9ca3af">📲 Line 免費諮詢</a>
+      <a href="https://lin.ee/WVxmY65" target="_blank" rel="noopener" style="font-size:.8rem;color:#9ca3af">LINE 免費諮詢</a>
       <span style="font-size:.78rem;color:#6b7280">服務時間：週一至週六</span>
       <span style="font-size:.78rem;color:#6b7280">09:00 – 18:00</span>
     </div>
@@ -1125,6 +1125,8 @@ function initCarousel(id){
     for(let i=0;i<pages;i++){
       const d=document.createElement('button');
       d.className='cc-dot'+(i===0?' active':'');
+      d.type='button';
+      d.setAttribute('aria-label',`切換到第 ${i+1} 頁`);
       d.onclick=()=>{goTo(i*pv);resetTimer()};
       dotsEl.appendChild(d);
     }
