@@ -73,6 +73,46 @@ body .service-flow[data-process-editorial]{
 #water-tank-cases .craft-case-copy{padding:1.3rem 1.25rem 1.5rem}
 #water-tank-cases .craft-case-note{line-height:1.85;font-size:.9rem}
 
+/* Case galleries: column count follows readable copy width, not device labels.
+   One media ratio for sliders and ordinary photos; contain preserves full evidence. */
+body[data-editorial-page] .case-gallery-container{max-width:1180px;width:100%;margin-inline:auto;padding-inline:24px!important}
+body[data-editorial-page] [data-case-gallery]{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,max(300px,16rem)),1fr));
+  grid-auto-flow:row;grid-auto-columns:auto;gap:24px;padding:0;
+  width:100%;max-width:1180px;margin-inline:auto;overflow:visible;scroll-snap-type:none;
+}
+body[data-editorial-page] [data-case-gallery] .craft-case{display:grid;grid-template-rows:auto 1fr;min-width:0;max-width:none;border-radius:16px;box-shadow:none;opacity:1!important;transform:none!important}
+body[data-editorial-page] [data-case-gallery] .craft-compare,
+body[data-editorial-page] [data-case-gallery] .real-case-media{aspect-ratio:4/3;width:100%;min-width:0;background:#eaf0ee}
+body[data-editorial-page] [data-case-gallery] .craft-compare img,
+body[data-editorial-page] [data-case-gallery] .real-case-media img{object-fit:contain;object-position:center}
+body[data-editorial-page] [data-case-gallery] .craft-case-copy{padding:clamp(20px,2vw,28px);min-width:0;display:grid;align-content:start;grid-template-rows:auto auto 1fr}
+body[data-editorial-page] [data-case-gallery] .craft-case-title{font-size:1.1rem;line-height:1.55;font-weight:800;letter-spacing:0;margin:0;padding-bottom:.55rem;text-wrap:balance;overflow-wrap:break-word}
+body[data-editorial-page] [data-case-gallery] .craft-case-meta{display:flex;flex-wrap:wrap;align-items:baseline;gap:.3em .75em;margin:0;padding-bottom:.8rem;font-size:.8rem;line-height:1.65;color:#52636b}
+body[data-editorial-page] [data-case-gallery] .craft-case-meta span{white-space:nowrap}
+body[data-editorial-page] [data-case-gallery] .craft-case-note{margin:0;font-size:.95rem;line-height:1.85;color:#52636b;text-wrap:pretty}
+body[data-editorial-page] [data-case-gallery] .real-case-media-label{max-width:calc(100% - 28px);line-height:1.5;white-space:normal}
+/* Share title/meta/note row heights within each visual row, without clipping copy. */
+@supports(grid-template-rows:subgrid){
+  body[data-editorial-page] [data-case-gallery]{row-gap:0}
+  body[data-editorial-page] [data-case-gallery] .craft-case{grid-row:span 4;grid-template-rows:subgrid;row-gap:0;margin-bottom:24px}
+  body[data-editorial-page] [data-case-gallery] .craft-case-copy{grid-row:span 3;grid-template-rows:subgrid;row-gap:0}
+}
+
+/* Service coverage: intact city names, consistent icons and a bottom-aligned note. */
+body[data-editorial-page] #service-area .area-inner{container-type:inline-size;container-name:service-regions}
+body[data-editorial-page] #service-area .area-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+body[data-editorial-page] #service-area .area-card{display:flex;flex-direction:column;align-items:flex-start;gap:16px;padding:24px;min-width:0;border-radius:16px}
+body[data-editorial-page] #service-area .area-region{display:flex;align-items:center;gap:10px;margin:0;font-size:1.1rem;line-height:1.5}
+body[data-editorial-page] #service-area .area-region .craft-icon{width:24px;height:24px;flex-shrink:0}
+body[data-editorial-page] #service-area .area-cities{display:flex;flex-wrap:wrap;gap:.35em .85em;list-style:none;margin:0 0 8px;padding:0;font-size:.95rem;line-height:1.7;color:#40565b}
+body[data-editorial-page] #service-area .area-cities li{white-space:nowrap}
+body[data-editorial-page] #service-area .area-badge{display:flex;flex-wrap:wrap;gap:.25em .6em;margin-top:auto;max-width:100%;padding:.65rem 0 0;border:0;border-top:1px solid #d5e5e1;border-radius:0;line-height:1.7;font-weight:700}
+body[data-editorial-page] #service-area .area-badge span{white-space:nowrap}
+@container service-regions (min-width:70rem){body[data-editorial-page] #service-area .area-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@container service-regions (max-width:34rem){body[data-editorial-page] #service-area .area-grid{grid-template-columns:1fr}}
+@media(max-width:560px){body[data-editorial-page] #service-area .area-grid{grid-template-columns:1fr}}
+
 /* Keep phrases together without making the entire table nowrap. */
 body[data-editorial-page] .price-cell-copy{display:block;min-width:0;line-height:1.9;text-wrap:pretty}
 body[data-editorial-page] .keep-phrase{display:inline-block;max-width:100%;vertical-align:top;word-break:normal;overflow-wrap:break-word}

@@ -3,6 +3,7 @@ import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
+import {parseCss, resolve as resolveCss} from './css-cascade.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const read = path => readFileSync(resolve(root,path),'utf8');
@@ -77,3 +78,53 @@ test('mutation: dropping an entire step is caught',()=>{
 test('mutation: reintroducing nowrap title is caught',()=>assert.throws(()=>checkLayout(css.replace('.headline-line{white-space:normal!important','.headline-line{white-space:nowrap!important'))));
 test('mutation: unequal case media ratio is caught',()=>assert.throws(()=>checkLayout(css.replace('.craft-compare{aspect-ratio:4/3}', '.craft-compare{aspect-ratio:1}'))));
 test('mutation: mobile header rows cannot return as vertical text',()=>assert.throws(()=>checkLayout(css.replace('.price-table tr:has(> th){display:none!important}', ''))));
+
+const serviceCases = ['aircon','washer','homeclean','water-tank','pipe-cleaning','leak-repair'];
+function checkCaseMarkup(html, count) {
+  assert.match(html,/class="[^"]*case-gallery-container/);
+  const gallery=html.split('data-case-gallery')[1]?.split('</section>')[0];
+  assert.ok(gallery,'explicit case gallery scope');
+  assert.equal((gallery.match(/<article class="craft-case">/g)||[]).length,count);
+  assert.equal((gallery.match(/<h3 class="craft-case-title">/g)||[]).length,count);
+  assert.equal((gallery.match(/<span>現場實拍<\/span><span>已去識別<\/span>/g)||[]).length,count);
+  assert.doesNotMatch(gallery,/style="[^"]*aspect-ratio/,'inline ratio must not defeat common media frame');
+  for(const match of gallery.matchAll(/(?:src|srcset)="(\/[^" ]+)"/g))assert.ok(existsSync(resolve(root,match[1].slice(1))),match[1]);
+}
+test('six service galleries retain 17 real cases with semantic headings',()=>{
+  serviceCases.forEach(page=>checkCaseMarkup(read(page+'.html'),page==='water-tank'?2:3));
+});
+
+// Check winning declarations, not just rule existence. This does NOT implement
+// grid layout or prove image/text alignment; the browser matrix covers those.
+function checkGalleryStyles(extraCss=css) {
+  const rules=parseCss(read('assets/craft.css')+'\n'+read('assets/uiux-polish.css')+'\n'+extraCss);
+  const element=(classes,ancestors=[],attrs={})=>({tag:'div',classes,attrs,ancestors,states:[]});
+  for(const width of [320,375,768,860,1024,1440]) {
+    for(const name of ['craft-compare','real-case-media']) {
+      const media=element([name],['craft-case']);
+      assert.equal(resolveCss(rules,media,'aspect-ratio',width).value,'4/3');
+      assert.equal(resolveCss(rules,{...element([],['craft-case',name]),tag:'img'},'object-fit',width).value,'contain');
+    }
+    const grid=element(['real-case-grid'],[],{'data-case-gallery':''});
+    assert.equal(resolveCss(rules,element(['container','case-gallery-container'],['section']),'padding-inline',width).value,'24px');
+    assert.equal(resolveCss(rules,element(['craft-case','craft-reveal']),'opacity',width).value,'1');
+    assert.equal(resolveCss(rules,grid,'grid-auto-flow',width).value,'row');
+    assert.equal(resolveCss(rules,grid,'grid-template-columns',width).value,'repeat(auto-fit,minmax(min(100%,max(300px,16rem)),1fr))');
+  }
+}
+test('winning gallery declarations keep equal media frames and readable adaptive columns',()=>checkGalleryStyles());
+
+function checkCities(html) {
+  const area=html.split('id="service-area"')[1].split('</section>')[0];
+  const groups=[...area.matchAll(/<ul class="area-cities"[^>]*>(.*?)<\/ul>/g)].map(m=>[...m[1].matchAll(/<li>(.*?)<\/li>/g)].map(m=>m[1]));
+  assert.deepEqual(groups,[['台北市','新北市','基隆市','桃園市','新竹市','新竹縣','宜蘭縣'],['苗栗縣','台中市','彰化縣','南投縣','雲林縣'],['嘉義市','嘉義縣','台南市','高雄市','屏東縣'],['花蓮縣','台東縣']]);
+  assert.equal((area.match(/<h3 class="area-region"><svg /g)||[]).length,4);
+  assert.match(area,/大台北 48H/);assert.match(area,/其他 72H/);
+  assert.equal((area.match(/72H 內安排/g)||[]).length,2);
+  assert.match(area,/離島地區（澎湖、金門、馬祖）目前暫不提供服務/);
+}
+test('coverage keeps all 19 city names, exclusions and scheduling statements',()=>checkCities(read('leak-repair.html')));
+test('mutation: a competing important media ratio is rejected',()=>assert.throws(()=>checkGalleryStyles(css+'\nbody[data-editorial-page] [data-case-gallery] .craft-compare{aspect-ratio:3/4!important}')));
+test('mutation: a narrow fixed three-column grid is rejected',()=>assert.throws(()=>checkGalleryStyles(css+'\nbody[data-editorial-page] [data-case-gallery]{grid-template-columns:repeat(3,1fr)!important}')));
+test('mutation: an inline case ratio is rejected',()=>assert.throws(()=>checkCaseMarkup(read('washer.html').replace('style="--compare:50%"','style="--compare:50%;aspect-ratio:3/4"'),3)));
+test('mutation: a lost city is rejected',()=>assert.throws(()=>checkCities(read('leak-repair.html').replace('<li>新竹縣</li>',''))));
