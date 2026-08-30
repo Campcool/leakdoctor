@@ -24,6 +24,8 @@ jobs:
           node-version: 22
       - name: Brand fact + structural validation (validate-site.mjs)
         run: node scripts/validate-site.mjs
+      - name: Homepage pricing and LINE handoff contract
+        run: node --test scripts/test-home-service-hub.mjs
       - name: 防假綠：故意破壞 header.js 常數，確認 validate 能抓住
         run: |
           cp header.js header.js.bak

@@ -98,6 +98,29 @@ function ldInit(){
   // 在訪客落地當下保存來源；若等到送出表單才記錄，跨頁後 UTM 會遺失。
   leadAttribution();
   landingPage();
+  // Homepage price route shares the same lead capture, attribution and LINE identity.
+  // Copy-only never calls this bridge or emits a conversion.
+  window.ldCreatePriceInquiry = async function(inquiry){
+    const attribution = leadAttribution();
+    const identifiers = await Promise.all([gaValue('client_id',900),gaValue('session_id',900)]);
+    const controller = new AbortController();
+    const timer = setTimeout(function(){controller.abort();},8000);
+    try{
+      const response = await fetch(LEAD_API,{
+        method:'POST',headers:{'Content-Type':'application/json'},signal:controller.signal,
+        body:JSON.stringify(Object.assign({},inquiry,{
+          attribution:attribution,sourcePage:location.pathname,landingPage:landingPage(),
+          referrer:(document.referrer || '').slice(0,500),gaClientId:identifiers[0] || cookieGaClientId(),
+          gaSessionId:identifiers[1],website:''
+        }))
+      });
+      const result = await response.json().catch(function(){return {};});
+      if(!response.ok || !result.leadId) throw new Error('lead_capture_failed');
+      ldTrack('generate_lead',{lead_source:attribution.utm_source || 'website',items:[{item_name:inquiry.service,quantity:1}]});
+      ldTrack('quote_submit',{service:inquiry.service,page:location.pathname,lead_id:result.leadId,placement:'homepage_price'});
+      return {leadId:result.leadId,lineBase:'https://line.me/R/oaMessage/' + LINE_OA_ID + '/?'};
+    }finally{clearTimeout(timer);}
+  };
   const SVC_PAGES = {'/aircon.html':'aircon','/washer.html':'washer','/homeclean.html':'homeclean','/water-tank.html':'water_tank','/pipe-cleaning.html':'pipe_cleaning','/leak-repair.html':'leak-repair'};
   const AREA_PAGES = ['/taipei.html','/new-taipei.html','/keelung.html','/taoyuan.html','/hsinchu.html','/miaoli.html','/taichung.html','/areas.html'];
   // 全站點擊追蹤：LINE 連結與電話
