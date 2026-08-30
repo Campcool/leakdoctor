@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { runInNewContext } from 'node:vm';
 import assert from 'node:assert/strict';
@@ -9,6 +9,54 @@ const root = new URL('../', import.meta.url);
 const header = readFileSync(new URL('header.js', root), 'utf8');
 const polish = readFileSync(new URL('assets/uiux-polish.css', root), 'utf8');
 const expected = ['aircon', 'washer', 'homeclean', 'water-tank', 'pipe-cleaning', 'leak-repair'];
+const faviconAssets = [
+  ['favicon-16.png', 'favicon-16.png', 16],
+  ['favicon-32.png', 'favicon-32.png', 32],
+  ['apple-touch-icon.png', 'apple-touch-icon-180.png', 180],
+  ['android-chrome-192.png', 'android-chrome-192.png', 192],
+  ['favicon-source-512.png', 'favicon-source-512.png', 512],
+  ['favicon.ico', 'favicon.ico'],
+];
+function checkBrandAsset(bytes, source) {
+  assert.deepEqual(bytes, readFileSync(new URL('logo/avatars-icons/' + source, root)));
+}
+function checkFaviconLinks(html) {
+  for (const file of ['favicon-16.png', 'favicon-32.png', 'favicon.ico', 'apple-touch-icon.png']) {
+    assert.ok(html.includes('/' + file + '?v=20260831-brand'), file + ' must use current brand cache key');
+  }
+  assert.doesNotMatch(html, /favicon\.svg|20260720e/);
+}
+test('favicon assets reuse the existing brand emblem at every published size', () => {
+  for (const [file, source, size] of faviconAssets) {
+    const bytes = readFileSync(new URL(file, root));
+    checkBrandAsset(bytes, source);
+    if (size) {
+      assert.equal(bytes.readUInt32BE(16), size);
+      assert.equal(bytes.readUInt32BE(20), size);
+    } else {
+      assert.equal(bytes.readUInt16LE(2), 1, 'valid ICO fallback');
+      assert.ok(bytes.readUInt16LE(4) > 0);
+    }
+  }
+  assert.equal(existsSync(new URL('favicon.svg', root)), false, 'obsolete hand-drawn brush is retired');
+});
+test('all public HTML favicon declarations use the current brand version', () => {
+  let checked = 0;
+  for (const dir of ['', 'articles/']) {
+    for (const file of readdirSync(new URL(dir, root)).filter(f => f.endsWith('.html'))) {
+      const html = readFileSync(new URL(dir + file, root), 'utf8');
+      if (!html.includes('favicon')) continue;
+      checkFaviconLinks(html);
+      checked++;
+    }
+  }
+  assert.equal(checked, 36, 'all existing favicon-bearing pages must be checked');
+});
+test('mutation: non-brand icon bytes and a stale favicon cache key are rejected', () => {
+  assert.throws(() => checkBrandAsset(Buffer.from('old brush'), 'favicon-32.png'));
+  const html = readFileSync(new URL('index.html', root), 'utf8');
+  assert.throws(() => checkFaviconLinks(html.replaceAll('20260831-brand', '20260720e')));
+});
 function checkNavigation(source) {
   const start = source.indexOf('  const activeNavId =');
   const end = source.indexOf('  const SERVICE_CHOICE_ICONS', start);
