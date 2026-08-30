@@ -830,6 +830,10 @@ GSC 存取：`leakdoctor.tw` 與 `blossomkids.tw` 皆已驗證，共用驗證碼
 - [ ] **本輪交付後審查與上線**：Claude唯讀覆核；依業主後續授權推main／部署；不得把本機完成寫成已上線。
 - [ ] **本輪真機／LINE webview**：首屏雙入口、數量留存、鍵盤與抽屜返回；舊瀏覽器color-mix／clip／subgrid降級與真實CLS/LCP／轉換率均待驗。
 - [x] **Claude必要修正**：手機重複LINE浮鈕遮字、指定大字短文換行、價目欄名測試缺口；路徑差異補文件、不盲目替換。詳`docs/CODEX-NECESSARY-FIXES-2026-08-30.md`。
+- [ ] **閱讀節奏強化（R1–R5）**：首屏零數字／價格藏在點擊後、桌機 CTA 中段空窗 39–80%、
+      FAQ 只有漏水頁在做異議處理、水管價格口徑不一致（**需業主裁決**）、痛點位置不一。
+      完整重現數據、最小修正與驗收要求見 `docs/CLAUDE-READING-RHYTHM-2026-08-30.md`。
+      方法論出自 `Campcool/AI-skill` 的 `uiux-design/SKILL.md`〈閱讀節奏與資訊順序〉。
 - [ ] **本批真機與舊瀏覽器覆驗**：720px浮鈕／底部兩CTA、放大文字、price-label與balance／pretty降級；桌面28組不等同真機驗收。
 - [x] **追加案例／服務地區修正**：六服務17張案例的寬度與圖文對齊、19個漏水服務縣市的完整斷行；54組桌面模擬尺寸通過，真機仍待驗。
 - [ ] **Claude 追加複核**：最新檢查 `c66b61a..main` 的案例／地區修正，含subgrid降級、contain全幅、手機24px邊距、縣市不變及未啟用service-layer的既有邊界；不要只審舊的 `53065b5`。
