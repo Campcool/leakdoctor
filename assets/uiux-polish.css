@@ -65,11 +65,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 @media(min-width:1024px){
   :root{--ld-hdr-h:86px}
   #ld-header{padding:7px clamp(18px,2.2vw,34px)!important;gap:clamp(18px,2vw,30px)!important}
-  .ld-top{flex-basis:218px!important;width:218px!important;height:71px!important}
-  .ld-logo-img{width:215px!important;max-height:71px!important;transform:scale(1.15);transform-origin:left center}
-  .ld-nav{grid-template-columns:repeat(4,minmax(155px,1fr))!important;max-width:980px!important;gap:10px!important}
-  .ld-tab{height:70px!important;min-height:70px!important;padding:9px 13px!important;border-radius:14px!important}
-  .ld-tab-icon{width:22px!important;height:22px!important}
+  .ld-top{flex-basis:190px!important;width:190px!important;height:71px!important}
+  .ld-logo-img{width:190px!important;max-height:71px!important;transform:none}
+  .ld-nav{grid-template-columns:repeat(6,minmax(0,1fr))!important;max-width:none!important;min-width:0;gap:8px!important}
+  .ld-tab{height:70px!important;min-height:70px!important;min-width:0;padding:9px 8px!important;border-radius:14px!important}
+  .ld-tab-icon{width:20px!important;height:20px!important;flex-shrink:0}
   .ld-tab-label{font-size:clamp(15px,1.2vw,17px)!important}
 }
 
@@ -115,6 +115,15 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   border-color:var(--service-accent,var(--ld-teal))!important;
 }
 .svc-title,.promise-title,.process-title{letter-spacing:-.025em}
+.hero-inner .hero-h1{max-width:none}
+/* 有意義的標籤／輔助文字；不放大 SVG 圖內刻度與純裝飾箭頭。 */
+body .process-kicker,body .process-disclosure,body .footer-copy,
+body .service-story-kicker,body .service-story-tag,body .health-note,
+body .real-case-media-label,body .area-status,body .hero-btn-sub,body .stat-label,
+body .top-badge,body .pr-unit,body .pop-badge,body .cc-type,body .cc-house,
+body .cc-result,body .tc-carousel-meta,body .myth-badge,body .inst-use,
+body .area-badge,body .trap-how-label,body .tc-carousel-stars span,
+body .tc-carousel-tags span,body .hero-caption span{font-size:max(.8rem,12px)!important;line-height:1.5}
 .svc-actions a,.svc-actions button,.hero-actions a,.hero-actions button,.page-btn,.quick-book-btn,.cta-btn{
   min-height:48px!important;
 }
@@ -161,6 +170,7 @@ body.service-page .trust-badge{box-shadow:none!important;background:rgba(255,255
 body.service-page .service-visual{border-radius:28px!important;overflow:hidden;border:1px solid color-mix(in srgb,var(--service-accent) 24%,#fff)!important;box-shadow:0 22px 50px rgba(23,50,77,.12)!important}
 body.service-page .service-visual-img{border-radius:0!important}
 body.service-page .service-visual-note{left:18px!important;bottom:18px!important;right:auto!important;max-width:min(76%,360px)!important;border:1px solid rgba(255,255,255,.8)!important;box-shadow:0 12px 28px rgba(16,39,59,.16)!important}
+.service-visual .service-visual-note{background:#fff!important;color:var(--ld-muted)!important}
 .service-toc{box-shadow:none!important}
 .service-toc a{box-shadow:none!important}
 .service-toc a.is-current{box-shadow:0 6px 16px color-mix(in srgb,var(--service-accent) 20%,transparent)!important}
@@ -176,7 +186,7 @@ body.service-page .service-visual-note{left:18px!important;bottom:18px!important
 #ld-quote-card{max-width:590px!important;border:1px solid rgba(255,255,255,.72);box-shadow:0 26px 80px rgba(16,39,59,.3)!important}
 .ld-q-title{color:var(--ld-ink)!important;font-size:1.28rem!important;letter-spacing:-.03em}
 .ld-q-sub{max-width:46ch;color:var(--ld-muted)!important}
-.ld-optional{display:inline-flex;margin-left:.35rem;padding:.1rem .42rem;border-radius:999px;background:#edf2f3;color:#667680;font-size:.68rem;font-weight:800;vertical-align:.08em}
+.ld-optional{display:inline-flex;margin-left:.35rem;padding:.1rem .42rem;border-radius:999px;background:#edf2f3;color:#667680;font-size:.875rem;font-weight:800;vertical-align:.08em}
 .ld-q-input,.ld-q-select{min-height:48px!important;border-color:#cbd7db!important;border-radius:12px!important;transition:border-color .16s ease,box-shadow .16s ease}
 .ld-q-input:focus,.ld-q-select:focus{border-color:var(--service-accent,var(--ld-teal))!important;box-shadow:0 0 0 4px color-mix(in srgb,var(--service-accent,var(--ld-teal)) 12%,transparent)!important;outline:0!important}
 .ld-service-choice{min-height:56px!important;gap:7px!important;padding-inline:9px!important;border-radius:14px!important;box-shadow:none!important;background:#fff!important}
@@ -189,7 +199,7 @@ body.service-page .service-visual-note{left:18px!important;bottom:18px!important
 .ld-q-submit{min-height:52px!important;border-radius:14px!important;box-shadow:0 12px 26px rgba(6,199,85,.25)!important}
 .ld-q-submit:hover{background:#05a848!important}
 
-/* 只保留 LINE 脈衝；其餘持續掃光會分散閱讀注意力。 */
+/* 官方 LINE 圖示維持靜態；持續掃光會分散閱讀注意力。 */
 body.service-page .page-btn::before,body.service-page .mid-cta-btn::before,body.service-page .cta-btn::before,
 body.leak-page .hero-btn::before,body.leak-page .cta-btn::before{animation:none!important;display:none!important}
 
@@ -197,6 +207,13 @@ body.leak-page .hero-btn::before,body.leak-page .cta-btn::before{animation:none!
 #ld-stickybar{border-top:1px solid rgba(23,50,77,.14)!important;box-shadow:0 -12px 30px rgba(16,39,59,.09)!important}
 .ld-sticky-btn{min-height:48px!important;border-radius:13px!important}
 .ld-sticky-btn--form{border-color:#cbd7db!important}
+#ld-float{display:flex!important;animation:none!important;box-shadow:none!important}
+@media(max-width:1023px){
+  #ld-float{bottom:calc(var(--ld-bottom-space,76px) + 16px)!important}
+  #ld-back-top{bottom:calc(var(--ld-bottom-space,76px) + 92px)!important}
+  /* 價格模式已有明細與 LINE CTA，浮鈕不可遮住數量或價格說明。 */
+  .home-price-active #ld-float{display:none!important}
+}
 
 @media(min-width:860px){
   .svc-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
@@ -205,7 +222,8 @@ body.leak-page .hero-btn::before,body.leak-page .cta-btn::before{animation:none!
 @media(max-width:720px){
   html{scroll-behavior:auto}
   .headline-line{white-space:normal!important}
-  .hero-h1,.page-title{font-size:clamp(2.15rem,10.4vw,2.75rem)!important;line-height:1.08!important}
+  /* 精確涵蓋 legacy service-refresh 選擇器；不鎖死使用者根字級。 */
+  body h1.hero-h1,body.service-page h1.page-title,body.leak-page h1.hero-h1{font-size:clamp(1.75rem,9vw,2.35rem)!important;line-height:1.2!important}
   .hero-desc,.page-desc{font-size:1rem!important;line-height:1.78!important}
   body.service-page #page-hero{padding:2.25rem 1.15rem 2.7rem!important}
   body.service-page .page-hero-inner{gap:1.55rem!important}
@@ -229,6 +247,12 @@ body.leak-page .hero-btn::before,body.leak-page .cta-btn::before{animation:none!
   .ld-q-row{grid-template-columns:1fr!important}
   .svc-card{padding:1.08rem!important}
   .cc-dots{display:none!important}
+}
+
+/* 平板不要把文字和窄圖片擠成兩欄。 */
+@media(min-width:721px) and (max-width:1023px){
+  body.service-page #page-hero .page-hero-inner,body.leak-page #hero .hero-content-pc{grid-template-columns:minmax(0,1fr)!important}
+  body.service-page .service-visual{width:min(680px,100%);margin-inline:auto}
 }
 
 @media(max-width:390px){

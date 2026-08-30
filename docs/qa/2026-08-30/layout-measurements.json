@@ -1,0 +1,2793 @@
+{
+  "mobileDefault": [
+    {
+      "active": [],
+      "bar": {
+        "height": 69,
+        "width": 360,
+        "x": 0,
+        "y": 743
+      },
+      "bodyBottom": "69px",
+      "brokenImages": [],
+      "clientWidth": 360,
+      "h1": {
+        "height": 83.6875,
+        "width": 320,
+        "x": 20,
+        "y": 221.21875
+      },
+      "header": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 914.6875,
+        "width": 360,
+        "x": 0,
+        "y": 119
+      },
+      "nav": [
+        {
+          "height": 44,
+          "text": "冷氣清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "洗衣機清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "居家清潔",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水塔清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水管清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "漏水檢測與修補",
+          "width": 152
+        }
+      ],
+      "path": "/",
+      "scrollWidth": 360,
+      "scrollY": 0,
+      "smallText": [],
+      "spacer": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 375,
+      "font": 16,
+      "safe": 0
+    },
+    {
+      "active": [
+        {
+          "href": "/aircon.html",
+          "text": "冷氣清洗"
+        }
+      ],
+      "bar": {
+        "height": 69,
+        "width": 360,
+        "x": 0,
+        "y": 743
+      },
+      "bodyBottom": "69px",
+      "brokenImages": [],
+      "clientWidth": 360,
+      "h1": {
+        "height": 83.6875,
+        "width": 320,
+        "x": 20,
+        "y": 215.65625
+      },
+      "header": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 780.234375,
+        "width": 360,
+        "x": 0,
+        "y": 119
+      },
+      "nav": [
+        {
+          "height": 44,
+          "text": "冷氣清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "洗衣機清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "居家清潔",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水塔清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水管清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "漏水檢測與修補",
+          "width": 152
+        }
+      ],
+      "path": "/aircon.html",
+      "scrollWidth": 360,
+      "scrollY": 0,
+      "smallText": [
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        }
+      ],
+      "spacer": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 375,
+      "font": 16,
+      "safe": 0
+    },
+    {
+      "active": [
+        {
+          "href": "/washer.html",
+          "text": "洗衣機清洗"
+        }
+      ],
+      "bar": {
+        "height": 69,
+        "width": 360,
+        "x": 0,
+        "y": 743
+      },
+      "bodyBottom": "69px",
+      "brokenImages": [],
+      "clientWidth": 360,
+      "h1": {
+        "height": 83.6875,
+        "width": 320,
+        "x": 20,
+        "y": 215.65625
+      },
+      "header": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 680.359375,
+        "width": 360,
+        "x": 0,
+        "y": 119
+      },
+      "nav": [
+        {
+          "height": 44,
+          "text": "冷氣清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "洗衣機清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "居家清潔",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水塔清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水管清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "漏水檢測與修補",
+          "width": 152
+        }
+      ],
+      "path": "/washer.html",
+      "scrollWidth": 360,
+      "scrollY": 0,
+      "smallText": [
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        }
+      ],
+      "spacer": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 375,
+      "font": 16,
+      "safe": 0
+    },
+    {
+      "active": [
+        {
+          "href": "/homeclean.html",
+          "text": "居家清潔"
+        }
+      ],
+      "bar": {
+        "height": 69,
+        "width": 360,
+        "x": 0,
+        "y": 743
+      },
+      "bodyBottom": "69px",
+      "brokenImages": [],
+      "clientWidth": 360,
+      "h1": {
+        "height": 83.6875,
+        "width": 320,
+        "x": 20,
+        "y": 215.65625
+      },
+      "header": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 680.359375,
+        "width": 360,
+        "x": 0,
+        "y": 119
+      },
+      "nav": [
+        {
+          "height": 44,
+          "text": "冷氣清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "洗衣機清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "居家清潔",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水塔清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水管清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "漏水檢測與修補",
+          "width": 152
+        }
+      ],
+      "path": "/homeclean.html",
+      "scrollWidth": 360,
+      "scrollY": 0,
+      "smallText": [
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        }
+      ],
+      "spacer": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 375,
+      "font": 16,
+      "safe": 0
+    },
+    {
+      "active": [
+        {
+          "href": "/water-tank.html",
+          "text": "水塔清洗"
+        }
+      ],
+      "bar": {
+        "height": 69,
+        "width": 360,
+        "x": 0,
+        "y": 743
+      },
+      "bodyBottom": "69px",
+      "brokenImages": [],
+      "clientWidth": 360,
+      "h1": {
+        "height": 83.6875,
+        "width": 323.21875,
+        "x": 18.390625,
+        "y": 209.0625
+      },
+      "header": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 611.9375,
+        "width": 360,
+        "x": 0,
+        "y": 119
+      },
+      "nav": [
+        {
+          "height": 44,
+          "text": "冷氣清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "洗衣機清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "居家清潔",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水塔清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水管清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "漏水檢測與修補",
+          "width": 152
+        }
+      ],
+      "path": "/water-tank.html",
+      "scrollWidth": 360,
+      "scrollY": 0,
+      "smallText": [],
+      "spacer": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 375,
+      "font": 16,
+      "safe": 0
+    },
+    {
+      "active": [
+        {
+          "href": "/pipe-cleaning.html",
+          "text": "水管清洗"
+        }
+      ],
+      "bar": {
+        "height": 69,
+        "width": 360,
+        "x": 0,
+        "y": 743
+      },
+      "bodyBottom": "69px",
+      "brokenImages": [],
+      "clientWidth": 360,
+      "h1": {
+        "height": 83.6875,
+        "width": 323.21875,
+        "x": 18.390625,
+        "y": 209.0625
+      },
+      "header": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 691.46875,
+        "width": 360,
+        "x": 0,
+        "y": 119
+      },
+      "nav": [
+        {
+          "height": 44,
+          "text": "冷氣清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "洗衣機清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "居家清潔",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水塔清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水管清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "漏水檢測與修補",
+          "width": 152
+        }
+      ],
+      "path": "/pipe-cleaning.html",
+      "scrollWidth": 360,
+      "scrollY": 0,
+      "smallText": [],
+      "spacer": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 375,
+      "font": 16,
+      "safe": 0
+    },
+    {
+      "active": [
+        {
+          "href": "/leak-repair.html",
+          "text": "漏水檢測與修補"
+        }
+      ],
+      "bar": {
+        "height": 69,
+        "width": 360,
+        "x": 0,
+        "y": 743
+      },
+      "bodyBottom": "69px",
+      "brokenImages": [],
+      "clientWidth": 360,
+      "h1": {
+        "height": 83.6875,
+        "width": 320,
+        "x": 20,
+        "y": 230.21875
+      },
+      "header": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 852.0625,
+        "width": 360,
+        "x": 0,
+        "y": 119
+      },
+      "nav": [
+        {
+          "height": 44,
+          "text": "冷氣清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "洗衣機清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "居家清潔",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水塔清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水管清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "漏水檢測與修補",
+          "width": 152
+        }
+      ],
+      "path": "/leak-repair.html",
+      "scrollWidth": 360,
+      "scrollY": 0,
+      "smallText": [
+        {
+          "class": "pa-arrow",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "pa-arrow",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "pa-arrow",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "pa-arrow",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "pa-arrow",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        }
+      ],
+      "spacer": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 375,
+      "font": 16,
+      "safe": 0
+    }
+  ],
+  "mobileEnlargedSafe": [
+    {
+      "active": [],
+      "bar": {
+        "height": 103,
+        "width": 360,
+        "x": 0,
+        "y": 709
+      },
+      "bodyBottom": "103px",
+      "brokenImages": [],
+      "clientWidth": 360,
+      "h1": {
+        "height": 104.140625,
+        "width": 300,
+        "x": 30,
+        "y": 271.296875
+      },
+      "header": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 1310.515625,
+        "width": 360,
+        "x": 0,
+        "y": 119
+      },
+      "nav": [
+        {
+          "height": 44,
+          "text": "冷氣清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "洗衣機清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "居家清潔",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水塔清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水管清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "漏水檢測與修補",
+          "width": 152
+        }
+      ],
+      "path": "/",
+      "scrollWidth": 360,
+      "scrollY": 0,
+      "smallText": [],
+      "spacer": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 375,
+      "port": 4181
+    },
+    {
+      "active": [
+        {
+          "href": "/aircon.html",
+          "text": "冷氣清洗"
+        }
+      ],
+      "bar": {
+        "height": 103,
+        "width": 360,
+        "x": 0,
+        "y": 709
+      },
+      "bodyBottom": "103px",
+      "brokenImages": [],
+      "clientWidth": 360,
+      "h1": {
+        "height": 104.140625,
+        "width": 300,
+        "x": 30,
+        "y": 289.15625
+      },
+      "header": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 1208.1875,
+        "width": 360,
+        "x": 0,
+        "y": 119
+      },
+      "nav": [
+        {
+          "height": 44,
+          "text": "冷氣清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "洗衣機清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "居家清潔",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水塔清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水管清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "漏水檢測與修補",
+          "width": 152
+        }
+      ],
+      "path": "/aircon.html",
+      "scrollWidth": 360,
+      "scrollY": 0,
+      "smallText": [],
+      "spacer": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 375,
+      "port": 4181
+    },
+    {
+      "active": [
+        {
+          "href": "/washer.html",
+          "text": "洗衣機清洗"
+        }
+      ],
+      "bar": {
+        "height": 103,
+        "width": 360,
+        "x": 0,
+        "y": 709
+      },
+      "bodyBottom": "103px",
+      "brokenImages": [],
+      "clientWidth": 360,
+      "h1": {
+        "height": 104.140625,
+        "width": 300,
+        "x": 30,
+        "y": 255.46875
+      },
+      "header": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 979.015625,
+        "width": 360,
+        "x": 0,
+        "y": 119
+      },
+      "nav": [
+        {
+          "height": 44,
+          "text": "冷氣清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "洗衣機清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "居家清潔",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水塔清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水管清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "漏水檢測與修補",
+          "width": 152
+        }
+      ],
+      "path": "/washer.html",
+      "scrollWidth": 360,
+      "scrollY": 0,
+      "smallText": [],
+      "spacer": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 375,
+      "port": 4181
+    },
+    {
+      "active": [
+        {
+          "href": "/homeclean.html",
+          "text": "居家清潔"
+        }
+      ],
+      "bar": {
+        "height": 103,
+        "width": 360,
+        "x": 0,
+        "y": 709
+      },
+      "bodyBottom": "103px",
+      "brokenImages": [],
+      "clientWidth": 360,
+      "h1": {
+        "height": 104.140625,
+        "width": 300,
+        "x": 30,
+        "y": 255.46875
+      },
+      "header": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 1025.640625,
+        "width": 360,
+        "x": 0,
+        "y": 119
+      },
+      "nav": [
+        {
+          "height": 44,
+          "text": "冷氣清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "洗衣機清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "居家清潔",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水塔清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水管清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "漏水檢測與修補",
+          "width": 152
+        }
+      ],
+      "path": "/homeclean.html",
+      "scrollWidth": 360,
+      "scrollY": 0,
+      "smallText": [],
+      "spacer": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 375,
+      "port": 4181
+    },
+    {
+      "active": [
+        {
+          "href": "/water-tank.html",
+          "text": "水塔清洗"
+        }
+      ],
+      "bar": {
+        "height": 103,
+        "width": 360,
+        "x": 0,
+        "y": 709
+      },
+      "bodyBottom": "103px",
+      "brokenImages": [],
+      "clientWidth": 360,
+      "h1": {
+        "height": 104.140625,
+        "width": 304.8125,
+        "x": 27.59375,
+        "y": 245.078125
+      },
+      "header": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 1096.046875,
+        "width": 360,
+        "x": 0,
+        "y": 119
+      },
+      "nav": [
+        {
+          "height": 44,
+          "text": "冷氣清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "洗衣機清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "居家清潔",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水塔清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水管清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "漏水檢測與修補",
+          "width": 152
+        }
+      ],
+      "path": "/water-tank.html",
+      "scrollWidth": 360,
+      "scrollY": 0,
+      "smallText": [],
+      "spacer": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 375,
+      "port": 4181
+    },
+    {
+      "active": [
+        {
+          "href": "/pipe-cleaning.html",
+          "text": "水管清洗"
+        }
+      ],
+      "bar": {
+        "height": 103,
+        "width": 360,
+        "x": 0,
+        "y": 709
+      },
+      "bodyBottom": "103px",
+      "brokenImages": [],
+      "clientWidth": 360,
+      "h1": {
+        "height": 204.921875,
+        "width": 304.8125,
+        "x": 27.59375,
+        "y": 245.078125
+      },
+      "header": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 1330,
+        "width": 360,
+        "x": 0,
+        "y": 119
+      },
+      "nav": [
+        {
+          "height": 44,
+          "text": "冷氣清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "洗衣機清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "居家清潔",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水塔清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水管清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "漏水檢測與修補",
+          "width": 152
+        }
+      ],
+      "path": "/pipe-cleaning.html",
+      "scrollWidth": 360,
+      "scrollY": 0,
+      "smallText": [],
+      "spacer": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 375,
+      "port": 4181
+    },
+    {
+      "active": [
+        {
+          "href": "/leak-repair.html",
+          "text": "漏水檢測與修補"
+        }
+      ],
+      "bar": {
+        "height": 103,
+        "width": 360,
+        "x": 0,
+        "y": 709
+      },
+      "bodyBottom": "103px",
+      "brokenImages": [],
+      "clientWidth": 360,
+      "h1": {
+        "height": 104.140625,
+        "width": 300,
+        "x": 30,
+        "y": 278.828125
+      },
+      "header": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 1237.78125,
+        "width": 360,
+        "x": 0,
+        "y": 119
+      },
+      "nav": [
+        {
+          "height": 44,
+          "text": "冷氣清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "洗衣機清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "居家清潔",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水塔清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "水管清洗",
+          "width": 108
+        },
+        {
+          "height": 44,
+          "text": "漏水檢測與修補",
+          "width": 152
+        }
+      ],
+      "path": "/leak-repair.html",
+      "scrollWidth": 360,
+      "scrollY": 0,
+      "smallText": [],
+      "spacer": {
+        "height": 119,
+        "width": 360,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 375,
+      "port": 4181
+    }
+  ],
+  "desktop": [
+    {
+      "active": [],
+      "bar": {
+        "height": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "bodyBottom": "0px",
+      "brokenImages": [],
+      "clientWidth": 1425,
+      "h1": {
+        "height": 156.140625,
+        "width": 591.59375,
+        "x": 112.5,
+        "y": 241.015625
+      },
+      "header": {
+        "height": 86,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 684.28125,
+        "width": 1425,
+        "x": 0,
+        "y": 86
+      },
+      "nav": [
+        {
+          "height": 70,
+          "text": "冷氣清洗",
+          "width": 183.796875
+        },
+        {
+          "height": 70,
+          "text": "洗衣機清洗",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "居家清潔",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "水塔清洗",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "水管清洗",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "漏水檢測與修補",
+          "width": 183.796875
+        }
+      ],
+      "path": "/",
+      "scrollWidth": 1425,
+      "scrollY": 0,
+      "smallText": [],
+      "spacer": {
+        "height": 86,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 1440,
+      "font": 16,
+      "safe": 0
+    },
+    {
+      "active": [
+        {
+          "href": "/aircon.html",
+          "text": "冷氣清洗"
+        }
+      ],
+      "bar": {
+        "height": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "bodyBottom": "0px",
+      "brokenImages": [],
+      "clientWidth": 1425,
+      "h1": {
+        "height": 126.1875,
+        "width": 514,
+        "x": 162.5,
+        "y": 277.859375
+      },
+      "header": {
+        "height": 86,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 720.78125,
+        "width": 1425,
+        "x": 0,
+        "y": 86
+      },
+      "nav": [
+        {
+          "height": 70,
+          "text": "冷氣清洗",
+          "width": 183.796875
+        },
+        {
+          "height": 70,
+          "text": "洗衣機清洗",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "居家清潔",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "水塔清洗",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "水管清洗",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "漏水檢測與修補",
+          "width": 183.796875
+        }
+      ],
+      "path": "/aircon.html",
+      "scrollWidth": 1425,
+      "scrollY": 0,
+      "smallText": [
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        }
+      ],
+      "spacer": {
+        "height": 86,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 1440,
+      "font": 16,
+      "safe": 0
+    },
+    {
+      "active": [
+        {
+          "href": "/washer.html",
+          "text": "洗衣機清洗"
+        }
+      ],
+      "bar": {
+        "height": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "bodyBottom": "0px",
+      "brokenImages": [],
+      "clientWidth": 1425,
+      "h1": {
+        "height": 126.1875,
+        "width": 514,
+        "x": 162.5,
+        "y": 293.390625
+      },
+      "header": {
+        "height": 86,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 720.78125,
+        "width": 1425,
+        "x": 0,
+        "y": 86
+      },
+      "nav": [
+        {
+          "height": 70,
+          "text": "冷氣清洗",
+          "width": 183.796875
+        },
+        {
+          "height": 70,
+          "text": "洗衣機清洗",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "居家清潔",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "水塔清洗",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "水管清洗",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "漏水檢測與修補",
+          "width": 183.796875
+        }
+      ],
+      "path": "/washer.html",
+      "scrollWidth": 1425,
+      "scrollY": 0,
+      "smallText": [
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        }
+      ],
+      "spacer": {
+        "height": 86,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 1440,
+      "font": 16,
+      "safe": 0
+    },
+    {
+      "active": [
+        {
+          "href": "/homeclean.html",
+          "text": "居家清潔"
+        }
+      ],
+      "bar": {
+        "height": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "bodyBottom": "0px",
+      "brokenImages": [],
+      "clientWidth": 1425,
+      "h1": {
+        "height": 126.1875,
+        "width": 514,
+        "x": 162.5,
+        "y": 293.390625
+      },
+      "header": {
+        "height": 86,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 720.78125,
+        "width": 1425,
+        "x": 0,
+        "y": 86
+      },
+      "nav": [
+        {
+          "height": 70,
+          "text": "冷氣清洗",
+          "width": 183.796875
+        },
+        {
+          "height": 70,
+          "text": "洗衣機清洗",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "居家清潔",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "水塔清洗",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "水管清洗",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "漏水檢測與修補",
+          "width": 183.796875
+        }
+      ],
+      "path": "/homeclean.html",
+      "scrollWidth": 1425,
+      "scrollY": 0,
+      "smallText": [
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        }
+      ],
+      "spacer": {
+        "height": 86,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 1440,
+      "font": 16,
+      "safe": 0
+    },
+    {
+      "active": [
+        {
+          "href": "/water-tank.html",
+          "text": "水塔清洗"
+        }
+      ],
+      "bar": {
+        "height": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "bodyBottom": "0px",
+      "brokenImages": [],
+      "clientWidth": 1425,
+      "h1": {
+        "height": 148.453125,
+        "width": 534.46875,
+        "x": 152.5,
+        "y": 264.234375
+      },
+      "header": {
+        "height": 86,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 720.78125,
+        "width": 1425,
+        "x": 0,
+        "y": 86
+      },
+      "nav": [
+        {
+          "height": 70,
+          "text": "冷氣清洗",
+          "width": 183.796875
+        },
+        {
+          "height": 70,
+          "text": "洗衣機清洗",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "居家清潔",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "水塔清洗",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "水管清洗",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "漏水檢測與修補",
+          "width": 183.796875
+        }
+      ],
+      "path": "/water-tank.html",
+      "scrollWidth": 1425,
+      "scrollY": 0,
+      "smallText": [],
+      "spacer": {
+        "height": 86,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 1440,
+      "font": 16,
+      "safe": 0
+    },
+    {
+      "active": [
+        {
+          "href": "/pipe-cleaning.html",
+          "text": "水管清洗"
+        }
+      ],
+      "bar": {
+        "height": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "bodyBottom": "0px",
+      "brokenImages": [],
+      "clientWidth": 1425,
+      "h1": {
+        "height": 148.453125,
+        "width": 534.46875,
+        "x": 152.5,
+        "y": 264.234375
+      },
+      "header": {
+        "height": 86,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 720.78125,
+        "width": 1425,
+        "x": 0,
+        "y": 86
+      },
+      "nav": [
+        {
+          "height": 70,
+          "text": "冷氣清洗",
+          "width": 183.796875
+        },
+        {
+          "height": 70,
+          "text": "洗衣機清洗",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "居家清潔",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "水塔清洗",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "水管清洗",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "漏水檢測與修補",
+          "width": 183.796875
+        }
+      ],
+      "path": "/pipe-cleaning.html",
+      "scrollWidth": 1425,
+      "scrollY": 0,
+      "smallText": [],
+      "spacer": {
+        "height": 86,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 1440,
+      "font": 16,
+      "safe": 0
+    },
+    {
+      "active": [
+        {
+          "href": "/leak-repair.html",
+          "text": "漏水檢測與修補"
+        }
+      ],
+      "bar": {
+        "height": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "bodyBottom": "0px",
+      "brokenImages": [],
+      "clientWidth": 1425,
+      "h1": {
+        "height": 126.1875,
+        "width": 532,
+        "x": 162.5,
+        "y": 299.46875
+      },
+      "header": {
+        "height": 86,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 772,
+        "width": 1425,
+        "x": 0,
+        "y": 86
+      },
+      "nav": [
+        {
+          "height": 70,
+          "text": "冷氣清洗",
+          "width": 183.796875
+        },
+        {
+          "height": 70,
+          "text": "洗衣機清洗",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "居家清潔",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "水塔清洗",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "水管清洗",
+          "width": 183.8125
+        },
+        {
+          "height": 70,
+          "text": "漏水檢測與修補",
+          "width": 183.796875
+        }
+      ],
+      "path": "/leak-repair.html",
+      "scrollWidth": 1425,
+      "scrollY": 0,
+      "smallText": [
+        {
+          "class": "",
+          "px": "11.52px",
+          "tag": "DIV",
+          "text": "不知道水從哪裡來？"
+        },
+        {
+          "class": "",
+          "px": "11.52px",
+          "tag": "P",
+          "text": "以下為已去識別之真實施工案例，持續更新中"
+        },
+        {
+          "class": "",
+          "px": "11.52px",
+          "tag": "P",
+          "text": "以下為合作師傅介紹，實際出勤師傅由專員依案件與地區確認"
+        },
+        {
+          "class": "pa-arrow",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "pa-arrow",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "pa-arrow",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "pa-arrow",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "pa-arrow",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        }
+      ],
+      "spacer": {
+        "height": 86,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 1440,
+      "font": 16,
+      "safe": 0
+    }
+  ],
+  "tablet": [
+    {
+      "active": [],
+      "bar": {
+        "height": 69,
+        "width": 753,
+        "x": 0,
+        "y": 955
+      },
+      "bodyBottom": "69px",
+      "brokenImages": [],
+      "clientWidth": 753,
+      "h1": {
+        "height": 112.390625,
+        "width": 343.21875,
+        "x": 20,
+        "y": 224.96875
+      },
+      "header": {
+        "height": 117,
+        "width": 753,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 674.703125,
+        "width": 753,
+        "x": 0,
+        "y": 117
+      },
+      "nav": [
+        {
+          "height": 44,
+          "text": "冷氣清洗",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "洗衣機清洗",
+          "width": 112.609375
+        },
+        {
+          "height": 44,
+          "text": "居家清潔",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "水塔清洗",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "水管清洗",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "漏水檢測與修補",
+          "width": 140.046875
+        }
+      ],
+      "path": "/",
+      "scrollWidth": 753,
+      "scrollY": 0,
+      "smallText": [],
+      "spacer": {
+        "height": 117,
+        "width": 753,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 768,
+      "font": 16,
+      "safe": 0
+    },
+    {
+      "active": [
+        {
+          "href": "/aircon.html",
+          "text": "冷氣清洗"
+        }
+      ],
+      "bar": {
+        "height": 69,
+        "width": 753,
+        "x": 0,
+        "y": 955
+      },
+      "bodyBottom": "69px",
+      "brokenImages": [],
+      "clientWidth": 753,
+      "h1": {
+        "height": 87.1875,
+        "width": 713,
+        "x": 20,
+        "y": 213.65625
+      },
+      "header": {
+        "height": 117,
+        "width": 753,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 953.515625,
+        "width": 753,
+        "x": 0,
+        "y": 117
+      },
+      "nav": [
+        {
+          "height": 44,
+          "text": "冷氣清洗",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "洗衣機清洗",
+          "width": 112.609375
+        },
+        {
+          "height": 44,
+          "text": "居家清潔",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "水塔清洗",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "水管清洗",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "漏水檢測與修補",
+          "width": 140.046875
+        }
+      ],
+      "path": "/aircon.html",
+      "scrollWidth": 753,
+      "scrollY": 0,
+      "smallText": [
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        }
+      ],
+      "spacer": {
+        "height": 117,
+        "width": 753,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 768,
+      "font": 16,
+      "safe": 0
+    },
+    {
+      "active": [
+        {
+          "href": "/washer.html",
+          "text": "洗衣機清洗"
+        }
+      ],
+      "bar": {
+        "height": 69,
+        "width": 753,
+        "x": 0,
+        "y": 955
+      },
+      "bodyBottom": "69px",
+      "brokenImages": [],
+      "clientWidth": 753,
+      "h1": {
+        "height": 87.1875,
+        "width": 713,
+        "x": 20,
+        "y": 213.65625
+      },
+      "header": {
+        "height": 117,
+        "width": 753,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 922.453125,
+        "width": 753,
+        "x": 0,
+        "y": 117
+      },
+      "nav": [
+        {
+          "height": 44,
+          "text": "冷氣清洗",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "洗衣機清洗",
+          "width": 112.609375
+        },
+        {
+          "height": 44,
+          "text": "居家清潔",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "水塔清洗",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "水管清洗",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "漏水檢測與修補",
+          "width": 140.046875
+        }
+      ],
+      "path": "/washer.html",
+      "scrollWidth": 753,
+      "scrollY": 0,
+      "smallText": [
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        }
+      ],
+      "spacer": {
+        "height": 117,
+        "width": 753,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 768,
+      "font": 16,
+      "safe": 0
+    },
+    {
+      "active": [
+        {
+          "href": "/homeclean.html",
+          "text": "居家清潔"
+        }
+      ],
+      "bar": {
+        "height": 69,
+        "width": 753,
+        "x": 0,
+        "y": 955
+      },
+      "bodyBottom": "69px",
+      "brokenImages": [],
+      "clientWidth": 753,
+      "h1": {
+        "height": 87.1875,
+        "width": 713,
+        "x": 20,
+        "y": 213.65625
+      },
+      "header": {
+        "height": 117,
+        "width": 753,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 922.453125,
+        "width": 753,
+        "x": 0,
+        "y": 117
+      },
+      "nav": [
+        {
+          "height": 44,
+          "text": "冷氣清洗",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "洗衣機清洗",
+          "width": 112.609375
+        },
+        {
+          "height": 44,
+          "text": "居家清潔",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "水塔清洗",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "水管清洗",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "漏水檢測與修補",
+          "width": 140.046875
+        }
+      ],
+      "path": "/homeclean.html",
+      "scrollWidth": 753,
+      "scrollY": 0,
+      "smallText": [
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▾"
+        }
+      ],
+      "spacer": {
+        "height": 117,
+        "width": 753,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 768,
+      "font": 16,
+      "safe": 0
+    },
+    {
+      "active": [
+        {
+          "href": "/water-tank.html",
+          "text": "水塔清洗"
+        }
+      ],
+      "bar": {
+        "height": 69,
+        "width": 753,
+        "x": 0,
+        "y": 955
+      },
+      "bodyBottom": "69px",
+      "brokenImages": [],
+      "clientWidth": 753,
+      "h1": {
+        "height": 89.0625,
+        "width": 713,
+        "x": 20,
+        "y": 212.65625
+      },
+      "header": {
+        "height": 117,
+        "width": 753,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 790.640625,
+        "width": 753,
+        "x": 0,
+        "y": 117
+      },
+      "nav": [
+        {
+          "height": 44,
+          "text": "冷氣清洗",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "洗衣機清洗",
+          "width": 112.609375
+        },
+        {
+          "height": 44,
+          "text": "居家清潔",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "水塔清洗",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "水管清洗",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "漏水檢測與修補",
+          "width": 140.046875
+        }
+      ],
+      "path": "/water-tank.html",
+      "scrollWidth": 753,
+      "scrollY": 0,
+      "smallText": [],
+      "spacer": {
+        "height": 117,
+        "width": 753,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 768,
+      "font": 16,
+      "safe": 0
+    },
+    {
+      "active": [
+        {
+          "href": "/pipe-cleaning.html",
+          "text": "水管清洗"
+        }
+      ],
+      "bar": {
+        "height": 69,
+        "width": 753,
+        "x": 0,
+        "y": 955
+      },
+      "bodyBottom": "69px",
+      "brokenImages": [],
+      "clientWidth": 753,
+      "h1": {
+        "height": 89.0625,
+        "width": 713,
+        "x": 20,
+        "y": 212.65625
+      },
+      "header": {
+        "height": 117,
+        "width": 753,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 820.234375,
+        "width": 753,
+        "x": 0,
+        "y": 117
+      },
+      "nav": [
+        {
+          "height": 44,
+          "text": "冷氣清洗",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "洗衣機清洗",
+          "width": 112.609375
+        },
+        {
+          "height": 44,
+          "text": "居家清潔",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "水塔清洗",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "水管清洗",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "漏水檢測與修補",
+          "width": 140.046875
+        }
+      ],
+      "path": "/pipe-cleaning.html",
+      "scrollWidth": 753,
+      "scrollY": 0,
+      "smallText": [],
+      "spacer": {
+        "height": 117,
+        "width": 753,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 768,
+      "font": 16,
+      "safe": 0
+    },
+    {
+      "active": [
+        {
+          "href": "/leak-repair.html",
+          "text": "漏水檢測與修補"
+        }
+      ],
+      "bar": {
+        "height": 69,
+        "width": 753,
+        "x": 0,
+        "y": 955
+      },
+      "bodyBottom": "69px",
+      "brokenImages": [],
+      "clientWidth": 753,
+      "h1": {
+        "height": 87.1875,
+        "width": 713,
+        "x": 20,
+        "y": 233.96875
+      },
+      "header": {
+        "height": 117,
+        "width": 753,
+        "x": 0,
+        "y": 0
+      },
+      "hero": {
+        "height": 999.75,
+        "width": 753,
+        "x": 0,
+        "y": 117
+      },
+      "nav": [
+        {
+          "height": 44,
+          "text": "冷氣清洗",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "洗衣機清洗",
+          "width": 112.609375
+        },
+        {
+          "height": 44,
+          "text": "居家清潔",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "水塔清洗",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "水管清洗",
+          "width": 112
+        },
+        {
+          "height": 44,
+          "text": "漏水檢測與修補",
+          "width": 140.046875
+        }
+      ],
+      "path": "/leak-repair.html",
+      "scrollWidth": 753,
+      "scrollY": 0,
+      "smallText": [
+        {
+          "class": "pa-arrow",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "pa-arrow",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "pa-arrow",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "pa-arrow",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "pa-arrow",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        },
+        {
+          "class": "faq-chevron",
+          "px": "10.56px",
+          "tag": "SPAN",
+          "text": "▼"
+        }
+      ],
+      "spacer": {
+        "height": 117,
+        "width": 753,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": 768,
+      "font": 16,
+      "safe": 0
+    }
+  ]
+}

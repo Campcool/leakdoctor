@@ -354,30 +354,18 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   position:fixed;right:16px;bottom:calc(112px + env(safe-area-inset-bottom));top:auto;
   transform:none;
   z-index:9991;
-  width:54px;height:54px;
-  border-radius:50%;
-  background:#06C755;
+  width:64px;height:64px;
+  border-radius:18px;
+  background:#fff;
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
   gap:2px;
   text-decoration:none;
-  box-shadow:0 4px 16px rgba(6,199,85,.5);
-  animation:ld-pulse 2s ease-in-out infinite;
-}
-@keyframes ld-pulse{
-  0%,100%{box-shadow:0 4px 16px rgba(6,199,85,.5)}
-  50%{box-shadow:0 4px 26px rgba(6,199,85,.75),0 0 0 7px rgba(6,199,85,.1)}
+  animation:none;
 }
 #ld-float-icon{
   display:block;
-  width:26px;height:26px;
-}
-#ld-float-text{
-  display:block;
-  font-size:10px;font-weight:700;
-  color:#ffffff;
-  font-family:'Noto Sans TC',sans-serif;
-  line-height:1;
+  width:48px;height:48px;
 }
 
 /* PC */
@@ -467,12 +455,12 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
 }
 .ld-sticky-text{flex:1;min-width:0}
 .ld-sticky-title{font-size:14px;font-weight:900;color:#111827;line-height:1.3}
-.ld-sticky-sub{font-size:10.5px;color:#6b7280;line-height:1.3}
+.ld-sticky-sub{font-size:12px;color:#6b7280;line-height:1.4}
 .ld-sticky-btn{
   flex-shrink:0;display:flex;align-items:center;justify-content:center;gap:5px;
   min-height:44px;padding:9px 13px;border-radius:11px;text-decoration:none;
   border:1.5px solid #06C755;background:#06C755;color:#fff;
-  font:800 12.5px 'Noto Sans TC',sans-serif;cursor:pointer;
+  font:800 14px 'Noto Sans TC',sans-serif;cursor:pointer;
   box-shadow:0 3px 10px rgba(6,199,85,.28);white-space:nowrap;
 }
 .ld-sticky-actions{display:flex;align-items:center;gap:7px;flex-shrink:0}
@@ -484,7 +472,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   .ld-sticky-btn{flex:1}
 }
 @media(max-width:1023px){
-  body{padding-bottom:66px}
+  body{padding-bottom:var(--ld-bottom-space,calc(76px + env(safe-area-inset-bottom)))}
 }
 @media(min-width:1024px){
   #ld-stickybar{display:none}
@@ -605,14 +593,14 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   style.textContent = css;
   document.head.appendChild(style);
 
-  // 最後載入全站精修層，集中處理視覺、無障礙與 RWD，不再把覆寫散落到各頁。
+  // 共用精修層；部分頁面在 body 另載入 legacy CSS，覆寫仍須檢查實際 cascade。
   const existingPolishCss = document.querySelector('link[href*="uiux-polish.css"]');
   if(existingPolishCss){
-    existingPolishCss.href = '/assets/uiux-polish.css?v=20260830a';
+    existingPolishCss.href = '/assets/uiux-polish.css?v=20260830b';
   }else{
     const polishCss = document.createElement('link');
     polishCss.rel = 'stylesheet';
-    polishCss.href = '/assets/uiux-polish.css?v=20260830a';
+    polishCss.href = '/assets/uiux-polish.css?v=20260830b';
     document.head.appendChild(polishCss);
   }
 
@@ -625,37 +613,28 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
     <circle cx="76" cy="24" r="2.4" fill="#ffffff"/>
   </svg>`
 
-  const LINE_ICON = `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" width="18" height="18" style="display:block;flex-shrink:0" aria-hidden="true" focusable="false">
-    <rect width="48" height="48" rx="10" fill="#fff"/>
-    <path d="M40 22.3C40 15 33.3 9 25 9S10 15 10 22.3c0 6.5 5.8 12 13.6 13 .5.1 1.2.4 1.4.9.2.5.1 1.2.1 1.2l-.2 1.5c-.1.5-.4 1.9 1.7.9 2.2-1 11.5-6.8 15.7-11.6 2.9-3.2 4.7-6.5 4.7-10z" fill="#06C755"/>
-    <path d="M21.2 19.2h-1.4c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h1.4c.3 0 .5-.2.5-.5v-6.6c0-.3-.2-.5-.5-.5zM28.6 19.2h-1.4c-.3 0-.5.2-.5.5v3.9l-3-4.2-.2-.2H22c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h1.4c.3 0 .5-.2.5-.5v-3.9l3 4.2.2.2h1.5c.3 0 .5-.2.5-.5v-6.6c0-.3-.2-.5-.5-.5zM19.2 24.3h-2.4v-4.7c0-.3-.2-.5-.5-.5h-1.4c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h4.3c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5zM33.8 20.6c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5h-4.3c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h4.3c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5H31v-1h2.8c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5H31v-1h2.8z" fill="#fff"/>
-  </svg>`;
-
-  const LINE_FLOAT_ICON = `<svg id="ld-float-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" width="26" height="26" style="display:block" aria-hidden="true" focusable="false">
-    <path d="M40 22.3C40 15 33.3 9 25 9S10 15 10 22.3c0 6.5 5.8 12 13.6 13 .5.1 1.2.4 1.4.9.2.5.1 1.2.1 1.2l-.2 1.5c-.1.5-.4 1.9 1.7.9 2.2-1 11.5-6.8 15.7-11.6 2.9-3.2 4.7-6.5 4.7-10z" fill="#fff"/>
-    <path d="M21.2 19.2h-1.4c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h1.4c.3 0 .5-.2.5-.5v-6.6c0-.3-.2-.5-.5-.5zM28.6 19.2h-1.4c-.3 0-.5.2-.5.5v3.9l-3-4.2-.2-.2H22c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h1.4c.3 0 .5-.2.5-.5v-3.9l3 4.2.2.2h1.5c.3 0 .5-.2.5-.5v-6.6c0-.3-.2-.5-.5-.5zM19.2 24.3h-2.4v-4.7c0-.3-.2-.5-.5-.5h-1.4c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h4.3c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5zM33.8 20.6c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5h-4.3c-.3 0-.5.2-.5.5v6.6c0 .3.2.5.5.5h4.3c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5H31v-1h2.8c.3 0 .5-.2.5-.5v-1.4c0-.3-.2-.5-.5-.5H31v-1h2.8z" fill="#06C755"/>
-  </svg>`;
 
   function craftIcon(id){ return '<svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#' + id + '"></use></svg>'; }
   const NAV_ICONS = {
     aircon:craftIcon('aircon'),
     washer:craftIcon('washer'),
     homeclean:craftIcon('homeclean'),
-    water:craftIcon('droplet'),
-    pipe:craftIcon('tools'),
+    water:craftIcon('water-tank'),
+    pipe:craftIcon('pipe-cleaning'),
     leak:craftIcon('leak'),
     knowledge:craftIcon('book'),
     other:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg>'
   };
 
   // 頁籤
-  // 首層只保留四個高頻服務大項。水塔與水管仍有完整服務頁與首頁入口，
-  // 但在導覽層歸入「漏水檢測與修補」的水路相關服務，避免六顆按鈕擠壓品牌。
-  const activeNavId = ['water-tank','pipe-cleaning'].includes(activePage) ? 'leak-repair' : activePage;
+  // 業主 2026-08-30 確認六大項，各服務保留自己的頁籤與作用中狀態。
+  const activeNavId = activePage;
   const tabs = [
     {id:'aircon', href:'aircon.html', icon:NAV_ICONS.aircon, label:'冷氣清洗'},
     {id:'washer', href:'washer.html', icon:NAV_ICONS.washer, label:'洗衣機清洗'},
     {id:'homeclean', href:'homeclean.html', icon:NAV_ICONS.homeclean, label:'居家清潔'},
+    {id:'water-tank', href:'water-tank.html', icon:NAV_ICONS.water, label:'水塔清洗'},
+    {id:'pipe-cleaning', href:'pipe-cleaning.html', icon:NAV_ICONS.pipe, label:'水管清洗'},
     {id:'leak-repair', href:'leak-repair.html', icon:NAV_ICONS.leak, label:'漏水檢測與修補'},
   ];
 
@@ -669,9 +648,8 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
 
   const html = `
     <a class="ld-skip-link" href="#main">跳到主要內容</a>
-    <a id="ld-float" href="${LINE}" target="_blank" rel="noopener">
-      ${LINE_FLOAT_ICON}
-      <span id="ld-float-text">LINE</span>
+    <a id="ld-float" href="${LINE}" target="_blank" rel="noopener" aria-label="LINE 詢價與預約">
+      <img id="ld-float-icon" src="/assets/brand/line-brand-icon.png" alt="" width="48" height="48">
     </a>
     <header id="ld-header">
       <div class="ld-top">
@@ -1024,6 +1002,19 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
     }
   }
   setOffset();
+  // 以實際高度保留空間：涵蓋 safe-area、文字換行、字型載入與縮放。
+  function setBottomSpace(){
+    var stickyBar = document.getElementById('ld-stickybar');
+    if(stickyBar) document.documentElement.style.setProperty('--ld-bottom-space', stickyBar.offsetHeight + 'px');
+  }
+  setBottomSpace();
+  window.addEventListener('resize', setBottomSpace);
+  window.addEventListener('load', setBottomSpace);
+  if(window.ResizeObserver){
+    const bottomObserver = new ResizeObserver(setBottomSpace);
+    const stickyBar = document.getElementById('ld-stickybar');
+    if(stickyBar) bottomObserver.observe(stickyBar);
+  }
   window.addEventListener('resize', setOffset);
   if(window.ResizeObserver){
     const headerObserver = new ResizeObserver(setOffset);

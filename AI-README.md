@@ -6,7 +6,7 @@
 > 3. 本檔案是唯一的交接依據，寫給 AI 看：請保持精確、可執行、不留模糊描述。
 > 4. **所有時間戳一律台灣時間（Asia/Taipei, UTC+8）**。
 
-最後更新：2026-08-30（Codex）— 首頁雙入口已部署；補齊 Claude 審查交接、驗證範圍與待複核清單
+最後更新：2026-08-30（Codex）— 業主確認六大項；修正導覽、官方 LINE 圖示與底部遮擋，最後複核與未修缺陷見新交接文件
 
 ## 2026-08-25 GitHub Actions Node 24 runtime（Codex）
 
@@ -310,6 +310,15 @@ cases/
 - 修改後驗證慣例：`node --check header.js`；以 Node 驗證 JSON-LD、內部連結、四頁流程與禁止字樣；本機網址受瀏覽器安全政策阻擋時，直接使用正式部署標記與真機驗證，不可繞過安全政策。
 
 ## 5. 進度紀錄（新條目加在最上面）
+
+### 2026-08-30（Codex・六大服務與最後複核）
+- 業主本輪明確回答「六大項」，覆蓋早先四項決策。Header 恢復水塔／水管，六頁各有正確選取狀態；桌機同列，手機橫滑，Logo 保持首頁品牌入口。
+- LINE 浮鈕改用官方未改動 PNG、移除手繪與重複文字並保持靜態；底部保留空間由 ResizeObserver 實測，含 safe-area。價格模式手機隱藏浮鈕，避免遮住數量與說明，保留原 LINE CTA。
+- 修正部分非 modal 小字、首頁標題過窄及平板 Hero 擁擠；尊重使用者根字級，不把 Chrome 24px 字體設定改掉。針對根字級 16px／24px 與模擬 safe-area 34px 做分開驗證。
+- 本機 Chrome 七頁 × 375／768／1440 檢查無水平溢出；mobile bar/body 為 69/69px，safe-area 模擬為 103/103px。實際點選水塔→水管→返回、modal 返回關閉與焦點歸還、首頁價格↔知識保留數量及 3,698 元試算正常。這不是 iOS／Android／LINE 真機驗收。
+- 新增 `scripts/test-header-contract.mjs`（9 案，含 5 個故意破壞的變異案例）並進 CI；首頁 16 案、結構 22 頁/33 sitemap、跨 repo 21 品項契約通過。完整證據與 Claude 提示詞見 `docs/CODEX-FINAL-REVIEW-2026-08-30.md`。
+- Bot 本輪未修改：以真實函式＋本機 SQLite 再次重現 A 草稿修改被吃掉、B working_lead 重複。`scripts/audit-bot-handoff.mjs` 是缺陷重現工具，exit 0 不代表缺陷修好，不可當成 CI 綠燈。
+- 更正歷史宣稱：service-layer 分頁目前因只掃 body 直屬節點而未啟用；native 目錄 hash 跳轉可用，但第二／第三層分頁不能宣稱通過。未啟用真實派單，也未寫入潔美淨 LINE ID。
 
 ### 2026-08-30（Codex・Claude 審查交接，僅文件）
 - 新增 `docs/CLAUDE-REVIEW-HANDOFF-2026-08-30.md`，列出功能 `43c28fd`（基準 `e5a5fa8`）的修改對照、價格來源、驗證證據、可重現命令與審查格式。
@@ -749,8 +758,8 @@ GSC 存取：`leakdoctor.tw` 與 `blossomkids.tw` 皆已驗證，共用驗證碼
 3. **LINE 連結不可隨意替換**：業主有多個事業（露涼社等）各有自己的 LINE。曾把露涼社連結誤換到全站（未推送即攔下）。**換任何 lin.ee 連結前必須向業主確認該連結屬於灰汰郎。**
 4. 價格改動同步點：頁面價目表、JSON-LD Offer、llms.txt、首頁服務卡、`header.js` 的 `SERVICE_DETAIL_CATALOG`、`data/service-options.json`。
 5. 雲端 session 容器會被回收：**成果要盡早 commit+push**，別累積大量未提交修改。
-6. `.ld-tab` 目前應為 **4 個主服務大項**（冷氣、洗衣機、居家清潔、漏水檢測與修補）；水塔／水管仍是可承接服務，但由首頁卡片與漏水／水路脈絡進入，不放回首層 Header。1023px 以下維持可橫向滑動單列，服務頁作用中頁籤置中；不要恢復 2×2 或 3×2。
-7. 第二層 `.service-toc` 不可再用所有內容區塊的 `offsetTop` 做 scroll-spy：第三層會把非作用中區塊設為 `hidden`，其 offset 不可靠。第二層與第三層狀態統一由 `initServiceLayerTabs()` 管理。
+6. `.ld-tab` 目前應為 **6 個主服務大項**（冷氣、洗衣機、居家清潔、水塔、水管、漏水檢測與修補），依 2026-08-30 業主最新決定。1023px 以下維持可橫向滑動單列；水塔／水管有獨立 active，不要又縮回四項。
+7. `initServiceLayerTabs()` 目前只掃 body 直屬節點，內容在 main 內，實際沒有產生 `.service-layer-tabs`。不可照歷史文件宣稱已啟用。若後续修復，須完整驗證 hidden、hash、history、焦點與 sticky 偏移，不要只改 selector 就啟用休眠程式。
 
 ## 7. 待辦清單
 
@@ -774,7 +783,11 @@ GSC 存取：`leakdoctor.tw` 與 `blossomkids.tw` 皆已驗證，共用驗證碼
       內容，被關掉有點可惜。要不要放出來是獨立決定，本輪未動。
 
 ### 🟠 高價值，AI 可做
-- [x] **Claude 審查交接文件**：`docs/CLAUDE-REVIEW-HANDOFF-2026-08-30.md` 已記錄修改、部署、測試邊界與審查清單。
+- [x] **六大項 Header／官方 LINE／底部安全區**：本輪必要修正與 Chrome 模擬回歸完成，詳 `docs/CODEX-FINAL-REVIEW-2026-08-30.md`；真機未驗。
+- [ ] **Bot A/B 優先修正**：同客戶修改草稿就地更新、維持 public_id、相同內容去重；working_lead 只在首次轉換發送。已重現但本輪未改 Bot，禁止用新增訂單規避去重。
+- [ ] **service-layer 分頁初始化與文件落差**：目前原生頁內目錄可用，第二／第三層分頁未生效；先確認預期互動後修復並加 history／焦點回歸。
+- [ ] **實體手機／LINE webview 驗收**：包含 24px 放大字、價格返回與逾時重送、鍵盤／安全區、剪貼簿及 LINE 跳轉。正式 D1、GA4 DebugView、潔美淨綁定另需安全操作及業主授權。
+- [x] **Claude 審查交接文件**：最新以 `docs/CODEX-FINAL-REVIEW-2026-08-30.md` 為準；先前 `docs/CLAUDE-REVIEW-HANDOFF-2026-08-30.md` 為歷史交接。
 - [ ] **Claude 獨立複核首頁價格功能**：先審 `e5a5fa8..43c28fd` 與目前 main 差異，按附件輸出具證據的 findings；確認修正範圍後再實作。真實 LINE 建案／確認／派工測試另需業主授權。
 - [x] **首頁知識／價格雙入口**：跨服務數量試算、固定價／待報價區分、複製明細、D1 成功後 LINE 交接、手機小計入口與測試門禁。
 - [x] **前台轉換 P0**：地址選填、機型數量收合、首頁／手機雙 CTA、`line_direct_click`、手機 Header CLS 與六服務卡配色已於 2026-07-19 完成。
