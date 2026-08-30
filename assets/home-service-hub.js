@@ -4,12 +4,12 @@
   // Public retail snapshot: leakdoctor-bot main@3a5b94e, src/catalog.ts (2026-08-30).
   // Supplier costs (including -1) are NOT retail prices. Bot re-prices every draft.
   const services = [
-    {id:'wall_mounted_split',group:'aircon',groupLabel:'冷氣清洗',label:'壁掛分離式冷氣清洗（室內機）',unit:'台',price:1599,note:'室外機另列加購',popular:true},
-    {id:'ceiling_concealed',group:'aircon',groupLabel:'冷氣清洗',label:'吊隱式冷氣清洗（二風鼓，室內外機）',unit:'台',price:2799,note:'三風鼓以上需加購風鼓'},
+    {id:'wall_mounted_split',group:'aircon',groupLabel:'冷氣清洗',label:'壁掛分離式冷氣清洗（室內機）',unit:'台',price:1599,note:'價格只含室內機；室外機另列加購',popular:true},
+    {id:'ceiling_concealed',group:'aircon',groupLabel:'冷氣清洗',label:'吊隱式冷氣清洗（二風鼓，室內機）',unit:'台',price:2799,note:'價格只含室內機；室外機與三風鼓以上另加購'},
     {id:'transformer_split_aircon',group:'aircon',groupLabel:'冷氣清洗',label:'變形金剛機型冷氣清洗（國際牌／三菱）',unit:'台',price:2500,note:'需提供品牌、型號與照片'},
     {id:'blower_wheel_removal',group:'aircon',groupLabel:'冷氣加購',label:'風鼓拆下深度清洗（加購）',unit:'台',price:800,note:'需搭配冷氣清洗'},
     {id:'ceiling_concealed_extra_blower',group:'aircon',groupLabel:'冷氣加購',label:'吊隱式加購風鼓（每多一組）',unit:'組',price:500,note:'三風鼓以上適用'},
-    {id:'aircon_outdoor_unit',group:'aircon',groupLabel:'冷氣加購',label:'室外機清洗',unit:'台',price:500,note:'需確認安裝位置與安全條件',popular:true},
+    {id:'aircon_outdoor_unit',group:'aircon',groupLabel:'冷氣加購',label:'室外機清洗',unit:'台',price:500,note:'壁掛與吊隱都需另加購；需確認安裝位置與安全條件',popular:true},
     {id:'window_aircon',group:'aircon',groupLabel:'冷氣清洗',label:'窗型冷氣清洗',unit:'台',quote:true,priceLabel:'3 台以上再安排評估',note:'需兩人搬抬，未達三台先由專員確認'},
     {id:'ceiling_cassette_4way',group:'aircon',groupLabel:'冷氣清洗',label:'四方吹冷氣清洗',unit:'台',quote:true,priceLabel:'依機型與高度報價',note:'請提供面板與現場照片'},
     {id:'commercial_aircon',group:'aircon',groupLabel:'冷氣清洗',label:'商用冷氣清洗',unit:'案',quote:true,priceLabel:'依案件報價',note:'需確認機型、數量與進場限制'},
@@ -36,8 +36,14 @@
     return Number.isFinite(number) ? Math.max(0,Math.min(20,Math.floor(number))) : 0;
   }
   function calculate(quantities){
-    const items = services.map(function(item){ return Object.assign({},item,{quantity:clampQuantity(quantities.get(item.id) || 0)}); }).filter(function(item){ return item.quantity > 0; });
-    return {items:items, priced:items.filter(function(item){return !item.quote;}), quoted:items.filter(function(item){return item.quote;}), amount:items.reduce(function(sum,item){return sum + (item.quote ? 0 : item.price * item.quantity);},0)};
+    const chosen = services.map(function(item){ return Object.assign({},item,{quantity:clampQuantity(quantities.get(item.id) || 0)}); }).filter(function(item){ return item.quantity > 0; });
+    // 固定價排前面，與畫面順序一致。Bot 會用第一行「服務內容」推訂單主服務
+    // （parser.ts：service = serviceLines[0].label），排序若讓待報價項目排第一，
+    // 訂單標題與業主通知就會掛成需報價品項，即使客戶主要買的是固定價服務。
+    const priced = chosen.filter(function(item){return !item.quote;});
+    const quoted = chosen.filter(function(item){return item.quote;});
+    const items = priced.concat(quoted);
+    return {items:items, priced:priced, quoted:quoted, amount:priced.reduce(function(sum,item){return sum + item.price * item.quantity;},0)};
   }
   function detailLines(items){
     return items.map(function(item){ return item.label + ' × ' + item.quantity + item.unit + '（' + (item.quote ? '需專員確認報價' : '參考價 $' + money.format(item.price) + '／' + item.unit) + '）'; });
@@ -55,14 +61,19 @@
     detailLines(result.items).forEach(function(line){lines.push('服務內容：' + line);});
     if(result.priced.length) lines.push('已定價項目小計：NT$ ' + money.format(result.amount));
     if(result.quoted.length) lines.push('待報價項目：需依照片或現場條件另行確認，未列入上述小計');
-    if(customer.time) lines.push('希望日期：' + clean(customer.time));
+    if(customer.time) lines.push('希望時段：' + clean(customer.time));
     lines.push('現場狀況／備註：由首頁價格試算帶入；最終服務內容與金額以專員確認為準。');
     return lines.join('\n');
   }
   // Pure calculation / parser-contract tests can run without a browser or network.
   if(typeof module !== 'undefined' && module.exports) module.exports = {services,clampQuantity,calculate,detailLines,formatMessage,routeForHash};
   if(typeof document === 'undefined') return;
-  const state = {filter:'popular', quantities:new Map(),submitting:false};
+  const state = {filter:'popular', quantities:new Map(),submitting:false,
+    submittedLeadId:'',
+    // 上一次送出結果的訊息與當時的「內容指紋」。
+    // 指紋沒變＝同一筆需求，訊息要留著（成功時鎖住送出鈕、逾時時保留警告）；
+    // 指紋變了＝客戶改了內容，才視為新的一筆詢價並解鎖。
+    lastStatus:'', lastSignature:''};
   const root = document.getElementById('service-hub');
   if(!root) return;
 
@@ -130,6 +141,10 @@
   root.addEventListener('change',function(event){
     if(event.target.matches('[data-quantity-value]')) updateRow(event.target.dataset.quantityValue,clampQuantity(event.target.value));
   });
+  // 聯絡欄位也算在指紋裡：改了姓名／電話等同新的一筆詢價，要解鎖送出鈕。
+  ['home-order-name','home-order-phone','home-order-address','home-order-time'].forEach(function(id){
+    document.getElementById(id).addEventListener('input', updateSummary);
+  });
 
   root.addEventListener('keydown', function(event){
     const tab = event.target.closest('[role="tab"]');
@@ -191,6 +206,18 @@
     return calculate(state.quantities).items;
   }
 
+  /** 選項數量＋聯絡欄位的內容指紋；用來判斷「還是同一筆需求」。 */
+  function signature(){
+    const picks = selectedItems().map(function(item){ return item.id + ':' + item.quantity; }).join(',');
+    return picks + '|' + ['home-order-name','home-order-phone','home-order-address','home-order-time']
+      .map(function(id){ return (document.getElementById(id).value || '').trim(); }).join('|');
+  }
+
+  /** 已建案且內容沒變就鎖住送出鈕，避免手機從 LINE 切回後再按一次多建一筆線索。 */
+  function isLockedAsSubmitted(){
+    return Boolean(state.submittedLeadId) && signature() === state.lastSignature;
+  }
+
   function updateSummary(){
     const selected = selectedItems();
     const priced = selected.filter(function(item){ return !item.quote; });
@@ -210,9 +237,16 @@
     const warning = document.getElementById('home-order-warning');
     warning.hidden = selected.length <= 12;
     warning.textContent = selected.length > 12 ? '單次最多 12 種項目，請減少項目或分次詢問；每種數量可各自設定。' : '';
-    lineButton.disabled = selected.length === 0 || state.submitting;
+    const locked = isLockedAsSubmitted();
+    lineButton.disabled = selected.length === 0 || state.submitting || locked;
     document.getElementById('home-order-copy').disabled = selected.length === 0 || state.submitting;
-    status.textContent = '';
+    // 指紋沒變就保留上次的成功／逾時訊息；客戶改了內容才清空並解鎖成新的一筆。
+    if(state.lastStatus && signature() === state.lastSignature){
+      status.textContent = state.lastStatus;
+    } else {
+      state.lastStatus = ''; state.lastSignature = ''; state.submittedLeadId = '';
+      status.textContent = '';
+    }
   }
 
   function customerData(requireAll){
@@ -281,18 +315,28 @@
       const message = formatMessage(quantities,customer,result.leadId);
       let copied = true;
       try { await copyText(message); } catch(error){copied = false;}
-      status.textContent = '需求 ' + result.leadId + ' 已儲存。' + (copied ? '明細已複製；' : '明細將帶入 LINE；') + '請在 LINE 按傳送，接續確認預約。';
+      state.submittedLeadId = result.leadId;
+      state.lastStatus = '需求 ' + result.leadId + ' 已儲存。' + (copied ? '明細已複製；' : '明細將帶入 LINE；') + '請在 LINE 按傳送，接續確認預約。改動任一欄位或數量才會視為新的一筆詢價。';
+      status.textContent = state.lastStatus;
       window.location.href = result.lineBase + encodeURIComponent(message);
     } catch(error){
-      status.textContent = '目前無法確認需求已儲存，未開啟 LINE。請稍後重試；也可先複製明細，再從「LINE 直接問」貼上詢問。';
+      // 逾時／失敗不代表伺服器一定沒寫入，訊息要留著，不能被下一次 updateSummary 清掉。
+      state.lastStatus = '目前無法確認需求已儲存，未開啟 LINE。請稍後重試；也可先複製明細，再從「LINE 直接問」貼上詢問。';
+      status.textContent = state.lastStatus;
     } finally {
       state.submitting = false;
       root.querySelectorAll('input,button').forEach(function(control){control.disabled = false;});
+      // 記下這次送出當下的內容指紋，讓 updateSummary 判斷是否要維持鎖定與保留訊息。
+      // 手機開 LINE 後切回來頁面還活著；若整組解鎖，再按一次會多一筆 D1 線索，
+      // 並重複送出 generate_lead／quote_submit（後者是 Google Ads 的主要轉換）。
+      state.lastSignature = signature();
+      updateSummary();
     }
   });
 
   document.getElementById('home-price-reset').addEventListener('click', function(){
     state.quantities.clear();
+    state.submittedLeadId = ''; state.lastStatus = ''; state.lastSignature = '';
     renderList();
     updateSummary();
   });

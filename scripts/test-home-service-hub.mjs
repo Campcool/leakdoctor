@@ -52,7 +52,7 @@ test('blank contact fields omitted, populated fields sanitised, lead ID retained
   const blank = formatMessage(selection,{});
   assert.ok(!blank.includes('姓名：') && !blank.includes('待補'));
   const full = formatMessage(selection,{name:'測試\n名稱',phone:'0912345678',address:'測試地址',time:'週六上午'},'HTL-L-TEST');
-  assert.match(full,/姓名：測試 名稱/);assert.match(full,/線索編號：HTL-L-TEST/);assert.match(full,/希望日期：週六上午/);
+  assert.match(full,/姓名：測試 名稱/);assert.match(full,/線索編號：HTL-L-TEST/);assert.match(full,/希望時段：週六上午/);
 });
 test('every detail roundtrips label and integer quantity and fits API 180-char limit',()=>{
   for(const service of services){
@@ -86,4 +86,38 @@ test('HTTP failure / missing lead ID / network failure never emits conversion',a
   for(const response of [{ok:false,json:async()=>({})},{ok:true,json:async()=>({})},new Error('offline')]){
     const h = bridgeHarness(response);await assert.rejects(h.run({}));assert.equal(h.events.length,0);
   }
+});
+
+// —— 2026-08-30 Claude 審查後補強 ——
+
+test('待報價項目一律排在固定價之後（bot 用第一行推訂單主服務）',()=>{
+  // window_aircon 在 services 陣列比 top_load_washer 早，若照陣列順序輸出，
+  // 訂單標題會變成需報價的窗型，即使客戶主要買的是直立式洗衣機。
+  const items = calculate(cart(['window_aircon',2],['top_load_washer',1])).items;
+  assert.equal(items[0].id,'top_load_washer');
+  assert.equal(items[1].id,'window_aircon');
+  const lines = formatMessage(cart(['window_aircon',2],['top_load_washer',1]),{}).split('\n').filter(l=>l.startsWith('服務內容：'));
+  assert.match(lines[0],/直立式洗衣機清洗/);
+});
+
+test('冷氣主機說明必須講清楚售價只含室內機',()=>{
+  for(const id of ['wall_mounted_split','ceiling_concealed']){
+    const item = services.find(s=>s.id===id);
+    assert.match(item.note,/只含室內機/,`${id} 的說明要講明只含室內機`);
+    assert.doesNotMatch(item.label,/室內外機|含室外機/,`${id} 的標籤不可宣稱含室外機`);
+  }
+  assert.match(services.find(s=>s.id==='aircon_outdoor_unit').note,/壁掛與吊隱都需另加購/);
+});
+
+test('希望時段欄位名與畫面標籤一致',()=>{
+  const msg = formatMessage(cart(['wall_mounted_split',1]),{time:'週六上午'});
+  assert.match(msg,/希望時段：週六上午/);
+  assert.doesNotMatch(msg,/希望日期/);
+});
+
+test('純待報價仍不得出現 NT$0 總額',()=>{
+  const r = calculate(cart(['deep_cleaning',1],['window_aircon',2]));
+  assert.equal(r.amount,0);
+  assert.equal(r.priced.length,0);
+  assert.equal(r.quoted.length,2);
 });

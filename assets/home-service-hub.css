@@ -27,14 +27,6 @@
 .route-panel{border:1px solid #dce5e9;border-radius:28px;background:#fff}
 .route-panel[hidden]{display:none!important}
 .knowledge-route{padding:clamp(1.1rem,3vw,2rem)}
-.knowledge-route-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
-.knowledge-route-card{display:flex;min-height:180px;flex-direction:column;padding:1.35rem;border:1px solid #dbe4e8;border-radius:20px;background:#fff;box-shadow:0 6px 18px rgba(23,50,77,.05);transition:border-color .2s,box-shadow .2s,transform .2s}
-.knowledge-route-card:hover{border-color:var(--knowledge-accent,#138a80);box-shadow:0 14px 32px rgba(23,50,77,.11);transform:translateY(-3px)}
-.knowledge-route-icon{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;color:var(--knowledge-accent,#138a80);background:color-mix(in srgb,var(--knowledge-accent,#138a80) 11%,#fff);margin-bottom:.9rem}
-.knowledge-route-icon svg{width:27px;height:27px}
-.knowledge-route-card strong{color:#17324d;font-size:1.12rem;line-height:1.4}
-.knowledge-route-card p{color:#647584;font-size:.86rem;line-height:1.7;margin:.42rem 0 1rem}
-.knowledge-route-link{display:flex;align-items:center;justify-content:space-between;color:var(--knowledge-accent,#138a80);font-size:.86rem;font-weight:900;margin-top:auto}
 
 .price-route{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(300px,.8fr);align-items:start}
 .price-builder{padding:clamp(1.1rem,3vw,2rem);min-width:0}
@@ -59,12 +51,6 @@
 .qty-value{text-align:center;color:#17324d;font-size:.9rem;font-weight:900;font-variant-numeric:tabular-nums}
 .price-quote-divider{display:flex;align-items:center;gap:.8rem;color:#748491;font-size:.76rem;font-weight:900;margin:1.35rem 0 .75rem}
 .price-quote-divider::before,.price-quote-divider::after{content:"";height:1px;background:#dae3e7;flex:1}
-.quote-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem}
-.quote-item{display:flex;align-items:center;justify-content:space-between;gap:.8rem;min-height:64px;padding:.82rem .9rem;border:1px solid #dce5e9;border-radius:16px;background:#fbfcfc;text-align:left}
-.quote-item[data-selected="true"]{border-color:#f28c28;background:#fff8ef;box-shadow:0 0 0 3px rgba(242,140,40,.09)}
-.quote-item strong{display:block;color:#17324d;font-size:.85rem;line-height:1.45}
-.quote-item small{display:block;color:#7b8994;font-size:.7rem;line-height:1.45;margin-top:.14rem}
-.quote-toggle{flex:0 0 auto;color:#c46d16;font-size:.76rem;font-weight:900}
 
 .order-summary{position:sticky;top:calc(var(--ld-hdr-h,96px) + 16px);padding:1.4rem;background:#17324d;color:#fff;border-radius:0 27px 27px 0;min-width:0}
 .order-summary-eyebrow{color:#8fe1d9;font-size:.72rem;font-weight:900;letter-spacing:.07em}
@@ -101,7 +87,9 @@
 .order-field input{min-height:48px;font-size:16px}
 .order-line-btn:focus-visible,.order-copy-btn:focus-visible{outline-color:#fff}
 .order-copy-btn:disabled{opacity:.5;cursor:not-allowed}
-/* Reading and control text stays at least 14px, independent of legacy page styles. */
+/* 可讀性下限：以 #service-hub 提高權重，蓋過舊頁面樣式。
+   ⚠️ 這一段的權重高於下方 @media 內的同名 class，媒體查詢再寫字級不會生效——
+   要調整手機字級請直接改這裡，或另外加上 #service-hub 前綴。 */
 #service-hub :is(.decision-hub-kicker,.route-tab small,.price-builder-head p,.price-reset,.price-filter,.price-item-type,.price-item-note,.price-quote-divider,.order-summary-eyebrow,.order-empty,.order-line,.order-total-label,.order-quote-note,.order-field label,.order-form-note,.order-status,.order-disclaimer){font-size:14px}
 #service-hub :is(.route-tab,.price-item-name,.qty-value,.order-line-btn,.order-copy-btn){font-size:16px}
 #service-hub .price-item-price{font-size:18px;color:#0f766e}
@@ -122,23 +110,19 @@
 @media(max-width:640px){
   .decision-hub{padding:3rem .85rem}
   .route-tabs{gap:.38rem;padding:.35rem;border-radius:17px}
-  .route-tab{min-height:58px;padding:.65rem .45rem;gap:.45rem;font-size:.84rem}
+  .route-tab{min-height:58px;padding:.65rem .45rem;gap:.45rem}
   .route-tab svg{width:21px;height:21px}
   .route-tab{flex-direction:column}
   .route-tab svg{display:none}
-  .route-tab small{font-size:.62rem}
   .route-panel{border-radius:22px}
-  .knowledge-route-grid,.quote-list{grid-template-columns:1fr}
-  .knowledge-route-card{min-height:160px}
   .price-builder{padding:1rem .8rem 1.2rem}
   .price-builder-head{align-items:start}
   .price-builder-head p{font-size:.76rem}
   .price-item{padding:1rem;gap:.75rem;grid-template-columns:1fr}
   .qty-stepper{justify-self:end}
-  .price-item-name{font-size:.84rem}
   .qty-stepper{grid-template-columns:44px 34px 44px}
   .order-summary{padding:1.2rem 1rem}
 }
 @media(prefers-reduced-motion:reduce){
-  .route-tab,.knowledge-route-card,.price-item{transition:none}
+  .route-tab,.price-item{transition:none}
 }
