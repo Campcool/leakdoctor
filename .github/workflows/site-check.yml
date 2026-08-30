@@ -28,6 +28,8 @@ jobs:
         run: node --test scripts/test-home-service-hub.mjs
       - name: Six-service header, bottom spacing and official LINE asset
         run: node --test scripts/test-header-contract.mjs
+      - name: Editorial process, safety copy and layout regression guards
+        run: node --test scripts/test-process-editorial.mjs
       - name: 防假綠：故意破壞 header.js 常數，確認 validate 能抓住
         run: |
           cp header.js header.js.bak

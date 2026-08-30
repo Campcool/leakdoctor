@@ -111,11 +111,12 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   .footer-links{flex-direction:column;gap:.38rem;margin-bottom:0}
 }
 </style>
+<link rel="stylesheet" href="/assets/process-editorial.css?v=20260830a">
 </head>
-<body class="service-page">
+<body class="service-page" data-editorial-page>
 <link rel="stylesheet" href="assets/service-refresh.css">
 <link rel="stylesheet" href="assets/craft.css?v=20260723a">
-<script src="header.js?v=20260727a"></script>
+<script src="header.js?v=20260830c"></script>
 
 <main id="main">
 <section id="page-hero" role="region">
@@ -168,16 +169,40 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
     </div>
   </div>
 </section>
-<section class="service-flow" aria-labelledby="washer-flow-title" aria-label="服務流程">
-  <div class="service-flow-inner">
-    <div class="service-flow-head"><div class="service-flow-kicker">洗衣機專屬流程</div><h2 id="washer-flow-title">拆洗、復位、試轉，六步不省略</h2><p class="service-flow-intro">直立式、滾筒式與洗脫烘結構不同；先核對機型與原始功能，再決定可拆範圍。</p></div>
-    <div class="service-step-grid">
-      <article class="service-step"><h3>型號與試運轉</h3><p>核對品牌、型號、容量，測試進水、洗程、排水、脫水、面板與異音。</p></article>
-      <article class="service-step"><h3>關水斷電與保護</h3><p>拔除電源並關閉進水，保護地板與牆面，劃分零件放置及清洗區。</p></article>
-      <article class="service-step"><h3>依結構分解</h3><p>按直立式、滾筒式或洗脫烘結構拆卸，記錄線組與零件位置，不強拆鏽蝕部件。</p></article>
-      <article class="service-step"><h3>內外槽分件清洗</h3><p>處理內槽、外槽、底盤、濾網及可拆部件，清除皂垢、棉絮與附著污物。</p></article>
-      <article class="service-step"><h3>組裝與管線復位</h3><p>依順序裝回零件，檢查螺絲、接頭、線組、進排水管與機身水平。</p></article>
-      <article class="service-step"><h3>進排水試運轉</h3><p>恢復水電，實測進水、洗程、排水與脫水，確認無漏水、異音或異常晃動。</p></article>
+<section class="service-flow" data-process-editorial aria-labelledby="washer-flow-title" aria-label="服務流程">
+  <div class="service-flow-inner process-editorial">
+    <div class="process-overview">
+      <div class="service-flow-head"><div class="service-flow-kicker">洗衣機專屬流程</div><h2 id="washer-flow-title">拆洗、復位、試轉，六步不省略</h2><p class="service-flow-intro">直立式、滾筒式與洗脫烘結構不同；先核對機型與原始功能，再決定可拆範圍。</p></div>
+      <figure class="process-field-photo"><img src="/cases/washer/case01-after.webp" alt="洗衣機拆洗後的內部槽體實拍" width="890" height="1188" loading="lazy" decoding="async"><figcaption>現場細節｜拆開後才看得到的槽體<span>真實服務紀錄・個案狀況不同</span></figcaption></figure>
+    </div>
+    <div class="process-reading">
+      <p class="process-hint">作業順序 <span>點選步驟，查看細節</span></p>
+      <ol class="process-timeline" role="list">
+          <li><article class="service-step"><details class="process-detail">
+            <summary><h3><span class="process-number" aria-hidden="true">01</span><span class="process-heading">型號與試運轉<span class="process-summary">核對型號，先測進水、洗程與脫水。</span></span><span class="process-toggle" aria-hidden="true">+</span></h3></summary>
+            <div class="process-detail-body"><p>核對品牌、型號、容量，測試進水、洗程、排水、脫水、面板與異音。</p></div>
+          </details></article></li>
+          <li><article class="service-step"><details class="process-detail">
+            <summary><h3><span class="process-number" aria-hidden="true">02</span><span class="process-heading">關水斷電與保護<span class="process-summary">關水斷電，劃分零件與清洗區。</span></span><span class="process-toggle" aria-hidden="true">+</span></h3></summary>
+            <div class="process-detail-body"><p>拔除電源並關閉進水，保護地板與牆面，劃分零件放置及清洗區。</p></div>
+          </details></article></li>
+          <li><article class="service-step"><details class="process-detail">
+            <summary><h3><span class="process-number" aria-hidden="true">03</span><span class="process-heading">依結構分解<span class="process-summary">依機型拆卸，記錄線組與零件位置。</span></span><span class="process-toggle" aria-hidden="true">+</span></h3></summary>
+            <div class="process-detail-body"><p>按直立式、滾筒式或洗脫烘結構拆卸，記錄線組與零件位置，不強拆鏽蝕部件。</p></div>
+          </details></article></li>
+          <li><article class="service-step"><details class="process-detail">
+            <summary><h3><span class="process-number" aria-hidden="true">04</span><span class="process-heading">內外槽分件清洗<span class="process-summary">分件處理皂垢、棉絮與附著污物。</span></span><span class="process-toggle" aria-hidden="true">+</span></h3></summary>
+            <div class="process-detail-body"><p>處理內槽、外槽、底盤、濾網及可拆部件，清除皂垢、棉絮與附著污物。</p></div>
+          </details></article></li>
+          <li><article class="service-step"><details class="process-detail">
+            <summary><h3><span class="process-number" aria-hidden="true">05</span><span class="process-heading">組裝與管線復位<span class="process-summary">逐一檢查螺絲、接頭、管線與水平。</span></span><span class="process-toggle" aria-hidden="true">+</span></h3></summary>
+            <div class="process-detail-body"><p>依順序裝回零件，檢查螺絲、接頭、線組、進排水管與機身水平。</p></div>
+          </details></article></li>
+          <li><article class="service-step"><details class="process-detail">
+            <summary><h3><span class="process-number" aria-hidden="true">06</span><span class="process-heading">進排水試運轉<span class="process-summary">完整跑過進排水，確認無漏水與異常。</span></span><span class="process-toggle" aria-hidden="true">+</span></h3></summary>
+            <div class="process-detail-body"><p>恢復水電，實測進水、洗程、排水與脫水，確認無漏水、異音或異常晃動。</p></div>
+          </details></article></li>
+      </ol>
     </div>
   </div>
 </section>

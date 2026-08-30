@@ -119,11 +119,12 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   .footer-links{flex-direction:column;gap:.38rem;margin-bottom:0}
 }
 </style>
+<link rel="stylesheet" href="/assets/process-editorial.css?v=20260830a">
 </head>
-<body class="service-page">
+<body class="service-page" data-editorial-page>
 <link rel="stylesheet" href="assets/service-refresh.css">
 <link rel="stylesheet" href="assets/craft.css?v=20260723a">
-<script src="header.js?v=20260727a"></script>
+<script src="header.js?v=20260830c"></script>
 
 <main id="main">
 <section id="page-hero" role="region">
@@ -183,16 +184,40 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
     </div>
   </div>
 </section>
-<section class="service-flow" aria-labelledby="aircon-flow-title" aria-label="服務流程">
-  <div class="service-flow-inner">
-    <div class="service-flow-head"><div class="service-flow-kicker">冷氣專屬流程</div><h2 id="aircon-flow-title">從試機到排水，六步完整確認</h2><p class="service-flow-intro">先記錄原始狀態再動工；若試機發現故障或無法安全拆卸，會先說明處理界線。</p></div>
-    <div class="service-step-grid">
-      <article class="service-step"><h3>試機與記錄</h3><p>確認冷房、風量、結霜、白霧、異音、異味、滴水與排水現況，留下清洗前設備狀態。</p></article>
-      <article class="service-step"><h3>斷電與防護</h3><p>關機隔離電源，覆蓋牆面、家具與地板，架設集水罩及污水承接區。</p></article>
-      <article class="service-step"><h3>依機型拆卸</h3><p>拆下外殼、濾網、導風葉與可安全卸除部件；不能強拆的結構不勉強施工。</p></article>
-      <article class="service-step"><h3>機內分區清洗</h3><p>依機型清潔濾網、蒸發器、風鼓、集水盤及外殼，避免電控部位進水。</p></article>
-      <article class="service-step"><h3>復原與排水</h3><p>乾燥重點部位並依原位組裝，再以倒水方式確認集水盤與排水路徑。</p></article>
-      <article class="service-step"><h3>通電試運轉</h3><p>重測冷房、風量、聲音與排水；簡易堵塞可協助排除，嚴重管阻另請水電處理。</p></article>
+<section class="service-flow" data-process-editorial aria-labelledby="aircon-flow-title" aria-label="服務流程">
+  <div class="service-flow-inner process-editorial">
+    <div class="process-overview">
+      <div class="service-flow-head"><div class="service-flow-kicker">冷氣專屬流程</div><h2 id="aircon-flow-title">從試機到排水，六步完整確認</h2><p class="service-flow-intro">先記錄原始狀態再動工；若試機發現故障或無法安全拆卸，會先說明處理界線。</p></div>
+      <figure class="process-field-photo"><img src="/cases/aircon/case01-after.webp" alt="冷氣清洗後的機內與出風口實拍" width="1280" height="960" loading="lazy" decoding="async"><figcaption>現場細節｜冷氣機內與出風口<span>真實服務紀錄・個案狀況不同</span></figcaption></figure>
+    </div>
+    <div class="process-reading">
+      <p class="process-hint">作業順序 <span>點選步驟，查看細節</span></p>
+      <ol class="process-timeline" role="list">
+          <li><article class="service-step"><details class="process-detail">
+            <summary><h3><span class="process-number" aria-hidden="true">01</span><span class="process-heading">試機與記錄<span class="process-summary">先記錄冷房、風量與排水現況。</span></span><span class="process-toggle" aria-hidden="true">+</span></h3></summary>
+            <div class="process-detail-body"><p>確認冷房、風量、結霜、白霧、異音、異味、滴水與排水現況，留下清洗前設備狀態。</p></div>
+          </details></article></li>
+          <li><article class="service-step"><details class="process-detail">
+            <summary><h3><span class="process-number" aria-hidden="true">02</span><span class="process-heading">斷電與防護<span class="process-summary">隔離電源，再保護牆面、家具與地板。</span></span><span class="process-toggle" aria-hidden="true">+</span></h3></summary>
+            <div class="process-detail-body"><p>關機隔離電源，覆蓋牆面、家具與地板，架設集水罩及污水承接區。</p></div>
+          </details></article></li>
+          <li><article class="service-step"><details class="process-detail">
+            <summary><h3><span class="process-number" aria-hidden="true">03</span><span class="process-heading">依機型拆卸<span class="process-summary">依結構拆卸；不能安全拆的部件不強拆。</span></span><span class="process-toggle" aria-hidden="true">+</span></h3></summary>
+            <div class="process-detail-body"><p>拆下外殼、濾網、導風葉與可安全卸除部件；不能強拆的結構不勉強施工。</p></div>
+          </details></article></li>
+          <li><article class="service-step"><details class="process-detail">
+            <summary><h3><span class="process-number" aria-hidden="true">04</span><span class="process-heading">機內分區清洗<span class="process-summary">分開清潔濾網、蒸發器、風鼓與集水盤。</span></span><span class="process-toggle" aria-hidden="true">+</span></h3></summary>
+            <div class="process-detail-body"><p>依機型清潔濾網、蒸發器、風鼓、集水盤及外殼，避免電控部位進水。</p></div>
+          </details></article></li>
+          <li><article class="service-step"><details class="process-detail">
+            <summary><h3><span class="process-number" aria-hidden="true">05</span><span class="process-heading">復原與排水<span class="process-summary">組裝復位，再倒水確認排水路徑。</span></span><span class="process-toggle" aria-hidden="true">+</span></h3></summary>
+            <div class="process-detail-body"><p>乾燥重點部位並依原位組裝，再以倒水方式確認集水盤與排水路徑。</p></div>
+          </details></article></li>
+          <li><article class="service-step"><details class="process-detail">
+            <summary><h3><span class="process-number" aria-hidden="true">06</span><span class="process-heading">通電試運轉<span class="process-summary">確認運轉與排水；嚴重管阻另請水電處理。</span></span><span class="process-toggle" aria-hidden="true">+</span></h3></summary>
+            <div class="process-detail-body"><p>重測冷房、風量、聲音與排水；簡易堵塞可協助排除，嚴重管阻另請水電處理。</p></div>
+          </details></article></li>
+      </ol>
     </div>
   </div>
 </section>

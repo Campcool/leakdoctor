@@ -3,7 +3,7 @@
   document.documentElement.classList.add('craft-js');
 
   function init(){
-    var revealTargets = document.querySelectorAll('.svc-card,.process-card,.service-step,.promise-item,.impact-card,.item-card,.knowledge-card,.craft-case,.scope-card,.quote-method-grid>div');
+    var revealTargets = document.querySelectorAll('.svc-card,.process-card,.service-step:not(.process-timeline .service-step),.promise-item:not([data-editorial-promises] .promise-item),.impact-card,.item-card,.knowledge-card,.craft-case,.scope-card,.quote-method-grid>div');
     revealTargets.forEach(function(el,index){
       el.setAttribute('data-craft-reveal','');
       el.style.transitionDelay = Math.min(index % 4,3) * 70 + 'ms';
@@ -40,6 +40,8 @@
       setTocHeight();
       toc.dataset.localCount = toc.querySelectorAll('a[href^="#"]').length;
       window.addEventListener('resize',setTocHeight,{passive:true});
+      if(window.ResizeObserver) new ResizeObserver(setTocHeight).observe(toc);
+      if(document.fonts && document.fonts.ready) document.fonts.ready.then(setTocHeight);
     }
 
     initPriceTableLabels();

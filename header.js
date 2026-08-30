@@ -214,7 +214,7 @@ function ldInit(){
   }
   if(!document.querySelector('script[src*="craft.js"]')){
     const craftJs = document.createElement('script');
-    craftJs.src = '/assets/craft.js?v=20260716a';
+    craftJs.src = '/assets/craft.js?v=20260830a';
     craftJs.defer = true;
     document.head.appendChild(craftJs);
   }

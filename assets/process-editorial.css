@@ -1,0 +1,141 @@
+/* 2026-08-30: six-service reading system. Scoped above legacy card/hero rules.
+   Details retain the complete original safety copy; no JS required to read it. */
+body[data-editorial-page] main{min-width:0}
+body[data-editorial-page] main [id]{scroll-margin-top:calc(var(--ld-hdr-h,119px) + var(--service-toc-h,0px) + 24px)!important}
+body[data-editorial-page] .headline-line{white-space:normal!important;text-wrap:balance}
+body[data-editorial-page] .pricing-block h3,
+body[data-editorial-page] .craft-case-title{text-wrap:balance}
+body[data-editorial-page].service-page .page-hero-inner,
+body[data-editorial-page].service-page .hero-content-pc{
+  width:100%!important;max-width:1180px!important;min-height:0!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:clamp(40px,5vw,80px)!important;align-items:center!important;
+}
+body[data-editorial-page] .page-hero-inner>* ,
+body[data-editorial-page] .hero-content-pc>*{min-width:0;max-width:100%}
+body[data-editorial-page].service-page h1.page-title,
+body[data-editorial-page].service-page h1.hero-h1{
+  font-size:clamp(1.75rem,3.5vw,3.35rem)!important;line-height:1.24!important;
+  letter-spacing:-.035em!important;overflow-wrap:break-word;
+}
+body[data-editorial-page].service-page .page-desc,
+body[data-editorial-page].service-page .hero-desc{
+  max-width:30em!important;line-height:1.85!important;margin-top:1.1rem!important;
+}
+body[data-editorial-page] .service-visual{width:100%;min-width:0;transform:none!important}
+body[data-editorial-page] .service-visual-note{max-width:calc(100% - 36px)!important}
+
+/* Editorial sequence: one field photograph and one reading column. */
+body .service-flow[data-process-editorial]{
+  padding:clamp(48px,6vw,88px) clamp(20px,4vw,48px)!important;
+  background:#f8f9f7!important;border-block:1px solid #e1e7e5;
+}
+.service-flow[data-process-editorial] .process-editorial{
+  display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);
+  gap:clamp(36px,6vw,88px);width:100%;max-width:1180px;margin-inline:auto;align-items:start;
+}
+.service-flow[data-process-editorial] .process-overview{min-width:0}
+.service-flow[data-process-editorial] .service-flow-head{max-width:none!important;margin:0 0 1.6rem!important}
+.service-flow[data-process-editorial] .service-flow-kicker{color:var(--service-accent-dark,#115e59);font-size:.8rem;font-weight:700;margin-bottom:.8rem}
+.service-flow[data-process-editorial] h2{font-size:clamp(1.5rem,2.6vw,2.3rem)!important;line-height:1.4!important;letter-spacing:-.03em;text-wrap:balance;margin:0 0 1rem!important}
+.service-flow[data-process-editorial] .service-flow-intro{font-size:.95rem!important;line-height:1.85!important;color:#52636b;max-width:28em!important}
+.process-field-photo{margin:0}
+.process-field-photo img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:center;border-radius:4px}
+.process-field-photo--pipe img{aspect-ratio:9/16;max-height:470px;width:auto;max-width:100%;object-fit:contain}
+.process-field-photo--leak img{object-position:center 22%}
+.process-field-photo figcaption{border-top:1px solid #cdd8d5;margin-top:.9rem;padding-top:.75rem;color:#40565b;font-size:.8rem;line-height:1.7}
+.process-field-photo figcaption span{display:block;font-size:.75rem;color:#607278;margin-top:.15rem}
+.process-hint{display:flex;flex-wrap:wrap;gap:.5rem 1rem;justify-content:space-between;align-items:baseline;margin:0!important;padding:0 0 .9rem;border-bottom:2px solid var(--service-accent-dark,#115e59);color:var(--ld-ink);font-size:.82rem;font-weight:700}
+.process-hint span{color:#607278;font-size:.75rem;font-weight:400}
+.process-timeline{list-style:none;padding:0;margin:0}
+.process-timeline>li{margin:0;padding:0;border-bottom:1px solid #d5dfdc}
+.service-flow[data-process-editorial] .service-step{
+  min-height:0;padding:0!important;border:0!important;border-radius:0!important;
+  background:none!important;box-shadow:none!important;overflow:visible;transform:none!important;
+}
+.service-flow[data-process-editorial] .service-step::before{content:none;display:none}
+.process-detail summary{display:block;list-style:none;cursor:pointer;padding:1.25rem 0;min-height:64px;border-radius:2px}
+.process-detail summary::-webkit-details-marker{display:none}
+.process-detail summary:focus-visible{outline:3px solid var(--service-accent-dark,#115e59);outline-offset:5px}
+.service-flow[data-process-editorial] .service-step h3{display:grid;grid-template-columns:2.2rem minmax(0,1fr) 28px;gap:.65rem;align-items:start;margin:0!important;font-size:1.15rem!important;line-height:1.5!important;letter-spacing:0;color:#17324d}
+.process-number{color:var(--service-accent-dark,#115e59);font-size:.82rem;font-weight:700;font-variant-numeric:tabular-nums;padding-top:.2rem;letter-spacing:.04em}
+.process-heading{min-width:0;text-wrap:balance}
+.process-summary{display:block;margin-top:.4rem;font-size:1rem;font-weight:400;line-height:1.75;color:#52636b;text-wrap:pretty}
+.process-toggle{display:grid;place-items:center;width:28px;height:28px;border:1px solid #b6c9c4;border-radius:50%;color:var(--service-accent-dark,#115e59);font-size:20px;font-weight:400;line-height:1;transition:transform .15s ease,background .15s ease}
+.process-detail[open] .process-toggle{transform:rotate(45deg);background:#e6eeeb}
+.process-detail[open] summary{padding-bottom:.75rem}
+.process-detail-body{padding:0 2.4rem 1.3rem 2.85rem}
+.service-flow[data-process-editorial] .service-step p{margin:0!important;padding:.9rem 1rem;border-left:2px solid var(--service-accent,#138a80);background:#fff;font-size:.9rem!important;line-height:1.9!important;color:#40565b;max-width:none;text-wrap:pretty}
+@media(hover:hover){.process-detail summary:hover .process-heading{color:var(--service-accent-dark,#115e59)}.process-detail summary:hover .process-toggle{background:#e6eeeb}}
+
+/* Same row, same media frame. Do not stretch photos or alter slider direction. */
+#water-tank-cases .real-case-grid .craft-compare{aspect-ratio:4/3}
+#water-tank-cases .craft-case-copy{padding:1.3rem 1.25rem 1.5rem}
+#water-tank-cases .craft-case-note{line-height:1.85;font-size:.9rem}
+
+/* Keep phrases together without making the entire table nowrap. */
+body[data-editorial-page] .price-cell-copy{display:block;min-width:0;line-height:1.9;text-wrap:pretty}
+body[data-editorial-page] .keep-phrase{display:inline-block;max-width:100%;vertical-align:top;word-break:normal;overflow-wrap:break-word}
+body[data-editorial-page] #homeclean-pricing .price-table,
+body[data-editorial-page] #pipe-pricing .price-table{table-layout:fixed;width:100%;min-width:0!important}
+#homeclean-pricing .price-table th:nth-child(1){width:29%}
+#homeclean-pricing .price-table th:nth-child(2){width:33%}
+#homeclean-pricing .price-table th:nth-child(3){width:38%}
+#pipe-pricing .price-table th:nth-child(1){width:26%}
+#pipe-pricing .price-table th:nth-child(2){width:31%}
+#pipe-pricing .price-table th:nth-child(3){width:43%}
+body[data-editorial-page] #homeclean-pricing .price-table td,
+body[data-editorial-page] #pipe-pricing .price-table td{white-space:normal!important;vertical-align:top;padding:1rem!important;line-height:1.9}
+
+/* Leak service promises are an explanation, not three fake clickable cards. */
+body[data-editorial-page] #promises[data-editorial-promises]{background:#fff!important;padding:clamp(48px,6vw,88px) clamp(20px,4vw,48px)!important}
+#promises[data-editorial-promises] .promises-inner{display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);column-gap:clamp(36px,6vw,88px);max-width:1180px;margin:auto;align-items:start}
+#promises[data-editorial-promises] .sec-tag{grid-column:1;grid-row:1}
+#promises[data-editorial-promises] .sec-title{grid-column:1;grid-row:2;line-height:1.45!important;margin:.6rem 0 1rem}
+#promises[data-editorial-promises] .sec-sub{grid-column:1;grid-row:3;line-height:1.85!important;margin:0}
+#promises[data-editorial-promises] .promise-list{grid-column:2;grid-row:1/span 4;display:block!important}
+#promises[data-editorial-promises] .promise-item{display:grid!important;grid-template-columns:40px minmax(0,1fr);gap:1rem;padding:1.4rem 0!important;border:0!important;border-top:1px solid #d5dfdc!important;border-radius:0!important;background:none!important;box-shadow:none!important;transform:none!important;cursor:default}
+#promises[data-editorial-promises] .promise-icon{width:40px;height:40px;margin:0;border:0!important;background:none!important;align-self:start}
+#promises[data-editorial-promises] .promise-title{font-size:1.08rem;line-height:1.55;margin-bottom:.55rem}
+#promises[data-editorial-promises] .promise-desc{font-size:.95rem;line-height:1.9;color:#52636b;text-wrap:pretty}
+#promises[data-editorial-promises] .promise-desc p{margin:0;line-height:inherit}
+#promises[data-editorial-promises] .promise-desc p+p{margin-top:.4em}
+@media(max-width:960px){
+  body[data-editorial-page].service-page .page-hero-inner,
+  body[data-editorial-page].service-page .hero-content-pc{grid-template-columns:1fr!important;gap:32px!important}
+  body[data-editorial-page].service-page h1.page-title,
+  body[data-editorial-page].service-page h1.hero-h1{font-size:clamp(1.75rem,5.3vw,3rem)!important}
+  body[data-editorial-page] #homeclean-pricing .price-table,
+  body[data-editorial-page] #pipe-pricing .price-table{display:block;border:0!important;background:none!important;overflow:visible!important}
+  #homeclean-pricing .price-scroll{overflow:visible}
+  #homeclean-pricing .price-table tbody,#pipe-pricing .price-table tbody{display:block}
+  #homeclean-pricing .price-table tr:first-child,#pipe-pricing .price-table tr:first-child{display:none!important}
+  #homeclean-pricing .price-table tr,#pipe-pricing .price-table tr{display:block!important;margin-bottom:1rem;padding:0!important;border:1px solid #d5dfdc;border-radius:8px;overflow:hidden}
+  body[data-editorial-page] #homeclean-pricing .price-table td,
+  body[data-editorial-page] #pipe-pricing .price-table td{display:grid!important;grid-template-columns:7em minmax(0,1fr)!important;gap:.75rem!important;width:auto!important;border-radius:0!important;text-align:left!important;background:#fff!important}
+  #homeclean-pricing .price-table td::before,#pipe-pricing .price-table td::before{content:attr(data-label);font-size:.8rem;font-weight:700;color:#40565b}
+  body[data-editorial-page] #homeclean-pricing .price-table td:first-child,
+  body[data-editorial-page] #pipe-pricing .price-table td:first-child{display:block!important;background:var(--service-soft,#f8f9f7)!important;font-weight:700}
+  #homeclean-pricing .price-table td:first-child::before,#pipe-pricing .price-table td:first-child::before{display:none}
+}
+@media(max-width:760px){
+  .service-flow[data-process-editorial] .process-editorial{grid-template-columns:1fr;gap:32px}
+  .process-field-photo img{aspect-ratio:16/9;max-height:280px}
+  .process-field-photo--pipe img{aspect-ratio:9/16;max-height:360px;width:auto}
+  .process-detail summary{padding:1.15rem 0}
+  .service-flow[data-process-editorial] .service-step h3{grid-template-columns:1.65rem minmax(0,1fr) 28px;gap:.5rem;font-size:1rem!important}
+  .process-detail-body{padding-left:2.15rem;padding-right:0}
+  .process-summary{font-size:.95rem}
+  #promises[data-editorial-promises] .promises-inner{display:block}
+  #promises[data-editorial-promises] .promise-list{margin-top:1.5rem}
+}
+@media(max-width:720px){
+  /* Legacy craft.css applies grid!important to every tr, including header rows. */
+  body[data-editorial-page] .price-table tr:has(> th){display:none!important}
+  body[data-editorial-page] .service-toc[data-local-count] .service-toc-inner{display:flex!important;justify-content:flex-start;overflow-x:auto!important;gap:8px;padding:10px 16px;scroll-snap-type:x proximity}
+  body[data-editorial-page] .service-toc[data-local-count] a{flex:0 0 auto;width:auto!important;min-width:0;min-height:44px;padding:10px 14px!important;white-space:nowrap!important;font-size:max(14px,.78rem);scroll-snap-align:start}
+  body[data-editorial-page] #homeclean-pricing .price-table td,
+  body[data-editorial-page] #pipe-pricing .price-table td{grid-template-columns:1fr!important;gap:.3rem;padding:.9rem!important;text-align:left!important}
+  body[data-editorial-page] .price-cell-copy{font-size:.92rem}
+}
+@media(prefers-reduced-motion:reduce){.process-toggle{transition:none}}

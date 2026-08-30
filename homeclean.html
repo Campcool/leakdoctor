@@ -111,11 +111,12 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   .footer-links{flex-direction:column;gap:.38rem;margin-bottom:0}
 }
 </style>
+<link rel="stylesheet" href="/assets/process-editorial.css?v=20260830a">
 </head>
-<body class="service-page">
+<body class="service-page" data-editorial-page>
 <link rel="stylesheet" href="assets/service-refresh.css">
 <link rel="stylesheet" href="assets/craft.css?v=20260723a">
-<script src="header.js?v=20260727a"></script>
+<script src="header.js?v=20260830c"></script>
 
 <main id="main">
 <section id="page-hero" role="region">
@@ -150,13 +151,13 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
       <div class="price-scroll">
         <table class="price-table">
           <tr><th>服務項目</th><th>適合情境</th><th>參考價格／方式</th></tr>
-          <tr><td>居家清潔 4 小時</td><td>一般住家、重點區域</td><td class="price-amt">$2,500</td></tr>
-          <tr><td>居家清潔 6 小時</td><td>較大坪數或加強清潔</td><td class="price-amt">$3,750</td></tr>
-          <tr><td>居家清潔 8 小時</td><td>大坪數或多區域</td><td class="price-amt">$5,000</td></tr>
-          <tr><td>入住／退租清潔</td><td>套房至整層住家</td><td class="price-amt">約 $2,500–8,000</td></tr>
-          <tr><td>裝潢後細清</td><td>依粉塵、櫃體與材質</td><td class="price-amt">約 $400–1,000／坪</td></tr>
-          <tr><td>大掃除</td><td>重污、移動家具、較多細節</td><td class="price-amt">現場確認後包工報價</td></tr>
-          <tr><td>社區／店面／辦公室</td><td>單次或定期維護</td><td class="price-amt">依面積與頻率估價</td></tr>
+          <tr><td><span class="price-cell-copy"><span class="keep-phrase">居家清潔</span><wbr><span class="keep-phrase"> 4 小時</span></span></td><td><span class="price-cell-copy"><span class="keep-phrase">一般住家、</span><wbr><span class="keep-phrase">重點區域</span></span></td><td class="price-amt"><span class="price-cell-copy"><span class="keep-phrase">$2,500</span></span></td></tr>
+          <tr><td><span class="price-cell-copy"><span class="keep-phrase">居家清潔</span><wbr><span class="keep-phrase"> 6 小時</span></span></td><td><span class="price-cell-copy"><span class="keep-phrase">較大坪數</span><wbr><span class="keep-phrase">或加強清潔</span></span></td><td class="price-amt"><span class="price-cell-copy"><span class="keep-phrase">$3,750</span></span></td></tr>
+          <tr><td><span class="price-cell-copy"><span class="keep-phrase">居家清潔</span><wbr><span class="keep-phrase"> 8 小時</span></span></td><td><span class="price-cell-copy"><span class="keep-phrase">大坪數</span><wbr><span class="keep-phrase">或多區域</span></span></td><td class="price-amt"><span class="price-cell-copy"><span class="keep-phrase">$5,000</span></span></td></tr>
+          <tr><td><span class="price-cell-copy"><span class="keep-phrase">入住／</span><wbr><span class="keep-phrase">退租清潔</span></span></td><td><span class="price-cell-copy"><span class="keep-phrase">套房至整層住家</span></span></td><td class="price-amt"><span class="price-cell-copy"><span class="keep-phrase">約 $2,500–8,000</span></span></td></tr>
+          <tr><td><span class="price-cell-copy"><span class="keep-phrase">裝潢後細清</span></span></td><td><span class="price-cell-copy"><span class="keep-phrase">依粉塵、</span><wbr><span class="keep-phrase">櫃體與材質</span></span></td><td class="price-amt"><span class="price-cell-copy"><span class="keep-phrase">約 $400–1,000</span><wbr><span class="keep-phrase">／坪</span></span></td></tr>
+          <tr><td><span class="price-cell-copy"><span class="keep-phrase">大掃除</span></span></td><td><span class="price-cell-copy"><span class="keep-phrase">重污、</span><wbr><span class="keep-phrase">移動家具、</span><wbr><span class="keep-phrase">較多細節</span></span></td><td class="price-amt"><span class="price-cell-copy"><span class="keep-phrase">現場確認後</span><wbr><span class="keep-phrase">包工報價</span></span></td></tr>
+          <tr><td><span class="price-cell-copy"><span class="keep-phrase">社區／</span><wbr><span class="keep-phrase">店面／</span><wbr><span class="keep-phrase">辦公室</span></span></td><td><span class="price-cell-copy"><span class="keep-phrase">單次或定期維護</span></span></td><td class="price-amt"><span class="price-cell-copy"><span class="keep-phrase">依面積與頻率估價</span></span></td></tr>
         </table>
       </div>
       <div class="quote-method-grid">
@@ -185,13 +186,28 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   </div>
 </section>
 
-<section class="service-flow" aria-labelledby="homeclean-flow-title" aria-label="服務流程">
-  <div class="service-flow-inner">
-    <div class="service-flow-head"><div class="service-flow-kicker">預約流程</div><h2 id="homeclean-flow-title">三步就能安排</h2><p class="service-flow-intro">先用 LINE 照片確認，避免看完一堆說明還不知道該選哪一項。</p></div>
-    <div class="service-step-grid">
-      <article class="service-step"><h3>1. 傳照片</h3><p>地區、坪數、重點區域與希望日期。</p></article>
-      <article class="service-step"><h3>2. 確認報價</h3><p>判斷計時、包工或單項加強。</p></article>
-      <article class="service-step"><h3>3. 到府清潔</h3><p>依約定範圍施工，完成後共同檢查。</p></article>
+<section class="service-flow" data-process-editorial aria-labelledby="homeclean-flow-title" aria-label="服務流程">
+  <div class="service-flow-inner process-editorial">
+    <div class="process-overview">
+      <div class="service-flow-head"><div class="service-flow-kicker">預約流程</div><h2 id="homeclean-flow-title">三步就能安排</h2><p class="service-flow-intro">傳空間照片與重點需求，先確認清潔範圍，再安排到府。</p></div>
+      <figure class="process-field-photo"><img src="/cases-clean/case11-after.jpg" alt="居家清潔案例中的浴室現場紀錄" width="960" height="1280" loading="lazy" decoding="async"><figcaption>現場細節｜依空間、材質與範圍清潔<span>真實服務紀錄・個案狀況不同</span></figcaption></figure>
+    </div>
+    <div class="process-reading">
+      <p class="process-hint">作業順序 <span>點選步驟，查看細節</span></p>
+      <ol class="process-timeline" role="list">
+          <li><article class="service-step"><details class="process-detail">
+            <summary><h3><span class="process-number" aria-hidden="true">01</span><span class="process-heading">傳照片<span class="process-summary">告訴我們地區、坪數、重點與希望日期。</span></span><span class="process-toggle" aria-hidden="true">+</span></h3></summary>
+            <div class="process-detail-body"><p>地區、坪數、重點區域與希望日期。</p></div>
+          </details></article></li>
+          <li><article class="service-step"><details class="process-detail">
+            <summary><h3><span class="process-number" aria-hidden="true">02</span><span class="process-heading">確認報價<span class="process-summary">先說清楚範圍，再確認計時或包工。</span></span><span class="process-toggle" aria-hidden="true">+</span></h3></summary>
+            <div class="process-detail-body"><p>判斷計時、包工或單項加強。</p></div>
+          </details></article></li>
+          <li><article class="service-step"><details class="process-detail">
+            <summary><h3><span class="process-number" aria-hidden="true">03</span><span class="process-heading">到府清潔<span class="process-summary">依約施工，完成後一起確認清潔範圍。</span></span><span class="process-toggle" aria-hidden="true">+</span></h3></summary>
+            <div class="process-detail-body"><p>依約定範圍施工，完成後共同檢查。</p></div>
+          </details></article></li>
+      </ol>
     </div>
   </div>
 </section>

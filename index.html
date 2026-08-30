@@ -165,13 +165,14 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   .footer-links{flex-direction:column;gap:.38rem;margin-bottom:0}
 }
 </style>
+<link rel="stylesheet" href="/assets/process-editorial.css?v=20260830a">
 </head>
-<body>
+<body data-editorial-page>
 <link rel="stylesheet" href="assets/home-refresh.css?v=20260723a">
 <link rel="stylesheet" href="assets/process-images.css">
 <link rel="stylesheet" href="assets/craft.css?v=20260723a">
 <link rel="stylesheet" href="assets/home-service-hub.css?v=20260830a">
-<script src="header.js?v=20260830b"></script>
+<script src="header.js?v=20260830c"></script>
 
 <!-- Hero -->
 <main id="main">
@@ -380,14 +381,32 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </section>
 
 <!-- 我們提供什麼 -->
-<section class="service-flow service-flow--compact" aria-labelledby="home-flow-title" aria-label="服務流程">
-  <div class="service-flow-inner">
-    <div class="service-flow-head"><div class="service-flow-kicker">簡易流程說明</div><h2 id="home-flow-title">四個階段，把到府服務說清楚</h2><p class="service-flow-intro">不同服務的工具與細節不同，但安全確認、環境保護、復原和測試不能省略。點進各服務頁可查看專屬說明。</p></div>
-    <div class="service-step-grid">
-      <article class="service-step"><h3>確認範圍</h3><p>確認設備原始功能、現場條件與處理範圍，避免服務前後認知不同。</p></article>
-      <article class="service-step"><h3>安全準備</h3><p>涉及設備時先停機並隔離電源，漏水或一般清潔依現場關閉相關水電；並保護家具、地板、牆面、插座與動線。</p></article>
-      <article class="service-step"><h3>分區處理</h3><p>劃分工具、零件及污水處理區，再依設備、材質或漏水原因分區處理，不用單一方式套用所有現場。</p></article>
-      <article class="service-step"><h3>復原驗收</h3><p>部件與物品復位，確認固定、接頭、表面與作業區皆完成整理；共同確認運轉、進排水、清潔範圍或止漏結果，必要時說明後續觀察期。</p></article>
+<section class="service-flow service-flow--compact" data-process-editorial aria-labelledby="home-flow-title" aria-label="服務流程">
+  <div class="service-flow-inner process-editorial">
+    <div class="process-overview">
+      <div class="service-flow-head"><div class="service-flow-kicker">簡易流程說明</div><h2 id="home-flow-title">四個階段，<br>到府服務有順序</h2><p class="service-flow-intro">不同服務的工具與細節不同，但安全確認、環境保護、復原和測試不能省略。點進各服務頁可查看專屬說明。</p></div>
+      <figure class="process-field-photo"><img src="/cases/aircon/case01-after.webp" alt="真實冷氣清洗紀錄中的機內細節" width="1280" height="960" loading="lazy" decoding="async"><figcaption>現場細節｜從確認到驗收，都有順序<span>真實服務紀錄・個案狀況不同</span></figcaption></figure>
+    </div>
+    <div class="process-reading">
+      <p class="process-hint">作業順序 <span>點選步驟，查看細節</span></p>
+      <ol class="process-timeline" role="list">
+          <li><article class="service-step"><details class="process-detail">
+            <summary><h3><span class="process-number" aria-hidden="true">01</span><span class="process-heading">確認範圍<span class="process-summary">先確認原有狀態與本次服務範圍。</span></span><span class="process-toggle" aria-hidden="true">+</span></h3></summary>
+            <div class="process-detail-body"><p>確認設備原始功能、現場條件與處理範圍，避免服務前後認知不同。</p></div>
+          </details></article></li>
+          <li><article class="service-step"><details class="process-detail">
+            <summary><h3><span class="process-number" aria-hidden="true">02</span><span class="process-heading">安全準備<span class="process-summary">隔離相關水電，保護家具與作業動線。</span></span><span class="process-toggle" aria-hidden="true">+</span></h3></summary>
+            <div class="process-detail-body"><p>涉及設備時先停機並隔離電源，漏水或一般清潔依現場關閉相關水電；並保護家具、地板、牆面、插座與動線。</p></div>
+          </details></article></li>
+          <li><article class="service-step"><details class="process-detail">
+            <summary><h3><span class="process-number" aria-hidden="true">03</span><span class="process-heading">分區處理<span class="process-summary">依設備與材質分區處理，不一體套用。</span></span><span class="process-toggle" aria-hidden="true">+</span></h3></summary>
+            <div class="process-detail-body"><p>劃分工具、零件及污水處理區，再依設備、材質或漏水原因分區處理，不用單一方式套用所有現場。</p></div>
+          </details></article></li>
+          <li><article class="service-step"><details class="process-detail">
+            <summary><h3><span class="process-number" aria-hidden="true">04</span><span class="process-heading">復原驗收<span class="process-summary">復位、測試，並交代需要觀察的地方。</span></span><span class="process-toggle" aria-hidden="true">+</span></h3></summary>
+            <div class="process-detail-body"><p>部件與物品復位，確認固定、接頭、表面與作業區皆完成整理；共同確認運轉、進排水、清潔範圍或止漏結果，必要時說明後續觀察期。</p></div>
+          </details></article></li>
+      </ol>
     </div>
   </div>
 </section>
