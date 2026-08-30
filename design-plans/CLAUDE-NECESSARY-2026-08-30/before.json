@@ -1,0 +1,457 @@
+[
+  {
+    "clientWidth": 360,
+    "float": "flex",
+    "font": "24px",
+    "hits": [],
+    "nav": 6,
+    "orphans": [
+      {
+        "class": "svc-title",
+        "lines": [
+          "冷氣清",
+          "洗"
+        ],
+        "text": "冷氣清洗"
+      },
+      {
+        "class": "svc-title",
+        "lines": [
+          "洗衣機清",
+          "洗"
+        ],
+        "text": "洗衣機清洗"
+      },
+      {
+        "class": "svc-title",
+        "lines": [
+          "居家清",
+          "潔"
+        ],
+        "text": "居家清潔"
+      },
+      {
+        "class": "svc-title",
+        "lines": [
+          "水塔清",
+          "洗"
+        ],
+        "text": "水塔清洗"
+      },
+      {
+        "class": "svc-title",
+        "lines": [
+          "水管清",
+          "洗"
+        ],
+        "text": "水管清洗"
+      },
+      {
+        "class": "process-disclosure",
+        "lines": [
+          "簡易流程說",
+          "明"
+        ],
+        "text": "簡易流程說明"
+      },
+      {
+        "class": "process-disclosure",
+        "lines": [
+          "簡易流程說",
+          "明"
+        ],
+        "text": "簡易流程說明"
+      },
+      {
+        "class": "promise-title",
+        "lines": [
+          "專員確認服務條",
+          "件"
+        ],
+        "text": "專員確認服務條件"
+      }
+    ],
+    "overflow": 0,
+    "sticky": true,
+    "url": "/index.html",
+    "width": 375
+  },
+  {
+    "clientWidth": 360,
+    "float": "flex",
+    "font": "24px",
+    "hits": [],
+    "nav": 6,
+    "orphans": [],
+    "overflow": 0,
+    "sticky": true,
+    "url": "/aircon.html",
+    "width": 375
+  },
+  {
+    "clientWidth": 360,
+    "float": "flex",
+    "font": "24px",
+    "hits": [
+      {
+        "text": "開始洗衣機清洗估價",
+        "width": 5.84375
+      }
+    ],
+    "nav": 6,
+    "orphans": [],
+    "overflow": 0,
+    "sticky": true,
+    "url": "/washer.html",
+    "width": 375
+  },
+  {
+    "clientWidth": 360,
+    "float": "flex",
+    "font": "24px",
+    "hits": [],
+    "nav": 6,
+    "orphans": [],
+    "overflow": 0,
+    "sticky": true,
+    "url": "/homeclean.html",
+    "width": 375
+  },
+  {
+    "clientWidth": 360,
+    "float": "flex",
+    "font": "24px",
+    "hits": [],
+    "nav": 6,
+    "orphans": [],
+    "overflow": 0,
+    "sticky": true,
+    "url": "/water-tank.html",
+    "width": 375
+  },
+  {
+    "clientWidth": 360,
+    "float": "flex",
+    "font": "24px",
+    "hits": [
+      {
+        "text": "很多人不是看到髒污才想洗水管，而是遇到熱水器點不著、熱水變小或洗澡水量不足。這些狀況可能來自水路沉積，也可能是濾網、閥件、加壓設備或熱水器本體故障，需先比較冷熱水與各出水點。",
+        "width": 35.59375
+      }
+    ],
+    "nav": 6,
+    "orphans": [
+      {
+        "class": "cta-sub",
+        "lines": [
+          "傳冷熱水出水影片、地址、屋",
+          "齡與熱水器狀況，專員協助分",
+          "類"
+        ],
+        "text": "傳冷熱水出水影片、地址、屋齡與熱水器狀況，專員協助分類"
+      }
+    ],
+    "overflow": 0,
+    "sticky": true,
+    "url": "/pipe-cleaning.html",
+    "width": 375
+  },
+  {
+    "clientWidth": 360,
+    "float": "flex",
+    "font": "24px",
+    "hits": [],
+    "nav": 6,
+    "orphans": [
+      {
+        "class": "cc-title",
+        "lines": [
+          "35年老屋廚房地板持續積",
+          "水"
+        ],
+        "text": "35 年老屋廚房地板持續積水"
+      }
+    ],
+    "overflow": 0,
+    "sticky": true,
+    "url": "/leak-repair.html",
+    "width": 375
+  },
+  {
+    "clientWidth": 753,
+    "float": "flex",
+    "font": "24px",
+    "hits": [],
+    "nav": 6,
+    "orphans": [],
+    "overflow": 0,
+    "sticky": true,
+    "url": "/index.html",
+    "width": 768
+  },
+  {
+    "clientWidth": 753,
+    "float": "flex",
+    "font": "24px",
+    "hits": [],
+    "nav": 6,
+    "orphans": [
+      {
+        "class": "service-visual-note",
+        "lines": [
+          "簡易流程說明・實際作業依現場調",
+          "整"
+        ],
+        "text": "簡易流程說明・實際作業依現場調整"
+      }
+    ],
+    "overflow": 0,
+    "sticky": true,
+    "url": "/aircon.html",
+    "width": 768
+  },
+  {
+    "clientWidth": 753,
+    "float": "flex",
+    "font": "24px",
+    "hits": [],
+    "nav": 6,
+    "orphans": [],
+    "overflow": 0,
+    "sticky": true,
+    "url": "/washer.html",
+    "width": 768
+  },
+  {
+    "clientWidth": 753,
+    "float": "flex",
+    "font": "24px",
+    "hits": [],
+    "nav": 6,
+    "orphans": [],
+    "overflow": 0,
+    "sticky": true,
+    "url": "/homeclean.html",
+    "width": 768
+  },
+  {
+    "clientWidth": 753,
+    "float": "flex",
+    "font": "24px",
+    "hits": [],
+    "nav": 6,
+    "orphans": [],
+    "overflow": 0,
+    "sticky": true,
+    "url": "/water-tank.html",
+    "width": 768
+  },
+  {
+    "clientWidth": 753,
+    "float": "flex",
+    "font": "24px",
+    "hits": [],
+    "nav": 6,
+    "orphans": [],
+    "overflow": 0,
+    "sticky": true,
+    "url": "/pipe-cleaning.html",
+    "width": 768
+  },
+  {
+    "clientWidth": 753,
+    "float": "flex",
+    "font": "24px",
+    "hits": [],
+    "nav": 6,
+    "orphans": [
+      {
+        "class": "cc-title",
+        "lines": [
+          "新大樓窗框雨天持續滲水壁",
+          "癌"
+        ],
+        "text": "新大樓窗框雨天持續滲水壁癌"
+      },
+      {
+        "class": "cc-title",
+        "lines": [
+          "20年透天厝頂樓積水滲入4",
+          "樓"
+        ],
+        "text": "20 年透天厝頂樓積水滲入 4 樓"
+      }
+    ],
+    "overflow": 0,
+    "sticky": true,
+    "url": "/leak-repair.html",
+    "width": 768
+  },
+  {
+    "clientWidth": 1425,
+    "float": "flex",
+    "font": "24px",
+    "hits": [],
+    "nav": 6,
+    "orphans": [
+      {
+        "class": "svc-title",
+        "lines": [
+          "漏水檢測與修",
+          "補"
+        ],
+        "text": "漏水檢測與修補"
+      },
+      {
+        "class": "process-title",
+        "lines": [
+          "先縮小範圍，再決定怎麼",
+          "修"
+        ],
+        "text": "先縮小範圍，再決定怎麼修"
+      }
+    ],
+    "overflow": 0,
+    "sticky": true,
+    "url": "/index.html",
+    "width": 1440
+  },
+  {
+    "clientWidth": 1425,
+    "float": "flex",
+    "font": "24px",
+    "hits": [],
+    "nav": 6,
+    "orphans": [
+      {
+        "class": "service-visual-note",
+        "lines": [
+          "簡易流程說明・實際作業依現場調",
+          "整"
+        ],
+        "text": "簡易流程說明・實際作業依現場調整"
+      }
+    ],
+    "overflow": 0,
+    "sticky": true,
+    "url": "/aircon.html",
+    "width": 1440
+  },
+  {
+    "clientWidth": 1425,
+    "float": "flex",
+    "font": "24px",
+    "hits": [],
+    "nav": 6,
+    "orphans": [],
+    "overflow": 0,
+    "sticky": true,
+    "url": "/washer.html",
+    "width": 1440
+  },
+  {
+    "clientWidth": 1425,
+    "float": "flex",
+    "font": "24px",
+    "hits": [],
+    "nav": 6,
+    "orphans": [],
+    "overflow": 0,
+    "sticky": true,
+    "url": "/homeclean.html",
+    "width": 1440
+  },
+  {
+    "clientWidth": 1425,
+    "float": "flex",
+    "font": "24px",
+    "hits": [],
+    "nav": 6,
+    "orphans": [],
+    "overflow": 0,
+    "sticky": true,
+    "url": "/water-tank.html",
+    "width": 1440
+  },
+  {
+    "clientWidth": 1425,
+    "float": "flex",
+    "font": "24px",
+    "hits": [],
+    "nav": 6,
+    "orphans": [],
+    "overflow": 0,
+    "sticky": true,
+    "url": "/pipe-cleaning.html",
+    "width": 1440
+  },
+  {
+    "clientWidth": 1425,
+    "float": "flex",
+    "font": "24px",
+    "hits": [],
+    "nav": 6,
+    "orphans": [
+      {
+        "class": "cc-title",
+        "lines": [
+          "30年老公寓浴室天花板持續滴",
+          "水"
+        ],
+        "text": "30 年老公寓浴室天花板持續滴水"
+      },
+      {
+        "class": "cc-title",
+        "lines": [
+          "10年新大樓浴室地板使用後滲",
+          "漏"
+        ],
+        "text": "10 年新大樓浴室地板使用後滲漏"
+      },
+      {
+        "class": "cc-title",
+        "lines": [
+          "40年老屋外牆壁癌反覆無法根",
+          "治"
+        ],
+        "text": "40 年老屋外牆壁癌反覆無法根治"
+      },
+      {
+        "class": "cc-title",
+        "lines": [
+          "透天厝颱風後多扇窗框同時滲",
+          "水"
+        ],
+        "text": "透天厝颱風後多扇窗框同時滲水"
+      },
+      {
+        "class": "cc-title",
+        "lines": [
+          "頂樓加蓋鐵皮接縫滲水影響下",
+          "層"
+        ],
+        "text": "頂樓加蓋鐵皮接縫滲水影響下層"
+      },
+      {
+        "class": "cc-title",
+        "lines": [
+          "透天厝2樓浴室漏水到1樓客",
+          "廳"
+        ],
+        "text": "透天厝 2 樓浴室漏水到 1 樓客廳"
+      },
+      {
+        "class": "cc-title",
+        "lines": [
+          "透天厝水塔給水管破裂水費異",
+          "常"
+        ],
+        "text": "透天厝水塔給水管破裂水費異常"
+      }
+    ],
+    "overflow": 0,
+    "sticky": true,
+    "url": "/leak-repair.html",
+    "width": 1440
+  }
+]

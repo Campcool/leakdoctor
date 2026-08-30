@@ -78,7 +78,7 @@
 
 ### 4.4 可重跑門禁
 
-於前台 repo：
+於前台 repo：最後一個參數是「本機 Bot checkout 路徑」，不是固定 repo 名稱。此 Codex 工作區為 `../huitailang-bot`，Claude 工作區可能為 `../leakdoctor-bot`；先確認該路徑內有 `src/catalog.ts` 與 `src/parser.ts`，再執行。不要為了照抄命令重命名資料夾。
 
 ```sh
 node --check header.js

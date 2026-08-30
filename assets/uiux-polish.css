@@ -115,6 +115,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   border-color:var(--service-accent,var(--ld-teal))!important;
 }
 .svc-title,.promise-title,.process-title{letter-spacing:-.025em}
+/* Short headings balance their last line; keep the user's enlarged font intact. */
+.svc-title,.process-title,.cc-title,.promise-title{text-wrap:balance}
+.cta-sub,.service-visual-note,.process-disclosure{text-wrap:pretty}
 .hero-inner .hero-h1{max-width:none}
 /* 有意義的標籤／輔助文字；不放大 SVG 圖內刻度與純裝飾箭頭。 */
 body .process-kicker,body .process-disclosure,body .footer-copy,
@@ -220,6 +223,8 @@ body.leak-page .hero-btn::before,body.leak-page .cta-btn::before{animation:none!
 }
 
 @media(max-width:720px){
+  /* The bottom LINE / quote actions remain available; a duplicate float covers copy. */
+  #ld-float{display:none!important}
   html{scroll-behavior:auto}
   .headline-line{white-space:normal!important}
   /* 精確涵蓋 legacy service-refresh 選擇器；不鎖死使用者根字級。 */

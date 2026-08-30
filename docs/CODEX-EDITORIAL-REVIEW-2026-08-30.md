@@ -1,5 +1,9 @@
 # 截圖版面精修交接（2026-08-30）
 
+## Claude 舊基準複核的必要修正
+
+業主要求先判斷必要性，再修改。Claude 附件基準為 `c66b61a`；本次實際基準為 `cee9b90`，所以不可把上輪已修的案例長標籤再當成現行缺陷。逐項採納與實測見 [必要性判定](CODEX-NECESSARY-FIXES-2026-08-30.md)。此節後的歷史量測不是全站所有文字「零孤字」保證。
+
 ## 最新追加：案例與服務地區（優先閱讀）
 
 業主在交接後提供三張新截圖，證明居家／洗衣機案例與漏水地區仍有漏修。本次基準 `c66b61a`；請額外審查 `c66b61a..main`，不要只審下方原始差異 `faa59aa..53065b5`。
@@ -89,7 +93,7 @@ Chrome共54組：六服務×375／768／1024／1440px×根字級16／24px，另�
 - 固定表頭及頁內目錄不能遮住錨點標題；切換服務、上一頁／下一頁、預約視窗開關與返回、首頁知識／價格切換不得遺失狀態或錯位。不要把休眠的 service-layer 誤認為已啟用。
 - 確認價格與承接規則、LINE官方素材、複製／送出與追蹤事件沒有回退。只複製不計轉換；待報價不是0元；成本不對客公開；冷氣價格只含室內機，室外機另加500元。
 
-回歸命令（依本機 Bot 位置調整最後一條路徑）：
+回歸命令（最後參數是本機 checkout 路徑；Codex 是 ../huitailang-bot，Claude 若是 ../leakdoctor-bot 就改用該路徑。先確認 src/catalog.ts 與 src/parser.ts 存在）：
 node --test scripts/test-process-editorial.mjs scripts/test-header-contract.mjs scripts/test-home-service-hub.mjs
 node scripts/validate-site.mjs
 node scripts/check-home-bot-contract.mjs ../huitailang-bot

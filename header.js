@@ -596,11 +596,11 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   // 共用精修層；部分頁面在 body 另載入 legacy CSS，覆寫仍須檢查實際 cascade。
   const existingPolishCss = document.querySelector('link[href*="uiux-polish.css"]');
   if(existingPolishCss){
-    existingPolishCss.href = '/assets/uiux-polish.css?v=20260830b';
+    existingPolishCss.href = '/assets/uiux-polish.css?v=20260830c';
   }else{
     const polishCss = document.createElement('link');
     polishCss.rel = 'stylesheet';
-    polishCss.href = '/assets/uiux-polish.css?v=20260830b';
+    polishCss.href = '/assets/uiux-polish.css?v=20260830c';
     document.head.appendChild(polishCss);
   }
 

@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import { runInNewContext } from 'node:vm';
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import {parseCss, resolve as resolveCss} from './css-cascade.mjs';
 
 const root = new URL('../', import.meta.url);
 const header = readFileSync(new URL('header.js', root), 'utf8');
@@ -61,4 +62,26 @@ function checkPriceFocus(css) {
 test('price mode keeps floating LINE away from quantity controls', () => checkPriceFocus(polish));
 test('mutation: removing price-mode float protection is rejected', () => {
   assert.throws(() => checkPriceFocus(polish.replace('.home-price-active #ld-float{display:none!important}', '')));
+});
+
+function checkMobileFloat(css) {
+  const base = header.match(/const css = `([\s\S]*?)`;/)?.[1];
+  assert.ok(base, 'include the injected header CSS before the polish layer');
+  const rules = parseCss(base + '\n' + css);
+  for (const priceMode of [false, true]) {
+    const el = {tag:'a', id:'ld-float', classes:[], attrs:{}, states:[], ancestors:priceMode?['home-price-active']:[]};
+    for (const width of [320,360,375,390,720,721,768,1023,1024,1440]) {
+      const expected = width <= 720 || (priceMode && width <= 1023) ? 'none' : 'flex';
+      assert.equal(resolveCss(rules,el,'display',width).value,expected,`float width=${width}, priceMode=${priceMode}`);
+    }
+  }
+  assert.match(header,/LINE 直接問/);
+  assert.match(header,/填單估價/);
+}
+test('mobile copy is not covered by a duplicate LINE float; desktop and CTA remain',()=>checkMobileFloat(polish));
+test('mutation: removing the mobile override is rejected despite header fallback',()=>{
+  assert.throws(()=>checkMobileFloat(polish.replace('#ld-float{display:none!important}','')));
+});
+test('mutation: a later important rule reviving the float is rejected',()=>{
+  assert.throws(()=>checkMobileFloat(polish+'\n#ld-float{display:flex!important}'));
 });

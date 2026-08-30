@@ -1,0 +1,22 @@
+[
+  {
+    "float": "none",
+    "nav": 6,
+    "width": 720
+  },
+  {
+    "float": "flex",
+    "nav": 6,
+    "width": 721
+  },
+  {
+    "float": "flex",
+    "nav": 6,
+    "width": 1023
+  },
+  {
+    "float": "flex",
+    "nav": 6,
+    "width": 1024
+  }
+]

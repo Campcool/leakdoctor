@@ -128,3 +128,41 @@ test('mutation: a competing important media ratio is rejected',()=>assert.throws
 test('mutation: a narrow fixed three-column grid is rejected',()=>assert.throws(()=>checkGalleryStyles(css+'\nbody[data-editorial-page] [data-case-gallery]{grid-template-columns:repeat(3,1fr)!important}')));
 test('mutation: an inline case ratio is rejected',()=>assert.throws(()=>checkCaseMarkup(read('washer.html').replace('style="--compare:50%"','style="--compare:50%;aspect-ratio:3/4"'),3)));
 test('mutation: a lost city is rejected',()=>assert.throws(()=>checkCities(read('leak-repair.html').replace('<li>新竹縣</li>',''))));
+
+function checkPriceLabels(source=css) {
+  // The shared resolver excludes pseudo-elements. Resolve ONLY ::before rules
+  // against their originating cell; removing the common suffix preserves their
+  // relative specificity. This is a declaration check, not a layout engine.
+  const all=parseCss(read('assets/craft.css')+'\n'+read('assets/uiux-polish.css')+'\n'+source);
+  for(const id of ['homeclean-pricing','pipe-pricing']) {
+    const rules=all.filter(r=>r.selector.endsWith('::before') &&
+      (!/#(?:homeclean|pipe)-pricing/.test(r.selector)||r.selector.includes('#'+id)))
+      // Probe a non-first data cell: the first column intentionally has no label.
+      .map(r=>({...r,selector:r.selector.replace(/::before$/,'').replace(/:not\(:first-child\)/g,'')}))
+      .filter(r=>!r.selector.includes('td:first-child'));
+    const cell={tag:'td',classes:[],attrs:{'data-label':'參考價格'},states:[],ancestors:['#'+id,'price-table','service-page']};
+    for(const width of [320,375,768,960]) {
+      assert.equal(resolveCss(rules,cell,'content',width).value,'attr(data-label)',`${id} at ${width}px keeps the label`);
+      assert.notEqual(resolveCss(rules,cell,'display',width).value,'none',`${id} label stays visible`);
+    }
+  }
+}
+test('mobile homeclean and pipe prices retain their field labels',()=>checkPriceLabels());
+test('mutation: removing generated price labels is rejected',()=>{
+  assert.throws(()=>checkPriceLabels(css.replace('content:attr(data-label)','content:none')));
+});
+test('mutation: a later important rule cannot hide price labels',()=>{
+  for(const id of ['homeclean-pricing','pipe-pricing'])assert.throws(()=>checkPriceLabels(css+`\n@media(max-width:960px){#${id} .price-table td::before{display:none!important}}`));
+});
+function checkShortCopy(source) {
+  const rules=parseCss(read('assets/craft.css')+'\n'+source+'\n'+css);
+  for(const [mode,classes] of [['balance',['svc-title','process-title','cc-title','promise-title']],['pretty',['cta-sub','service-visual-note','process-disclosure']]]) {
+    for(const name of classes)for(const width of [375,768,1440]) {
+      assert.equal(resolveCss(rules,{tag:'div',classes:[name],attrs:{},states:[],ancestors:[]},'text-wrap',width).value,mode);
+    }
+  }
+}
+test('short headings and explanatory copy keep targeted wrap rules',()=>checkShortCopy(read('assets/uiux-polish.css')));
+test('mutation: reverting short-copy wrapping is rejected',()=>{
+  assert.throws(()=>checkShortCopy(read('assets/uiux-polish.css').replace('.cc-title,.promise-title{text-wrap:balance}', '.cc-title,.promise-title{text-wrap:wrap}')));
+});
