@@ -16,7 +16,7 @@ const strip = text => text.replace(/<[^>]*>/g,'');
 function checkProcess(page, html) {
   assert.match(html, /data-editorial-page/);
   assert.equal((html.match(/href="\/assets\/process-editorial.css\?/g)||[]).length,1);
-  const section = html.match(/<section class="service-flow(?: service-flow--compact)?"[^>]*data-process-editorial[\s\S]*?<\/section>/)?.[0];
+  const section = html.match(/<section\b(?=[^>]*\bclass="service-flow(?: service-flow--compact)?")(?=[^>]*\bdata-process-editorial)[^>]*>[\s\S]*?<\/section>/)?.[0];
   assert.ok(section, `${page}: editorial flow is present`);
   assert.match(section, /<ol class="process-timeline" role="list">/);
   assert.doesNotMatch(section, /service-step-grid/);
@@ -165,4 +165,42 @@ function checkShortCopy(source) {
 test('short headings and explanatory copy keep targeted wrap rules',()=>checkShortCopy(read('assets/uiux-polish.css')));
 test('mutation: reverting short-copy wrapping is rejected',()=>{
   assert.throws(()=>checkShortCopy(read('assets/uiux-polish.css').replace('.cc-title,.promise-title{text-wrap:balance}', '.cc-title,.promise-title{text-wrap:wrap}')));
+});
+
+const chapterOrder={
+  aircon:['aircon-services','knowledge','impact','flow','aircon-cases','aircon-pricing'],
+  washer:['washer-services','washer-differences','flow','washer-cases','washer-pricing'],
+  homeclean:['homeclean-services','homeclean-difference','flow','homeclean-cases','homeclean-estimate','homeclean-areas'],
+  'water-tank':['water-tank-content','water-tank-difference','flow','water-tank-cases','water-tank-pricing'],
+  'pipe-cleaning':['pipe-content','pipe-difference','flow','pipe-cases','pipe-pricing'],
+  'leak-repair':['pain','knowledge','promises','myths','instruments','leak-flow','cases-carousel','pricing','team-carousel','service-area']
+};
+function checkChapters(page,html){
+  const actual=[...html.matchAll(/<section[^>]*data-reading-chapter="([^"]+)"/g)].map(m=>m[1]);
+  assert.deepEqual(actual.slice(0,chapterOrder[page].length),chapterOrder[page]);
+  const toc=html.match(/<nav class="service-toc"[\s\S]*?<\/nav>/)?.[0];
+  assert.ok(toc);
+  const hashes=[...toc.matchAll(/href="#([^"]+)"/g)].map(m=>m[1]);
+  assert.match(hashes[0],/pricing/,'direct price access remains the first shortcut');
+  for(const hash of hashes)assert.ok(html.includes('id="'+hash+'"'),hash+' exists');
+  assert.ok(hashes.some(hash=>/flow/.test(hash)),'process is directly accessible');
+  assert.doesNotMatch(html,/<section[^>]*data-reading-chapter[^>]*\bhidden\b/);
+}
+test('six services: explanation → flow → real cases → price, with direct price shortcuts',()=>serviceCases.forEach(page=>checkChapters(page,read(page+'.html'))));
+test('mutation: moving prices ahead of the narrative is rejected',()=>{
+  const html=read('washer.html').replace('data-reading-chapter="washer-services"','data-reading-chapter="washer-pricing"');
+  assert.throws(()=>checkChapters('washer',html));
+});
+test('mutation: orphaned TOC anchor is rejected',()=>assert.throws(()=>checkChapters('homeclean',read('homeclean.html').replace('id="homeclean-pricing"','id="lost-pricing"'))));
+function checkReadingSurface(source){
+  assert.match(source,/body\[data-editorial-page\]\{overflow-x:clip;overflow-y:visible\}/,'no non-scrolling body ancestor; modal inline lock can still win');
+  assert.match(source,/--reading-space:clamp\(36px,4vw,60px\)/);
+  assert.match(source,/div\.item-card:nth-child\(even\)\{background:var\(--reading-tone\)!important\}/);
+  assert.match(source,/\.service-toc\[data-local-count\] a\{[^}]*min-height:44px[^}]*border-radius:0!important/);
+}
+test('theme shades, tighter chapter spacing and usable secondary navigation',()=>checkReadingSurface(css));
+test('mutation: sticky-killing body overflow is rejected',()=>assert.throws(()=>checkReadingSurface(css.replace('overflow-x:clip;overflow-y:visible','overflow-x:hidden;overflow-y:visible'))));
+test('mutation: oversized chapter gaps or lost tone boundaries are rejected',()=>{
+  assert.throws(()=>checkReadingSurface(css.replace('--reading-space:clamp(36px,4vw,60px)','--reading-space:120px')));
+  assert.throws(()=>checkReadingSurface(css.replace('div.item-card:nth-child(even){background:var(--reading-tone)!important}','')));
 });

@@ -165,29 +165,33 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   .footer-links{flex-direction:column;gap:.38rem;margin-bottom:0}
 }
 </style>
-<link rel="stylesheet" href="/assets/process-editorial.css?v=20260830-cases">
+<link rel="stylesheet" href="/assets/process-editorial.css?v=20260831-reading">
 </head>
 <body data-editorial-page>
 <link rel="stylesheet" href="assets/home-refresh.css?v=20260723a">
 <link rel="stylesheet" href="assets/process-images.css">
 <link rel="stylesheet" href="assets/craft.css?v=20260723a">
-<link rel="stylesheet" href="assets/home-service-hub.css?v=20260830a">
+<link rel="stylesheet" href="assets/home-service-hub.css?v=20260831-reading">
 <script src="header.js?v=20260830c"></script>
 
 <!-- Hero -->
 <main id="main">
-<section id="hero" role="region">
+<div id="home-route-nav" class="home-route-nav">
+  <div class="route-tabs" role="tablist" aria-label="選擇瀏覽方式">
+    <button type="button" id="home-tab-price" class="route-tab" role="tab" data-route="price" aria-selected="false" aria-controls="price-overview" tabindex="-1"><svg aria-hidden="true"><use href="/assets/icons.svg#clipboard"></use></svg><span>看價格・試算</span></button>
+    <button type="button" id="home-tab-knowledge" class="route-tab" role="tab" data-route="knowledge" aria-selected="true" aria-controls="knowledge-overview"><svg aria-hidden="true"><use href="/assets/icons.svg#book"></use></svg><span>看清洗知識</span></button>
+  </div>
+</div>
+<section id="hero" role="region" data-home-knowledge>
 <div class="hero-inner">
   <div class="hero-copy">
-    <div class="hero-eyebrow">先說清楚，再安排到府服務</div>
-    <h1 class="hero-h1"><span class="headline-line">居家問題先看懂</span><span class="headline-line"><em>找對方法才有用</em></span></h1>
-    <p class="hero-desc">想先了解怎麼清？從知識開始。<br>想直接知道多少錢？選項目、填數量，費用即時算給你看。</p>
+    <div class="hero-eyebrow">清洗保養・居家清潔・漏水修補</div>
+    <h1 class="hero-h1"><span class="headline-line"><span class="home-phrase">居家問題</span><span class="home-phrase">先看懂</span></span><span class="headline-line"><em><span class="home-phrase">找對方法</span><span class="home-phrase">才有用</span></em></span></h1>
+    <p class="hero-desc">先看懂怎麼處理，再決定要不要預約。<br>已經知道需求？上方切換價格，直接算費用。</p>
     <div class="hero-actions">
-      <a class="home-route-primary" href="#price-overview" data-home-route-target="price">看價格・即時試算 <span aria-hidden="true">↗</span></a>
-      <a class="hero-secondary" href="#knowledge-overview" data-home-route-target="knowledge">先看清洗知識</a>
+      <a class="home-route-primary" href="#knowledge-overview" data-home-route-target="knowledge">找到需要的服務 <span aria-hidden="true">↓</span></a>
     </div>
-    <div class="hero-note">自由切換，不必先填資料・確認明細後，再用 LINE 聯絡</div>
-    <div class="trust-badges"><span class="trust-badge">價格與條件先確認</span><span class="trust-badge">依地區安排團隊</span><span class="trust-badge">需要時由專員協處</span></div>
+    <div class="hero-note">看知識、算價格，都不必先留資料。</div>
   </div>
   <div class="hero-visual">
     <div class="hero-photo process-photo aircon" role="img" aria-label="冷氣清洗服務流程示意：技師保護家具並使用清洗罩清潔室內機" style="background-image:url('/assets/service-photos/aircon-cleaning-landscape-1200x628.jpg')"></div>
@@ -196,7 +200,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </div>
 </section>
 
-<section class="confidence-strip" aria-label="服務原則" role="region">
+<section class="confidence-strip" aria-label="服務原則" role="region" data-home-knowledge>
   <div class="confidence-inner">
     <div class="confidence-item"><span class="confidence-dot"></span><span><b>先確認：</b>機型、數量與現場條件</span></div>
     <div class="confidence-item"><span class="confidence-dot"></span><span><b>再報價：</b>固定價格或需要專員確認</span></div>
@@ -207,15 +211,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 <!-- 首頁雙入口：知識探索與主動開啟的價格試算 -->
 <section id="service-hub" class="decision-hub" aria-labelledby="service-hub-title">
 <div class="decision-hub-inner">
-  <div class="decision-hub-head">
-    <p class="decision-hub-kicker">先了解，或直接算</p>
-    <h2 id="service-hub-title" class="decision-hub-title">你的需求，你的節奏</h2>
-    <p class="decision-hub-lead">知識幫你找對方法，價格幫你安排預算。兩種入口，隨時切換。</p>
-  </div>
-  <div class="route-tabs" role="tablist" aria-label="選擇瀏覽方式">
-    <button type="button" id="home-tab-knowledge" class="route-tab" role="tab" data-route="knowledge" aria-selected="true" aria-controls="knowledge-overview"><svg aria-hidden="true"><use href="/assets/icons.svg#book"></use></svg><span>清洗知識<small>流程・差異・案例</small></span></button>
-    <button type="button" id="home-tab-price" class="route-tab" role="tab" data-route="price" aria-selected="false" aria-controls="price-overview" tabindex="-1"><svg aria-hidden="true"><use href="/assets/icons.svg#clipboard"></use></svg><span>價格一覽<small>即時試算費用</small></span></button>
-  </div>
+  <h2 id="service-hub-title" class="home-visually-hidden">服務知識與價格總覽</h2>
   <div id="knowledge-overview" class="route-panel knowledge-route" role="tabpanel" aria-labelledby="home-tab-knowledge">
 <section id="services" aria-label="services">
 <div class="services-inner">
@@ -302,7 +298,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   </div>
   <div id="price-overview" class="route-panel price-route" role="tabpanel" aria-labelledby="home-tab-price" hidden>
     <div class="price-builder">
-      <div class="price-builder-head"><div><h3>服務與價格總覽</h3><p>填數量，或按 ＋／− 調整。</p></div><button id="home-price-reset" class="price-reset" type="button">清空選擇</button></div>
+      <div class="price-builder-head"><div><h3>選項目，費用即時計算</h3><p>先試算，不必留資料。數量可跨分類保留。</p></div><button id="home-price-reset" class="price-reset" type="button">清空</button></div>
       <div class="price-filters" role="group" aria-label="篩選服務項目">
         <button class="price-filter" type="button" data-price-filter="popular" aria-pressed="true">常用項目</button>
         <button class="price-filter" type="button" data-price-filter="aircon" aria-pressed="false">冷氣</button>
@@ -311,7 +307,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
         <button class="price-filter" type="button" data-price-filter="water" aria-pressed="false">水塔・水管・抓漏</button>
         <button class="price-filter" type="button" data-price-filter="all" aria-pressed="false">全部項目</button>
       </div>
-      <a class="price-summary-jump" href="#home-order-summary">查看試算明細 <span id="home-price-mini-total" aria-live="polite">尚未選擇</span><span aria-hidden="true">↓</span></a>
+      <a class="price-summary-jump" href="#home-order-summary"><span>查看明細</span><span id="home-price-mini-total" aria-live="polite">尚未選擇</span><span aria-hidden="true">↓</span></a>
       <div id="home-price-list" class="price-list"></div>
       <p class="price-boundary">機型、施工空間與現場狀況可能影響報價。變形金剛冷氣另有專屬價格；日立／三菱含烘乾功能的洗衣機需先由專員確認是否可承接。水泥水塔暫不承接。</p>
     </div>
@@ -342,7 +338,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </section>
 
 <!-- 服務流程示意 -->
-<section id="service-process" role="region">
+<section id="service-process" role="region" data-home-knowledge>
   <div class="process-inner">
     <div class="process-head">
       <div>
@@ -380,8 +376,34 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   </div>
 </section>
 
+<section id="home-real-cases" class="home-evidence" aria-labelledby="home-cases-title" data-home-knowledge>
+  <div class="home-evidence-inner">
+    <p class="decision-hub-kicker">現場實拍・已去識別</p>
+    <h2 id="home-cases-title">不用想像，看看清洗前後</h2>
+    <p class="home-evidence-lead">同一處細節，對照清洗前後。實際成果依材質、老化與現場狀況不同。</p>
+    <div class="home-evidence-grid">
+      <article class="home-evidence-case">
+        <div class="home-photo-pair">
+          <figure><img src="/cases/aircon/case01-before.webp" alt="冷氣風鼓與出風口清潔前" width="1280" height="960" loading="lazy" decoding="async"><figcaption>清洗前</figcaption></figure>
+          <figure><img src="/cases/aircon/case01-after.webp" alt="同一冷氣機內清潔後" width="1280" height="960" loading="lazy" decoding="async"><figcaption>清洗後</figcaption></figure>
+        </div>
+        <h3>冷氣｜機內與出風口</h3>
+        <a href="/aircon.html#aircon-cases">查看完整冷氣案例 <span aria-hidden="true">→</span></a>
+      </article>
+      <article class="home-evidence-case">
+        <div class="home-photo-pair">
+          <figure><img src="/cases/washer/case01-before.webp" alt="直立式洗衣機外槽清潔前" width="890" height="1188" loading="lazy" decoding="async"><figcaption>清洗前</figcaption></figure>
+          <figure><img src="/cases/washer/case01-after.webp" alt="同一洗衣機外槽清潔後" width="890" height="1188" loading="lazy" decoding="async"><figcaption>清洗後</figcaption></figure>
+        </div>
+        <h3>洗衣機｜拆開後的外槽</h3>
+        <a href="/washer.html#washer-cases">查看完整洗衣機案例 <span aria-hidden="true">→</span></a>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- 我們提供什麼 -->
-<section class="service-flow service-flow--compact" data-process-editorial aria-labelledby="home-flow-title" aria-label="服務流程">
+<section class="service-flow service-flow--compact" data-process-editorial aria-labelledby="home-flow-title" aria-label="服務流程" data-home-knowledge>
   <div class="service-flow-inner process-editorial">
     <div class="process-overview">
       <div class="service-flow-head"><div class="service-flow-kicker">簡易流程說明</div><h2 id="home-flow-title">四個階段，<br>到府服務有順序</h2><p class="service-flow-intro">不同服務的工具與細節不同，但安全確認、環境保護、復原和測試不能省略。點進各服務頁可查看專屬說明。</p></div>
@@ -411,7 +433,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   </div>
 </section>
 
-<section id="promises" aria-label="服務承諾">
+<section id="promises" aria-label="服務承諾" data-home-knowledge>
 <div class="promises-inner">
   <div class="sec-tag teal">我們提供什麼</div>
   <h2 class="sec-title">知識 · 專業 · 透明</h2>
@@ -425,7 +447,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </section>
 
 <!-- 服務地區 -->
-<section id="areas-strip" style="padding:2.5rem 1.25rem;background:#fff" aria-label="服務地區">
+<section id="areas-strip" style="padding:2.5rem 1.25rem;background:#fff" aria-label="服務地區" data-home-knowledge>
   <div style="max-width:900px;margin:0 auto;text-align:center">
     <div class="sec-tag blue">服務地區</div>
     <h2 class="sec-title">北台灣到台中，到府服務</h2>
@@ -438,11 +460,20 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   </div>
 </section>
 
+<section id="home-booking-questions" class="home-booking-questions" aria-labelledby="home-questions-title" data-home-knowledge>
+  <div class="home-evidence-inner">
+    <h2 id="home-questions-title">預約前，你可能想先問</h2>
+    <details><summary>試算後，一定要預約嗎？</summary><p>不用。你可以先選數量、看參考費用，或只複製明細。開啟 LINE 後仍需按「傳送」，由專員接續確認內容與日期，並不是已完成預約。</p></details>
+    <details><summary>為什麼有些項目沒有固定總價？</summary><p>部分機型、髒污程度與施工條件需要照片或現場確認。這些項目會標示待報價，不會當成免費，也不會混入固定價小計。</p></details>
+    <details><summary>還不知道機型、地址，能先詢問嗎？</summary><p>可以先透過 LINE 描述問題與提供照片。使用試算表聯絡時，稱呼與手機為必填；完整地址、設備照片與希望時段可後續補充。</p></details>
+  </div>
+</section>
+
 <!-- CTA -->
-<section id="cta-bottom" aria-label="預約行動呼籲" role="region">
-  <div class="cta-title">灰塵髒污，交給灰汰郎</div>
-  <div class="cta-sub">填寫基本資料，快速預約到府服務</div>
-  <button type="button" class="cta-btn craft-action-icon" onclick="ldOpenQuote()"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#calendar"></use></svg>線上預約估價</button>
+<section id="cta-bottom" aria-label="預約行動呼籲" role="region" data-home-knowledge>
+  <div class="cta-title">看懂了，再算算看</div>
+  <div class="cta-sub">選項目、填數量；確認明細後，再用 LINE 接著聊。</div>
+  <a class="cta-btn craft-action-icon" href="#price-overview" data-home-route-target="price"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#clipboard"></use></svg>看價格・開始試算</a>
 </section>
 
 <!-- Footer -->
@@ -475,7 +506,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </footer>
 
 <script>document.getElementById('copy-year').textContent = new Date().getFullYear();</script>
-<script src="assets/home-service-hub.js?v=20260830a"></script>
+<script src="assets/home-service-hub.js?v=20260831-reading"></script>
 
 </main>
 </body>

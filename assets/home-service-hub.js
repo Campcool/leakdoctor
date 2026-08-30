@@ -66,7 +66,20 @@
     return lines.join('\n');
   }
   // Pure calculation / parser-contract tests can run without a browser or network.
-  if(typeof module !== 'undefined' && module.exports) module.exports = {services,clampQuantity,calculate,detailLines,formatMessage,routeForHash};
+  function renderServiceRow(item,quantity){
+    const qty = clampQuantity(quantity);
+    const price = item.quote ? item.priceLabel : 'NT$ ' + money.format(item.price) + '／' + item.unit;
+    const theme = item.id === 'rooftop_tank' ? 'water-tank' : item.id === 'leak_inspection' ? 'leak-repair' : item.group === 'water' ? 'pipe-cleaning' : item.group;
+    return '<article class="price-item" data-service="' + theme + '" data-service-row="' + item.id + '" data-active="' + (qty > 0) + '">' +
+      '<h4 class="price-item-name">' + item.label + '</h4>' +
+      '<div class="price-item-controls"><div class="price-item-amount"><div class="price-item-price">' + price + '</div><div class="price-item-type">' + (item.quote ? '需專員確認' : '固定參考價') + '</div></div>' +
+      '<div class="qty-stepper" role="group" aria-label="' + item.label + '數量">' +
+      '<button class="qty-btn" type="button" data-quantity-action="subtract" data-service-id="' + item.id + '" aria-label="減少' + item.label + '數量">−</button>' +
+      '<input class="qty-value" type="number" inputmode="numeric" min="0" max="20" step="1" data-quantity-value="' + item.id + '" aria-label="' + item.label + '數量" value="' + qty + '">' +
+      '<button class="qty-btn" type="button" data-quantity-action="add" data-service-id="' + item.id + '" aria-label="增加' + item.label + '數量">＋</button></div></div>' +
+      '<div class="price-item-note">' + item.note + '</div></article>';
+  }
+  if(typeof module !== 'undefined' && module.exports) module.exports = {services,clampQuantity,calculate,detailLines,formatMessage,routeForHash,renderServiceRow};
   if(typeof document === 'undefined') return;
   const state = {filter:'popular', quantities:new Map(),submitting:false,
     submittedLeadId:'',
@@ -76,6 +89,24 @@
     lastStatus:'', lastSignature:''};
   const root = document.getElementById('service-hub');
   if(!root) return;
+  const routeNav = document.getElementById('home-route-nav');
+  const routeTabs = Array.from(routeNav.querySelectorAll('[role="tab"]'));
+  const knowledgeSections = Array.from(document.querySelectorAll('[data-home-knowledge]'));
+  const quickQuote = document.querySelector('.ld-sticky-btn--form');
+  if(quickQuote) quickQuote.onclick = function(){
+    if(document.body.classList.contains('home-price-active')){
+      location.hash = 'home-order-summary';
+      document.getElementById('home-order-summary').scrollIntoView({block:'start',behavior:'instant'});
+    } else {
+      window.ldOpenQuote();
+    }
+  };
+  function syncNavHeight(){
+    document.documentElement.style.setProperty('--home-route-h',routeNav.getBoundingClientRect().height + 'px');
+  }
+  syncNavHeight();
+  if(typeof ResizeObserver !== 'undefined') new ResizeObserver(syncNavHeight).observe(routeNav);
+  if(document.fonts) document.fonts.ready.then(syncNavHeight);
 
   const list = document.getElementById('home-price-list');
   const summary = document.getElementById('home-order-lines');
@@ -88,8 +119,9 @@
   function setRoute(route, focus, record){
     if(record !== false && location.hash !== '#' + route + '-overview') history.pushState(history.state,'','#' + route + '-overview');
     document.body.classList.toggle('home-price-active',route === 'price');
-    const tabs = Array.from(root.querySelectorAll('[role="tab"]'));
-    tabs.forEach(function(tab){
+    if(quickQuote) quickQuote.textContent = route === 'price' ? '確認明細・聯絡' : '填單估價';
+    knowledgeSections.forEach(function(section){section.hidden = route === 'price';});
+    routeTabs.forEach(function(tab){
       const selected = tab.dataset.route === route;
       tab.setAttribute('aria-selected', selected ? 'true' : 'false');
       tab.tabIndex = selected ? 0 : -1;
@@ -97,17 +129,20 @@
       if(panel) panel.hidden = !selected;
     });
     if(focus){
-      const active = tabs.find(function(tab){ return tab.dataset.route === route; });
-      if(active) active.focus();
+      const active = routeTabs.find(function(tab){ return tab.dataset.route === route; });
+      if(active) active.focus({preventScroll:true});
     }
   }
 
-  root.addEventListener('click', function(event){
+  routeNav.addEventListener('click', function(event){
     const routeTab = event.target.closest('[data-route]');
     if(routeTab){
       setRoute(routeTab.dataset.route, false);
-      return;
+      document.getElementById('main').scrollIntoView({block:'start',behavior:'instant'});
     }
+  });
+
+  root.addEventListener('click', function(event){
     const filter = event.target.closest('[data-price-filter]');
     if(filter){
       state.filter = filter.dataset.priceFilter;
@@ -146,14 +181,15 @@
     document.getElementById(id).addEventListener('input', updateSummary);
   });
 
-  root.addEventListener('keydown', function(event){
+  routeNav.addEventListener('keydown', function(event){
     const tab = event.target.closest('[role="tab"]');
     if(!tab || !['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
     event.preventDefault();
-    const tabs = Array.from(root.querySelectorAll('[role="tab"]'));
+    const tabs = routeTabs;
     const direction = event.key === 'ArrowRight' ? 1 : -1;
     const next = event.key === 'Home' ? tabs[0] : event.key === 'End' ? tabs[tabs.length-1] : tabs[(tabs.indexOf(tab) + direction + tabs.length) % tabs.length];
     setRoute(next.dataset.route, true);
+    document.getElementById('main').scrollIntoView({block:'start',behavior:'instant'});
   });
 
   document.querySelectorAll('[data-home-route-target]').forEach(function(trigger){
@@ -183,15 +219,7 @@
   }
 
   function rowHtml(item){
-    const qty = state.quantities.get(item.id) || 0;
-    const price = item.quote ? item.priceLabel : 'NT$ ' + money.format(item.price) + '／' + item.unit;
-    return '<article class="price-item" data-service-row="' + item.id + '" data-active="' + (qty > 0) + '">' +
-      '<div class="price-item-main"><div class="price-item-type">' + item.groupLabel + (item.quote ? '・專員確認' : '・固定參考價') + '</div>' +
-      '<div class="price-item-name">' + item.label + '</div><div class="price-item-price">' + price + '</div><div class="price-item-note">' + item.note + '</div></div>' +
-      '<div class="qty-stepper" aria-label="' + item.label + '數量">' +
-      '<button class="qty-btn" type="button" data-quantity-action="subtract" data-service-id="' + item.id + '" aria-label="減少' + item.label + '數量">−</button>' +
-      '<input class="qty-value" type="number" inputmode="numeric" min="0" max="20" step="1" data-quantity-value="' + item.id + '" aria-label="' + item.label + '數量" value="' + qty + '">' +
-      '<button class="qty-btn" type="button" data-quantity-action="add" data-service-id="' + item.id + '" aria-label="增加' + item.label + '數量">＋</button></div></article>';
+    return renderServiceRow(item,state.quantities.get(item.id) || 0);
   }
 
   function updateRow(id, quantity){
@@ -306,6 +334,7 @@
     const quantities = new Map(state.quantities);
     const selected = calculate(quantities).items;
     state.submitting = true;
+    routeTabs.forEach(function(tab){tab.disabled = true;});
     root.querySelectorAll('input,button').forEach(function(control){control.disabled = true;});
     status.textContent = '正在安全儲存需求，請稍候…';
     try {
@@ -325,6 +354,7 @@
       status.textContent = state.lastStatus;
     } finally {
       state.submitting = false;
+      routeTabs.forEach(function(tab){tab.disabled = false;});
       root.querySelectorAll('input,button').forEach(function(control){control.disabled = false;});
       // 記下這次送出當下的內容指紋，讓 updateSummary 判斷是否要維持鎖定與保留訊息。
       // 手機開 LINE 後切回來頁面還活著；若整組解鎖，再按一次會多一筆 D1 線索，

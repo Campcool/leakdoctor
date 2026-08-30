@@ -46,6 +46,38 @@
 
     initPriceTableLabels();
     initServiceLayerTabs();
+    if(!document.querySelector('.service-layer-tabs')) initReadingToc();
+  }
+
+  // Native chapter navigation: preserve anchors/history and the browser's scroll
+  // behaviour. Only reflect the currently read chapter; never hide sections.
+  function initReadingToc(){
+    var toc = document.querySelector('.service-toc');
+    if(!toc) return;
+    var links = Array.from(toc.querySelectorAll('a[href^="#"]'));
+    var chapters = links.map(function(link){return {link:link,target:document.getElementById(link.hash.slice(1))};}).filter(function(item){return item.target;});
+    var queued = false;
+    function reflect(){
+      queued = false;
+      var header = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--ld-hdr-h')) || 0;
+      var threshold = header + toc.offsetHeight + 56;
+      var current = null, closest = -Infinity;
+      chapters.forEach(function(item){
+        var top = item.target.getBoundingClientRect().top;
+        if(top <= threshold && top > closest){current = item.link;closest = top;}
+      });
+      links.forEach(function(link){
+        link.classList.toggle('is-current',link === current);
+        if(link === current) link.setAttribute('aria-current','location');
+        else link.removeAttribute('aria-current');
+      });
+    }
+    function requestReflect(){if(!queued){queued = true;requestAnimationFrame(reflect);}}
+    window.addEventListener('scroll',requestReflect,{passive:true});
+    window.addEventListener('resize',requestReflect,{passive:true});
+    window.addEventListener('hashchange',requestReflect);
+    if(document.fonts) document.fonts.ready.then(requestReflect);
+    requestReflect();
   }
 
   function initServiceLayerTabs(){

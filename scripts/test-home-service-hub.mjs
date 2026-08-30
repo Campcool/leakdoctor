@@ -5,7 +5,7 @@ import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 
 const require = createRequire(import.meta.url);
-const {services,clampQuantity,calculate,detailLines,formatMessage,routeForHash} = require('../assets/home-service-hub.js');
+const {services,clampQuantity,calculate,detailLines,formatMessage,routeForHash,renderServiceRow} = require('../assets/home-service-hub.js');
 const cart = (...entries) => new Map(entries);
 test('summary anchor remains inside price route, knowledge and initial route stay separate',()=>{
   assert.equal(routeForHash('#home-order-summary'),'price');
@@ -120,4 +120,46 @@ test('純待報價仍不得出現 NT$0 總額',()=>{
   assert.equal(r.amount,0);
   assert.equal(r.priced.length,0);
   assert.equal(r.quoted.length,2);
+});
+
+const homeHtml = readFileSync(new URL('../index.html',import.meta.url),'utf8');
+const homeCss = readFileSync(new URL('../assets/home-service-hub.css',import.meta.url),'utf8');
+function checkEntry(html){
+  const entry = html.indexOf('id="home-route-nav"'), hero = html.indexOf('<section id="hero"');
+  assert.ok(entry > 0 && entry < hero,'mode choice precedes the story');
+  assert.equal((html.match(/role="tablist"/g)||[]).length,1);
+  for(const route of ['price','knowledge']){
+    assert.match(html,new RegExp('aria-controls="'+route+'-overview"'));
+    assert.match(html,new RegExp('id="'+route+'-overview"[^>]*role="tabpanel"'));
+  }
+  for(const phrase of ['居家問題','先看懂','找對方法','才有用'])assert.ok(html.includes('<span class="home-phrase">'+phrase+'</span>'));
+}
+function checkCompactRow(html,item,quantity){
+  const controls=html.split('<div class="price-item-controls">')[1]?.split('<div class="price-item-note">')[0];
+  assert.ok(controls && controls.includes('class="price-item-price"') && controls.includes('class="qty-stepper"'),'price and quantity share a controls row');
+  assert.ok(html.includes(item.label) && html.includes(item.note),'all original terms remain');
+  assert.ok(html.includes('value="'+quantity+'"'));
+  assert.match(html,/data-service="(?:aircon|washer|homeclean|water-tank|pipe-cleaning|leak-repair)"/);
+  assert.match(html,/type="number" inputmode="numeric" min="0" max="20"/);
+}
+test('first-screen modes and intact desktop heading phrases',()=>checkEntry(homeHtml));
+test('all 21 compact price rows retain labels, conditions and accessible quantity inputs',()=>services.forEach(item=>checkCompactRow(renderServiceRow(item,2),item,2)));
+test('price themes distinguish tank, pipes and leak without changing their catalog groups',()=>{
+  for(const [id,theme] of [['rooftop_tank','water-tank'],['water_pipe_cleaning','pipe-cleaning'],['leak_inspection','leak-repair']])assert.ok(renderServiceRow(services.find(s=>s.id===id),0).includes('data-service="'+theme+'"'));
+});
+test('homepage evidence uses labelled real assets, separate from disclosed illustrations',()=>{
+  const cases=homeHtml.split('id="home-real-cases"')[1].split('</section>')[0];
+  for(const service of ['aircon','washer'])for(const state of ['before','after'])assert.ok(cases.includes('/cases/'+service+'/case01-'+state+'.webp'));
+  assert.equal((cases.match(/<figcaption>清洗前<\/figcaption>/g)||[]).length,2);
+  assert.equal((cases.match(/<figcaption>清洗後<\/figcaption>/g)||[]).length,2);
+});
+test('mutation: burying modes behind the hero is rejected',()=>assert.throws(()=>checkEntry(homeHtml.replace('id="home-route-nav"','id="removed-route-nav"'))));
+test('mutation: quantity outside the compact controls row is rejected',()=>{
+  const item=services[0];assert.throws(()=>checkCompactRow(renderServiceRow(item,2).replace('class="qty-stepper"','class="detached-stepper"'),item,2));
+});
+test('mutation: splitting a protected heading phrase is rejected',()=>assert.throws(()=>checkEntry(homeHtml.replace('class="home-phrase">居家問題','class="home-phrase">居家問</span><span>題'))));
+test('six themes and adjacent surface contrast are explicit',()=>{
+  for(const service of ['aircon','washer','homeclean','water-tank','pipe-cleaning','leak-repair'])assert.ok(homeCss.includes('[data-service="'+service+'"]{--service-accent:'));
+  assert.match(homeCss,/\.price-item:nth-of-type\(even\)\{background:color-mix/);
+  assert.match(homeCss,/\.qty-btn\{[^}]*width:44px;height:44px/);
 });
