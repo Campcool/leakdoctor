@@ -24,6 +24,8 @@ jobs:
           node-version: 22
       - name: Brand fact + structural validation (validate-site.mjs)
         run: node scripts/validate-site.mjs
+      - name: Per-page Open Graph images and metadata
+        run: node --test scripts/test-og-contract.mjs
       - name: Homepage pricing and LINE handoff contract
         run: node --test scripts/test-home-service-hub.mjs
       - name: Six-service header, bottom spacing and official LINE asset
