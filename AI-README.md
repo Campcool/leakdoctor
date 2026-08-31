@@ -304,7 +304,7 @@ CI 只跑 `setup-node` + `node`，不能引外部套件），實際解析 `heade
 - 根目錄保留 `.nojekyll`，讓 GitHub Pages 直接發布靜態檔案，不執行不必要的 Jekyll metadata build；勿刪除。
 - **`header.js` 是全站共用核心**（每頁 `<script src="header.js">` 或 `../header.js` 載入），runtime 注入：
   - fixed header＋6 個主服務頁籤（root 絕對路徑 `/xxx.html`，讓 /articles/ 下也正確）；桌機 Logo 首頁入口與服務頁籤同列等高，手機／平板維持 Logo＋單列橫向滑動服務選項，服務頁會把作用中頁籤置中
-  - 右側 LINE 浮動鈕、回頂鈕、手機底部 LINE 預約列；網站不提供公開電話 CTA，也不顯示「加入我們」
+  - 右側 LINE 浮動鈕、回頂鈕、手機底部 LINE 預約列；網站不提供公開電話 CTA；「加入我們」由共用腳本注入於頁尾前，連到 /join.html，完整申請僅登入後台可查看
   - 六服務專屬色系由 body theme class 與 CSS variables 串接頁籤及頁面 CTA：冷氣青藍、洗衣機紫、居家清潔琥珀、水塔綠、水管靛藍、漏水青綠
   - **預約表單 modal**（`ldOpenQuote(serviceKey)` 全域函式）：姓名/電話/地址/服務卡片/日期時段，送出 → `POST /api/leads` 寫入灰汰郎 D1 → 取得 `HTL-L-*` 線索編號 → 組訊息 → `line.me/R/oaMessage/@478xvlgl/?<encoded>` 開 LINE 預填；API 失敗時不開 LINE，避免需求未落案
   - GA4 載入與事件：`line_click`、`line_direct_click`、`quote_open`、`generate_lead`、`quote_submit`；`generate_lead` 只在 D1 建案成功後送出
@@ -399,6 +399,14 @@ cases/
 - 修改後驗證慣例：`node --check header.js`；以 Node 驗證 JSON-LD、內部連結、四頁流程與禁止字樣；本機網址受瀏覽器安全政策阻擋時，直接使用正式部署標記與真機驗證，不可繞過安全政策。
 
 ## 5. 進度紀錄（新條目加在最上面）
+
+### 2026-08-31 加入我們整合 Claude 最新版（Codex）
+
+- 基準為 Claude 最新 main 48b0f1d，其祖先已包含合作申請 6f700d7；保留新版浮動聯絡區、Key Impact、證據列與客戶時程軸，不回套舊 header/CSS。
+- join.html／assets/join.js／assets/join.css 與 sitemap、頁尾入口均仍完整。後台 main 2f40b9f 已部署，私有合作申請 API 及 D1 0018 不需重建。
+- Claude 更新 header.js 時未同步各頁載入 query。此次 37 頁統一改為 20260831-partners-integrated，讓加入我們、服務頁與文章頁取得最新共用腳本，避免沿用舊浮島快取。
+- 整合前最新版前台 123/123 測試通過；本輪不改服務資料、價格、申請 API、派工或 LINE 發送邏輯。最新測試／正式部署證據另記本輪發布報告，未以自動測試代替業主真機驗收。
+
 
 ### 2026-08-31 共用估價浮島、流程置中與廠商合作申請
 
@@ -930,7 +938,7 @@ GSC 存取：`leakdoctor.tw` 與 `blossomkids.tw` 皆已驗證，共用驗證碼
 
 ## 7. 待辦清單
 
-- [x] 本機完成共用估價浮島、流程高度置中、加入我們與私有後台合作申請存檔。
+- [x] 加入我們及私有合作申請後台已發布；2026-08-31 整合 Claude 最新 48b0f1d 版型並同步全站 header 快取版本。
 - [ ] 本批發布後由業主雙平台人工驗收；LINE webview 尚未代替真機驗證。
 
 - 本輪 main 發布已獲授權；發布後核對正式三個水泥級距及 NT$1,500 提醒，再交由業主人工驗收網站→LINE→後台，勿把自動測試當成真實客戶／廠商收送確認。
