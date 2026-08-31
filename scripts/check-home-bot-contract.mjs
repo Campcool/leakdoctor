@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {createRequire,stripTypeScriptTypes} from 'node:module';
+import vm from 'node:vm';
 const require = createRequire(import.meta.url);
 const {services,formatMessage} = require('../assets/home-service-hub.js');
 // 前台用客戶看得懂的量詞，後台用報價單的計價單位；以下差異是刻意的，改動前請一併確認訊息與卡片讀起來合理。
@@ -60,4 +61,19 @@ const parsedFields = parseWebsiteForm(fieldMsg);
 assert.equal(parsedFields.preferredTime,'週六上午','希望時段 must reach preferredTime');
 assert.equal(parsedFields.address,'新北市三重區');
 
-console.log(`Bot contract OK: ${services.length} retail labels/prices/units/parser mappings + mixed-order headline, indoor-only labels, field aliases and lead ID.`);
+const header = readFileSync(new URL('../header.js',import.meta.url),'utf8');
+const modalSource = header.match(/const SERVICE_DETAIL_CATALOG\s*=\s*({[\s\S]*?\n  });/);
+assert.ok(modalSource,'Modal service catalog must be readable for the cross-repo contract');
+const modal = vm.runInNewContext('('+modalSource[1]+')')['水塔清洗'];
+const seeds=JSON.parse(readFileSync(new URL('../data/service-options.json',import.meta.url),'utf8')).service_groups.find(g=>g.id==='water_tank_cleaning').options;
+const page=readFileSync(new URL('../water-tank.html',import.meta.url),'utf8');
+for(const id of ['concrete_tank_small','concrete_tank_medium','concrete_tank_large']){
+  const option=catalog.SERVICE_OPTIONS.find(o=>o.id===id), row=modal.find(o=>o.backendId===id), seed=seeds.find(o=>o.id===id);
+  assert.ok(row,`Missing modal tier ${id}`);assert.equal(row.label,option.label);assert.equal(seed.pricing.base_price,option.pricing.basePrice);
+  assert.ok(row.note.includes(option.pricing.basePrice.toLocaleString('en-US')));
+  assert.ok(page.includes(`<td>${option.label}</td>`),`Missing visible price-table row ${id}`);
+  const parsed=parseWebsiteForm(`灰汰郎預約\n服務項目：水塔清洗\n服務內容：${row.label} × 2${row.unit}（${row.note}）`);
+  assert.equal(parsed.service,option.label);assert.equal(parsed.detail.service_lines[0].quantity,2);
+}
+assert.ok(modal.every(row=>!['concrete_lower_tank','upper_lower_tanks'].includes(row.backendId)),'Unsupported tanks must not reappear when availability API fails');
+console.log(`Bot contract OK: ${services.length} retail labels/prices/units/parser mappings; 3 concrete tiers also verified in modal messages, seed prices and visible table.`);

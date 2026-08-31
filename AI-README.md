@@ -311,6 +311,16 @@ cases/
 
 ## 5. 進度紀錄（新條目加在最上面）
 
+### 2026-08-31（Codex・水泥水塔上架修正，本機完成／未發布）
+- 固定審查基準 ac98a4aad9fb536ea6d86a078073e5f64363d285，分支 codex/fix-concrete-dispatch。補齊水塔頁可見價目、Offer schema、meta、共用 modal、首頁、llms 與水塔種子資料。
+- 水泥上水塔 15–20／30–50／80–100 噸售價維持 4,499／5,999／9,999 元每座；其他噸數與容量不明先報價。地下蓄水池／上下水塔整組從 modal 的 API 失敗後備清單移除。
+- 跨 repo 契約增加 modal 實際明細格式→Bot parser 的三個級距／數量檢查；CRLF 的 CTA mutation 已修正，98/98 測試、22 頁／33 sitemap、29 品項契約通過。
+- 桌面瀏覽器手機模式實際選取三個級距；小型×2＋中型×1＋大型×1＝24,996。375／768／1440px、根字級24px無水平溢出。非實體手機、未提交正式訂單或 LINE。
+- 正式網址唯讀核對仍為舊版，沒有三個水泥價目；此分支尚未推 main／部署。Bot 修正與 migration 0016 必須協調發布，避免 availability API 過濾新選項或舊 D1 問答否定承接。
+- 原有 Bot A/B 草稿去重與 working_lead 問題未納入本次，不因水塔測試通過而結案。
+
+
+
 ### 2026-08-31（Codex・品牌 favicon）
 - 依業主截圖，以 `logo/avatars-icons/` 已存在的品牌圖形（刷子、弧線與星芒）取代自行繪製的斜刷子。直接使用既有素材，未生成或重畫 Logo；小尺寸不放「灰汰郎／清潔公司」字樣，以免縮小難辨。
 - 根目錄 16／32px PNG、ICO、180px Apple、192px Android、512px 來源同步品牌素材；移除零引用的舊 `favicon.svg`。36 個 HTML 頁面的 favicon cache key 統一為 `20260831-brand`，並補齊漏水指南原本缺少的 16px／Apple／ICO 宣告。既有公開 artifact 根目錄圖片白名單已涵蓋這些檔案，品牌素材包本身仍不公開。
@@ -805,6 +815,9 @@ GSC 存取：`leakdoctor.tw` 與 `blossomkids.tw` 皆已驗證，共用驗證碼
 7. `initServiceLayerTabs()` 目前只掃 body 直屬節點，內容在 main 內，實際沒有產生 `.service-layer-tabs`。不可照歷史文件宣稱已啟用。若後续修復，須完整驗證 hidden、hash、history、焦點與 sticky 偏移，不要只改 selector 就啟用休眠程式。
 
 ## 7. 待辦清單
+
+- [x] 水泥水塔三級距的首頁／服務頁／modal／Bot 契約本機修正與驗證。
+- [ ] 發布上述修正版並覆驗正式價格、availability、知識庫與真機 LINE；本機完成不等於正式上架。
 
 ### 🔑 只有業主能做（AI 請勿代做，可提醒）
 - [x] GA4 已提供並填入 `header.js`：`G-1H1X1X9QZE`

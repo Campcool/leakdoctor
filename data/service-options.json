@@ -258,42 +258,82 @@
       "customer_prompt": "請選擇水塔類型",
       "default_unit": "座/顆",
       "handoff_rules": [
-        "水泥水塔、地下蓄水池、上下水塔同時清洗、大樓/社區、需要停水公告、密閉空間、無安全通道、容量不明"
+        "其他噸數、容量不明、需要停水公告或現場條件待確認時轉專員；地下蓄水池及上下水塔整組不承接"
       ],
       "options": [
         {
           "id": "rooftop_stainless_tank",
-          "label": "屋頂不鏽鋼/塑膠水塔",
+          "label": "白鐵（不鏽鋼）水塔清洗",
           "short_label": "屋頂水塔",
-          "aliases": ["屋頂水塔", "上水塔", "不鏽鋼水塔", "白鐵水塔", "塑膠水塔", "FRP水塔", "一顆水塔"],
+          "aliases": [
+            "屋頂水塔",
+            "上水塔",
+            "不鏽鋼水塔",
+            "白鐵水塔",
+            "一顆水塔"
+          ],
           "customer_description": "一般透天、公寓頂樓常見，以顆數與容量估價。",
           "pricing": {
-            "status": "quote_required",
-            "base_price": null,
+            "status": "fixed",
+            "base_price": 1599,
             "price_unit": "per_tank",
-            "reason": "需依容量、顆數、樓層、通道與水塔髒污程度確認。"
+            "source": "bot/src/catalog.ts"
           },
           "quantity_selector": {
             "type": "count",
             "label": "有幾顆水塔？",
             "min": 1,
             "max": 20,
-            "quick_options": [1, 2, 3, 4, "5 顆以上", "不確定"]
+            "quick_options": [
+              1,
+              2,
+              3,
+              4,
+              "5 顆以上",
+              "不確定"
+            ]
           },
           "capacity_selector": {
             "type": "liter_or_ton_range",
             "label": "單顆容量大約多大？",
-            "quick_options": ["500L / 0.5 噸", "1000L / 1 噸", "1500L / 1.5 噸", "2000L / 2 噸", "3000L / 3 噸", "5000L / 5 噸以上", "不確定"]
+            "quick_options": [
+              "500L / 0.5 噸",
+              "1000L / 1 噸",
+              "1500L / 1.5 噸",
+              "2000L / 2 噸",
+              "3000L / 3 噸",
+              "5000L / 5 噸以上",
+              "不確定"
+            ]
           },
-          "required_fields": ["quantity", "area", "access_condition", "preferred_time", "customer_name", "phone"],
-          "optional_fields": ["capacity_liters", "floor_count", "has_ladder", "photo_url", "needs_water_shutdown_notice"],
+          "required_fields": [
+            "quantity",
+            "area",
+            "access_condition",
+            "preferred_time",
+            "customer_name",
+            "phone"
+          ],
+          "optional_fields": [
+            "capacity_liters",
+            "floor_count",
+            "has_ladder",
+            "photo_url",
+            "needs_water_shutdown_notice"
+          ],
           "ai_notes": "1 公噸水約等於 1000 公升，可協助客戶用水塔標籤或照片判斷。"
         },
         {
           "id": "concrete_upper_tank",
-          "label": "水泥上水塔",
+          "label": "水泥水塔清洗（其他噸數／噸數未定）",
           "short_label": "水泥上塔",
-          "aliases": ["水泥水塔", "水泥上水塔", "頂樓水泥水塔", "RC水塔", "混凝土水塔"],
+          "aliases": [
+            "水泥水塔",
+            "水泥上水塔",
+            "頂樓水泥水塔",
+            "RC水塔",
+            "混凝土水塔"
+          ],
           "customer_description": "建築物頂樓或高處的水泥/混凝土蓄水槽。",
           "pricing": {
             "status": "quote_required",
@@ -304,63 +344,186 @@
           "quantity_selector": {
             "type": "case",
             "label": "約幾座水泥上水塔？",
-            "quick_options": ["1 座", "2 座", "3 座以上", "不確定"]
+            "quick_options": [
+              "1 座",
+              "2 座",
+              "3 座以上",
+              "不確定"
+            ]
           },
           "capacity_selector": {
             "type": "unknown_allowed",
             "label": "容量是否知道？",
-            "quick_options": ["5 噸以下", "6-10 噸", "11-20 噸", "20 噸以上", "不確定"]
+            "quick_options": [
+              "15–20 噸",
+              "30–50 噸",
+              "80–100 噸",
+              "其他噸數",
+              "不確定"
+            ]
           },
-          "required_fields": ["area", "building_type", "photo_url", "customer_name", "phone"],
-          "optional_fields": ["capacity_tons", "manhole_size", "drainage_method", "needs_water_shutdown_notice", "management_committee_contact"],
+          "required_fields": [
+            "area",
+            "building_type",
+            "photo_url",
+            "customer_name",
+            "phone"
+          ],
+          "optional_fields": [
+            "capacity_tons",
+            "manhole_size",
+            "drainage_method",
+            "needs_water_shutdown_notice",
+            "management_committee_contact"
+          ],
           "ai_notes": "水泥水塔一律先蒐集照片與現場條件，再人工確認。"
         },
         {
-          "id": "concrete_lower_tank",
-          "label": "水泥下水塔/地下蓄水池",
-          "short_label": "下水塔",
-          "aliases": ["下水塔", "地下水塔", "地下蓄水池", "水泥下水塔", "蓄水池", "地下水池"],
-          "customer_description": "地下室或一樓低處的蓄水池，常見於大樓、社區、店面或透天。",
+          "id": "concrete_tank_small",
+          "label": "水泥水塔清洗（15–20 噸）",
+          "short_label": "15–20 噸",
+          "aliases": [],
+          "customer_description": "建築物頂樓或高處的水泥/混凝土蓄水槽。",
           "pricing": {
-            "status": "quote_required",
-            "base_price": null,
-            "price_unit": "case",
-            "reason": "需確認容量、入口、抽水/排水、通風、安全與停水安排。"
+            "status": "fixed",
+            "base_price": 4499,
+            "price_unit": "per_tank",
+            "source": "bot/src/catalog.ts"
           },
           "quantity_selector": {
             "type": "case",
-            "label": "是否有下水塔/地下蓄水池？",
-            "quick_options": ["只有下水塔", "上水塔 + 下水塔", "不確定"]
+            "label": "約幾座水泥上水塔？",
+            "quick_options": [
+              "1 座",
+              "2 座",
+              "3 座以上",
+              "不確定"
+            ]
           },
           "capacity_selector": {
             "type": "unknown_allowed",
             "label": "容量是否知道？",
-            "quick_options": ["5 噸以下", "6-10 噸", "11-20 噸", "20 噸以上", "不確定"]
+            "quick_options": [
+              "15–20 噸",
+              "30–50 噸",
+              "80–100 噸",
+              "其他噸數",
+              "不確定"
+            ]
           },
-          "required_fields": ["area", "building_type", "photo_url", "customer_name", "phone"],
-          "optional_fields": ["capacity_tons", "basement_access", "drainage_method", "needs_water_shutdown_notice", "management_committee_contact"],
-          "ai_notes": "地下蓄水池涉及密閉空間與安全，AI 不可承諾施工，需人工確認。"
+          "required_fields": [
+            "area",
+            "building_type",
+            "photo_url",
+            "customer_name",
+            "phone"
+          ],
+          "optional_fields": [
+            "capacity_tons",
+            "manhole_size",
+            "drainage_method",
+            "needs_water_shutdown_notice",
+            "management_committee_contact"
+          ],
+          "ai_notes": "依級距查牌價；施工前仍須確認容量、照片及安全條件。"
         },
         {
-          "id": "upper_and_lower_tanks",
-          "label": "上下水塔一起清洗",
-          "short_label": "上下水塔",
-          "aliases": ["上下水塔", "上水塔下水塔", "整棟水塔", "大樓水塔清洗", "社區水塔清洗"],
-          "customer_description": "同時清洗屋頂水塔與地下/低處蓄水池。",
+          "id": "concrete_tank_medium",
+          "label": "水泥水塔清洗（30–50 噸）",
+          "short_label": "30–50 噸",
+          "aliases": [],
+          "customer_description": "建築物頂樓或高處的水泥/混凝土蓄水槽。",
           "pricing": {
-            "status": "quote_required",
-            "base_price": null,
-            "price_unit": "case",
-            "reason": "需依顆數、容量、停水時段、社區規模與施工安全報價。"
+            "status": "fixed",
+            "base_price": 5999,
+            "price_unit": "per_tank",
+            "source": "bot/src/catalog.ts"
           },
           "quantity_selector": {
-            "type": "mixed",
-            "label": "請選擇大概狀況",
-            "quick_options": ["透天 1-2 顆", "公寓 3-5 顆", "社區/大樓", "不確定，請協助判斷"]
+            "type": "case",
+            "label": "約幾座水泥上水塔？",
+            "quick_options": [
+              "1 座",
+              "2 座",
+              "3 座以上",
+              "不確定"
+            ]
           },
-          "required_fields": ["area", "building_type", "photo_url", "customer_name", "phone"],
-          "optional_fields": ["upper_tank_count", "lower_tank_count", "capacity_tons", "needs_water_shutdown_notice", "management_committee_contact"],
-          "ai_notes": "適合建立 draft order 後由人工確認。可詢問是否需公告停水、是否有管委會窗口。"
+          "capacity_selector": {
+            "type": "unknown_allowed",
+            "label": "容量是否知道？",
+            "quick_options": [
+              "15–20 噸",
+              "30–50 噸",
+              "80–100 噸",
+              "其他噸數",
+              "不確定"
+            ]
+          },
+          "required_fields": [
+            "area",
+            "building_type",
+            "photo_url",
+            "customer_name",
+            "phone"
+          ],
+          "optional_fields": [
+            "capacity_tons",
+            "manhole_size",
+            "drainage_method",
+            "needs_water_shutdown_notice",
+            "management_committee_contact"
+          ],
+          "ai_notes": "依級距查牌價；施工前仍須確認容量、照片及安全條件。"
+        },
+        {
+          "id": "concrete_tank_large",
+          "label": "水泥水塔清洗（80–100 噸）",
+          "short_label": "80–100 噸",
+          "aliases": [],
+          "customer_description": "建築物頂樓或高處的水泥/混凝土蓄水槽。",
+          "pricing": {
+            "status": "fixed",
+            "base_price": 9999,
+            "price_unit": "per_tank",
+            "source": "bot/src/catalog.ts"
+          },
+          "quantity_selector": {
+            "type": "case",
+            "label": "約幾座水泥上水塔？",
+            "quick_options": [
+              "1 座",
+              "2 座",
+              "3 座以上",
+              "不確定"
+            ]
+          },
+          "capacity_selector": {
+            "type": "unknown_allowed",
+            "label": "容量是否知道？",
+            "quick_options": [
+              "15–20 噸",
+              "30–50 噸",
+              "80–100 噸",
+              "其他噸數",
+              "不確定"
+            ]
+          },
+          "required_fields": [
+            "area",
+            "building_type",
+            "photo_url",
+            "customer_name",
+            "phone"
+          ],
+          "optional_fields": [
+            "capacity_tons",
+            "manhole_size",
+            "drainage_method",
+            "needs_water_shutdown_notice",
+            "management_committee_contact"
+          ],
+          "ai_notes": "依級距查牌價；施工前仍須確認容量、照片及安全條件。"
         }
       ]
     },

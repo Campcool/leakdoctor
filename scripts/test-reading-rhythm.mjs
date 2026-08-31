@@ -98,7 +98,7 @@ test('mutation: 拿掉 hero 價格錨點會被抓到',()=>{
 
 test('mutation: 中段 CTA 減到一個會被抓到',()=>{
   const s = read('water-tank.html');
-  const mutated = s.replace(/<div class="section-cta">[\s\S]{0,400}?<\/div>\n/g,'');
+  const mutated = s.replace(/<div class="section-cta">[\s\S]{0,400}?<\/div>\r?\n/g,'');
   assert.ok(((mutated.match(/class="section-cta"/g)||[]).length) < 2);
   assert.throws(()=>assert.ok(((mutated.match(/class="section-cta"/g)||[]).length) >= 2));
 });

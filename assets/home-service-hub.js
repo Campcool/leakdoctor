@@ -28,13 +28,13 @@
     {id:'concrete_tank_small',cat:'tank',group:'water',groupLabel:'水路服務',label:'水泥水塔清洗（15–20 噸）',unit:'座',price:4499,note:'請提供水塔照片、入口與排水方式'},
     {id:'concrete_tank_medium',cat:'tank',group:'water',groupLabel:'水路服務',label:'水泥水塔清洗（30–50 噸）',unit:'座',price:5999,note:'請提供水塔照片、入口與排水方式'},
     {id:'concrete_tank_large',cat:'tank',group:'water',groupLabel:'水路服務',label:'水泥水塔清洗（80–100 噸）',unit:'座',price:9999,note:'請提供水塔照片、入口與排水方式'},
-    {id:'concrete_upper_tank',cat:'tank',group:'water',groupLabel:'水路服務',label:'水泥水塔清洗（100 噸以上／噸數未定）',unit:'座',quote:true,priceLabel:'現場勘查後報價',note:'破百噸需現場確認結構與作業條件'},
+    {id:'concrete_upper_tank',cat:'tank',group:'water',groupLabel:'水路服務',label:'水泥水塔清洗（其他噸數／噸數未定）',unit:'座',quote:true,priceLabel:'現場勘查後報價',note:'未列級距或容量不明，先確認結構與作業條件'},
     {id:'water_pipe_cleaning',cat:'pipe',group:'water',groupLabel:'水路服務',label:'水管清洗－大樓／公寓（給水管路除垢）',unit:'戶',price:3599,note:'需先確認屋齡、管材與出水點',popular:true},
     {id:'water_pipe_cleaning_house',cat:'pipe',group:'water',groupLabel:'水路服務',label:'水管清洗－透天（給水管路除垢）',unit:'戶',price:4999,note:'需先確認樓層、管材與出水點'},
     {id:'leak_inspection',cat:'leak',group:'water',groupLabel:'漏水服務',label:'水管抓漏',unit:'案',quote:true,priceLabel:'LINE 免費初判',note:'實際檢測與修補費用依現場確認',popular:true},
-    {id:'supply_pipe_leak_test',cat:'leak',group:'water',groupLabel:'漏水服務',label:'給水管檢測（測漏）',unit:'案',quote:true,priceLabel:'依現場報價',note:'檢測費可折抵後續施工費用'},
+    {id:'supply_pipe_leak_test',cat:'leak',group:'water',groupLabel:'漏水服務',label:'給水管檢測（測漏）',unit:'案',quote:true,priceLabel:'依現場報價',note:'折抵條件與施工費用由專員確認'},
     {id:'supply_pipe_leak_repair',cat:'leak',group:'water',groupLabel:'漏水服務',label:'給水管補漏（單一回路）',unit:'回路',quote:true,priceLabel:'依現場報價',note:'以單一回路（冷水或熱水）計價，範圍與工法現場確認'},
-    {id:'drain_pipe_leak_test',cat:'leak',group:'water',groupLabel:'漏水服務',label:'排水管檢測（測漏）',unit:'案',quote:true,priceLabel:'依現場報價',note:'檢測費可折抵後續施工費用'},
+    {id:'drain_pipe_leak_test',cat:'leak',group:'water',groupLabel:'漏水服務',label:'排水管檢測（測漏）',unit:'案',quote:true,priceLabel:'依現場報價',note:'折抵條件與施工費用由專員確認'},
     {id:'drain_pipe_leak_repair',cat:'leak',group:'water',groupLabel:'漏水服務',label:'排水管補漏',unit:'案',quote:true,priceLabel:'依現場報價',note:'範圍與工法需現場確認後報價'}
   ];
 
@@ -106,7 +106,7 @@
   function renderServiceRow(item,quantity){
     const qty = clampQuantity(quantity);
     const price = item.quote ? item.priceLabel : 'NT$ ' + money.format(item.price) + '／' + item.unit;
-    const theme = item.id === 'rooftop_tank' ? 'water-tank' : item.id === 'leak_inspection' ? 'leak-repair' : item.group === 'water' ? 'pipe-cleaning' : item.group;
+    const theme = item.cat === 'tank' ? 'water-tank' : item.cat === 'leak' ? 'leak-repair' : item.cat === 'pipe' ? 'pipe-cleaning' : item.group;
     return '<article class="price-item" data-service="' + theme + '" data-service-row="' + item.id + '" data-active="' + (qty > 0) + '">' +
       '<h4 class="price-item-name">' + item.label + '</h4>' +
       '<div class="price-item-controls"><div class="price-item-amount"><div class="price-item-price">' + price + '</div><div class="price-item-type">' + (item.quote ? '需專員確認' : '固定參考價') + '</div></div>' +

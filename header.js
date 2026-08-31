@@ -168,9 +168,10 @@ function ldInit(){
     ],
     '水塔清洗': [
       {id:'tank-rooftop',backendId:'rooftop_tank',label:'屋頂不鏽鋼水塔',unit:'顆',note:'參考價 $1,599／顆'},
-      {id:'tank-concrete-upper',backendId:'concrete_upper_tank',label:'水泥上水塔',unit:'座',note:'需照片、入口尺寸與排水方式評估'},
-      {id:'tank-concrete-lower',backendId:'concrete_lower_tank',label:'地下蓄水池／下水塔',unit:'座',note:'涉及通風與安全條件，需人工確認'},
-      {id:'tank-building',backendId:'upper_lower_tanks',label:'公寓／社區上下水塔',unit:'案',note:'依公告停水、管委會與施工時段報價'}
+      {id:'tank-concrete-small',backendId:'concrete_tank_small',label:'水泥水塔清洗（15–20 噸）',unit:'座',note:'參考價 $4,499／座；需確認照片、容量與施工條件'},
+      {id:'tank-concrete-medium',backendId:'concrete_tank_medium',label:'水泥水塔清洗（30–50 噸）',unit:'座',note:'參考價 $5,999／座；需確認照片、容量與施工條件'},
+      {id:'tank-concrete-large',backendId:'concrete_tank_large',label:'水泥水塔清洗（80–100 噸）',unit:'座',note:'參考價 $9,999／座；需確認照片、容量與施工條件'},
+      {id:'tank-concrete-upper',backendId:'concrete_upper_tank',label:'水泥水塔清洗（其他噸數／噸數未定）',unit:'座',note:'未列級距或容量不明，先由專員報價'}
     ],
     '水管清洗': [
       {id:'pipe-home',backendId:'water_pipe_cleaning_house',label:'透天水管清洗',unit:'戶',note:'參考價 $4,999／戶'},
@@ -841,8 +842,8 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
     'water-tank':{
       title:'水塔清洗先看三張圖',
       cards:[
-        {tag:'為什麼需要洗',title:'蓄水容器會累積沉積物',text:'目前承接屋頂白鐵水塔；先看容量、內部狀況與頂樓通道，再確認是否能安排。',image:'/assets/service-story/water-tank-service-story-20260714.webp',fallback:'/assets/service-story/water-tank-service-story-20260714.jpg'},
-        {tag:'怎麼洗',title:'停水、排水、復水要有順序',text:'上下水塔、加壓馬達與排水點會影響施工安排，報價前要先看照片。',image:'/assets/optimized/water-tank-system-sm.webp',fallback:'/assets/optimized/water-tank-system-sm.jpg',fit:'contain',width:733,height:1100},
+        {tag:'為什麼需要洗',title:'蓄水容器會累積沉積物',text:'承接白鐵與水泥上水塔；先看容量、內部狀況與頂樓通道，再確認是否能安排。',image:'/assets/service-story/water-tank-service-story-20260714.webp',fallback:'/assets/service-story/water-tank-service-story-20260714.jpg'},
+        {tag:'怎麼洗',title:'停水、排水、復水要有順序',text:'加壓馬達、排水點與停水安排會影響施工；地下蓄水池及上下水塔整組目前不承接。',image:'/assets/optimized/water-tank-system-sm.webp',fallback:'/assets/optimized/water-tank-system-sm.jpg',fit:'contain',width:733,height:1100},
         {tag:'清洗前後案例',title:'從頂部人孔看內壁與底部',text:'真實服務紀錄呈現內壁與底部沉積清除後的狀況，完工還會確認排水與復水流程。',image:'/cases/water-tank/case01-after.webp',fallback:'/cases/water-tank/case01-after.jpg',width:1200,height:1600}
       ]
     },
@@ -1070,7 +1071,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
       aircon:['wall_mounted_split','ceiling_concealed','window_aircon','ceiling_cassette_4way','commercial_aircon'],
       washer:['top_load_washer','front_load_drum_washer','commercial_washer'],
       homeclean:['home_cleaning_4h','deep_cleaning','move_out_cleaning','post_renovation_cleaning','range_hood_cleaning'],
-      'water-tank':['rooftop_tank','concrete_upper_tank','concrete_lower_tank','upper_lower_tanks'],
+      'water-tank':['rooftop_tank','concrete_tank_small','concrete_tank_medium','concrete_tank_large','concrete_upper_tank'],
       'pipe-cleaning':['water_pipe_cleaning','water_pipe_cleaning_house'],
       'leak-repair':['leak_inspection']
     };
