@@ -133,3 +133,51 @@ test('mutation: removing the mobile override is rejected despite header fallback
 test('mutation: a later important rule reviving the float is rejected',()=>{
   assert.throws(()=>checkMobileFloat(polish+'\n#ld-float{display:flex!important}'));
 });
+
+// ── 浮動聯絡區（2026-08-31 修版）─────────────────────────
+// 改版前是「白卡片裡包白方塊再包深藍鈕」——三層圓角、兩個實色互相競爭，
+// 違反 DESIGN.md §3「單一畫面最多一個主 CTA 色」與 §6「同一區塊最多一層卡片嵌套」。
+function checkContactIsland(js, css){
+  // 標記：估價鈕在前、LINE 在後，DOM 順序＝視覺順序＝Tab 順序
+  const island = js.match(/<div id="ld-contact-island"[\s\S]*?<\/div>/);
+  assert.ok(island, '浮動聯絡區必須存在');
+  const order = [...island[0].matchAll(/id="(ld-float-quote|ld-float)"/g)].map(m => m[1]);
+  assert.deepEqual(order, ['ld-float-quote', 'ld-float'], 'DOM 順序必須是估價鈕在前、LINE 在後');
+
+  // 副標移到 aria-label，畫面不留第二行文字
+  assert.match(island[0], /id="ld-float-quote"[^>]*aria-label="[^"]{8,}"/, '估價鈕需有描述性 aria-label');
+  assert.doesNotMatch(island[0], /id="ld-float-quote"[^>]*>[^<]*<span/, '浮動估價鈕不得再放第二行副標');
+
+  // 官方 LINE 素材不得另疊文字（DESIGN.md §6）
+  assert.match(island[0], /src="\/assets\/brand\/line-brand-icon\.png"/);
+  assert.doesNotMatch(island[0], /id="ld-float"[\s\S]{0,200}?>LINE</, 'LINE 官方素材旁不得另加 LINE 字樣');
+
+  // 外層容器不得再是卡片（無底色、無邊框、無陰影）
+  const wrap = css.match(/#ld-contact-island\{([^}]*)\}/);
+  assert.ok(wrap, '#ld-contact-island 需有樣式');
+  assert.match(wrap[1], /background:none/, '外層容器不得有底色，否則又變成卡片包卡片');
+  assert.match(wrap[1], /border:0/, '外層容器不得有邊框');
+  assert.match(wrap[1], /box-shadow:none/, '外層容器不得有陰影');
+
+  // LINE 按鈕本身不得再套白底（官方 PNG 已是綠底圓角方形，套白底會出現雙框）
+  const lineRule = css.match(/#ld-contact-island #ld-float\{([^}]*)\}/);
+  assert.ok(lineRule, '#ld-float 需有樣式');
+  assert.match(lineRule[1], /background:none/, 'LINE 按鈕不得套白底，否則綠框外再多一層白框');
+
+  // 次操作維持白底細框，不得再用第二個實色與 LINE 綠競爭
+  const quoteRule = css.match(/#ld-float-quote\{([^}]*)\}/);
+  assert.ok(quoteRule, '#ld-float-quote 需有樣式');
+  assert.match(quoteRule[1], /background:#fff/, '次操作應為白底藥丸，不得填第二個品牌實色');
+  assert.match(quoteRule[1], /min-height:44px/, '觸控目標至少 44px');
+  assert.match(quoteRule[1], /white-space:nowrap/, '標題必須單行，不得在浮動元件裡換行');
+}
+test('浮動聯絡區：單一實色、無卡片嵌套、順序與觸控達標', () => checkContactIsland(header, polish));
+test('mutation: 外層容器加回白底卡片會被拒絕', () => {
+  assert.throws(() => checkContactIsland(header, polish.replace('background:none;border:0;padding:0;box-shadow:none', 'background:#fff;border:1px solid #dce4e7;padding:6px')));
+});
+test('mutation: 次操作改回深藍實色會被拒絕', () => {
+  assert.throws(() => checkContactIsland(header, polish.replace(/(#ld-float-quote\{[^}]*)background:#fff/, '$1background:#17324d')));
+});
+test('mutation: 估價鈕加回第二行副標會被拒絕', () => {
+  assert.throws(() => checkContactIsland(header.replace('onclick="ldOpenQuote()" aria-label="填單估價：先填需求，確認後才安排到府">填單估價', 'onclick="ldOpenQuote()" aria-label="填單估價">填單估價<span>先填需求</span>'), polish));
+});

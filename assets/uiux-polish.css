@@ -309,16 +309,42 @@ body.leak-page .hero-btn::before,body.leak-page .cta-btn::before{animation:none!
 .confidence-dot{margin-top:.6em}
 
 /* One persistent estimate entry; the existing mobile bar owns small screens. */
-#ld-contact-island{position:fixed;right:16px;bottom:calc(100px + env(safe-area-inset-bottom));z-index:9991;
-  display:grid;gap:6px;width:6.25rem;padding:6px;border:1px solid #dce4e7;border-radius:20px;background:#fff;
-  box-shadow:0 8px 28px rgba(16,39,59,.15)}
-#ld-contact-island #ld-float{position:static!important;width:100%;height:56px;border-radius:14px}
-#ld-float-quote{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;
-  width:100%;padding:.6rem .3rem;border:0;border-radius:12px;background:#17324d;color:#fff;
-  font:inherit;font-size:.9rem;font-weight:800;line-height:1.5;cursor:pointer}
-#ld-float-quote span{font-size:.75rem;font-weight:400;color:#dce7eb}
-#ld-float-quote:hover{background:#10273b}
-#ld-float-quote:focus-visible{outline:3px solid #d97706;outline-offset:3px}
+/* 浮動聯絡區（2026-08-31 修版）
+   改版前：白色卡片裡再放一個白色 LINE 方塊，再放一顆深藍按鈕——三層圓角疊在
+   100px 寬的容器裡（半徑 20/14/12 三種），而且 LINE 綠與品牌深藍兩個實色互相競爭。
+   違反 DESIGN.md §3「單一畫面最多一個主 CTA 色」與 §6「同一區塊最多一層卡片嵌套」。
+
+   改版後：拿掉外層卡片，只留兩個獨立控制項並建立層級——
+   LINE 是主操作（官方 PNG 直接當按鈕表面，不再套白底造成雙框），
+   填單估價是次操作（白底細框藥丸，單行）。全區只剩 LINE 綠一個實色。 */
+#ld-contact-island{position:fixed;right:20px;bottom:calc(96px + env(safe-area-inset-bottom));z-index:9991;
+  display:grid;gap:10px;justify-items:end;
+  background:none;border:0;padding:0;box-shadow:none;width:auto}
+
+/* 次操作：白底細框藥丸，單行不換行。原本 86px 寬硬塞四字標題＋四字副標，
+   在浮動元件上是雜訊；副標移到 aria-label，畫面只留最短可辨識的動作名稱。 */
+#ld-float-quote{display:inline-flex;align-items:center;justify-content:center;
+  min-height:44px;padding:0 1.05rem;border:1px solid #cbd7db;border-radius:999px;
+  background:#fff;color:var(--ld-ink,#17324d);
+  font:inherit;font-size:.92rem;font-weight:800;line-height:1;white-space:nowrap;cursor:pointer;
+  box-shadow:0 6px 18px rgba(16,39,59,.10);
+  transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
+#ld-float-quote:hover{border-color:var(--ld-ink,#17324d);box-shadow:0 8px 22px rgba(16,39,59,.16);transform:translateY(-1px)}
+#ld-float-quote:focus-visible{outline:3px solid #075f7d;outline-offset:3px}
+
+/* 主操作：官方 PNG 本身就是綠底圓角方形，容器不再給白底與邊框，
+   否則會出現「白框裡包綠框」的雙框。陰影用 LINE 綠的低透明度，讓它看起來是浮起的實體按鈕。 */
+#ld-contact-island #ld-float{position:static!important;width:60px;height:60px;
+  padding:0;border:0;border-radius:18px;background:none!important;
+  box-shadow:0 10px 24px rgba(6,199,85,.30);
+  transition:box-shadow .18s ease,transform .18s ease}
+#ld-contact-island #ld-float:hover{box-shadow:0 12px 30px rgba(6,199,85,.42);transform:translateY(-1px)}
+#ld-contact-island #ld-float:focus-visible{outline:3px solid #075f7d;outline-offset:3px}
+#ld-contact-island #ld-float-icon{width:60px;height:60px;border-radius:18px;display:block}
+@media(prefers-reduced-motion:reduce){
+  #ld-float-quote,#ld-contact-island #ld-float{transition:none}
+  #ld-float-quote:hover,#ld-contact-island #ld-float:hover{transform:none}
+}
 #ld-partner-entry{text-align:center;padding:1.25rem;background:#10273b;color:#fff}
 #ld-partner-entry a{display:inline-flex;align-items:center;min-height:44px;color:#fff;text-decoration:underline;text-underline-offset:4px}
 @media(max-width:1023px){#ld-contact-island{display:none}}

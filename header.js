@@ -597,11 +597,11 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   // 共用精修層；部分頁面在 body 另載入 legacy CSS，覆寫仍須檢查實際 cascade。
   const existingPolishCss = document.querySelector('link[href*="uiux-polish.css"]');
   if(existingPolishCss){
-    existingPolishCss.href = '/assets/uiux-polish.css?v=20260831-partners';
+    existingPolishCss.href = '/assets/uiux-polish.css?v=20260831d';
   }else{
     const polishCss = document.createElement('link');
     polishCss.rel = 'stylesheet';
-    polishCss.href = '/assets/uiux-polish.css?v=20260831-partners';
+    polishCss.href = '/assets/uiux-polish.css?v=20260831d';
     document.head.appendChild(polishCss);
   }
 
@@ -650,10 +650,10 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   const html = `
     <a class="ld-skip-link" href="#main">跳到主要內容</a>
     <div id="ld-contact-island" aria-label="詢價與聯絡">
-    <a id="ld-float" href="${LINE}" target="_blank" rel="noopener" aria-label="LINE 詢價與預約">
-      <img id="ld-float-icon" src="/assets/brand/line-brand-icon.png" alt="" width="48" height="48">
-    </a>
-    <button id="ld-float-quote" type="button" onclick="ldOpenQuote()">填單估價<span>先填需求</span></button>
+      <button id="ld-float-quote" type="button" onclick="ldOpenQuote()" aria-label="填單估價：先填需求，確認後才安排到府">填單估價</button>
+      <a id="ld-float" href="${LINE}" target="_blank" rel="noopener" aria-label="用 LINE 詢價與預約">
+        <img id="ld-float-icon" src="/assets/brand/line-brand-icon.png" alt="" width="60" height="60">
+      </a>
     </div>
     <header id="ld-header">
       <div class="ld-top">
