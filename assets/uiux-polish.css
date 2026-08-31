@@ -361,3 +361,65 @@ body.leak-page .hero-btn::before,body.leak-page .cta-btn::before{animation:none!
   border-radius:50%;background:var(--service-accent,#d97706)}
 .pain-lead{margin:0 0 1.25rem;font-size:.92rem;line-height:1.8;color:#5a6a74}
 @media(min-width:768px){.pain-list{grid-template-columns:1fr 1fr;gap:.5rem 1.5rem}}
+
+/* ══ 2026-08-31 客戶端閱讀節奏（借鏡 SimplyCarbs /business 的三招）══
+   1. Key Impact：大字放結論不放標題——客戶要的是「多久、多少、什麼時候有人來」
+   2. 證據列：真實案例是灰汰郎最強的資產，原本埋在第 3–4 屏，前移到 hero 正下方
+   3. 客戶時程軸：把「48H／72H 安排」這個既有承諾變成看得見的四步
+   48／72 小時一律附但書：業主 2026-08-31 指示旺季／滿檔／夜間需求不適用。 */
+
+.key-impact{padding:1.5rem 0 .25rem;background:var(--ld-paper,#fff)}
+.ki-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem;
+  padding:1.1rem 1.15rem;border:1px solid var(--ld-border,#dce4e7);border-radius:18px;
+  background:linear-gradient(180deg,#fff,var(--service-soft,#f8fafb))}
+.ki-cell{min-width:0;text-align:center}
+.ki-num{font-size:clamp(1.5rem,5.5vw,2.4rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;
+  color:var(--service-accent-dark,#17324d);white-space:nowrap}
+.ki-unit{margin-left:.15em;font-size:.5em;font-weight:800}
+.ki-label{margin-top:.4rem;font-size:.82rem;line-height:1.5;color:#5a6a74}
+.ki-note{margin:.7rem 0 0;font-size:.78rem;line-height:1.7;color:#5a6a74;text-align:center}
+@media(min-width:768px){
+  .key-impact{padding:2rem 0 .5rem}
+  .ki-row{gap:1.5rem;padding:1.6rem 2rem}
+  .ki-label{font-size:.92rem}
+  .ki-note{font-size:.84rem}
+}
+
+.evidence-strip{padding:1.25rem 0 .5rem;background:var(--ld-paper,#fff)}
+.ev-inner{display:grid;gap:.9rem;align-items:center;
+  padding:1rem 1.1rem;border:1px solid var(--ld-border,#dce4e7);border-radius:18px;background:#fff}
+.ev-thumbs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem}
+.ev-thumbs--2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.ev-thumbs img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;display:block;
+  border:1px solid var(--ld-border,#dce4e7)}
+.ev-title{margin:0;font-size:1rem;font-weight:900;line-height:1.5;color:var(--ld-ink,#17324d)}
+.ev-sub{margin:.35rem 0 0;font-size:.86rem;line-height:1.7;color:#5a6a74}
+.ev-link{display:inline-flex;align-items:center;min-height:44px;margin-top:.5rem;
+  font-size:.92rem;font-weight:800;color:var(--service-accent-dark,#17324d);text-underline-offset:4px}
+@media(min-width:900px){
+  .ev-inner{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:1.75rem;padding:1.35rem 1.6rem}
+  .ev-title{font-size:1.1rem}
+}
+
+.customer-timeline{padding:2rem 0 .5rem;background:var(--ld-paper,#fff)}
+.ct-kicker{margin:0;font-size:.76rem;font-weight:900;letter-spacing:.13em;
+  color:var(--service-accent-dark,#17324d)}
+.ct-title{margin:.4rem 0 1.1rem;font-size:clamp(1.35rem,4.5vw,2rem);font-weight:900;
+  line-height:1.3;letter-spacing:-.02em;color:var(--ld-ink,#17324d);text-wrap:balance}
+.ct-list{display:grid;gap:.6rem;margin:0;padding:0;list-style:none;counter-reset:none}
+.ct-step{display:flex;align-items:flex-start;gap:.85rem;
+  padding:.9rem 1rem;border:1px solid var(--ld-border,#dce4e7);border-radius:14px;background:#fff}
+.ct-num{flex:0 0 auto;display:grid;place-items:center;width:34px;height:34px;border-radius:10px;
+  background:var(--service-accent,#17324d);color:#fff;font-size:.86rem;font-weight:900}
+.ct-body{min-width:0;display:grid;gap:.2rem}
+.ct-body b{font-size:1rem;font-weight:900;line-height:1.5;color:var(--ld-ink,#17324d)}
+.ct-body span{font-size:.88rem;line-height:1.7;color:#5a6a74}
+.ct-caveat{margin:.9rem 0 0;padding:.85rem 1rem;border-radius:12px;
+  background:#fff7ed;border:1px solid #fed7aa;
+  font-size:.84rem;line-height:1.8;color:#7c2d12}
+.ct-caveat strong{color:#7c2d12}
+@media(min-width:900px){
+  .ct-list{grid-template-columns:repeat(4,minmax(0,1fr));gap:.75rem}
+  .ct-step{flex-direction:column;gap:.6rem}
+  .ct-caveat{font-size:.86rem}
+}
