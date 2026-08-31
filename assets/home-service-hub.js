@@ -1,33 +1,59 @@
 (function(){
   'use strict';
 
-  // Public retail snapshot: leakdoctor-bot main@3a5b94e, src/catalog.ts (2026-08-30).
+  // Public retail snapshot: leakdoctor-bot, src/catalog.ts (2026-08-31).
   // Supplier costs (including -1) are NOT retail prices. Bot re-prices every draft.
   const services = [
-    {id:'wall_mounted_split',group:'aircon',groupLabel:'冷氣清洗',label:'壁掛分離式冷氣清洗（室內機）',unit:'台',price:1599,note:'價格只含室內機；室外機另列加購',popular:true},
-    {id:'ceiling_concealed',group:'aircon',groupLabel:'冷氣清洗',label:'吊隱式冷氣清洗（二風鼓，室內機）',unit:'台',price:2799,note:'價格只含室內機；室外機與三風鼓以上另加購'},
-    {id:'transformer_split_aircon',group:'aircon',groupLabel:'冷氣清洗',label:'變形金剛機型冷氣清洗（國際牌／三菱）',unit:'台',price:2500,note:'需提供品牌、型號與照片'},
-    {id:'blower_wheel_removal',group:'aircon',groupLabel:'冷氣加購',label:'風鼓拆下深度清洗（加購）',unit:'台',price:800,note:'需搭配冷氣清洗'},
-    {id:'ceiling_concealed_extra_blower',group:'aircon',groupLabel:'冷氣加購',label:'吊隱式加購風鼓（每多一組）',unit:'組',price:500,note:'三風鼓以上適用'},
-    {id:'aircon_outdoor_unit',group:'aircon',groupLabel:'冷氣加購',label:'室外機清洗',unit:'台',price:500,note:'壁掛與吊隱都需另加購；需確認安裝位置與安全條件',popular:true},
-    {id:'window_aircon',group:'aircon',groupLabel:'冷氣清洗',label:'窗型冷氣清洗',unit:'台',quote:true,priceLabel:'3 台以上再安排評估',note:'需兩人搬抬，未達三台先由專員確認'},
-    {id:'ceiling_cassette_4way',group:'aircon',groupLabel:'冷氣清洗',label:'四方吹冷氣清洗',unit:'台',quote:true,priceLabel:'依機型與高度報價',note:'請提供面板與現場照片'},
-    {id:'commercial_aircon',group:'aircon',groupLabel:'冷氣清洗',label:'商用冷氣清洗',unit:'案',quote:true,priceLabel:'依案件報價',note:'需確認機型、數量與進場限制'},
+    {id:'wall_mounted_split',cat:'aircon',group:'aircon',groupLabel:'冷氣清洗',label:'壁掛分離式冷氣清洗（室內機）',unit:'台',price:1599,note:'價格只含室內機；室外機另列加購',popular:true},
+    {id:'ceiling_concealed',cat:'aircon',group:'aircon',groupLabel:'冷氣清洗',label:'吊隱式冷氣清洗（二風鼓，室內機）',unit:'台',price:2799,note:'價格只含室內機；室外機與三風鼓以上另加購'},
+    {id:'transformer_split_aircon',cat:'aircon',group:'aircon',groupLabel:'冷氣清洗',label:'變形金剛機型冷氣清洗（國際牌／三菱）',unit:'台',price:2500,note:'需提供品牌、型號與照片'},
+    {id:'blower_wheel_removal',cat:'aircon',group:'aircon',groupLabel:'冷氣加購',label:'風鼓拆下深度清洗（加購）',unit:'台',price:800,note:'需搭配冷氣清洗'},
+    {id:'ceiling_concealed_extra_blower',cat:'aircon',group:'aircon',groupLabel:'冷氣加購',label:'吊隱式加購風鼓（每多一組）',unit:'組',price:500,note:'三風鼓以上適用'},
+    {id:'aircon_outdoor_unit',cat:'aircon',group:'aircon',groupLabel:'冷氣加購',label:'室外機清洗',unit:'台',price:500,note:'壁掛與吊隱都需另加購；需確認安裝位置與安全條件',popular:true},
+    {id:'window_aircon',cat:'aircon',group:'aircon',groupLabel:'冷氣清洗',label:'窗型冷氣清洗',unit:'台',quote:true,priceLabel:'3 台以上再安排評估',note:'需兩人搬抬，未達三台先由專員確認'},
+    {id:'ceiling_cassette_4way',cat:'aircon',group:'aircon',groupLabel:'冷氣清洗',label:'四方吹冷氣清洗',unit:'台',quote:true,priceLabel:'依機型與高度報價',note:'請提供面板與現場照片'},
+    {id:'commercial_aircon',cat:'aircon',group:'aircon',groupLabel:'冷氣清洗',label:'商用冷氣清洗',unit:'案',quote:true,priceLabel:'依案件報價',note:'需確認機型、數量與進場限制'},
 
-    {id:'top_load_washer',group:'washer',groupLabel:'洗衣機清洗',label:'直立式洗衣機清洗',unit:'台',price:1599,note:'需確認品牌、容量與型號',popular:true},
-    {id:'front_load_drum_washer',group:'washer',groupLabel:'洗衣機清洗',label:'滾筒式洗衣機清洗',unit:'台',price:3599,note:'日立／三菱洗脫烘需先確認機型'},
-    {id:'commercial_washer',group:'washer',groupLabel:'洗衣機清洗',label:'商用或投幣洗衣機清洗',unit:'台',quote:true,priceLabel:'依型號與容量報價',note:'請提供正面照與型號'},
+    {id:'top_load_washer',cat:'washer',group:'washer',groupLabel:'洗衣機清洗',label:'直立式洗衣機清洗',unit:'台',price:1599,note:'需確認品牌、容量與型號',popular:true},
+    {id:'front_load_drum_washer',cat:'washer',group:'washer',groupLabel:'洗衣機清洗',label:'滾筒式洗衣機清洗',unit:'台',price:3599,note:'日立／三菱洗脫烘需先確認機型'},
+    {id:'commercial_washer',cat:'washer',group:'washer',groupLabel:'洗衣機清洗',label:'商用或投幣洗衣機清洗',unit:'台',quote:true,priceLabel:'依型號與容量報價',note:'請提供正面照與型號'},
 
-    {id:'home_cleaning_4h',group:'homeclean',groupLabel:'居家清潔',label:'定時居家清潔 4 小時',unit:'次',price:2500,note:'實際範圍依現場狀況確認',popular:true},
-    {id:'deep_cleaning',group:'homeclean',groupLabel:'居家清潔',label:'大掃除',unit:'案',quote:true,priceLabel:'NT$ 3,500 起',note:'依坪數與現況確認'},
-    {id:'move_out_cleaning',group:'homeclean',groupLabel:'居家清潔',label:'退租清潔',unit:'案',quote:true,priceLabel:'NT$ 3,000 起',note:'依坪數、家具與髒污程度確認'},
-    {id:'post_renovation_cleaning',group:'homeclean',groupLabel:'居家清潔',label:'裝潢細清',unit:'案',quote:true,priceLabel:'NT$ 6,000 起',note:'依坪數與粉塵、膠漬狀況確認'},
-    {id:'range_hood_cleaning',group:'homeclean',groupLabel:'居家清潔',label:'抽油煙機清洗',unit:'台',quote:true,priceLabel:'依機型報價',note:'請提供正面照與油垢狀況'},
+    {id:'home_cleaning_4h',cat:'homeclean',group:'homeclean',groupLabel:'居家清潔',label:'定時居家清潔 4 小時',unit:'次',price:2500,note:'實際範圍依現場狀況確認',popular:true},
+    {id:'deep_cleaning',cat:'homeclean',group:'homeclean',groupLabel:'居家清潔',label:'大掃除',unit:'案',quote:true,priceLabel:'NT$ 3,500 起',note:'依坪數與現況確認'},
+    {id:'move_out_cleaning',cat:'homeclean',group:'homeclean',groupLabel:'居家清潔',label:'退租清潔',unit:'案',quote:true,priceLabel:'NT$ 3,000 起',note:'依坪數、家具與髒污程度確認'},
+    {id:'post_renovation_cleaning',cat:'homeclean',group:'homeclean',groupLabel:'居家清潔',label:'裝潢細清',unit:'案',quote:true,priceLabel:'NT$ 6,000 起',note:'依坪數與粉塵、膠漬狀況確認'},
+    {id:'range_hood_cleaning',cat:'homeclean',group:'homeclean',groupLabel:'居家清潔',label:'抽油煙機清洗',unit:'台',quote:true,priceLabel:'依機型報價',note:'請提供正面照與油垢狀況'},
 
-    {id:'rooftop_tank',group:'water',groupLabel:'水路服務',label:'白鐵（不鏽鋼）水塔清洗',unit:'顆',price:1599,note:'目前僅承接白鐵水塔',popular:true},
-    {id:'water_pipe_cleaning',group:'water',groupLabel:'水路服務',label:'水管清洗－大樓／公寓（給水管路除垢）',unit:'戶',price:3599,note:'需先確認屋齡、管材與出水點',popular:true},
-    {id:'water_pipe_cleaning_house',group:'water',groupLabel:'水路服務',label:'水管清洗－透天（給水管路除垢）',unit:'戶',price:4999,note:'需先確認樓層、管材與出水點'},
-    {id:'leak_inspection',group:'water',groupLabel:'漏水服務',label:'水管抓漏',unit:'案',quote:true,priceLabel:'LINE 免費初判',note:'實際檢測與修補費用依現場確認',popular:true}
+    {id:'rooftop_tank',cat:'tank',group:'water',groupLabel:'水路服務',label:'白鐵（不鏽鋼）水塔清洗',unit:'顆',price:1599,note:'三噸內；水泥水塔另有級距牌價',popular:true},
+    {id:'concrete_tank_small',cat:'tank',group:'water',groupLabel:'水路服務',label:'水泥水塔清洗（15–20 噸）',unit:'座',price:4999,note:'請提供水塔照片、入口與排水方式'},
+    {id:'concrete_tank_medium',cat:'tank',group:'water',groupLabel:'水路服務',label:'水泥水塔清洗（30–50 噸）',unit:'座',price:6999,note:'請提供水塔照片、入口與排水方式'},
+    {id:'concrete_tank_large',cat:'tank',group:'water',groupLabel:'水路服務',label:'水泥水塔清洗（80–100 噸）',unit:'座',price:12999,note:'請提供水塔照片、入口與排水方式'},
+    {id:'concrete_upper_tank',cat:'tank',group:'water',groupLabel:'水路服務',label:'水泥水塔清洗（100 噸以上／噸數未定）',unit:'座',quote:true,priceLabel:'現場勘查後報價',note:'破百噸需現場確認結構與作業條件'},
+    {id:'water_pipe_cleaning',cat:'pipe',group:'water',groupLabel:'水路服務',label:'水管清洗－大樓／公寓（給水管路除垢）',unit:'戶',price:3599,note:'需先確認屋齡、管材與出水點',popular:true},
+    {id:'water_pipe_cleaning_house',cat:'pipe',group:'water',groupLabel:'水路服務',label:'水管清洗－透天（給水管路除垢）',unit:'戶',price:4999,note:'需先確認樓層、管材與出水點'},
+    {id:'leak_inspection',cat:'leak',group:'water',groupLabel:'漏水服務',label:'水管抓漏',unit:'案',quote:true,priceLabel:'LINE 免費初判',note:'實際檢測與修補費用依現場確認',popular:true},
+    {id:'supply_pipe_leak_test',cat:'leak',group:'water',groupLabel:'漏水服務',label:'給水管檢測（測漏）',unit:'案',quote:true,priceLabel:'依現場報價',note:'檢測費可折抵後續施工費用'},
+    {id:'supply_pipe_leak_repair',cat:'leak',group:'water',groupLabel:'漏水服務',label:'給水管補漏（單一回路）',unit:'回路',quote:true,priceLabel:'依現場報價',note:'以單一回路（冷水或熱水）計價，範圍與工法現場確認'},
+    {id:'drain_pipe_leak_test',cat:'leak',group:'water',groupLabel:'漏水服務',label:'排水管檢測（測漏）',unit:'案',quote:true,priceLabel:'依現場報價',note:'檢測費可折抵後續施工費用'},
+    {id:'drain_pipe_leak_repair',cat:'leak',group:'water',groupLabel:'漏水服務',label:'排水管補漏',unit:'案',quote:true,priceLabel:'依現場報價',note:'範圍與工法需現場確認後報價'}
+  ];
+
+  /**
+   * 價格試算的「品項抽屜」。大項固定六個；細項預設只露出一項最常見的，
+   * 其餘收在抽屜裡，客戶按大項的＋才展開——常見需求一頁就看得完，
+   * 想深入的人再展開，不必一次面對 29 個選項。
+   *
+   * cat 是「畫面分類」，跟 catalog 的 group 是兩回事：group 要跟 Bot parser
+   * 對得起來（水塔／水管／抓漏在後端同屬 water），畫面上客戶要的是分開的入口。
+   * 不要為了畫面去改 group。
+   */
+  const categories = [
+    {id:'aircon',   label:'冷氣清洗',   defaultId:'wall_mounted_split'},
+    {id:'washer',   label:'洗衣機清洗', defaultId:'top_load_washer'},
+    {id:'homeclean',label:'居家清潔',   defaultId:'home_cleaning_4h'},
+    {id:'tank',     label:'水塔清洗',   defaultId:null},
+    {id:'pipe',     label:'水管清洗',   defaultId:null},
+    {id:'leak',     label:'漏水補漏',   defaultId:null}
   ];
 
   const money = new Intl.NumberFormat('zh-TW');
@@ -66,6 +92,17 @@
     return lines.join('\n');
   }
   // Pure calculation / parser-contract tests can run without a browser or network.
+  /** 某個大項底下的細項，預設項排第一。 */
+  function categoryRows(catId){
+    const cat = categories.find(function(c){ return c.id === catId; });
+    if(!cat) return [];
+    const rows = services.filter(function(item){ return item.cat === catId; });
+    if(!cat.defaultId) return rows;
+    const head = rows.filter(function(item){ return item.id === cat.defaultId; });
+    const rest = rows.filter(function(item){ return item.id !== cat.defaultId; });
+    return head.concat(rest);
+  }
+
   function renderServiceRow(item,quantity){
     const qty = clampQuantity(quantity);
     const price = item.quote ? item.priceLabel : 'NT$ ' + money.format(item.price) + '／' + item.unit;
@@ -79,9 +116,9 @@
       '<button class="qty-btn" type="button" data-quantity-action="add" data-service-id="' + item.id + '" aria-label="增加' + item.label + '數量">＋</button></div></div>' +
       '<div class="price-item-note">' + item.note + '</div></article>';
   }
-  if(typeof module !== 'undefined' && module.exports) module.exports = {services,clampQuantity,calculate,detailLines,formatMessage,routeForHash,renderServiceRow};
+  if(typeof module !== 'undefined' && module.exports) module.exports = {services,categories,clampQuantity,calculate,detailLines,formatMessage,routeForHash,renderServiceRow,categoryRows};
   if(typeof document === 'undefined') return;
-  const state = {filter:'popular', quantities:new Map(),submitting:false,
+  const state = {openCats:new Set(), quantities:new Map(),submitting:false,
     submittedLeadId:'',
     // 上一次送出結果的訊息與當時的「內容指紋」。
     // 指紋沒變＝同一筆需求，訊息要留著（成功時鎖住送出鈕、逾時時保留警告）；
@@ -143,13 +180,14 @@
   });
 
   root.addEventListener('click', function(event){
-    const filter = event.target.closest('[data-price-filter]');
-    if(filter){
-      state.filter = filter.dataset.priceFilter;
-      root.querySelectorAll('[data-price-filter]').forEach(function(button){
-        button.setAttribute('aria-pressed', button === filter ? 'true' : 'false');
-      });
+    const toggle = event.target.closest('[data-cat-toggle]');
+    if(toggle){
+      const id = toggle.dataset.catToggle;
+      if(state.openCats.has(id)) state.openCats.delete(id); else state.openCats.add(id);
       renderList();
+      // 收合後把焦點還給該大項的標題鈕，鍵盤操作不會掉到頁首。
+      const head = list.querySelector('[data-price-cat="' + id + '"] .price-cat-toggle');
+      if(head) head.focus({preventScroll:true});
       return;
     }
     const quantityButton = event.target.closest('[data-quantity-action]');
@@ -172,6 +210,7 @@
     if(event.target.value !== '') event.target.value = value;
     updateSummary();
     event.target.closest('[data-service-row]').dataset.active = value > 0 ? 'true' : 'false';
+    refreshCategoryBadges();
   });
   root.addEventListener('change',function(event){
     if(event.target.matches('[data-quantity-value]')) updateRow(event.target.dataset.quantityValue,clampQuantity(event.target.value));
@@ -200,22 +239,50 @@
     });
   });
 
-  function visibleServices(){
-    if(state.filter === 'all') return services;
-    if(state.filter === 'popular') return services.filter(function(item){ return item.popular; });
-    return services.filter(function(item){ return item.group === state.filter; });
+  /**
+   * 大項標題右邊那句：幾項可選、最低多少起。
+   * 「起價」只看主服務，不看加購——冷氣加購的室外機 500 元若拿來當起價，
+   * 會變成「冷氣清洗 NT$ 500 起」，那是誤導。
+   */
+  function categoryMeta(catId){
+    const rows = categoryRows(catId);
+    const priced = rows.filter(function(item){ return !item.quote && !/加購/.test(item.groupLabel || ''); });
+    const from = priced.length ? Math.min.apply(null, priced.map(function(item){ return item.price; })) : null;
+    return rows.length + ' 項' + (from != null ? '・NT$ ' + money.format(from) + ' 起' : '・需專員確認');
   }
 
   function renderList(){
-    const fixed = visibleServices().filter(function(item){ return !item.quote; });
-    const quoted = visibleServices().filter(function(item){ return item.quote; });
-    const chunks = [];
-    fixed.forEach(function(item){ chunks.push(rowHtml(item)); });
-    if(quoted.length){
-      chunks.push('<div class="price-quote-divider" role="presentation">需要照片或現場條件</div>');
-      quoted.forEach(function(item){ chunks.push(rowHtml(item)); });
-    }
-    list.innerHTML = chunks.join('');
+    list.innerHTML = categories.map(function(cat){
+      const rows = categoryRows(cat.id);
+      if(!rows.length) return '';
+      const open = state.openCats.has(cat.id);
+      // 有選數量的細項一律顯示，否則客戶收合後會看不到自己選過什麼。
+      const visible = rows.filter(function(item,index){
+        if(open) return true;
+        if((state.quantities.get(item.id) || 0) > 0) return true;
+        return cat.defaultId ? item.id === cat.defaultId : false;
+      });
+      const hiddenCount = rows.length - visible.length;
+      const chosen = rows.reduce(function(sum,item){ return sum + (state.quantities.get(item.id) || 0); },0);
+      return '<section class="price-cat" data-price-cat="' + cat.id + '" data-open="' + open + '">' +
+        '<h4 class="price-cat-head">' +
+          '<button class="price-cat-toggle" type="button" data-cat-toggle="' + cat.id + '"' +
+            ' aria-expanded="' + open + '" aria-controls="price-cat-body-' + cat.id + '">' +
+            '<span class="price-cat-name">' + cat.label +
+              (chosen > 0 ? '<span class="price-cat-badge">已選 ' + chosen + '</span>' : '') + '</span>' +
+            '<span class="price-cat-meta">' + categoryMeta(cat.id) + '</span>' +
+            '<span class="price-cat-sign" aria-hidden="true">' + (open ? '−' : '＋') + '</span>' +
+            '<span class="home-visually-hidden">' + (open ? '收合' : '展開其他') + cat.label + '選項</span>' +
+          '</button>' +
+        '</h4>' +
+        '<div class="price-cat-body" id="price-cat-body-' + cat.id + '">' +
+          visible.map(function(item){ return rowHtml(item); }).join('') +
+          (!open && hiddenCount > 0
+            ? '<button class="price-cat-more" type="button" data-cat-toggle="' + cat.id + '">還有 ' + hiddenCount + ' 種' + cat.label + '選項　＋</button>'
+            : '') +
+        '</div>' +
+      '</section>';
+    }).join('');
   }
 
   function rowHtml(item){
@@ -228,6 +295,24 @@
     row.dataset.active = quantity > 0 ? 'true' : 'false';
     const output = row.querySelector('[data-quantity-value]');
     if(output) output.value = quantity;
+    refreshCategoryBadges();
+  }
+
+  /**
+   * 只更新大項標題上的「已選 N」，不重繪整個清單——
+   * 重繪會讓正在輸入數量的欄位失去焦點。
+   */
+  function refreshCategoryBadges(){
+    categories.forEach(function(cat){
+      const head = list.querySelector('[data-price-cat="' + cat.id + '"] .price-cat-name');
+      if(!head) return;
+      const chosen = categoryRows(cat.id).reduce(function(sum,item){ return sum + (state.quantities.get(item.id) || 0); },0);
+      const badge = head.querySelector('.price-cat-badge');
+      if(chosen > 0){
+        if(badge) badge.textContent = '已選 ' + chosen;
+        else head.insertAdjacentHTML('beforeend','<span class="price-cat-badge">已選 ' + chosen + '</span>');
+      } else if(badge) badge.remove();
+    });
   }
 
   function selectedItems(){
@@ -259,7 +344,7 @@
     summary.hidden = selected.length === 0;
     total.textContent = !priced.length && quoted.length ? '待報價' : 'NT$ ' + money.format(amount);
     document.getElementById('home-order-total-label').textContent = quoted.length ? '已定價小計' : '參考總價';
-    document.getElementById('home-price-mini-total').textContent = selected.length ? total.textContent + (priced.length && quoted.length ? ' ＋ 待報價' : '') : '尚未選擇';
+    document.getElementById('home-price-mini-total').textContent = selected.length ? total.textContent + (priced.length && quoted.length ? ' ＋ 待報價' : '') : 'NT$ 0';
     quoteNote.hidden = quoted.length === 0;
     quoteNote.textContent = quoted.length ? '另有 ' + quoted.length + ' 項需要照片或現場條件確認，未計入固定小計。' : '';
     const warning = document.getElementById('home-order-warning');

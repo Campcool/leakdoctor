@@ -260,7 +260,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
         <div class="svc-icon c1"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#droplet"></use></svg></div>
         <div class="svc-title">水塔清洗</div>
       </div>
-      <div class="svc-desc">目前承接屋頂白鐵水塔。<br>先確認容量、顆數與頂樓通道，再安排報價。</div>
+      <div class="svc-desc">白鐵水塔與水泥水塔皆可承接。<br>先確認容量、顆數與頂樓通道，再安排報價。</div>
       <div class="svc-price">$1,599／顆</div>
       <div class="svc-actions">
         <a class="svc-btn-price" href="water-tank.html">了解水塔清洗 →</a>
@@ -299,17 +299,15 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   <div id="price-overview" class="route-panel price-route" role="tabpanel" aria-labelledby="home-tab-price" hidden>
     <div class="price-builder">
       <div class="price-builder-head"><div><h3>選項目，費用即時計算</h3><p>先試算，不必留資料。數量可跨分類保留。</p></div><button id="home-price-reset" class="price-reset" type="button">清空</button></div>
-      <div class="price-filters" role="group" aria-label="篩選服務項目">
-        <button class="price-filter" type="button" data-price-filter="popular" aria-pressed="true">常用項目</button>
-        <button class="price-filter" type="button" data-price-filter="aircon" aria-pressed="false">冷氣</button>
-        <button class="price-filter" type="button" data-price-filter="washer" aria-pressed="false">洗衣機</button>
-        <button class="price-filter" type="button" data-price-filter="homeclean" aria-pressed="false">居家清潔</button>
-        <button class="price-filter" type="button" data-price-filter="water" aria-pressed="false">水塔・水管・抓漏</button>
-        <button class="price-filter" type="button" data-price-filter="all" aria-pressed="false">全部項目</button>
-      </div>
-      <a class="price-summary-jump" href="#home-order-summary"><span>查看明細</span><span id="home-price-mini-total" aria-live="polite">尚未選擇</span><span aria-hidden="true">↓</span></a>
+      <p class="price-hint">預設只顯示每一類最常見的項目；需要其他選項時按大項的 <b>＋</b> 展開。</p>
       <div id="home-price-list" class="price-list"></div>
-      <p class="price-boundary">機型、施工空間與現場狀況可能影響報價。變形金剛冷氣另有專屬價格；日立／三菱含烘乾功能的洗衣機需先由專員確認是否可承接。水泥水塔暫不承接。</p>
+      <a class="price-total-bar" href="#home-order-summary" aria-describedby="home-price-total-hint">
+        <span class="price-total-bar-label">目前總價</span>
+        <strong id="home-price-mini-total" class="price-total-bar-value" aria-live="polite" aria-atomic="true">NT$ 0</strong>
+        <span class="price-total-bar-go">查看明細 ↓</span>
+      </a>
+      <p id="home-price-total-hint" class="price-total-hint">此為選定項目的參考總價，尚未送出；確認明細後再用 LINE 聯絡。</p>
+      <p class="price-boundary">機型、施工空間與現場狀況可能影響報價。變形金剛冷氣另有專屬價格；日立／三菱含烘乾功能的洗衣機需先由專員確認是否可承接。水泥水塔依噸數分級距報價，100 噸以上需現場勘查。</p>
     </div>
     <aside id="home-order-summary" class="order-summary" aria-labelledby="home-summary-title">
       <p class="order-summary-eyebrow">你的服務清單</p><h3 id="home-summary-title">先算清楚，再放心預約</h3>

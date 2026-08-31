@@ -242,3 +242,59 @@
 #main #promises .promise-item:nth-child(even){background:#e0efeb!important}
 #main .home-booking-questions details{padding-inline:16px;background:#fff}
 #main .home-booking-questions details:nth-of-type(even){background:#f0f7f5}
+
+/* ── 品項抽屜（2026-08-31）───────────────────────────────
+   預設只露出每一類最常見的細項，其餘收起來；常見需求一頁看得完。
+   收合狀態下「已選數量 > 0」的細項一律照常顯示，否則客戶收合後
+   會看不到自己選過什麼，總價卻在跳。 */
+.price-hint{margin:0 0 .75rem;font-size:.86rem;line-height:1.7;color:#5a6a74}
+.price-hint b{color:var(--ld-ink,#17324d)}
+.price-cat{border:1px solid #dce4e7;border-radius:16px;background:#fff;margin-bottom:.75rem;overflow:hidden}
+.price-cat[data-open="true"]{border-color:#c3d2d8;box-shadow:0 6px 18px rgba(23,50,77,.06)}
+.price-cat-head{margin:0}
+.price-cat-toggle{display:grid;grid-template-columns:1fr auto;align-items:center;gap:.25rem .75rem;
+  width:100%;min-height:56px;padding:.85rem 1rem;border:0;background:#f8fafb;
+  font:inherit;text-align:left;cursor:pointer}
+.price-cat-toggle:hover{background:#f1f5f7}
+.price-cat-toggle:focus-visible{outline:3px solid #075f7d;outline-offset:-3px}
+.price-cat-name{grid-column:1;font-size:1.02rem;font-weight:900;color:var(--ld-ink,#17324d);
+  display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.price-cat-meta{grid-column:1;font-size:.82rem;font-weight:400;color:#5a6a74}
+.price-cat-sign{grid-column:2;grid-row:1 / span 2;display:flex;align-items:center;justify-content:center;
+  width:44px;height:44px;border-radius:12px;background:#fff;border:1px solid #dce4e7;
+  font-size:1.25rem;font-weight:900;color:var(--ld-ink,#17324d)}
+.price-cat[data-open="true"] .price-cat-sign{background:var(--ld-ink,#17324d);border-color:var(--ld-ink,#17324d);color:#fff}
+.price-cat-badge{padding:.1rem .5rem;border-radius:999px;background:#0f766e;color:#fff;
+  font-size:.76rem;font-weight:800;letter-spacing:.02em}
+.price-cat-body{padding:.75rem}
+.price-cat-body > .price-item{margin-bottom:.6rem}
+.price-cat-body > .price-item:last-child{margin-bottom:0}
+.price-cat-more{display:block;width:100%;min-height:44px;margin-top:.6rem;padding:.6rem 1rem;
+  border:1px dashed #b9c8cf;border-radius:12px;background:#fff;
+  font:inherit;font-size:.9rem;font-weight:800;color:#3f5560;cursor:pointer}
+.price-cat-more:hover{border-color:var(--ld-ink,#17324d);color:var(--ld-ink,#17324d)}
+.price-cat-more:focus-visible{outline:3px solid #075f7d;outline-offset:2px}
+
+/* ── 醒目總價列 ───────────────────────────────
+   客戶最常問的是「所以總共多少」。這一列黏在畫面底部，
+   金額用最大的字，讓人一眼就知道那是總價，不是某一項的單價。 */
+.price-total-bar{position:sticky;bottom:calc(var(--ld-bottom-space,76px) + 8px);z-index:5;
+  display:grid;grid-template-columns:1fr auto;align-items:center;gap:.15rem 1rem;
+  margin:1rem 0 .5rem;padding:.9rem 1.1rem;border-radius:16px;
+  background:var(--ld-ink,#17324d);color:#fff;text-decoration:none;
+  box-shadow:0 12px 28px rgba(16,39,59,.28)}
+.price-total-bar:focus-visible{outline:3px solid #ffd7a8;outline-offset:3px}
+.price-total-bar-label{grid-column:1;font-size:.82rem;font-weight:700;letter-spacing:.06em;color:#c9d8e2}
+.price-total-bar-value{grid-column:1;font-size:1.75rem;font-weight:900;line-height:1.15;letter-spacing:-.02em}
+.price-total-bar-go{grid-column:2;grid-row:1 / span 2;display:flex;align-items:center;
+  min-height:44px;padding:0 .9rem;border-radius:12px;background:rgba(255,255,255,.14);
+  font-size:.88rem;font-weight:800;white-space:nowrap}
+.price-total-hint{margin:0 0 1rem;font-size:.8rem;line-height:1.7;color:#5a6a74}
+@media(min-width:1024px){
+  .price-total-bar{position:static;box-shadow:0 8px 20px rgba(16,39,59,.18)}
+  .price-total-bar-value{font-size:2rem}
+}
+@media(prefers-reduced-motion:no-preference){
+  .price-cat-body{animation:ld-cat-in .18s ease-out}
+  @keyframes ld-cat-in{from{opacity:.4}to{opacity:1}}
+}
