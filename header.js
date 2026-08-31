@@ -742,6 +742,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
             <input id="ld-q-website" name="website" type="text" tabindex="-1" autocomplete="off">
           </div>
           <div class="ld-q-privacy">資料只用於本次估價、聯繫與服務安排，不會公開；完整地址可等確認預約時再提供。</div>
+          <div class="ld-q-privacy" data-trip-fee-policy>若由水男孩企業社承接，師傅到場後因現場條件無法施作時，可能涉及 NT$1,500 車馬費；實際是否收取及處理方式，先由專員、施工廠商與客戶依個案討論確認，並非一律加收。</div>
           <button type="submit" class="ld-q-submit">建立需求並開啟 LINE</button>
           <div class="ld-q-status" id="ld-q-status" role="status" aria-live="polite"></div>
           <div class="ld-q-note">開啟 LINE 後再按一次「傳送」即可；詢問與照片初判不收費。</div>
