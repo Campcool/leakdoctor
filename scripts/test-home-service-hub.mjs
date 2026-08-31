@@ -23,7 +23,7 @@ test('29 unique public services, no dehumidifier / internal supplier costs',()=>
   assert.ok(services.every(s=>s.quote || Number.isInteger(s.price) && s.price > 0));
 });
 test('all 15 fixed retail prices match the approved catalog snapshot',()=>{
-  const prices = {wall_mounted_split:1599,ceiling_concealed:2799,transformer_split_aircon:2500,blower_wheel_removal:800,ceiling_concealed_extra_blower:500,aircon_outdoor_unit:500,top_load_washer:1599,front_load_drum_washer:3599,home_cleaning_4h:2500,rooftop_tank:1599,concrete_tank_small:4999,concrete_tank_medium:6999,concrete_tank_large:12999,water_pipe_cleaning:3599,water_pipe_cleaning_house:4999};
+  const prices = {wall_mounted_split:1599,ceiling_concealed:2799,transformer_split_aircon:2500,blower_wheel_removal:800,ceiling_concealed_extra_blower:500,aircon_outdoor_unit:500,top_load_washer:1599,front_load_drum_washer:3599,home_cleaning_4h:2500,rooftop_tank:1599,concrete_tank_small:4499,concrete_tank_medium:5999,concrete_tank_large:9999,water_pipe_cleaning:3599,water_pipe_cleaning_house:4999};
   assert.deepEqual(Object.fromEntries(services.filter(s=>!s.quote).map(s=>[s.id,s.price])),prices);
 });
 test('供應商成本不得外洩成對客牌價',()=>{
@@ -227,9 +227,9 @@ test('cat 是畫面分類，不可污染 Bot 用的 group（水塔／水管／�
 });
 
 test('水泥水塔已開賣：三個級距有牌價，破百噸維持現場勘查',()=>{
-  assert.equal(services.find(s=>s.id==='concrete_tank_small').price,4999);
-  assert.equal(services.find(s=>s.id==='concrete_tank_medium').price,6999);
-  assert.equal(services.find(s=>s.id==='concrete_tank_large').price,12999);
+  assert.equal(services.find(s=>s.id==='concrete_tank_small').price,4499);
+  assert.equal(services.find(s=>s.id==='concrete_tank_medium').price,5999);
+  assert.equal(services.find(s=>s.id==='concrete_tank_large').price,9999);
   assert.equal(services.find(s=>s.id==='concrete_upper_tank').quote,true);
   for(const item of categoryRows('tank')) assert.equal(item.cat,'tank');
 });

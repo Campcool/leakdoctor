@@ -25,9 +25,9 @@
     {id:'range_hood_cleaning',cat:'homeclean',group:'homeclean',groupLabel:'居家清潔',label:'抽油煙機清洗',unit:'台',quote:true,priceLabel:'依機型報價',note:'請提供正面照與油垢狀況'},
 
     {id:'rooftop_tank',cat:'tank',group:'water',groupLabel:'水路服務',label:'白鐵（不鏽鋼）水塔清洗',unit:'顆',price:1599,note:'三噸內；水泥水塔另有級距牌價',popular:true},
-    {id:'concrete_tank_small',cat:'tank',group:'water',groupLabel:'水路服務',label:'水泥水塔清洗（15–20 噸）',unit:'座',price:4999,note:'請提供水塔照片、入口與排水方式'},
-    {id:'concrete_tank_medium',cat:'tank',group:'water',groupLabel:'水路服務',label:'水泥水塔清洗（30–50 噸）',unit:'座',price:6999,note:'請提供水塔照片、入口與排水方式'},
-    {id:'concrete_tank_large',cat:'tank',group:'water',groupLabel:'水路服務',label:'水泥水塔清洗（80–100 噸）',unit:'座',price:12999,note:'請提供水塔照片、入口與排水方式'},
+    {id:'concrete_tank_small',cat:'tank',group:'water',groupLabel:'水路服務',label:'水泥水塔清洗（15–20 噸）',unit:'座',price:4499,note:'請提供水塔照片、入口與排水方式'},
+    {id:'concrete_tank_medium',cat:'tank',group:'water',groupLabel:'水路服務',label:'水泥水塔清洗（30–50 噸）',unit:'座',price:5999,note:'請提供水塔照片、入口與排水方式'},
+    {id:'concrete_tank_large',cat:'tank',group:'water',groupLabel:'水路服務',label:'水泥水塔清洗（80–100 噸）',unit:'座',price:9999,note:'請提供水塔照片、入口與排水方式'},
     {id:'concrete_upper_tank',cat:'tank',group:'water',groupLabel:'水路服務',label:'水泥水塔清洗（100 噸以上／噸數未定）',unit:'座',quote:true,priceLabel:'現場勘查後報價',note:'破百噸需現場確認結構與作業條件'},
     {id:'water_pipe_cleaning',cat:'pipe',group:'water',groupLabel:'水路服務',label:'水管清洗－大樓／公寓（給水管路除垢）',unit:'戶',price:3599,note:'需先確認屋齡、管材與出水點',popular:true},
     {id:'water_pipe_cleaning_house',cat:'pipe',group:'water',groupLabel:'水路服務',label:'水管清洗－透天（給水管路除垢）',unit:'戶',price:4999,note:'需先確認樓層、管材與出水點'},
