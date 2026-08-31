@@ -323,12 +323,16 @@ body.leak-page .hero-btn::before,body.leak-page .cta-btn::before{animation:none!
 
 /* 次操作：白底細框藥丸，單行不換行。原本 86px 寬硬塞四字標題＋四字副標，
    在浮動元件上是雜訊；副標移到 aria-label，畫面只留最短可辨識的動作名稱。 */
-#ld-float-quote{display:inline-flex;align-items:center;justify-content:center;
-  min-height:44px;padding:0 1.05rem;border:1px solid #cbd7db;border-radius:999px;
+/* 2026-08-31 業主指定：文字拆成「填單／估價」兩行，尺寸與圓角與下方 LINE 鈕一致（60×60、18px），
+   兩顆在同一條右緣上對齊，看起來是一組按鈕而不是一顆藥丸配一顆方塊。 */
+#ld-float-quote{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  width:60px;height:60px;min-height:60px;padding:0;border:1px solid #cbd7db;border-radius:18px;
   background:#fff;color:var(--ld-ink,#17324d);
-  font:inherit;font-size:.92rem;font-weight:800;line-height:1;white-space:nowrap;cursor:pointer;
+  font:inherit;font-size:.94rem;font-weight:800;line-height:1.25;letter-spacing:.02em;
+  white-space:nowrap;cursor:pointer;
   box-shadow:0 6px 18px rgba(16,39,59,.10);
   transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
+#ld-float-quote span{display:block}
 #ld-float-quote:hover{border-color:var(--ld-ink,#17324d);box-shadow:0 8px 22px rgba(16,39,59,.16);transform:translateY(-1px)}
 #ld-float-quote:focus-visible{outline:3px solid #075f7d;outline-offset:3px}
 

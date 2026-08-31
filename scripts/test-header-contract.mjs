@@ -146,7 +146,13 @@ function checkContactIsland(js, css){
 
   // 副標移到 aria-label，畫面不留第二行文字
   assert.match(island[0], /id="ld-float-quote"[^>]*aria-label="[^"]{8,}"/, '估價鈕需有描述性 aria-label');
-  assert.doesNotMatch(island[0], /id="ld-float-quote"[^>]*>[^<]*<span/, '浮動估價鈕不得再放第二行副標');
+  // 2026-08-31 業主指定拆成「填單／估價」兩行，所以 span 本身是允許的；
+  // 要守的是不得再把「先填需求」這類副標塞回畫面（它應該只存在於 aria-label）。
+  const quoteBtn = island[0].match(/<button id="ld-float-quote"[\s\S]*?<\/button>/);
+  assert.ok(quoteBtn, '估價鈕必須存在');
+  const visibleText = quoteBtn[0].replace(/<[^>]*>/g, '');
+  assert.equal(visibleText, '填單估價', '畫面文字只能是「填單估價」兩行，不得夾帶副標');
+  assert.match(quoteBtn[0], /<span>填單<\/span><span>估價<\/span>/, '必須拆成兩行 span');
 
   // 官方 LINE 素材不得另疊文字（DESIGN.md §6）
   assert.match(island[0], /src="\/assets\/brand\/line-brand-icon\.png"/);
@@ -167,9 +173,19 @@ function checkContactIsland(js, css){
   // 次操作維持白底細框，不得再用第二個實色與 LINE 綠競爭
   const quoteRule = css.match(/#ld-float-quote\{([^}]*)\}/);
   assert.ok(quoteRule, '#ld-float-quote 需有樣式');
-  assert.match(quoteRule[1], /background:#fff/, '次操作應為白底藥丸，不得填第二個品牌實色');
-  assert.match(quoteRule[1], /min-height:44px/, '觸控目標至少 44px');
-  assert.match(quoteRule[1], /white-space:nowrap/, '標題必須單行，不得在浮動元件裡換行');
+  assert.match(quoteRule[1], /background:#fff/, '次操作應為白底，不得填第二個品牌實色');
+  const mh = quoteRule[1].match(/min-height:(\d+)px/);
+  assert.ok(mh && Number(mh[1]) >= 44, `觸控目標至少 44px（目前 ${mh ? mh[1] : '未設定'}）`);
+  assert.match(quoteRule[1], /white-space:nowrap/, '每行文字不得自行斷字');
+
+  // 與 LINE 鈕視覺對齊：同寬、同高、同圓角，否則會變成藥丸配方塊
+  const qw = quoteRule[1].match(/width:(\d+)px/), qh = quoteRule[1].match(/height:(\d+)px/);
+  const qr = quoteRule[1].match(/border-radius:(\d+)px/);
+  const lw = lineRule[1].match(/width:(\d+)px/), lh = lineRule[1].match(/height:(\d+)px/);
+  const lr = lineRule[1].match(/border-radius:(\d+)px/);
+  assert.ok(qw && lw && qw[1] === lw[1], `估價鈕與 LINE 鈕寬度須一致（${qw?.[1]} vs ${lw?.[1]}）`);
+  assert.ok(qh && lh && qh[1] === lh[1], `估價鈕與 LINE 鈕高度須一致（${qh?.[1]} vs ${lh?.[1]}）`);
+  assert.ok(qr && lr && qr[1] === lr[1], `估價鈕與 LINE 鈕圓角須一致（${qr?.[1]} vs ${lr?.[1]}）`);
 }
 test('浮動聯絡區：單一實色、無卡片嵌套、順序與觸控達標', () => checkContactIsland(header, polish));
 test('mutation: 外層容器加回白底卡片會被拒絕', () => {
@@ -178,8 +194,17 @@ test('mutation: 外層容器加回白底卡片會被拒絕', () => {
 test('mutation: 次操作改回深藍實色會被拒絕', () => {
   assert.throws(() => checkContactIsland(header, polish.replace(/(#ld-float-quote\{[^}]*)background:#fff/, '$1background:#17324d')));
 });
-test('mutation: 估價鈕加回第二行副標會被拒絕', () => {
-  assert.throws(() => checkContactIsland(header.replace('onclick="ldOpenQuote()" aria-label="填單估價：先填需求，確認後才安排到府">填單估價', 'onclick="ldOpenQuote()" aria-label="填單估價">填單估價<span>先填需求</span>'), polish));
+test('mutation: 估價鈕加回副標會被拒絕', () => {
+  assert.throws(() => checkContactIsland(
+    header.replace('<span>填單</span><span>估價</span>', '<span>填單</span><span>估價</span><span>先填需求</span>'), polish));
+});
+test('mutation: 估價鈕與 LINE 鈕尺寸不一致會被拒絕', () => {
+  assert.throws(() => checkContactIsland(header,
+    polish.replace(/(#ld-float-quote\{[^}]*?)width:60px/, '$1width:94px')));
+});
+test('mutation: 估價鈕圓角與 LINE 鈕不一致會被拒絕', () => {
+  assert.throws(() => checkContactIsland(header,
+    polish.replace(/(#ld-float-quote\{[^}]*?)border-radius:18px/, '$1border-radius:999px')));
 });
 
 // ── 廠商招募入口（DESIGN.md §6，2026-08-31 業主確認取代「公開前台不顯示」）──
