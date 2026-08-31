@@ -400,6 +400,13 @@ cases/
 
 ## 5. 進度紀錄（新條目加在最上面）
 
+### 2026-08-31 加入我們專屬 OG 圖（Codex，業主選定 A 正式商務）
+
+- join.html 原本沒有 OG／Twitter metadata，分享時可能退回網站圖示；本次補齊獨立 title、description、canonical URL、image、實際尺寸、MIME、alt 及 Twitter 大圖卡。
+- 採用業主選定的雙方深藍西裝商務握手 A 圖，公開檔 assets/og/join-business-handshake-a-20260831.jpg，1731×909／131287 bytes；只做 JPEG 壓縮，構圖不變。AI 生成情境圖，不是實際合作或簽約證據；來源與提示詞見 docs/JOIN-OG-ASSET-20260831.md。
+- 不修改其他頁面的圖片、favicon、表單、價格或後台。LINE 最終預覽由平台決定，正式圖片可抓取不代表舊訊息立即更新。
+- 後续圖像流程依業主要求：每張先討論理念並取得同意，再產出 3–5 版，選定後才上架；大手／小手方向已取消。
+
 ### 2026-08-31 加入我們整合 Claude 最新版（Codex）
 
 - 基準為 Claude 最新 main 48b0f1d，其祖先已包含合作申請 6f700d7；保留新版浮動聯絡區、Key Impact、證據列與客戶時程軸，不回套舊 header/CSS。
@@ -937,6 +944,9 @@ GSC 存取：`leakdoctor.tw` 與 `blossomkids.tw` 皆已驗證，共用驗證碼
 7. `initServiceLayerTabs()` 目前只掃 body 直屬節點，內容在 main 內，實際沒有產生 `.service-layer-tabs`。不可照歷史文件宣稱已啟用。若後续修復，須完整驗證 hidden、hash、history、焦點與 sticky 偏移，不要只改 selector 就啟用休眠程式。
 
 ## 7. 待辦清單
+
+- [x] 加入我們專屬 OG：業主選定 A 正式商務握手，metadata 與圖檔已整合。
+- [ ] 業主在 LINE 重新分享 join.html 驗收小圖；其他分頁新圖仍需逐張討論與選版，不自動替換。
 
 - [x] 加入我們及私有合作申請後台已發布；2026-08-31 整合 Claude 最新 48b0f1d 版型並同步全站 header 快取版本。
 - [ ] 本批發布後由業主雙平台人工驗收；LINE webview 尚未代替真機驗證。
