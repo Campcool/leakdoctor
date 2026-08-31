@@ -181,3 +181,45 @@ test('mutation: 次操作改回深藍實色會被拒絕', () => {
 test('mutation: 估價鈕加回第二行副標會被拒絕', () => {
   assert.throws(() => checkContactIsland(header.replace('onclick="ldOpenQuote()" aria-label="填單估價：先填需求，確認後才安排到府">填單估價', 'onclick="ldOpenQuote()" aria-label="填單估價">填單估價<span>先填需求</span>'), polish));
 });
+
+// ── 廠商招募入口（DESIGN.md §6，2026-08-31 業主確認取代「公開前台不顯示」）──
+// 只能在最後一個轉換 CTA 之後、footer 正上方；不得做成主 CTA、不得上移到內容區。
+function checkPartnerEntry(js, css){
+  assert.match(js, /id="ld-partner-entry"/, '廠商招募入口必須存在');
+  // 必須插在 footer 之前，而不是塞進內容區或 header
+  assert.match(js, /footer\.insertAdjacentHTML\('beforebegin',\s*entry\)/,
+    '招募入口只能插在 <footer> 正上方');
+  assert.doesNotMatch(js, /insertAdjacentHTML\('afterbegin',\s*entry\)/,
+    '招募入口不得插到頁首');
+  // 指向獨立的申請頁，不得直接掛在主要轉換動作上
+  assert.match(js, /id="ld-partner-entry"[\s\S]{0,200}?href="\/join\.html"/);
+  assert.doesNotMatch(js, /id="ld-partner-entry"[\s\S]{0,300}?ldOpenQuote\(/,
+    '招募入口不得共用客戶估價的觸發');
+  // 樣式不得是主 CTA 按鈕：不得套用品牌橘或 .page-btn
+  const rule = css.match(/#ld-partner-entry\{([^}]*)\}/);
+  assert.ok(rule, '#ld-partner-entry 需有樣式');
+  assert.doesNotMatch(rule[1], /--orange|#f28c28|#d96f0d/i,
+    '招募入口不得使用主 CTA 品牌橘');
+  assert.doesNotMatch(js, /id="ld-partner-entry"[\s\S]{0,300}?class="[^"]*page-btn/,
+    '招募入口不得做成主 CTA 按鈕');
+}
+test('廠商招募入口只在 footer 上方，且不是主 CTA', () => checkPartnerEntry(header, polish));
+test('mutation: 招募入口改插到頁首會被拒絕', () => {
+  assert.throws(() => checkPartnerEntry(
+    header.replace("footer.insertAdjacentHTML('beforebegin', entry)", "document.body.insertAdjacentHTML('afterbegin', entry)"), polish));
+});
+test('mutation: 招募入口套上主 CTA 品牌橘會被拒絕', () => {
+  assert.throws(() => checkPartnerEntry(header,
+    polish.replace(/#ld-partner-entry\{([^}]*)\}/, '#ld-partner-entry{$1;background:#f28c28}')));
+});
+
+// DESIGN.md 與實作必須同步：規則改了，文件要跟著改（這批就是因為沒改才對不起來）
+test('DESIGN.md 已記錄招募入口與浮動區的現行規則', () => {
+  const design = readFileSync(new URL('DESIGN.md', root), 'utf8');
+  assert.doesNotMatch(design, /公開前台不顯示「加入我們」合作招募入口，主要浮動操作只保留 LINE。/,
+    '舊條文與現行實作牴觸，必須移除');
+  assert.match(design, /廠商招募入口/, 'DESIGN.md 需說明招募入口的位置規則');
+  assert.match(design, /footer.{0,6}正上方/, 'DESIGN.md 需寫明只能放在 footer 正上方');
+  assert.match(design, /LINE 主、填單估價次|LINE 主.{0,10}填單估價次/, 'DESIGN.md 需說明浮動區的主次關係');
+  assert.match(design, /只保留 LINE 綠一個實色/, 'DESIGN.md 需寫明單一實色規則');
+});
