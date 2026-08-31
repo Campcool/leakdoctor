@@ -298,3 +298,10 @@
   .price-cat-body{animation:ld-cat-in .18s ease-out}
   @keyframes ld-cat-in{from{opacity:.4}to{opacity:1}}
 }
+
+/* R1：首屏就要看得到價格。原本第一屏零數字，
+   而「價格透明」正是灰汰郎對同業最強的差異化，藏在一次點擊之後等於沒有。 */
+.hero-price-anchor{display:block;margin-bottom:.35rem;font-size:1.02rem;font-weight:900;
+  line-height:1.6;color:var(--ld-ink,#17324d);letter-spacing:-.01em}
+.hero-note span{display:block;font-size:.86rem;color:#5a6a74}
+@media(min-width:1024px){.hero-price-anchor{font-size:1.12rem}}

@@ -276,3 +276,25 @@ body.leak-page .hero-btn::before,body.leak-page .cta-btn::before{animation:none!
   .ld-tab,.svc-card,.process-card,.promise-item,.knowledge-card,.service-step{border-color:#667680!important}
   .hero-desc,.page-desc,.sec-sub,.svc-desc,.service-step p,.knowledge-card p{color:#394b55!important}
 }
+
+/* R1：服務頁首屏也要看得到價格。六頁的 hero 副標尾端掛一行起價，
+   漏水頁沒有固定牌價，掛的是「免費初判＋車馬費事先告知」，不得編造數字。 */
+.page-desc-price{display:block;margin-top:.5rem;font-size:1rem;font-weight:900;line-height:1.7;
+  color:var(--service-accent-dark,#17324d)}
+@media(min-width:1024px){.page-desc-price{font-size:1.06rem}}
+
+/* R2：關掉桌機中段的 CTA 空窗（原本水管 80%、水塔 74%、首頁 67% 沒有任何按鈕）。
+   ≥1024px 不顯示底部固定列，客戶讀完價格表與案例正是最想行動的時候，手邊卻沒有按鈕。 */
+.section-cta{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1rem;
+  margin:1.75rem 0 .25rem;padding-top:1.25rem;border-top:1px solid var(--ld-border,#dce4e7)}
+.section-cta .page-btn{margin-top:0!important;flex:0 0 auto}
+.section-cta-note{font-size:.86rem;line-height:1.7;color:#5a6a74}
+
+/* R5：痛點對號入座。原本居家清潔頁完全沒有痛點語言，一開場就是分類與價格——
+   客戶要先認出「這就是我」，才會往下看方案。 */
+.pain-list{margin:1rem 0 .75rem;padding:0;list-style:none;display:grid;gap:.5rem}
+.pain-list li{position:relative;padding-left:1.6rem;font-size:.98rem;line-height:1.8;color:#3f5560}
+.pain-list li::before{content:"";position:absolute;left:.35rem;top:.75em;width:6px;height:6px;
+  border-radius:50%;background:var(--service-accent,#d97706)}
+.pain-lead{margin:0 0 1.25rem;font-size:.92rem;line-height:1.8;color:#5a6a74}
+@media(min-width:768px){.pain-list{grid-template-columns:1fr 1fr;gap:.5rem 1.5rem}}
