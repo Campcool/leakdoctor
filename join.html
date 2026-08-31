@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>加入我們｜廠商合作申請・灰汰郎</title>
+<meta name="description" content="申請成為灰汰郎合作服務團隊。填寫廠商與聯絡資料、服務縣市及可承接項目，由專員聯繫確認合作條件。">
+<link rel="canonical" href="https://leakdoctor.tw/join.html">
+<link rel="icon" href="/favicon.ico?v=20260831-brand" sizes="any">
+<link rel="icon" href="/favicon-32.png?v=20260831-brand" type="image/png" sizes="32x32">
+<link rel="icon" href="/favicon-16.png?v=20260831-brand" type="image/png" sizes="16x16">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20260831-brand">
+<link rel="stylesheet" href="/assets/join.css?v=20260831-partners">
+<script src="header.js?v=20260831-partners" defer></script>
+<script src="/assets/join.js?v=20260831-partners" defer></script>
+</head>
+<body class="join-page">
+<main id="main" class="join-main">
+  <header class="join-intro"><p class="join-kicker">一起把到府服務做好</p><h1>加入我們</h1><p>有專長，也重視服務品質？<br>留下團隊資料與可承接項目，讓我們認識你。</p><p class="join-muted">送出的是合作申請。服務區域、承接條件及合作方式，會由專員另行確認；送出不代表審核通過或保證派單。</p></header>
+  <form id="partner-application">
+    <p class="join-required">標示「必填」的欄位請完整填寫；個人技師也可申請。</p>
+    <fieldset class="join-card"><legend>01　廠商與團隊</legend><div class="join-grid">
+      <label>廠商／團隊名稱（必填）<input name="companyName" required maxlength="100" autocomplete="organization"></label>
+      <label>廠商類型（必填）<select name="businessType" required><option value="">請選擇</option>公司</option><option>行號</option><option>個人工作室／技師</option></select></label>
+      <label>統一編號（選填）<input name="businessId" inputmode="numeric" pattern="[0-9]{8}" maxlength="8" aria-describedby="business-id-help"><small id="business-id-help">有登記者請填 8 碼；個人技師可留空。</small></label>
+      <label>服務年資（選填）<input name="experience" maxlength="100" placeholder="例如：5 年"></label>
+      <label>可出勤團隊人數（選填）<input name="teamSize" maxlength="100" placeholder="例如：固定 3 人，旺季可增加人力"></label>
+      <label>據點地址（必填）<input name="address" required maxlength="240" autocomplete="street-address" placeholder="縣市、行政區與聯絡地址"></label>
+      <label>發票／收據（必填）<select name="invoice" required><option value="">請選擇</option>可開發票</option><option>可開收據</option><option>需另確認</option></select></label>
+      <label>相關保險（必填）<select name="insurance" required><option value="">請選擇</option>有相關保險</option><option>無相關保險</option><option>需另確認</option></select></label>
+    </div></fieldset>
+    <fieldset class="join-card"><legend>02　聯絡方式</legend><div class="join-grid">
+      <label>聯絡人姓名（必填）<input name="contactName" required maxlength="60" autocomplete="name"></label>
+      <label>聯絡電話（必填）<input name="phone" type="tel" required minlength="8" maxlength="30" autocomplete="tel"></label>
+      <label>Email（選填）<input name="email" type="email" maxlength="160" autocomplete="email"></label>
+      <label>LINE ID（選填）<input name="lineId" maxlength="100" placeholder="平常提供給他人加好友的 ID"><small>不是系統用的 LINE User ID，審核時再確認綁定。</small></label>
+      <label class="join-wide">方便聯絡時間（選填）<input name="contactTime" maxlength="160" placeholder="例如：平日 18:00 後"></label>
+    </div></fieldset>
+    <fieldset class="join-card"><legend>03　可服務地區（必填）</legend><p>可複選實際能出勤的縣市。這是廠商能力登記，不代表網站已對外承諾所有地區都可安排。</p><div id="join-regions" class="join-check-grid"></div><label>服務範圍補充（選填）<textarea name="regionNote" maxlength="500" rows="2" placeholder="例如：山區、跨縣市、停車或交通限制"></textarea></label></fieldset>
+    <fieldset class="join-card"><legend>04　可服務項目（必填）</legend><p>先勾選大項，再勾選展開的小項；可跨類別複選。只勾選確實具備人員、設備與經驗的項目。</p><div id="join-services"></div><p id="join-options-status" role="status">正在載入服務選項…</p><button type="button" id="join-retry" hidden>重新載入選項</button></fieldset>
+    <fieldset class="join-card"><legend>05　專長與補充資料</legend><label>設備、證照與保險說明（選填）<textarea name="equipment" rows="3" maxlength="1200" placeholder="可列出工具、專業資格、保險類型及特殊施工能力；暫不需提供證件影本。"></textarea></label><label>官網／作品集網址（選填）<input name="website" type="url" maxlength="400" placeholder="https://"></label><label>其他合作說明（選填）<textarea name="note" rows="3" maxlength="2000" placeholder="例如：可配合時段、承接限制或希望了解的合作條件。請勿填寫銀行帳戶或身分證字號。"></textarea></label></fieldset>
+    <div class="join-consent"><p id="join-privacy">資料僅供灰汰郎進行合作審核、聯絡與內部建檔，不會公開在網站。申請人可透過官方 LINE 詢問、更正或要求刪除申請資料。請確認你有權提供此廠商及聯絡人的資料。</p><label class="join-check"><input name="consent" type="checkbox" required><span>我已閱讀上述說明，同意將資料用於合作審核與聯絡。（必填）</span></label></div>
+    <div hidden aria-hidden="true"><label>傳真確認<input name="fax" tabindex="-1" autocomplete="off"></label></div>
+    <button class="join-submit" id="join-submit" type="submit" disabled>送出合作申請</button>
+    <p id="join-result" role="status" aria-live="polite" tabindex="-1"></p>
+    <noscript>此表單需要 JavaScript。你也可以透過官方 LINE 詢問合作申請。</noscript>
+  </form>
+</main>
+<footer class="join-footer"><a href="/">灰汰郎首頁</a><a href="https://lin.ee/WVxmY65" target="_blank" rel="noopener">官方 LINE</a><p>灰汰郎・清潔與居家服務</p></footer>
+</body></html>

@@ -287,8 +287,41 @@ body.leak-page .hero-btn::before,body.leak-page .cta-btn::before{animation:none!
    ≥1024px 不顯示底部固定列，客戶讀完價格表與案例正是最想行動的時候，手邊卻沒有按鈕。 */
 .section-cta{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1rem;
   margin:1.75rem 0 .25rem;padding-top:1.25rem;border-top:1px solid var(--ld-border,#dce4e7)}
-.section-cta .page-btn{margin-top:0!important;flex:0 0 auto}
-.section-cta-note{font-size:.86rem;line-height:1.7;color:#5a6a74}
+/* Shared by home links and service buttons; retain service accent overrides. */
+.section-cta .page-btn{display:inline-flex;align-items:center;justify-content:center;
+  margin-top:0!important;flex:0 1 auto;max-width:100%;min-width:0;
+  padding:.85rem 1.25rem;border:0;border-radius:12px;
+  background:var(--service-accent,var(--ld-ink));color:#fff;
+  font:inherit;font-size:.98rem;font-weight:800;line-height:1.6;
+  text-align:center;text-decoration:none;white-space:normal;cursor:pointer;
+  box-shadow:var(--ld-shadow-action,0 8px 20px rgba(23,50,77,.12))}
+.section-cta-note{flex:1 1 18rem;min-width:0;font-size:.86rem;line-height:1.7;color:#5a6a74}
+@media(max-width:639px){
+  .section-cta{flex-direction:column;align-items:stretch;gap:.65rem}
+  .section-cta .page-btn{width:100%}
+  .section-cta-note{flex:auto}
+}
+/* Give each service principle a shared label baseline and balanced copy. */
+.confidence-inner{align-items:start}
+.confidence-item{align-items:flex-start;justify-content:flex-start;text-align:left;line-height:1.7}
+.confidence-item>span:last-child{min-width:0;text-wrap:balance}
+.confidence-item b{display:block;margin-bottom:.15rem}
+.confidence-dot{margin-top:.6em}
+
+/* One persistent estimate entry; the existing mobile bar owns small screens. */
+#ld-contact-island{position:fixed;right:16px;bottom:calc(100px + env(safe-area-inset-bottom));z-index:9991;
+  display:grid;gap:6px;width:6.25rem;padding:6px;border:1px solid #dce4e7;border-radius:20px;background:#fff;
+  box-shadow:0 8px 28px rgba(16,39,59,.15)}
+#ld-contact-island #ld-float{position:static!important;width:100%;height:56px;border-radius:14px}
+#ld-float-quote{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;
+  width:100%;padding:.6rem .3rem;border:0;border-radius:12px;background:#17324d;color:#fff;
+  font:inherit;font-size:.9rem;font-weight:800;line-height:1.5;cursor:pointer}
+#ld-float-quote span{font-size:.75rem;font-weight:400;color:#dce7eb}
+#ld-float-quote:hover{background:#10273b}
+#ld-float-quote:focus-visible{outline:3px solid #d97706;outline-offset:3px}
+#ld-partner-entry{text-align:center;padding:1.25rem;background:#10273b;color:#fff}
+#ld-partner-entry a{display:inline-flex;align-items:center;min-height:44px;color:#fff;text-decoration:underline;text-underline-offset:4px}
+@media(max-width:1023px){#ld-contact-island{display:none}}
 
 /* R5：痛點對號入座。原本居家清潔頁完全沒有痛點語言，一開場就是分類與價格——
    客戶要先認出「這就是我」，才會往下看方案。 */

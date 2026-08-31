@@ -50,7 +50,7 @@ test('all public HTML favicon declarations use the current brand version', () =>
       checked++;
     }
   }
-  assert.equal(checked, 36, 'all existing favicon-bearing pages must be checked');
+  assert.equal(checked, 37, 'all existing pages plus the partner application page must be checked');
 });
 test('mutation: non-brand icon bytes and a stale favicon cache key are rejected', () => {
   assert.throws(() => checkBrandAsset(Buffer.from('old brush'), 'favicon-32.png'));

@@ -39,6 +39,11 @@ body .service-flow[data-process-editorial]{
   gap:clamp(36px,6vw,88px);width:100%;max-width:1180px;margin-inline:auto;align-items:start;
 }
 .service-flow[data-process-editorial] .process-overview{min-width:0}
+/* Short timelines sit at the vertical centre of the adjacent photo column.
+   Intrinsic height stays free to grow when details open or text is enlarged. */
+@media(min-width:761px){
+  .service-flow[data-process-editorial] .process-reading{min-width:0;align-self:center}
+}
 .service-flow[data-process-editorial] .service-flow-head{max-width:none!important;margin:0 0 1.6rem!important}
 .service-flow[data-process-editorial] .service-flow-kicker{color:var(--service-accent-dark,#115e59);font-size:.8rem;font-weight:700;margin-bottom:.8rem}
 .service-flow[data-process-editorial] h2{font-size:clamp(1.5rem,2.6vw,2.3rem)!important;line-height:1.4!important;letter-spacing:-.03em;text-wrap:balance;margin:0 0 1rem!important}

@@ -597,11 +597,11 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   // 共用精修層；部分頁面在 body 另載入 legacy CSS，覆寫仍須檢查實際 cascade。
   const existingPolishCss = document.querySelector('link[href*="uiux-polish.css"]');
   if(existingPolishCss){
-    existingPolishCss.href = '/assets/uiux-polish.css?v=20260830c';
+    existingPolishCss.href = '/assets/uiux-polish.css?v=20260831-partners';
   }else{
     const polishCss = document.createElement('link');
     polishCss.rel = 'stylesheet';
-    polishCss.href = '/assets/uiux-polish.css?v=20260830c';
+    polishCss.href = '/assets/uiux-polish.css?v=20260831-partners';
     document.head.appendChild(polishCss);
   }
 
@@ -649,9 +649,12 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
 
   const html = `
     <a class="ld-skip-link" href="#main">跳到主要內容</a>
+    <div id="ld-contact-island" aria-label="詢價與聯絡">
     <a id="ld-float" href="${LINE}" target="_blank" rel="noopener" aria-label="LINE 詢價與預約">
       <img id="ld-float-icon" src="/assets/brand/line-brand-icon.png" alt="" width="48" height="48">
     </a>
+    <button id="ld-float-quote" type="button" onclick="ldOpenQuote()">填單估價<span>先填需求</span></button>
+    </div>
     <header id="ld-header">
       <div class="ld-top">
         <a class="ld-brand" href="/" aria-label="灰汰郎｜冷氣清洗・洗衣機清洗・居家清潔・水塔清洗・水管清洗・漏水檢測與修補">
@@ -757,6 +760,15 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   });
 
   document.body.insertAdjacentHTML('afterbegin', html);
+  function addPartnerEntry(){
+    if(document.getElementById('ld-partner-entry')) return;
+    const entry = '<aside id="ld-partner-entry" aria-label="廠商合作"><a href="/join.html">加入我們 · 廠商合作申請 →</a></aside>';
+    const footer = document.querySelector('footer');
+    if(footer) footer.insertAdjacentHTML('beforebegin', entry);
+    else document.body.insertAdjacentHTML('beforeend', entry);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',addPartnerEntry,{once:true});
+  else addPartnerEntry();
 
   // 手機導覽是單列橫向滑動，六個服務放不進一個畫面，所以要把「目前所在的服務」捲進可視範圍。
   //

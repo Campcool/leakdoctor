@@ -27,24 +27,15 @@ test('R1 六個服務頁的 hero 都帶價格資訊',()=>{
   }
 });
 
-// R2：桌機 ≥1024px 不顯示底部固定列，中段原本有 39–80% 完全沒有 CTA。
-test('R2 每頁中段都有 CTA，不是只有頭尾',()=>{
-  for(const f of ALL){
-    const n = (read(f).match(/class="section-cta"/g) || []).length;
-    assert.ok(n >= 2,`${f} 中段 CTA 只有 ${n} 個，桌機會出現長段空窗`);
-  }
-});
-
-test('R2 中段 CTA 沿用既有元件與觸發，不自創新的下單路徑',()=>{
-  for(const f of SERVICE_PAGES){
-    const s = read(f);
-    const blocks = s.match(/<div class="section-cta">[\s\S]{0,400}?<\/div>/g) || [];
-    assert.ok(blocks.length > 0,`${f} 沒有 section-cta`);
-    for(const b of blocks){
-      assert.ok(/ldOpenQuote\(|href="#price-overview"/.test(b),`${f} 的 CTA 未沿用既有觸發`);
-      assert.match(b,/class="page-btn"/,`${f} 的 CTA 未沿用既有按鈕樣式`);
-    }
-  }
+// 2026-08-31 owner decision: one persistent island instead of repeated content buttons.
+function checkQuoteIsland(header){
+  assert.match(header, /id="ld-contact-island"/);
+  assert.match(header, /id="ld-float-quote"[^>]*onclick="ldOpenQuote\(\)"/);
+  assert.match(header, /class="ld-sticky-btn ld-sticky-btn--form" onclick="ldOpenQuote\(\)"/);
+}
+test('R2 persistent desktop and mobile quote entries reuse the established form',()=>checkQuoteIsland(read('header.js')));
+test('R2 repeated service-section quote buttons are removed',()=>{
+  for(const f of SERVICE_PAGES)assert.doesNotMatch(read(f),/<button\b[^>]*onclick="ldOpenQuote\(/,f);
 });
 
 // R3：FAQ 的本質是異議處理，不是衛教。原本只有漏水頁做對。
@@ -96,11 +87,8 @@ test('mutation: 拿掉 hero 價格錨點會被抓到',()=>{
   assert.throws(()=>assert.match(mutated,/class="page-desc-price"/));
 });
 
-test('mutation: 中段 CTA 減到一個會被抓到',()=>{
-  const s = read('water-tank.html');
-  const mutated = s.replace(/<div class="section-cta">[\s\S]{0,400}?<\/div>\r?\n/g,'');
-  assert.ok(((mutated.match(/class="section-cta"/g)||[]).length) < 2);
-  assert.throws(()=>assert.ok(((mutated.match(/class="section-cta"/g)||[]).length) >= 2));
+test('mutation: losing the persistent quote entry is rejected',()=>{
+  assert.throws(()=>checkQuoteIsland(read('header.js').replace('id="ld-float-quote"','id="missing-quote"')));
 });
 
 test('mutation: 第一題 FAQ 換回衛教題會被抓到',()=>{
