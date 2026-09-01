@@ -144,7 +144,7 @@
           "label": "窗型冷氣",
           "short_label": "窗型",
           "aliases": ["窗型", "窗口式", "窗戶冷氣", "窗型機"],
-          "customer_description": "整台機器安裝在窗戶或牆洞內。",
+          "customer_description": "整台機器安裝在窗戶或牆洞內；一次 3 台以上才承接。",
           "pricing": {
             "status": "quote_required",
             "base_price": null,
@@ -154,13 +154,13 @@
           "quantity_selector": {
             "type": "count",
             "label": "幾台窗型冷氣？",
-            "min": 1,
+            "min": 3,
             "max": 5,
-            "quick_options": [1, 2, 3, "4 台以上"]
+            "quick_options": [3, 4, 5, "6 台以上"]
           },
           "required_fields": ["quantity", "area", "preferred_time", "customer_name", "phone"],
           "optional_fields": ["installation_height", "photo_url"],
-          "ai_notes": "窗型可能涉及拆裝與重量，若安裝位置危險需人工確認。"
+          "ai_notes": "窗型需兩人搬抬，一次 3 台以上才承接；若安裝位置危險需人工確認。"
         }
       ]
     },

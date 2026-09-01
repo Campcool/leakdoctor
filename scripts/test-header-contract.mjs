@@ -85,6 +85,11 @@ function checkBottomSpace(source) {
   assert.match(source, /bottomObserver\.observe\(stickyBar\)/);
 }
 test('all six services have an independent active navigation entry', () => checkNavigation(header));
+test('service knowledge cards reserve a separate label and number row', () => {
+  assert.match(header, /body\.service-page \.knowledge-rail \.knowledge-card\{[^}]*padding:4rem 1\.15rem 1\.15rem!important/);
+  assert.match(header, /\.knowledge-rail \.knowledge-card small\{[^}]*right:68px/);
+  assert.match(header, /\.knowledge-rail \.knowledge-card h3\{[^}]*margin-top:0/);
+});
 test('bottom content space follows actual CTA height, including safe area', () => checkBottomSpace(header));
 test('official LINE PNG is used once, without hand-drawn or duplicate lettering', () => {
   assert.match(header, /<img id="ld-float-icon" src="\/assets\/brand\/line-brand-icon\.png"/);

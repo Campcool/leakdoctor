@@ -151,7 +151,7 @@ function ldInit(){
       {id:'aircon-wall',backendId:'wall_mounted_split',label:'壁掛內機',unit:'台',note:'參考價 $1,599／台'},
       {id:'aircon-concealed',backendId:'ceiling_concealed',label:'吊隱式冷氣',unit:'台',note:'參考價 $2,799／台'},
       {id:'aircon-outdoor',backendId:'aircon_outdoor_unit',label:'室外機清洗',unit:'台',note:'加購 $500／台'},
-      {id:'aircon-window',backendId:'window_aircon',label:'窗型冷氣',unit:'台',note:'需確認台數與出勤條件'},
+      {id:'aircon-window',backendId:'window_aircon',label:'窗型冷氣',unit:'台',note:'一次 3 台以上才承接；需確認拆裝與出勤條件'},
       {id:'aircon-cassette',backendId:'ceiling_cassette_4way',label:'四方吹／商用冷氣',unit:'台',note:'需照片與現場條件評估'}
     ],
     '洗衣機清洗': [
@@ -652,9 +652,10 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
 .knowledge-card h3{margin:.25rem 0 .4rem;color:#17324d}
 .knowledge-card p{margin:0;color:#667680}
 .knowledge-rail .knowledge-grid{counter-reset:ld-knowledge-card}
-.knowledge-rail .knowledge-card{position:relative;overflow:hidden;padding-top:2.75rem!important}
-.knowledge-rail .knowledge-card::before{counter-increment:ld-knowledge-card;content:'0' counter(ld-knowledge-card);position:absolute;top:14px;right:15px;color:color-mix(in srgb,var(--service-accent,#138a80) 22%,#fff);font-size:2rem;font-weight:900;line-height:1}
-.knowledge-rail .knowledge-card small{position:absolute;top:14px;left:15px;z-index:1}
+body.service-page .knowledge-rail .knowledge-card{position:relative;overflow:hidden;padding:4rem 1.15rem 1.15rem!important}
+.knowledge-rail .knowledge-card::before{counter-increment:ld-knowledge-card;content:'0' counter(ld-knowledge-card);position:absolute;top:16px;right:18px;color:color-mix(in srgb,var(--service-accent,#138a80) 22%,#fff);font-size:2rem;font-weight:900;line-height:1}
+.knowledge-rail .knowledge-card small{position:absolute;top:18px;left:18px;right:68px;z-index:1;min-height:1.35rem;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.knowledge-rail .knowledge-card h3{position:relative;z-index:1;margin-top:0;line-height:1.4}
 .ld-knowledge-answer{display:inline-flex;align-items:center;gap:5px;margin-top:.8rem;color:var(--service-accent,#138a80);font-size:.8rem;font-weight:900;transition:transform .18s ease}
 .knowledge-card:hover .ld-knowledge-answer{transform:translateX(3px)}
 .ld-knowledge-finder{padding:1.35rem 1.25rem;background:#fff;border-bottom:1px solid #e4ecef}

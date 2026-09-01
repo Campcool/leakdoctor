@@ -22,6 +22,12 @@ test('29 unique public services, no dehumidifier / internal supplier costs',()=>
   assert.ok(services.every(s=>!s.id.includes('dehumidifier') && s.price !== -1));
   assert.ok(services.every(s=>s.quote || Number.isInteger(s.price) && s.price > 0));
 });
+test('窗型冷氣明確限制一次三台以上才承接',()=>{
+  const item = services.find(s=>s.id==='window_aircon');
+  assert.ok(item);
+  assert.equal(item.priceLabel,'一次 3 台以上才承接');
+  assert.match(item.note,/兩人搬抬/);
+});
 test('all 15 fixed retail prices match the approved catalog snapshot',()=>{
   const prices = {wall_mounted_split:1599,ceiling_concealed:2799,transformer_split_aircon:2500,blower_wheel_removal:800,ceiling_concealed_extra_blower:500,aircon_outdoor_unit:500,top_load_washer:1599,front_load_drum_washer:3599,home_cleaning_4h:2500,rooftop_tank:1599,concrete_tank_small:4499,concrete_tank_medium:5999,concrete_tank_large:9999,water_pipe_cleaning:3599,water_pipe_cleaning_house:4999};
   assert.deepEqual(Object.fromEntries(services.filter(s=>!s.quote).map(s=>[s.id,s.price])),prices);

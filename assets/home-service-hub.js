@@ -10,7 +10,7 @@
     {id:'blower_wheel_removal',cat:'aircon',group:'aircon',groupLabel:'冷氣加購',label:'風鼓拆下深度清洗（加購）',unit:'台',price:800,note:'需搭配冷氣清洗'},
     {id:'ceiling_concealed_extra_blower',cat:'aircon',group:'aircon',groupLabel:'冷氣加購',label:'吊隱式加購風鼓（每多一組）',unit:'組',price:500,note:'三風鼓以上適用'},
     {id:'aircon_outdoor_unit',cat:'aircon',group:'aircon',groupLabel:'冷氣加購',label:'室外機清洗',unit:'台',price:500,note:'壁掛與吊隱都需另加購；需確認安裝位置與安全條件',popular:true},
-    {id:'window_aircon',cat:'aircon',group:'aircon',groupLabel:'冷氣清洗',label:'窗型冷氣清洗',unit:'台',quote:true,priceLabel:'3 台以上再安排評估',note:'需兩人搬抬，未達三台先由專員確認'},
+    {id:'window_aircon',cat:'aircon',group:'aircon',groupLabel:'冷氣清洗',label:'窗型冷氣清洗',unit:'台',quote:true,priceLabel:'一次 3 台以上才承接',note:'需兩人搬抬，並確認安裝位置與拆裝條件'},
     {id:'ceiling_cassette_4way',cat:'aircon',group:'aircon',groupLabel:'冷氣清洗',label:'四方吹冷氣清洗',unit:'台',quote:true,priceLabel:'依機型與高度報價',note:'請提供面板與現場照片'},
     {id:'commercial_aircon',cat:'aircon',group:'aircon',groupLabel:'冷氣清洗',label:'商用冷氣清洗',unit:'案',quote:true,priceLabel:'依案件報價',note:'需確認機型、數量與進場限制'},
 
