@@ -34,12 +34,15 @@ body{color:var(--text)!important;background:#fff!important}
 .hero-caption strong{display:block;color:var(--ink);font-size:.9rem}
 .hero-caption span{display:block;color:var(--muted);font-size:.74rem;margin-top:.15rem}
 
-/* 信任列 */
-.confidence-strip{background:var(--ink);color:#fff;padding:1rem 1.25rem}
-.confidence-inner{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-.confidence-item{display:flex;align-items:center;justify-content:center;gap:.65rem;font-size:.86rem;color:#dce7eb;text-align:center}
-.confidence-item b{color:#fff}
-.confidence-dot{width:9px;height:9px;border-radius:50%;background:var(--orange);flex:0 0 auto}
+/* 首頁服務安排流程：步驟編號與箭頭取代散落圓點。 */
+.confidence-strip{background:var(--ink);color:#fff;padding:1.15rem 1.25rem}
+.confidence-strip .confidence-inner{max-width:1200px;margin:auto;padding:0;list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2.75rem;align-items:stretch}
+.confidence-strip .confidence-item{position:relative;min-width:0;display:grid;grid-template-columns:42px minmax(0,1fr);align-items:center;justify-content:start;gap:.8rem;text-align:left;color:#dce7eb;font-size:.86rem;line-height:1.55}
+.confidence-strip .confidence-item:not(:last-child)::after{content:'→';position:absolute;right:-2rem;top:50%;transform:translateY(-50%);color:var(--orange);font-size:1.35rem;font-weight:900;line-height:1}
+.confidence-step{width:42px;height:42px;border:1px solid rgba(248,146,45,.75);border-radius:50%;display:grid;place-items:center;background:rgba(248,146,45,.1);color:#ffad56;font-size:.76rem;font-weight:900;letter-spacing:.04em}
+.confidence-copy{min-width:0;display:grid;gap:.12rem;text-wrap:balance}
+.confidence-strip .confidence-item b{display:block;margin:0;color:#fff;font-size:.92rem;line-height:1.35}
+.confidence-copy>span{color:#cbdbe1}
 
 /* 服務 */
 #services{margin:0!important;padding:clamp(4rem,8vw,6.5rem) 1.25rem!important;background:#fff!important}
@@ -86,8 +89,11 @@ footer{background:var(--ink-deep)!important}
 }
 @media(max-width:759px){
   .hero-copy{order:1}.hero-visual{order:2}
-  .confidence-inner{grid-template-columns:1fr;gap:.55rem}
-  .confidence-item{justify-content:flex-start;text-align:left}
+  .confidence-strip{padding:1.2rem 1.25rem}
+  .confidence-strip .confidence-inner{grid-template-columns:1fr;gap:1.15rem}
+  .confidence-strip .confidence-item{grid-template-columns:38px minmax(0,1fr)}
+  .confidence-strip .confidence-item:not(:last-child)::after{content:'↓';left:11px;right:auto;top:auto;bottom:-1rem;transform:none;font-size:1rem}
+  .confidence-step{width:38px;height:38px}
   .trust-badge+.trust-badge::before{display:none}
   .trust-badges{display:grid!important}
   .hero-caption{left:12px;right:12px;bottom:12px;max-width:none}
