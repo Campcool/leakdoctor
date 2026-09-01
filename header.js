@@ -308,6 +308,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   padding:6px 10px 8px;
   max-width:100%;margin:0 auto;
 }
+.ld-tab-shell{position:relative;min-width:0}
 .ld-tab{
   display:flex;flex-direction:row;
   align-items:center;justify-content:center;gap:5px;
@@ -391,6 +392,8 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
     grid-template-columns:repeat(6,minmax(0,1fr));
     margin:0;padding:0;gap:9px;background:transparent;
   }
+  .ld-tab-shell{height:66px}
+  .ld-tab-shell>.ld-tab{width:100%}
   .ld-tab{box-sizing:border-box;height:66px;min-height:66px;padding:8px 7px;gap:6px;border-radius:13px;overflow:hidden;position:relative}
   .ld-tab-icon{width:19px;height:19px}
   .ld-tab-label{font-size:16px}
@@ -399,7 +402,41 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
     background:linear-gradient(105deg,transparent,rgba(255,255,255,.08),rgba(255,255,255,.44),rgba(255,255,255,.08),transparent);
     transform:skewX(-16deg);animation:ld-active-flow 3.2s ease-in-out infinite;
   }
+  .ld-tab-menu{
+    position:absolute;top:calc(100% + 8px);left:50%;z-index:10002;
+    width:210px;padding:8px;border:1px solid #d5e0e3;border-radius:14px;
+    background:rgba(255,255,255,.98);box-shadow:0 20px 46px rgba(23,50,77,.2);
+    opacity:0;visibility:hidden;transform:translate(-50%,-6px);
+    transition:opacity .16s ease,transform .16s ease,visibility .16s;
+    pointer-events:none;
+  }
+  .ld-tab-shell:first-child .ld-tab-menu{left:0;transform:translate(0,-6px)}
+  .ld-tab-shell:last-child .ld-tab-menu{left:auto;right:0;transform:translate(0,-6px)}
+  .ld-tab-shell::after{content:'';position:absolute;left:0;right:0;top:100%;height:10px}
+  .ld-tab-shell:hover .ld-tab-menu,
+  .ld-tab-shell:focus-within .ld-tab-menu{opacity:1;visibility:visible;transform:translate(-50%,0);pointer-events:auto}
+  .ld-tab-shell:first-child:hover .ld-tab-menu,
+  .ld-tab-shell:first-child:focus-within .ld-tab-menu,
+  .ld-tab-shell:last-child:hover .ld-tab-menu,
+  .ld-tab-shell:last-child:focus-within .ld-tab-menu{transform:translate(0,0)}
+  .ld-tab-menu::before{
+    content:'';position:absolute;top:-5px;left:50%;width:10px;height:10px;
+    border-left:1px solid #d5e0e3;border-top:1px solid #d5e0e3;background:#fff;
+    transform:translateX(-50%) rotate(45deg);
+  }
+  .ld-tab-shell:first-child .ld-tab-menu::before{left:28px}
+  .ld-tab-shell:last-child .ld-tab-menu::before{left:auto;right:23px}
+  .ld-tab-menu-label{display:block;padding:5px 9px 7px;color:var(--tab-accent);font-size:11px;font-weight:900;letter-spacing:.04em}
+  .ld-tab-menu a{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    min-height:39px;padding:8px 10px;border-radius:9px;color:#17324d;text-decoration:none;
+    font-size:13px;font-weight:800;line-height:1.35;
+  }
+  .ld-tab-menu a::after{content:'›';color:var(--tab-accent);font-size:18px;line-height:1}
+  .ld-tab-menu a:hover,.ld-tab-menu a:focus-visible{outline:none;background:var(--tab-soft);color:var(--tab-accent)}
 }
+
+@media(max-width:1023px){.ld-tab-menu{display:none!important}}
 
 @media(min-width:1280px){.ld-tab-label{font-size:17px}.ld-tab-icon{width:20px;height:20px}}
 @keyframes ld-active-flow{0%,18%{left:-42%;opacity:0}28%{opacity:1}68%{opacity:1}82%,100%{left:118%;opacity:0}}
@@ -414,6 +451,7 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
     padding:4px 12px 6px;gap:6px;
   }
   .ld-nav::-webkit-scrollbar{display:none}
+  .ld-tab-shell{flex:0 0 auto}
   .ld-tab{
     flex:0 0 auto;min-width:112px;min-height:44px;
     gap:5px;padding:7px 10px;scroll-snap-align:center;
@@ -584,6 +622,67 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   .ld-detail-unit{display:none}
   .ld-add-menu{grid-template-columns:1fr}
 }
+
+/* Hero visual: service photo first, explanatory diagram on hover/focus/tap. */
+.service-visual.ld-visual-ready{position:relative;isolation:isolate;border-radius:26px;overflow:hidden;box-shadow:0 20px 55px rgba(23,50,77,.13);background:#eef5f6;cursor:zoom-in}
+.service-visual.ld-visual-ready .service-visual-img,.service-visual.ld-visual-ready .process-photo{box-shadow:none!important}
+.ld-visual-detail{position:absolute;inset:0;z-index:2;display:grid;place-items:center;background:#fff;opacity:0;transform:scale(1.025);transition:opacity .28s ease,transform .34s ease;pointer-events:none}
+.ld-visual-detail picture,.ld-visual-detail img{display:block;width:100%;height:100%}
+.ld-visual-detail img{object-fit:contain;padding:8px;background:#fff}
+.ld-visual-switch{position:absolute;top:12px;right:12px;z-index:4;display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:8px 12px;border:1px solid rgba(255,255,255,.72);border-radius:999px;background:rgba(23,50,77,.9);color:#fff;font-size:.875rem;font-weight:900;font-family:'Noto Sans TC',sans-serif;box-shadow:0 8px 18px rgba(23,50,77,.2);backdrop-filter:blur(8px);cursor:pointer}
+.ld-visual-switch::before{content:'＋';font-size:15px;line-height:1}
+.service-visual.ld-visual-ready:hover .ld-visual-detail,.service-visual.ld-visual-ready:focus-within .ld-visual-detail,.service-visual.ld-visual-ready.is-detail .ld-visual-detail{opacity:1;transform:scale(1)}
+.service-visual.ld-visual-ready:hover .service-visual-note,.service-visual.ld-visual-ready:focus-within .service-visual-note,.service-visual.ld-visual-ready.is-detail .service-visual-note{opacity:0;transform:translateY(6px)}
+.service-visual.ld-visual-ready.is-detail .ld-visual-switch::before{content:'－'}
+.service-visual-note{transition:opacity .2s ease,transform .2s ease}
+@media(max-width:759px){.service-visual.ld-visual-ready{border-radius:20px}.ld-visual-switch{top:9px;right:9px}}
+
+/* Question-first knowledge paths used on service pages and the knowledge hub. */
+.knowledge-rail{padding:clamp(2.2rem,4vw,3.4rem) 1.25rem;background:#fff;border-top:1px solid #e6edef}
+.knowledge-rail-inner{max-width:1000px;margin:0 auto}
+.knowledge-rail-head{display:flex;align-items:end;justify-content:space-between;gap:1.25rem;margin-bottom:1.1rem}
+.knowledge-rail-kicker{color:var(--service-accent,#138a80);font-size:.75rem;font-weight:900;letter-spacing:.08em;margin-bottom:.3rem}
+.knowledge-rail h2{margin:0;color:#17324d;font-size:clamp(1.35rem,2.6vw,1.95rem);line-height:1.25}
+.knowledge-rail-intro{margin:.45rem 0 0;color:#667680;font-size:.9rem;line-height:1.7;max-width:64ch}
+.knowledge-more{flex:0 0 auto;color:var(--service-accent,#138a80);font-size:.875rem;font-weight:900;text-decoration:none}
+.knowledge-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem}
+.knowledge-card{display:block;border:1px solid #dce5e8;border-radius:16px;background:#fff;color:#17324d;text-decoration:none;box-shadow:0 9px 24px rgba(23,50,77,.055);transition:border-color .18s,transform .18s,box-shadow .18s}
+.knowledge-card:hover{border-color:var(--service-accent,#138a80);transform:translateY(-3px);box-shadow:0 15px 32px rgba(23,50,77,.1)}
+.knowledge-card small{display:inline-flex;color:var(--service-accent,#138a80);font-size:.75rem;font-weight:900}
+.knowledge-card h3{margin:.25rem 0 .4rem;color:#17324d}
+.knowledge-card p{margin:0;color:#667680}
+.knowledge-rail .knowledge-grid{counter-reset:ld-knowledge-card}
+.knowledge-rail .knowledge-card{position:relative;overflow:hidden;padding-top:2.75rem!important}
+.knowledge-rail .knowledge-card::before{counter-increment:ld-knowledge-card;content:'0' counter(ld-knowledge-card);position:absolute;top:14px;right:15px;color:color-mix(in srgb,var(--service-accent,#138a80) 22%,#fff);font-size:2rem;font-weight:900;line-height:1}
+.knowledge-rail .knowledge-card small{position:absolute;top:14px;left:15px;z-index:1}
+.ld-knowledge-answer{display:inline-flex;align-items:center;gap:5px;margin-top:.8rem;color:var(--service-accent,#138a80);font-size:.8rem;font-weight:900;transition:transform .18s ease}
+.knowledge-card:hover .ld-knowledge-answer{transform:translateX(3px)}
+.ld-knowledge-finder{padding:1.35rem 1.25rem;background:#fff;border-bottom:1px solid #e4ecef}
+.ld-knowledge-finder-inner{max-width:1000px;margin:0 auto}
+.ld-knowledge-finder-head{display:flex;align-items:end;justify-content:space-between;gap:1rem;margin-bottom:.9rem}
+.ld-knowledge-finder-kicker{color:#0d9488;font-size:.75rem;font-weight:900;letter-spacing:.08em}
+.ld-knowledge-finder h2{margin:.22rem 0 0;color:#17324d;font-size:clamp(1.18rem,2.5vw,1.55rem);line-height:1.3}
+.ld-knowledge-finder-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.65rem}
+.ld-knowledge-finder a{display:flex;align-items:center;justify-content:space-between;gap:.65rem;min-height:66px;padding:.8rem .9rem;border:1px solid #d7e3e6;border-radius:12px;background:#fff;color:#17324d;text-decoration:none;font-size:.875rem;font-weight:900;line-height:1.45;transition:.18s}
+.ld-knowledge-finder a span{color:#0d9488;font-size:1.1rem}
+.ld-knowledge-finder a:hover,.ld-knowledge-finder a:focus-visible{outline:none;border-color:#138a80;background:#f0fdfa;transform:translateY(-2px)}
+
+/* Shared article reading experience: concise TOC, active section and progress. */
+.ld-article-page .article-wrap{max-width:1120px!important}
+.ld-article-layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:2rem;align-items:start}
+.ld-article-layout>.article-body{min-width:0;margin:0!important}
+.ld-article-guide{position:sticky;top:calc(var(--ld-hdr-h,79px) + 16px);padding:1rem;border:1px solid #dce5e8;border-radius:14px;background:#fff;box-shadow:0 12px 30px rgba(23,50,77,.07)}
+.ld-article-guide-kicker{color:#0d9488;font-size:.75rem;font-weight:900;letter-spacing:.08em}
+.ld-article-guide-title{margin:.25rem 0;color:#17324d;font-size:1rem;font-weight:900;line-height:1.35}
+.ld-article-guide-meta{color:#718087;font-size:.8rem;line-height:1.5}
+.ld-article-guide-links{display:grid;gap:3px;margin-top:.75rem}
+.ld-article-guide a{display:block;min-height:44px;padding:.58rem;border-left:3px solid transparent;border-radius:0 8px 8px 0;color:#53656e;text-decoration:none;font-size:.82rem;font-weight:800;line-height:1.45;transition:.16s}
+.ld-article-guide a:hover,.ld-article-guide a:focus-visible,.ld-article-guide a.is-active{outline:none;border-left-color:#138a80;background:#f0fdfa;color:#0f766e}
+.ld-reading-progress{position:fixed;top:var(--ld-hdr-h,79px);left:0;right:0;z-index:9988;height:3px;background:transparent;pointer-events:none}
+.ld-reading-progress span{display:block;width:0;height:100%;background:linear-gradient(90deg,#138a80,#f28c28);transition:width .08s linear}
+.ld-article-page .article-body h2{scroll-margin-top:calc(var(--ld-hdr-h,79px) + 16px)!important}
+@media(max-width:900px){.ld-article-layout{display:block}.ld-article-guide{position:relative;top:auto;margin-bottom:1.2rem;padding:.9rem}.ld-article-guide-links{display:flex;gap:.45rem;overflow-x:auto;padding-bottom:.2rem;scrollbar-width:thin}.ld-article-guide a{flex:0 0 auto;max-width:76vw;border:1px solid #dce5e8;border-radius:999px;padding:.62rem .78rem;white-space:nowrap}.ld-article-guide a.is-active{border-color:#138a80}}
+@media(max-width:760px){.knowledge-rail-head{display:block}.knowledge-more{display:inline-flex;margin-top:.7rem}.knowledge-grid{grid-template-columns:1fr}.ld-knowledge-finder-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ld-knowledge-finder a{min-height:62px}}
 `;
 
   // 注入 CSS
@@ -631,20 +730,26 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
   // 業主 2026-08-30 確認六大項，各服務保留自己的頁籤與作用中狀態。
   const activeNavId = activePage;
   const tabs = [
-    {id:'aircon', href:'aircon.html', icon:NAV_ICONS.aircon, label:'冷氣清洗'},
-    {id:'washer', href:'washer.html', icon:NAV_ICONS.washer, label:'洗衣機清洗'},
-    {id:'homeclean', href:'homeclean.html', icon:NAV_ICONS.homeclean, label:'居家清潔'},
-    {id:'water-tank', href:'water-tank.html', icon:NAV_ICONS.water, label:'水塔清洗'},
-    {id:'pipe-cleaning', href:'pipe-cleaning.html', icon:NAV_ICONS.pipe, label:'水管清洗'},
-    {id:'leak-repair', href:'leak-repair.html', icon:NAV_ICONS.leak, label:'漏水檢測與修補'},
+    {id:'aircon', href:'aircon.html', icon:NAV_ICONS.aircon, label:'冷氣清洗', children:[['價格一覽','#aircon-pricing'],['清洗內容','#aircon-services'],['症狀與差異','#aircon-impact-title'],['實際案例','#aircon-cases']]},
+    {id:'washer', href:'washer.html', icon:NAV_ICONS.washer, label:'洗衣機清洗', children:[['價格一覽','#washer-pricing'],['清洗內容','#washer-services'],['機型差異','#washer-differences'],['實際案例','#washer-cases']]},
+    {id:'homeclean', href:'homeclean.html', icon:NAV_ICONS.homeclean, label:'居家清潔', children:[['價格一覽','#homeclean-pricing'],['服務內容','#homeclean-services'],['清潔差異','#homeclean-difference'],['實際案例','#homeclean-cases']]},
+    {id:'water-tank', href:'water-tank.html', icon:NAV_ICONS.water, label:'水塔清洗', children:[['價格與條件','#water-tank-pricing'],['清洗內容','#water-tank-content'],['水塔差異','#water-tank-difference'],['實際案例','#water-tank-cases']]},
+    {id:'pipe-cleaning', href:'pipe-cleaning.html', icon:NAV_ICONS.pipe, label:'水管清洗', children:[['價格與條件','#pipe-pricing'],['適用情況','#pipe-content'],['風險與差異','#pipe-difference'],['實際案例','#pipe-cases']]},
+    {id:'leak-repair', href:'leak-repair.html', icon:NAV_ICONS.leak, label:'漏水檢測與修補', children:[['費用行情','#pricing'],['提供的服務','#promises'],['知識與流程','#leak-flow'],['修補案例','#cases-carousel']]},
   ];
 
-  const tabsHTML = tabs.map(t =>
-    `<a href="/${t.href}" class="ld-tab ld-tab--${t.id}${t.id===activeNavId?' ld-active':''}"${t.id===activeNavId?' aria-current="page"':''}>
-      <span class="ld-tab-icon">${t.icon}</span>
-      <span class="ld-tab-label">${t.label}</span>
-    </a>`
-  ).join('');
+  const tabsHTML = tabs.map(function(t){
+    const childLinks = t.children.map(function(child){
+      return '<a href="/' + t.href + child[1] + '">' + child[0] + '</a>';
+    }).join('');
+    return '<div class="ld-tab-shell ld-tab--' + t.id + '">' +
+      '<a href="/' + t.href + '" class="ld-tab ld-tab--' + t.id + (t.id===activeNavId?' ld-active':'') + '"' + (t.id===activeNavId?' aria-current="page"':'') + '>' +
+        '<span class="ld-tab-icon">' + t.icon + '</span>' +
+        '<span class="ld-tab-label">' + t.label + '</span>' +
+      '</a>' +
+      '<div class="ld-tab-menu"><span class="ld-tab-menu-label">' + t.label + '快速前往</span>' + childLinks + '</div>' +
+    '</div>';
+  }).join('');
   const SERVICE_CHOICE_ICONS = [NAV_ICONS.aircon,NAV_ICONS.washer,NAV_ICONS.homeclean,NAV_ICONS.water,NAV_ICONS.pipe,NAV_ICONS.leak,NAV_ICONS.other];
 
   const html = `
@@ -984,6 +1089,163 @@ body.ld-theme-leak-repair{--service-accent:#0f766e;--service-accent-dark:#115e59
     }
   }
   renderServiceStory();
+
+  const VISUAL_DETAILS = {
+    aircon:{image:'/assets/optimized/aircon-dirt-map-sm.webp',fallback:'/assets/optimized/aircon-dirt-map-sm.jpg',alt:'冷氣蒸發器、風鼓、濾網與排水等常見髒污位置圖解'},
+    washer:{image:'/assets/optimized/washer-dirt-source-sm.webp',fallback:'/assets/optimized/washer-dirt-source-sm.jpg',alt:'洗衣機內外槽夾層髒污來源與拆洗原因圖解'},
+    homeclean:{image:'/assets/optimized/home-care-knowledge-sm.webp',fallback:'/assets/optimized/home-care-knowledge-sm.jpg',alt:'居家清潔區域、材質與處理順序圖解'},
+    'water-tank':{image:'/assets/optimized/water-tank-system-sm.webp',fallback:'/assets/optimized/water-tank-system-sm.jpg',alt:'上水塔、下水塔與住宅供水功能圖解'},
+    'pipe-cleaning':{image:'/assets/optimized/pipe-cleaning-effects-sm.webp',fallback:'/assets/optimized/pipe-cleaning-effects-sm.jpg',alt:'水管沉積、清洗原因、預期效果與老舊管線風險圖解'},
+    'leak-repair':{image:'/assets/optimized/leak-detection-methods-sm.webp',fallback:'/assets/optimized/leak-detection-methods-sm.jpg',alt:'漏水現象、檢測工具與定位方式圖解'},
+    knowledge:{image:'/assets/optimized/home-leak-knowledge-sm.webp',fallback:'/assets/optimized/home-leak-knowledge-sm.jpg',alt:'住宅常見漏水路徑與判斷方法圖解'}
+  };
+
+  function initVisualDetail(){
+    const config = VISUAL_DETAILS[activePage] || VISUAL_DETAILS[page];
+    const visual = document.querySelector('#page-hero .service-visual,#hero .service-visual');
+    if(!config || !visual || visual.classList.contains('ld-visual-ready')) return;
+    visual.classList.add('ld-visual-ready');
+    visual.setAttribute('role','group');
+    visual.setAttribute('aria-label','服務實景照片，可切換查看詳細圖解');
+    const detail = document.createElement('div');
+    detail.className = 'ld-visual-detail';
+    detail.setAttribute('aria-hidden','true');
+    detail.innerHTML = '<picture><source srcset="' + config.image + '" type="image/webp"><img src="' + config.fallback + '" alt="' + config.alt + '" loading="eager" decoding="async"></picture>';
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'ld-visual-switch';
+    button.setAttribute('aria-pressed','false');
+    button.textContent = '查看詳細圖';
+    button.addEventListener('click',function(event){
+      event.stopPropagation();
+      const open = visual.classList.toggle('is-detail');
+      button.setAttribute('aria-pressed',open ? 'true' : 'false');
+      button.textContent = open ? '返回實景' : '查看詳細圖';
+      detail.setAttribute('aria-hidden',open ? 'false' : 'true');
+    });
+    visual.appendChild(detail);
+    visual.appendChild(button);
+  }
+
+  function enhanceKnowledgePaths(){
+    const fallbackPaths = {
+      'water-tank':{
+        before:'water-tank-cases',kicker:'深入了解・先看條件再安排',title:'水塔不是只看大小，還要看供水系統',
+        intro:'用容量、位置、停水與安全條件快速找到對應說明，再決定如何估價。',
+        cards:[
+          ['預約前準備','要提供哪些照片與資料？','容量標示、頂樓通道、入口與排水點，會直接影響估價與安排。','#water-tank-content'],
+          ['類型差異','上水塔、下水塔怎麼分？','位置、材質、通風與排水方式不同，清洗方法和安全條件也不同。','#water-tank-difference'],
+          ['真實案例','清洗前後要看哪些位置？','從頂部人孔確認內壁與底部沉積，完成後再檢查排水與復水。','#water-tank-cases']
+        ]
+      },
+      'pipe-cleaning':{
+        before:'pipe-cases',kicker:'深入了解・先找原因再清洗',title:'熱水變小，不一定都是水管髒',
+        intro:'把症狀、設備與老舊管線風險拆開判斷，避免還沒找原因就直接施工。',
+        cards:[
+          ['症狀分類','熱水器點不著，要先查什麼？','先比對冷熱水、濾網、閥件與熱水器狀態，再判斷是否和管路沉積有關。','#pipe-content'],
+          ['風險說明','老舊水管為什麼不能直接洗？','去除堵塞後，原本被沉積物遮住的鏽蝕或滲漏可能變得更明顯。','#pipe-difference'],
+          ['現場案例','水量不足可能堵在哪裡？','管件、接頭、濾網與閥件都可能造成限流，需要搭配現場資訊判斷。','#pipe-cases']
+        ]
+      }
+    };
+    const fallback = fallbackPaths[activePage];
+    if(fallback && !document.querySelector('.knowledge-rail')){
+      const target = document.getElementById(fallback.before);
+      if(target){
+        const cards = fallback.cards.map(function(card){
+          return '<a class="knowledge-card" href="' + card[3] + '"><small>' + card[0] + '</small><h3>' + card[1] + '</h3><p>' + card[2] + '</p></a>';
+        }).join('');
+        target.insertAdjacentHTML('beforebegin','<section class="knowledge-rail" aria-label="' + fallback.title + '"><div class="knowledge-rail-inner"><div class="knowledge-rail-head"><div><div class="knowledge-rail-kicker">' + fallback.kicker + '</div><h2>' + fallback.title + '</h2><p class="knowledge-rail-intro">' + fallback.intro + '</p></div><a class="knowledge-more" href="/knowledge.html">瀏覽全部知識文章 →</a></div><div class="knowledge-grid">' + cards + '</div></div></section>');
+      }
+    }
+    document.querySelectorAll('.knowledge-rail .knowledge-card').forEach(function(card){
+      if(card.querySelector('.ld-knowledge-answer')) return;
+      const action = document.createElement('span');
+      action.className = 'ld-knowledge-answer';
+      action.textContent = card.getAttribute('href') && card.getAttribute('href').charAt(0) === '#' ? '跳到解答 →' : '閱讀完整說明 →';
+      card.appendChild(action);
+    });
+  }
+
+  function initKnowledgeFinder(){
+    if(page !== 'knowledge' || document.querySelector('.ld-knowledge-finder')) return;
+    const hero = document.getElementById('page-hero');
+    const tabNav = document.getElementById('tab-nav');
+    if(!hero || !tabNav) return;
+    const cleaningSection = tabNav.previousElementSibling;
+    if(cleaningSection && !cleaningSection.id) cleaningSection.id = 'cleaning-knowledge';
+    hero.insertAdjacentHTML('afterend','<section class="ld-knowledge-finder" aria-labelledby="ld-knowledge-finder-title"><div class="ld-knowledge-finder-inner"><div class="ld-knowledge-finder-head"><div><div class="ld-knowledge-finder-kicker">先選問題，再看完整說明</div><h2 id="ld-knowledge-finder-title">你現在最想解決哪一件事？</h2></div></div><div class="ld-knowledge-finder-grid"><a href="#cleaning-knowledge">查清洗週期與費用 <span>→</span></a><a href="#tab-nav" data-knowledge-tab="symptom">從漏水症狀找原因 <span>→</span></a><a href="#tab-nav" data-knowledge-tab="detect">比較檢測與修補方式 <span>→</span></a><a href="/leak-guide.html">三步整理現場線索 <span>→</span></a></div></div></section>');
+    document.querySelectorAll('[data-knowledge-tab]').forEach(function(link){
+      link.addEventListener('click',function(event){
+        const tab = link.getAttribute('data-knowledge-tab');
+        const matchingButton = Array.from(tabNav.querySelectorAll('.tab-btn')).find(function(btn){ return (btn.getAttribute('onclick') || '').indexOf("'" + tab + "'") !== -1; });
+        if(typeof window.showTab === 'function' && matchingButton) window.showTab(tab,matchingButton);
+        event.preventDefault();
+        tabNav.scrollIntoView({behavior:'smooth',block:'start'});
+      });
+    });
+  }
+
+  function initArticleGuide(){
+    if(location.pathname.indexOf('/articles/') === -1 || document.querySelector('.ld-article-layout')) return;
+    const articleBody = document.querySelector('.article-body');
+    const articleWrap = document.querySelector('.article-wrap');
+    if(!articleBody || !articleWrap) return;
+    const headings = Array.from(articleBody.querySelectorAll('h2'));
+    if(headings.length < 2) return;
+    document.body.classList.add('ld-article-page');
+    headings.forEach(function(heading,index){ if(!heading.id) heading.id = 'article-section-' + (index + 1); });
+    const oldToc = articleWrap.querySelector('.toc');
+    if(oldToc) oldToc.remove();
+    const readingMinutes = Math.max(3,Math.ceil((articleBody.textContent || '').replace(/\s+/g,'').length / 500));
+    const guide = document.createElement('aside');
+    guide.className = 'ld-article-guide';
+    guide.setAttribute('aria-label','本文重點目錄');
+    guide.innerHTML = '<div class="ld-article-guide-kicker">快速閱讀</div><div class="ld-article-guide-title">先選你要看的問題</div><div class="ld-article-guide-meta">約 ' + readingMinutes + ' 分鐘讀完</div><nav class="ld-article-guide-links"></nav>';
+    const links = guide.querySelector('.ld-article-guide-links');
+    headings.forEach(function(heading,index){
+      const link = document.createElement('a');
+      link.href = '#' + heading.id;
+      link.textContent = heading.textContent.trim();
+      if(index === 0) link.classList.add('is-active');
+      links.appendChild(link);
+    });
+    const layout = document.createElement('div');
+    layout.className = 'ld-article-layout';
+    articleWrap.insertBefore(layout,articleBody);
+    layout.appendChild(guide);
+    layout.appendChild(articleBody);
+    const progress = document.createElement('div');
+    progress.className = 'ld-reading-progress';
+    progress.setAttribute('aria-hidden','true');
+    progress.innerHTML = '<span></span>';
+    document.body.appendChild(progress);
+    const progressBar = progress.querySelector('span');
+    const guideLinks = Array.from(links.querySelectorAll('a'));
+    function updateProgress(){
+      const rect = articleBody.getBoundingClientRect();
+      const total = Math.max(1,articleBody.offsetHeight - window.innerHeight * .55);
+      const headerHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--ld-hdr-h')) || 0;
+      const passed = Math.min(total,Math.max(0,-rect.top + headerHeight));
+      progressBar.style.width = Math.min(100,Math.max(0,(passed / total) * 100)) + '%';
+    }
+    window.addEventListener('scroll',updateProgress,{passive:true});
+    window.addEventListener('resize',updateProgress,{passive:true});
+    updateProgress();
+    if('IntersectionObserver' in window){
+      const observer = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(!entry.isIntersecting) return;
+          guideLinks.forEach(function(link){ link.classList.toggle('is-active',link.getAttribute('href') === '#' + entry.target.id); });
+        });
+      },{rootMargin:'-22% 0px -68% 0px',threshold:0});
+      headings.forEach(function(heading){ observer.observe(heading); });
+    }
+  }
+
+  function initContentExperience(){ initVisualDetail(); enhanceKnowledgePaths(); initKnowledgeFinder(); initArticleGuide(); }
+  initContentExperience();
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded',initContentExperience,{once:true});
 
   function enhancePriceTables(){
     document.querySelectorAll('.price-table').forEach(function(table){

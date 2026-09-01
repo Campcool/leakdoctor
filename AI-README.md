@@ -6,7 +6,7 @@
 > 3. 本檔案是唯一的交接依據，寫給 AI 看：請保持精確、可執行、不留模糊描述。
 > 4. **所有時間戳一律台灣時間（Asia/Taipei, UTC+8）**。
 
-最後更新：2026-09-01（Codex）— 首頁服務原則改為 01／02／03 箭頭流程；桌機橫排、手機直排。全站 OG 圖前批詳 §5 與 docs/OG-BATCH-20260831.md；正式狀態以 main、Actions 及 HTTP 覆驗為準。
+最後更新：2026-09-01（Codex）— 服務大項 hover 子選單、Hero 實景／詳細圖解切換、知識文章問題式快速目錄；首頁箭頭流程與全站 OG 前批內容均保留。
 
 ## 2026-08-31 浮動聯絡區重修 ＋ DESIGN.md 對齊（Claude，**業主授權直接合併 main**）
 
@@ -303,7 +303,9 @@ CI 只跑 `setup-node` + `node`，不能引外部套件），實際解析 `heade
 - **純靜態站**，無框架、無打包工具，直接編輯 HTML。部署 = push 到 `main`（GitHub Pages）。
 - 根目錄保留 `.nojekyll`，讓 GitHub Pages 直接發布靜態檔案，不執行不必要的 Jekyll metadata build；勿刪除。
 - **`header.js` 是全站共用核心**（每頁 `<script src="header.js">` 或 `../header.js` 載入），runtime 注入：
-  - fixed header＋6 個主服務頁籤（root 絕對路徑 `/xxx.html`，讓 /articles/ 下也正確）；桌機 Logo 首頁入口與服務頁籤同列等高，手機／平板維持 Logo＋單列橫向滑動服務選項，服務頁會把作用中頁籤置中
+  - fixed header＋6 個主服務頁籤（root 絕對路徑 `/xxx.html`，讓 /articles/ 下也正確）；桌機 Logo 首頁入口與服務頁籤同列等高，hover／鍵盤聚焦可展開價格、內容、差異與案例子項；手機／平板維持單列橫向滑動服務選項並把作用中頁籤置中
+  - 六服務與百科 Hero 右圖提供「實景照片 ↔ 詳細圖解」：桌機可 hover／focus，觸控裝置用按鈕切換；圖解使用 `assets/optimized/` 的 WebP＋JPG fallback
+  - `articles/*.html` 由 runtime 建立問題式快速目錄、預估閱讀時間、桌機 sticky 章節導覽、手機橫滑章節鈕與閱讀進度
   - 右側 LINE 浮動鈕、回頂鈕、手機底部 LINE 預約列；網站不提供公開電話 CTA；「加入我們」由共用腳本注入於頁尾前，連到 /join.html，完整申請僅登入後台可查看
   - 六服務專屬色系由 body theme class 與 CSS variables 串接頁籤及頁面 CTA：冷氣青藍、洗衣機紫、居家清潔琥珀、水塔綠、水管靛藍、漏水青綠
   - **預約表單 modal**（`ldOpenQuote(serviceKey)` 全域函式）：姓名/電話/地址/服務卡片/日期時段，送出 → `POST /api/leads` 寫入灰汰郎 D1 → 取得 `HTL-L-*` 線索編號 → 組訊息 → `line.me/R/oaMessage/@478xvlgl/?<encoded>` 開 LINE 預填；API 失敗時不開 LINE，避免需求未落案
@@ -399,6 +401,15 @@ cases/
 - 修改後驗證慣例：`node --check header.js`；以 Node 驗證 JSON-LD、內部連結、四頁流程與禁止字樣；本機網址受瀏覽器安全政策阻擋時，直接使用正式部署標記與真機驗證，不可繞過安全政策。
 
 ## 5. 進度紀錄（新條目加在最上面）
+
+### 2026-09-01 知識內容導覽與圖解互動（Codex）
+
+- 參考 `hscctv-tcc.com.tw/what-is-pbx/` 的問題式標題、快速目錄與先教育再行動路徑，套用到灰汰郎；未沿用參考站過長頁面與手機小字問題。
+- 六個桌機主服務頁籤加入 hover／`focus-within` 子選單，直接前往價格、內容、差異與案例；手機及無 hover 裝置不顯示浮層，維持單列橫向滑動與整張服務按鈕點擊。
+- 六服務與 `knowledge.html` Hero 右圖新增實景／詳細圖解切換：桌機滑過或鍵盤聚焦顯示圖解，按鈕可固定切換；手機用同一顆按鈕，不依賴 hover。沿用既有壓縮資訊圖，不新增大圖負擔。
+- 四個既有 `.knowledge-rail` 改成有序問題卡；水塔與水管補上同架構的深入了解模組。百科首屏下新增四個問題入口，可直達清洗文章、漏水症狀、檢測方式或三步判讀。
+- 16 篇 `articles/*.html` 共用問題式快速目錄、約略閱讀時間、作用中章節與閱讀進度；桌機為左側 sticky 目錄，900px 以下改為橫滑章節鈕，不增加手機置頂列高度。舊文章原本的 `.toc` 會由新版單一目錄取代，避免重複。
+- 共用 `header.js` cache key 升為 `20260901a`，37 個 HTML 引用同步更新；保留 2026-08-31 後的價格、合作申請、OG、無障礙與首頁箭頭流程更新。本機 `validate-site.mjs` 23 頁全綠；header、閱讀節奏、首頁服務、流程四套契約共 121 項通過。16 篇文章各只有一套新版目錄，並以 1440×900／390×844 實際檢查服務頁、百科與文章。兩個 mutation harness 的基準均通過，但手機導覽有 5 個、modal 有 1 個「預期攔截／放行」測試仍不一致，屬門禁測試精度待另案處理，不是目前正式 baseline 失敗。
 
 ### 2026-09-01 首頁服務安排箭頭流程（Codex）
 
@@ -959,6 +970,8 @@ GSC 存取：`leakdoctor.tw` 與 `blossomkids.tw` 皆已驗證，共用驗證碼
 7. `initServiceLayerTabs()` 目前只掃 body 直屬節點，內容在 main 內，實際沒有產生 `.service-layer-tabs`。不可照歷史文件宣稱已啟用。若後续修復，須完整驗證 hidden、hash、history、焦點與 sticky 偏移，不要只改 selector 就啟用休眠程式。
 
 ## 7. 待辦清單
+
+- [x] 桌機主服務 hover 子選單、Hero 實景／詳細圖解切換、百科問題入口與 16 篇文章共用快速目錄已於 2026-09-01 完成；手機使用點按與橫滑，不依賴 hover。
 
 - [x] 首頁服務原則由散落圓點改成 01／02／03 箭頭流程；桌機橫排、手機直排，保留原服務界線。
 
