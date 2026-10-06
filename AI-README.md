@@ -404,8 +404,8 @@ cases/
 
 ### 2026-10-06（Codex・A15 圖片 CSS 效能續優化）
 
-- 最新 main `4af3fff79878cd20292ec72b004f5808c7acc9b6` 的接單防重／三段詢價／管理中心已交付，不重做。首頁与漏水頁仍載入 428,473 bytes 的 process-images.css；三張 base64 背景已被行內 service-photos 覆蓋，但 CSS 仍阻擋呈現。
-- 原 WebP 無重編碼外置到 `assets/process-media/`，保留 SHA256／選擇器與其他页面相容性；CSS 改為 466 bytes（減少 99.89%），兩處引用更新 query。瀏覽器只載入生效的 service-photos，不下載被覆蓋的舊圖。
+- 最新 main `4af3fff79878cd20292ec72b004f5808c7acc9b6` 的接單防重／三段詢價／管理中心已交付，不重做。首頁与漏水頁仍載入 本機 CRLF 428,473 bytes（Git LF 428,467 bytes）的 process-images.css；三張 base64 背景已被行內 service-photos 覆蓋，但 CSS 仍阻擋呈現。
+- 原 WebP 無重編碼外置到 `assets/process-media/`，保留 SHA256／選擇器與其他页面相容性；CSS 改為本機 CRLF 466 bytes／Git LF 正式產物 460 bytes（減少 99.89%），兩處引用更新 query。瀏覽器只載入生效的 service-photos，不下載被覆蓋的舊圖。
 - 新增 <1KB CSS 與三張原圖完整性門禁，以及三引擎的調整前後逐像素對照；本機 Chromium 375／1440 的首頁与漏水頁四組畫面完全一致。既有 134 項測試、品牌驗證與四寬度六服務接單回歸通過；修正驗證腳本 Windows 檔案 URL 路徑，沒有修改正式接單程式。
 - CI 三引擎及正式部署結果以中央 `PERFORMANCE-DELIVERY-2026-10-06.md` 為準。這是確定的阻擋 CSS bytes 減少，不能推論正式 LCP／成交率已改善；其他 CSS 疊加、分享圖與真機量測仍待。
 
