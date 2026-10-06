@@ -149,6 +149,12 @@ try {
       /尚未完成預約/,
     );
     await page.screenshot({ path: `${evidence}/receipt-${width}.png` });
+    assert.ok(
+      !(await page.locator("#ld-q-receipt a").getAttribute("href")).includes(
+        "?",
+      ),
+      "private LINE query must not be stored in href",
+    );
     const storage = await page.evaluate(() =>
       sessionStorage.getItem("ld_inquiry_keys"),
     );
@@ -193,6 +199,43 @@ try {
       ).length,
       0,
     );
+    // Simulate automatic outbound measurement reading href, and prove actual handoff still has details.
+    let navigatedLine = "";
+    const observedHrefs = [];
+    await page.exposeFunction("observeLineHref", (href) =>
+      observedHrefs.push(href),
+    );
+    await page.evaluate(() =>
+      document.addEventListener(
+        "click",
+        (event) => {
+          const link = event.target.closest("a");
+          if (link && link.href.startsWith("https://line.me/"))
+            window.observeLineHref(link.href);
+        },
+        true,
+      ),
+    );
+    await page.route("https://line.me/**", async (route) => {
+      navigatedLine = route.request().url();
+      await route.fulfill({
+        contentType: "text/html",
+        body: "<p>Local LINE handoff fixture</p>",
+      });
+    });
+    forceFailure = false;
+    await page.locator(".ld-q-submit").click();
+    await page.locator("#ld-q-receipt a").waitFor();
+    await page.locator("#ld-q-receipt a").click();
+    await page.getByText("Local LINE handoff fixture").waitFor();
+    assert.match(decodeURIComponent(navigatedLine), /測試勿派工/);
+    assert.match(decodeURIComponent(navigatedLine), /0912345679/);
+    assert.ok(observedHrefs.length > 0);
+    assert.ok(
+      observedHrefs.every(
+        (href) => !href.includes("?") && !href.includes("0912345679"),
+      ),
+    );
     for (const service of [
       "aircon",
       "washer",
@@ -218,6 +261,19 @@ try {
       );
       await page.evaluate(() => window.ldCloseQuote());
     }
+    await page.goto('http://127.0.0.1:4173/#price-overview');
+    await page.locator('#price-overview').waitFor();
+    await page.locator('[data-quantity-action="add"][data-service-id="wall_mounted_split"]').click();
+    await page.locator('#home-order-name').fill('試算測試勿派工');
+    await page.locator('#home-order-phone').fill('0912111222');
+    await page.locator('#home-order-address').fill('新北市三重區測試路1號');
+    await page.locator('#home-order-line').click();await page.locator('#home-order-receipt a').waitFor();
+    assert.ok(!(await page.locator('#home-order-receipt a').getAttribute('href')).includes('?'));
+    assert.equal(await page.locator('#home-order-line').isDisabled(),true);
+    await page.evaluate(()=>document.addEventListener('click',event=>{const link=event.target.closest('a');if(link&&link.href.startsWith('https://line.me/'))window.observeLineHref(link.href);},true));
+    await page.locator('#home-order-receipt a').click();await page.getByText('Local LINE handoff fixture').waitFor();
+    assert.match(decodeURIComponent(navigatedLine),/試算測試勿派工/);assert.match(decodeURIComponent(navigatedLine),/0912111222/);
+    assert.ok(observedHrefs.every(href=>!href.includes('?')));
     assert.deepEqual(errors, []);
     await context.close();
   }

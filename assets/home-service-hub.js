@@ -435,7 +435,7 @@
       status.textContent = state.lastStatus;
       let receipt=document.getElementById('home-order-receipt');
       if(!receipt){receipt=document.createElement('div');receipt.id='home-order-receipt';receipt.className='ld-q-receipt';status.after(receipt);}
-      receipt.replaceChildren();const link=document.createElement('a');link.href=result.lineBase+encodeURIComponent(message);link.className='ld-q-line-action';link.textContent='開啟 LINE 並傳送這份需求';receipt.appendChild(link);link.focus();
+      receipt.replaceChildren();const link=document.createElement('a');window.ldPrivateLineLink(link,result.lineBase+encodeURIComponent(message));link.className='ld-q-line-action';link.textContent='開啟 LINE 並傳送這份需求';receipt.appendChild(link);link.focus();
     } catch(error){
       // 逾時／失敗不代表伺服器一定沒寫入，訊息要留著，不能被下一次 updateSummary 清掉。
       state.lastStatus = '目前無法確認需求已儲存，未開啟 LINE。請稍後重試；也可先複製明細，再從「LINE 直接問」貼上詢問。';
