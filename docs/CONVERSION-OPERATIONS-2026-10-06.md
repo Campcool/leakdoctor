@@ -15,7 +15,7 @@
 觀察 quote_step → generate_lead → working_lead → confirmed/dispatch，前台事件不傳姓名、電話、地址或 LINE 訊息 URL。working_lead 首次資料庫銜接成功後送出，程序中斷仍可能漏報，未承諾分析事件 exactly-once。
 
 ## 驗證與發布
-132項前台測試、品牌與結構檢查、真SQLite跨bot八種價格情境及A/B修正通過；固定Playwright1.63.0在320/375/768/1440驗證首頁、六服務、逾時重送同鍵、保留錯誤、LINE回執與追蹤／storage無聯絡個資。348項bot測試含並發建單／第一個線索連結、地址完整性、知識庫FAQ、授權及lead明細。
+133項前台測試、品牌與結構檢查、真SQLite跨bot八種價格情境及A/B修正通過；固定Playwright1.63.0在320/375/768/1440驗證首頁、六服務、逾時重送同鍵、保留錯誤、LINE回執與追蹤／storage無聯絡個資。348項bot測試含並發建單／第一個線索連結、地址完整性、知識庫FAQ、授權及lead明細。
 
 先部署相容舊前台的bot，再發布本站；以 meta ld-release=2026-10-06-conversion-operations、Actions和中央交付快照核對。所有頁面header.js引用版本更新，避免舊快取暫時保留單頁表單。
 
@@ -23,3 +23,6 @@
 同需求UUID在sessionStorage最長24小時／20筆；禁止storage後只保留同頁記憶，關頁後不保證去重。客戶端generate_lead依鍵去重，bot working_lead依首次DB銜接去重；網路／程序中斷仍可能漏報，不宣稱跨系統exactly-once。正式LINE真機送出、管理者登入的實際資料、GA4／Ads後台與成交提升比例待核對，隔離測試不代替這些結果。
 
 回滾前台可回前一版本；bot回滾須保留新版leadId parser與去重，避免已傳給消費者的訊息不能接續。沒有新增D1 migration，不刪除真實資料。
+
+## 發布補強：預填連結隱私與快取
+除了自訂事件去除query，GA4增強測量亦可能讀取外連href。含聯絡資料的LINE訊息只存在WeakMap記憶體，href僅保留官方帳號路徑；用戶點擊時才導向預填訊息，複製明細備援保留。瀏覽器模擬自動追蹤讀href、攔截真正導向，分別驗證沒有聯絡資料與訊息完整。首頁試算JS引用亦換新版本，避免舊快取跳過新版回執。

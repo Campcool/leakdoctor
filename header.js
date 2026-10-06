@@ -144,6 +144,21 @@ function ldInit(){
     return {leadId:result.leadId,lineBase:'https://line.me/R/oaMessage/' + LINE_OA_ID + '/?'};
   }
   window.ldCreatePriceInquiry = function(inquiry){return captureInquiry(inquiry,'homepage_price');};
+  // Enhanced outbound-link measurement can inspect href. Keep private prefill out of the DOM.
+  const privateLineTargets = new WeakMap();
+  window.ldPrivateLineLink = function(link, target){
+    const parsed = new URL(target);
+    if(parsed.origin !== 'https://line.me' || !parsed.pathname.startsWith('/R/oaMessage/')) throw new Error('invalid_line_target');
+    link.href = parsed.origin + parsed.pathname;
+    privateLineTargets.set(link,target);
+    link.addEventListener('click',function(event){
+      event.preventDefault();
+      const destination=privateLineTargets.get(link);
+      if(event.ctrlKey || event.metaKey || event.shiftKey){window.open(destination,'_blank','noopener');}
+      else window.location.assign(destination);
+    });
+  };
+
   const SVC_PAGES = {'/aircon.html':'aircon','/washer.html':'washer','/homeclean.html':'homeclean','/water-tank.html':'water_tank','/pipe-cleaning.html':'pipe_cleaning','/leak-repair.html':'leak-repair'};
   const AREA_PAGES = ['/taipei.html','/new-taipei.html','/keelung.html','/taoyuan.html','/hsinchu.html','/miaoli.html','/taichung.html','/areas.html'];
   // 全站點擊追蹤：LINE 連結與電話
@@ -1682,7 +1697,7 @@ body.service-page .knowledge-rail .knowledge-card{position:relative;overflow:hid
       let receipt=document.getElementById('ld-q-receipt');
       if(!receipt){receipt=document.createElement('div');receipt.id='ld-q-receipt';receipt.className='ld-q-receipt';qForm.appendChild(receipt);}
       receipt.replaceChildren();
-      const lineLink=document.createElement('a');lineLink.href=url;lineLink.className='ld-q-line-action';lineLink.textContent='開啟 LINE 並傳送需求';
+      const lineLink=document.createElement('a');window.ldPrivateLineLink(lineLink,url);lineLink.className='ld-q-line-action';lineLink.textContent='開啟 LINE 並傳送需求';
       const copyButton=document.createElement('button');copyButton.type='button';copyButton.textContent='複製完整需求';copyButton.className='ld-q-copy-action';
       copyButton.onclick=async function(){try{await navigator.clipboard.writeText(msg);copyButton.textContent='已複製，請貼到灰汰郎 LINE';}catch(error){
         let text=receipt.querySelector('textarea');if(!text){text=document.createElement('textarea');text.value=msg;text.readOnly=true;text.setAttribute('aria-label','完整需求，可手動複製');receipt.appendChild(text);}text.focus();text.select();copyButton.textContent='請選取並手動複製需求';}};

@@ -95,11 +95,12 @@ function bridgeHarness(response){
   const start = source.indexOf('const pendingKeys = new Map()');
   const end = source.indexOf('\n  const SVC_PAGES',start);
   assert.ok(start > 0 && end > start);
-  const events = [], requests = [];
+  const events = [], requests = [], navigations = [];
   const stored=new Map();
-  const context = {crypto:webcrypto,TextEncoder,sessionStorage:{getItem:k=>stored.get(k),setItem:(k,v)=>stored.set(k,v)},window:{},leadAttribution:()=>({utm_source:'test'}),gaValue:async()=>'',cookieGaClientId:()=>'',landingPage:()=> 'https://leakdoctor.tw/',location:{pathname:'/'},document:{referrer:''},AbortController,setTimeout,clearTimeout,LEAD_API:'https://test.invalid/api/leads',LINE_OA_ID:'@478xvlgl',ldTrack:(...args)=>events.push(args),fetch:async(url,options)=>{requests.push({url,options});if(response instanceof Error) throw response;return response;}};
+  const context = {URL,crypto:webcrypto,TextEncoder,sessionStorage:{getItem:k=>stored.get(k),setItem:(k,v)=>stored.set(k,v)},window:{},leadAttribution:()=>({utm_source:'test'}),gaValue:async()=>'',cookieGaClientId:()=>'',landingPage:()=> 'https://leakdoctor.tw/',location:{pathname:'/',assign:url=>navigations.push(url)},document:{referrer:''},AbortController,setTimeout,clearTimeout,LEAD_API:'https://test.invalid/api/leads',LINE_OA_ID:'@478xvlgl',ldTrack:(...args)=>events.push(args),fetch:async(url,options)=>{requests.push({url,options});if(response instanceof Error) throw response;return response;}};
+  context.window.location=context.location;
   vm.runInNewContext(source.slice(start,end),context);
-  return {run:context.window.ldCreatePriceInquiry,events,requests};
+  return {run:context.window.ldCreatePriceInquiry,privateLink:context.window.ldPrivateLineLink,events,requests,navigations};
 }
 test('lead capture success keeps all details + attribution and returns the official LINE base',async()=>{
   const h = bridgeHarness({ok:true,json:async()=>({leadId:'HTL-L-TEST'})});
@@ -298,4 +299,14 @@ test('same inquiry retries share one request key and conversion, changed content
  const keys=h.requests.map(r=>JSON.parse(r.options.body).requestId);
  assert.equal(keys[0],keys[1]);assert.notEqual(keys[1],keys[2]);
  assert.equal(h.events.filter(([name])=>name==='generate_lead').length,2);
+});
+
+test('private LINE prefill stays out of href while navigation preserves the complete message',async()=>{
+ const h=bridgeHarness({ok:true,json:async()=>({leadId:'HTL-L-TEST'})});const listeners={};
+ const link={href:'',addEventListener:(name,fn)=>{listeners[name]=fn;}};
+ const target='https://line.me/R/oaMessage/@478xvlgl/?'+encodeURIComponent('姓名：測試\n電話：0912345678');
+ h.privateLink(link,target);assert.equal(link.href,'https://line.me/R/oaMessage/@478xvlgl/');assert.ok(!link.href.includes('0912345678'));
+ let prevented=false;listeners.click({preventDefault(){prevented=true;}});await new Promise(r=>setTimeout(r,5));
+ assert.equal(prevented,true);assert.deepEqual(h.navigations,[target]);
+ assert.throws(()=>h.privateLink(link,'https://evil.invalid/?phone=0912345678'));
 });
