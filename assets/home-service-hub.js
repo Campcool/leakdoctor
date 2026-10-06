@@ -358,6 +358,7 @@
       status.textContent = state.lastStatus;
     } else {
       state.lastStatus = ''; state.lastSignature = ''; state.submittedLeadId = '';
+      const receipt=document.getElementById('home-order-receipt');if(receipt)receipt.remove();
       status.textContent = '';
     }
   }
@@ -430,9 +431,11 @@
       let copied = true;
       try { await copyText(message); } catch(error){copied = false;}
       state.submittedLeadId = result.leadId;
-      state.lastStatus = '需求 ' + result.leadId + ' 已儲存。' + (copied ? '明細已複製；' : '明細將帶入 LINE；') + '請在 LINE 按傳送，接續確認預約。改動任一欄位或數量才會視為新的一筆詢價。';
+      state.lastStatus = '需求 ' + result.leadId + ' 已儲存。' + (copied ? '明細已複製；' : '明細將帶入 LINE；') + '請在 LINE 按傳送，核對草稿後再確認預約；目前尚未完成預約。改動欄位或數量可重新整理需求。';
       status.textContent = state.lastStatus;
-      window.location.href = result.lineBase + encodeURIComponent(message);
+      let receipt=document.getElementById('home-order-receipt');
+      if(!receipt){receipt=document.createElement('div');receipt.id='home-order-receipt';receipt.className='ld-q-receipt';status.after(receipt);}
+      receipt.replaceChildren();const link=document.createElement('a');link.href=result.lineBase+encodeURIComponent(message);link.className='ld-q-line-action';link.textContent='開啟 LINE 並傳送這份需求';receipt.appendChild(link);link.focus();
     } catch(error){
       // 逾時／失敗不代表伺服器一定沒寫入，訊息要留著，不能被下一次 updateSummary 清掉。
       state.lastStatus = '目前無法確認需求已儲存，未開啟 LINE。請稍後重試；也可先複製明細，再從「LINE 直接問」貼上詢問。';

@@ -1,6 +1,5 @@
-// Diagnostic reproduction, NOT a green regression gate.
-// Exit 0 currently means the known A/B defects reproduced as expected.
-// After fixing the bot, replace these defect assertions with desired-behaviour tests.
+// Cross-repository regression gate: real application functions + actual SQLite.
+// Exit 0 means the previously reproduced A/B defects are fixed.
 // Read-only repo audit: real application functions + local in-memory SQLite.
 // No production API, LINE, analytics, or supplier notification calls.
 import assert from 'node:assert/strict';
@@ -60,12 +59,13 @@ const scenarios = [
 let index = 0;
 for (const entries of scenarios) {
   const calc = front.calculate(new Map(entries));
-  const input = parse(entries,'HTL-L-20260830-ABC123');
+  const scenarioId='HTL-L-20260830-'+String(index+1).padStart(6,'0');
+  const input = parse(entries,scenarioId);
   const draft = await buildWebsiteDraft(env,`audit-scenario-${++index}`,input);
   const stored = await dbModule.getOrderByPublicId(db,draft.publicId);
   assert.equal(stored.detail.items.length,entries.length);
   assert.equal(stored.detail.priced_subtotal,calc.amount);
-  assert.equal(stored.detail.web_lead_id,'HTL-L-20260830-ABC123');
+  assert.equal(stored.detail.web_lead_id,scenarioId);
   if (calc.quoted.length) assert.equal(stored.estimateMin,undefined);
   else assert.equal(stored.estimateMin,calc.amount);
   assert.equal(orderServiceNeeds(stored).length,entries.length);
@@ -91,10 +91,10 @@ console.log('PASS: actual settlement freeze persists 3698/2600/1098 and refuses 
 const original = await buildWebsiteDraft(env,'audit-edited-inquiry',parse([['wall_mounted_split',1]]));
 const edited = await buildWebsiteDraft(env,'audit-edited-inquiry',parse([['wall_mounted_split',2],['aircon_outdoor_unit',1]]));
 assert.equal(edited.publicId,original.publicId);
-assert.equal(edited.detail.items.length,1);
-assert.equal(edited.detail.items[0].quantity,1);
-assert.equal(edited.estimateMin,1599);
-console.log('REPRODUCED: edited inquiry wall x2 + outdoor x1 should be 3698; actual old draft remains wall x1 = 1599');
+assert.equal(edited.detail.items.length,2);
+assert.equal(edited.detail.items[0].quantity,2);
+assert.equal(edited.estimateMin,3698);
+console.log('PASS: changed inquiry updates same draft to 3698 with both items');
 
 // The same lead can be claimed repeatedly; linkage success is not once-only.
 const lead = await dbModule.createWebLead(db,{...customer,service:'冷氣清洗',details:['壁掛內機 × 1'],attribution:{},gaClientId:'test.123'});
@@ -103,8 +103,8 @@ assert.ok(claim1);
 assert.equal(await dbModule.linkWebLeadToOrder(db,claim1,'audit-edited-inquiry',original.id),true);
 const claim2 = await dbModule.getWebLeadForClaim(db,lead.publicId,customer.phone);
 assert.ok(claim2);
-assert.equal(await dbModule.linkWebLeadToOrder(db,claim2,'audit-edited-inquiry',original.id),true);
-console.log('REPRODUCED: converted lead can be claimed and linked again; lifecycle handler has no once-only guard');
+assert.equal(await dbModule.linkWebLeadToOrder(db,claim2,'audit-edited-inquiry',original.id),false);
+console.log('PASS: lead conversion linkage succeeds once');
 
 // Full webhook path with fake credentials and in-memory interception of all HTTP.
 // Two distinct customer messages (NOT LINE webhook redelivery) containing one lead.
@@ -129,11 +129,11 @@ for (let attempt = 1; attempt <= 2; attempt++) {
   await Promise.all(tasks);
 }
 const gaCalls = outbound.filter(r=>r.url.startsWith('https://www.google-analytics.com/mp/collect'));
-assert.equal(gaCalls.length,2);
+assert.equal(gaCalls.length,1);
 assert.equal(gaCalls[0].body.events[0].name,'working_lead');
-assert.equal(gaCalls[0].body.events[0].params.lead_id,gaCalls[1].body.events[0].params.lead_id);
+
 const replies = outbound.filter(r=>r.url.startsWith('https://api.line.me/'));
 assert.equal(replies.length,2);
 assert.equal(sql.prepare("SELECT count(*) AS n FROM orders o JOIN customers c ON c.id=o.customer_id WHERE c.line_user_id='audit-webhook-customer'").get().n,1);
-console.log('REPRODUCED: real webhook handler, same form sent as two messages -> 1 draft but 2 working_lead events (HTTP mocked; no external traffic)');
+console.log('PASS: two distinct messages -> one draft and one working_lead; HTTP mocked, no external traffic');
 sql.close();
