@@ -32,6 +32,22 @@ jobs:
         run: node --test scripts/test-header-contract.mjs
       - name: Editorial process, safety copy and layout regression guards
         run: node --test scripts/test-process-editorial.mjs
+      - name: Install pinned browser verification tools
+        run: |
+          npm install --prefix /tmp/ld-browser --no-package-lock --no-audit --no-fund playwright@1.63.0
+          /tmp/ld-browser/node_modules/.bin/playwright install --with-deps chromium
+      - name: Real mobile and desktop conversion flow
+        env:
+          PLAYWRIGHT_MODULE: /tmp/ld-browser/node_modules/playwright/index.mjs
+          EVIDENCE_DIR: /tmp/leakdoctor-site-browser
+        run: node scripts/verify-conversion-browser.mjs
+      - name: Upload browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: conversion-browser
+          path: /tmp/leakdoctor-site-browser
+          if-no-files-found: ignore
       - name: 防假綠：故意破壞 header.js 常數，確認 validate 能抓住
         run: |
           cp header.js header.js.bak

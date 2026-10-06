@@ -100,27 +100,50 @@ function ldInit(){
   landingPage();
   // Homepage price route shares the same lead capture, attribution and LINE identity.
   // Copy-only never calls this bridge or emits a conversion.
-  window.ldCreatePriceInquiry = async function(inquiry){
-    const attribution = leadAttribution();
-    const identifiers = await Promise.all([gaValue('client_id',900),gaValue('session_id',900)]);
-    const controller = new AbortController();
-    const timer = setTimeout(function(){controller.abort();},8000);
-    try{
-      const response = await fetch(LEAD_API,{
-        method:'POST',headers:{'Content-Type':'application/json'},signal:controller.signal,
-        body:JSON.stringify(Object.assign({},inquiry,{
-          attribution:attribution,sourcePage:location.pathname,landingPage:landingPage(),
-          referrer:(document.referrer || '').slice(0,500),gaClientId:identifiers[0] || cookieGaClientId(),
-          gaSessionId:identifiers[1],website:''
-        }))
-      });
-      const result = await response.json().catch(function(){return {};});
-      if(!response.ok || !result.leadId) throw new Error('lead_capture_failed');
+  // Store only a business-data hash and random request key, never contacts, in session storage.
+  const pendingKeys = new Map();
+  async function requestRecord(inquiry){
+    const canonical = JSON.stringify([inquiry.name,inquiry.phone.replace(/\D/g,''),inquiry.service,
+      inquiry.area || '',inquiry.address || '',inquiry.preferredTime || '',inquiry.note || '',inquiry.details || []]);
+    const bytes=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(canonical));
+    const hash=Array.from(new Uint8Array(bytes),function(b){return b.toString(16).padStart(2,'0');}).join('');
+    if(pendingKeys.has(hash))return pendingKeys.get(hash);
+    let records=[];
+    try{records=JSON.parse(sessionStorage.getItem('ld_inquiry_keys') || '[]');}catch(error){}
+    if(!Array.isArray(records))records=[];
+    records=records.filter(function(r){return r && typeof r.hash==='string' && /^[0-9a-f-]{36}$/.test(r.requestId) && Date.now()-r.at<86400000;}).slice(-19);
+    let record=records.find(function(r){return r.hash===hash;});
+    if(!record){record={hash:hash,requestId:crypto.randomUUID(),at:Date.now(),tracked:false};records.push(record);}
+    pendingKeys.set(hash,record);
+    record.save=function(){try{const saved=JSON.parse(sessionStorage.getItem('ld_inquiry_keys') || '[]');const merged=new Map((Array.isArray(saved)?saved:[]).concat(records).map(function(r){return [r.hash,r];}));pendingKeys.forEach(function(r,key){merged.set(key,r);});sessionStorage.setItem('ld_inquiry_keys',JSON.stringify(Array.from(merged.values()).filter(function(r){return Date.now()-r.at<86400000;}).slice(-20).map(function(r){return {hash:r.hash,requestId:r.requestId,at:r.at,tracked:r.tracked};})));}catch(error){}};
+    record.save();return record;
+  }
+  async function captureInquiry(inquiry,placement){
+    const record=await requestRecord(inquiry);
+    const attribution=leadAttribution();
+    const identifiers=await Promise.all([gaValue('client_id',900),gaValue('session_id',900)]);
+    const payload=Object.assign({},inquiry,{requestId:record.requestId,attribution:attribution,
+      sourcePage:location.pathname,landingPage:landingPage(),referrer:(document.referrer || '').slice(0,500),
+      gaClientId:identifiers[0] || cookieGaClientId(),gaSessionId:identifiers[1],website:inquiry.website || ''});
+    let result;
+    for(let attempt=0;attempt<2;attempt++){
+      const controller=new AbortController();const timer=setTimeout(function(){controller.abort();},8000);
+      try{
+        const response=await fetch(LEAD_API,{method:'POST',headers:{'Content-Type':'application/json'},signal:controller.signal,body:JSON.stringify(payload)});
+        result=await response.json().catch(function(){return {};});
+        if(!response.ok || !result.leadId){const error=new Error(result.error || 'capture_unavailable');error.status=response.status;throw error;}
+        break;
+      }catch(error){if(attempt===1 || (error.status && error.status<500))throw error;}
+      finally{clearTimeout(timer);}
+    }
+    if(!record.tracked){
+      record.tracked=true;record.save();
       ldTrack('generate_lead',{lead_source:attribution.utm_source || 'website',items:[{item_name:inquiry.service,quantity:1}]});
-      ldTrack('quote_submit',{service:inquiry.service,page:location.pathname,lead_id:result.leadId,placement:'homepage_price'});
-      return {leadId:result.leadId,lineBase:'https://line.me/R/oaMessage/' + LINE_OA_ID + '/?'};
-    }finally{clearTimeout(timer);}
-  };
+      ldTrack('quote_submit',{service:inquiry.service,page:location.pathname,lead_id:result.leadId,placement:placement});
+    }
+    return {leadId:result.leadId,lineBase:'https://line.me/R/oaMessage/' + LINE_OA_ID + '/?'};
+  }
+  window.ldCreatePriceInquiry = function(inquiry){return captureInquiry(inquiry,'homepage_price');};
   const SVC_PAGES = {'/aircon.html':'aircon','/washer.html':'washer','/homeclean.html':'homeclean','/water-tank.html':'water_tank','/pipe-cleaning.html':'pipe_cleaning','/leak-repair.html':'leak-repair'};
   const AREA_PAGES = ['/taipei.html','/new-taipei.html','/keelung.html','/taoyuan.html','/hsinchu.html','/miaoli.html','/taichung.html','/areas.html'];
   // 全站點擊追蹤：LINE 連結與電話
@@ -129,7 +152,7 @@ function ldInit(){
     if (!a) return;
     const href = a.getAttribute('href') || '';
     if (href.indexOf('lin.ee') !== -1 || href.indexOf('line.me') !== -1) {
-      ldTrack('line_click', { link_url: href, page: location.pathname });
+      ldTrack('line_click', { link_url: href.split('?')[0].split('#')[0], page: location.pathname });
       if(a.hasAttribute('data-line-direct')){
         ldTrack('line_direct_click', {
           placement: a.getAttribute('data-line-direct') || 'unknown',
@@ -850,7 +873,7 @@ body.service-page .knowledge-rail .knowledge-card{position:relative;overflow:hid
             <label for="ld-q-website">網站</label>
             <input id="ld-q-website" name="website" type="text" tabindex="-1" autocomplete="off">
           </div>
-          <div class="ld-q-privacy">資料只用於本次估價、聯繫與服務安排，不會公開；完整地址可等確認預約時再提供。</div>
+          <div class="ld-q-privacy">按下儲存後，姓名、電話與需求會先安全存入案件系統，只用於估價、聯繫與服務安排，不會公開；完整地址可於確認預約前補齊。</div>
           <div class="ld-q-privacy" data-trip-fee-policy>若由水男孩企業社承接，師傅到場後因現場條件無法施作時，可能涉及 NT$1,500 車馬費；實際是否收取及處理方式，先由專員、施工廠商與客戶依個案討論確認，並非一律加收。</div>
           <button type="submit" class="ld-q-submit">建立需求並開啟 LINE</button>
           <div class="ld-q-status" id="ld-q-status" role="status" aria-live="polite"></div>
@@ -1572,6 +1595,11 @@ body.service-page .knowledge-rail .knowledge-card{position:relative;overflow:hid
     }).filter(Boolean);
   }
 
+  let lockedFields=[];
+  function lockInquiryFields(lock){
+    if(lock){lockedFields=Array.from(qForm.querySelectorAll('input,select,textarea,button')).map(function(el){const saved={el:el,disabled:el.disabled};el.disabled=true;return saved;});}
+    else{lockedFields.forEach(function(saved){saved.el.disabled=saved.disabled;});lockedFields=[];}
+  }
   if(qForm){
     qForm.addEventListener('submit', async function(e){
       e.preventDefault();
@@ -1595,6 +1623,7 @@ body.service-page .knowledge-rail .knowledge-card{position:relative;overflow:hid
       const submitButton = qForm.querySelector('.ld-q-submit');
       const submitStatus = document.getElementById('ld-q-status');
       qForm.dataset.submitting = '1';
+      lockInquiryFields(true);
       if(submitButton){
         submitButton.disabled = true;
         submitButton.textContent = '正在建立詢價案件…';
@@ -1607,58 +1636,27 @@ body.service-page .knowledge-rail .knowledge-card{position:relative;overflow:hid
       let dateLabel = '未指定';
       if(date){
         const d = new Date(date + 'T00:00:00');
-        dateLabel = (d.getMonth()+1) + '/' + d.getDate() + '（' + '日一二三四五六'[d.getDay()] + '）';
+        dateLabel = date + '（' + '日一二三四五六'[d.getDay()] + '）';
       }
       const timeLabel = time || '未指定';
 
       const guideSummary = typeof window.ldLeakGuideSummary === 'string' ? window.ldLeakGuideSummary.trim() : '';
       const serviceDetails = collectServiceDetails(service);
-      const attribution = leadAttribution();
-      const identifiers = await Promise.all([gaValue('client_id', 900), gaValue('session_id', 900)]);
-      const gaClientId = identifiers[0] || cookieGaClientId();
       let leadId = '';
-      let leadTimer = 0;
       try{
-        const controller = new AbortController();
-        leadTimer = setTimeout(function(){ controller.abort(); }, 8000);
-        const response = await fetch(LEAD_API, {
-          method: 'POST',
-          headers: {'Content-Type':'application/json'},
-          signal: controller.signal,
-          body: JSON.stringify({
-            name: name,
-            phone: phone,
-            service: service,
-            address: addr,
-            preferredTime: [date || '', time || ''].filter(Boolean).join(' '),
-            note: [note, guideSummary ? '漏水判讀摘要：' + guideSummary : ''].filter(Boolean).join('\n'),
-            details: serviceDetails,
-            attribution: attribution,
-            sourcePage: location.pathname,
-            landingPage: landingPage(),
-            referrer: (document.referrer || '').slice(0,500),
-            gaClientId: gaClientId,
-            gaSessionId: identifiers[1],
-            website: (document.getElementById('ld-q-website') || {}).value || ''
-          })
-        });
-        const result = await response.json().catch(function(){ return {}; });
-        if(!response.ok || !result.leadId) throw new Error(result.error || 'lead_capture_failed');
-        leadId = result.leadId;
+        const result = await captureInquiry({name:name,phone:phone,service:service,address:addr,
+          preferredTime:[date || '',time || ''].filter(Boolean).join(' '),
+          note:[note,guideSummary ? '漏水判讀摘要：' + guideSummary : ''].filter(Boolean).join('\n'),
+          details:serviceDetails,website:(document.getElementById('ld-q-website') || {}).value || ''},'service_form');
+        leadId=result.leadId;
       }catch(error){
-        qForm.dataset.submitting = '0';
-        if(submitButton){
-          submitButton.disabled = false;
-          submitButton.textContent = '重新送出並開啟 LINE';
-        }
-        if(submitStatus){
-          submitStatus.classList.add('ld-error');
-          submitStatus.textContent = '目前無法建立案件，資料尚未送出。請稍後重試，或使用頁面上的「LINE 直接問」。';
-        }
-        ldTrack('lead_capture_error', { service: service, page: location.pathname });
-        return;
-      }finally{
-        if(leadTimer) clearTimeout(leadTimer);
+        qForm.dataset.submitting='0';
+        lockInquiryFields(false);
+        if(submitButton){submitButton.disabled=false;submitButton.textContent='重試儲存需求';}
+        if(submitStatus){submitStatus.classList.add('ld-error');submitStatus.textContent=error.status===429 ?
+          '詢價次數較密集，請稍後再試，或直接在 LINE 聯繫。填寫內容會保留。' :
+          '目前無法確認儲存結果。填寫內容會保留；重試同一份內容會沿用同一案件，或可直接在 LINE 聯繫。';}
+        ldTrack('lead_capture_error',{service:service,page:location.pathname});return;
       }
 
       const msgLines = [
@@ -1676,22 +1674,25 @@ body.service-page .knowledge-rail .knowledge-card{position:relative;overflow:hid
       if(guideSummary) msgLines.push('漏水判讀摘要：' + guideSummary);
       const msg = msgLines.join('\n');
 
-      ldTrack('generate_lead', {
-        lead_source: attribution.utm_source || 'website',
-        items: [{item_name: service, quantity: 1}]
-      });
-      ldTrack('quote_submit', { service: service, page: location.pathname, lead_id: leadId });
-      if(submitStatus) submitStatus.textContent = '案件 ' + leadId + ' 已建立，正在開啟 LINE';
       const url = 'https://line.me/R/oaMessage/' + LINE_OA_ID + '/?' + encodeURIComponent(msg);
-      hideQuote();
-      if(qHistoryOpen){
-        qPendingNavigation = url;
-        history.back();
-      }else{
-        window.location.href = url;
-      }
+      qForm.dataset.submitting='0';
+      lockInquiryFields(false);
+      if(submitButton){submitButton.disabled=false;submitButton.dataset.saved='true';submitButton.textContent='更新需求並儲存';}
+      if(submitStatus){submitStatus.classList.remove('ld-error');submitStatus.textContent='需求已儲存：' + leadId + '。接著在 LINE 按「傳送」，收到草稿後再確認預約；目前尚未完成預約。';}
+      let receipt=document.getElementById('ld-q-receipt');
+      if(!receipt){receipt=document.createElement('div');receipt.id='ld-q-receipt';receipt.className='ld-q-receipt';qForm.appendChild(receipt);}
+      receipt.replaceChildren();
+      const lineLink=document.createElement('a');lineLink.href=url;lineLink.className='ld-q-line-action';lineLink.textContent='開啟 LINE 並傳送需求';
+      const copyButton=document.createElement('button');copyButton.type='button';copyButton.textContent='複製完整需求';copyButton.className='ld-q-copy-action';
+      copyButton.onclick=async function(){try{await navigator.clipboard.writeText(msg);copyButton.textContent='已複製，請貼到灰汰郎 LINE';}catch(error){
+        let text=receipt.querySelector('textarea');if(!text){text=document.createElement('textarea');text.value=msg;text.readOnly=true;text.setAttribute('aria-label','完整需求，可手動複製');receipt.appendChild(text);}text.focus();text.select();copyButton.textContent='請選取並手動複製需求';}};
+      receipt.append(lineLink,copyButton);
+      receipt.scrollIntoView({block:'nearest'});
+      lineLink.focus();
     });
   }
+  const journeyCss=document.createElement('link');journeyCss.rel='stylesheet';journeyCss.href='/assets/customer-journey.css?v=20261006';document.head.appendChild(journeyCss);
+  const journeyScript=document.createElement('script');journeyScript.src='/assets/customer-journey.js?v=20261006';document.body.appendChild(journeyScript);
   }
   if(document.body){ ldInit(); }
   else { document.addEventListener('DOMContentLoaded', ldInit); }

@@ -3,6 +3,7 @@ import {test} from 'node:test';
 import {createRequire} from 'node:module';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
+import {webcrypto} from 'node:crypto';
 
 const require = createRequire(import.meta.url);
 const {services,categories,categoryRows,clampQuantity,calculate,detailLines,formatMessage,routeForHash,renderServiceRow} = require('../assets/home-service-hub.js');
@@ -91,11 +92,12 @@ test('every detail roundtrips label and integer quantity and fits API 180-char l
 
 function bridgeHarness(response){
   const source = readFileSync(new URL('../header.js',import.meta.url),'utf8');
-  const start = source.indexOf('window.ldCreatePriceInquiry = async function');
+  const start = source.indexOf('const pendingKeys = new Map()');
   const end = source.indexOf('\n  const SVC_PAGES',start);
   assert.ok(start > 0 && end > start);
   const events = [], requests = [];
-  const context = {window:{},leadAttribution:()=>({utm_source:'test'}),gaValue:async()=>'',cookieGaClientId:()=>'',landingPage:()=> 'https://leakdoctor.tw/',location:{pathname:'/'},document:{referrer:''},AbortController,setTimeout,clearTimeout,LEAD_API:'https://test.invalid/api/leads',LINE_OA_ID:'@478xvlgl',ldTrack:(...args)=>events.push(args),fetch:async(url,options)=>{requests.push({url,options});if(response instanceof Error) throw response;return response;}};
+  const stored=new Map();
+  const context = {crypto:webcrypto,TextEncoder,sessionStorage:{getItem:k=>stored.get(k),setItem:(k,v)=>stored.set(k,v)},window:{},leadAttribution:()=>({utm_source:'test'}),gaValue:async()=>'',cookieGaClientId:()=>'',landingPage:()=> 'https://leakdoctor.tw/',location:{pathname:'/'},document:{referrer:''},AbortController,setTimeout,clearTimeout,LEAD_API:'https://test.invalid/api/leads',LINE_OA_ID:'@478xvlgl',ldTrack:(...args)=>events.push(args),fetch:async(url,options)=>{requests.push({url,options});if(response instanceof Error) throw response;return response;}};
   vm.runInNewContext(source.slice(start,end),context);
   return {run:context.window.ldCreatePriceInquiry,events,requests};
 }
@@ -110,7 +112,7 @@ test('lead capture success keeps all details + attribution and returns the offic
 });
 test('HTTP failure / missing lead ID / network failure never emits conversion',async()=>{
   for(const response of [{ok:false,json:async()=>({})},{ok:true,json:async()=>({})},new Error('offline')]){
-    const h = bridgeHarness(response);await assert.rejects(h.run({}));assert.equal(h.events.length,0);
+    const h = bridgeHarness(response);await assert.rejects(h.run({name:'測試',phone:'0912345678',service:'冷氣清洗',details:[]}));assert.equal(h.events.length,0);
   }
 });
 
@@ -158,7 +160,7 @@ function checkEntry(html){
     assert.match(html,new RegExp('aria-controls="'+route+'-overview"'));
     assert.match(html,new RegExp('id="'+route+'-overview"[^>]*role="tabpanel"'));
   }
-  for(const phrase of ['居家問題','先看懂','找對方法','才有用'])assert.ok(html.includes('<span class="home-phrase">'+phrase+'</span>'));
+  for(const phrase of ['家的清潔','交給專業','把時間','留給生活'])assert.ok(html.includes('<span class="home-phrase">'+phrase+'</span>'));
 }
 function checkCompactRow(html,item,quantity){
   const controls=html.split('<div class="price-item-controls">')[1]?.split('<div class="price-item-note">')[0];
@@ -183,7 +185,7 @@ test('mutation: burying modes behind the hero is rejected',()=>assert.throws(()=
 test('mutation: quantity outside the compact controls row is rejected',()=>{
   const item=services[0];assert.throws(()=>checkCompactRow(renderServiceRow(item,2).replace('class="qty-stepper"','class="detached-stepper"'),item,2));
 });
-test('mutation: splitting a protected heading phrase is rejected',()=>assert.throws(()=>checkEntry(homeHtml.replace('class="home-phrase">居家問題','class="home-phrase">居家問</span><span>題'))));
+test('mutation: splitting a protected heading phrase is rejected',()=>assert.throws(()=>checkEntry(homeHtml.replace('class="home-phrase">家的清潔','class="home-phrase">家的清</span><span>潔'))));
 test('six themes and adjacent surface contrast are explicit',()=>{
   for(const service of ['aircon','washer','homeclean','water-tank','pipe-cleaning','leak-repair'])assert.ok(homeCss.includes('[data-service="'+service+'"]{--service-accent:'));
   assert.match(homeCss,/\.price-item:nth-of-type\(even\)\{background:color-mix/);
@@ -286,4 +288,14 @@ test('抽屜的螢幕閱讀器文字必須用倉庫既有的隱藏 class，不�
   const classes = [...src.matchAll(/class="([a-z-]*visually-hidden|[a-z-]*sr-only)"/g)].map(m=>m[1]);
   assert.ok(classes.length>0,'抽屜應有螢幕閱讀器說明文字');
   for(const cls of classes) assert.ok(css.includes('.'+cls+'{'),`${cls} 未定義於 CSS，會變成可見文字`);
+});
+
+// Verify actual bridge retry identity and event de-duplication, not only source strings.
+test('same inquiry retries share one request key and conversion, changed content gets a new key',async()=>{
+ const h=bridgeHarness({ok:true,json:async()=>({leadId:'HTL-L-TEST'})});
+ const inquiry={name:'測試',phone:'0912345678',service:'冷氣清洗',details:['壁掛 × 1']};
+ await h.run(inquiry);await h.run(inquiry);await h.run({...inquiry,details:['壁掛 × 2']});
+ const keys=h.requests.map(r=>JSON.parse(r.options.body).requestId);
+ assert.equal(keys[0],keys[1]);assert.notEqual(keys[1],keys[2]);
+ assert.equal(h.events.filter(([name])=>name==='generate_lead').length,2);
 });

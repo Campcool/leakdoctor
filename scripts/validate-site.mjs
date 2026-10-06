@@ -17,7 +17,7 @@
 //   4d. 品牌綠 #06C755 全站單一，不得出現第二種綠
 //   5. 全站 LINE 連結覆蓋率（根 HTML 每頁至少 1 處 LINE CTA）
 //   6. 反個資：表單說明不得出現「此裝置」等暗示可收集個人訊息的詞彙；
-//      個資由客戶在 LINE 內自行送出，站內表單只寫草稿
+//      個資先由官網存入案件系統，客戶再於 LINE 傳送並確認預約
 //   7. og-image.html 等工具頁維持 noindex 或不在 sitemap
 //   8. 手機導覽維持單列可滑動，首頁通用流程維持四階段
 //
@@ -496,7 +496,8 @@ const formText = headerJs.slice(headerJs.indexOf('姓名'), headerJs.indexOf('�
 const leakyPhrases = ['此裝置', '裝置資料', '自動收集', '自動擷取', '裝置編號'];
 const foundLeaky = leakyPhrases.filter((p) => formText.includes(p));
 if (foundLeaky.length) report('表單出現可能誤導的收集用語：' + JSON.stringify(foundLeaky));
-else ok('表單文案符合「客戶在 LINE 內送出個資」設計（無暗示站內收集的字樣）');
+else if (!headerJs.includes('姓名、電話與需求會先安全存入案件系統') || !headerJs.includes('目前尚未完成預約')) report('表單缺少真實資料儲存與預約狀態說明');
+else ok('表單清楚說明官網資料儲存、LINE 傳送與尚未完成預約');
 
 // ── 總結 ─────────────────────────────────────────────────────
 console.log(fail === 0 ? '\n✅ 全部通過（' + htmlFiles.length + ' 個頁面、' + sitemapUrls.size + ' 個 sitemap 網址）' : '\n❌ ' + fail + ' 項失敗，請先修正再 push');
