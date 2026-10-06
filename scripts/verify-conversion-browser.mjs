@@ -3,14 +3,14 @@ import { createServer } from "node:http";
 import { readFileSync, existsSync, statSync, mkdirSync } from "node:fs";
 import { createRequire } from "node:module";
 import { resolve, extname, sep } from "node:path";
-import { pathToFileURL } from "node:url";
+import { pathToFileURL, fileURLToPath } from "node:url";
 const modulePath = process.env.PLAYWRIGHT_MODULE;
 if (!modulePath)
   throw new Error("Set PLAYWRIGHT_MODULE to pinned playwright/index.mjs");
 const { chromium } = await import(pathToFileURL(modulePath));
 const require = createRequire(import.meta.url);
 const { services } = require("../assets/home-service-hub.js");
-const root = resolve(new URL("..", import.meta.url).pathname);
+const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const types = {
   ".html": "text/html",
   ".js": "text/javascript",
