@@ -402,6 +402,14 @@ cases/
 
 ## 5. 進度紀錄（新條目加在最上面）
 
+### 2026-10-15（Codex・首頁與六服務 UI/UX 精修）
+
+- 依業主本次要求，透過 GitHub 讀取最新 `AI-skill/uiux-design`（含10月14日增補）、四來源整合指引及 Taste。網站基準與遠端 main 均為 `74da24d7ec281f69f10f8275faab136be7366655`。
+- 首頁改深藍／暖橘首屏、暖白內容與雙欄服務閱讀；直接顯示原有起價，完整實拍前後圖、流程、FAQ、頁尾字級與文案同步整理。只描述既有服務，不新增認證、評論或成果宣稱。
+- 六服務共用新 `assets/service-editorial.css`，統一標題、圖片／說明、重點資料與詢價入口。水塔／水管舊 absolute 圖片定位需明確改為 normal flow，否則圖說與圖片重疊；已新增瀏覽器位置斷言。
+- `DESIGN.md` 同步現行規則；既有首頁 CSS 原地重整，共用 header.js、詢價、價格 catalog、Bot、LINE、GA4均未修改。新增真瀏覽器28組頁面／寬度檢查並接 CI。驗證證據與限制見 `docs/EDITORIAL-DELIVERY-2026-10-15.md`。
+- 成果保存於 `codex/huitailang-editorial-20261015` 分支；本輪未合併 main、未部署正式網站。舊交接中的過往發布授權不是本輪已上線的證據。
+
 ### 2026-10-06（Codex・A15 圖片 CSS 效能續優化）
 
 - 最新 main `4af3fff79878cd20292ec72b004f5808c7acc9b6` 的接單防重／三段詢價／管理中心已交付，不重做。首頁与漏水頁仍載入 本機 CRLF 428,473 bytes（Git LF 428,467 bytes）的 process-images.css；三張 base64 背景已被行內 service-photos 覆蓋，但 CSS 仍阻擋呈現。
@@ -995,6 +1003,9 @@ GSC 存取：`leakdoctor.tw` 與 `blossomkids.tw` 皆已驗證，共用驗證碼
 7. `initServiceLayerTabs()` 目前只掃 body 直屬節點，內容在 main 內，實際沒有產生 `.service-layer-tabs`。不可照歷史文件宣稱已啟用。若後续修復，須完整驗證 hidden、hash、history、焦點與 sticky 偏移，不要只改 selector 就啟用休眠程式。
 
 ## 7. 待辦清單
+
+- [x] 2026-10-15 首頁與六服務的品牌視覺、閱讀層次與文案精修，設計規範及瀏覽器門禁同步。
+- [ ] 本輪分支正式發布與發布後覆核；Lighthouse、iOS／Android／LINE 真機、正式字體載入及營運轉換量測仍未驗，不以桌面模擬代替。
 
 - [x] A15 部分：428KB 內嵌流程 CSS 外置，原圖與視覺保留；新增 bytes／原图完整性及三引擎視覺門禁。
 - [ ] A15 剩餘：量測其他 CSS 疊加與生效分享圖；正式 LCP／CLS、真機及 LINE webview 未驗。

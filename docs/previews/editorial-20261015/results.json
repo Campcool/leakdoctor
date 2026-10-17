@@ -1,0 +1,231 @@
+{
+  "browser": "154.0.8037.57",
+  "remoteTraffic": "mocked; no production analytics, leads or LINE messages",
+  "noJavaScript": "prices, LINE fallback, FAQ passed",
+  "results": [
+    {
+      "page": "index",
+      "width": 320,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "aircon",
+      "width": 320,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "washer",
+      "width": 320,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "homeclean",
+      "width": 320,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "water-tank",
+      "width": 320,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "pipe-cleaning",
+      "width": 320,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "leak-repair",
+      "width": 320,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "index",
+      "width": 375,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "aircon",
+      "width": 375,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "washer",
+      "width": 375,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "homeclean",
+      "width": 375,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "water-tank",
+      "width": 375,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "pipe-cleaning",
+      "width": 375,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "leak-repair",
+      "width": 375,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "index",
+      "width": 768,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "aircon",
+      "width": 768,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "washer",
+      "width": 768,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "homeclean",
+      "width": 768,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "water-tank",
+      "width": 768,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "pipe-cleaning",
+      "width": 768,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "leak-repair",
+      "width": 768,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "index",
+      "width": 1440,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "aircon",
+      "width": 1440,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "washer",
+      "width": 1440,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "homeclean",
+      "width": 1440,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "water-tank",
+      "width": 1440,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "pipe-cleaning",
+      "width": 1440,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    },
+    {
+      "page": "leak-repair",
+      "width": 1440,
+      "images": "pass",
+      "overflow": "pass",
+      "enlargedText": "pass",
+      "errors": 0
+    }
+  ]
+}

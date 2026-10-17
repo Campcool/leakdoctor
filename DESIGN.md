@@ -1,5 +1,18 @@
 # 灰汰郎 Design System
 
+## 2026-10-15 居家編輯風格（首頁與六服務，現行）
+
+本節取代下方舊稿中與本次實作衝突的首頁色彩／服務卡／首屏尺寸，產品事實、LINE 和詢價流程仍以 AI-README 與正式 catalog 為準。
+
+- 首頁由 `assets/conversion-home.css` 的 `body.home-editorial` 管理。primitive（navy／deep／paper／warm／orange）→ semantic（section-bg／section-text）→ component（button-bg／button-text），不用再加一個首頁覆寫檔。
+- 深藍 `#17324d` 首屏與白字，暖橘 `#ffb260` 強調標題；主試算 CTA 採 `#f28c28` 深藍字。正文採暖白 `#fffdf9`／暖灰 `#f5f1e9` 交替。LINE 原有品牌樣式維持。
+- 首頁 Noto Sans TC 及既有系統備援不變；桌面標題上限64px、375px為32px。必要說明通常14–16px；不使用新增字體／動效套件。
+- 六服務入口桌面／平板雙欄、600px以下單欄；原有六個價格提示直接可讀，名稱、服務說明、價格與原生服務頁連結共同呈現。取消旋轉邊框與多層卡片。極窄版價格允許獨立換列。
+- 首頁前後圖採 contain 顯示完整照片，標籤在照片下方，保留前後方向與成果差異聲明。沒有重繪、修圖或新增虛構素材。
+- 六服務由 `assets/service-editorial.css` 共用；每頁在原有 header.js 後靜態載入，包含水塔／水管的 service-landing 舊架構。圖片回到文件正常排列，說明在圖下，依服務專色顯示標題重點；價格、實拍、流程、服務範圍不改。
+- 互動維持原生錨點、六項導覽、FAQ、知識／價格雙模式、三段詢價與 LINE 交接。減少動態時保持完整內容及操作。
+- 視覺變更不等於轉換率提升。驗證與未驗部分見 `docs/EDITORIAL-DELIVERY-2026-10-15.md`。
+
 ## 2026-10-06 接單改版增補（現行）
 
 首頁利益與價格 CTA、實際案例優先，仍保留知識／試算雙模式。`conversion-home.css` 覆蓋首頁版型；共用 `customer-journey.css/js` 管理三段式表單及六服務預約入口，不改寫公開牌價。請先查看最新 AI-README §5 和本批設計／驗收文件。

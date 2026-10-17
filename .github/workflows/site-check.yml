@@ -43,6 +43,11 @@ jobs:
           PLAYWRIGHT_MODULE: /tmp/ld-browser/node_modules/playwright/index.mjs
           EVIDENCE_DIR: /tmp/leakdoctor-site-browser
         run: node scripts/verify-conversion-browser.mjs
+      - name: Editorial homepage and six-service visual acceptance
+        env:
+          PLAYWRIGHT_MODULE: /tmp/ld-browser/node_modules/playwright/index.mjs
+          EVIDENCE_DIR: /tmp/leakdoctor-site-browser/editorial
+        run: node scripts/verify-editorial-browser.mjs
       - name: Three-engine process image visual and download regression
         env:
           PLAYWRIGHT_MODULE: /tmp/ld-browser/node_modules/playwright/index.mjs
