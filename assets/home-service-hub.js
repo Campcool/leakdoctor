@@ -123,7 +123,7 @@
     // 上一次送出結果的訊息與當時的「內容指紋」。
     // 指紋沒變＝同一筆需求，訊息要留著（成功時鎖住送出鈕、逾時時保留警告）；
     // 指紋變了＝客戶改了內容，才視為新的一筆詢價並解鎖。
-    lastStatus:'', lastSignature:''};
+    lastStatus:'', lastSignature:'', lastFeedback:''};
   const root = document.getElementById('service-hub');
   if(!root) return;
   const routeNav = document.getElementById('home-route-nav');
@@ -264,7 +264,7 @@
       });
       const hiddenCount = rows.length - visible.length;
       const chosen = rows.reduce(function(sum,item){ return sum + (state.quantities.get(item.id) || 0); },0);
-      return '<section class="price-cat" data-price-cat="' + cat.id + '" data-open="' + open + '">' +
+      return '<section class="price-cat" data-price-cat="' + cat.id + '" data-open="' + open + '" data-selected="' + (chosen > 0) + '">' +
         '<h4 class="price-cat-head">' +
           '<button class="price-cat-toggle" type="button" data-cat-toggle="' + cat.id + '"' +
             ' aria-expanded="' + open + '" aria-controls="price-cat-body-' + cat.id + '">' +
@@ -307,6 +307,7 @@
       const head = list.querySelector('[data-price-cat="' + cat.id + '"] .price-cat-name');
       if(!head) return;
       const chosen = categoryRows(cat.id).reduce(function(sum,item){ return sum + (state.quantities.get(item.id) || 0); },0);
+      head.closest('.price-cat').dataset.selected = String(chosen > 0);
       const badge = head.querySelector('.price-cat-badge');
       if(chosen > 0){
         if(badge) badge.textContent = '已選 ' + chosen;
@@ -352,12 +353,16 @@
     warning.textContent = selected.length > 12 ? '單次最多 12 種項目，請減少項目或分次詢問；每種數量可各自設定。' : '';
     const locked = isLockedAsSubmitted();
     lineButton.disabled = selected.length === 0 || state.submitting || locked;
+    lineButton.setAttribute('aria-busy', String(state.submitting));
+    lineButton.textContent = state.submitting ? '正在儲存需求…' : locked ? '已儲存，請使用下方 LINE' : '儲存需求，接著到 LINE';
     document.getElementById('home-order-copy').disabled = selected.length === 0 || state.submitting;
     // 指紋沒變就保留上次的成功／逾時訊息；客戶改了內容才清空並解鎖成新的一筆。
     if(state.lastStatus && signature() === state.lastSignature){
       status.textContent = state.lastStatus;
+      status.dataset.state = state.lastFeedback;
     } else {
-      state.lastStatus = ''; state.lastSignature = ''; state.submittedLeadId = '';
+      state.lastStatus = ''; state.lastSignature = ''; state.submittedLeadId = ''; state.lastFeedback = '';
+      status.removeAttribute('data-state');
       const receipt=document.getElementById('home-order-receipt');if(receipt)receipt.remove();
       status.textContent = '';
     }
@@ -410,7 +415,7 @@
   document.getElementById('home-order-copy').addEventListener('click', function(){
     const message = buildMessage(false);
     if(!message) return;
-    copyText(message).then(function(){ status.textContent = '明細已複製，可直接貼到 LINE。'; }).catch(function(){ status.textContent = '無法自動複製，請使用 LINE 按鈕帶入明細。'; });
+    copyText(message).then(function(){ status.dataset.state = 'copied'; status.textContent = '明細已複製，可直接貼到 LINE。'; }).catch(function(){ status.dataset.state = 'error'; status.textContent = '無法自動複製，請使用 LINE 按鈕帶入明細。'; });
   });
 
   document.getElementById('home-order-form').addEventListener('submit', async function(event){
@@ -420,6 +425,10 @@
     const quantities = new Map(state.quantities);
     const selected = calculate(quantities).items;
     state.submitting = true;
+    document.getElementById('home-order-form').setAttribute('aria-busy','true');
+    lineButton.setAttribute('aria-busy','true');
+    lineButton.textContent = '正在儲存需求…';
+    status.dataset.state = 'saving';
     routeTabs.forEach(function(tab){tab.disabled = true;});
     root.querySelectorAll('input,button').forEach(function(control){control.disabled = true;});
     status.textContent = '正在安全儲存需求，請稍候…';
@@ -431,17 +440,20 @@
       let copied = true;
       try { await copyText(message); } catch(error){copied = false;}
       state.submittedLeadId = result.leadId;
+      state.lastFeedback = 'saved';
       state.lastStatus = '需求 ' + result.leadId + ' 已儲存。' + (copied ? '明細已複製；' : '明細將帶入 LINE；') + '請在 LINE 按傳送，核對草稿後再確認預約；目前尚未完成預約。改動欄位或數量可重新整理需求。';
       status.textContent = state.lastStatus;
       let receipt=document.getElementById('home-order-receipt');
       if(!receipt){receipt=document.createElement('div');receipt.id='home-order-receipt';receipt.className='ld-q-receipt';status.after(receipt);}
       receipt.replaceChildren();const link=document.createElement('a');window.ldPrivateLineLink(link,result.lineBase+encodeURIComponent(message));link.className='ld-q-line-action';link.textContent='開啟 LINE 並傳送這份需求';receipt.appendChild(link);link.focus();
     } catch(error){
+      state.lastFeedback = 'error';
       // 逾時／失敗不代表伺服器一定沒寫入，訊息要留著，不能被下一次 updateSummary 清掉。
       state.lastStatus = '目前無法確認需求已儲存，未開啟 LINE。請稍後重試；也可先複製明細，再從「LINE 直接問」貼上詢問。';
       status.textContent = state.lastStatus;
     } finally {
       state.submitting = false;
+      document.getElementById('home-order-form').setAttribute('aria-busy','false');
       routeTabs.forEach(function(tab){tab.disabled = false;});
       root.querySelectorAll('input,button').forEach(function(control){control.disabled = false;});
       // 記下這次送出當下的內容指紋，讓 updateSummary 判斷是否要維持鎖定與保留訊息。

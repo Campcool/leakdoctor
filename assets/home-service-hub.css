@@ -305,3 +305,8 @@
   line-height:1.6;color:var(--ld-ink,#17324d);letter-spacing:-.01em}
 .hero-note span{display:block;font-size:.86rem;color:#5a6a74}
 @media(min-width:1024px){.hero-price-anchor{font-size:1.12rem}}
+
+
+/* P02: selected service categories keep their quantities and retain the existing drawers. */
+#home-price-list .price-cat[data-selected="true"]{border-color:#17324d;box-shadow:inset 3px 0 #17324d}
+#home-price-list .price-cat[data-selected="true"] .price-cat-toggle{background:#edf3f8}
