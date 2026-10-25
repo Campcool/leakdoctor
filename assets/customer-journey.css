@@ -232,16 +232,18 @@
 }
 
 
-/* P02: keep the six existing service buttons and the separate optional other choice. */
+/* P02: keep the six existing service buttons and the separate optional other choice.
+   Scoped important declarations override the known uiux-polish legacy selected fill,
+   indicator dimensions and mobile type. They never change the page root size. */
 #ld-q-form .ld-service-choices{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 #ld-q-form .ld-service-choice{display:grid;grid-template-columns:minmax(0,1fr) 20px;gap:10px;align-items:start;min-width:0;min-height:96px;padding:14px 12px;background:#fff;border:2px solid #bdcbd5;box-shadow:none;transform:none}
 #ld-q-form .ld-service-choice:last-child{grid-column:1 / -1}
 #ld-q-form .ld-service-choice-icon{grid-column:1;grid-row:1;width:30px;height:30px;background:#edf3f8;color:#17324d}
-#ld-q-form .ld-service-choice-label{grid-column:1 / -1;grid-row:2;min-width:0;font-size:15px;line-height:1.5;text-wrap:balance;overflow-wrap:anywhere}
-#ld-q-form .ld-service-choice-check{grid-column:2;grid-row:1;margin:5px 0 0;width:20px;height:20px;display:grid;place-items:center;border:1.5px solid #93a5b5;background:#fff}
-#ld-q-form .ld-service-choice.ld-selected{background:#edf3f8;border-color:#17324d;color:#17324d;box-shadow:none}
+#ld-q-form .ld-service-choice-label{grid-column:1 / -1;grid-row:2;min-width:0;font-size:max(15px,.875rem)!important;line-height:1.5;text-wrap:balance;overflow-wrap:anywhere}
+#ld-q-form .ld-service-choice-check{grid-column:2;grid-row:1;margin:5px 0 0;width:20px!important;height:20px!important;display:grid;place-items:center;border:1.5px solid #93a5b5;background:#fff}
+#ld-q-form .ld-service-choice.ld-selected{background:#edf3f8!important;border-color:#17324d;color:#17324d;box-shadow:none}
 #ld-q-form .ld-service-choice.ld-selected .ld-service-choice-icon{background:#dce7f0;color:#17324d}
-#ld-q-form .ld-service-choice.ld-selected .ld-service-choice-check{border:2px solid #17324d;background:#17324d}
+#ld-q-form .ld-service-choice.ld-selected .ld-service-choice-check{border:2px solid #17324d;border-width:2px!important;background:#17324d}
 #ld-q-form .ld-service-choice.ld-selected .ld-service-choice-check::after{content:"✓";color:#fff;font-size:13px;line-height:1;font-weight:900}
 #ld-q-form .ld-service-choice:focus-visible{outline:3px solid #a9660c;outline-offset:3px}
 #ld-q-form .ld-q-selected-service{margin:14px 0 18px;color:#17324d;font-size:14px;line-height:1.7;font-weight:700}

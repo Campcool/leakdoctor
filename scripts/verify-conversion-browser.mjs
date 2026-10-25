@@ -154,6 +154,13 @@ try {
       assert.equal(await page.locator('.ld-service-choice[aria-pressed="true"]').count(),1);
       assert.equal(await page.locator('#ld-q-selected-service').innerText(),'目前選擇：'+service);
       assert.ok(await button.evaluate(el=>parseFloat(getComputedStyle(el).outlineWidth)>=3),'P02 keyboard focus');
+      assert.ok(await button.evaluate(el=>{
+        const rgb = value=>value.match(/[\d.]+/g).slice(0,3).map(Number).map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4;});
+        const lum = values=>values.reduce((n,v,i)=>n+v*[.2126,.7152,.0722][i],0);
+        const fg=lum(rgb(getComputedStyle(el.querySelector('.ld-service-choice-label')).color));
+        const bg=lum(rgb(getComputedStyle(el).backgroundColor));
+        return (Math.max(fg,bg)+.05)/(Math.min(fg,bg)+.05)>=4.5;
+      }),'P02 selected service text contrast');
     }
     await page.screenshot({path:`${evidence}/p02-service-choices-${width}.png`});
     await page.locator('.ld-service-choice[data-service="冷氣清洗"]').click();
