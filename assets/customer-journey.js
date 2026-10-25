@@ -80,6 +80,15 @@
     $("ld-q-date").closest(".ld-q-field"),
     $("ld-q-note").closest(".ld-q-field"),
   ].forEach((el) => groups[1].appendChild(el));
+  const selectedService = document.createElement("p");
+  selectedService.id = "ld-q-selected-service";
+  selectedService.className = "ld-q-selected-service";
+  selectedService.setAttribute("role", "status");
+  selectedService.setAttribute("aria-live", "polite");
+  selectedService.textContent = $("ld-q-service").value
+    ? "目前選擇：" + $("ld-q-service").value
+    : "尚未選擇服務，請選最接近的需求。";
+  $("ld-f-service").after(selectedService);
   const checklist = document.createElement("div");
   checklist.className = "ld-q-prep";
   groups[1].appendChild(checklist);
@@ -175,6 +184,7 @@
       $("ld-q-date").value &&
       $("ld-q-date").value < localDate
     ) {
+      $("ld-q-status").dataset.state = "error";
       $("ld-q-status").textContent = "希望日期已過，請選擇未來日期或先留空。";
       $("ld-q-date").focus();
       return;
@@ -206,6 +216,7 @@
     const receipt = $("ld-q-receipt");
     if (receipt) receipt.remove();
     $("ld-q-status").textContent = "";
+    $("ld-q-status").removeAttribute("data-state");
   }
   form.addEventListener("input", invalidateReceipt);
   form.addEventListener("change", function (e) {

@@ -230,3 +230,29 @@
   border: 1px solid #cbd8e9 !important;
   box-shadow: none !important;
 }
+
+
+/* P02: keep the six existing service buttons and the separate optional other choice.
+   Scoped important declarations override the known uiux-polish legacy selected fill,
+   indicator dimensions and mobile type. They never change the page root size. */
+#ld-q-form .ld-service-choices{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#ld-q-form .ld-service-choice{display:grid;grid-template-columns:minmax(0,1fr) 20px;gap:10px;align-items:start;min-width:0;min-height:96px;padding:14px 12px;background:#fff;border:2px solid #bdcbd5;box-shadow:none;transform:none}
+#ld-q-form .ld-service-choice:last-child{grid-column:1 / -1}
+#ld-q-form .ld-service-choice-icon{grid-column:1;grid-row:1;width:30px;height:30px;background:#edf3f8;color:#17324d}
+#ld-q-form .ld-service-choice-label{grid-column:1 / -1;grid-row:2;min-width:0;font-size:max(15px,.875rem)!important;line-height:1.5;text-wrap:balance;overflow-wrap:anywhere}
+#ld-q-form .ld-service-choice-check{grid-column:2;grid-row:1;margin:5px 0 0;width:20px!important;height:20px!important;display:grid;place-items:center;border:1.5px solid #93a5b5;background:#fff}
+#ld-q-form .ld-service-choice.ld-selected{background:#edf3f8!important;border-color:#17324d;color:#17324d;box-shadow:none}
+#ld-q-form .ld-service-choice.ld-selected .ld-service-choice-icon{background:#dce7f0;color:#17324d}
+#ld-q-form .ld-service-choice.ld-selected .ld-service-choice-check{border:2px solid #17324d;border-width:2px!important;background:#17324d}
+#ld-q-form .ld-service-choice.ld-selected .ld-service-choice-check::after{content:"✓";color:#fff;font-size:13px;line-height:1;font-weight:900}
+#ld-q-form .ld-service-choice:focus-visible{outline:3px solid #a9660c;outline-offset:3px}
+#ld-q-form .ld-q-selected-service{margin:14px 0 18px;color:#17324d;font-size:14px;line-height:1.7;font-weight:700}
+#ld-q-status[data-state],#home-order-status[data-state]{border:1px solid #c7d5e3;border-left:4px solid #2458a6;border-radius:8px;background:#f1f5fa;color:#17324d;padding:12px 14px;font-size:14px;line-height:1.8;text-align:left;overflow-wrap:anywhere}
+#ld-q-status[data-state="error"],#home-order-status[data-state="error"]{border-color:#dec1bb;border-left-color:#a12d22;color:#8e2b22;background:#fff4f1}
+#ld-q-status[data-state="saved"],#home-order-status[data-state="saved"]{border-color:#b9d4d6;border-left-color:#16636a;color:#174f55;background:#f0f7f7}
+/* Loader adapted from Uiverse.io by AHMED-MIT / curly-rabbit-4.
+   Galaxy adbd2adde0a299a3956ea288fb444ec01891ca41; full MIT: /assets/uiverse-NOTICE.txt.
+   Scoped inline size, currentColor, one rotating ring and a reduced-motion static fallback. */
+#ld-q-form .ld-q-submit[aria-busy="true"]::before,#home-order-line[aria-busy="true"]::before{content:"";display:inline-block;width:16px;height:16px;margin-right:8px;vertical-align:-3px;border:2px solid transparent;border-color:currentColor transparent;border-radius:50%;animation:ld-p02-loading 1s linear infinite}
+@keyframes ld-p02-loading{to{transform:rotate(1turn)}}
+@media(prefers-reduced-motion:reduce){#ld-q-form .ld-q-submit[aria-busy="true"]::before,#home-order-line[aria-busy="true"]::before{animation:none}}

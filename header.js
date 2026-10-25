@@ -848,7 +848,7 @@ body.service-page .knowledge-rail .knowledge-card{position:relative;overflow:hid
           </div>
           <div class="ld-q-field" id="ld-f-service">
             <div class="ld-q-label" id="ld-q-service-label">選擇服務<span class="ld-req">*</span></div>
-            <div class="ld-service-choices" role="radiogroup" aria-labelledby="ld-q-service-label">
+            <div class="ld-service-choices" role="group" aria-labelledby="ld-q-service-label">
               ${SERVICE_OPTIONS.map((s,i)=>`<button type="button" class="ld-service-choice" data-service="${s}" aria-pressed="false"><span class="ld-service-choice-icon">${SERVICE_CHOICE_ICONS[i]}</span><span class="ld-service-choice-label">${s==='其他（請於下方說明）'?'其他需求':s}</span><span class="ld-service-choice-check" aria-hidden="true"></span></button>`).join('')}
             </div>
             <input type="hidden" id="ld-q-service" value="">
@@ -1483,6 +1483,8 @@ body.service-page .knowledge-rail .knowledge-card{position:relative;overflow:hid
   function selectService(value){
     const changed = qService && qService.value !== value;
     if(qService) qService.value = value || '';
+    const currentService = document.getElementById('ld-q-selected-service');
+    if(currentService) currentService.textContent = value ? '目前選擇：' + value : '尚未選擇服務，請選最接近的需求。';
     qServiceButtons.forEach(function(btn){
       const selected = btn.getAttribute('data-service') === value;
       btn.classList.toggle('ld-selected', selected);
@@ -1610,6 +1612,12 @@ body.service-page .knowledge-rail .knowledge-card{position:relative;overflow:hid
     }).filter(Boolean);
   }
 
+  function setQuoteFeedbackState(state){
+    const busy = state === 'saving';
+    qForm.setAttribute('aria-busy', String(busy));
+    qForm.querySelector('.ld-q-submit').setAttribute('aria-busy', String(busy));
+    document.getElementById('ld-q-status').dataset.state = state;
+  }
   let lockedFields=[];
   function lockInquiryFields(lock){
     if(lock){lockedFields=Array.from(qForm.querySelectorAll('input,select,textarea,button')).map(function(el){const saved={el:el,disabled:el.disabled};el.disabled=true;return saved;});}
@@ -1638,6 +1646,7 @@ body.service-page .knowledge-rail .knowledge-card{position:relative;overflow:hid
       const submitButton = qForm.querySelector('.ld-q-submit');
       const submitStatus = document.getElementById('ld-q-status');
       qForm.dataset.submitting = '1';
+      setQuoteFeedbackState('saving');
       lockInquiryFields(true);
       if(submitButton){
         submitButton.disabled = true;
@@ -1645,7 +1654,7 @@ body.service-page .knowledge-rail .knowledge-card{position:relative;overflow:hid
       }
       if(submitStatus){
         submitStatus.classList.remove('ld-error');
-        submitStatus.textContent = '正在安全儲存資料，完成後會開啟 LINE';
+        submitStatus.textContent = '正在安全儲存需求，成功後請從下方開啟 LINE。';
       }
 
       let dateLabel = '未指定';
@@ -1666,6 +1675,7 @@ body.service-page .knowledge-rail .knowledge-card{position:relative;overflow:hid
         leadId=result.leadId;
       }catch(error){
         qForm.dataset.submitting='0';
+        setQuoteFeedbackState('error');
         lockInquiryFields(false);
         if(submitButton){submitButton.disabled=false;submitButton.textContent='重試儲存需求';}
         if(submitStatus){submitStatus.classList.add('ld-error');submitStatus.textContent=error.status===429 ?
@@ -1691,6 +1701,7 @@ body.service-page .knowledge-rail .knowledge-card{position:relative;overflow:hid
 
       const url = 'https://line.me/R/oaMessage/' + LINE_OA_ID + '/?' + encodeURIComponent(msg);
       qForm.dataset.submitting='0';
+      setQuoteFeedbackState('saved');
       lockInquiryFields(false);
       if(submitButton){submitButton.disabled=false;submitButton.dataset.saved='true';submitButton.textContent='更新需求並儲存';}
       if(submitStatus){submitStatus.classList.remove('ld-error');submitStatus.textContent='需求已儲存：' + leadId + '。接著在 LINE 按「傳送」，收到草稿後再確認預約；目前尚未完成預約。';}
@@ -1706,8 +1717,8 @@ body.service-page .knowledge-rail .knowledge-card{position:relative;overflow:hid
       lineLink.focus();
     });
   }
-  const journeyCss=document.createElement('link');journeyCss.rel='stylesheet';journeyCss.href='/assets/customer-journey.css?v=20261006';document.head.appendChild(journeyCss);
-  const journeyScript=document.createElement('script');journeyScript.src='/assets/customer-journey.js?v=20261006';document.body.appendChild(journeyScript);
+  const journeyCss=document.createElement('link');journeyCss.rel='stylesheet';journeyCss.href='/assets/customer-journey.css?v=20261026-p02';document.head.appendChild(journeyCss);
+  const journeyScript=document.createElement('script');journeyScript.src='/assets/customer-journey.js?v=20261026-p02';document.body.appendChild(journeyScript);
   }
   if(document.body){ ldInit(); }
   else { document.addEventListener('DOMContentLoaded', ldInit); }

@@ -6,7 +6,7 @@
 > 3. 本檔案是唯一的交接依據，寫給 AI 看：請保持精確、可執行、不留模糊描述。
 > 4. **所有時間戳一律台灣時間（Asia/Taipei, UTC+8）**。
 
-最後更新：2026-10-06（Codex，Asia/Taipei）— 接單轉換與 bot 營運中心整合；本輪驗證及發布查核見 docs/CONVERSION-OPERATIONS-2026-10-06.md。
+最後更新：2026-10-26（Codex，Asia/Taipei）— P02 服務選取與詢問儲存回饋；驗證及部署以本次 PR／Actions 為準。
 
 ## 2026-08-31 浮動聯絡區重修 ＋ DESIGN.md 對齊（Claude，**業主授權直接合併 main**）
 
@@ -401,6 +401,19 @@ cases/
 - 修改後驗證慣例：`node --check header.js`；以 Node 驗證 JSON-LD、內部連結、四頁流程與禁止字樣；本機網址受瀏覽器安全政策阻擋時，直接使用正式部署標記與真機驗證，不可繞過安全政策。
 
 ## 5. 進度紀錄（新條目加在最上面）
+
+### 2026-10-26（Codex・P02 服務選取與儲存回饋）
+
+- 依使用者在 P01 完成交付後的「繼續」，接續既定下一案 P02；只施工灰汰郎，不展開其他案或 Bot。
+- 保留六大服務與「其他需求」入口、原按鈕／aria-pressed／selectService 資料與可承接判定。使用 group 語意配原有按鈕；兩欄服務卡補勾選與目前選擇文字、鍵盤焦點，不套入上游隱藏 radio。
+- 首頁試算分類沿用六抽屜與全部 29 公開品項，已選分類有文字徽章與邊界；收合及跨分類不清空數量，不改價格、固定價／待報價、最低數量或 Bot group。
+- 共用表單與首頁試算以真實 saving／error／saved 狀態上色，忙碌按鈕加 aria-busy 與 16px 極簡轉圈，reduced-motion 停轉但保留等待文字。儲存成功才呈現 LINE 回執，不用動畫當成功。
+- setQuoteFeedbackState 僅補 UI 屬性；captureInquiry、UUID／同鍵重送、去重事件、私有 LINE WeakMap 與欄位鎖保留。失敗／逾時不宣稱沒寫入，仍保留內容與重試；成功不等於已傳 LINE 或預約完成。
+- Uiverse 僅改作 AHMED-MIT / curly-rabbit-4 的 loader 視覺；固定 Galaxy adbd2adde0a299a3956ea288fb444ec01891ca41，作者／MIT 見公開 assets/uiverse-NOTICE.txt。沒有付費包、框架或新增依賴。
+- header 及 customer-journey 資源 key、首頁 hub key 更新 20261026-p02，37 個既有 HTML 只同步 header key（首頁另更新 release 與 hub keys）；未修改其他頁正文、牌價、照片、LINE／GA ID、noindex、DNS 或後端。
+- 本機語法／diff／40 個真實計算與 bridge 契約通過；完整 validator 唯一失敗為子程序 spawnSync /bin/sh EPERM，未假稱通過。完整品牌、原有契約、真瀏覽器與三引擎圖像檢查交給既有 CI。
+- 瀏覽器增加 320／375／768／1440 兩欄、七入口／單選狀態、鍵盤／目前選擇、可控 pending API、失敗保留、同鍵重試與成功回執的截圖／檢查，外部請求均攔截。真機、截圖目視、正式客服收件與成效仍待驗。
+
 
 ### 2026-10-06（Codex・A15 圖片 CSS 效能續優化）
 
@@ -995,6 +1008,9 @@ GSC 存取：`leakdoctor.tw` 與 `blossomkids.tw` 皆已驗證，共用驗證碼
 7. `initServiceLayerTabs()` 目前只掃 body 直屬節點，內容在 main 內，實際沒有產生 `.service-layer-tabs`。不可照歷史文件宣稱已啟用。若後续修復，須完整驗證 hidden、hash、history、焦點與 sticky 偏移，不要只改 selector 就啟用休眠程式。
 
 ## 7. 待辦清單
+
+- [x] P02 六服務選擇／試算分類與真實儲存狀態 UI 補強，驗證／發布以本次 PR 與 Actions 為準。
+- [ ] P02 真機、截圖目視與正式有效詢問／預約成效；其他專案仍須逐案同意。
 
 - [x] A15 部分：428KB 內嵌流程 CSS 外置，原圖與視覺保留；新增 bytes／原图完整性及三引擎視覺門禁。
 - [ ] A15 剩餘：量測其他 CSS 疊加與生效分享圖；正式 LCP／CLS、真機及 LINE webview 未驗。
