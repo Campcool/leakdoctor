@@ -68,7 +68,9 @@ jobs:
         run: |
           grep -q 'lin.ee/WVxmY65' llms.txt && grep -q '@478xvlgl' llms.txt && echo "llms.txt LINE 資訊一致"
       - name: Pages artifact excludes internal docs
-        run: bash scripts/prepare-pages-artifact.sh
+        run: |
+          bash scripts/prepare-pages-artifact.sh
+          node scripts/check-search.mjs _site
 
   deploy:
     if: github.event_name != 'pull_request'
@@ -81,7 +83,9 @@ jobs:
       - uses: actions/checkout@v7
       - uses: actions/configure-pages@v6
       - name: Prepare public artifact
-        run: bash scripts/prepare-pages-artifact.sh
+        run: |
+          bash scripts/prepare-pages-artifact.sh
+          node scripts/check-search.mjs _site
       - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
