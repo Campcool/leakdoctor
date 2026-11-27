@@ -6,6 +6,7 @@ on:
   pull_request:
   workflow_dispatch:
 permissions:
+  actions: read
   contents: read
   pages: write
   id-token: write
@@ -78,7 +79,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url || steps.deployment_retry.outputs.page_url }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/configure-pages@v6
@@ -90,7 +91,31 @@ jobs:
         with:
           name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
           path: _site
+      - name: Wait for Pages artifact metadata
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PAGES_ARTIFACT: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
+        run: |
+          for attempt in $(seq 1 12); do
+            if gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts" --jq '.artifacts[] | select(.name == env.PAGES_ARTIFACT and .expired == false) | .id' | grep -q '^[0-9]'; then
+              # The artifact REST index can become visible before the Pages results index.
+              sleep 15
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::error::Pages artifact metadata did not become available"
+          exit 1
       - id: deployment
+        uses: actions/deploy-pages@v5
+        continue-on-error: true
+        with:
+          artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Wait before retrying Pages metadata discovery
+        if: steps.deployment.outcome == 'failure'
+        run: sleep 15
+      - id: deployment_retry
+        if: steps.deployment.outcome == 'failure'
         uses: actions/deploy-pages@v5
         with:
           artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
