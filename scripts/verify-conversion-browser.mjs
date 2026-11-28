@@ -345,6 +345,60 @@ try {
     await page.locator('#home-order-receipt a').click();await page.getByText('Local LINE handoff fixture').waitFor();
     assert.match(decodeURIComponent(navigatedLine),/試算測試勿派工/);assert.match(decodeURIComponent(navigatedLine),/0912111222/);
     assert.ok(observedHrefs.every(href=>!href.includes('?')));
+    // New homepage paths use the original mode state. They must preserve quantities,
+    // work with history/deep links and leave the existing modal focus cycle intact.
+    await page.goto('http://127.0.0.1:4173/');
+    await page.locator('#visitor-start').waitFor();
+    assert.equal(await page.locator('#visitor-start a').count(),4);
+    assert.equal(await page.locator('#services .svc-card').count(),6);
+    const order=await page.evaluate(()=>['visitor-start','service-hub','home-real-cases'].map(id=>document.getElementById(id).offsetTop));
+    assert.ok(order[0]<order[1]&&order[1]<order[2],'task and service choices precede repeated evidence');
+    for(const card of await page.locator('#services .svc-card').all()){
+      await card.scrollIntoViewIfNeeded();
+      await card.locator('img').evaluate(image=>image.complete ? Promise.resolve() : new Promise(resolve=>image.addEventListener('load',resolve,{once:true})));
+      assert(await card.locator('img').evaluate(image=>image.naturalWidth>0),'real service image loaded');
+      assert(await card.locator('.svc-price').isVisible(),'service price visible');
+      assert.equal(await card.locator('img').evaluate(image=>getComputedStyle(image).objectFit),'contain');
+    }
+    const cards=await page.locator('#services .svc-card').evaluateAll(nodes=>nodes.slice(0,2).map(n=>({x:n.getBoundingClientRect().x,y:n.getBoundingClientRect().y})));
+    assert.equal(Math.abs(cards[0].y-cards[1].y)<2,width>1050,'responsive service columns');
+    await page.locator('#home-tab-price').click();
+    await page.locator('[data-quantity-action="add"][data-service-id="wall_mounted_split"]').click();
+    await page.getByRole('link',{name:'服務地區確認',exact:true}).click();
+    await page.locator('#areas-strip').waitFor({state:'visible'});
+    await page.waitForFunction(()=>document.activeElement.id==='areas-strip');
+    const clear=await page.locator('#areas-strip').evaluate(e=>e.getBoundingClientRect().top>=document.getElementById('ld-header').getBoundingClientRect().bottom+document.getElementById('home-route-nav').getBoundingClientRect().height-1);
+    assert(clear,'coverage clears fixed header and mode navigation');
+    assert.match(await page.locator('#areas-strip').innerText(),/桃園與宜蘭/);
+    assert.match(await page.locator('#areas-strip').innerText(),/其他地區不當作保證服務區/);
+    await page.goBack();await page.locator('#price-overview').waitFor({state:'visible'});
+    assert.equal(await page.locator('[data-quantity-value="wall_mounted_split"]').inputValue(),'1','history preserves chosen quantity');
+    await page.goForward();await page.locator('#areas-strip').waitFor({state:'visible'});
+    await page.getByRole('link',{name:'詢問前準備',exact:true}).click();
+    const preparation=page.locator('#visitor-preparation details');
+    assert.equal(await preparation.count(),6);
+    await preparation.first().locator('summary').click();
+    assert.match(await preparation.first().innerText(),/窗型一次 3 台以上/);
+    await page.getByRole('link',{name:'改期與售後聯絡',exact:true}).click();
+    assert.match(await page.locator('#visitor-followup').innerText(),/不必重新試算或另建一份需求/);
+    assert.equal(await page.locator('#visitor-followup a[href="https://lin.ee/WVxmY65"]').count(),2);
+    // Reopening and closing the existing modal on a new hash must restore its trigger.
+    const quote=page.locator(width>=1024?'#ld-float-quote':'.ld-sticky-btn--form');
+    await quote.click();await page.locator('#ld-quote-overlay.ld-show').waitFor();
+    await page.keyboard.press('Escape');
+    await page.locator('#ld-quote-overlay.ld-show').waitFor({state:'hidden'});
+    await page.waitForFunction(selector=>document.activeElement.matches(selector),width>=1024?'#ld-float-quote':'.ld-sticky-btn--form');
+    await page.goto('http://127.0.0.1:4173/#visitor-preparation');
+    await page.locator('#visitor-preparation').waitFor({state:'visible'});
+    await page.waitForFunction(()=>document.activeElement.id==='visitor-preparation');
+    assert.equal(await page.locator('body').evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,'new visitor paths do not overflow');
+    await page.screenshot({path:`${evidence}/visitor-preparation-${width}.png`});
+    await page.goto('http://127.0.0.1:4173/#knowledge-overview');
+    await page.locator('#services').scrollIntoViewIfNeeded();
+    await page.screenshot({path:`${evidence}/visitor-services-${width}.png`});
+    await page.goto('http://127.0.0.1:4173/areas.html');
+    assert.match(await page.locator('.local-box').first().innerText(),/桃園與宜蘭/);
+    assert.equal(await page.locator('meta[name="robots"]').getAttribute('content'),'noindex,follow');
     assert.deepEqual(errors, []);
     await context.close();
   }
