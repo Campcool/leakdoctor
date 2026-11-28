@@ -471,10 +471,32 @@
     updateSummary();
   });
 
-  function syncRoute(){setRoute(routeForHash(location.hash),false,false);}
-  window.addEventListener('popstate',function(){if(['','#price-overview','#knowledge-overview','#home-order-summary'].includes(location.hash)) syncRoute();});
-  window.addEventListener('hashchange',function(){if(['#price-overview','#knowledge-overview'].includes(location.hash)) syncRoute();});
+  const visitorAnchors = ['#visitor-start','#areas-strip','#visitor-preparation','#visitor-followup','#home-real-cases','#services'];
+  function revealVisitorAnchor(){
+    if(!visitorAnchors.includes(location.hash)) return;
+    if(document.querySelector('#ld-quote-overlay.ld-show')) return;
+    const requestedHash=location.hash;
+    const target=document.getElementById(location.hash.slice(1));
+    if(target) requestAnimationFrame(function(){
+      if(location.hash!==requestedHash || document.querySelector('#ld-quote-overlay.ld-show')) return;
+      target.setAttribute('tabindex','-1');
+      target.focus({preventScroll:true});
+      target.scrollIntoView({block:'start',behavior:'instant'});
+    });
+  }
+  let lastRouteHash=location.hash;
+  function syncRoute(){
+    const changed=lastRouteHash!==location.hash;
+    setRoute(routeForHash(location.hash),false,false);
+    if(changed) revealVisitorAnchor();
+    lastRouteHash=location.hash;
+  }
+  const routeHashes = ['','#price-overview','#knowledge-overview','#home-order-summary',...visitorAnchors];
+  window.addEventListener('popstate',function(){if(routeHashes.includes(location.hash)) syncRoute();});
+  window.addEventListener('hashchange',function(){if(routeHashes.includes(location.hash)) syncRoute();});
   syncRoute();
+  revealVisitorAnchor();
+  window.addEventListener('load',revealVisitorAnchor,{once:true});
   if(location.hash === '#price-overview') requestAnimationFrame(function(){root.scrollIntoView({block:'start'});});
   renderList();
   updateSummary();

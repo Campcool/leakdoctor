@@ -220,14 +220,15 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 <meta name="twitter:description" content="灰汰郎清洗知識與服務價格總覽：冷氣、洗衣機、居家清潔、水塔水管與漏水檢測。可依數量即時試算、複製明細，透過 LINE 確認到府服務。">
 <meta name="twitter:image" content="https://leakdoctor.tw/assets/og/index-share-20260831.jpg">
 <meta name="twitter:image:alt" content="居家到府服務情境示意；AI 生成，非實際人員、施工或地點紀錄。">
-<meta name="ld-release" content="2026-10-26-p02-selection-feedback">
+<meta name="ld-release" content="2026-11-28-visitor-journey">
 </head>
-<body data-editorial-page>
+<body class="ld-visitor-home" data-editorial-page>
 <link rel="stylesheet" href="assets/home-refresh.css?v=20260901-flow">
 <link rel="stylesheet" href="assets/process-images.css?v=20261006-external">
 <link rel="stylesheet" href="assets/craft.css?v=20260723a">
 <link rel="stylesheet" href="assets/home-service-hub.css?v=20261026-p02">
 <link rel="stylesheet" href="assets/conversion-home.css?v=20261006">
+<link rel="stylesheet" href="assets/visitor-journey.css?v=20261128">
 <script src="header.js?v=20261026-p02"></script>
 
 <!-- Hero -->
@@ -256,42 +257,12 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   </div>
 </div>
 </section>
-<section id="home-real-cases" class="home-evidence" aria-labelledby="home-cases-title" data-home-knowledge>
-  <div class="home-evidence-inner">
-    <p class="decision-hub-kicker">現場實拍・已去識別</p>
-    <h2 id="home-cases-title">不用想像，看看清洗前後</h2>
-    <p class="home-evidence-lead">同一處細節，對照清洗前後。實際成果依材質、老化與現場狀況不同。</p>
-    <div class="home-evidence-grid">
-      <article class="home-evidence-case">
-        <div class="home-photo-pair">
-          <figure><img src="/cases/aircon/case01-before.webp" alt="冷氣風鼓與出風口清潔前" width="1280" height="960" loading="lazy" decoding="async"><figcaption>清洗前</figcaption></figure>
-          <figure><img src="/cases/aircon/case01-after.webp" alt="同一冷氣機內清潔後" width="1280" height="960" loading="lazy" decoding="async"><figcaption>清洗後</figcaption></figure>
-        </div>
-        <h3>冷氣｜機內與出風口</h3>
-        <a href="/aircon.html#aircon-cases">查看完整冷氣案例 <span aria-hidden="true">→</span></a>
-      </article>
-      <article class="home-evidence-case">
-        <div class="home-photo-pair">
-          <figure><img src="/cases/washer/case01-before.webp" alt="直立式洗衣機外槽清潔前" width="890" height="1188" loading="lazy" decoding="async"><figcaption>清洗前</figcaption></figure>
-          <figure><img src="/cases/washer/case01-after.webp" alt="同一洗衣機外槽清潔後" width="890" height="1188" loading="lazy" decoding="async"><figcaption>清洗後</figcaption></figure>
-        </div>
-        <h3>洗衣機｜拆開後的外槽</h3>
-        <a href="/washer.html#washer-cases">查看完整洗衣機案例 <span aria-hidden="true">→</span></a>
-      </article>
-    </div>
-    <div class="section-cta"><a class="page-btn" href="#price-overview" data-home-route-target="price">看價格・即時試算</a><span class="section-cta-note">選項目、填數量，費用即時算給你看；不必先留資料。</span></div>
-  </div>
-</section>
-
-
-<section class="confidence-strip" aria-label="服務安排流程" role="region" data-home-knowledge>
-  <ol class="confidence-inner">
-    <li class="confidence-item"><span class="confidence-step" aria-hidden="true">01</span><span class="confidence-copy"><b>先確認</b><span>機型、數量與現場條件</span></span></li>
-    <li class="confidence-item"><span class="confidence-step" aria-hidden="true">02</span><span class="confidence-copy"><b>明碼標價</b><span>常見項目直接標價；特殊條件再確認</span></span></li>
-    <li class="confidence-item"><span class="confidence-step" aria-hidden="true">03</span><span class="confidence-copy"><b>確認後安排</b><span>內容確認後，安排可承接團隊</span></span></li>
-  </ol>
-</section>
-
+<nav id="visitor-start" class="visitor-start" aria-label="依需求開始瀏覽" data-home-knowledge>
+  <a href="#knowledge-overview" data-home-route-target="knowledge"><span class="visitor-task-label">還不確定要找誰</span><strong>找適合的服務</strong><span>先看狀況與處理範圍</span></a>
+  <a href="#price-overview" data-home-route-target="price"><span class="visitor-task-label">已經知道需求</span><strong>看價格・先試算</strong><span>不必先留聯絡資料</span></a>
+  <a href="#areas-strip"><span class="visitor-task-label">想確認能否安排</span><strong>查看服務地區</strong><span>各服務的範圍分開看</span></a>
+  <a href="#visitor-followup"><span class="visitor-task-label">已詢問或已服務</span><strong>改期與售後聯絡</strong><span>回原 LINE 對話接續處理</span></a>
+</nav>
 <!-- 首頁雙入口：知識探索與主動開啟的價格試算 -->
 <section id="service-hub" class="decision-hub" aria-labelledby="service-hub-title">
 <div class="decision-hub-inner">
@@ -300,81 +271,105 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 <section id="services" aria-label="services">
 <div class="services-inner">
   <div class="sec-tag blue">我們的服務</div>
-  <h3 class="sec-title">從家裡的問題開始</h3>
-  <p class="sec-sub">先看處理方式與價格依據，再決定是否詢問</p>
+  <h2 class="sec-title">從家裡的問題，找對服務</h2>
+  <p class="sec-sub">六種到府服務，先看處理範圍與參考費用。不確定原因時，可以先到 LINE 描述狀況。</p>
   <div class="svc-grid">
-    <div class="svc-card" data-service="aircon">
+    <article class="svc-card" data-service="aircon">
+      <figure class="visitor-service-photo"><img src="/cases/aircon/case01-after.webp" alt="冷氣機內清洗後的實拍紀錄" width="1280" height="960" loading="lazy" decoding="async"><figcaption>現場紀錄・已去識別</figcaption></figure>
+      <div class="visitor-service-copy">
       <div class="svc-head">
         <div class="svc-icon c1"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#aircon"></use></svg></div>
-        <div class="svc-title">冷氣清洗</div>
+        <h3 class="svc-title">冷氣清洗</h3>
       </div>
+      <p class="visitor-symptom">異味、髒污，想安排冷氣保養</p>
       <div class="svc-desc">分離式、吊隱式依機型拆洗；窗型一次 3 台以上才承接。<br>清洗後復原、試運轉，並確認基本排水。</div>
       <div class="svc-price">$1,599 起</div>
       <div class="svc-actions">
-        <a class="svc-btn-price" href="aircon.html">了解冷氣清洗 →</a>
+        <a class="svc-btn-price" href="/aircon.html">了解冷氣清洗</a>
 
       </div>
-    </div>
-    <div class="svc-card" data-service="washer">
+      </div>
+    </article>
+    <article class="svc-card" data-service="washer">
+      <figure class="visitor-service-photo"><img src="/cases/washer/case01-after.webp" alt="直立式洗衣機外槽清洗後實拍" width="890" height="1188" loading="lazy" decoding="async"><figcaption>現場紀錄・已去識別</figcaption></figure>
+      <div class="visitor-service-copy">
       <div class="svc-head">
         <div class="svc-icon c2"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#washer"></use></svg></div>
-        <div class="svc-title">洗衣機清洗</div>
+        <h3 class="svc-title">洗衣機清洗</h3>
       </div>
+      <p class="visitor-symptom">洗衣有黑屑、槽內異味，想了解拆洗</p>
       <div class="svc-desc">直立式、滾筒式皆可拆洗。<br>深層去除洗衣槽黑垢與霉味。</div>
       <div class="svc-price">$1,599 起</div>
       <div class="svc-actions">
-        <a class="svc-btn-price" href="washer.html">了解機型與拆洗 →</a>
+        <a class="svc-btn-price" href="/washer.html">了解機型與拆洗</a>
 
       </div>
-    </div>
-    <div class="svc-card" data-service="homeclean">
+      </div>
+    </article>
+    <article class="svc-card" data-service="homeclean">
+      <figure class="visitor-service-photo"><img src="/cases-clean/case03-after.jpg" alt="門片與溝縫清潔後的實拍紀錄" width="960" height="1280" loading="lazy" decoding="async"><figcaption>現場紀錄・已去識別</figcaption></figure>
+      <div class="visitor-service-copy">
       <div class="svc-head">
         <div class="svc-icon c3"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#homeclean"></use></svg></div>
-        <div class="svc-title">居家清潔</div>
+        <h3 class="svc-title">居家清潔</h3>
       </div>
+      <p class="visitor-symptom">日常整理、大掃除、入住或退租</p>
       <div class="svc-desc">定期清潔、大掃除、入住退租都能安排。<br>抽油煙機等單項加強，也在這一類確認。</div>
       <div class="svc-price">$2,500 起</div>
       <div class="svc-actions">
-        <a class="svc-btn-price" href="homeclean.html">了解清潔範圍 →</a>
+        <a class="svc-btn-price" href="/homeclean.html">了解清潔範圍</a>
 
       </div>
-    </div>
-    <div class="svc-card" data-service="water-tank">
+      </div>
+    </article>
+    <article class="svc-card" data-service="water-tank">
+      <figure class="visitor-service-photo"><img src="/cases/water-tank/case01-after.webp" alt="不鏽鋼水塔內壁與底部實拍" width="890" height="1188" loading="lazy" decoding="async"><figcaption>現場紀錄・已去識別</figcaption></figure>
+      <div class="visitor-service-copy">
       <div class="svc-head">
         <div class="svc-icon c1"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#droplet"></use></svg></div>
-        <div class="svc-title">水塔清洗</div>
+        <h3 class="svc-title">水塔清洗</h3>
       </div>
+      <p class="visitor-symptom">水塔定期清洗，先確認材質與容量</p>
       <div class="svc-desc">白鐵水塔與水泥水塔皆可承接。<br>先確認容量、顆數與頂樓通道，再安排報價。</div>
       <div class="svc-price">$1,599／顆</div>
       <div class="svc-actions">
-        <a class="svc-btn-price" href="water-tank.html">了解水塔清洗 →</a>
+        <a class="svc-btn-price" href="/water-tank.html">了解水塔清洗</a>
 
       </div>
-    </div>
-    <div class="svc-card" data-service="pipe-cleaning">
+      </div>
+    </article>
+    <article class="svc-card" data-service="pipe-cleaning">
+      <figure class="visitor-service-photo"><img src="/cases/pipe-cleaning/case02-scale.webp" alt="水管接頭沉積物的現場實拍" width="900" height="1600" loading="lazy" decoding="async"><figcaption>現場紀錄・已去識別</figcaption></figure>
+      <div class="visitor-service-copy">
       <div class="svc-head">
         <div class="svc-icon c2"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#tools"></use></svg></div>
-        <div class="svc-title">水管清洗</div>
+        <h3 class="svc-title">水管清洗</h3>
       </div>
+      <p class="visitor-symptom">黃水或水量變小，先區分原因</p>
       <div class="svc-desc">黃水、異味、水量變小，先分類原因。<br>依屋齡、管材與停水條件，評估是否適合清洗。</div>
       <div class="svc-price">$3,599 起／戶</div>
       <div class="svc-actions">
-        <a class="svc-btn-price" href="pipe-cleaning.html">了解水管清洗 →</a>
+        <a class="svc-btn-price" href="/pipe-cleaning.html">了解水管清洗</a>
 
       </div>
-    </div>
-    <div class="svc-card" data-service="leak-repair">
+      </div>
+    </article>
+    <article class="svc-card" data-service="leak-repair">
+      <figure class="visitor-service-photo"><img src="/cases/leak-repair/case03-opening.webp" alt="漏水現場局部開孔檢查實拍" width="900" height="1600" loading="lazy" decoding="async"><figcaption>現場紀錄・已去識別</figcaption></figure>
+      <div class="visitor-service-copy">
       <div class="svc-head">
         <div class="svc-icon c4"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#leak"></use></svg></div>
-        <div class="svc-title">漏水檢測與修補</div>
+        <h3 class="svc-title">漏水檢測與修補</h3>
       </div>
+      <p class="visitor-symptom">牆面水痕、天花板滴水，先釐清來源</p>
       <div class="svc-desc">依漏水現象安排檢測、定位水源。<br>確認原因後，再選擇適合的止漏與修補方式。</div>
       <div class="svc-price">免費初判</div>
       <div class="svc-actions">
-        <a class="svc-btn-price" href="leak-repair.html">了解漏水判讀 →</a>
+        <a class="svc-btn-price" href="/leak-repair.html">了解漏水判讀</a>
 
       </div>
-    </div>
+      </div>
+    </article>
   </div>
   <div class="section-cta"><a class="page-btn" href="#price-overview" data-home-route-target="price">看價格・即時試算</a><span class="section-cta-note">選項目、填數量，費用即時算給你看；不必先留資料。</span></div>
 </div>
@@ -419,6 +414,42 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   </div>
   <noscript><p>即時試算需要 JavaScript。你仍可從上方各服務頁查看價格，或<a href="https://lin.ee/WVxmY65">透過 LINE 詢問</a>。</p></noscript>
 </div>
+</section>
+
+<section id="home-real-cases" class="home-evidence" aria-labelledby="home-cases-title" data-home-knowledge>
+  <div class="home-evidence-inner">
+    <p class="decision-hub-kicker">現場實拍・已去識別</p>
+    <h2 id="home-cases-title">不用想像，看看清洗前後</h2>
+    <p class="home-evidence-lead">同一處細節，對照清洗前後。實際成果依材質、老化與現場狀況不同。</p>
+    <div class="home-evidence-grid">
+      <article class="home-evidence-case">
+        <div class="home-photo-pair">
+          <figure><img src="/cases/aircon/case01-before.webp" alt="冷氣風鼓與出風口清潔前" width="1280" height="960" loading="lazy" decoding="async"><figcaption>清洗前</figcaption></figure>
+          <figure><img src="/cases/aircon/case01-after.webp" alt="同一冷氣機內清潔後" width="1280" height="960" loading="lazy" decoding="async"><figcaption>清洗後</figcaption></figure>
+        </div>
+        <h3>冷氣｜機內與出風口</h3>
+        <a href="/aircon.html#aircon-cases">查看完整冷氣案例 <span aria-hidden="true">→</span></a>
+      </article>
+      <article class="home-evidence-case">
+        <div class="home-photo-pair">
+          <figure><img src="/cases/washer/case01-before.webp" alt="直立式洗衣機外槽清潔前" width="890" height="1188" loading="lazy" decoding="async"><figcaption>清洗前</figcaption></figure>
+          <figure><img src="/cases/washer/case01-after.webp" alt="同一洗衣機外槽清潔後" width="890" height="1188" loading="lazy" decoding="async"><figcaption>清洗後</figcaption></figure>
+        </div>
+        <h3>洗衣機｜拆開後的外槽</h3>
+        <a href="/washer.html#washer-cases">查看完整洗衣機案例 <span aria-hidden="true">→</span></a>
+      </article>
+    </div>
+    <div class="section-cta"><a class="page-btn" href="#price-overview" data-home-route-target="price">看價格・即時試算</a><span class="section-cta-note">選項目、填數量，費用即時算給你看；不必先留資料。</span></div>
+  </div>
+</section>
+
+
+<section class="confidence-strip" aria-label="服務安排流程" role="region" data-home-knowledge>
+  <ol class="confidence-inner">
+    <li class="confidence-item"><span class="confidence-step" aria-hidden="true">01</span><span class="confidence-copy"><b>先確認</b><span>機型、數量與現場條件</span></span></li>
+    <li class="confidence-item"><span class="confidence-step" aria-hidden="true">02</span><span class="confidence-copy"><b>明碼標價</b><span>常見項目直接標價；特殊條件再確認</span></span></li>
+    <li class="confidence-item"><span class="confidence-step" aria-hidden="true">03</span><span class="confidence-copy"><b>確認後安排</b><span>內容確認後，安排可承接團隊</span></span></li>
+  </ol>
 </section>
 
 <!-- 服務流程示意 -->
@@ -507,15 +538,38 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </section>
 
 <!-- 服務地區 -->
-<section id="areas-strip" style="padding:2.5rem 1.25rem;background:#fff" aria-label="服務地區" data-home-knowledge>
-  <div style="max-width:900px;margin:0 auto;text-align:center">
-    <div class="sec-tag blue">服務地區</div>
-    <h2 class="sec-title">北台灣到台中，到府服務</h2>
-    <p class="sec-sub">施工案例、專業人員與服務範圍統一放在漏水檢測與修補頁</p>
-    <div style="display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center">
-      <a href="leak-repair.html#cases-carousel" style="font-size:.88rem;font-weight:800;color:var(--blue);background:var(--blue-light);border:1.5px solid #dbeafe;border-radius:9px;padding:.7rem 1rem">施工案例</a>
-      <a href="leak-repair.html#team-carousel" style="font-size:.88rem;font-weight:800;color:var(--blue);background:var(--blue-light);border:1.5px solid #dbeafe;border-radius:9px;padding:.7rem 1rem">專業人員</a>
-      <a href="leak-repair.html#service-area" style="font-size:.88rem;font-weight:800;color:#fff;background:var(--blue-dark);border:1.5px solid var(--blue-dark);border-radius:9px;padding:.7rem 1rem">抓漏服務地區 →</a>
+<section id="areas-strip" class="visitor-coverage" aria-labelledby="visitor-coverage-title" data-home-knowledge>
+  <div class="visitor-section-inner">
+    <p class="visitor-eyebrow">先確認地區，再安排時間</p>
+    <h2 id="visitor-coverage-title">你的地區，能安排哪一種服務？</h2>
+    <p class="visitor-lead">服務範圍依項目不同，不以抓漏的地區直接套用清潔服務。實際日期、現場條件與費用，由專員確認。</p>
+    <dl class="visitor-area-list">
+      <div><dt>居家清潔</dt><dd><strong>基隆・台北・新北為主要到府範圍</strong><p>桃園與宜蘭需依路線、人員及日期預約確認；其他地區不當作保證服務區。</p><a href="/homeclean.html#homeclean-areas">查看居家清潔範圍</a></dd></div>
+      <div><dt>設備與水路清洗</dt><dd><strong>北台灣至台中，可先提供地區詢問</strong><p>冷氣、洗衣機、水塔及水管，依機型、容量、施工動線與排程確認可否安排。</p><a href="/areas.html">查看各地區與服務內容</a></dd></div>
+      <div><dt>漏水檢測與修補</dt><dd><strong>先描述位置與發生情況，再確認檢測安排</strong><p>抓漏範圍、合作人員與案例另列於漏水服務頁；實際出勤人員依案件與地區確認。</p><a href="/leak-repair.html#service-area">查看抓漏地區</a><a href="/leak-repair.html#cases-carousel">查看抓漏案例</a><a href="/leak-repair.html#team-carousel">了解合作人員</a></dd></div>
+    </dl>
+  </div>
+</section>
+<section id="visitor-preparation" class="visitor-preparation" aria-labelledby="visitor-preparation-title" data-home-knowledge>
+  <div class="visitor-section-inner">
+    <div class="visitor-prep-heading"><div><p class="visitor-eyebrow">第一次詢問，也不用先懂規格</p><h2 id="visitor-preparation-title">準備這些資料，溝通更有方向</h2></div><p>先描述狀況即可；不清楚的機型、完整地址與設備照片，可在 LINE 再補充。不要為了填表猜資料。</p></div>
+    <div class="visitor-prep-list">
+      <details><summary>冷氣清洗，先提供什麼？</summary><div><p>室內機與型號貼紙照片、台數，以及異味或漏水情況。窗型一次 3 台以上才承接；特殊機型先確認。</p><a href="/aircon.html">查看冷氣清洗內容</a></div></details>
+      <details><summary>洗衣機清洗，先提供什麼？</summary><div><p>設備正面與型號貼紙照片、直立或滾筒式、是否含烘乾。日立／三菱含烘乾功能需先確認是否可承接。</p><a href="/washer.html">查看洗衣機清洗內容</a></div></details>
+      <details><summary>居家清潔，先提供什麼？</summary><div><p>所在縣市區、坪數、日常維護或入住退租等目的，以及重點區域照片。服務範圍與清潔程度先確認。</p><a href="/homeclean.html">查看居家清潔內容</a></div></details>
+      <details><summary>水塔清洗，先提供什麼？</summary><div><p>材質、容量或噸數、顆數、所在樓層與頂樓通道。不確定容量可補照片，不直接套用最低價。</p><a href="/water-tank.html">查看水塔清洗內容</a></div></details>
+      <details><summary>水管清洗，先提供什麼？</summary><div><p>住家或整棟、所在樓層、冷熱水是否都異常。水量變小有不同原因，清洗不代表一定能排除設備故障。</p><a href="/pipe-cleaning.html">查看水管清洗內容</a></div></details>
+      <details><summary>漏水檢測與修補，先提供什麼？</summary><div><p>水痕或漏水位置照片、發生時間、晴雨天差異與用水情況。先評估原因，再確認檢測及修補方式。</p><a href="/leak-repair.html">查看漏水檢測與修補內容</a></div></details>
+    </div>
+    <div class="visitor-uncertain"><svg class="craft-icon" aria-hidden="true"><use href="/assets/icons.svg#book"></use></svg><div><strong>還不知道是哪一種問題？</strong><p>可以先看居家百科；漏水狀況另有三步判讀工具，結果是溝通線索，不代替現場檢測。</p><a href="/knowledge.html">查看居家百科</a><a href="/leak-guide.html">使用漏水判讀工具</a></div></div>
+  </div>
+</section>
+<section id="visitor-followup" class="visitor-followup" aria-labelledby="visitor-followup-title" data-home-knowledge>
+  <div class="visitor-section-inner">
+    <p class="visitor-eyebrow">詢問後，也找得到下一步</p><h2 id="visitor-followup-title">已經詢問或服務過？</h2>
+    <div class="visitor-followup-grid">
+      <article><h3>想調整日期或補充需求</h3><p>回到原本的 LINE 對話，附上需求編號（如有）及希望調整的內容。是否能改期、追加項目與費用，仍需專員確認。</p><a href="https://lin.ee/WVxmY65" target="_blank" rel="noopener">到 LINE 確認安排</a></article>
+      <article><h3>完工後有疑問，想找人協助</h3><p>準備原服務資訊、現況說明與照片，透過原 LINE 對話提出。由專員協助確認與處理，不必重新試算或另建一份需求。</p><a href="https://lin.ee/WVxmY65" target="_blank" rel="noopener">聯絡 LINE 服務協處</a></article>
     </div>
   </div>
 </section>
@@ -548,7 +602,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
   </div>
   <div>
     <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:.62rem">快速連結</div>
-    <div class="footer-links" style="flex-direction:column;gap:.38rem"><a href="leak-repair.html#service-area">抓漏服務地區</a><a href="knowledge.html">居家百科</a><a href="leak-repair.html#cases-carousel">抓漏施工案例</a><a href="leak-repair.html#team-carousel">抓漏專業人員</a><a href="about.html">關於我們</a></div>
+    <div class="footer-links" style="flex-direction:column;gap:.38rem"><a href="#areas-strip">服務地區確認</a><a href="#visitor-preparation">詢問前準備</a><a href="#visitor-followup">改期與售後聯絡</a><a href="knowledge.html">居家百科</a><a href="leak-repair.html#cases-carousel">抓漏施工案例</a><a href="leak-repair.html#team-carousel">抓漏專業人員</a><a href="about.html">關於我們</a></div>
   </div>
   <div>
     <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:.62rem">聯絡我們</div>
@@ -566,7 +620,7 @@ footer{background:var(--gray-900);color:#fff;padding:2.5rem 1.25rem 1.5rem}
 </footer>
 
 <script>document.getElementById('copy-year').textContent = new Date().getFullYear();</script>
-<script src="assets/home-service-hub.js?v=20261026-p02"></script>
+<script src="assets/home-service-hub.js?v=20261128-visitor"></script>
 
 </main>
 </body>

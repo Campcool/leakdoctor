@@ -40,7 +40,20 @@ try {
           await context.route('**/*', route => route.request().url().startsWith(base) ? route.continue() : route.fulfill({ status:200, contentType:'application/json', body:'{}' }));
           await page.goto(base + path);
           await page.locator('.process-photo').first().scrollIntoViewIfNeeded();
-          await page.waitForFunction(() => [...document.images].filter(i => i.loading !== 'lazy' || i.getBoundingClientRect().top < innerHeight).every(i => i.complete));
+          // Firefox may leave distant lazy images above the viewport unloaded.
+          // Only eager images and images intersecting this screenshot are required;
+          // a failed visible image must still fail rather than count as complete.
+          try {
+            await page.waitForFunction(() => [...document.images].filter(i => {
+              const r=i.getBoundingClientRect();
+              return i.loading !== 'lazy' || (r.bottom > 0 && r.top < innerHeight);
+            }).every(i => i.complete && i.naturalWidth > 0));
+          } catch (error) {
+            const pending=await page.locator('img').evaluateAll(images=>images.filter(i=>{
+              const r=i.getBoundingClientRect();return (i.loading!=='lazy'||(r.bottom>0&&r.top<innerHeight))&&(!i.complete||!i.naturalWidth);
+            }).map(i=>({src:i.getAttribute('src'),loading:i.loading,complete:i.complete,box:i.getBoundingClientRect().toJSON()})));
+            throw new Error(`${name}/${width}/${path}: visible images not ready: ${JSON.stringify(pending)}`,{cause:error});
+          }
           await page.waitForTimeout(500);
           const visuals = await page.locator('.process-photo').evaluateAll(nodes => nodes.map(n => ({ background:getComputedStyle(n).backgroundImage, width:n.clientWidth, height:n.clientHeight })));
           for (const visual of visuals) assert(visual.background.includes('/assets/service-photos/'));
